@@ -1,0 +1,32 @@
+grammar fr.obeo.releng.TargetPlatform with org.eclipse.xtext.common.Terminals
+
+generate targetplatform "http://www.obeo.fr/releng/TargetPlatform"
+
+TargetPlatform:
+	(
+		'target' name=STRING
+		locations+=Location*
+	)?
+;
+	
+Location:
+	'location' uri=STRING ('{'
+		('with' options+=Option (',' options+=Option)*)?
+		(ius+=IU (ius+=IU)*)?
+	'}')?
+;
+
+enum Option:
+	INCLUDE_REQUIRED='requirements' |
+	INCLUDE_ALL_ENVIRONMENTS='allEnvironments' |
+	INCLUDE_SOURCE='source' |
+	INCLUDE_CONFIGURE_PHASE='configurePhase'
+;
+
+IU:
+	ID=QualifiedName (';' 'version' '=' version=STRING)?
+;
+
+QualifiedName:
+	ID ('.' ID)*
+;

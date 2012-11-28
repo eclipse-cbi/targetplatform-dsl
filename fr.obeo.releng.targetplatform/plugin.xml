@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.obeo.fr/releng/TargetPlatform" 
+       class = "fr.obeo.releng.targetPlatform.TargetPlatformPackage"
+       genModel = "fr/obeo/releng/TargetPlatform.genmodel" /> 
+	
+  </extension>
+  
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="fr.obeo.releng.ide.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="targetplatform">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="targetplatform">
+	    </resourceServiceProvider>
+	</extension>
+  
+  <extension
+        id="targetPlatform.converter"
+        point="org.eclipse.core.runtime.applications">
+     <application
+           cardinality="singleton-global"
+           thread="main"
+           visible="true">
+        <run
+              class="fr.obeo.releng.targetplatform.pde.ConverterApplication">
+        </run>
+     </application>
+  </extension>
+
+
+
+
+</plugin>

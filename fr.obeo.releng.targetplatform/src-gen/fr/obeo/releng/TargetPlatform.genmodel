@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.obeo.releng.targetplatform/src-gen" editDirectory="/fr.obeo.releng.targetplatform.edit/src"
+    editorDirectory="/fr.obeo.releng.targetplatform.editor/src" modelPluginID="fr.obeo.releng.targetplatform"
+    forceOverwrite="true" modelName="TargetPlatform" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="fr.obeo.releng.targetplatform.edit"
+    editorPluginID="fr.obeo.releng.targetplatform.editor" runtimeVersion="2.9">
+  <genPackages prefix="Targetplatform" basePackage="fr.obeo.releng" disposableProviderFactory="true"
+      ecorePackage="TargetPlatform.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TargetPlatform.ecore#//Option">
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_REQUIRED"/>
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_ALL_ENVIRONMENTS"/>
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_SOURCE"/>
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_CONFIGURE_PHASE"/>
+    </genEnums>
+    <genClasses ecoreClass="TargetPlatform.ecore#//TargetPlatform">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/locations"/>
+    </genClasses>
+    <genClasses ecoreClass="TargetPlatform.ecore#//Location">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//Location/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//Location/options"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//Location/ius"/>
+    </genClasses>
+    <genClasses ecoreClass="TargetPlatform.ecore#//IU">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//IU/ID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//IU/version"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
