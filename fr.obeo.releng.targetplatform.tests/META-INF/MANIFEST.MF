@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: fr.obeo.releng.targetplatform.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
