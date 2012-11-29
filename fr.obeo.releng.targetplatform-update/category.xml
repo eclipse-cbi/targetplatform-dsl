@@ -5,7 +5,7 @@
    </feature>
    <category-def name="releng" label="Obeo Releng Tools">
       <description>
-         Release Engineering tooling from Obeo
+         Release Engineering tools from Obeo
       </description>
    </category-def>
 </site>

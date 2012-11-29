@@ -6,9 +6,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.obeo.fr/releng/TargetPlatform" 
-       class = "fr.obeo.releng.targetPlatform.TargetPlatformPackage"
+       class = "fr.obeo.releng.targetplatform.TargetplatformPackage"
        genModel = "fr/obeo/releng/TargetPlatform.genmodel" /> 
-	
   </extension>
   
 	<extension
@@ -17,12 +16,6 @@
 			class="fr.obeo.releng.ide.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="targetplatform">
 		</parser>
-	</extension>
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-	    <resourceServiceProvider
-	        class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-	        uriExtension="targetplatform">
-	    </resourceServiceProvider>
 	</extension>
   
   <extension
@@ -37,8 +30,5 @@
         </run>
      </application>
   </extension>
-
-
-
 
 </plugin>
