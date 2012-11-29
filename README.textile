@@ -1,0 +1,88 @@
+h1. fr.obeo.releng.targetplatform
+
+Obeo Target Platform Definition DSL and Generator provides a DSL with an advanced editor and a generator taking this DSL as input and generating a @.target@ file that PDE is able to read to provision a Target Platform.
+
+!http://imageshack.us/a/img15/8338/tpeditor.png(The targetplatform DSL editor)!
+
+!http://imageshack.us/a/img832/1508/tpgenmenucreate.png(The right-click command)!
+
+h2. Installation
+
+Add the following p2 repository (update-site) in your update manager (in Eclipse, @Help Menu > Install New Software...@, @Add...@ button on the top right corner)
+
+<pre></pre>
+
+Then, select the "Obeo Target Platform Definition DSL and Generator" feature and click on @Finish@.
+
+h2. Basic usage
+
+* Create a file with @.targetplatform@ extension
+
+* Once done, right-click on the file and select "Create Target Definition File" 
+
+h3. Syntax
+
+An empty file is a valid file.
+
+Strings can be surrounded by either simple quotes @'@ or double quotes @"@.
+
+You must start by defining the name of your target by specifying the header
+
+<pre>
+target "The name of my target"
+</pre>
+
+Then, you define the locations of your p2 repositories. You can add as many locations as your want to your target. Location string must be URL, if your p2 repository is local, don't forget to put a @file:/@ URL.
+
+<pre>
+location "http://download.eclipse.org/releases/juno/" {
+}
+</pre>
+
+You can define some options (separated with comma) about what should be retrieved from the p2 repository. You can do that with the @with@ keyword immediatly after the opening curl brace:
+
+<pre>
+location "http://download.eclipse.org/releases/juno/" {
+	with source, allEnvironments	
+}
+</pre>
+
+Available options are:
+
+* @requirements@, whether this target must have all required IUs of the selected IUs available and included in the target to resolve successfully. If this option is true, the planner will be used to resolve otherwise the slicer is used. The planner can describe any missing requirements as errors.
+* @allEnvironments@, whether this target should download and include environment (platform) specific units for all available platforms (vs. only the current target definition's environment settings).  Only supported  by the slicer so @requirements@ must not be used for this setting to be used.
+* @source@, whether this location should download and include source bundles for the selected units if the associated source is available in the repository.
+* @configurePhase@, whether this target should execute the configure phase after fetching the selected units.
+
+Then, you may list the Installable Units (IUs) your want to include in your target. This can be Bundles or Eclipse Features (then it ends with @feature.group@).
+
+<pre>
+location "http://download.eclipse.org/releases/juno/" {
+	with source, allEnvironments	
+	org.eclipse.emf.sdk.feature.group
+}
+</pre>
+
+If no version specified, the most recent IUs will be selected in the repository. You can restrain the range of version to use by using the same syntax as in @MANIFEST.MF@ files.
+
+<pre>
+location "http://download.eclipse.org/releases/juno/" {
+	with source, allEnvironments	
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.rcp.feature.group;version="(4.0.0,4.3.0]"
+}
+</pre>
+
+Then, the most recent version of the given IU within this range will be selected.
+
+h2. Build
+
+Go to @fr.obeo.releng.targetplatform-parent@ and do a @mvn clean package@.
+
+h2. Contribute
+
+Clone this repository, import all projects in your Eclipse and set your target platform to the one in @fr.obeo.releng.targetplatform-parent/targetdefinitions@.
+
+h2. License
+
+Copyright (c) 2012 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
