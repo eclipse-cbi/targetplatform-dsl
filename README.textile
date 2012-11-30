@@ -16,6 +16,12 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 Then, select the "Obeo Target Platform Definition DSL and Generator" feature and click on @Finish@.
 
+h3. Requirements
+
+* Java SE 6
+
+* Has been tested on Eclipse 4.2 (Juno) only but may works on previous version of Eclipse (3.x included). Feedback welcome ;)
+
 h2. Basic usage
 
 * Create a file with @.targetplatform@ extension
