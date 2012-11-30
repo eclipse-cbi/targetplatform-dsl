@@ -17,7 +17,11 @@
    <license url="%licenseURL">
       %license
    </license>
-   
+
+   <requires>
+      <import feature="org.eclipse.xtext.runtime" version="2.3.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="fr.obeo.releng.targetplatform"
          download-size="0"
