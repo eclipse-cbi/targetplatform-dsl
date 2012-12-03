@@ -20,7 +20,7 @@ h3. Requirements
 
 * Java SE 6
 
-* Has been tested on Eclipse 4.2 (Juno) only but may works on previous version of Eclipse (3.x included). Feedback welcome ;)
+* Eclipse 4.2 (Juno)
 
 h2. Basic usage
 
