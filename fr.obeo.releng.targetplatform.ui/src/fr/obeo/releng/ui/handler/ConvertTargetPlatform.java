@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -56,33 +57,28 @@ public class ConvertTargetPlatform extends AbstractHandler {
 				final Converter converter = new Converter();
 				injector.injectMembers(converter);
 				
-				ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(HandlerUtil.getActiveShell(event));
-				try {
-					progressMonitorDialog.run(true, true, new IRunnableWithProgress() {
-						@Override
-						public void run(IProgressMonitor monitor) throws InvocationTargetException,
-								InterruptedException {
-							SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
+				Job job = new Job("Create target platform definition file") {
+				     @Override
+				     protected IStatus run(IProgressMonitor monitor) {
+				         SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 							try {
 								converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
 							} catch (Exception e) {
-								throw new InvocationTargetException(e);
+								return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
 							}
 							IContainer container = ((IFile) firstElement).getParent();
 							if (container != null) {
 								try {
 									container.refreshLocal(IResource.DEPTH_ONE, subMonitor.newChild(5));
 								} catch (CoreException e) {
-									throw new InvocationTargetException(e);
+									return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
 								}
 							}
-						}
-					});
-				} catch (InvocationTargetException e) {
-					TargetPlatformActivator.getInstance().getLog().log(new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getCause().getMessage(), e.getCause()));
-				} catch (InterruptedException e) {
-					TargetPlatformActivator.getInstance().getLog().log(new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e));
-				}
+				         return Status.OK_STATUS;
+				     }
+				 };
+				 job.setUser(true);
+				 job.schedule();
 			}
 		}
 		return null;
