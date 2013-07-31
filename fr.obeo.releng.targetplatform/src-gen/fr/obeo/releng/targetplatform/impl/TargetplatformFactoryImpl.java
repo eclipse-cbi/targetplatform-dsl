@@ -31,7 +31,7 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     try
     {
-      TargetplatformFactory theTargetplatformFactory = (TargetplatformFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.obeo.fr/releng/TargetPlatform"); 
+      TargetplatformFactory theTargetplatformFactory = (TargetplatformFactory)EPackage.Registry.INSTANCE.getEFactory(TargetplatformPackage.eNS_URI);
       if (theTargetplatformFactory != null)
       {
         return theTargetplatformFactory;

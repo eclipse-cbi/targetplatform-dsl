@@ -263,6 +263,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private OptionElements unknownRuleOption;
 	private IUElements pIU;
 	private QualifiedNameElements pQualifiedName;
+	private TerminalRule tID;
 	
 	private final Grammar grammar;
 
@@ -354,9 +355,9 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9" | "-")*;
 	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
+		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal INT returns ecore::EInt:

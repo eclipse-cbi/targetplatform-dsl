@@ -178,4 +178,30 @@ public class TestGrammar {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testIdWithDash() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("my.iu.with-dash");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("my.iu.with-dash", _iD);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

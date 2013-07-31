@@ -341,8 +341,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '-' )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '-' )*
             {
             // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:11: ( '^' )?
             int alt1=2;
@@ -371,13 +371,13 @@ public class InternalTargetPlatformLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '-' )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
+                if ( (LA2_0=='-'||(LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
                     alt2=1;
                 }
 
@@ -386,7 +386,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             	case 1 :
             	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/ui/contentassist/antlr/internal/InternalTargetPlatform.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
 
             	    }
@@ -1022,11 +1022,11 @@ public class InternalTargetPlatformLexer extends Lexer {
         "\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\161\1\uffff\1\154\1\165"+
         "\1\156\1\162\1\143\2\uffff\1\164\2\uffff\1\162\7\uffff\1\165\1\105"+
         "\1\162\1\146\1\147\1\141\1\150\1\163\1\151\1\156\1\143\1\151\1\145"+
-        "\1\164\1\60\1\151\1\162\1\166\1\145\1\147\1\164\1\151\1\uffff\1"+
-        "\157\1\145\1\151\1\60\1\165\1\60\1\157\1\156\1\155\1\162\1\uffff"+
-        "\1\162\1\uffff\1\156\1\60\1\145\1\157\1\145\1\60\1\uffff\2\156\1"+
-        "\120\1\uffff\1\164\1\155\1\150\1\163\1\145\1\141\1\60\1\156\1\163"+
-        "\1\uffff\1\164\1\145\1\163\2\60\2\uffff";
+        "\1\164\1\55\1\151\1\162\1\166\1\145\1\147\1\164\1\151\1\uffff\1"+
+        "\157\1\145\1\151\1\55\1\165\1\55\1\157\1\156\1\155\1\162\1\uffff"+
+        "\1\162\1\uffff\1\156\1\55\1\145\1\157\1\145\1\55\1\uffff\2\156\1"+
+        "\120\1\uffff\1\164\1\155\1\150\1\163\1\145\1\141\1\55\1\156\1\163"+
+        "\1\uffff\1\164\1\145\1\163\2\55\2\uffff";
     static final String DFA12_maxS =
         "\1\uffff\1\145\1\154\2\157\1\141\1\157\2\uffff\1\151\2\uffff\1\145"+
         "\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\161\1\uffff\1\154"+
@@ -1106,7 +1106,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             "\1\76",
             "\1\77",
             "\1\100",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\102",
             "\1\103",
             "\1\104",
@@ -1118,9 +1118,9 @@ public class InternalTargetPlatformLexer extends Lexer {
             "\1\111",
             "\1\112",
             "\1\113",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\115",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\117",
             "\1\120",
             "\1\121",
@@ -1129,11 +1129,11 @@ public class InternalTargetPlatformLexer extends Lexer {
             "\1\123",
             "",
             "\1\124",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\126",
             "\1\127",
             "\1\130",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
             "\1\132",
             "\1\133",
@@ -1145,15 +1145,15 @@ public class InternalTargetPlatformLexer extends Lexer {
             "\1\140",
             "\1\141",
             "\1\142",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\144",
             "\1\145",
             "",
             "\1\146",
             "\1\147",
             "\1\150",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
             ""
     };

@@ -37,8 +37,8 @@
     </licenses>
 
     <properties>
-        <tycho-version>0.16.0</tycho-version>
-        <tycho-extras-version>0.16.0</tycho-extras-version>
+        <tycho-version>0.18.1</tycho-version>
+        <tycho-extras-version>0.18.1</tycho-extras-version>
     </properties>
 
 

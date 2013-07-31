@@ -105,4 +105,18 @@ class TestGrammar {
 		}
 	}
 	
+	@Test
+	def testIdWithDash() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				my.iu.with-dash
+			}
+		''')
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("my.iu.with-dash", iu0.ID)
+	}
+	
 }
