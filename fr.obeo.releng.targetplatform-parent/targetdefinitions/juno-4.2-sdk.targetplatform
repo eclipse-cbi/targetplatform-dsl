@@ -1,0 +1,21 @@
+target "Juno 4.2 SDK"
+
+location "http://download.eclipse.org/releases/juno" {
+	with source, requirements
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.xtext.sdk.feature.group
+	org.eclipse.pde.core
+	org.eclipse.equinox.p2.sdk.feature.group
+	org.eclipse.core.runtime.feature.feature.group
+	org.eclipse.sdk.feature.group
+}
+
+location "http://download.itemis.de/updates" {
+	with source, requirements
+	de.itemis.xtext.antlr.sdk.feature.group
+}
+
+location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+	with source, requirements
+	com.google.guava;version="[10,11)"
+}
