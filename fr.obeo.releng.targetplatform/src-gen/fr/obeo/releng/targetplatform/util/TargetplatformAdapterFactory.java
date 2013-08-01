@@ -1,4 +1,7 @@
 /**
+ * <copyright>
+ * </copyright>
+ *
  */
 package fr.obeo.releng.targetplatform.util;
 
