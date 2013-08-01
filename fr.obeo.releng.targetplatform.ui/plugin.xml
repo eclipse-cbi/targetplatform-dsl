@@ -343,6 +343,9 @@
         <command
               commandId="fr.obeo.releng.targetplatform.ui.convertTargetPlatform"
               style="push">
+           <visibleWhen
+                 checkEnabled="true">
+           </visibleWhen>
         </command>
      </menuContribution>
   </extension>
