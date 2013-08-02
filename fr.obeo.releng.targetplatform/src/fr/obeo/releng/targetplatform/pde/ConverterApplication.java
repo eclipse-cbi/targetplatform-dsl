@@ -47,9 +47,10 @@ public class ConverterApplication implements IApplication {
 		}
 		
 		Injector injector = TargetPlatformBundleActivator.getInstance().getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
-		Converter converter = new Converter();
+		Class<?> converterClass = ConverterApplication.class.getClassLoader().loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter");
+		IConverter converter = (IConverter) converterClass.newInstance();
 		injector.injectMembers(converter);
-		
+
 		URI fileURI = org.eclipse.emf.common.util.URI.createFileURI(path);
 		if (fileURI.isRelative()) {
 			fileURI = org.eclipse.emf.common.util.URI.createFileURI(new File(".").getAbsolutePath() + File.separator + path);

@@ -1,12 +1,13 @@
 package fr.obeo.releng;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
-import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -16,8 +17,6 @@ import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 /*******************************************************************************
  * Copyright (c) 2012 Obeo.
@@ -46,9 +45,7 @@ public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.Targe
 
 	private BundleContext context;
 	
-	private List<ServiceReference<?>> serviceReferencesToUnget;
-
-	private ITargetPlatformService targetPlatformService;
+	private List<ServiceReference> serviceReferencesToUnget;
 
 	private IProvisioningAgentProvider provisioningAgentProvider;
 	
@@ -62,7 +59,7 @@ public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.Targe
 	
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		for (ServiceReference<?> serviceReference : serviceReferencesToUnget) {
+		for (ServiceReference serviceReference : serviceReferencesToUnget) {
 			context.ungetService(serviceReference);
 		}
 		
@@ -74,6 +71,10 @@ public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.Targe
 	
 	public static TargetPlatformBundleActivator getInstance() {
 		return INSTANCE;
+	}
+	
+	public BundleContext getContext() {
+		return context;
 	}
 	
 	public Bundle getBundle() {
@@ -101,13 +102,6 @@ public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.Targe
 		}
 	}
 	
-	public ITargetPlatformService getTargetPlatformService() {
-		if (targetPlatformService == null) {
-			targetPlatformService = getService(ITargetPlatformService.class);
-		} 
-		return targetPlatformService;
-	}
-	
 	/**
 	 * @return the provisioningAgentProvider
 	 */
@@ -118,15 +112,16 @@ public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.Targe
 		return provisioningAgentProvider;
 	}
 	
-	private <T> T getService(Class<T> clazz) {
-		ServiceReference<T> serviceReference = context.getServiceReference(clazz);
+	@SuppressWarnings("unchecked")
+	public <T> T getService(Class<T> clazz) {
+		ServiceReference serviceReference = context.getServiceReference(clazz.getName());
 		
 		final T service;
 		if (serviceReference == null) {
 			service = null;
 		} else {
 			serviceReferencesToUnget.add(serviceReference);
-			service = context.getService(serviceReference);  
+			service = (T) context.getService(serviceReference);  
 		}
 		
 		return service;

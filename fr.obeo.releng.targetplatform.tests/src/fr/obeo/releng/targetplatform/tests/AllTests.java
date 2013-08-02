@@ -19,7 +19,12 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({TestGrammar.class,})
+@SuiteClasses({TestGrammar.class})
 public class AllTests {
 
+	@RunWith(Suite.class)
+	@SuiteClasses({TestTargetConvertion.class})
+	public static class WithRuntime {
+		
+	}
 }

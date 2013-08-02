@@ -35,19 +35,20 @@
 	      </resource>
 	</resources>
     <plugins>
-  	<plugin>
-		<groupId>org.eclipse.tycho</groupId>
-		<artifactId>tycho-surefire-plugin</artifactId>
-		<version>${tycho-version}</version>
-		<configuration>
-			<includes>
-				<include>fr/obeo/releng/targetplatform/tests/AllTests.class</include>
-			</includes>	
-			<useUIHarness>false</useUIHarness>
-			<useUIThread>false</useUIThread>
-			<appArgLine>-Xmx1024m -XX:MaxPermSize=256m</appArgLine>
-		</configuration>
-	</plugin>
+	  	<plugin>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-surefire-plugin</artifactId>
+			<version>${tycho-version}</version>
+			<configuration>
+				<includes>
+					<include>fr/obeo/releng/targetplatform/tests/AllTests.class</include>
+					<include>fr/obeo/releng/targetplatform/tests/AllTest$WithRuntime.class</include>
+				</includes>	
+				<useUIHarness>true</useUIHarness>
+				<useUIThread>false</useUIThread>
+				<appArgLine>-Xmx1024m -XX:MaxPermSize=256m</appArgLine>
+			</configuration>
+		</plugin>
     </plugins>
   </build>
 </project>

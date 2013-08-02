@@ -10,8 +10,6 @@
  *******************************************************************************/
 package fr.obeo.releng.ui.handler;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -25,15 +23,13 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.google.inject.Injector;
 
-import fr.obeo.releng.targetplatform.pde.Converter;
+import fr.obeo.releng.targetplatform.pde.IConverter;
 import fr.obeo.releng.ui.internal.TargetPlatformActivator;
 
 /**
@@ -53,14 +49,19 @@ public class ConvertTargetPlatform extends AbstractHandler {
 			final Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 			if (firstElement instanceof IFile) {
 				final String path = ((IFile) firstElement).getLocation().toFile().getAbsolutePath();
-				Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM);
-				final Converter converter = new Converter();
-				injector.injectMembers(converter);
 				
-				Job job = new Job("Create target platform definition file") {
+				Job job = new Job("Creating target platform definition file") {
 				     @Override
 				     protected IStatus run(IProgressMonitor monitor) {
 				         SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
+				         Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM);
+				         IConverter converter;
+				         try {
+				        	 converter = (IConverter) TargetPlatformActivator.class.getClassLoader().loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter").newInstance();
+				         } catch (Exception e) {
+				        	 throw new RuntimeException(e);
+				         }
+				         injector.injectMembers(converter);
 							try {
 								converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
 							} catch (Exception e) {

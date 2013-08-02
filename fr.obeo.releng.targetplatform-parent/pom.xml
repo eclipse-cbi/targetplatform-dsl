@@ -44,12 +44,20 @@
 
   <modules>
     <module>../fr.obeo.releng.targetplatform</module>
+    <module>../fr.obeo.releng.targetplatform.pde-util_3.6</module>
+    <module>../fr.obeo.releng.targetplatform.pde-util_3.7</module>
+    <module>../fr.obeo.releng.targetplatform.pde-util_3.8</module>
     <module>../fr.obeo.releng.targetplatform.ui</module>
 
     <module>../fr.obeo.releng.targetplatform.tests</module>
 
-    <module>../fr.obeo.releng.targetplatform-update</module>
-    <module>../fr.obeo.releng.targetplatform-feature</module>
+    <module>../fr.obeo.releng.targetplatform-feature/3.6</module>
+    <module>../fr.obeo.releng.targetplatform-feature/3.7</module>
+    <module>../fr.obeo.releng.targetplatform-feature/3.8</module>
+    
+    <module>../fr.obeo.releng.targetplatform-update/3.6</module>
+    <module>../fr.obeo.releng.targetplatform-update/3.7</module>
+    <module>../fr.obeo.releng.targetplatform-update/3.8</module>
   </modules>
 
   <build>
