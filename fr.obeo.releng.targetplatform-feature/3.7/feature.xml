@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <discovery label="Eclipse Juno (3.8/4.2) update site" url="http://download.eclipse.org/releases/juno/"/>
+      <update label="Eclipse Juno (3.8/4.2) update site" url="http://download.eclipse.org/releases/juno/"/>
    </url>
 
    <requires>
