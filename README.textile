@@ -1,6 +1,6 @@
 h1. Target Platform Definition DSL and Generator
 
-Obeo Target Platform Definition DSL and Generator provides a DSL with an advanced editor and a generator taking this DSL as input and generating a @.target@ file that PDE is able to read to provision a Target Platform.
+Target Platform Definition DSL and Generator provides a DSL with an advanced editor and a generator taking this DSL as input and generating a @.target@ file that PDE is able to read to provision a Target Platform.
 
 The greatest thing about this tool is that it avoids you to manage .target files links to strict versions (e.g., @3.2.5.v20093493-sfoit-v-rrel@). It lets you define the bundles and features you want to use in your target platform and it handles the generation of the .target file with the most recent available version. It is possible to restrict the lookup within a version range.
 
@@ -14,13 +14,17 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 *http://mbarbero.github.com/fr.obeo.releng.targetplatform/p2/*
 
-Then, select the "Obeo Target Platform Definition DSL and Generator" feature and click on @Finish@.
+Then, select the "Target Platform Definition DSL and Generator" feature suitable for your current Eclipse version and click on @Finish@.
+
+bq. This tool requires Xtext 2.3.0 (released along with Eclipse Juno - 3.8/4.2) or later. If installing on Eclipse 3.6 or 3.7, you may need to add the Juno repository to the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/releases/juno/*
 
 h3. Requirements
 
 * Java SE 6
 
-* Eclipse 4.2 (Juno)
+* Eclipse 3.6+ (tested on 3.6, 3.7, 3.8/4.2 and 4.3)
+
+* Xtext 2.3.0+
 
 h2. Basic usage
 
@@ -93,4 +97,4 @@ Clone this repository, import all projects in your Eclipse and set your target p
 
 h2. License
 
-Copyright (c) 2012 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
+Copyright (c) 2012, 2013 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
