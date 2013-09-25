@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -63,6 +64,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 		Job job = new Job("Creating target platform definition file") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				IStatus ret = Status.OK_STATUS;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 				Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM);
 				IConverter converter;
@@ -74,8 +76,10 @@ public class ConvertTargetPlatform extends AbstractHandler {
 				injector.injectMembers(converter);
 				try {
 					converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
+				} catch (OperationCanceledException cancel) {
+					ret = new Status(IStatus.CANCEL, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), cancel.getMessage(), cancel);
 				} catch (Exception e) {
-					return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
+					ret = new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
 				}
 				IContainer container = ((IFile) selectedElement).getParent();
 				if (container != null) {
@@ -85,7 +89,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 						return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
 					}
 				}
-				return Status.OK_STATUS;
+				return ret;
 			}
 		};
 		job.setUser(userJob);
