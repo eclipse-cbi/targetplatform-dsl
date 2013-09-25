@@ -15,13 +15,13 @@ for v in ${VERSIONS[@]}; do
 		--eclipse '/Applications/eclipse 3.8.2' \
 		add ${TIMESTAMP}/
 
-	#thisFolder=`pwd`
-	#./comp-repo.sh ${thisFolder} \
-	#	--name "Target Platform Definition DSL and Generator" \
-	#	--eclipse '/Applications/eclipse 3.8.2' \
-	#	add ${v}/${TIMESTAMP}/
+	thisFolder=`pwd`
+	./comp-repo.sh ${thisFolder} \
+		--name "Target Platform Definition DSL and Generator" \
+		--eclipse '/Applications/eclipse 3.8.2' \
+		add ${v}/${TIMESTAMP}/
 done
 
-git add 2.*
+git add 3.*
 git add composite*.jar
 git commit -m "added build ${TIMESTAMP}"
