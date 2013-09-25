@@ -10,6 +10,8 @@
  *******************************************************************************/
 package fr.obeo.releng.ui.handler;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -46,43 +48,48 @@ public class ConvertTargetPlatform extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof IStructuredSelection) {
-			final Object firstElement = ((IStructuredSelection) selection).getFirstElement();
-			if (firstElement instanceof IFile) {
-				final String path = ((IFile) firstElement).getLocation().toFile().getAbsolutePath();
-				
-				Job job = new Job("Creating target platform definition file") {
-				     @Override
-				     protected IStatus run(IProgressMonitor monitor) {
-				         SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-				         Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM);
-				         IConverter converter;
-				         try {
-				        	 converter = (IConverter) TargetPlatformActivator.class.getClassLoader().loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter").newInstance();
-				         } catch (Exception e) {
-				        	 throw new RuntimeException(e);
-				         }
-				         injector.injectMembers(converter);
-							try {
-								converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
-							} catch (Exception e) {
-								return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
-							}
-							IContainer container = ((IFile) firstElement).getParent();
-							if (container != null) {
-								try {
-									container.refreshLocal(IResource.DEPTH_ONE, subMonitor.newChild(5));
-								} catch (CoreException e) {
-									return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
-								}
-							}
-				         return Status.OK_STATUS;
-				     }
-				 };
-				 job.setUser(true);
-				 job.schedule();
+			List<?> selectedObjects = ((IStructuredSelection) selection).toList();
+			for (Object selectedObject : selectedObjects) {
+				if (selectedObject instanceof IFile) {
+					final String path = ((IFile) selectedObject).getLocation().toFile().getAbsolutePath();
+					scheduleJob(selectedObject, path, selectedObjects.size() <= 1);
+				}
 			}
 		}
 		return null;
+	}
+
+	private void scheduleJob(final Object selectedElement, final String path, boolean userJob) {
+		Job job = new Job("Creating target platform definition file") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
+				Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM);
+				IConverter converter;
+				try {
+					converter = (IConverter) TargetPlatformActivator.class.getClassLoader().loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter").newInstance();
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+				injector.injectMembers(converter);
+				try {
+					converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
+				} catch (Exception e) {
+					return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
+				}
+				IContainer container = ((IFile) selectedElement).getParent();
+				if (container != null) {
+					try {
+						container.refreshLocal(IResource.DEPTH_ONE, subMonitor.newChild(5));
+					} catch (CoreException e) {
+						return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setUser(userJob);
+		job.schedule();
 	}
 
 }
