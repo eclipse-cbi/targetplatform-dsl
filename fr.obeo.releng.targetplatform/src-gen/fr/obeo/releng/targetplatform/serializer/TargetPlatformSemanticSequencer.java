@@ -57,7 +57,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (id=ID? uri=STRING ((options+=Option options+=Option*)? (ius+=IU ius+=IU*)?)?)
+	 *     (id=ID? uri=STRING ((options+=Option options+=Option*)? ius+=IU*)?)
 	 */
 	protected void sequence_Location(EObject context, Location semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

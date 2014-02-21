@@ -396,10 +396,10 @@ ruleLocation returns [EObject current=null]
 	    }
 
 )
-))*)?((
+))*)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0_0()); 
+	        newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0()); 
 	    }
 		lv_ius_9_0=ruleIU		{
 	        if ($current==null) {
@@ -414,27 +414,9 @@ ruleLocation returns [EObject current=null]
 	    }
 
 )
-)(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_1_0()); 
-	    }
-		lv_ius_10_0=ruleIU		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLocationRule());
-	        }
-       		add(
-       			$current, 
-       			"ius",
-        		lv_ius_10_0, 
-        		"IU");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*)?	otherlv_11='}' 
+)*	otherlv_10='}' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getLocationAccess().getRightCurlyBracketKeyword_2_3());
+    	newLeafNode(otherlv_10, grammarAccess.getLocationAccess().getRightCurlyBracketKeyword_2_3());
     }
 )?)
 ;
@@ -559,13 +541,15 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     { 
     newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
     }
-(
+(((
+	'.' 
+)=>
 	kw='.' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
     }
-    this_ID_2=RULE_ID    {
+)    this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
@@ -603,60 +587,61 @@ ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
     @after { leaveRule(); }:
-((    this_INT_0=RULE_INT    {
+(    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
     }
 
     { 
-    newLeafNode(this_INT_0, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0_0()); 
+    newLeafNode(this_INT_0, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0()); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_0_1_0()); 
+        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_0()); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    newLeafNode(this_INT_2, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0_1_1()); 
+    newLeafNode(this_INT_2, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_1()); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_0_1_2_0()); 
+        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_0()); 
     }
     this_INT_4=RULE_INT    {
 		$current.merge(this_INT_4);
     }
 
     { 
-    newLeafNode(this_INT_4, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0_1_2_1()); 
+    newLeafNode(this_INT_4, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_1()); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_0_1_2_2_0()); 
+        newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0()); 
     }
-    this_ID_6=RULE_ID    {
+(    this_ID_6=RULE_ID    {
 		$current.merge(this_ID_6);
     }
 
     { 
-    newLeafNode(this_ID_6, grammarAccess.getVersionAccess().getIDTerminalRuleCall_0_1_2_2_1()); 
+    newLeafNode(this_ID_6, grammarAccess.getVersionAccess().getIDTerminalRuleCall_1_2_2_1_0()); 
     }
-)?)?)?)
-    |
-	kw='latest' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getVersionAccess().getLatestKeyword_1()); 
+
+    |    this_INT_7=RULE_INT    {
+		$current.merge(this_INT_7);
     }
-)
+
+    { 
+    newLeafNode(this_INT_7, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_2_1_1()); 
+    }
+))?)?)?)
     ;
 finally {
 	myHiddenTokenState.restore();
@@ -795,16 +780,16 @@ finally {
 ruleTargetVersion returns [Enumerator current=null] 
     @init { enterRule(); }
     @after { leaveRule(); }:
-((	enumLiteral_0='3.8' 
+((	enumLiteral_0='PDE_3.8' 
 	{
-        $current = grammarAccess.getTargetVersionAccess().getTARGET38EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_0, grammarAccess.getTargetVersionAccess().getTARGET38EnumLiteralDeclaration_0()); 
+        $current = grammarAccess.getTargetVersionAccess().getTARGET_38EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_0, grammarAccess.getTargetVersionAccess().getTARGET_38EnumLiteralDeclaration_0()); 
     }
 )
-    |(	enumLiteral_1='3.6' 
+    |(	enumLiteral_1='PDE_3.6' 
 	{
-        $current = grammarAccess.getTargetVersionAccess().getTARGET36EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_1, grammarAccess.getTargetVersionAccess().getTARGET36EnumLiteralDeclaration_1()); 
+        $current = grammarAccess.getTargetVersionAccess().getTARGET_36EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_1, grammarAccess.getTargetVersionAccess().getTARGET_36EnumLiteralDeclaration_1()); 
     }
 ));
 
@@ -841,9 +826,9 @@ ruleOption returns [Enumerator current=null]
 
 
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'-')*;
-
 RULE_INT : ('0'..'9')+;
+
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')+;
 
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 

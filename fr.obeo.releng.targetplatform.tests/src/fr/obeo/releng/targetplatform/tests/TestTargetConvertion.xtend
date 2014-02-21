@@ -7,7 +7,7 @@ import com.google.inject.name.Named
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.IConverter
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 import java.net.URI
 import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.BasicMonitor.Printing
@@ -32,7 +32,7 @@ class TestTargetConvertion {
 	ParseHelper<TargetPlatform> parser
 	
 	@Inject
-	TargetPlatformJavaValidator validator
+	TargetPlatformValidator validator
 	
 	@Inject
 	EValidatorRegistrar validatorRegistrar

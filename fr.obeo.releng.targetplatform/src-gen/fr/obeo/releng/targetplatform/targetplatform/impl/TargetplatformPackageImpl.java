@@ -373,8 +373,8 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
 
     // Initialize enums and add enum literals
     initEEnum(targetVersionEEnum, TargetVersion.class, "TargetVersion");
-    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET38);
-    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET36);
+    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET_38);
+    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET_36);
 
     initEEnum(optionEEnum, Option.class, "Option");
     addEEnumLiteral(optionEEnum, Option.INCLUDE_REQUIRED);

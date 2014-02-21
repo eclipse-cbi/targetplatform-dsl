@@ -3,12 +3,9 @@
 */
 package fr.obeo.releng.targetplatform.ui.labeling;
 
-import javax.net.ssl.SSLContext;
-
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
 

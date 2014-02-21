@@ -12,7 +12,6 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
@@ -140,18 +139,15 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
 		private final Assignment cOptionsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
 		private final RuleCall cOptionsOptionEnumRuleCall_2_1_2_1_0 = (RuleCall)cOptionsAssignment_2_1_2_1.eContents().get(0);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Assignment cIusAssignment_2_2_0 = (Assignment)cGroup_2_2.eContents().get(0);
-		private final RuleCall cIusIUParserRuleCall_2_2_0_0 = (RuleCall)cIusAssignment_2_2_0.eContents().get(0);
-		private final Assignment cIusAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cIusIUParserRuleCall_2_2_1_0 = (RuleCall)cIusAssignment_2_2_1.eContents().get(0);
+		private final Assignment cIusAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cIusIUParserRuleCall_2_2_0 = (RuleCall)cIusAssignment_2_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//Location:
-		//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? (ius+=IU ius+=IU*)? "}")?;
+		//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? (ius+=IU ius+=IU*)? "}")?
+		//"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"location"
@@ -172,7 +168,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getUriSTRINGTerminalRuleCall_1_1_0() { return cUriSTRINGTerminalRuleCall_1_1_0; }
 
-		//("{" ("with" options+=Option ("," options+=Option)*)? (ius+=IU ius+=IU*)? "}")?
+		//("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"{"
@@ -202,20 +198,11 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//Option
 		public RuleCall getOptionsOptionEnumRuleCall_2_1_2_1_0() { return cOptionsOptionEnumRuleCall_2_1_2_1_0; }
 
-		//(ius+=IU ius+=IU*)?
-		public Group getGroup_2_2() { return cGroup_2_2; }
-
-		//ius+=IU
-		public Assignment getIusAssignment_2_2_0() { return cIusAssignment_2_2_0; }
-
-		//IU
-		public RuleCall getIusIUParserRuleCall_2_2_0_0() { return cIusIUParserRuleCall_2_2_0_0; }
-
 		//ius+=IU*
-		public Assignment getIusAssignment_2_2_1() { return cIusAssignment_2_2_1; }
+		public Assignment getIusAssignment_2_2() { return cIusAssignment_2_2; }
 
 		//IU
-		public RuleCall getIusIUParserRuleCall_2_2_1_0() { return cIusIUParserRuleCall_2_2_1_0; }
+		public RuleCall getIusIUParserRuleCall_2_2_0() { return cIusIUParserRuleCall_2_2_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
@@ -295,10 +282,10 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//(=> "." ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//=> "."
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -307,62 +294,62 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class VersionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Version");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_0_1_1 = (RuleCall)cGroup_0_1.eContents().get(1);
-		private final Group cGroup_0_1_2 = (Group)cGroup_0_1.eContents().get(2);
-		private final Keyword cFullStopKeyword_0_1_2_0 = (Keyword)cGroup_0_1_2.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_0_1_2_1 = (RuleCall)cGroup_0_1_2.eContents().get(1);
-		private final Group cGroup_0_1_2_2 = (Group)cGroup_0_1_2.eContents().get(2);
-		private final Keyword cFullStopKeyword_0_1_2_2_0 = (Keyword)cGroup_0_1_2_2.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_0_1_2_2_1 = (RuleCall)cGroup_0_1_2_2.eContents().get(1);
-		private final Keyword cLatestKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
+		private final Keyword cFullStopKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
+		private final Group cGroup_1_2_2 = (Group)cGroup_1_2.eContents().get(2);
+		private final Keyword cFullStopKeyword_1_2_2_0 = (Keyword)cGroup_1_2_2.eContents().get(0);
+		private final Alternatives cAlternatives_1_2_2_1 = (Alternatives)cGroup_1_2_2.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_1_2_2_1_0 = (RuleCall)cAlternatives_1_2_2_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_2_2_1_1 = (RuleCall)cAlternatives_1_2_2_1.eContents().get(1);
 		
 		//Version hidden():
-		//	INT ("." INT ("." INT ("." ID)?)?)? | "latest";
+		//	INT ("." INT ("." INT ("." (ID | INT))?)?)?;
 		public ParserRule getRule() { return rule; }
 
-		//INT ("." INT ("." INT ("." ID)?)?)? | "latest"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//INT ("." INT ("." INT ("." ID)?)?)?
-		public Group getGroup_0() { return cGroup_0; }
+		//INT ("." INT ("." INT ("." (ID | INT))?)?)?
+		public Group getGroup() { return cGroup; }
 
 		//INT
-		public RuleCall getINTTerminalRuleCall_0_0() { return cINTTerminalRuleCall_0_0; }
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//("." INT ("." INT ("." ID)?)?)?
-		public Group getGroup_0_1() { return cGroup_0_1; }
+		//("." INT ("." INT ("." (ID | INT))?)?)?
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
-		public Keyword getFullStopKeyword_0_1_0() { return cFullStopKeyword_0_1_0; }
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//INT
-		public RuleCall getINTTerminalRuleCall_0_1_1() { return cINTTerminalRuleCall_0_1_1; }
+		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 
-		//("." INT ("." ID)?)?
-		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
+		//("." INT ("." (ID | INT))?)?
+		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//"."
-		public Keyword getFullStopKeyword_0_1_2_0() { return cFullStopKeyword_0_1_2_0; }
+		public Keyword getFullStopKeyword_1_2_0() { return cFullStopKeyword_1_2_0; }
 
 		//INT
-		public RuleCall getINTTerminalRuleCall_0_1_2_1() { return cINTTerminalRuleCall_0_1_2_1; }
+		public RuleCall getINTTerminalRuleCall_1_2_1() { return cINTTerminalRuleCall_1_2_1; }
 
-		//("." ID)?
-		public Group getGroup_0_1_2_2() { return cGroup_0_1_2_2; }
+		//("." (ID | INT))?
+		public Group getGroup_1_2_2() { return cGroup_1_2_2; }
 
 		//"."
-		public Keyword getFullStopKeyword_0_1_2_2_0() { return cFullStopKeyword_0_1_2_2_0; }
+		public Keyword getFullStopKeyword_1_2_2_0() { return cFullStopKeyword_1_2_2_0; }
+
+		//ID | INT
+		public Alternatives getAlternatives_1_2_2_1() { return cAlternatives_1_2_2_1; }
 
 		//ID
-		public RuleCall getIDTerminalRuleCall_0_1_2_2_1() { return cIDTerminalRuleCall_0_1_2_2_1; }
+		public RuleCall getIDTerminalRuleCall_1_2_2_1_0() { return cIDTerminalRuleCall_1_2_2_1_0; }
 
-		//"latest"
-		public Keyword getLatestKeyword_1() { return cLatestKeyword_1; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_2_2_1_1() { return cINTTerminalRuleCall_1_2_2_1_1; }
 	}
 
 	public class VersionRangeElements extends AbstractParserRuleElementFinder {
@@ -441,29 +428,29 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	public class TargetVersionElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "TargetVersion");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cTARGET38EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cTARGET3838Keyword_0_0 = (Keyword)cTARGET38EnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cTARGET36EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cTARGET3636Keyword_1_0 = (Keyword)cTARGET36EnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cTARGET_38EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cTARGET_38PDE_38Keyword_0_0 = (Keyword)cTARGET_38EnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cTARGET_36EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cTARGET_36PDE_36Keyword_1_0 = (Keyword)cTARGET_36EnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum TargetVersion:
-		//	TARGET38="3.8" | TARGET36="3.6";
+		//	TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6";
 		public EnumRule getRule() { return rule; }
 
-		//TARGET38="3.8" | TARGET36="3.6"
+		//TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//TARGET38="3.8"
-		public EnumLiteralDeclaration getTARGET38EnumLiteralDeclaration_0() { return cTARGET38EnumLiteralDeclaration_0; }
+		//TARGET_38="PDE_3.8"
+		public EnumLiteralDeclaration getTARGET_38EnumLiteralDeclaration_0() { return cTARGET_38EnumLiteralDeclaration_0; }
 
-		//"3.8"
-		public Keyword getTARGET3838Keyword_0_0() { return cTARGET3838Keyword_0_0; }
+		//"PDE_3.8"
+		public Keyword getTARGET_38PDE_38Keyword_0_0() { return cTARGET_38PDE_38Keyword_0_0; }
 
-		//TARGET36="3.6"
-		public EnumLiteralDeclaration getTARGET36EnumLiteralDeclaration_1() { return cTARGET36EnumLiteralDeclaration_1; }
+		//TARGET_36="PDE_3.6"
+		public EnumLiteralDeclaration getTARGET_36EnumLiteralDeclaration_1() { return cTARGET_36EnumLiteralDeclaration_1; }
 
-		//"3.6"
-		public Keyword getTARGET3636Keyword_1_0() { return cTARGET3636Keyword_1_0; }
+		//"PDE_3.6"
+		public Keyword getTARGET_36PDE_36Keyword_1_0() { return cTARGET_36PDE_36Keyword_1_0; }
 	}
 
 	public class OptionElements extends AbstractEnumRuleElementFinder {
@@ -520,17 +507,19 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private QualifiedNameElements pQualifiedName;
 	private VersionElements pVersion;
 	private VersionRangeElements pVersionRange;
+	private TerminalRule tINT;
 	private TerminalRule tID;
+	private TerminalRule tSTRING;
+	private TerminalRule tML_COMMENT;
+	private TerminalRule tSL_COMMENT;
+	private TerminalRule tWS;
+	private TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
-
 	@Inject
-	public TargetPlatformGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+	public TargetPlatformGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaTerminals = gaTerminals;
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -555,10 +544,6 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 
-	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return gaTerminals;
-	}
-
 	
 	//TargetPlatform:
 	//	("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
@@ -572,7 +557,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum TargetVersion:
-	//	TARGET38="3.8" | TARGET36="3.6";
+	//	TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6";
 	public TargetVersionElements getTargetVersionAccess() {
 		return (unknownRuleTargetVersion != null) ? unknownRuleTargetVersion : (unknownRuleTargetVersion = new TargetVersionElements());
 	}
@@ -582,7 +567,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Location:
-	//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? (ius+=IU ius+=IU*)? "}")?;
+	//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
 	public LocationElements getLocationAccess() {
 		return (pLocation != null) ? pLocation : (pLocation = new LocationElements());
 	}
@@ -623,7 +608,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Version hidden():
-	//	INT ("." INT ("." INT ("." ID)?)?)? | "latest";
+	//	INT ("." INT ("." INT ("." (ID | INT))?)?)?;
 	public VersionElements getVersionAccess() {
 		return (pVersion != null) ? pVersion : (pVersion = new VersionElements());
 	}
@@ -642,46 +627,46 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersionRangeAccess().getRule();
 	}
 
-	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9" | "-")*;
-	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
-	} 
-
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
-		return gaTerminals.getINTRule();
+		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	//terminal ID:
+	//	"^"? ("a".."z" | "A".."Z" | "_" | "-" | "0".."9")+;
+	public TerminalRule getIDRule() {
+		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return gaTerminals.getSTRINGRule();
+		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return gaTerminals.getML_COMMENTRule();
+		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaTerminals.getSL_COMMENTRule();
+		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return gaTerminals.getWSRule();
+		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaTerminals.getANY_OTHERRule();
+		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

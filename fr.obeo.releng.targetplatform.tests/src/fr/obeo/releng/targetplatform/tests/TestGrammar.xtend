@@ -5,7 +5,7 @@ import com.google.inject.name.Named
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.targetplatform.Option
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -26,7 +26,7 @@ class TestGrammar {
 	ParseHelper<TargetPlatform> parser
 	
 	@Inject
-	TargetPlatformJavaValidator validator
+	TargetPlatformValidator validator
 	
 	@Inject
 	EValidatorRegistrar validatorRegistrar
@@ -49,6 +49,7 @@ class TestGrammar {
 				org.eclipse.uml2.sdk.feature.group
 			}
 		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
 		assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", fisrtLocation.uri)
 		assertEquals(2, fisrtLocation.ius.size)
@@ -78,6 +79,7 @@ class TestGrammar {
 				org.eclipse.emf.sdk.feature.group;version="[2.9.0,3.0.0)"
 			}
 		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_SOURCE))
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_ALL_ENVIRONMENTS))
@@ -96,13 +98,38 @@ class TestGrammar {
 				org.eclipse.emf.sdk.feature.group;version="[2.9.0,3.0.0)"
 			}
 		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
 		tester.validator.checkAllEnvAndRequiredAreSelfExluding(fisrtLocation)
 		for (diag: tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic))) {
-			assertEquals(TargetPlatformJavaValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, 
+			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, 
 				diag.issueCode
 			)
 		}
+	}
+	
+	@Test
+	def testIdWithSpaceInIt() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				my. iu
+			}
+		''')
+		assertFalse(targetPlatform.eResource.errors.empty)
+	}
+	
+	@Test
+	def testIdWithSpaceInIt2() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				my .iu
+			}
+		''')
+		assertFalse(targetPlatform.eResource.errors.empty)
 	}
 	
 	@Test
@@ -114,9 +141,89 @@ class TestGrammar {
 				my.iu.with-dash
 			}
 		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("my.iu.with-dash", iu0.ID)
 	}
 	
+	@Test
+	def testIdWithVersionNonString() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				my.iu;version=3
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("my.iu", iu0.ID)
+		assertEquals("3", iu0.version)
+	}
+	
+	@Test
+	def testIdWithVersionNonString2() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				myu;version=3.2.1
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("myu", iu0.ID)
+		assertEquals("3.2.1", iu0.version)
+	}
+	
+	@Test
+	def testIdWithVersionNonString3() {
+		val targetPlatform = parser.parse('''
+			target "a target platform" version PDE_3.8
+
+			location "my location URL" {
+				myu;version=[3.2.1,10.0)
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("myu", iu0.ID)
+		assertEquals("[3.2.1,10.0)", iu0.version)
+	}
+	
+	@Test
+	def testIdWithVersionNonString4() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				myu;version=[ 3 , 5 )
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("myu", iu0.ID)
+		assertEquals("[ 3 , 5 )", iu0.version)
+	}
+
+	@Test
+	def testIUWithIntQualifier() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+
+			location "my location URL" {
+				myu;version=1.2.3.201404071200
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val fisrtLocation = targetPlatform.locations.head
+		val iu0 = fisrtLocation.ius.head
+		assertEquals("myu", iu0.ID)
+		assertEquals("1.2.3.201404071200", iu0.version)
+	}	
 }

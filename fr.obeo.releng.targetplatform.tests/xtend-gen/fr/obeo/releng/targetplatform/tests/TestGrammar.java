@@ -8,9 +8,10 @@ import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator;
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -34,7 +35,7 @@ public class TestGrammar {
   private ParseHelper<TargetPlatform> parser;
   
   @Inject
-  private TargetPlatformJavaValidator validator;
+  private TargetPlatformValidator validator;
   
   @Inject
   private EValidatorRegistrar validatorRegistrar;
@@ -69,6 +70,13 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
       EList<Location> _locations = targetPlatform.getLocations();
       final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
       String _uri = fisrtLocation.getUri();
@@ -124,6 +132,13 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
       EList<Location> _locations = targetPlatform.getLocations();
       final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
       EList<Option> _options = fisrtLocation.getOptions();
@@ -146,7 +161,7 @@ public class TestGrammar {
   @Test
   public void testLocationOptionCheck() {
     try {
-      final ValidatorTester<TargetPlatformJavaValidator> tester = new ValidatorTester<TargetPlatformJavaValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"a target platform\"");
       _builder.newLine();
@@ -162,17 +177,72 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
       EList<Location> _locations = targetPlatform.getLocations();
       final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      TargetPlatformJavaValidator _validator = tester.validator();
+      TargetPlatformValidator _validator = tester.validator();
       _validator.checkAllEnvAndRequiredAreSelfExluding(fisrtLocation);
       AssertableDiagnostics _diagnose = tester.diagnose();
       Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
       Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
       for (final AbstractValidationDiagnostic diag : _filter) {
         String _issueCode = diag.getIssueCode();
-        Assert.assertEquals(TargetPlatformJavaValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, _issueCode);
+        Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, _issueCode);
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithSpaceInIt() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("my. iu");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertFalse(_isEmpty);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithSpaceInIt2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("my .iu");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertFalse(_isEmpty);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -193,12 +263,194 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
       EList<Location> _locations = targetPlatform.getLocations();
       final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
       EList<IU> _ius = fisrtLocation.getIus();
       final IU iu0 = IterableExtensions.<IU>head(_ius);
       String _iD = iu0.getID();
       Assert.assertEquals("my.iu.with-dash", _iD);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithVersionNonString() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("my.iu;version=3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("my.iu", _iD);
+      String _version = iu0.getVersion();
+      Assert.assertEquals("3", _version);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithVersionNonString2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myu;version=3.2.1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("myu", _iD);
+      String _version = iu0.getVersion();
+      Assert.assertEquals("3.2.1", _version);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithVersionNonString3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\" version PDE_3.8");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myu;version=[3.2.1,10.0)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("myu", _iD);
+      String _version = iu0.getVersion();
+      Assert.assertEquals("[3.2.1,10.0)", _version);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIdWithVersionNonString4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myu;version=[ 3 , 5 )");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("myu", _iD);
+      String _version = iu0.getVersion();
+      Assert.assertEquals("[ 3 , 5 )", _version);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIUWithIntQualifier() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"my location URL\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myu;version=1.2.3.201404071200");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = fisrtLocation.getIus();
+      final IU iu0 = IterableExtensions.<IU>head(_ius);
+      String _iD = iu0.getID();
+      Assert.assertEquals("myu", _iD);
+      String _version = iu0.getVersion();
+      Assert.assertEquals("1.2.3.201404071200", _version);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

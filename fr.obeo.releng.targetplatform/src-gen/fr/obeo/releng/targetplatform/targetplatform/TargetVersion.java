@@ -20,54 +20,54 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum TargetVersion implements Enumerator
 {
   /**
-   * The '<em><b>TARGET38</b></em>' literal object.
+   * The '<em><b>TARGET 38</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #TARGET38_VALUE
+   * @see #TARGET_38_VALUE
    * @generated
    * @ordered
    */
-  TARGET38(0, "TARGET38", "3.8"),
+  TARGET_38(0, "TARGET_38", "PDE_3.8"),
 
   /**
-   * The '<em><b>TARGET36</b></em>' literal object.
+   * The '<em><b>TARGET 36</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #TARGET36_VALUE
+   * @see #TARGET_36_VALUE
    * @generated
    * @ordered
    */
-  TARGET36(1, "TARGET36", "3.6");
+  TARGET_36(1, "TARGET_36", "PDE_3.6");
 
   /**
-   * The '<em><b>TARGET38</b></em>' literal value.
+   * The '<em><b>TARGET 38</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>TARGET38</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>TARGET 38</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #TARGET38
-   * @model literal="3.8"
+   * @see #TARGET_38
+   * @model literal="PDE_3.8"
    * @generated
    * @ordered
    */
-  public static final int TARGET38_VALUE = 0;
+  public static final int TARGET_38_VALUE = 0;
 
   /**
-   * The '<em><b>TARGET36</b></em>' literal value.
+   * The '<em><b>TARGET 36</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>TARGET36</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>TARGET 36</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #TARGET36
-   * @model literal="3.6"
+   * @see #TARGET_36
+   * @model literal="PDE_3.6"
    * @generated
    * @ordered
    */
-  public static final int TARGET36_VALUE = 1;
+  public static final int TARGET_36_VALUE = 1;
 
   /**
    * An array of all the '<em><b>Target Version</b></em>' enumerators.
@@ -78,8 +78,8 @@ public enum TargetVersion implements Enumerator
   private static final TargetVersion[] VALUES_ARRAY =
     new TargetVersion[]
     {
-      TARGET38,
-      TARGET36,
+      TARGET_38,
+      TARGET_36,
     };
 
   /**
@@ -138,8 +138,8 @@ public enum TargetVersion implements Enumerator
   {
     switch (value)
     {
-      case TARGET38_VALUE: return TARGET38;
-      case TARGET36_VALUE: return TARGET36;
+      case TARGET_38_VALUE: return TARGET_38;
+      case TARGET_36_VALUE: return TARGET_36;
     }
     return null;
   }

@@ -12,8 +12,8 @@
         eType="#//Location" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TargetVersion">
-    <eLiterals name="TARGET38" literal="3.8"/>
-    <eLiterals name="TARGET36" value="1" literal="3.6"/>
+    <eLiterals name="TARGET_38" literal="PDE_3.8"/>
+    <eLiterals name="TARGET_36" value="1" literal="PDE_3.6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Location">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

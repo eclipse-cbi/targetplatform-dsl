@@ -8,7 +8,7 @@ import com.google.inject.name.Named;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.pde.IConverter;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator;
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URI;
@@ -41,7 +41,7 @@ public class TestTargetConvertion {
   private ParseHelper<TargetPlatform> parser;
   
   @Inject
-  private TargetPlatformJavaValidator validator;
+  private TargetPlatformValidator validator;
   
   @Inject
   private EValidatorRegistrar validatorRegistrar;

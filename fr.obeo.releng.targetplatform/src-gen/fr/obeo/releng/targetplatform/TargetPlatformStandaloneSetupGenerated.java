@@ -17,7 +17,18 @@ import com.google.inject.Injector;
 public class TargetPlatformStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		// register default ePackages
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xtextbin", new org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);
@@ -40,7 +51,6 @@ public class TargetPlatformStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tpd", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("tpd", serviceProvider);
 		
-
 
 
 	}

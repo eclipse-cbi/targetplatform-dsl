@@ -4,12 +4,12 @@
     editorDirectory="/fr.obeo.releng.targetplatform.editor/src" modelPluginID="fr.obeo.releng.targetplatform"
     forceOverwrite="true" modelName="TargetPlatform" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="fr.obeo.releng.targetplatform.edit"
-    editorPluginID="fr.obeo.releng.targetplatform.editor" runtimeVersion="2.5">
+    editorPluginID="fr.obeo.releng.targetplatform.editor" runtimeVersion="2.9">
   <genPackages prefix="Targetplatform" basePackage="fr.obeo.releng.targetplatform"
-      disposableProviderFactory="true" ecorePackage="TargetPlatform.ecore#/">
+      disposableProviderFactory="true" fileExtensions="targetplatform,tpd" ecorePackage="TargetPlatform.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="TargetPlatform.ecore#//TargetVersion">
-      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET38"/>
-      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET36"/>
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET_38"/>
+      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET_36"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="TargetPlatform.ecore#//Option">
       <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_REQUIRED"/>
