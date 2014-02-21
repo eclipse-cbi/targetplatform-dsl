@@ -30,8 +30,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import fr.obeo.releng.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.pde.IConverter;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 

@@ -1,22 +1,22 @@
 package fr.obeo.releng.targetplatform.tests
 
 import com.google.inject.Inject
-import fr.obeo.releng.TargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.TargetPlatform
+import com.google.inject.name.Named
+import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
+import fr.obeo.releng.targetplatform.targetplatform.Option
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator
+import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidatorTester
+import org.eclipse.xtext.validation.AbstractValidationDiagnostic
+import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import fr.obeo.releng.targetplatform.Option
 import static org.junit.Assert.*
-import fr.obeo.releng.validation.TargetPlatformJavaValidator
-import org.eclipse.xtext.validation.EValidatorRegistrar
-import com.google.inject.name.Named
-import org.eclipse.xtext.Constants
-import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

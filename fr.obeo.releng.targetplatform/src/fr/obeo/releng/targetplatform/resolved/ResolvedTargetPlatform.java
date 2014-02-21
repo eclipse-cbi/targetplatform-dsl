@@ -20,10 +20,10 @@ import org.eclipse.emf.common.util.EList;
 
 import com.google.common.base.Strings;
 
-import fr.obeo.releng.targetplatform.IU;
-import fr.obeo.releng.targetplatform.Location;
-import fr.obeo.releng.targetplatform.Option;
-import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.targetplatform.IU;
+import fr.obeo.releng.targetplatform.targetplatform.Location;
+import fr.obeo.releng.targetplatform.targetplatform.Option;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 
 
 public class ResolvedTargetPlatform {

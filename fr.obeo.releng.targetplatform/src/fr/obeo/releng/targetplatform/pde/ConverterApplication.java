@@ -21,7 +21,7 @@ import org.eclipse.equinox.app.IApplicationContext;
 
 import com.google.inject.Injector;
 
-import fr.obeo.releng.TargetPlatformBundleActivator;
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 
 
 /**

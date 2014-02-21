@@ -6,42 +6,72 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="targetplatform"
-            id="fr.obeo.releng.TargetPlatform"
+            extensions="targetplatform,tpd"
+            id="fr.obeo.releng.targetplatform.TargetPlatform"
             name="TargetPlatform Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="fr.obeo.releng.TargetPlatform.validate">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="fr.obeo.releng.targetplatform.TargetPlatform.validate">
          <activeWhen>
             <reference
-                    definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
             </reference>
          </activeWhen>
-      </handler>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="fr.obeo.releng.TargetPlatform.Editor.opened">
+        <definition id="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="fr.obeo.releng.TargetPlatform" 
+                        value="fr.obeo.releng.targetplatform.TargetPlatform" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+        <definition id="fr.obeo.releng.targetplatform.TargetPlatform.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="fr.obeo.releng.targetplatform.TargetPlatform" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -50,33 +80,33 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="fr.obeo.releng.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform"
             name="TargetPlatform">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
         <page
-            category="fr.obeo.releng.TargetPlatform"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="fr.obeo.releng.TargetPlatform.coloring"
+            category="fr.obeo.releng.targetplatform.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform.coloring"
             name="Syntax Coloring">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
         <page
-            category="fr.obeo.releng.TargetPlatform"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="fr.obeo.releng.TargetPlatform.templates"
+            category="fr.obeo.releng.targetplatform.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform.templates"
             name="Templates">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="fr.obeo.releng.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform"
             name="TargetPlatform">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -86,37 +116,80 @@
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="fr.obeo.releng.ui.keyword_TargetPlatform"
+            id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"
             label="TargetPlatform"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="fr.obeo.releng.TargetPlatform.validate"
+            id="fr.obeo.releng.targetplatform.TargetPlatform.validate"
             name="Validate">
+      </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="fr.obeo.releng.TargetPlatform.validate"
+                 commandId="fr.obeo.releng.targetplatform.TargetPlatform.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
          </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                	<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -124,11 +197,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -139,19 +212,33 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="targetplatform">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="targetplatform">
         </resourceServiceProvider>
     </extension>
 
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="tpd">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="tpd">
+        </resourceServiceProvider>
+    </extension>
 
-    <!-- marker definitions for fr.obeo.releng.TargetPlatform -->
+
+    <!-- marker definitions for fr.obeo.releng.targetplatform.TargetPlatform -->
     <extension
             id="targetplatform.check.fast"
             name="TargetPlatform Problem"
@@ -177,27 +264,27 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
    <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            category="fr.obeo.releng.TargetPlatform"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="fr.obeo.releng.TargetPlatform.compiler.preferencePage"
+            category="fr.obeo.releng.targetplatform.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform.compiler.preferencePage"
             name="Compiler">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            category="fr.obeo.releng.TargetPlatform"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="fr.obeo.releng.TargetPlatform.compiler.propertyPage"
+            category="fr.obeo.releng.targetplatform.TargetPlatform"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="fr.obeo.releng.targetplatform.TargetPlatform.compiler.propertyPage"
             name="Compiler">
-            <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+            <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -209,11 +296,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+					definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -233,33 +320,33 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="fr.obeo.releng.TargetPlatform.Editor.opened"/>
+					<reference definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-    <!-- quickfix marker resolution generator for fr.obeo.releng.TargetPlatform -->
+    <!-- quickfix marker resolution generator for fr.obeo.releng.targetplatform.TargetPlatform -->
     <extension
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="fr.obeo.releng.ui.targetplatform.check.fast">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="fr.obeo.releng.targetplatform.ui.targetplatform.check.fast">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="fr.obeo.releng.ui.targetplatform.check.normal">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="fr.obeo.releng.targetplatform.ui.targetplatform.check.normal">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="fr.obeo.releng.ui.targetplatform.check.expensive">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="fr.obeo.releng.targetplatform.ui.targetplatform.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -269,11 +356,11 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+					definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -285,7 +372,7 @@
                style="push">
             <visibleWhen checkEnabled="false">
                <reference
-                     definitionId="fr.obeo.releng.TargetPlatform.Editor.opened">
+                     definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
                </reference>
             </visibleWhen>
          </command>
@@ -293,30 +380,30 @@
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
 	    <page
-	        category="fr.obeo.releng.TargetPlatform"
-	        class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-	        id="fr.obeo.releng.TargetPlatform.refactoring"
+	        category="fr.obeo.releng.targetplatform.TargetPlatform"
+	        class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="fr.obeo.releng.targetplatform.TargetPlatform.refactoring"
 	        name="Refactoring">
-	        <keywordReference id="fr.obeo.releng.ui.keyword_TargetPlatform"/>
+	        <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
 	    </page>
 	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="fr.obeo.releng.TargetPlatform.compare.contentViewers"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="targetplatform">
+    <viewer id="fr.obeo.releng.targetplatform.TargetPlatform.compare.contentViewers"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="targetplatform,tpd">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="fr.obeo.releng.TargetPlatform.compare.contentMergeViewers"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="targetplatform" label="TargetPlatform Compare">
+    <viewer id="fr.obeo.releng.targetplatform.TargetPlatform.compare.contentMergeViewers"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="targetplatform,tpd" label="TargetPlatform Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="fr.obeo.releng.TargetPlatform.editors.documentProviders"
-            class="fr.obeo.releng.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="targetplatform">
+    <provider id="fr.obeo.releng.targetplatform.TargetPlatform.editors.documentProviders"
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="targetplatform,tpd">
     </provider>
   </extension>
 

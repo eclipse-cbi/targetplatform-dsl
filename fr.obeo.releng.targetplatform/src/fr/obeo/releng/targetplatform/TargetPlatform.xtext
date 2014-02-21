@@ -1,0 +1,56 @@
+grammar fr.obeo.releng.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
+
+generate targetplatform "http://www.obeo.fr/releng/TargetPlatform"
+
+TargetPlatform:
+	(
+		'target' name=STRING
+		(
+			('version' targetVersions+=TargetVersion (',' targetVersions+=TargetVersion)*)?
+			&
+			('with' options+=Option (',' options+=Option)*)?	
+		)
+		
+		locations+=Location*
+	)?
+;
+	
+enum TargetVersion:
+	TARGET38='3.8' | TARGET36='3.6'
+;
+
+Location:
+	'location' ((id=ID)? & uri=STRING) ('{'
+		('with' options+=Option (',' options+=Option)*)?
+		(ius+=IU (ius+=IU)*)?
+	'}')?
+;
+
+enum Option:
+	INCLUDE_REQUIRED='requirements' |
+	INCLUDE_ALL_ENVIRONMENTS='allEnvironments' |
+	INCLUDE_SOURCE='source' |
+	INCLUDE_CONFIGURE_PHASE='configurePhase'
+;
+
+IU:
+	ID=QualifiedName (';' 'version' '=' (version=STRING|version=VersionRange))?
+;
+
+QualifiedName hidden ():
+	ID ('.' ID)*
+;
+
+Version hidden ():
+	INT ('.' INT ('.' INT ('.' ID)?)?)? | 'latest'
+;
+
+VersionRange hidden ():
+	( ('('|'[') WS* Version WS* ',' WS* Version WS*  (')'|']') )
+	|
+	Version
+;
+
+terminal ID: 
+	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'-')*
+;

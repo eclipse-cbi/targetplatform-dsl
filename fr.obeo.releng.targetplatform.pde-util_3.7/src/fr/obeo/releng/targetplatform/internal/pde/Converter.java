@@ -22,18 +22,15 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.ProvisionException;
-import org.eclipse.pde.internal.core.target.TargetDefinitionPersistenceHelper;
-import org.eclipse.pde.internal.core.target.provisional.ITargetDefinition;
-import org.eclipse.pde.internal.core.target.provisional.ITargetPlatformService;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import fr.obeo.releng.TargetPlatformBundleActivator;
-import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.pde.IConverter;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 
 /**
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>

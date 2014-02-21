@@ -3,12 +3,12 @@ package fr.obeo.releng.targetplatform.tests;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import fr.obeo.releng.TargetPlatformInjectorProvider;
-import fr.obeo.releng.targetplatform.IU;
-import fr.obeo.releng.targetplatform.Location;
-import fr.obeo.releng.targetplatform.Option;
-import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.validation.TargetPlatformJavaValidator;
+import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
+import fr.obeo.releng.targetplatform.targetplatform.IU;
+import fr.obeo.releng.targetplatform.targetplatform.Location;
+import fr.obeo.releng.targetplatform.targetplatform.Option;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -26,8 +26,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = TargetPlatformInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(TargetPlatformInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestGrammar {
   @Inject
@@ -40,7 +40,7 @@ public class TestGrammar {
   private EValidatorRegistrar validatorRegistrar;
   
   @Inject
-  @Named(value = Constants.LANGUAGE_NAME)
+  @Named(Constants.LANGUAGE_NAME)
   private String languageName;
   
   @Test
@@ -101,7 +101,7 @@ public class TestGrammar {
       Assert.assertEquals("org.eclipse.uml2.sdk.feature.group", _iD_2);
       String _version_2 = uml2iu.getVersion();
       Assert.assertEquals(null, _version_2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -138,7 +138,7 @@ public class TestGrammar {
       EList<Option> _options_3 = fisrtLocation.getOptions();
       boolean _contains_3 = _options_3.contains(Option.INCLUDE_CONFIGURE_PHASE);
       Assert.assertTrue(_contains_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -146,8 +146,7 @@ public class TestGrammar {
   @Test
   public void testLocationOptionCheck() {
     try {
-      ValidatorTester<TargetPlatformJavaValidator> _validatorTester = new ValidatorTester<TargetPlatformJavaValidator>(this.validator, this.validatorRegistrar, this.languageName);
-      final ValidatorTester<TargetPlatformJavaValidator> tester = _validatorTester;
+      final ValidatorTester<TargetPlatformJavaValidator> tester = new ValidatorTester<TargetPlatformJavaValidator>(this.validator, this.validatorRegistrar, this.languageName);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"a target platform\"");
       _builder.newLine();
@@ -174,7 +173,7 @@ public class TestGrammar {
         String _issueCode = diag.getIssueCode();
         Assert.assertEquals(TargetPlatformJavaValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, _issueCode);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -200,7 +199,7 @@ public class TestGrammar {
       final IU iu0 = IterableExtensions.<IU>head(_ius);
       String _iD = iu0.getID();
       Assert.assertEquals("my.iu.with-dash", _iD);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

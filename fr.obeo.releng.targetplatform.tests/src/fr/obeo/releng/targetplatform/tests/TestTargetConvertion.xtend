@@ -4,13 +4,13 @@ import com.google.common.collect.Lists
 import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.name.Named
-import fr.obeo.releng.TargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.IConverter
-import fr.obeo.releng.validation.TargetPlatformJavaValidator
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator
 import java.net.URI
 import org.eclipse.emf.common.util.BasicMonitor
-import org.eclipse.emf.common.util.BasicMonitor$Printing
+import org.eclipse.emf.common.util.BasicMonitor.Printing
 import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.pde.core.target.ITargetDefinition
 import org.eclipse.pde.internal.core.target.IUBundleContainer
@@ -56,7 +56,7 @@ class TestTargetConvertion {
 		
 		val IConverter converter = converterClass.newInstance as IConverter
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create("file:" + tmpDir.absolutePath)
+		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
 		val args = Lists::newArrayList(targetPlatform,agentUri,BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		val targetDef = converterMethod.invoke(converter,  args.toArray) as ITargetDefinition
 		

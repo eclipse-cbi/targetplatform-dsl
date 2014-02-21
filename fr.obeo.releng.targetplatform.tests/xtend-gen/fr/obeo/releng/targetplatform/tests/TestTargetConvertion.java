@@ -5,17 +5,16 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import fr.obeo.releng.TargetPlatformInjectorProvider;
-import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.pde.IConverter;
-import fr.obeo.releng.validation.TargetPlatformJavaValidator;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.validation.TargetPlatformJavaValidator;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.ArrayList;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
-import org.eclipse.emf.common.util.BasicMonitor.Printing;
 import org.eclipse.equinox.p2.metadata.Version;
 import org.eclipse.pde.core.target.ITargetDefinition;
 import org.eclipse.pde.core.target.ITargetLocation;
@@ -34,8 +33,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = TargetPlatformInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(TargetPlatformInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetConvertion {
   @Inject
@@ -48,7 +47,7 @@ public class TestTargetConvertion {
   private EValidatorRegistrar validatorRegistrar;
   
   @Inject
-  @Named(value = Constants.LANGUAGE_NAME)
+  @Named(Constants.LANGUAGE_NAME)
   private String languageName;
   
   @Test
@@ -72,23 +71,24 @@ public class TestTargetConvertion {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       ClassLoader _classLoader = IConverter.class.getClassLoader();
-      final Class<? extends Object> converterClass = _classLoader.loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter");
+      final Class<?> converterClass = _classLoader.loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter");
       Method[] _declaredMethods = converterClass.getDeclaredMethods();
       final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
-          public Boolean apply(final Method it) {
-            String _name = it.getName();
-            boolean _equals = Objects.equal(_name, "convertToTargetDefinition");
-            return Boolean.valueOf(_equals);
-          }
-        };
+        public Boolean apply(final Method it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "convertToTargetDefinition"));
+        }
+      };
       final Method converterMethod = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
       Object _newInstance = converterClass.newInstance();
       final IConverter converter = ((IConverter) _newInstance);
       final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
       String _absolutePath = tmpDir.getAbsolutePath();
-      String _plus = ("file:" + _absolutePath);
-      final URI agentUri = URI.create(_plus);
-      Printing _printing = new Printing(System.out);
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
       IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
       final ArrayList<Object> args = Lists.<Object>newArrayList(targetPlatform, agentUri, _iProgressMonitor);
       Object[] _array = args.toArray();
@@ -105,7 +105,7 @@ public class TestTargetConvertion {
           final String[] ids = ((String[]) _invoke_1);
           Object _invoke_2 = getVersions.invoke(loc);
           final Version[] versions = ((Version[]) _invoke_2);
-          String _head = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(ids)));
+          Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
           Assert.assertEquals(_head, "com.google.guava");
           Version _head_1 = IterableExtensions.<Version>head(((Iterable<Version>)Conversions.doWrapArray(versions)));
           Version _parseVersion = Version.parseVersion("11.0.2.v201303041551");
@@ -113,7 +113,7 @@ public class TestTargetConvertion {
           Assert.assertEquals(0, _compareTo);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

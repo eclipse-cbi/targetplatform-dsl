@@ -24,7 +24,7 @@ import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
-import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 
 public class ResolvedLocation {

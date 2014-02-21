@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?>
-
-<target name="Indigo 3.7 SDK" sequenceNumber="0">
+<?pde version="3.8"?><target name="Indigo 3.7 SDK" sequenceNumber="0">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.2.v20120130-0943"/>
 <unit id="org.eclipse.pde.core" version="3.7.1.v20120103_r372"/>
 <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.7.1.R37x_v20110907-9N7sHDdGIUw3H-591a16Tcf5FePP"/>
 <unit id="org.eclipse.core.runtime.feature.feature.group" version="1.0.1.R37x_v20110907-7H7KFD6BpeIkWN-XxegWjHnQa9Df"/>
@@ -12,16 +9,16 @@
 <repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.1.v201208210947"/>
-<repository location="http://download.eclipse.org/releases/juno"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.9.2.v20140203-1126"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.0.0.v201108011202"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.2.v201402120812"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.0.v201308291703"/>
 <repository location="http://download.itemis.de/updates"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.google.guava" version="10.0.1.v201203051515"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"/>
 </location>
 </locations>
 </target>

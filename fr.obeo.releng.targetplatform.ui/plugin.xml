@@ -305,7 +305,7 @@
   <extension
         point="org.eclipse.ui.handlers">
      <handler
-           class="fr.obeo.releng.ui.handler.ConvertTargetPlatform"
+           class="fr.obeo.releng.targetplatform.ui.handler.ConvertTargetPlatform"
            commandId="fr.obeo.releng.targetplatform.ui.convertTargetPlatform">
         <activeWhen>
            <with

@@ -2,23 +2,23 @@ target "Indigo 3.7 SDK"
 
 location "http://download.eclipse.org/releases/indigo" {
 	with source, requirements
-	org.eclipse.emf.sdk.feature.group
 	org.eclipse.pde.core
 	org.eclipse.equinox.p2.sdk.feature.group
 	org.eclipse.core.runtime.feature.feature.group
 	org.eclipse.sdk.feature.group
 }
 
-location "http://download.eclipse.org/releases/juno" {
-	org.eclipse.xtext.sdk.feature.group	
+location "http://download.eclipse.org/modeling/emf/emf/updates/releases/" {
+	with source, requirements
+	org.eclipse.emf.sdk.feature.group;version="[2.9.0,2.10.0)"
+}
+
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" {
+	with source, requirements
+	org.eclipse.xtext.sdk.feature.group;version="[2.5,2.6)"
 }
 
 location "http://download.itemis.de/updates" {
 	with source, requirements
 	de.itemis.xtext.antlr.sdk.feature.group
-}
-
-location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-	with source, requirements
-	com.google.guava;version="[10,11)"
 }

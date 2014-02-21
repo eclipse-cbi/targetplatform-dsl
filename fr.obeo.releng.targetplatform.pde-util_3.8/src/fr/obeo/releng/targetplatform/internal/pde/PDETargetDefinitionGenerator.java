@@ -26,9 +26,9 @@ import org.eclipse.pde.core.target.ITargetLocation;
 import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.internal.core.target.IUBundleContainer;
 
-import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
+import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 /**
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>

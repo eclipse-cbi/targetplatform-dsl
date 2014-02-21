@@ -21,13 +21,10 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.pde.internal.core.target.IUBundleContainer;
-import org.eclipse.pde.internal.core.target.provisional.ITargetDefinition;
-import org.eclipse.pde.internal.core.target.provisional.ITargetPlatformService;
 
-import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
+import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 /**
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>

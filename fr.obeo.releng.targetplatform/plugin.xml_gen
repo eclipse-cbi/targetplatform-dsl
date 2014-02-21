@@ -6,8 +6,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.obeo.fr/releng/TargetPlatform" 
-       class = "fr.obeo.releng.targetplatform.TargetplatformPackage"
-       genModel = "fr/obeo/releng/TargetPlatform.genmodel" /> 
+       class = "fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage"
+       genModel = "fr/obeo/releng/targetplatform/TargetPlatform.genmodel" /> 
 	
   </extension>
 
