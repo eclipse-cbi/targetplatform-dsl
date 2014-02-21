@@ -3,10 +3,18 @@
 */
 package fr.obeo.releng.targetplatform.ui.labeling;
 
+import javax.net.ssl.SSLContext;
+
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
- 
+
 import com.google.inject.Inject;
+
+import fr.obeo.releng.targetplatform.targetplatform.IU;
+import fr.obeo.releng.targetplatform.targetplatform.Location;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 
 /**
  * Provides labels for a EObjects.
@@ -20,15 +28,38 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	Object text(Location object) {
+		StyledString ss = new StyledString();
+		ss.append(object.getUri());
+		if (object.getId() != null) {
+			ss.append(" " + object.getId(), StyledString.DECORATIONS_STYLER);
+		}
+		return ss;
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	
+	String image(Location object) {
+		return "obj16/location_obj.gif";
+	}
+	
+	Object text(IU object) {
+		StyledString ss = new StyledString();
+		ss.append(object.getID());
+		if (object.getVersion() != null) {
+			ss.append(" " + object.getVersion(), StyledString.COUNTER_STYLER);
+		}
+		return ss;
+	}
+	
+	String image(IU object) {
+		return "obj16/iu_obj.gif";
+	}
+	
+	Object text(TargetPlatform object) {
+		return object.getName();
+	}
+	
+	String image(TargetPlatform object) {
+		return "obj16/target_obj.gif";
+	}
+	
 }

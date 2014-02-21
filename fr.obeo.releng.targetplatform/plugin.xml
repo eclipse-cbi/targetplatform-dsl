@@ -6,29 +6,12 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.obeo.fr/releng/TargetPlatform" 
-       class = "fr.obeo.releng.targetplatform.TargetplatformPackage"
-       genModel = "fr/obeo/releng/TargetPlatform.genmodel" /> 
+       class = "fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage"
+       genModel = "fr/obeo/releng/targetplatform/TargetPlatform.genmodel" /> 
+	
   </extension>
-  
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="fr.obeo.releng.ide.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="targetplatform">
-		</parser>
-	</extension>
-  
-  <extension
-        id="targetPlatform.converter"
-        point="org.eclipse.core.runtime.applications">
-     <application
-           cardinality="singleton-global"
-           thread="main"
-           visible="true">
-        <run
-              class="fr.obeo.releng.targetplatform.pde.ConverterApplication">
-        </run>
-     </application>
-  </extension>
+
+
+
 
 </plugin>
