@@ -2573,8 +2573,8 @@ rule__IU__VersionAssignment_1_3_0
     }
 :
 (
-{ before(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_0_0()); }
-	RULE_STRING{ after(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_0_0()); }
+{ before(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); }
+	ruleVersionRange{ after(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); }
 )
 
 ;
@@ -2588,8 +2588,8 @@ rule__IU__VersionAssignment_1_3_1
     }
 :
 (
-{ before(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_1_0()); }
-	ruleVersionRange{ after(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_1_0()); }
+{ before(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_1_0()); }
+	RULE_STRING{ after(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_1_0()); }
 )
 
 ;

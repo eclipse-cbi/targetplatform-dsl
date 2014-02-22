@@ -3,24 +3,45 @@
 */
 package fr.obeo.releng.targetplatform.ui.quickfix
 
-//import org.eclipse.xtext.ui.editor.quickfix.Fix
-//import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
-//import org.eclipse.xtext.validation.Issue
+import fr.obeo.releng.targetplatform.targetplatform.Location
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
+import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.eclipse.xtext.validation.Issue
+import com.google.common.collect.Sets
 
 /**
  * Custom quickfixes.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-class TargetPlatformQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider {
+class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 
-//	@Fix(MyDslValidator::INVALID_NAME)
-//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
-//			context |
-//			val xtextDocument = context.xtextDocument
-//			val firstLetter = xtextDocument.get(issue.offset, 1)
-//			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
-//		]
-//	}
+	@Fix(TargetPlatformValidator::DEPRECATE__STRINGS_ON_IU_VERSION)
+	def removeQuotes(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Remove quotes', 'Remove quotes.', null) [
+			context |
+			val xtextDocument = context.xtextDocument
+			xtextDocument.replace(issue.offset + issue.length - 1, 1, "")
+			xtextDocument.replace(issue.offset, 1, "")
+		]
+	}
+	
+	@Fix(TargetPlatformValidator::CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
+	def equalizeOptions(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 
+	    "Set all options equals to this one", "Set all options equals to this one", null) [
+	    	element, context |
+	    	(element.eContainer as TargetPlatform).locations.forEach[_ |
+	    		val elemLoc = element as Location;
+	    		val locOptions = elemLoc.options;
+	    		if (_ != element && !Sets::symmetricDifference(locOptions.toSet, _.options.toSet).empty) {
+	    			_.options.clear
+	    			_.options.addAll(locOptions)
+	    		}
+	    	]
+	    ]
+	}
 }

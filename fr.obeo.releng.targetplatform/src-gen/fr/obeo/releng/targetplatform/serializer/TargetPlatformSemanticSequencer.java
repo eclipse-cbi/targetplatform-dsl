@@ -48,7 +48,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=QualifiedName (version=STRING | version=VersionRange)?)
+	 *     (ID=QualifiedName (version=VersionRange | version=STRING)?)
 	 */
 	protected void sequence_IU(EObject context, IU semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -58,26 +58,30 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
 		val listOptions = targetPlatform.locations
 		val first = listOptions.head
-		
 		val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
-		conflicts.forEach[_ |
-			val nodes = NodeModelUtils::findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS)
-			if (!nodes.empty) {
-				val withKeyword = (nodes.head as CompositeNode).previousSibling
-				val lastOption = (nodes.last as CompositeNode)
-				acceptError("Options of every locations must be the same as on the first location",
-					_, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
-			} else {
-				val node = NodeModelUtils::getNode(_)
-				acceptError("Options of every locations must be the same as on the first location",
-					_, node.offset, node.length, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
-			}
-		]
+		if (!conflicts.empty) {
+			listOptions.forEach[_ |
+				val nodes = NodeModelUtils::findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+				if (!nodes.empty) {
+					val withKeyword = (nodes.head as CompositeNode).previousSibling
+					val lastOption = (nodes.last as CompositeNode)
+					acceptError("Options of every locations must be the same",
+						_, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
+				} else {
+					val node = NodeModelUtils::getNode(_)
+					acceptError("Options of every locations must be the same",
+						_, node.offset, node.length, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
+				}
+			]
+		}
 	}
 	
 	@Check
 	def deprecateOptionsOnLocation(Location location) {
-		if (!location.options.empty) {
+		val listOptions = (location.eContainer as TargetPlatform).locations
+		val first = listOptions.head
+		val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
+		if (conflicts.empty && !location.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);

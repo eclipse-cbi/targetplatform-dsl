@@ -471,9 +471,28 @@ ruleIU returns [EObject current=null]
     }
 ((
 (
-		lv_version_4_0=RULE_STRING
+		{ 
+	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); 
+	    }
+		lv_version_4_0=ruleVersionRange		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIURule());
+	        }
+       		set(
+       			$current, 
+       			"version",
+        		lv_version_4_0, 
+        		"VersionRange");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		lv_version_5_0=RULE_STRING
 		{
-			newLeafNode(lv_version_4_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_0_0()); 
+			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -482,27 +501,8 @@ ruleIU returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"version",
-        		lv_version_4_0, 
-        		"STRING");
-	    }
-
-)
-)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_1_0()); 
-	    }
-		lv_version_5_0=ruleVersionRange		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getIURule());
-	        }
-       		set(
-       			$current, 
-       			"version",
         		lv_version_5_0, 
-        		"VersionRange");
-	        afterParserOrEnumRuleCall();
+        		"STRING");
 	    }
 
 )

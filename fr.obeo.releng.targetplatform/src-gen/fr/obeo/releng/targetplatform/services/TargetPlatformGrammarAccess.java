@@ -219,15 +219,15 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		private final Alternatives cAlternatives_1_3 = (Alternatives)cGroup_1.eContents().get(3);
 		private final Assignment cVersionAssignment_1_3_0 = (Assignment)cAlternatives_1_3.eContents().get(0);
-		private final RuleCall cVersionSTRINGTerminalRuleCall_1_3_0_0 = (RuleCall)cVersionAssignment_1_3_0.eContents().get(0);
+		private final RuleCall cVersionVersionRangeParserRuleCall_1_3_0_0 = (RuleCall)cVersionAssignment_1_3_0.eContents().get(0);
 		private final Assignment cVersionAssignment_1_3_1 = (Assignment)cAlternatives_1_3.eContents().get(1);
-		private final RuleCall cVersionVersionRangeParserRuleCall_1_3_1_0 = (RuleCall)cVersionAssignment_1_3_1.eContents().get(0);
+		private final RuleCall cVersionSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cVersionAssignment_1_3_1.eContents().get(0);
 		
 		//IU:
-		//	ID=QualifiedName (";" "version" "=" (version=STRING | version=VersionRange))?;
+		//	ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?;
 		public ParserRule getRule() { return rule; }
 
-		//ID=QualifiedName (";" "version" "=" (version=STRING | version=VersionRange))?
+		//ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?
 		public Group getGroup() { return cGroup; }
 
 		//ID=QualifiedName
@@ -236,7 +236,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getIDQualifiedNameParserRuleCall_0_0() { return cIDQualifiedNameParserRuleCall_0_0; }
 
-		//(";" "version" "=" (version=STRING | version=VersionRange))?
+		//(";" "version" "=" (version=VersionRange | version=STRING))?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//";"
@@ -248,20 +248,20 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_1_2() { return cEqualsSignKeyword_1_2; }
 
-		//version=STRING | version=VersionRange
+		//version=VersionRange | version=STRING
 		public Alternatives getAlternatives_1_3() { return cAlternatives_1_3; }
 
-		//version=STRING
+		//version=VersionRange
 		public Assignment getVersionAssignment_1_3_0() { return cVersionAssignment_1_3_0; }
 
-		//STRING
-		public RuleCall getVersionSTRINGTerminalRuleCall_1_3_0_0() { return cVersionSTRINGTerminalRuleCall_1_3_0_0; }
+		//VersionRange
+		public RuleCall getVersionVersionRangeParserRuleCall_1_3_0_0() { return cVersionVersionRangeParserRuleCall_1_3_0_0; }
 
-		//version=VersionRange
+		//version=STRING
 		public Assignment getVersionAssignment_1_3_1() { return cVersionAssignment_1_3_1; }
 
-		//VersionRange
-		public RuleCall getVersionVersionRangeParserRuleCall_1_3_1_0() { return cVersionVersionRangeParserRuleCall_1_3_1_0; }
+		//STRING
+		public RuleCall getVersionSTRINGTerminalRuleCall_1_3_1_0() { return cVersionSTRINGTerminalRuleCall_1_3_1_0; }
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
@@ -588,7 +588,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IU:
-	//	ID=QualifiedName (";" "version" "=" (version=STRING | version=VersionRange))?;
+	//	ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?;
 	public IUElements getIUAccess() {
 		return (pIU != null) ? pIU : (pIU = new IUElements());
 	}

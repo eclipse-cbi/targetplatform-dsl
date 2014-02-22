@@ -35,7 +35,7 @@ enum Option:
 ;
 
 IU:
-	ID=QualifiedName ( ';' 'version' '=' (version=STRING|version=VersionRange) )? 
+	ID=QualifiedName ( ';' 'version' '=' (version=VersionRange|version=STRING) )? 
 ;
 
 QualifiedName hidden ():

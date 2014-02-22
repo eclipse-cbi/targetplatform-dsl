@@ -3,8 +3,12 @@
  */
 package fr.obeo.releng.targetplatform.formatting;
 
+import com.google.inject.Inject;
+import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * This class contains custom formatting description.
@@ -16,6 +20,22 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  */
 @SuppressWarnings("all")
 public class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
+  @Inject
+  @Extension
+  private TargetPlatformGrammarAccess _targetPlatformGrammarAccess;
+  
   protected void configureFormatting(final FormattingConfig c) {
+    FormattingConfig.LinewrapLocator _setLinewrap = c.setLinewrap(1);
+    TargetPlatformGrammarAccess.LocationElements _locationAccess = this._targetPlatformGrammarAccess.getLocationAccess();
+    Keyword _leftCurlyBracketKeyword_2_0 = _locationAccess.getLeftCurlyBracketKeyword_2_0();
+    _setLinewrap.after(_leftCurlyBracketKeyword_2_0);
+    FormattingConfig.LinewrapLocator _setLinewrap_1 = c.setLinewrap(1);
+    TargetPlatformGrammarAccess.LocationElements _locationAccess_1 = this._targetPlatformGrammarAccess.getLocationAccess();
+    Keyword _rightCurlyBracketKeyword_2_3 = _locationAccess_1.getRightCurlyBracketKeyword_2_3();
+    _setLinewrap_1.before(_rightCurlyBracketKeyword_2_3);
+    FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(2);
+    TargetPlatformGrammarAccess.LocationElements _locationAccess_2 = this._targetPlatformGrammarAccess.getLocationAccess();
+    Keyword _rightCurlyBracketKeyword_2_3_1 = _locationAccess_2.getRightCurlyBracketKeyword_2_3();
+    _setLinewrap_2.after(_rightCurlyBracketKeyword_2_3_1);
   }
 }
