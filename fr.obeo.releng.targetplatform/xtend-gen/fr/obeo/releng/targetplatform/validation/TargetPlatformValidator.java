@@ -3,12 +3,28 @@
  */
 package fr.obeo.releng.targetplatform.validation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
+import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
+import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
+import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Custom validation rules.
@@ -19,9 +35,25 @@ import org.eclipse.xtext.validation.Check;
 public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
   
+  public final static String CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS";
+  
+  public final static String DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS";
+  
+  public final static String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
+  
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
-    final EList<Option> options = location.getOptions();
+    EList<Option> _options = location.getOptions();
+    this.doCheckAllEnvAndRequiredAreSelfExluding(location, _options);
+  }
+  
+  @Check
+  public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
+    EList<Option> _options = targetPlatform.getOptions();
+    this.doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, _options);
+  }
+  
+  public void doCheckAllEnvAndRequiredAreSelfExluding(final EObject optionOwner, final List<Option> options) {
     boolean _and = false;
     boolean _contains = options.contains(Option.INCLUDE_ALL_ENVIRONMENTS);
     if (!_contains) {
@@ -32,11 +64,92 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     }
     if (_and) {
       int _indexOf = options.indexOf(Option.INCLUDE_REQUIRED);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", location, 
+      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", optionOwner, 
         TargetplatformPackage.Literals.LOCATION__OPTIONS, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
       int _indexOf_1 = options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", location, 
+      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", optionOwner, 
         TargetplatformPackage.Literals.LOCATION__OPTIONS, _indexOf_1, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+    }
+  }
+  
+  @Check
+  public void checkOptionsOnLocationAreIdentical(final TargetPlatform targetPlatform) {
+    final EList<Location> listOptions = targetPlatform.getLocations();
+    final Location first = IterableExtensions.<Location>head(listOptions);
+    Iterable<Location> _tail = IterableExtensions.<Location>tail(listOptions);
+    final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+      public Boolean apply(final Location _) {
+        EList<Option> _options = _.getOptions();
+        Set<Option> _set = IterableExtensions.<Option>toSet(_options);
+        EList<Option> _options_1 = first.getOptions();
+        Set<Option> _set_1 = IterableExtensions.<Option>toSet(_options_1);
+        Sets.SetView<Option> _symmetricDifference = Sets.<Option>symmetricDifference(_set, _set_1);
+        boolean _isEmpty = _symmetricDifference.isEmpty();
+        return Boolean.valueOf((!_isEmpty));
+      }
+    };
+    final Iterable<Location> conflicts = IterableExtensions.<Location>filter(_tail, _function);
+    final Procedure1<Location> _function_1 = new Procedure1<Location>() {
+      public void apply(final Location _) {
+        final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+        boolean _isEmpty = nodes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          INode _head = IterableExtensions.<INode>head(nodes);
+          final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
+          INode _last = IterableExtensions.<INode>last(nodes);
+          final CompositeNode lastOption = ((CompositeNode) _last);
+          int _offset = withKeyword.getOffset();
+          int _endOffset = lastOption.getEndOffset();
+          int _offset_1 = withKeyword.getOffset();
+          int _minus = (_endOffset - _offset_1);
+          TargetPlatformValidator.this.acceptError("Options of every locations must be the same as on the first location", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+        } else {
+          final ICompositeNode node = NodeModelUtils.getNode(_);
+          int _offset_2 = node.getOffset();
+          int _length = node.getLength();
+          TargetPlatformValidator.this.acceptError("Options of every locations must be the same as on the first location", _, _offset_2, _length, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+        }
+      }
+    };
+    IterableExtensions.<Location>forEach(conflicts, _function_1);
+  }
+  
+  @Check
+  public void deprecateOptionsOnLocation(final Location location) {
+    EList<Option> _options = location.getOptions();
+    boolean _isEmpty = _options.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+      INode _head = IterableExtensions.<INode>head(nodes);
+      final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
+      INode _last = IterableExtensions.<INode>last(nodes);
+      final CompositeNode lastOption = ((CompositeNode) _last);
+      int _offset = withKeyword.getOffset();
+      int _endOffset = lastOption.getEndOffset();
+      int _offset_1 = withKeyword.getOffset();
+      int _minus = (_endOffset - _offset_1);
+      this.acceptWarning("Option on location is deprecated. Define the option at the target level", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
+    }
+  }
+  
+  @Check
+  public void deprecateIUVersionRangeWihString(final IU iu) {
+    String _version = iu.getVersion();
+    boolean _notEquals = (!Objects.equal(_version, null));
+    if (_notEquals) {
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(iu, TargetplatformPackage.Literals.IU__VERSION);
+      INode _head = IterableExtensions.<INode>head(nodes);
+      EObject _grammarElement = _head.getGrammarElement();
+      AbstractRule _rule = ((RuleCall) _grammarElement).getRule();
+      String _name = _rule.getName();
+      boolean _equals = "STRING".equals(_name);
+      if (_equals) {
+        this.warning("Usage of Strings is deprecated for version range. You should remove the quotes.", iu, 
+          TargetplatformPackage.Literals.IU__VERSION, 
+          TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION);
+      }
     }
   }
 }
