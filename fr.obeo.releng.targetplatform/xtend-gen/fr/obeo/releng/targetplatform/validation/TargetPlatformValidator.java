@@ -90,54 +90,58 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _endOffset = lastOption.getEndOffset();
       int _offset_1 = withKeyword.getOffset();
       int _minus = (_endOffset - _offset_1);
-      this.acceptError("You can not define options on location and at target platform level.", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
+      this.acceptError("You can not define options on location and on target platform.", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
     }
   }
   
   @Check
   public void checkOptionsOnLocationAreIdentical(final TargetPlatform targetPlatform) {
-    final EList<Location> listOptions = targetPlatform.getLocations();
-    final Location first = IterableExtensions.<Location>head(listOptions);
-    Iterable<Location> _tail = IterableExtensions.<Location>tail(listOptions);
-    final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
-      public Boolean apply(final Location _) {
-        EList<Option> _options = _.getOptions();
-        Set<Option> _set = IterableExtensions.<Option>toSet(_options);
-        EList<Option> _options_1 = first.getOptions();
-        Set<Option> _set_1 = IterableExtensions.<Option>toSet(_options_1);
-        Sets.SetView<Option> _symmetricDifference = Sets.<Option>symmetricDifference(_set, _set_1);
-        boolean _isEmpty = _symmetricDifference.isEmpty();
-        return Boolean.valueOf((!_isEmpty));
-      }
-    };
-    final Iterable<Location> conflicts = IterableExtensions.<Location>filter(_tail, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(conflicts);
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      final Procedure1<Location> _function_1 = new Procedure1<Location>() {
-        public void apply(final Location _) {
-          final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS);
-          boolean _isEmpty = nodes.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (_not) {
-            INode _head = IterableExtensions.<INode>head(nodes);
-            final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
-            INode _last = IterableExtensions.<INode>last(nodes);
-            final CompositeNode lastOption = ((CompositeNode) _last);
-            int _offset = withKeyword.getOffset();
-            int _endOffset = lastOption.getEndOffset();
-            int _offset_1 = withKeyword.getOffset();
-            int _minus = (_endOffset - _offset_1);
-            TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
-          } else {
-            final ICompositeNode node = NodeModelUtils.getNode(_);
-            int _offset_2 = node.getOffset();
-            int _length = node.getLength();
-            TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset_2, _length, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
-          }
+    EList<Option> _options = targetPlatform.getOptions();
+    boolean _isEmpty = _options.isEmpty();
+    if (_isEmpty) {
+      final EList<Location> listOptions = targetPlatform.getLocations();
+      final Location first = IterableExtensions.<Location>head(listOptions);
+      Iterable<Location> _tail = IterableExtensions.<Location>tail(listOptions);
+      final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+        public Boolean apply(final Location _) {
+          EList<Option> _options = _.getOptions();
+          Set<Option> _set = IterableExtensions.<Option>toSet(_options);
+          EList<Option> _options_1 = first.getOptions();
+          Set<Option> _set_1 = IterableExtensions.<Option>toSet(_options_1);
+          Sets.SetView<Option> _symmetricDifference = Sets.<Option>symmetricDifference(_set, _set_1);
+          boolean _isEmpty = _symmetricDifference.isEmpty();
+          return Boolean.valueOf((!_isEmpty));
         }
       };
-      IterableExtensions.<Location>forEach(listOptions, _function_1);
+      final Iterable<Location> conflicts = IterableExtensions.<Location>filter(_tail, _function);
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(conflicts);
+      boolean _not = (!_isEmpty_1);
+      if (_not) {
+        final Procedure1<Location> _function_1 = new Procedure1<Location>() {
+          public void apply(final Location _) {
+            final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+            boolean _isEmpty = nodes.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              INode _head = IterableExtensions.<INode>head(nodes);
+              final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
+              INode _last = IterableExtensions.<INode>last(nodes);
+              final CompositeNode lastOption = ((CompositeNode) _last);
+              int _offset = withKeyword.getOffset();
+              int _endOffset = lastOption.getEndOffset();
+              int _offset_1 = withKeyword.getOffset();
+              int _minus = (_endOffset - _offset_1);
+              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+            } else {
+              final ICompositeNode node = NodeModelUtils.getNode(_);
+              int _offset_2 = node.getOffset();
+              int _length = node.getLength();
+              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset_2, _length, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+            }
+          }
+        };
+        IterableExtensions.<Location>forEach(listOptions, _function_1);
+      }
     }
   }
   

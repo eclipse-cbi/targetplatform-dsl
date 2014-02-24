@@ -56,30 +56,32 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
-			acceptError("You can not define options on location and at target platform level.",
+			acceptError("You can not define options on location and on target platform.",
 				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, DEPRECATE__OPTIONS_ON_LOCATIONS)
 		}
 	}
 	
 	@Check
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
-		val listOptions = targetPlatform.locations
-		val first = listOptions.head
-		val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
-		if (!conflicts.empty) {
-			listOptions.forEach[_ |
-				val nodes = NodeModelUtils::findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS)
-				if (!nodes.empty) {
-					val withKeyword = (nodes.head as CompositeNode).previousSibling
-					val lastOption = (nodes.last as CompositeNode)
-					acceptError("Options of every locations must be the same",
-						_, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
-				} else {
-					val node = NodeModelUtils::getNode(_)
-					acceptError("Options of every locations must be the same",
-						_, node.offset, node.length, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
-				}
-			]
+		if (targetPlatform.options.empty) { // else do not check as it is another error.
+			val listOptions = targetPlatform.locations
+			val first = listOptions.head
+			val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
+			if (!conflicts.empty) {
+				listOptions.forEach[_ |
+					val nodes = NodeModelUtils::findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+					if (!nodes.empty) {
+						val withKeyword = (nodes.head as CompositeNode).previousSibling
+						val lastOption = (nodes.last as CompositeNode)
+						acceptError("Options of every locations must be the same",
+							_, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
+					} else {
+						val node = NodeModelUtils::getNode(_)
+						acceptError("Options of every locations must be the same",
+							_, node.offset, node.length, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
+					}
+				]
+			}
 		}
 	}
 	
