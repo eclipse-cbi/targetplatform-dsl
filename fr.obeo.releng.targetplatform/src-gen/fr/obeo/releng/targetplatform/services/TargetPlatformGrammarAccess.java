@@ -12,6 +12,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
@@ -40,16 +41,18 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
 		private final Assignment cOptionsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
 		private final RuleCall cOptionsOptionEnumRuleCall_2_1_2_1_0 = (RuleCall)cOptionsAssignment_2_1_2_1.eContents().get(0);
+		private final Assignment cImportsAssignment_2_2 = (Assignment)cUnorderedGroup_2.eContents().get(2);
+		private final RuleCall cImportsIncludeDeclarationParserRuleCall_2_2_0 = (RuleCall)cImportsAssignment_2_2.eContents().get(0);
 		private final Assignment cLocationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cLocationsLocationParserRuleCall_3_0 = (RuleCall)cLocationsAssignment_3.eContents().get(0);
 		
 		//TargetPlatform:
 		//	("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-		//	options+=Option ("," options+=Option)*)?) locations+=Location*)?;
+		//	options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?;
 		public ParserRule getRule() { return rule; }
 
 		//("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-		//options+=Option ("," options+=Option)*)?) locations+=Location*)?
+		//options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?
 		public Group getGroup() { return cGroup; }
 
 		//"target"
@@ -62,7 +65,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 
 		//("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with" options+=Option (","
-		//options+=Option)*)?
+		//options+=Option)*)? & imports+=IncludeDeclaration*
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
 		//("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)?
@@ -113,6 +116,12 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//Option
 		public RuleCall getOptionsOptionEnumRuleCall_2_1_2_1_0() { return cOptionsOptionEnumRuleCall_2_1_2_1_0; }
 
+		//imports+=IncludeDeclaration*
+		public Assignment getImportsAssignment_2_2() { return cImportsAssignment_2_2; }
+
+		//IncludeDeclaration
+		public RuleCall getImportsIncludeDeclarationParserRuleCall_2_2_0() { return cImportsIncludeDeclarationParserRuleCall_2_2_0; }
+
 		//locations+=Location*
 		public Assignment getLocationsAssignment_3() { return cLocationsAssignment_3; }
 
@@ -120,13 +129,37 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getLocationsLocationParserRuleCall_3_0() { return cLocationsLocationParserRuleCall_3_0; }
 	}
 
+	public class IncludeDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IncludeDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIncludeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
+		
+		//IncludeDeclaration:
+		//	"include" importURI=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//"include" importURI=STRING
+		public Group getGroup() { return cGroup; }
+
+		//"include"
+		public Keyword getIncludeKeyword_0() { return cIncludeKeyword_0; }
+
+		//importURI=STRING
+		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
+
+		//STRING
+		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
+	}
+
 	public class LocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Location");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLocationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
-		private final Assignment cIdAssignment_1_0 = (Assignment)cUnorderedGroup_1.eContents().get(0);
-		private final RuleCall cIdIDTerminalRuleCall_1_0_0 = (RuleCall)cIdAssignment_1_0.eContents().get(0);
+		private final Assignment cIDAssignment_1_0 = (Assignment)cUnorderedGroup_1.eContents().get(0);
+		private final RuleCall cIDIDTerminalRuleCall_1_0_0 = (RuleCall)cIDAssignment_1_0.eContents().get(0);
 		private final Assignment cUriAssignment_1_1 = (Assignment)cUnorderedGroup_1.eContents().get(1);
 		private final RuleCall cUriSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cUriAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
@@ -144,23 +177,23 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//Location:
-		//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
+		//	"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?
+		//"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"location"
 		public Keyword getLocationKeyword_0() { return cLocationKeyword_0; }
 
-		//id=ID? & uri=STRING
+		//ID=ID? & uri=STRING
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
-		//id=ID?
-		public Assignment getIdAssignment_1_0() { return cIdAssignment_1_0; }
+		//ID=ID?
+		public Assignment getIDAssignment_1_0() { return cIDAssignment_1_0; }
 
 		//ID
-		public RuleCall getIdIDTerminalRuleCall_1_0_0() { return cIdIDTerminalRuleCall_1_0_0; }
+		public RuleCall getIDIDTerminalRuleCall_1_0_0() { return cIDIDTerminalRuleCall_1_0_0; }
 
 		//uri=STRING
 		public Assignment getUriAssignment_1_1() { return cUriAssignment_1_1; }
@@ -359,26 +392,23 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives_0_0 = (Alternatives)cGroup_0.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_0_0_0 = (Keyword)cAlternatives_0_0.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_0_0_1 = (Keyword)cAlternatives_0_0.eContents().get(1);
-		private final RuleCall cWSTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final RuleCall cVersionParserRuleCall_0_2 = (RuleCall)cGroup_0.eContents().get(2);
-		private final RuleCall cWSTerminalRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
-		private final Keyword cCommaKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
-		private final RuleCall cWSTerminalRuleCall_0_5 = (RuleCall)cGroup_0.eContents().get(5);
-		private final RuleCall cVersionParserRuleCall_0_6 = (RuleCall)cGroup_0.eContents().get(6);
-		private final RuleCall cWSTerminalRuleCall_0_7 = (RuleCall)cGroup_0.eContents().get(7);
-		private final Alternatives cAlternatives_0_8 = (Alternatives)cGroup_0.eContents().get(8);
-		private final Keyword cRightParenthesisKeyword_0_8_0 = (Keyword)cAlternatives_0_8.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_0_8_1 = (Keyword)cAlternatives_0_8.eContents().get(1);
+		private final RuleCall cVersionParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Keyword cCommaKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final RuleCall cVersionParserRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
+		private final Alternatives cAlternatives_0_4 = (Alternatives)cGroup_0.eContents().get(4);
+		private final Keyword cRightParenthesisKeyword_0_4_0 = (Keyword)cAlternatives_0_4.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_0_4_1 = (Keyword)cAlternatives_0_4.eContents().get(1);
 		private final RuleCall cVersionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Keyword cLazyKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
-		//VersionRange hidden():
-		//	("(" | "[") WS* Version WS* "," WS* Version WS* (")" | "]") | Version;
+		//VersionRange hidden(WS):
+		//	("(" | "[") Version "," Version (")" | "]") | Version | "lazy";
 		public ParserRule getRule() { return rule; }
 
-		//("(" | "[") WS* Version WS* "," WS* Version WS* (")" | "]") | Version
+		//("(" | "[") Version "," Version (")" | "]") | Version | "lazy"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//("(" | "[") WS* Version WS* "," WS* Version WS* (")" | "]")
+		//("(" | "[") Version "," Version (")" | "]")
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"(" | "["
@@ -390,38 +420,29 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//"["
 		public Keyword getLeftSquareBracketKeyword_0_0_1() { return cLeftSquareBracketKeyword_0_0_1; }
 
-		//WS*
-		public RuleCall getWSTerminalRuleCall_0_1() { return cWSTerminalRuleCall_0_1; }
-
 		//Version
-		public RuleCall getVersionParserRuleCall_0_2() { return cVersionParserRuleCall_0_2; }
-
-		//WS*
-		public RuleCall getWSTerminalRuleCall_0_3() { return cWSTerminalRuleCall_0_3; }
+		public RuleCall getVersionParserRuleCall_0_1() { return cVersionParserRuleCall_0_1; }
 
 		//","
-		public Keyword getCommaKeyword_0_4() { return cCommaKeyword_0_4; }
-
-		//WS*
-		public RuleCall getWSTerminalRuleCall_0_5() { return cWSTerminalRuleCall_0_5; }
+		public Keyword getCommaKeyword_0_2() { return cCommaKeyword_0_2; }
 
 		//Version
-		public RuleCall getVersionParserRuleCall_0_6() { return cVersionParserRuleCall_0_6; }
-
-		//WS*
-		public RuleCall getWSTerminalRuleCall_0_7() { return cWSTerminalRuleCall_0_7; }
+		public RuleCall getVersionParserRuleCall_0_3() { return cVersionParserRuleCall_0_3; }
 
 		//")" | "]"
-		public Alternatives getAlternatives_0_8() { return cAlternatives_0_8; }
+		public Alternatives getAlternatives_0_4() { return cAlternatives_0_4; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_0_8_0() { return cRightParenthesisKeyword_0_8_0; }
+		public Keyword getRightParenthesisKeyword_0_4_0() { return cRightParenthesisKeyword_0_4_0; }
 
 		//"]"
-		public Keyword getRightSquareBracketKeyword_0_8_1() { return cRightSquareBracketKeyword_0_8_1; }
+		public Keyword getRightSquareBracketKeyword_0_4_1() { return cRightSquareBracketKeyword_0_4_1; }
 
 		//Version
 		public RuleCall getVersionParserRuleCall_1() { return cVersionParserRuleCall_1; }
+
+		//"lazy"
+		public Keyword getLazyKeyword_2() { return cLazyKeyword_2; }
 	}
 	
 	
@@ -501,6 +522,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private TargetPlatformElements pTargetPlatform;
 	private TargetVersionElements unknownRuleTargetVersion;
+	private IncludeDeclarationElements pIncludeDeclaration;
 	private LocationElements pLocation;
 	private OptionElements unknownRuleOption;
 	private IUElements pIU;
@@ -509,17 +531,16 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private VersionRangeElements pVersionRange;
 	private TerminalRule tINT;
 	private TerminalRule tID;
-	private TerminalRule tSTRING;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSL_COMMENT;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
+	private TerminalsGrammarAccess gaTerminals;
+
 	@Inject
-	public TargetPlatformGrammarAccess(GrammarProvider grammarProvider) {
+	public TargetPlatformGrammarAccess(GrammarProvider grammarProvider,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.gaTerminals = gaTerminals;
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -544,10 +565,14 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
+	}
+
 	
 	//TargetPlatform:
 	//	("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-	//	options+=Option ("," options+=Option)*)?) locations+=Location*)?;
+	//	options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?;
 	public TargetPlatformElements getTargetPlatformAccess() {
 		return (pTargetPlatform != null) ? pTargetPlatform : (pTargetPlatform = new TargetPlatformElements());
 	}
@@ -566,8 +591,18 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		return getTargetVersionAccess().getRule();
 	}
 
+	//IncludeDeclaration:
+	//	"include" importURI=STRING;
+	public IncludeDeclarationElements getIncludeDeclarationAccess() {
+		return (pIncludeDeclaration != null) ? pIncludeDeclaration : (pIncludeDeclaration = new IncludeDeclarationElements());
+	}
+	
+	public ParserRule getIncludeDeclarationRule() {
+		return getIncludeDeclarationAccess().getRule();
+	}
+
 	//Location:
-	//	"location" (id=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
+	//	"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option ("," options+=Option)*)? ius+=IU* "}")?;
 	public LocationElements getLocationAccess() {
 		return (pLocation != null) ? pLocation : (pLocation = new LocationElements());
 	}
@@ -617,8 +652,8 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersionAccess().getRule();
 	}
 
-	//VersionRange hidden():
-	//	("(" | "[") WS* Version WS* "," WS* Version WS* (")" | "]") | Version;
+	//VersionRange hidden(WS):
+	//	("(" | "[") Version "," Version (")" | "]") | Version | "lazy";
 	public VersionRangeElements getVersionRangeAccess() {
 		return (pVersionRange != null) ? pVersionRange : (pVersionRange = new VersionRangeElements());
 	}
@@ -643,30 +678,30 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

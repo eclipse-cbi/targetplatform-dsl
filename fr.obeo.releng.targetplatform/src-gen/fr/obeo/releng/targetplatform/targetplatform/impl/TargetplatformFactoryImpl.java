@@ -66,6 +66,7 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
     switch (eClass.getClassifierID())
     {
       case TargetplatformPackage.TARGET_PLATFORM: return createTargetPlatform();
+      case TargetplatformPackage.INCLUDE_DECLARATION: return createIncludeDeclaration();
       case TargetplatformPackage.LOCATION: return createLocation();
       case TargetplatformPackage.IU: return createIU();
       default:
@@ -120,6 +121,17 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     TargetPlatformImpl targetPlatform = new TargetPlatformImpl();
     return targetPlatform;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IncludeDeclaration createIncludeDeclaration()
+  {
+    IncludeDeclarationImpl includeDeclaration = new IncludeDeclarationImpl();
+    return includeDeclaration;
   }
 
   /**

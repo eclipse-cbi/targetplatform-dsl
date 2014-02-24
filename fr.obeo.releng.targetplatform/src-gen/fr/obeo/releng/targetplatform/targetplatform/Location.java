@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.Location#getId <em>Id</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.Location#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.Location#getUri <em>Uri</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.Location#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.Location#getIus <em>Ius</em>}</li>
@@ -28,30 +28,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface Location extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Id</b></em>' attribute.
+   * Returns the value of the '<em><b>ID</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Id</em>' attribute isn't clear,
+   * If the meaning of the '<em>ID</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Id</em>' attribute.
-   * @see #setId(String)
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getLocation_Id()
+   * @return the value of the '<em>ID</em>' attribute.
+   * @see #setID(String)
+   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getLocation_ID()
    * @model
    * @generated
    */
-  String getId();
+  String getID();
 
   /**
-   * Sets the value of the '{@link fr.obeo.releng.targetplatform.targetplatform.Location#getId <em>Id</em>}' attribute.
+   * Sets the value of the '{@link fr.obeo.releng.targetplatform.targetplatform.Location#getID <em>ID</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Id</em>' attribute.
-   * @see #getId()
+   * @param value the new value of the '<em>ID</em>' attribute.
+   * @see #getID()
    * @generated
    */
-  void setId(String value);
+  void setID(String value);
 
   /**
    * Returns the value of the '<em><b>Uri</b></em>' attribute.

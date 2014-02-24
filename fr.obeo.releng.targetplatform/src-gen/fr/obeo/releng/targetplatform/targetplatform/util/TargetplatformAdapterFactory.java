@@ -80,6 +80,11 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
         return createTargetPlatformAdapter();
       }
       @Override
+      public Adapter caseIncludeDeclaration(IncludeDeclaration object)
+      {
+        return createIncludeDeclarationAdapter();
+      }
+      @Override
       public Adapter caseLocation(Location object)
       {
         return createLocationAdapter();
@@ -122,6 +127,21 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTargetPlatformAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration <em>Include Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
+   * @generated
+   */
+  public Adapter createIncludeDeclarationAdapter()
   {
     return null;
   }

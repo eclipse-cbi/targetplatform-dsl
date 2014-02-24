@@ -2,6 +2,7 @@
  */
 package fr.obeo.releng.targetplatform.targetplatform.impl;
 
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
@@ -31,6 +32,13 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * @generated
    */
   private EClass targetPlatformEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass includeDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -168,9 +176,39 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTargetPlatform_Locations()
+  public EReference getTargetPlatform_Imports()
   {
     return (EReference)targetPlatformEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTargetPlatform_Locations()
+  {
+    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIncludeDeclaration()
+  {
+    return includeDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIncludeDeclaration_ImportURI()
+  {
+    return (EAttribute)includeDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -188,7 +226,7 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLocation_Id()
+  public EAttribute getLocation_ID()
   {
     return (EAttribute)locationEClass.getEStructuralFeatures().get(0);
   }
@@ -307,7 +345,11 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__NAME);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__TARGET_VERSIONS);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__OPTIONS);
+    createEReference(targetPlatformEClass, TARGET_PLATFORM__IMPORTS);
     createEReference(targetPlatformEClass, TARGET_PLATFORM__LOCATIONS);
+
+    includeDeclarationEClass = createEClass(INCLUDE_DECLARATION);
+    createEAttribute(includeDeclarationEClass, INCLUDE_DECLARATION__IMPORT_URI);
 
     locationEClass = createEClass(LOCATION);
     createEAttribute(locationEClass, LOCATION__ID);
@@ -359,10 +401,14 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     initEAttribute(getTargetPlatform_Name(), ecorePackage.getEString(), "name", null, 0, 1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetPlatform_TargetVersions(), this.getTargetVersion(), "targetVersions", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetPlatform_Options(), this.getOption(), "options", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTargetPlatform_Imports(), this.getIncludeDeclaration(), null, "imports", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTargetPlatform_Locations(), this.getLocation(), null, "locations", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(includeDeclarationEClass, IncludeDeclaration.class, "IncludeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIncludeDeclaration_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, IncludeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLocation_Id(), ecorePackage.getEString(), "id", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLocation_ID(), ecorePackage.getEString(), "ID", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLocation_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLocation_Options(), this.getOption(), "options", null, 0, -1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocation_Ius(), this.getIU(), null, "ius", null, 0, -1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -1,4 +1,4 @@
-grammar fr.obeo.releng.targetplatform.TargetPlatform hidden(WS, ML_COMMENT, SL_COMMENT)
+grammar fr.obeo.releng.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
 
 generate targetplatform "http://www.obeo.fr/releng/TargetPlatform"
 
@@ -9,7 +9,8 @@ TargetPlatform:
 		'target' name=STRING
 		(
 			('version'  targetVersions+=TargetVersion (',' targetVersions+=TargetVersion)*)?
-			& ('with' options+=Option (',' options+=Option)*)?	
+			& ('with' options+=Option (',' options+=Option)*)?
+			& (imports+=IncludeDeclaration)*	
 		)
 		
 		locations+=Location*
@@ -20,8 +21,12 @@ enum TargetVersion:
 	TARGET_38='PDE_3.8' | TARGET_36='PDE_3.6'
 ;
 
+IncludeDeclaration:
+	'include' importURI=STRING
+;
+
 Location:
-	'location' ((id=ID)? & uri=STRING) ('{'
+	'location' ((ID=ID)? & uri=STRING) ('{'
 		('with' options+=Option (',' options+=Option)*)?
 		ius+=IU*
 	'}')?
@@ -46,22 +51,9 @@ Version hidden():
 	INT ('.' INT ('.' INT ('.' (ID|INT))?)?)?
 ;
 
-VersionRange hidden ():
-	( ('('|'[') WS* Version WS* ',' WS* Version WS*  (')'|']') )
-	|
-	Version
+VersionRange hidden (WS):
+	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
 ;
 
 terminal INT returns ecore::EInt: ('0'..'9')+;
 terminal ID: '^'?('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')+;
-
-terminal STRING	: 
-			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
-			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
-		; 
-terminal ML_COMMENT	: '/*' -> '*/';
-terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')?;
-
-terminal WS			: (' '|'\t'|'\r'|'\n')+;
-
-terminal ANY_OTHER: .;

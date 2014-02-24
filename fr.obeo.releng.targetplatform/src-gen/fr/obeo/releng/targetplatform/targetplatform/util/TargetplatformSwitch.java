@@ -79,6 +79,13 @@ public class TargetplatformSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case TargetplatformPackage.INCLUDE_DECLARATION:
+      {
+        IncludeDeclaration includeDeclaration = (IncludeDeclaration)theEObject;
+        T result = caseIncludeDeclaration(includeDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case TargetplatformPackage.LOCATION:
       {
         Location location = (Location)theEObject;
@@ -109,6 +116,22 @@ public class TargetplatformSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTargetPlatform(TargetPlatform object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIncludeDeclaration(IncludeDeclaration object)
   {
     return null;
   }

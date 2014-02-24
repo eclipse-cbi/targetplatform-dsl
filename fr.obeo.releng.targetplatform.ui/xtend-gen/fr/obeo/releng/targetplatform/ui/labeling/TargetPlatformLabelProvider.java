@@ -6,6 +6,7 @@ package fr.obeo.releng.targetplatform.ui.labeling;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.targetplatform.IU;
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -30,11 +31,11 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
       final StyledString ss = new StyledString();
       String _uri = object.getUri();
       ss.append(_uri);
-      String _id = object.getId();
-      boolean _notEquals = (!Objects.equal(_id, null));
+      String _iD = object.getID();
+      boolean _notEquals = (!Objects.equal(_iD, null));
       if (_notEquals) {
-        String _id_1 = object.getId();
-        String _plus = (" " + _id_1);
+        String _iD_1 = object.getID();
+        String _plus = (" " + _iD_1);
         ss.append(_plus, StyledString.DECORATIONS_STYLER);
       }
       _xblockexpression = ss;
@@ -74,5 +75,9 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   
   public String image(final TargetPlatform object) {
     return "obj16/target_obj.gif";
+  }
+  
+  public String image(final IncludeDeclaration object) {
+    return "obj16/inc_obj.gif";
   }
 }

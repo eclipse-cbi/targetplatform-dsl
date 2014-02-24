@@ -10,6 +10,7 @@ import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 
 /**
  * Provides labels for a EObjects.
@@ -26,8 +27,8 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(Location object) {
 		val ss = new StyledString();
 		ss.append(object.getUri());
-		if (object.getId() != null) {
-			ss.append(" " + object.getId(), StyledString.DECORATIONS_STYLER);
+		if (object.getID() != null) {
+			ss.append(" " + object.getID(), StyledString.DECORATIONS_STYLER);
 		}
 		ss;
 	}
@@ -55,5 +56,9 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	
 	def image(TargetPlatform object) {
 		"obj16/target_obj.gif";
+	}
+	
+	def image(IncludeDeclaration object) {
+		"obj16/inc_obj.gif"
 	}
 }

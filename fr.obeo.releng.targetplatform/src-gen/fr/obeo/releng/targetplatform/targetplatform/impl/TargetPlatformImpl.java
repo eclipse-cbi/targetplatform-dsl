@@ -2,6 +2,7 @@
  */
 package fr.obeo.releng.targetplatform.targetplatform.impl;
 
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getTargetVersions <em>Target Versions</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getLocations <em>Locations</em>}</li>
  * </ul>
  * </p>
@@ -82,6 +84,16 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected EList<Option> options;
+
+  /**
+   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getImports()
+   * @generated
+   * @ordered
+   */
+  protected EList<IncludeDeclaration> imports;
 
   /**
    * The cached value of the '{@link #getLocations() <em>Locations</em>}' containment reference list.
@@ -170,6 +182,20 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<IncludeDeclaration> getImports()
+  {
+    if (imports == null)
+    {
+      imports = new EObjectContainmentEList<IncludeDeclaration>(IncludeDeclaration.class, this, TargetplatformPackage.TARGET_PLATFORM__IMPORTS);
+    }
+    return imports;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Location> getLocations()
   {
     if (locations == null)
@@ -189,6 +215,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
+      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
+        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
     }
@@ -211,6 +239,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
         return getTargetVersions();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return getOptions();
+      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
+        return getImports();
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return getLocations();
     }
@@ -239,6 +269,10 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
         getOptions().clear();
         getOptions().addAll((Collection<? extends Option>)newValue);
         return;
+      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
+        getImports().clear();
+        getImports().addAll((Collection<? extends IncludeDeclaration>)newValue);
+        return;
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         getLocations().clear();
         getLocations().addAll((Collection<? extends Location>)newValue);
@@ -266,6 +300,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         getOptions().clear();
         return;
+      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
+        getImports().clear();
+        return;
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         getLocations().clear();
         return;
@@ -289,6 +326,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
         return targetVersions != null && !targetVersions.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return options != null && !options.isEmpty();
+      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
+        return imports != null && !imports.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return locations != null && !locations.isEmpty();
     }

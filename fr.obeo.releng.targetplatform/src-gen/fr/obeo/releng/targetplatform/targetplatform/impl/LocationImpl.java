@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getIus <em>Ius</em>}</li>
@@ -43,20 +43,20 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class LocationImpl extends MinimalEObjectImpl.Container implements Location
 {
   /**
-   * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+   * The default value of the '{@link #getID() <em>ID</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getId()
+   * @see #getID()
    * @generated
    * @ordered
    */
   protected static final String ID_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+   * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getId()
+   * @see #getID()
    * @generated
    * @ordered
    */
@@ -128,7 +128,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getId()
+  public String getID()
   {
     return id;
   }
@@ -138,12 +138,12 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setId(String newId)
+  public void setID(String newID)
   {
-    String oldId = id;
-    id = newId;
+    String oldID = id;
+    id = newID;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.LOCATION__ID, oldId, id));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.LOCATION__ID, oldID, id));
   }
 
   /**
@@ -224,7 +224,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     switch (featureID)
     {
       case TargetplatformPackage.LOCATION__ID:
-        return getId();
+        return getID();
       case TargetplatformPackage.LOCATION__URI:
         return getUri();
       case TargetplatformPackage.LOCATION__OPTIONS:
@@ -247,7 +247,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     switch (featureID)
     {
       case TargetplatformPackage.LOCATION__ID:
-        setId((String)newValue);
+        setID((String)newValue);
         return;
       case TargetplatformPackage.LOCATION__URI:
         setUri((String)newValue);
@@ -275,7 +275,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     switch (featureID)
     {
       case TargetplatformPackage.LOCATION__ID:
-        setId(ID_EDEFAULT);
+        setID(ID_EDEFAULT);
         return;
       case TargetplatformPackage.LOCATION__URI:
         setUri(URI_EDEFAULT);
@@ -323,7 +323,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (id: ");
+    result.append(" (ID: ");
     result.append(id);
     result.append(", uri: ");
     result.append(uri);

@@ -5,9 +5,13 @@ package fr.obeo.releng.targetplatform.formatting;
 
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
+import java.util.List;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -25,17 +29,95 @@ public class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
   private TargetPlatformGrammarAccess _targetPlatformGrammarAccess;
   
   protected void configureFormatting(final FormattingConfig c) {
-    FormattingConfig.LinewrapLocator _setLinewrap = c.setLinewrap(1);
+    List<Pair<Keyword,Keyword>> _findKeywordPairs = this._targetPlatformGrammarAccess.findKeywordPairs("{", "}");
+    for (final Pair<Keyword,Keyword> pair : _findKeywordPairs) {
+      {
+        FormattingConfig.IndentationLocatorStart _setIndentationIncrement = c.setIndentationIncrement();
+        Keyword _first = pair.getFirst();
+        _setIndentationIncrement.after(_first);
+        FormattingConfig.IndentationLocatorEnd _setIndentationDecrement = c.setIndentationDecrement();
+        Keyword _second = pair.getSecond();
+        _setIndentationDecrement.before(_second);
+        FormattingConfig.LinewrapLocator _setLinewrap = c.setLinewrap(1, 1, 2);
+        Keyword _first_1 = pair.getFirst();
+        _setLinewrap.after(_first_1);
+        FormattingConfig.LinewrapLocator _setLinewrap_1 = c.setLinewrap(1, 1, 2);
+        Keyword _second_1 = pair.getSecond();
+        _setLinewrap_1.before(_second_1);
+        FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(1, 2, 2);
+        Keyword _second_2 = pair.getSecond();
+        _setLinewrap_2.after(_second_2);
+      }
+    }
+    List<Keyword> _findKeywords = this._targetPlatformGrammarAccess.findKeywords(",");
+    for (final Keyword comma : _findKeywords) {
+      {
+        FormattingConfig.NoSpaceLocator _setNoSpace = c.setNoSpace();
+        _setNoSpace.before(comma);
+        FormattingConfig.SpaceLocator _setSpace = c.setSpace(" ");
+        _setSpace.after(comma);
+      }
+    }
+    FormattingConfig.NoLinewrapLocator _setNoLinewrap = c.setNoLinewrap();
     TargetPlatformGrammarAccess.LocationElements _locationAccess = this._targetPlatformGrammarAccess.getLocationAccess();
-    Keyword _leftCurlyBracketKeyword_2_0 = _locationAccess.getLeftCurlyBracketKeyword_2_0();
-    _setLinewrap.after(_leftCurlyBracketKeyword_2_0);
-    FormattingConfig.LinewrapLocator _setLinewrap_1 = c.setLinewrap(1);
+    Assignment _iDAssignment_1_0 = _locationAccess.getIDAssignment_1_0();
+    _setNoLinewrap.around(_iDAssignment_1_0);
+    FormattingConfig.NoLinewrapLocator _setNoLinewrap_1 = c.setNoLinewrap();
     TargetPlatformGrammarAccess.LocationElements _locationAccess_1 = this._targetPlatformGrammarAccess.getLocationAccess();
-    Keyword _rightCurlyBracketKeyword_2_3 = _locationAccess_1.getRightCurlyBracketKeyword_2_3();
-    _setLinewrap_1.before(_rightCurlyBracketKeyword_2_3);
-    FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(2);
+    Assignment _uriAssignment_1_1 = _locationAccess_1.getUriAssignment_1_1();
+    _setNoLinewrap_1.around(_uriAssignment_1_1);
+    FormattingConfig.LinewrapLocator _setLinewrap = c.setLinewrap(1, 2, 2);
     TargetPlatformGrammarAccess.LocationElements _locationAccess_2 = this._targetPlatformGrammarAccess.getLocationAccess();
-    Keyword _rightCurlyBracketKeyword_2_3_1 = _locationAccess_2.getRightCurlyBracketKeyword_2_3();
-    _setLinewrap_2.after(_rightCurlyBracketKeyword_2_3_1);
+    Keyword _locationKeyword_0 = _locationAccess_2.getLocationKeyword_0();
+    _setLinewrap.before(_locationKeyword_0);
+    FormattingConfig.LinewrapLocator _setLinewrap_1 = c.setLinewrap(1, 1, 2);
+    TargetPlatformGrammarAccess.LocationElements _locationAccess_3 = this._targetPlatformGrammarAccess.getLocationAccess();
+    Keyword _withKeyword_2_1_0 = _locationAccess_3.getWithKeyword_2_1_0();
+    _setLinewrap_1.before(_withKeyword_2_1_0);
+    FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(1);
+    TargetPlatformGrammarAccess.TargetPlatformElements _targetPlatformAccess = this._targetPlatformGrammarAccess.getTargetPlatformAccess();
+    Keyword _withKeyword_2_1_0_1 = _targetPlatformAccess.getWithKeyword_2_1_0();
+    _setLinewrap_2.before(_withKeyword_2_1_0_1);
+    FormattingConfig.LinewrapLocator _setLinewrap_3 = c.setLinewrap();
+    TargetPlatformGrammarAccess.IUElements _iUAccess = this._targetPlatformGrammarAccess.getIUAccess();
+    Assignment _iDAssignment_0 = _iUAccess.getIDAssignment_0();
+    _setLinewrap_3.before(_iDAssignment_0);
+    FormattingConfig.NoLinewrapLocator _setNoLinewrap_2 = c.setNoLinewrap();
+    TargetPlatformGrammarAccess.IUElements _iUAccess_1 = this._targetPlatformGrammarAccess.getIUAccess();
+    Assignment _versionAssignment_1_3_1 = _iUAccess_1.getVersionAssignment_1_3_1();
+    _setNoLinewrap_2.before(_versionAssignment_1_3_1);
+    FormattingConfig.NoSpaceLocator _setNoSpace = c.setNoSpace();
+    TargetPlatformGrammarAccess.IUElements _iUAccess_2 = this._targetPlatformGrammarAccess.getIUAccess();
+    Keyword _semicolonKeyword_1_0 = _iUAccess_2.getSemicolonKeyword_1_0();
+    _setNoSpace.around(_semicolonKeyword_1_0);
+    FormattingConfig.NoSpaceLocator _setNoSpace_1 = c.setNoSpace();
+    TargetPlatformGrammarAccess.IUElements _iUAccess_3 = this._targetPlatformGrammarAccess.getIUAccess();
+    Keyword _equalsSignKeyword_1_2 = _iUAccess_3.getEqualsSignKeyword_1_2();
+    _setNoSpace_1.around(_equalsSignKeyword_1_2);
+    FormattingConfig.NoSpaceLocator _setNoSpace_2 = c.setNoSpace();
+    TargetPlatformGrammarAccess.VersionRangeElements _versionRangeAccess = this._targetPlatformGrammarAccess.getVersionRangeAccess();
+    Keyword _leftParenthesisKeyword_0_0_0 = _versionRangeAccess.getLeftParenthesisKeyword_0_0_0();
+    _setNoSpace_2.around(_leftParenthesisKeyword_0_0_0);
+    FormattingConfig.NoSpaceLocator _setNoSpace_3 = c.setNoSpace();
+    TargetPlatformGrammarAccess.VersionRangeElements _versionRangeAccess_1 = this._targetPlatformGrammarAccess.getVersionRangeAccess();
+    Keyword _leftSquareBracketKeyword_0_0_1 = _versionRangeAccess_1.getLeftSquareBracketKeyword_0_0_1();
+    _setNoSpace_3.around(_leftSquareBracketKeyword_0_0_1);
+    FormattingConfig.NoSpaceLocator _setNoSpace_4 = c.setNoSpace();
+    TargetPlatformGrammarAccess.VersionRangeElements _versionRangeAccess_2 = this._targetPlatformGrammarAccess.getVersionRangeAccess();
+    Keyword _rightParenthesisKeyword_0_4_0 = _versionRangeAccess_2.getRightParenthesisKeyword_0_4_0();
+    _setNoSpace_4.around(_rightParenthesisKeyword_0_4_0);
+    FormattingConfig.NoSpaceLocator _setNoSpace_5 = c.setNoSpace();
+    TargetPlatformGrammarAccess.VersionRangeElements _versionRangeAccess_3 = this._targetPlatformGrammarAccess.getVersionRangeAccess();
+    Keyword _rightSquareBracketKeyword_0_4_1 = _versionRangeAccess_3.getRightSquareBracketKeyword_0_4_1();
+    _setNoSpace_5.around(_rightSquareBracketKeyword_0_4_1);
+    FormattingConfig.LinewrapLocator _setLinewrap_4 = c.setLinewrap(0, 1, 2);
+    TerminalRule _sL_COMMENTRule = this._targetPlatformGrammarAccess.getSL_COMMENTRule();
+    _setLinewrap_4.before(_sL_COMMENTRule);
+    FormattingConfig.LinewrapLocator _setLinewrap_5 = c.setLinewrap(0, 1, 2);
+    TerminalRule _mL_COMMENTRule = this._targetPlatformGrammarAccess.getML_COMMENTRule();
+    _setLinewrap_5.before(_mL_COMMENTRule);
+    FormattingConfig.LinewrapLocator _setLinewrap_6 = c.setLinewrap(0, 1, 1);
+    TerminalRule _mL_COMMENTRule_1 = this._targetPlatformGrammarAccess.getML_COMMENTRule();
+    _setLinewrap_6.after(_mL_COMMENTRule_1);
   }
 }

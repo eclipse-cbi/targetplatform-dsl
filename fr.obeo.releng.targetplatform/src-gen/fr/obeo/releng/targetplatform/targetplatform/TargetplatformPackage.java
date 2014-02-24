@@ -95,13 +95,22 @@ public interface TargetplatformPackage extends EPackage
   int TARGET_PLATFORM__OPTIONS = 2;
 
   /**
+   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TARGET_PLATFORM__IMPORTS = 3;
+
+  /**
    * The feature id for the '<em><b>Locations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM__LOCATIONS = 3;
+  int TARGET_PLATFORM__LOCATIONS = 4;
 
   /**
    * The number of structural features of the '<em>Target Platform</em>' class.
@@ -110,7 +119,35 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM_FEATURE_COUNT = 4;
+  int TARGET_PLATFORM_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl <em>Include Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl
+   * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getIncludeDeclaration()
+   * @generated
+   */
+  int INCLUDE_DECLARATION = 1;
+
+  /**
+   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INCLUDE_DECLARATION__IMPORT_URI = 0;
+
+  /**
+   * The number of structural features of the '<em>Include Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INCLUDE_DECLARATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl <em>Location</em>}' class.
@@ -120,10 +157,10 @@ public interface TargetplatformPackage extends EPackage
    * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getLocation()
    * @generated
    */
-  int LOCATION = 1;
+  int LOCATION = 2;
 
   /**
-   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * The feature id for the '<em><b>ID</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -175,7 +212,7 @@ public interface TargetplatformPackage extends EPackage
    * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getIU()
    * @generated
    */
-  int IU = 2;
+  int IU = 3;
 
   /**
    * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -212,7 +249,7 @@ public interface TargetplatformPackage extends EPackage
    * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getTargetVersion()
    * @generated
    */
-  int TARGET_VERSION = 3;
+  int TARGET_VERSION = 4;
 
   /**
    * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.Option <em>Option</em>}' enum.
@@ -222,7 +259,7 @@ public interface TargetplatformPackage extends EPackage
    * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getOption()
    * @generated
    */
-  int OPTION = 4;
+  int OPTION = 5;
 
 
   /**
@@ -269,6 +306,17 @@ public interface TargetplatformPackage extends EPackage
   EAttribute getTargetPlatform_Options();
 
   /**
+   * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports <em>Imports</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Imports</em>'.
+   * @see fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports()
+   * @see #getTargetPlatform()
+   * @generated
+   */
+  EReference getTargetPlatform_Imports();
+
+  /**
    * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getLocations <em>Locations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -278,6 +326,27 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    */
   EReference getTargetPlatform_Locations();
+
+  /**
+   * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration <em>Include Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Include Declaration</em>'.
+   * @see fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
+   * @generated
+   */
+  EClass getIncludeDeclaration();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Import URI</em>'.
+   * @see fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration#getImportURI()
+   * @see #getIncludeDeclaration()
+   * @generated
+   */
+  EAttribute getIncludeDeclaration_ImportURI();
 
   /**
    * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.targetplatform.Location <em>Location</em>}'.
@@ -290,15 +359,15 @@ public interface TargetplatformPackage extends EPackage
   EClass getLocation();
 
   /**
-   * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.targetplatform.Location#getId <em>Id</em>}'.
+   * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.targetplatform.Location#getID <em>ID</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Id</em>'.
-   * @see fr.obeo.releng.targetplatform.targetplatform.Location#getId()
+   * @return the meta object for the attribute '<em>ID</em>'.
+   * @see fr.obeo.releng.targetplatform.targetplatform.Location#getID()
    * @see #getLocation()
    * @generated
    */
-  EAttribute getLocation_Id();
+  EAttribute getLocation_ID();
 
   /**
    * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.targetplatform.Location#getUri <em>Uri</em>}'.
@@ -443,12 +512,38 @@ public interface TargetplatformPackage extends EPackage
     EAttribute TARGET_PLATFORM__OPTIONS = eINSTANCE.getTargetPlatform_Options();
 
     /**
+     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TARGET_PLATFORM__IMPORTS = eINSTANCE.getTargetPlatform_Imports();
+
+    /**
      * The meta object literal for the '<em><b>Locations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference TARGET_PLATFORM__LOCATIONS = eINSTANCE.getTargetPlatform_Locations();
+
+    /**
+     * The meta object literal for the '{@link fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl <em>Include Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl
+     * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getIncludeDeclaration()
+     * @generated
+     */
+    EClass INCLUDE_DECLARATION = eINSTANCE.getIncludeDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INCLUDE_DECLARATION__IMPORT_URI = eINSTANCE.getIncludeDeclaration_ImportURI();
 
     /**
      * The meta object literal for the '{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl <em>Location</em>}' class.
@@ -461,12 +556,12 @@ public interface TargetplatformPackage extends EPackage
     EClass LOCATION = eINSTANCE.getLocation();
 
     /**
-     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LOCATION__ID = eINSTANCE.getLocation_Id();
+    EAttribute LOCATION__ID = eINSTANCE.getLocation_ID();
 
     /**
      * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.

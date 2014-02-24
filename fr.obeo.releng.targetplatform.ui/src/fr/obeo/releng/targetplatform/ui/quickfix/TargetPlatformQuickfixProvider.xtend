@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 import com.google.common.collect.Sets
+import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 
 /**
  * Custom quickfixes.

@@ -32,6 +32,15 @@ public interface TargetplatformFactory extends EFactory
   TargetPlatform createTargetPlatform();
 
   /**
+   * Returns a new object of class '<em>Include Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Include Declaration</em>'.
+   * @generated
+   */
+  IncludeDeclaration createIncludeDeclaration();
+
+  /**
    * Returns a new object of class '<em>Location</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

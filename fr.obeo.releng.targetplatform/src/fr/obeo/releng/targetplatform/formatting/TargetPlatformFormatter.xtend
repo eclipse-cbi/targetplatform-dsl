@@ -21,15 +21,40 @@ class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
 	@Inject extension TargetPlatformGrammarAccess
 	
 	override protected void configureFormatting(FormattingConfig c) {
+		for (pair : findKeywordPairs("{", "}")) {
+			c.setIndentationIncrement.after(pair.first)
+			c.setIndentationDecrement.before(pair.second)
+			c.setLinewrap(1, 1, 2).after(pair.first);
+			c.setLinewrap(1, 1, 2).before(pair.second);
+			c.setLinewrap(1, 2, 2).after(pair.second);
+		}
 		
-		c.setLinewrap(1).after(locationAccess.leftCurlyBracketKeyword_2_0);
-		c.setLinewrap(1).before(locationAccess.rightCurlyBracketKeyword_2_3);
-		c.setLinewrap(2).after(locationAccess.rightCurlyBracketKeyword_2_3);
+		for (comma : findKeywords(",")) {
+      		c.setNoSpace.before(comma);
+      		c.setSpace(" ").after(comma);
+    	}
+    	
+    	c.setNoLinewrap.around(locationAccess.IDAssignment_1_0)
+    	c.setNoLinewrap.around(locationAccess.uriAssignment_1_1)
 		
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-		//c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
-		//c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
-		//c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
+		c.setLinewrap(1, 2, 2).before(locationAccess.locationKeyword_0)
+		c.setLinewrap(1, 1, 2).before(locationAccess.withKeyword_2_1_0)
+		c.setLinewrap(1).before(targetPlatformAccess.withKeyword_2_1_0)
+		
+		c.setLinewrap.before(IUAccess.IDAssignment_0)
+		c.setNoLinewrap.before(IUAccess.versionAssignment_1_3_1)
+		c.setNoSpace.around(IUAccess.semicolonKeyword_1_0)
+		c.setNoSpace.around(IUAccess.equalsSignKeyword_1_2)
+		
+		c.setNoSpace.around(versionRangeAccess.leftParenthesisKeyword_0_0_0)
+		c.setNoSpace.around(versionRangeAccess.leftSquareBracketKeyword_0_0_1)
+		c.setNoSpace.around(versionRangeAccess.rightParenthesisKeyword_0_4_0)
+		c.setNoSpace.around(versionRangeAccess.rightSquareBracketKeyword_0_4_1)
+		
+		// It's usually a good idea to activate the following three statements.
+		// They will add and preserve newlines around comments
+		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
 	}
 }

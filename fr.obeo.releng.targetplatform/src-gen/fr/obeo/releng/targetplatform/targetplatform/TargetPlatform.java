@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getTargetVersions <em>Target Versions</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getOptions <em>Options</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
  * </ul>
  * </p>
@@ -88,6 +89,22 @@ public interface TargetPlatform extends EObject
    * @generated
    */
   EList<Option> getOptions();
+
+  /**
+   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+   * The list contents are of type {@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Imports</em>' containment reference list.
+   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getTargetPlatform_Imports()
+   * @model containment="true"
+   * @generated
+   */
+  EList<IncludeDeclaration> getImports();
 
   /**
    * Returns the value of the '<em><b>Locations</b></em>' containment reference list.

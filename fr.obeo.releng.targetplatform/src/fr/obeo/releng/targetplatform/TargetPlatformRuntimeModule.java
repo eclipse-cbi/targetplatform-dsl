@@ -3,9 +3,17 @@
  */
 package fr.obeo.releng.targetplatform;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
+
+import fr.obeo.releng.targetplatform.conversion.TargetPlatformConverter;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class TargetPlatformRuntimeModule extends fr.obeo.releng.targetplatform.AbstractTargetPlatformRuntimeModule {
 
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return TargetPlatformConverter.class;
+	}
 }
