@@ -1,5 +1,8 @@
 package fr.obeo.releng.targetplatform.conversion
 
+import com.google.inject.Singleton
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.services.DefaultTerminalConverters
 import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.conversion.ValueConverter
@@ -9,9 +12,8 @@ import org.eclipse.xtext.conversion.impl.STRINGValueConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.util.Strings
 import org.osgi.framework.VersionRange
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.Assignment
 
+@Singleton
 class TargetPlatformConverter extends DefaultTerminalConverters {
 	
 	IValueConverter<String> versionRangeValueConverter = new VersionRangeConverter()
@@ -21,7 +23,7 @@ class TargetPlatformConverter extends DefaultTerminalConverters {
 		return versionRangeValueConverter
 	}
 	
-	IValueConverter<String> stringValueConverter = new VersionRangeConverter()
+	IValueConverter<String> stringValueConverter = new TargetPlatformSTRINGValueConverter()
 	
 	@ValueConverter(rule = "STRING")
 	def IValueConverter<String> getStringValueConverter() {

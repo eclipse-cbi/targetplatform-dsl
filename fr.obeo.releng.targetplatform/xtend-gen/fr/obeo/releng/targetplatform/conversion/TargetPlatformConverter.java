@@ -1,5 +1,7 @@
 package fr.obeo.releng.targetplatform.conversion;
 
+import com.google.inject.Singleton;
+import fr.obeo.releng.targetplatform.conversion.TargetPlatformSTRINGValueConverter;
 import fr.obeo.releng.targetplatform.conversion.VersionRangeConverter;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -10,6 +12,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.osgi.framework.VersionRange;
 
+@Singleton
 @SuppressWarnings("all")
 public class TargetPlatformConverter extends DefaultTerminalConverters {
   private IValueConverter<String> versionRangeValueConverter = new VersionRangeConverter();
@@ -19,7 +22,7 @@ public class TargetPlatformConverter extends DefaultTerminalConverters {
     return this.versionRangeValueConverter;
   }
   
-  private IValueConverter<String> stringValueConverter = new VersionRangeConverter();
+  private IValueConverter<String> stringValueConverter = new TargetPlatformSTRINGValueConverter();
   
   @ValueConverter(rule = "STRING")
   public IValueConverter<String> getStringValueConverter() {
