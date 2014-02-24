@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -42,18 +43,12 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
   
   @Check
-  public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
-    EList<Option> _options = location.getOptions();
-    this.doCheckAllEnvAndRequiredAreSelfExluding(location, _options);
-  }
-  
-  @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
     EList<Option> _options = targetPlatform.getOptions();
-    this.doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, _options);
+    this.doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, _options, TargetplatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
   }
   
-  public void doCheckAllEnvAndRequiredAreSelfExluding(final EObject optionOwner, final List<Option> options) {
+  public void doCheckAllEnvAndRequiredAreSelfExluding(final EObject optionOwner, final List<Option> options, final EStructuralFeature feature) {
     boolean _and = false;
     boolean _contains = options.contains(Option.INCLUDE_ALL_ENVIRONMENTS);
     if (!_contains) {
@@ -64,11 +59,38 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     }
     if (_and) {
       int _indexOf = options.indexOf(Option.INCLUDE_REQUIRED);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", optionOwner, 
-        TargetplatformPackage.Literals.LOCATION__OPTIONS, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+      this.error("All environments can not be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
       int _indexOf_1 = options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options", optionOwner, 
-        TargetplatformPackage.Literals.LOCATION__OPTIONS, _indexOf_1, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+      this.error("All environments can not be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf_1, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+    }
+  }
+  
+  @Check
+  public void noLocationOptionIfGlobalOptions(final Location location) {
+    boolean _and = false;
+    EList<Option> _options = location.getOptions();
+    boolean _isEmpty = _options.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (!_not) {
+      _and = false;
+    } else {
+      EObject _eContainer = location.eContainer();
+      EList<Option> _options_1 = ((TargetPlatform) _eContainer).getOptions();
+      boolean _isEmpty_1 = _options_1.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      _and = _not_1;
+    }
+    if (_and) {
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+      INode _head = IterableExtensions.<INode>head(nodes);
+      final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
+      INode _last = IterableExtensions.<INode>last(nodes);
+      final CompositeNode lastOption = ((CompositeNode) _last);
+      int _offset = withKeyword.getOffset();
+      int _endOffset = lastOption.getEndOffset();
+      int _offset_1 = withKeyword.getOffset();
+      int _minus = (_endOffset - _offset_1);
+      this.acceptError("You can not define options on location and at target platform level.", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
     }
   }
   
@@ -120,6 +142,12 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   }
   
   @Check
+  public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
+    EList<Option> _options = location.getOptions();
+    this.doCheckAllEnvAndRequiredAreSelfExluding(location, _options, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+  }
+  
+  @Check
   public void deprecateOptionsOnLocation(final Location location) {
     EObject _eContainer = location.eContainer();
     final EList<Location> listOptions = ((TargetPlatform) _eContainer).getLocations();
@@ -157,7 +185,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _endOffset = lastOption.getEndOffset();
       int _offset_1 = withKeyword.getOffset();
       int _minus = (_endOffset - _offset_1);
-      this.acceptWarning("Option on location is deprecated. Define the option at the target level", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
+      this.acceptWarning("Options on location are deprecated. Define the option at the target level.", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
     }
   }
   
@@ -173,7 +201,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       String _name = _rule.getName();
       boolean _equals = "STRING".equals(_name);
       if (_equals) {
-        this.warning("Usage of Strings is deprecated for version range. You should remove the quotes.", iu, 
+        this.warning("Usage of strings is deprecated for version range. You should remove the quotes.", iu, 
           TargetplatformPackage.Literals.IU__VERSION, 
           TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION);
       }

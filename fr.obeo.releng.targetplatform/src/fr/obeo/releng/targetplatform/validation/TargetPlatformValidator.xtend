@@ -3,18 +3,19 @@
  */
 package fr.obeo.releng.targetplatform.validation
 
+import com.google.common.collect.Sets
+import fr.obeo.releng.targetplatform.targetplatform.IU
 import fr.obeo.releng.targetplatform.targetplatform.Location
 import fr.obeo.releng.targetplatform.targetplatform.Option
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.validation.Check
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.nodemodel.impl.CompositeNode
-import fr.obeo.releng.targetplatform.targetplatform.IU
 import org.eclipse.xtext.RuleCall
-import com.google.common.collect.Sets
+import org.eclipse.xtext.nodemodel.impl.CompositeNode
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.validation.Check
+import org.eclipse.emf.ecore.EStructuralFeature
 
 //import org.eclipse.xtext.validation.Check
 
@@ -31,26 +32,32 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static final String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
 	
 	@Check
-	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
-		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options)
+	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
+		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options, TargetplatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
+	}
+	
+	def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
+		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
+			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
+					optionOwner, 
+					feature, 
+					options.indexOf(Option.INCLUDE_REQUIRED), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
+			
+			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
+					optionOwner, 
+					feature, 
+					options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
+		}
 	}
 	
 	@Check
-	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
-		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options);
-	}
-	
-	def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options) {
-		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
-			error("All environments can not be included along with required artifacts, you must choose one of the two options", 
-					optionOwner, 
-					TargetplatformPackage.Literals.LOCATION__OPTIONS, 
-					options.indexOf(Option.INCLUDE_REQUIRED), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
-			
-			error("All environments can not be included along with required artifacts, you must choose one of the two options", 
-					optionOwner, 
-					TargetplatformPackage.Literals.LOCATION__OPTIONS, 
-					options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
+	def noLocationOptionIfGlobalOptions(Location location) {
+		if (!location.options.empty && !(location.eContainer as TargetPlatform).options.empty) {
+			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+			val withKeyword = (nodes.head as CompositeNode).previousSibling
+			val lastOption = (nodes.last as CompositeNode);
+			acceptError("You can not define options on location and at target platform level.",
+				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, DEPRECATE__OPTIONS_ON_LOCATIONS)
 		}
 	}
 	
@@ -77,6 +84,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	}
 	
 	@Check
+	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
+		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+	}
+	
+	@Check
 	def deprecateOptionsOnLocation(Location location) {
 		val listOptions = (location.eContainer as TargetPlatform).locations
 		val first = listOptions.head
@@ -85,7 +97,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
-			acceptWarning("Option on location is deprecated. Define the option at the target level",
+			acceptWarning("Options on location are deprecated. Define the option at the target level.",
 				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, DEPRECATE__OPTIONS_ON_LOCATIONS)
 		}
 	}
@@ -95,7 +107,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		if (iu.version != null) {
 			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetplatformPackage.Literals.IU__VERSION)
 			if ("STRING".equals((nodes.head.grammarElement as RuleCall).rule.name)) {
-				warning("Usage of Strings is deprecated for version range. You should remove the quotes.",
+				warning("Usage of strings is deprecated for version range. You should remove the quotes.",
 					iu, 
 					TargetplatformPackage.Literals.IU__VERSION,
 					DEPRECATE__STRINGS_ON_IU_VERSION)
