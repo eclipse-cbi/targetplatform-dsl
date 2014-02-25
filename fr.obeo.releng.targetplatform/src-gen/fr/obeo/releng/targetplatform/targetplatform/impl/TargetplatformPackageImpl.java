@@ -6,7 +6,6 @@ import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.targetplatform.TargetVersion;
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformFactory;
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
 
@@ -53,13 +52,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * @generated
    */
   private EClass iuEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EEnum targetVersionEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -156,7 +148,7 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTargetPlatform_TargetVersions()
+  public EAttribute getTargetPlatform_Options()
   {
     return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(1);
   }
@@ -166,19 +158,9 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTargetPlatform_Options()
-  {
-    return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getTargetPlatform_Imports()
   {
-    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(3);
+    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -188,7 +170,7 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    */
   public EReference getTargetPlatform_Locations()
   {
-    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(4);
+    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -296,16 +278,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getTargetVersion()
-  {
-    return targetVersionEEnum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EEnum getOption()
   {
     return optionEEnum;
@@ -343,7 +315,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     // Create classes and their features
     targetPlatformEClass = createEClass(TARGET_PLATFORM);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__NAME);
-    createEAttribute(targetPlatformEClass, TARGET_PLATFORM__TARGET_VERSIONS);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__OPTIONS);
     createEReference(targetPlatformEClass, TARGET_PLATFORM__IMPORTS);
     createEReference(targetPlatformEClass, TARGET_PLATFORM__LOCATIONS);
@@ -362,7 +333,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     createEAttribute(iuEClass, IU__VERSION);
 
     // Create enums
-    targetVersionEEnum = createEEnum(TARGET_VERSION);
     optionEEnum = createEEnum(OPTION);
   }
 
@@ -399,7 +369,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     // Initialize classes and features; add operations and parameters
     initEClass(targetPlatformEClass, TargetPlatform.class, "TargetPlatform", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTargetPlatform_Name(), ecorePackage.getEString(), "name", null, 0, 1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTargetPlatform_TargetVersions(), this.getTargetVersion(), "targetVersions", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetPlatform_Options(), this.getOption(), "options", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTargetPlatform_Imports(), this.getIncludeDeclaration(), null, "imports", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTargetPlatform_Locations(), this.getLocation(), null, "locations", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -418,10 +387,6 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     initEAttribute(getIU_Version(), ecorePackage.getEString(), "version", null, 0, 1, fr.obeo.releng.targetplatform.targetplatform.IU.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
-    initEEnum(targetVersionEEnum, TargetVersion.class, "TargetVersion");
-    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET_38);
-    addEEnumLiteral(targetVersionEEnum, TargetVersion.TARGET_36);
-
     initEEnum(optionEEnum, Option.class, "Option");
     addEEnumLiteral(optionEEnum, Option.INCLUDE_REQUIRED);
     addEEnumLiteral(optionEEnum, Option.INCLUDE_ALL_ENVIRONMENTS);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Obeo.
+ * Copyright (c) 2012-2014 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,15 +10,17 @@
  *******************************************************************************/
 package fr.obeo.releng.targetplatform.resolved;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.equinox.p2.core.ProvisionException;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
@@ -29,44 +31,61 @@ import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 public class ResolvedTargetPlatform {
 	private final List<ResolvedLocation> locations;
 	private final String name;
+	private final EnumSet<Option> options;
 
-	public ResolvedTargetPlatform(String name, List<ResolvedLocation> locations) {
+	public ResolvedTargetPlatform(String name, List<ResolvedLocation> locations, EnumSet<Option> options) {
 		this.name = name;
 		this.locations = locations;
+		this.options = options;
 	}
 	
 	public List<ResolvedLocation> getLocations() {
 		return locations;
 	}
 	
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 	
-	public static ResolvedTargetPlatform resolve(TargetPlatform targetPlatform, IProgressMonitor monitor) throws URISyntaxException {
-		List<ResolvedLocation> locations = new ArrayList<ResolvedLocation>();
-		EList<Location> locationList = targetPlatform.getLocations();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, locationList.size());
-		for (Location location : locationList) {
-			List<ResolvedIU> ius = new ArrayList<ResolvedIU>();
-			EList<IU> iuList = location.getIus();
-			for (IU iu : iuList) {
-				ius.add(new ResolvedIU(iu.getID(), Strings.emptyToNull(iu.getVersion())));
-			}
-			
-			final EnumSet<Option> optionSet;
-			if (location.getOptions().isEmpty()) {
-				optionSet = EnumSet.noneOf(Option.class);
-			} else {
-				optionSet = EnumSet.copyOf(location.getOptions());
-			}
-			
-			locations.add(new ResolvedLocation(location.getUri(), ius, optionSet));
+	public EnumSet<Option> getOptions() {
+		return options;
+	}
+	
+	public void resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, getLocations().size());
+		for (ResolvedLocation location : getLocations()) {
+			location.resolve(metadataRepositoryManager, subMonitor);
 			subMonitor.worked(1);
 		}
-		return new ResolvedTargetPlatform(targetPlatform.getName(), locations);
+	}
+	
+	public static ResolvedTargetPlatform create(TargetPlatform targetPlatform) throws URISyntaxException {
+		List<ResolvedLocation> locations = Lists.newArrayList();
+		EList<Location> locationList = targetPlatform.getLocations();
+		
+		for (Location location : locationList) {
+			List<UnresolvedIU> ius = Lists.newArrayList();
+			EList<IU> iuList = location.getIus();
+			for (IU iu : iuList) {
+				ius.add(new UnresolvedIU(iu.getID(), Strings.emptyToNull(iu.getVersion())));
+			}
+			
+			EnumSet<Option> locOptions = getOptionSet(location.getOptions());
+			ResolvedLocation resolvedLocation = new ResolvedLocation(location.getID(), location.getUri(), ius, locOptions);
+			locations.add(resolvedLocation);
+		}
+		
+		final EnumSet<Option> options = getOptionSet(targetPlatform.getOptions());
+		return new ResolvedTargetPlatform(targetPlatform.getName(), locations, options);
+	}
+
+	public static EnumSet<Option> getOptionSet(EList<Option> optionsList) {
+		final EnumSet<Option> optionSet;
+		if (optionsList.isEmpty()) {
+			optionSet = EnumSet.noneOf(Option.class);
+		} else {
+			optionSet = EnumSet.copyOf(optionsList);
+		}
+		return optionSet;
 	}
 }

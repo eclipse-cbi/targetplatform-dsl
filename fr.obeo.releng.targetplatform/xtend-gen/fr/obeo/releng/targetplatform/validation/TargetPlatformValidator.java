@@ -38,6 +38,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   public final static String CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS";
   
+  public final static String CHECK__SUPPORTED_PDE_VERSION = "CHECK__SUPPORTED_PDE_VERSION";
+  
   public final static String DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS";
   
   public final static String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";

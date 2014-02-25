@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getTargetVersions <em>Target Versions</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
@@ -53,24 +52,6 @@ public interface TargetPlatform extends EObject
    * @generated
    */
   void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Target Versions</b></em>' attribute list.
-   * The list contents are of type {@link fr.obeo.releng.targetplatform.targetplatform.TargetVersion}.
-   * The literals are from the enumeration {@link fr.obeo.releng.targetplatform.targetplatform.TargetVersion}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target Versions</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Target Versions</em>' attribute list.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetVersion
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getTargetPlatform_TargetVersions()
-   * @model unique="false"
-   * @generated
-   */
-  EList<TargetVersion> getTargetVersions();
 
   /**
    * Returns the value of the '<em><b>Options</b></em>' attribute list.

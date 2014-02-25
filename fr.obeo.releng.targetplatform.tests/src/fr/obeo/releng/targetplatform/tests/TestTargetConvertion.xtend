@@ -1,19 +1,16 @@
 package fr.obeo.releng.targetplatform.tests
 
-import com.google.common.collect.Lists
 import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.pde.IConverter
+import fr.obeo.releng.targetplatform.pde.Converter
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 import java.net.URI
 import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.BasicMonitor.Printing
 import org.eclipse.equinox.p2.metadata.Version
-import org.eclipse.pde.core.target.ITargetDefinition
-import org.eclipse.pde.internal.core.target.IUBundleContainer
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -51,27 +48,17 @@ class TestTargetConvertion {
 				org.junit
 			}
 			''')
-		val converterClass = typeof (IConverter).classLoader.loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter")
-		val converterMethod = converterClass.declaredMethods.findFirst([name == "convertToTargetDefinition"])
-		
-		val IConverter converter = converterClass.newInstance as IConverter
+		val converter = new Converter
 		val tmpDir = Files::createTempDir()
 		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
-		val args = Lists::newArrayList(targetPlatform,agentUri,BasicMonitor::toIProgressMonitor(new Printing(System::out)))
-		val targetDef = converterMethod.invoke(converter,  args.toArray) as ITargetDefinition
+		val targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
-		for(loc : targetDef.targetLocations) {
-			if (loc instanceof IUBundleContainer) {
-				val getIds = typeof (IUBundleContainer).getDeclaredMethod("getIds")
-				val getVersions = typeof (IUBundleContainer).getDeclaredMethod("getVersions")
-				getIds.accessible = true;
-				getVersions.accessible = true;
-				val String[] ids = getIds.invoke(loc) as String[]
-				val Version[] versions = getVersions.invoke(loc) as Version[]
-				
-				assertEquals(ids.head, "com.google.guava")
-				assertEquals(0, versions.head.compareTo(Version::parseVersion("11.0.2.v201303041551")))
-			}
+		for(loc : targetDef.locations) {
+			val String[] ids = loc.resolvedIUs.map[id]
+			val Version[] versions = loc.resolvedIUs.map[version]
+			
+			assertEquals("com.google.guava", ids.head)
+			assertEquals(0, versions.head.compareTo(Version::parseVersion("11.0.2.v201303041551")))
 		}
 	}
 }

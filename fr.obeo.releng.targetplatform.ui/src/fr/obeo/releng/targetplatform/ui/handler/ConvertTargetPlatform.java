@@ -32,7 +32,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.google.inject.Injector;
 
-import fr.obeo.releng.targetplatform.pde.IConverter;
+import fr.obeo.releng.targetplatform.pde.Converter;
 import fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActivator;
 
 /**
@@ -67,12 +67,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 				IStatus ret = Status.OK_STATUS;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 				Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM);
-				IConverter converter;
-				try {
-					converter = (IConverter) TargetPlatformActivator.class.getClassLoader().loadClass("fr.obeo.releng.targetplatform.internal.pde.Converter").newInstance();
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
+				Converter converter = new Converter();
 				injector.injectMembers(converter);
 				try {
 					converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));

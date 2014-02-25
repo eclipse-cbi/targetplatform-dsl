@@ -26,33 +26,25 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
-		private final Keyword cVersionKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final Assignment cTargetVersionsAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cTargetVersionsTargetVersionEnumRuleCall_2_0_1_0 = (RuleCall)cTargetVersionsAssignment_2_0_1.eContents().get(0);
+		private final Keyword cWithKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cOptionsAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cOptionsOptionEnumRuleCall_2_0_1_0 = (RuleCall)cOptionsAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_0_2 = (Group)cGroup_2_0.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0_2_0 = (Keyword)cGroup_2_0_2.eContents().get(0);
-		private final Assignment cTargetVersionsAssignment_2_0_2_1 = (Assignment)cGroup_2_0_2.eContents().get(1);
-		private final RuleCall cTargetVersionsTargetVersionEnumRuleCall_2_0_2_1_0 = (RuleCall)cTargetVersionsAssignment_2_0_2_1.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cWithKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cOptionsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cOptionsOptionEnumRuleCall_2_1_1_0 = (RuleCall)cOptionsAssignment_2_1_1.eContents().get(0);
-		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
-		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
-		private final Assignment cOptionsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
-		private final RuleCall cOptionsOptionEnumRuleCall_2_1_2_1_0 = (RuleCall)cOptionsAssignment_2_1_2_1.eContents().get(0);
-		private final Assignment cImportsAssignment_2_2 = (Assignment)cUnorderedGroup_2.eContents().get(2);
-		private final RuleCall cImportsIncludeDeclarationParserRuleCall_2_2_0 = (RuleCall)cImportsAssignment_2_2.eContents().get(0);
+		private final Assignment cOptionsAssignment_2_0_2_1 = (Assignment)cGroup_2_0_2.eContents().get(1);
+		private final RuleCall cOptionsOptionEnumRuleCall_2_0_2_1_0 = (RuleCall)cOptionsAssignment_2_0_2_1.eContents().get(0);
+		private final Assignment cImportsAssignment_2_1 = (Assignment)cUnorderedGroup_2.eContents().get(1);
+		private final RuleCall cImportsIncludeDeclarationParserRuleCall_2_1_0 = (RuleCall)cImportsAssignment_2_1.eContents().get(0);
 		private final Assignment cLocationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cLocationsLocationParserRuleCall_3_0 = (RuleCall)cLocationsAssignment_3.eContents().get(0);
 		
 		//TargetPlatform:
-		//	("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-		//	options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?;
+		//	("target" name=STRING (("with" options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*)
+		//	locations+=Location*)?;
 		public ParserRule getRule() { return rule; }
 
-		//("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-		//options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?
+		//("target" name=STRING (("with" options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*)
+		//locations+=Location*)?
 		public Group getGroup() { return cGroup; }
 
 		//"target"
@@ -64,63 +56,38 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 
-		//("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with" options+=Option (","
-		//options+=Option)*)? & imports+=IncludeDeclaration*
+		//("with" options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)?
+		//("with" options+=Option ("," options+=Option)*)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
-		//"version"
-		public Keyword getVersionKeyword_2_0_0() { return cVersionKeyword_2_0_0; }
+		//"with"
+		public Keyword getWithKeyword_2_0_0() { return cWithKeyword_2_0_0; }
 
-		//targetVersions+=TargetVersion
-		public Assignment getTargetVersionsAssignment_2_0_1() { return cTargetVersionsAssignment_2_0_1; }
+		//options+=Option
+		public Assignment getOptionsAssignment_2_0_1() { return cOptionsAssignment_2_0_1; }
 
-		//TargetVersion
-		public RuleCall getTargetVersionsTargetVersionEnumRuleCall_2_0_1_0() { return cTargetVersionsTargetVersionEnumRuleCall_2_0_1_0; }
+		//Option
+		public RuleCall getOptionsOptionEnumRuleCall_2_0_1_0() { return cOptionsOptionEnumRuleCall_2_0_1_0; }
 
-		//("," targetVersions+=TargetVersion)*
+		//("," options+=Option)*
 		public Group getGroup_2_0_2() { return cGroup_2_0_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_0_2_0() { return cCommaKeyword_2_0_2_0; }
 
-		//targetVersions+=TargetVersion
-		public Assignment getTargetVersionsAssignment_2_0_2_1() { return cTargetVersionsAssignment_2_0_2_1; }
-
-		//TargetVersion
-		public RuleCall getTargetVersionsTargetVersionEnumRuleCall_2_0_2_1_0() { return cTargetVersionsTargetVersionEnumRuleCall_2_0_2_1_0; }
-
-		//("with" options+=Option ("," options+=Option)*)?
-		public Group getGroup_2_1() { return cGroup_2_1; }
-
-		//"with"
-		public Keyword getWithKeyword_2_1_0() { return cWithKeyword_2_1_0; }
-
 		//options+=Option
-		public Assignment getOptionsAssignment_2_1_1() { return cOptionsAssignment_2_1_1; }
+		public Assignment getOptionsAssignment_2_0_2_1() { return cOptionsAssignment_2_0_2_1; }
 
 		//Option
-		public RuleCall getOptionsOptionEnumRuleCall_2_1_1_0() { return cOptionsOptionEnumRuleCall_2_1_1_0; }
-
-		//("," options+=Option)*
-		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
-
-		//","
-		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
-
-		//options+=Option
-		public Assignment getOptionsAssignment_2_1_2_1() { return cOptionsAssignment_2_1_2_1; }
-
-		//Option
-		public RuleCall getOptionsOptionEnumRuleCall_2_1_2_1_0() { return cOptionsOptionEnumRuleCall_2_1_2_1_0; }
+		public RuleCall getOptionsOptionEnumRuleCall_2_0_2_1_0() { return cOptionsOptionEnumRuleCall_2_0_2_1_0; }
 
 		//imports+=IncludeDeclaration*
-		public Assignment getImportsAssignment_2_2() { return cImportsAssignment_2_2; }
+		public Assignment getImportsAssignment_2_1() { return cImportsAssignment_2_1; }
 
 		//IncludeDeclaration
-		public RuleCall getImportsIncludeDeclarationParserRuleCall_2_2_0() { return cImportsIncludeDeclarationParserRuleCall_2_2_0; }
+		public RuleCall getImportsIncludeDeclarationParserRuleCall_2_1_0() { return cImportsIncludeDeclarationParserRuleCall_2_1_0; }
 
 		//locations+=Location*
 		public Assignment getLocationsAssignment_3() { return cLocationsAssignment_3; }
@@ -446,34 +413,6 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	public class TargetVersionElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "TargetVersion");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cTARGET_38EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cTARGET_38PDE_38Keyword_0_0 = (Keyword)cTARGET_38EnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cTARGET_36EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cTARGET_36PDE_36Keyword_1_0 = (Keyword)cTARGET_36EnumLiteralDeclaration_1.eContents().get(0);
-		
-		//enum TargetVersion:
-		//	TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6";
-		public EnumRule getRule() { return rule; }
-
-		//TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//TARGET_38="PDE_3.8"
-		public EnumLiteralDeclaration getTARGET_38EnumLiteralDeclaration_0() { return cTARGET_38EnumLiteralDeclaration_0; }
-
-		//"PDE_3.8"
-		public Keyword getTARGET_38PDE_38Keyword_0_0() { return cTARGET_38PDE_38Keyword_0_0; }
-
-		//TARGET_36="PDE_3.6"
-		public EnumLiteralDeclaration getTARGET_36EnumLiteralDeclaration_1() { return cTARGET_36EnumLiteralDeclaration_1; }
-
-		//"PDE_3.6"
-		public Keyword getTARGET_36PDE_36Keyword_1_0() { return cTARGET_36PDE_36Keyword_1_0; }
-	}
-
 	public class OptionElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Option");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -521,7 +460,6 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	private TargetPlatformElements pTargetPlatform;
-	private TargetVersionElements unknownRuleTargetVersion;
 	private IncludeDeclarationElements pIncludeDeclaration;
 	private LocationElements pLocation;
 	private OptionElements unknownRuleOption;
@@ -571,24 +509,14 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TargetPlatform:
-	//	("target" name=STRING (("version" targetVersions+=TargetVersion ("," targetVersions+=TargetVersion)*)? & ("with"
-	//	options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*) locations+=Location*)?;
+	//	("target" name=STRING (("with" options+=Option ("," options+=Option)*)? & imports+=IncludeDeclaration*)
+	//	locations+=Location*)?;
 	public TargetPlatformElements getTargetPlatformAccess() {
 		return (pTargetPlatform != null) ? pTargetPlatform : (pTargetPlatform = new TargetPlatformElements());
 	}
 	
 	public ParserRule getTargetPlatformRule() {
 		return getTargetPlatformAccess().getRule();
-	}
-
-	//enum TargetVersion:
-	//	TARGET_38="PDE_3.8" | TARGET_36="PDE_3.6";
-	public TargetVersionElements getTargetVersionAccess() {
-		return (unknownRuleTargetVersion != null) ? unknownRuleTargetVersion : (unknownRuleTargetVersion = new TargetVersionElements());
-	}
-	
-	public EnumRule getTargetVersionRule() {
-		return getTargetVersionAccess().getRule();
 	}
 
 	//IncludeDeclaration:

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Obeo.
+ * Copyright (c) 2012-2014 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,66 +11,78 @@
 package fr.obeo.releng.targetplatform.resolved;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.equinox.internal.p2.metadata.InstallableUnit;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
+import org.eclipse.equinox.p2.metadata.Version;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
+
+import com.google.common.collect.Lists;
 
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 
 public class ResolvedLocation {
+	private final String id;
 	private final URI uri;
-	private final List<ResolvedIU> latestIUs;
+	private final List<UnresolvedIU> unresolvedIUs;
+	private final List<IInstallableUnit> resolvedIUs;
 	private final EnumSet<Option> options;
 
-	public ResolvedLocation(String uri, List<ResolvedIU> latestIUs, EnumSet<Option> options) throws URISyntaxException {
-		this(new URI(uri), latestIUs, options);
+	public ResolvedLocation(String id, String uri, List<UnresolvedIU> unresolvedIUs, EnumSet<Option> options) throws URISyntaxException {
+		this(id, new URI(uri), unresolvedIUs, options);
 	}
 
-	public ResolvedLocation(URI uri, List<ResolvedIU> latestIUs, EnumSet<Option> options) {
+	public ResolvedLocation(String id, URI uri, List<UnresolvedIU> unresolvedIUs, EnumSet<Option> options) {
+		this.id = id;
 		this.uri = uri;
-		this.latestIUs = latestIUs;
+		this.unresolvedIUs = unresolvedIUs;
+		this.resolvedIUs = Lists.newArrayList();
 		this.options = options;
 	}
 	
-	public List<IInstallableUnit>  getIUToBeInstalled(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
+	public void resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		final List<IInstallableUnit> ret = new ArrayList<IInstallableUnit>();
-		final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, subMonitor.newChild(60));
+		final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, subMonitor.newChild(80));
 		
-		SubMonitor loopMonitor = subMonitor.newChild(40).setWorkRemaining(latestIUs.size());
-		for (ResolvedIU iu : latestIUs) {
+		SubMonitor loopMonitor = subMonitor.newChild(20).setWorkRemaining(unresolvedIUs.size());
+		for (UnresolvedIU iu : unresolvedIUs) {
 			Set<IInstallableUnit> results = metadataRepository.query(iu.getQuery(), loopMonitor.newChild(1)).toUnmodifiableSet();
 			if (!results.isEmpty()) {
-				ret.add(results.iterator().next());
+				IInstallableUnit unit =  results.iterator().next();
+				if (iu.isLazyRange() && unit instanceof InstallableUnit) {
+					((InstallableUnit)unit).setVersion(Version.create("0.0.0"));
+				}
+				resolvedIUs.add(unit);
 			} else {
 				System.err.println("No IU found for " + iu.getID() + ";version=\"" + iu.getVersionRange() +"\"");
 			}
 		}
-		
-		return ret;
 	}
 	
 	public URI getURI() {
 		return uri;
 	}
 	
-	public List<ResolvedIU> getLatestIUs() {
-		return latestIUs;
+	public String getID() {
+		return id;
 	}
 	
-	/**
-	 * @return the options
-	 */
+	public List<UnresolvedIU> getUnresolvedIUs() {
+		return unresolvedIUs;
+	}
+	
+	public List<IInstallableUnit> getResolvedIUs() {
+		return resolvedIUs;
+	}
+	
 	public EnumSet<Option> getOptions() {
 		return options;
 	}

@@ -114,24 +114,24 @@ ruleTargetPlatform returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 0);
 	 				}
-					({true}?=>(	otherlv_3='version' 
+					({true}?=>(	otherlv_3='with' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getTargetPlatformAccess().getVersionKeyword_2_0_0());
+    	newLeafNode(otherlv_3, grammarAccess.getTargetPlatformAccess().getWithKeyword_2_0_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getTargetVersionsTargetVersionEnumRuleCall_2_0_1_0()); 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_0_1_0()); 
 	    }
-		lv_targetVersions_4_0=ruleTargetVersion		{
+		lv_options_4_0=ruleOption		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
 	        }
        		add(
        			$current, 
-       			"targetVersions",
-        		lv_targetVersions_4_0, 
-        		"TargetVersion");
+       			"options",
+        		lv_options_4_0, 
+        		"Option");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -143,17 +143,17 @@ ruleTargetPlatform returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getTargetVersionsTargetVersionEnumRuleCall_2_0_2_1_0()); 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_0_2_1_0()); 
 	    }
-		lv_targetVersions_6_0=ruleTargetVersion		{
+		lv_options_6_0=ruleOption		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
 	        }
        		add(
        			$current, 
-       			"targetVersions",
-        		lv_targetVersions_6_0, 
-        		"TargetVersion");
+       			"options",
+        		lv_options_6_0, 
+        		"Option");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -170,75 +170,19 @@ ruleTargetPlatform returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 1);
 	 				}
-					({true}?=>(	otherlv_7='with' 
-    {
-    	newLeafNode(otherlv_7, grammarAccess.getTargetPlatformAccess().getWithKeyword_2_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_1_1_0()); 
-	    }
-		lv_options_8_0=ruleOption		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
-	        }
-       		add(
-       			$current, 
-       			"options",
-        		lv_options_8_0, 
-        		"Option");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_9=',' 
-    {
-    	newLeafNode(otherlv_9, grammarAccess.getTargetPlatformAccess().getCommaKeyword_2_1_2_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0()); 
-	    }
-		lv_options_10_0=ruleOption		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
-	        }
-       		add(
-       			$current, 
-       			"options",
-        		lv_options_10_0, 
-        		"Option");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2());
-	 				}
- 				)
-			)  |
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 2)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 2);
-	 				}
 					({true}?=>(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getImportsIncludeDeclarationParserRuleCall_2_2_0()); 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getImportsIncludeDeclarationParserRuleCall_2_1_0()); 
 	    }
-		lv_imports_11_0=ruleIncludeDeclaration		{
+		lv_imports_7_0=ruleIncludeDeclaration		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
 	        }
        		add(
        			$current, 
        			"imports",
-        		lv_imports_11_0, 
+        		lv_imports_7_0, 
         		"IncludeDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -263,14 +207,14 @@ ruleTargetPlatform returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getLocationsLocationParserRuleCall_3_0()); 
 	    }
-		lv_locations_12_0=ruleLocation		{
+		lv_locations_8_0=ruleLocation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
 	        }
        		add(
        			$current, 
        			"locations",
-        		lv_locations_12_0, 
+        		lv_locations_8_0, 
         		"Location");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -825,25 +769,6 @@ finally {
 }
 
 
-
-
-
-// Rule TargetVersion
-ruleTargetVersion returns [Enumerator current=null] 
-    @init { enterRule(); }
-    @after { leaveRule(); }:
-((	enumLiteral_0='PDE_3.8' 
-	{
-        $current = grammarAccess.getTargetVersionAccess().getTARGET_38EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_0, grammarAccess.getTargetVersionAccess().getTARGET_38EnumLiteralDeclaration_0()); 
-    }
-)
-    |(	enumLiteral_1='PDE_3.6' 
-	{
-        $current = grammarAccess.getTargetVersionAccess().getTARGET_36EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        newLeafNode(enumLiteral_1, grammarAccess.getTargetVersionAccess().getTARGET_36EnumLiteralDeclaration_1()); 
-    }
-));
 
 
 

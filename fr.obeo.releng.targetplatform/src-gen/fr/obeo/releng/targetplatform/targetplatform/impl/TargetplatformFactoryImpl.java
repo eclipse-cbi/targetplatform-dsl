@@ -84,8 +84,6 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     switch (eDataType.getClassifierID())
     {
-      case TargetplatformPackage.TARGET_VERSION:
-        return createTargetVersionFromString(eDataType, initialValue);
       case TargetplatformPackage.OPTION:
         return createOptionFromString(eDataType, initialValue);
       default:
@@ -103,8 +101,6 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     switch (eDataType.getClassifierID())
     {
-      case TargetplatformPackage.TARGET_VERSION:
-        return convertTargetVersionToString(eDataType, instanceValue);
       case TargetplatformPackage.OPTION:
         return convertOptionToString(eDataType, instanceValue);
       default:
@@ -154,28 +150,6 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     IUImpl iu = new IUImpl();
     return iu;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TargetVersion createTargetVersionFromString(EDataType eDataType, String initialValue)
-  {
-    TargetVersion result = TargetVersion.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertTargetVersionToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

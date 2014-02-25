@@ -6,7 +6,6 @@ import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.targetplatform.TargetVersion;
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
 
 import java.util.Collection;
@@ -34,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getTargetVersions <em>Target Versions</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getLocations <em>Locations</em>}</li>
@@ -64,16 +62,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getTargetVersions() <em>Target Versions</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTargetVersions()
-   * @generated
-   * @ordered
-   */
-  protected EList<TargetVersion> targetVersions;
 
   /**
    * The cached value of the '{@link #getOptions() <em>Options</em>}' attribute list.
@@ -154,20 +142,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TargetVersion> getTargetVersions()
-  {
-    if (targetVersions == null)
-    {
-      targetVersions = new EDataTypeEList<TargetVersion>(TargetVersion.class, this, TargetplatformPackage.TARGET_PLATFORM__TARGET_VERSIONS);
-    }
-    return targetVersions;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<Option> getOptions()
   {
     if (options == null)
@@ -235,8 +209,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     {
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         return getName();
-      case TargetplatformPackage.TARGET_PLATFORM__TARGET_VERSIONS:
-        return getTargetVersions();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return getOptions();
       case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
@@ -260,10 +232,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     {
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         setName((String)newValue);
-        return;
-      case TargetplatformPackage.TARGET_PLATFORM__TARGET_VERSIONS:
-        getTargetVersions().clear();
-        getTargetVersions().addAll((Collection<? extends TargetVersion>)newValue);
         return;
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         getOptions().clear();
@@ -294,9 +262,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case TargetplatformPackage.TARGET_PLATFORM__TARGET_VERSIONS:
-        getTargetVersions().clear();
-        return;
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         getOptions().clear();
         return;
@@ -322,8 +287,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     {
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case TargetplatformPackage.TARGET_PLATFORM__TARGET_VERSIONS:
-        return targetVersions != null && !targetVersions.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return options != null && !options.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
@@ -347,8 +310,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", targetVersions: ");
-    result.append(targetVersions);
     result.append(", options: ");
     result.append(options);
     result.append(')');

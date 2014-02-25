@@ -76,8 +76,8 @@ public class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
     _setLinewrap_1.before(_withKeyword_2_1_0);
     FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(1);
     TargetPlatformGrammarAccess.TargetPlatformElements _targetPlatformAccess = this._targetPlatformGrammarAccess.getTargetPlatformAccess();
-    Keyword _withKeyword_2_1_0_1 = _targetPlatformAccess.getWithKeyword_2_1_0();
-    _setLinewrap_2.before(_withKeyword_2_1_0_1);
+    Keyword _withKeyword_2_0_0 = _targetPlatformAccess.getWithKeyword_2_0_0();
+    _setLinewrap_2.before(_withKeyword_2_0_0);
     FormattingConfig.LinewrapLocator _setLinewrap_3 = c.setLinewrap();
     TargetPlatformGrammarAccess.IUElements _iUAccess = this._targetPlatformGrammarAccess.getIUAccess();
     Assignment _iDAssignment_0 = _iUAccess.getIDAssignment_0();

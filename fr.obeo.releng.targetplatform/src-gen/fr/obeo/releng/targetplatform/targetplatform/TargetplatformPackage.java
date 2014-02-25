@@ -77,22 +77,13 @@ public interface TargetplatformPackage extends EPackage
   int TARGET_PLATFORM__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Target Versions</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TARGET_PLATFORM__TARGET_VERSIONS = 1;
-
-  /**
    * The feature id for the '<em><b>Options</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM__OPTIONS = 2;
+  int TARGET_PLATFORM__OPTIONS = 1;
 
   /**
    * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -101,7 +92,7 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM__IMPORTS = 3;
+  int TARGET_PLATFORM__IMPORTS = 2;
 
   /**
    * The feature id for the '<em><b>Locations</b></em>' containment reference list.
@@ -110,7 +101,7 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM__LOCATIONS = 4;
+  int TARGET_PLATFORM__LOCATIONS = 3;
 
   /**
    * The number of structural features of the '<em>Target Platform</em>' class.
@@ -119,7 +110,7 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM_FEATURE_COUNT = 5;
+  int TARGET_PLATFORM_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl <em>Include Declaration</em>}' class.
@@ -242,16 +233,6 @@ public interface TargetplatformPackage extends EPackage
   int IU_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.TargetVersion <em>Target Version</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetVersion
-   * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getTargetVersion()
-   * @generated
-   */
-  int TARGET_VERSION = 4;
-
-  /**
    * The meta object id for the '{@link fr.obeo.releng.targetplatform.targetplatform.Option <em>Option</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -259,7 +240,7 @@ public interface TargetplatformPackage extends EPackage
    * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getOption()
    * @generated
    */
-  int OPTION = 5;
+  int OPTION = 4;
 
 
   /**
@@ -282,17 +263,6 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    */
   EAttribute getTargetPlatform_Name();
-
-  /**
-   * Returns the meta object for the attribute list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getTargetVersions <em>Target Versions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Target Versions</em>'.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getTargetVersions()
-   * @see #getTargetPlatform()
-   * @generated
-   */
-  EAttribute getTargetPlatform_TargetVersions();
 
   /**
    * Returns the meta object for the attribute list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getOptions <em>Options</em>}'.
@@ -435,16 +405,6 @@ public interface TargetplatformPackage extends EPackage
   EAttribute getIU_Version();
 
   /**
-   * Returns the meta object for enum '{@link fr.obeo.releng.targetplatform.targetplatform.TargetVersion <em>Target Version</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Target Version</em>'.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetVersion
-   * @generated
-   */
-  EEnum getTargetVersion();
-
-  /**
    * Returns the meta object for enum '{@link fr.obeo.releng.targetplatform.targetplatform.Option <em>Option</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -494,14 +454,6 @@ public interface TargetplatformPackage extends EPackage
      * @generated
      */
     EAttribute TARGET_PLATFORM__NAME = eINSTANCE.getTargetPlatform_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Target Versions</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TARGET_PLATFORM__TARGET_VERSIONS = eINSTANCE.getTargetPlatform_TargetVersions();
 
     /**
      * The meta object literal for the '<em><b>Options</b></em>' attribute list feature.
@@ -612,16 +564,6 @@ public interface TargetplatformPackage extends EPackage
      * @generated
      */
     EAttribute IU__VERSION = eINSTANCE.getIU_Version();
-
-    /**
-     * The meta object literal for the '{@link fr.obeo.releng.targetplatform.targetplatform.TargetVersion <em>Target Version</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see fr.obeo.releng.targetplatform.targetplatform.TargetVersion
-     * @see fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformPackageImpl#getTargetVersion()
-     * @generated
-     */
-    EEnum TARGET_VERSION = eINSTANCE.getTargetVersion();
 
     /**
      * The meta object literal for the '{@link fr.obeo.releng.targetplatform.targetplatform.Option <em>Option</em>}' enum.

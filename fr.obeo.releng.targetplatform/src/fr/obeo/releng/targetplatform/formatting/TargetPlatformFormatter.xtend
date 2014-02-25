@@ -39,7 +39,7 @@ class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
 		
 		c.setLinewrap(1, 2, 2).before(locationAccess.locationKeyword_0)
 		c.setLinewrap(1, 1, 2).before(locationAccess.withKeyword_2_1_0)
-		c.setLinewrap(1).before(targetPlatformAccess.withKeyword_2_1_0)
+		c.setLinewrap(1).before(targetPlatformAccess.withKeyword_2_0_0)
 		
 		c.setLinewrap.before(IUAccess.IDAssignment_0)
 		c.setNoLinewrap.before(IUAccess.versionAssignment_1_3_1)

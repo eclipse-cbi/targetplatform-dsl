@@ -7,10 +7,6 @@
     editorPluginID="fr.obeo.releng.targetplatform.editor" runtimeVersion="2.9">
   <genPackages prefix="Targetplatform" basePackage="fr.obeo.releng.targetplatform"
       disposableProviderFactory="true" fileExtensions="targetplatform,tpd" ecorePackage="TargetPlatform.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TargetPlatform.ecore#//TargetVersion">
-      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET_38"/>
-      <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//TargetVersion/TARGET_36"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="TargetPlatform.ecore#//Option">
       <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_REQUIRED"/>
       <genEnumLiterals ecoreEnumLiteral="TargetPlatform.ecore#//Option/INCLUDE_ALL_ENVIRONMENTS"/>
@@ -19,7 +15,6 @@
     </genEnums>
     <genClasses ecoreClass="TargetPlatform.ecore#//TargetPlatform">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/targetVersions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/options"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/locations"/>

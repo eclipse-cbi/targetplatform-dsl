@@ -36,6 +36,12 @@ class TestGrammar {
 	String languageName
 	
 	@Test
+	def testEmpty() {
+		val targetPlatform = parser.parse("")
+		assertNull(targetPlatform)
+	}
+	
+	@Test
 	def testStandardFile() {
 		val targetPlatform = parser.parse('''
 			target "Latest target for EMF Compare based on Kepler interim"
@@ -85,27 +91,6 @@ class TestGrammar {
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_ALL_ENVIRONMENTS))
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_REQUIRED))
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_CONFIGURE_PHASE))
-	}
-	
-	@Test
-	def testLocationOptionCheck() {
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val targetPlatform = parser.parse('''
-			target "a target platform"
-
-			location "my location URL" {
-				with source, allEnvironments, requirements, configurePhase
-				org.eclipse.emf.sdk.feature.group;version="[2.9.0,3.0.0)"
-			}
-		''')
-		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
-		val fisrtLocation = targetPlatform.locations.head
-		tester.validator.checkAllEnvAndRequiredAreSelfExluding(fisrtLocation)
-		for (diag: tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic))) {
-			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, 
-				diag.issueCode
-			)
-		}
 	}
 	
 	@Test
@@ -160,7 +145,7 @@ class TestGrammar {
 		val fisrtLocation = targetPlatform.locations.head
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("my.iu", iu0.ID)
-		assertEquals("3", iu0.version)
+		assertEquals("3.0.0", iu0.version)
 	}
 	
 	@Test
@@ -182,7 +167,7 @@ class TestGrammar {
 	@Test
 	def testIdWithVersionNonString3() {
 		val targetPlatform = parser.parse('''
-			target "a target platform" version PDE_3.8
+			target "a target platform" version 3.8
 
 			location "my location URL" {
 				myu;version=[3.2.1,10.0)
@@ -192,7 +177,7 @@ class TestGrammar {
 		val fisrtLocation = targetPlatform.locations.head
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("myu", iu0.ID)
-		assertEquals("[3.2.1,10.0)", iu0.version)
+		assertEquals("[3.2.1,10.0.0)", iu0.version)
 	}
 	
 	@Test
@@ -208,7 +193,7 @@ class TestGrammar {
 		val fisrtLocation = targetPlatform.locations.head
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("myu", iu0.ID)
-		assertEquals("[ 3 , 5 )", iu0.version)
+		assertEquals("[3.0.0,5.0.0)", iu0.version)
 	}
 
 	@Test

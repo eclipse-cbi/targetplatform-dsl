@@ -29,8 +29,6 @@ public class InternalTargetPlatformLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T__19=19;
     public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -162,10 +160,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:16:7: ( 'PDE_3.8' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:16:9: 'PDE_3.8'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:16:7: ( 'requirements' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:16:9: 'requirements'
             {
-            match("PDE_3.8"); 
+            match("requirements"); 
 
 
             }
@@ -183,10 +181,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:17:7: ( 'PDE_3.6' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:17:9: 'PDE_3.6'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:17:7: ( 'allEnvironments' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:17:9: 'allEnvironments'
             {
-            match("PDE_3.6"); 
+            match("allEnvironments"); 
 
 
             }
@@ -204,10 +202,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:18:7: ( 'requirements' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:18:9: 'requirements'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:18:7: ( 'source' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:18:9: 'source'
             {
-            match("requirements"); 
+            match("source"); 
 
 
             }
@@ -225,10 +223,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:19:7: ( 'allEnvironments' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:19:9: 'allEnvironments'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:19:7: ( 'configurePhase' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:19:9: 'configurePhase'
             {
-            match("allEnvironments"); 
+            match("configurePhase"); 
 
 
             }
@@ -246,10 +244,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:20:7: ( 'source' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:20:9: 'source'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:20:7: ( 'target' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:20:9: 'target'
             {
-            match("source"); 
+            match("target"); 
 
 
             }
@@ -267,10 +265,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:21:7: ( 'configurePhase' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:21:9: 'configurePhase'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:21:7: ( 'with' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:21:9: 'with'
             {
-            match("configurePhase"); 
+            match("with"); 
 
 
             }
@@ -288,11 +286,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:22:7: ( 'target' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:22:9: 'target'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:22:7: ( ',' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:22:9: ','
             {
-            match("target"); 
-
+            match(','); 
 
             }
 
@@ -309,10 +306,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:23:7: ( 'version' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:23:9: 'version'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:23:7: ( 'include' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:23:9: 'include'
             {
-            match("version"); 
+            match("include"); 
 
 
             }
@@ -330,10 +327,11 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:24:7: ( ',' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:24:9: ','
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:24:7: ( 'location' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:24:9: 'location'
             {
-            match(','); 
+            match("location"); 
+
 
             }
 
@@ -350,11 +348,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:25:7: ( 'with' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:25:9: 'with'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:25:7: ( '{' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:25:9: '{'
             {
-            match("with"); 
-
+            match('{'); 
 
             }
 
@@ -371,11 +368,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:26:7: ( 'include' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:26:9: 'include'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:26:7: ( '}' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:26:9: '}'
             {
-            match("include"); 
-
+            match('}'); 
 
             }
 
@@ -392,11 +388,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:27:7: ( 'location' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:27:9: 'location'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:27:7: ( ';' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:27:9: ';'
             {
-            match("location"); 
-
+            match(';'); 
 
             }
 
@@ -413,10 +408,11 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:28:7: ( '{' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:28:9: '{'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:28:7: ( 'version' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:28:9: 'version'
             {
-            match('{'); 
+            match("version"); 
+
 
             }
 
@@ -433,10 +429,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:29:7: ( '}' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:29:9: '}'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:29:7: ( '=' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:29:9: '='
             {
-            match('}'); 
+            match('='); 
 
             }
 
@@ -453,48 +449,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:30:7: ( ';' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:30:9: ';'
-            {
-            match(';'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__30"
-
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
-        try {
-            int _type = T__31;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:31:7: ( '=' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:31:9: '='
-            {
-            match('='); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__31"
-
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
-        try {
-            int _type = T__32;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:32:7: ( '.' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:32:9: '.'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:30:7: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:30:9: '.'
             {
             match('.'); 
 
@@ -506,17 +462,17 @@ public class InternalTargetPlatformLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__32"
+    // $ANTLR end "T__30"
 
     // $ANTLR start "RULE_INT"
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2643:10: ( ( '0' .. '9' )+ )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2643:12: ( '0' .. '9' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2381:10: ( ( '0' .. '9' )+ )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2381:12: ( '0' .. '9' )+
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2643:12: ( '0' .. '9' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2381:12: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -530,7 +486,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2643:13: '0' .. '9'
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2381:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -562,10 +518,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2645:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2645:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2383:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2383:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2645:11: ( '^' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2383:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -574,7 +530,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2645:11: '^'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2383:11: '^'
                     {
                     match('^'); 
 
@@ -583,7 +539,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
             }
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2645:16: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2383:16: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -637,10 +593,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -658,10 +614,10 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -677,7 +633,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -693,7 +649,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -718,10 +674,10 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -737,7 +693,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -753,7 +709,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2647:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -796,12 +752,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2649:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2649:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2387:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2387:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2649:24: ( options {greedy=false; } : . )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2387:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -826,7 +782,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2649:52: .
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2387:52: .
             	    {
             	    matchAny(); 
 
@@ -856,12 +812,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -874,7 +830,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -894,7 +850,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                 }
             } while (true);
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:40: ( ( '\\r' )? '\\n' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -903,9 +859,9 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:41: ( '\\r' )? '\\n'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:41: ( '\\r' )? '\\n'
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:41: ( '\\r' )?
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -914,7 +870,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2651:41: '\\r'
+                            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2389:41: '\\r'
                             {
                             match('\r'); 
 
@@ -946,10 +902,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2653:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2653:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2391:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2391:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2653:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2391:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1003,8 +959,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2655:16: ( . )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2655:18: .
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2393:16: ( . )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2393:18: .
             {
             matchAny(); 
 
@@ -1019,8 +975,8 @@ public class InternalTargetPlatformLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=29;
+        // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=27;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -1164,63 +1120,49 @@ public class InternalTargetPlatformLexer extends Lexer {
                 }
                 break;
             case 21 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:130: T__31
-                {
-                mT__31(); 
-
-                }
-                break;
-            case 22 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:136: T__32
-                {
-                mT__32(); 
-
-                }
-                break;
-            case 23 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:142: RULE_INT
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:130: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 24 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:151: RULE_ID
+            case 22 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:139: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 25 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:159: RULE_STRING
+            case 23 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:147: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 26 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:171: RULE_ML_COMMENT
+            case 24 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:159: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 27 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:187: RULE_SL_COMMENT
+            case 25 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:175: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 28 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:203: RULE_WS
+            case 26 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:191: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 29 :
-                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:211: RULE_ANY_OTHER
+            case 27 :
+                // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1:199: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1234,108 +1176,108 @@ public class InternalTargetPlatformLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\37\4\uffff\7\37\1\uffff\2\37\5\uffff\1\63\1\34\1\uffff"+
-        "\3\34\2\uffff\2\37\5\uffff\7\37\1\uffff\2\37\6\uffff\1\63\4\uffff"+
-        "\13\37\1\117\10\37\1\130\1\37\1\uffff\10\37\1\uffff\2\37\1\uffff"+
-        "\2\37\1\150\1\37\1\152\3\37\2\uffff\2\37\1\uffff\1\37\1\uffff\1"+
-        "\161\1\162\1\163\3\37\3\uffff\11\37\1\u0080\2\37\1\uffff\3\37\1"+
-        "\u0086\1\u0087\2\uffff";
+        "\1\uffff\1\36\4\uffff\6\36\1\uffff\1\36\3\uffff\1\36\2\uffff\1\61"+
+        "\1\33\1\uffff\3\33\2\uffff\2\36\5\uffff\6\36\1\uffff\1\36\3\uffff"+
+        "\1\36\3\uffff\1\61\4\uffff\12\36\1\113\6\36\1\122\2\36\1\uffff\6"+
+        "\36\1\uffff\5\36\1\140\1\36\1\142\5\36\1\uffff\1\36\1\uffff\1\151"+
+        "\1\152\1\153\3\36\3\uffff\11\36\1\170\2\36\1\uffff\3\36\1\176\1"+
+        "\177\2\uffff";
     static final String DFA12_eofS =
-        "\u0088\uffff";
+        "\u0080\uffff";
     static final String DFA12_minS =
-        "\1\0\1\141\4\uffff\1\104\1\145\1\154\2\157\1\141\1\145\1\uffff\1"+
-        "\151\1\156\5\uffff\2\55\1\uffff\2\0\1\52\2\uffff\1\172\1\143\5\uffff"+
-        "\1\105\1\161\1\154\1\165\1\156\2\162\1\uffff\1\164\1\143\6\uffff"+
-        "\1\55\4\uffff\1\171\1\141\1\137\1\165\1\105\1\162\1\146\1\147\1"+
-        "\163\1\150\1\154\1\55\1\164\1\63\1\151\1\156\1\143\1\151\1\145\1"+
-        "\151\1\55\1\165\1\uffff\1\151\1\56\1\162\1\166\1\145\1\147\1\164"+
-        "\1\157\1\uffff\1\144\1\157\1\66\1\145\1\151\1\55\1\165\1\55\1\156"+
-        "\1\145\1\156\2\uffff\1\155\1\162\1\uffff\1\162\1\uffff\3\55\1\145"+
-        "\1\157\1\145\3\uffff\2\156\1\120\1\164\1\155\1\150\1\163\1\145\1"+
-        "\141\1\55\1\156\1\163\1\uffff\1\164\1\145\1\163\2\55\2\uffff";
+        "\1\0\1\141\4\uffff\1\145\1\154\2\157\1\141\1\151\1\uffff\1\156\3"+
+        "\uffff\1\145\2\uffff\2\55\1\uffff\2\0\1\52\2\uffff\1\172\1\143\5"+
+        "\uffff\1\161\1\154\1\165\1\156\1\162\1\164\1\uffff\1\143\3\uffff"+
+        "\1\162\3\uffff\1\55\4\uffff\1\171\1\141\1\165\1\105\1\162\1\146"+
+        "\1\147\1\150\1\154\1\163\1\55\1\164\1\151\1\156\1\143\1\151\1\145"+
+        "\1\55\1\165\1\151\1\uffff\1\151\1\162\1\166\1\145\1\147\1\164\1"+
+        "\uffff\1\144\2\157\1\145\1\151\1\55\1\165\1\55\1\145\2\156\1\155"+
+        "\1\162\1\uffff\1\162\1\uffff\3\55\1\145\1\157\1\145\3\uffff\2\156"+
+        "\1\120\1\164\1\155\1\150\1\163\1\145\1\141\1\55\1\156\1\163\1\uffff"+
+        "\1\164\1\145\1\163\2\55\2\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\4\uffff\1\104\1\145\1\154\2\157\1\141\1\145\1\uffff"+
-        "\1\151\1\156\5\uffff\2\172\1\uffff\2\uffff\1\57\2\uffff\1\172\1"+
-        "\143\5\uffff\1\105\1\161\1\154\1\165\1\156\2\162\1\uffff\1\164\1"+
-        "\143\6\uffff\1\172\4\uffff\1\171\1\141\1\137\1\165\1\105\1\162\1"+
-        "\146\1\147\1\163\1\150\1\154\1\172\1\164\1\63\1\151\1\156\1\143"+
-        "\1\151\1\145\1\151\1\172\1\165\1\uffff\1\151\1\56\1\162\1\166\1"+
-        "\145\1\147\1\164\1\157\1\uffff\1\144\1\157\1\70\1\145\1\151\1\172"+
-        "\1\165\1\172\1\156\1\145\1\156\2\uffff\1\155\1\162\1\uffff\1\162"+
-        "\1\uffff\3\172\1\145\1\157\1\145\3\uffff\2\156\1\120\1\164\1\155"+
-        "\1\150\1\163\1\145\1\141\1\172\1\156\1\163\1\uffff\1\164\1\145\1"+
-        "\163\2\172\2\uffff";
+        "\1\uffff\1\157\4\uffff\1\145\1\154\2\157\1\141\1\151\1\uffff\1\156"+
+        "\3\uffff\1\145\2\uffff\2\172\1\uffff\2\uffff\1\57\2\uffff\1\172"+
+        "\1\143\5\uffff\1\161\1\154\1\165\1\156\1\162\1\164\1\uffff\1\143"+
+        "\3\uffff\1\162\3\uffff\1\172\4\uffff\1\171\1\141\1\165\1\105\1\162"+
+        "\1\146\1\147\1\150\1\154\1\163\1\172\1\164\1\151\1\156\1\143\1\151"+
+        "\1\145\1\172\1\165\1\151\1\uffff\1\151\1\162\1\166\1\145\1\147\1"+
+        "\164\1\uffff\1\144\2\157\1\145\1\151\1\172\1\165\1\172\1\145\2\156"+
+        "\1\155\1\162\1\uffff\1\162\1\uffff\3\172\1\145\1\157\1\145\3\uffff"+
+        "\2\156\1\120\1\164\1\155\1\150\1\163\1\145\1\141\1\172\1\156\1\163"+
+        "\1\uffff\1\164\1\145\1\163\2\172\2\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\5\7\uffff\1\16\2\uffff\1\22\1\23\1\24\1\25"+
-        "\1\26\2\uffff\1\30\3\uffff\1\34\1\35\2\uffff\1\30\1\2\1\3\1\4\1"+
-        "\5\7\uffff\1\16\2\uffff\1\22\1\23\1\24\1\25\1\26\1\27\1\uffff\1"+
-        "\31\1\32\1\33\1\34\26\uffff\1\1\10\uffff\1\17\13\uffff\1\6\1\7\2"+
-        "\uffff\1\12\1\uffff\1\14\6\uffff\1\15\1\20\1\21\14\uffff\1\10\5"+
-        "\uffff\1\13\1\11";
+        "\2\uffff\1\2\1\3\1\4\1\5\6\uffff\1\14\1\uffff\1\17\1\20\1\21\1\uffff"+
+        "\1\23\1\24\2\uffff\1\26\3\uffff\1\32\1\33\2\uffff\1\26\1\2\1\3\1"+
+        "\4\1\5\6\uffff\1\14\1\uffff\1\17\1\20\1\21\1\uffff\1\23\1\24\1\25"+
+        "\1\uffff\1\27\1\30\1\31\1\32\24\uffff\1\1\6\uffff\1\13\15\uffff"+
+        "\1\10\1\uffff\1\12\6\uffff\1\15\1\22\1\16\14\uffff\1\6\5\uffff\1"+
+        "\11\1\7";
     static final String DFA12_specialS =
-        "\1\2\27\uffff\1\0\1\1\156\uffff}>";
+        "\1\2\26\uffff\1\1\1\0\147\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\34\2\33\2\34\1\33\22\34\1\33\1\34\1\30\4\34\1\31\1\2\1\4"+
-            "\2\34\1\15\1\27\1\24\1\32\12\25\1\34\1\22\1\34\1\23\3\34\17"+
-            "\27\1\6\12\27\1\3\1\34\1\5\1\26\1\27\1\34\1\10\1\27\1\12\5\27"+
-            "\1\17\2\27\1\1\5\27\1\7\1\11\1\13\1\27\1\14\1\16\3\27\1\20\1"+
-            "\34\1\21\uff82\34",
-            "\1\35\15\uffff\1\36",
+            "\11\33\2\32\2\33\1\32\22\33\1\32\1\33\1\27\4\33\1\30\1\2\1\4"+
+            "\2\33\1\14\1\26\1\23\1\31\12\24\1\33\1\20\1\33\1\22\3\33\32"+
+            "\26\1\3\1\33\1\5\1\25\1\26\1\33\1\7\1\26\1\11\5\26\1\15\2\26"+
+            "\1\1\5\26\1\6\1\10\1\12\1\26\1\21\1\13\3\26\1\16\1\33\1\17\uff82"+
+            "\33",
+            "\1\34\15\uffff\1\35",
             "",
             "",
             "",
             "",
+            "\1\43",
             "\1\44",
             "\1\45",
             "\1\46",
             "\1\47",
             "\1\50",
-            "\1\51",
+            "",
             "\1\52",
             "",
-            "\1\54",
-            "\1\55",
+            "",
+            "",
+            "\1\56",
+            "",
+            "",
+            "\1\36\2\uffff\12\62\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "",
+            "\0\63",
+            "\0\63",
+            "\1\64\4\uffff\1\65",
+            "",
+            "",
+            "\1\67",
+            "\1\70",
             "",
             "",
             "",
-            "",
-            "",
-            "\1\37\2\uffff\12\64\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "",
-            "\0\65",
-            "\0\65",
-            "\1\66\4\uffff\1\67",
             "",
             "",
             "\1\71",
             "\1\72",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\73",
             "\1\74",
             "\1\75",
             "\1\76",
-            "\1\77",
-            "\1\100",
-            "\1\101",
             "",
+            "\1\77",
+            "",
+            "",
+            "",
+            "\1\100",
+            "",
+            "",
+            "",
+            "\1\36\2\uffff\12\62\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "",
+            "",
+            "",
+            "",
+            "\1\101",
             "\1\102",
             "\1\103",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\37\2\uffff\12\64\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "",
-            "",
-            "",
-            "",
             "\1\104",
             "\1\105",
             "\1\106",
@@ -1343,76 +1285,67 @@ public class InternalTargetPlatformLexer extends Lexer {
             "\1\110",
             "\1\111",
             "\1\112",
-            "\1\113",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\114",
             "\1\115",
             "\1\116",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\117",
             "\1\120",
             "\1\121",
-            "\1\122",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\123",
             "\1\124",
+            "",
             "\1\125",
             "\1\126",
             "\1\127",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\130",
             "\1\131",
-            "",
             "\1\132",
+            "",
             "\1\133",
             "\1\134",
             "\1\135",
             "\1\136",
             "\1\137",
-            "\1\140",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\141",
-            "",
-            "\1\142",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\143",
-            "\1\145\1\uffff\1\144",
+            "\1\144",
+            "\1\145",
             "\1\146",
             "\1\147",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\151",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\153",
+            "",
+            "\1\150",
+            "",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\154",
             "\1\155",
-            "",
-            "",
             "\1\156",
+            "",
+            "",
+            "",
             "\1\157",
-            "",
             "\1\160",
-            "",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\161",
+            "\1\162",
+            "\1\163",
             "\1\164",
             "\1\165",
             "\1\166",
-            "",
-            "",
-            "",
             "\1\167",
-            "\1\170",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\171",
             "\1\172",
+            "",
             "\1\173",
             "\1\174",
             "\1\175",
-            "\1\176",
-            "\1\177",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\u0081",
-            "\1\u0082",
-            "",
-            "\1\u0083",
-            "\1\u0084",
-            "\1\u0085",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\37\2\uffff\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\36\2\uffff\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "",
             ""
     };
@@ -1447,7 +1380,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
@@ -1457,19 +1390,19 @@ public class InternalTargetPlatformLexer extends Lexer {
                         int LA12_24 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFF')) ) {s = 53;}
+                        if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFF')) ) {s = 51;}
 
-                        else s = 28;
+                        else s = 27;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_25 = input.LA(1);
+                        int LA12_23 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_25>='\u0000' && LA12_25<='\uFFFF')) ) {s = 53;}
+                        if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFF')) ) {s = 51;}
 
-                        else s = 28;
+                        else s = 27;
 
                         if ( s>=0 ) return s;
                         break;
@@ -1487,51 +1420,49 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         else if ( (LA12_0==']') ) {s = 5;}
 
-                        else if ( (LA12_0=='P') ) {s = 6;}
+                        else if ( (LA12_0=='r') ) {s = 6;}
 
-                        else if ( (LA12_0=='r') ) {s = 7;}
+                        else if ( (LA12_0=='a') ) {s = 7;}
 
-                        else if ( (LA12_0=='a') ) {s = 8;}
+                        else if ( (LA12_0=='s') ) {s = 8;}
 
-                        else if ( (LA12_0=='s') ) {s = 9;}
+                        else if ( (LA12_0=='c') ) {s = 9;}
 
-                        else if ( (LA12_0=='c') ) {s = 10;}
+                        else if ( (LA12_0=='t') ) {s = 10;}
 
-                        else if ( (LA12_0=='t') ) {s = 11;}
+                        else if ( (LA12_0=='w') ) {s = 11;}
 
-                        else if ( (LA12_0=='v') ) {s = 12;}
+                        else if ( (LA12_0==',') ) {s = 12;}
 
-                        else if ( (LA12_0==',') ) {s = 13;}
+                        else if ( (LA12_0=='i') ) {s = 13;}
 
-                        else if ( (LA12_0=='w') ) {s = 14;}
+                        else if ( (LA12_0=='{') ) {s = 14;}
 
-                        else if ( (LA12_0=='i') ) {s = 15;}
+                        else if ( (LA12_0=='}') ) {s = 15;}
 
-                        else if ( (LA12_0=='{') ) {s = 16;}
+                        else if ( (LA12_0==';') ) {s = 16;}
 
-                        else if ( (LA12_0=='}') ) {s = 17;}
+                        else if ( (LA12_0=='v') ) {s = 17;}
 
-                        else if ( (LA12_0==';') ) {s = 18;}
+                        else if ( (LA12_0=='=') ) {s = 18;}
 
-                        else if ( (LA12_0=='=') ) {s = 19;}
+                        else if ( (LA12_0=='.') ) {s = 19;}
 
-                        else if ( (LA12_0=='.') ) {s = 20;}
+                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 20;}
 
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 21;}
+                        else if ( (LA12_0=='^') ) {s = 21;}
 
-                        else if ( (LA12_0=='^') ) {s = 22;}
+                        else if ( (LA12_0=='-'||(LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='q')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 22;}
 
-                        else if ( (LA12_0=='-'||(LA12_0>='A' && LA12_0<='O')||(LA12_0>='Q' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='q')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 23;}
+                        else if ( (LA12_0=='\"') ) {s = 23;}
 
-                        else if ( (LA12_0=='\"') ) {s = 24;}
+                        else if ( (LA12_0=='\'') ) {s = 24;}
 
-                        else if ( (LA12_0=='\'') ) {s = 25;}
+                        else if ( (LA12_0=='/') ) {s = 25;}
 
-                        else if ( (LA12_0=='/') ) {s = 26;}
+                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 26;}
 
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 27;}
-
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='*' && LA12_0<='+')||LA12_0==':'||LA12_0=='<'||(LA12_0>='>' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 28;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='*' && LA12_0<='+')||LA12_0==':'||LA12_0=='<'||(LA12_0>='>' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 27;}
 
                         if ( s>=0 ) return s;
                         break;

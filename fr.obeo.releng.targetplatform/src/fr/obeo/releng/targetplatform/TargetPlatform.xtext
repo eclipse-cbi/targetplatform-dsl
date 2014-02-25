@@ -8,8 +8,7 @@ TargetPlatform:
 	(
 		'target' name=STRING
 		(
-			('version'  targetVersions+=TargetVersion (',' targetVersions+=TargetVersion)*)?
-			& ('with' options+=Option (',' options+=Option)*)?
+			('with' options+=Option (',' options+=Option)*)?
 			& (imports+=IncludeDeclaration)*	
 		)
 		
@@ -17,10 +16,6 @@ TargetPlatform:
 	)?
 ;
 	
-enum TargetVersion:
-	TARGET_38='PDE_3.8' | TARGET_36='PDE_3.6'
-;
-
 IncludeDeclaration:
 	'include' importURI=STRING
 ;

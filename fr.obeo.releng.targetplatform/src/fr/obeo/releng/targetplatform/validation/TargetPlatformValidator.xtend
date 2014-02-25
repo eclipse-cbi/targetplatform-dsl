@@ -11,11 +11,11 @@ import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
-import org.eclipse.emf.ecore.EStructuralFeature
 
 //import org.eclipse.xtext.validation.Check
 
@@ -28,6 +28,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	public static final String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
 	public static final String CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS";
+	public static final String CHECK__SUPPORTED_PDE_VERSION = "CHECK__SUPPORTED_PDE_VERSION";
 	public static final String DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS";
 	public static final String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
 	
