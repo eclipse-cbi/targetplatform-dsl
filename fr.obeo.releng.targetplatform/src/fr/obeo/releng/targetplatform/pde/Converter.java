@@ -20,15 +20,16 @@ import java.net.URISyntaxException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -37,6 +38,7 @@ import com.google.inject.Provider;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 /**
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>
@@ -47,27 +49,35 @@ public class Converter {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 	
+	@Inject
+	private ImportUriResolver resolver;
+	
 	public void generateTargetDefinitionFile(URI targetPlatformLocation, IProgressMonitor monitor) throws Exception {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		if (!"targetplatform".equals(targetPlatformLocation.fileExtension()) && !"tpd".equals(targetPlatformLocation.fileExtension())) {
-			System.err.println("The target platform file must ends with .targetplatform or .tpd extensions");
-			return;
+			throw new IllegalStateException("The target platform file '" + targetPlatformLocation + "' must ends with .targetplatform or .tpd extensions.");
 		}
 		
 		TargetPlatform targetPlatform = loadTargetPlatform(targetPlatformLocation);
-		subMonitor.worked(10);
+		
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(targetPlatform);
+		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+			throw new IllegalStateException("The file '" + targetPlatformLocation + "' can not be converted. It contains errors.");
+		}
+		
+		subMonitor.worked(5);
 		if (targetPlatform == null) {
 			return;
 		}
 		java.net.URI agentLocation = getAgentLocationURI(targetPlatformLocation);
-		ResolvedTargetPlatform resolvedTargetPlatform = getResolvedTargetPlatform(targetPlatform, agentLocation, subMonitor.newChild(80));
+		ResolvedTargetPlatform resolvedTargetPlatform = getResolvedTargetPlatform(targetPlatform, agentLocation, subMonitor.newChild(90));
 		
 		TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
 		
 		String xml = generator.generate(resolvedTargetPlatform);
 		final URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
 		serialize(targetDefinitionLocation, xml);
-		subMonitor.worked(10);
+		subMonitor.worked(5);
 	}
 
 	private void serialize(URI targetPlatformLocation, String xml) throws FileNotFoundException, IOException {
@@ -86,7 +96,7 @@ public class Converter {
 		IProvisioningAgent agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
 		IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
 
-		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform);
+		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, new LocationIndexBuilder(resolver));
 		resolvedTargetPlatform.resolve(repositoryManager, monitor);
 		
 		agent.stop();
@@ -107,15 +117,10 @@ public class Converter {
 	private TargetPlatform loadTargetPlatform(URI fileLocation) {
 		ResourceSet resourceSet = resourceSetProvider.get();
 		Resource resource = resourceSet.getResource(fileLocation, true);
-		EList<Diagnostic> errors = resource.getErrors();
-		if (!errors.isEmpty()) {
-			for (Diagnostic diagnostic : errors) {
-				System.err.println(diagnostic);
-			}
-			return null;
+		TargetPlatform targetPlatform = null;
+		if (resource != null && !resource.getContents().isEmpty()) {
+			targetPlatform = (TargetPlatform) resource.getContents().get(0);
 		}
-		
-		TargetPlatform targetPlatform = (TargetPlatform) resource.getContents().get(0);
 		return targetPlatform;
 	}
 }

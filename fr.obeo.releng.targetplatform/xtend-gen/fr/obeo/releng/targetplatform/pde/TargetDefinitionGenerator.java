@@ -50,20 +50,20 @@ public class TargetDefinitionGenerator {
           _and = _not;
         }
         if (_and) {
-          _builder.append("\t");
+          _builder.append("  ");
           _builder.append("<locations>");
           _builder.newLine();
           {
             List<ResolvedLocation> _locations_2 = targetPlatform.getLocations();
             for(final ResolvedLocation location : _locations_2) {
-              _builder.append("\t");
-              _builder.append("\t");
+              _builder.append("  ");
+              _builder.append("  ");
               String _generateLocation = this.generateLocation(targetPlatform, location);
-              _builder.append(_generateLocation, "\t\t");
+              _builder.append(_generateLocation, "    ");
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
+          _builder.append("  ");
           _builder.append("</locations>");
           _builder.newLine();
         }
@@ -112,10 +112,7 @@ public class TargetDefinitionGenerator {
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_iD);
       boolean _not_1 = (!_isNullOrEmpty);
       if (_not_1) {
-        String _iD_1 = location.getID();
-        _xifexpression_2 = (_iD_1 + " ");
-      } else {
-        String _plus_4 = ("" + "location=\"");
+        String _plus_4 = ((("id=\"" + location.getID()) + "\" ") + "location=\"");
         URI _uRI = location.getURI();
         String _plus_5 = (_plus_4 + _uRI);
         _xifexpression_2 = (_plus_5 + "\"");
@@ -129,20 +126,20 @@ public class TargetDefinitionGenerator {
       {
         List<IInstallableUnit> _resolvedIUs = location.getResolvedIUs();
         for(final IInstallableUnit iu : _resolvedIUs) {
-          _builder.append("\t");
+          _builder.append("  ");
           _builder.append("<unit id=\"");
           String _id = iu.getId();
-          _builder.append(_id, "\t");
+          _builder.append(_id, "  ");
           _builder.append("\" version=\"");
           Version _version = iu.getVersion();
-          _builder.append(_version, "\t");
+          _builder.append(_version, "  ");
           _builder.append("\"/>");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
+      _builder.append("  ");
       _builder.append("<repository ");
-      _builder.append(repositoryAttributes, "\t");
+      _builder.append(repositoryAttributes, "  ");
       _builder.append("/>");
       _builder.newLineIfNotEmpty();
       _builder.append("</location>");

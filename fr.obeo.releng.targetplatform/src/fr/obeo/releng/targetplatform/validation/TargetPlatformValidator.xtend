@@ -3,24 +3,19 @@
  */
 package fr.obeo.releng.targetplatform.validation
 
-import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.targetplatform.IU
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.targetplatform.Location
 import fr.obeo.releng.targetplatform.targetplatform.Option
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
-import java.util.LinkedList
+import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.util.List
-import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -36,6 +31,8 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	@Inject
 	ImportUriResolver resolver;
+	
+	val LocationIndexBuilder indexBuilder;
 
 	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
 	
@@ -47,6 +44,10 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	public static val CHECK__LOCATION_CONFLICTUAL_ID = "CHECK__LOCATION_CONFLICTUAL_ID"
 	public static val CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID"	
+	
+	new() {
+		indexBuilder = new LocationIndexBuilder(resolver)
+	}
 	
 	@Check
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -133,12 +134,51 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		}
 	}
 	
+	@Check
+	def checkIDUniqueOnAllLocations(TargetPlatform targetPlatform) {
+		val index = indexBuilder.getLocationIndex(targetPlatform)
+		val resource = targetPlatform.eResource
+		
+		val conflictualURI = index.keySet.map[
+			index.get(it).filter[ID != null].map[ID].toSet
+		].filter[
+			size > 1
+		]
+		
+		if (conflictualURI.empty) {
+			val uniqueLocation = Multimaps.index(
+				index.keySet.map[index.get(it).filter[ID != null].head].filterNull,
+				[ID]
+			)
+			uniqueLocation.keys
+			val duplicateIDLocation = uniqueLocation.keys.filter[uniqueLocation.keys.count(it) > 1]
+			duplicateIDLocation.forEach[
+				uniqueLocation.get(it).forEach[duplicateID |
+				val allNonUniqIDLocations = index.get(duplicateID.uri);
+				val external = allNonUniqIDLocations.filter[resource != eResource];
+				val internal = allNonUniqIDLocations.filter[resource == eResource];
+				
+				internal.forEach[
+					error('ID must be unique for each location', it, TargetplatformPackage.Literals.LOCATION__ID)
+				]
+				
+				external.forEach[location |
+					val includeErr = targetPlatform.includes.findFirst[
+						val direct = indexBuilder.getImportedTargetPlatform(resource, it);
+						direct.locations.contains(location) ||
+						indexBuilder.getImportedTargetPlatforms(direct).map[locations].flatten.toSet.contains(location)
+					]
+					error('''ID '«duplicateID.ID»' is duplicated in the included target platform''', includeErr, TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI)
+				]
+			]]
+		}
+	}
 	
 	@Check
 	def checkImportCycle(TargetPlatform targetPlatform) {
-		val cycle = checkIncludeCycle(targetPlatform)
+		val cycle = indexBuilder.checkIncludeCycle(targetPlatform)
 		if (!cycle.empty) {
-			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(getImportedTargetPlatform(targetPlatform.eResource, it))]
+			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(indexBuilder.getImportedTargetPlatform(targetPlatform.eResource, it))]
 			if (cyclingImport != null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
@@ -150,7 +190,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check
 	def checkImportedLocationConflictualID(TargetPlatform targetPlatform) {
-		val index = getLocationIndex(targetPlatform)
+		val index = indexBuilder.getLocationIndex(targetPlatform)
 		val resource = targetPlatform.eResource
 		
 		for (locURI : index.keySet) {
@@ -194,68 +234,5 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				]
 			}
 		}
-	}
-	
-	private def getLocationIndex(TargetPlatform targetPlatform) {
-		val locationList = targetPlatform.getLocations()
-		val locationIndex = ArrayListMultimap.create(Multimaps.index(locationList, [uri]))
-		
-		getImportedTargetPlatforms(targetPlatform).map[locations].flatten.forEach[
-			locationIndex.put(it.uri, it)
-		]
-		
-		return locationIndex;
-	}
-
-	private def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
-		val acc = newLinkedHashSet();
-		val s = newLinkedList();
-		return 
-			if (checkIncludeCycle(targetPlatform, acc, s)) {
-				newImmutableList()
-			} else {
-				acc
-			}
-	}
-	
-	private def checkIncludeCycle(TargetPlatform targetPlatform) {
-		val acc = newLinkedHashSet();
-		val s = newLinkedList();
-		return 
-			if (checkIncludeCycle(targetPlatform, acc, s)) {
-				s.reverse
-			} else {
-				newImmutableList()
-			}
-	}
-	
-	private def boolean checkIncludeCycle(TargetPlatform targetPlatform, Set<TargetPlatform> visited, LinkedList<TargetPlatform> s) {
-		s.addFirst(targetPlatform)
-		val context = targetPlatform.eResource
-		val includedTPs = targetPlatform.includes.map[getImportedTargetPlatform(context, it)].filterNull.toSet
-		for(includedTP : includedTPs) {
-			if (s.contains(includedTP)) {
-				s.addFirst(includedTP)
-				return true
-			}
-			
-			visited.add(includedTP)
-			
-			if (checkIncludeCycle(includedTP, visited, s)) {
-				return true;
-			}
-		}
-		s.removeFirst
-		return false
-	}
-
-	private def TargetPlatform getImportedTargetPlatform(Resource context, IncludeDeclaration include) {
-		var TargetPlatform ret = null;
-		val resource = EcoreUtil2.getResource(context, resolver.resolve(include));
-		var root = resource?.getContents()?.head;
-		if (root instanceof TargetPlatform) {
-			ret = root as TargetPlatform;
-		}
-		return ret;
 	}
 }
