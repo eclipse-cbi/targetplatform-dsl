@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="fr.obeo.releng.targetplatform-feature_3.6"
+      id="fr.obeo.releng.targetplatform-feature"
       label="%featureName"
       version="1.2.0.qualifier"
       provider-name="%providerName"
@@ -23,8 +23,8 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.3.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.xtext.ui" version="2.3.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.ui" version="2.5.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -46,14 +46,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.obeo.releng.targetplatform.pde-util_3.6"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
 </feature>

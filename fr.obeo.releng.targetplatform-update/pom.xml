@@ -8,7 +8,7 @@
         <artifactId>releng.targetplatform-parent</artifactId>
         <groupId>fr.obeo.releng.targetplatform</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../fr.obeo.releng.targetplatform-parent</relativePath>
+        <relativePath>../fr.obeo.releng.targetplatform-parent</relativePath>
     </parent>
 
     <artifactId>fr.obeo.releng.targetplatform-update_3.8</artifactId>
