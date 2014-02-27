@@ -77,22 +77,22 @@ public interface TargetplatformPackage extends EPackage
   int TARGET_PLATFORM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Includes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TARGET_PLATFORM__INCLUDES = 1;
+
+  /**
    * The feature id for the '<em><b>Options</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TARGET_PLATFORM__OPTIONS = 1;
-
-  /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TARGET_PLATFORM__IMPORTS = 2;
+  int TARGET_PLATFORM__OPTIONS = 2;
 
   /**
    * The feature id for the '<em><b>Locations</b></em>' containment reference list.
@@ -265,6 +265,17 @@ public interface TargetplatformPackage extends EPackage
   EAttribute getTargetPlatform_Name();
 
   /**
+   * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getIncludes <em>Includes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Includes</em>'.
+   * @see fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getIncludes()
+   * @see #getTargetPlatform()
+   * @generated
+   */
+  EReference getTargetPlatform_Includes();
+
+  /**
    * Returns the meta object for the attribute list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getOptions <em>Options</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -274,17 +285,6 @@ public interface TargetplatformPackage extends EPackage
    * @generated
    */
   EAttribute getTargetPlatform_Options();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports <em>Imports</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports()
-   * @see #getTargetPlatform()
-   * @generated
-   */
-  EReference getTargetPlatform_Imports();
 
   /**
    * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getLocations <em>Locations</em>}'.
@@ -456,20 +456,20 @@ public interface TargetplatformPackage extends EPackage
     EAttribute TARGET_PLATFORM__NAME = eINSTANCE.getTargetPlatform_Name();
 
     /**
+     * The meta object literal for the '<em><b>Includes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TARGET_PLATFORM__INCLUDES = eINSTANCE.getTargetPlatform_Includes();
+
+    /**
      * The meta object literal for the '<em><b>Options</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute TARGET_PLATFORM__OPTIONS = eINSTANCE.getTargetPlatform_Options();
-
-    /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TARGET_PLATFORM__IMPORTS = eINSTANCE.getTargetPlatform_Imports();
 
     /**
      * The meta object literal for the '<em><b>Locations</b></em>' containment reference list feature.

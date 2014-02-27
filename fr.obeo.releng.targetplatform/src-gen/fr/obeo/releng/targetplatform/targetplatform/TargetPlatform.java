@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getIncludes <em>Includes</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getOptions <em>Options</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
  * </ul>
  * </p>
@@ -54,6 +54,22 @@ public interface TargetPlatform extends EObject
   void setName(String value);
 
   /**
+   * Returns the value of the '<em><b>Includes</b></em>' containment reference list.
+   * The list contents are of type {@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Includes</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Includes</em>' containment reference list.
+   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getTargetPlatform_Includes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<IncludeDeclaration> getIncludes();
+
+  /**
    * Returns the value of the '<em><b>Options</b></em>' attribute list.
    * The list contents are of type {@link fr.obeo.releng.targetplatform.targetplatform.Option}.
    * The literals are from the enumeration {@link fr.obeo.releng.targetplatform.targetplatform.Option}.
@@ -70,22 +86,6 @@ public interface TargetPlatform extends EObject
    * @generated
    */
   EList<Option> getOptions();
-
-  /**
-   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-   * The list contents are of type {@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Imports</em>' containment reference list.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getTargetPlatform_Imports()
-   * @model containment="true"
-   * @generated
-   */
-  EList<IncludeDeclaration> getImports();
 
   /**
    * Returns the value of the '<em><b>Locations</b></em>' containment reference list.

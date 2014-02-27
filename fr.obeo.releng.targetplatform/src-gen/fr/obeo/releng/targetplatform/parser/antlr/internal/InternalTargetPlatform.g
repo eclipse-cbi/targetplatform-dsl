@@ -100,28 +100,32 @@ ruleTargetPlatform returns [EObject current=null]
 	    }
 
 )
-)(
-
+)((
 (
-	{ 
-	  getUnorderedGroupHelper().enter(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2());
-	}
-	(
-		(
+		{ 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getIncludesIncludeDeclarationParserRuleCall_2_0_0()); 
+	    }
+		lv_includes_2_0=ruleIncludeDeclaration		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
+	        }
+       		add(
+       			$current, 
+       			"includes",
+        		lv_includes_2_0, 
+        		"IncludeDeclaration");
+	        afterParserOrEnumRuleCall();
+	    }
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 0)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 0);
-	 				}
-					({true}?=>(	otherlv_3='with' 
+)
+)*(	otherlv_3='with' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getTargetPlatformAccess().getWithKeyword_2_0_0());
+    	newLeafNode(otherlv_3, grammarAccess.getTargetPlatformAccess().getWithKeyword_2_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_0_1_0()); 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_1_1_0()); 
 	    }
 		lv_options_4_0=ruleOption		{
 	        if ($current==null) {
@@ -138,12 +142,12 @@ ruleTargetPlatform returns [EObject current=null]
 )
 )(	otherlv_5=',' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getTargetPlatformAccess().getCommaKeyword_2_0_2_0());
+    	newLeafNode(otherlv_5, grammarAccess.getTargetPlatformAccess().getCommaKeyword_2_1_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_0_2_1_0()); 
+	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0()); 
 	    }
 		lv_options_6_0=ruleOption		{
 	        if ($current==null) {
@@ -158,63 +162,19 @@ ruleTargetPlatform returns [EObject current=null]
 	    }
 
 )
-))*))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2());
-	 				}
- 				)
-			)  |
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 1)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), 1);
-	 				}
-					({true}?=>(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getImportsIncludeDeclarationParserRuleCall_2_1_0()); 
-	    }
-		lv_imports_7_0=ruleIncludeDeclaration		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
-	        }
-       		add(
-       			$current, 
-       			"imports",
-        		lv_imports_7_0, 
-        		"IncludeDeclaration");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))+
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2());
-	 				}
- 				)
-			)  
-
-		)*	
-	)
-)
-	{ 
-	  getUnorderedGroupHelper().leave(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2());
-	}
-
-)(
+))*)?)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getLocationsLocationParserRuleCall_3_0()); 
 	    }
-		lv_locations_8_0=ruleLocation		{
+		lv_locations_7_0=ruleLocation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetPlatformRule());
 	        }
        		add(
        			$current, 
        			"locations",
-        		lv_locations_8_0, 
+        		lv_locations_7_0, 
         		"Location");
 	        afterParserOrEnumRuleCall();
 	    }

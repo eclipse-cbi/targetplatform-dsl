@@ -44,8 +44,9 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVersionRangeAccess().getAlternatives_0_4(), "rule__VersionRange__Alternatives_0_4");
 					put(grammarAccess.getOptionAccess().getAlternatives(), "rule__Option__Alternatives");
 					put(grammarAccess.getTargetPlatformAccess().getGroup(), "rule__TargetPlatform__Group__0");
-					put(grammarAccess.getTargetPlatformAccess().getGroup_2_0(), "rule__TargetPlatform__Group_2_0__0");
-					put(grammarAccess.getTargetPlatformAccess().getGroup_2_0_2(), "rule__TargetPlatform__Group_2_0_2__0");
+					put(grammarAccess.getTargetPlatformAccess().getGroup_2(), "rule__TargetPlatform__Group_2__0");
+					put(grammarAccess.getTargetPlatformAccess().getGroup_2_1(), "rule__TargetPlatform__Group_2_1__0");
+					put(grammarAccess.getTargetPlatformAccess().getGroup_2_1_2(), "rule__TargetPlatform__Group_2_1_2__0");
 					put(grammarAccess.getIncludeDeclarationAccess().getGroup(), "rule__IncludeDeclaration__Group__0");
 					put(grammarAccess.getLocationAccess().getGroup(), "rule__Location__Group__0");
 					put(grammarAccess.getLocationAccess().getGroup_2(), "rule__Location__Group_2__0");
@@ -61,9 +62,9 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVersionAccess().getGroup_1_2_2(), "rule__Version__Group_1_2_2__0");
 					put(grammarAccess.getVersionRangeAccess().getGroup_0(), "rule__VersionRange__Group_0__0");
 					put(grammarAccess.getTargetPlatformAccess().getNameAssignment_1(), "rule__TargetPlatform__NameAssignment_1");
-					put(grammarAccess.getTargetPlatformAccess().getOptionsAssignment_2_0_1(), "rule__TargetPlatform__OptionsAssignment_2_0_1");
-					put(grammarAccess.getTargetPlatformAccess().getOptionsAssignment_2_0_2_1(), "rule__TargetPlatform__OptionsAssignment_2_0_2_1");
-					put(grammarAccess.getTargetPlatformAccess().getImportsAssignment_2_1(), "rule__TargetPlatform__ImportsAssignment_2_1");
+					put(grammarAccess.getTargetPlatformAccess().getIncludesAssignment_2_0(), "rule__TargetPlatform__IncludesAssignment_2_0");
+					put(grammarAccess.getTargetPlatformAccess().getOptionsAssignment_2_1_1(), "rule__TargetPlatform__OptionsAssignment_2_1_1");
+					put(grammarAccess.getTargetPlatformAccess().getOptionsAssignment_2_1_2_1(), "rule__TargetPlatform__OptionsAssignment_2_1_2_1");
 					put(grammarAccess.getTargetPlatformAccess().getLocationsAssignment_3(), "rule__TargetPlatform__LocationsAssignment_3");
 					put(grammarAccess.getIncludeDeclarationAccess().getImportURIAssignment_1(), "rule__IncludeDeclaration__ImportURIAssignment_1");
 					put(grammarAccess.getLocationAccess().getIDAssignment_1_0(), "rule__Location__IDAssignment_1_0");
@@ -74,7 +75,6 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIUAccess().getIDAssignment_0(), "rule__IU__IDAssignment_0");
 					put(grammarAccess.getIUAccess().getVersionAssignment_1_3_0(), "rule__IU__VersionAssignment_1_3_0");
 					put(grammarAccess.getIUAccess().getVersionAssignment_1_3_1(), "rule__IU__VersionAssignment_1_3_1");
-					put(grammarAccess.getTargetPlatformAccess().getUnorderedGroup_2(), "rule__TargetPlatform__UnorderedGroup_2");
 					put(grammarAccess.getLocationAccess().getUnorderedGroup_1(), "rule__Location__UnorderedGroup_1");
 				}
 			};

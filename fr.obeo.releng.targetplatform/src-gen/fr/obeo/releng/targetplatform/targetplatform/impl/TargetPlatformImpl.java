@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.TargetPlatformImpl#getLocations <em>Locations</em>}</li>
  * </ul>
  * </p>
@@ -64,6 +64,16 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
   protected String name = NAME_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getIncludes() <em>Includes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIncludes()
+   * @generated
+   * @ordered
+   */
+  protected EList<IncludeDeclaration> includes;
+
+  /**
    * The cached value of the '{@link #getOptions() <em>Options</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -72,16 +82,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected EList<Option> options;
-
-  /**
-   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getImports()
-   * @generated
-   * @ordered
-   */
-  protected EList<IncludeDeclaration> imports;
 
   /**
    * The cached value of the '{@link #getLocations() <em>Locations</em>}' containment reference list.
@@ -142,13 +142,13 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Option> getOptions()
+  public EList<IncludeDeclaration> getIncludes()
   {
-    if (options == null)
+    if (includes == null)
     {
-      options = new EDataTypeEList<Option>(Option.class, this, TargetplatformPackage.TARGET_PLATFORM__OPTIONS);
+      includes = new EObjectContainmentEList<IncludeDeclaration>(IncludeDeclaration.class, this, TargetplatformPackage.TARGET_PLATFORM__INCLUDES);
     }
-    return options;
+    return includes;
   }
 
   /**
@@ -156,13 +156,13 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<IncludeDeclaration> getImports()
+  public EList<Option> getOptions()
   {
-    if (imports == null)
+    if (options == null)
     {
-      imports = new EObjectContainmentEList<IncludeDeclaration>(IncludeDeclaration.class, this, TargetplatformPackage.TARGET_PLATFORM__IMPORTS);
+      options = new EDataTypeEList<Option>(Option.class, this, TargetplatformPackage.TARGET_PLATFORM__OPTIONS);
     }
-    return imports;
+    return options;
   }
 
   /**
@@ -189,8 +189,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
-        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case TargetplatformPackage.TARGET_PLATFORM__INCLUDES:
+        return ((InternalEList<?>)getIncludes()).basicRemove(otherEnd, msgs);
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
     }
@@ -209,10 +209,10 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     {
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         return getName();
+      case TargetplatformPackage.TARGET_PLATFORM__INCLUDES:
+        return getIncludes();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return getOptions();
-      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
-        return getImports();
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return getLocations();
     }
@@ -233,13 +233,13 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         setName((String)newValue);
         return;
+      case TargetplatformPackage.TARGET_PLATFORM__INCLUDES:
+        getIncludes().clear();
+        getIncludes().addAll((Collection<? extends IncludeDeclaration>)newValue);
+        return;
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         getOptions().clear();
         getOptions().addAll((Collection<? extends Option>)newValue);
-        return;
-      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
-        getImports().clear();
-        getImports().addAll((Collection<? extends IncludeDeclaration>)newValue);
         return;
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         getLocations().clear();
@@ -262,11 +262,11 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case TargetplatformPackage.TARGET_PLATFORM__INCLUDES:
+        getIncludes().clear();
+        return;
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         getOptions().clear();
-        return;
-      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
-        getImports().clear();
         return;
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         getLocations().clear();
@@ -287,10 +287,10 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
     {
       case TargetplatformPackage.TARGET_PLATFORM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case TargetplatformPackage.TARGET_PLATFORM__INCLUDES:
+        return includes != null && !includes.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__OPTIONS:
         return options != null && !options.isEmpty();
-      case TargetplatformPackage.TARGET_PLATFORM__IMPORTS:
-        return imports != null && !imports.isEmpty();
       case TargetplatformPackage.TARGET_PLATFORM__LOCATIONS:
         return locations != null && !locations.isEmpty();
     }

@@ -8,8 +8,8 @@ TargetPlatform:
 	(
 		'target' name=STRING
 		(
+			(includes+=IncludeDeclaration)*
 			('with' options+=Option (',' options+=Option)*)?
-			& (imports+=IncludeDeclaration)*	
 		)
 		
 		locations+=Location*

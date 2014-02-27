@@ -92,7 +92,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (name=STRING (options+=Option options+=Option*)? imports+=IncludeDeclaration* locations+=Location*)?
+	 *     (name=STRING includes+=IncludeDeclaration* (options+=Option options+=Option*)? locations+=Location*)?
 	 */
 	protected void sequence_TargetPlatform(EObject context, TargetPlatform semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

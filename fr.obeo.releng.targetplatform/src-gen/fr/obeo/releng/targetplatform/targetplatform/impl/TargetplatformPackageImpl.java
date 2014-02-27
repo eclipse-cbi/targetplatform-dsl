@@ -148,9 +148,9 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTargetPlatform_Options()
+  public EReference getTargetPlatform_Includes()
   {
-    return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(1);
+    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -158,9 +158,9 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTargetPlatform_Imports()
+  public EAttribute getTargetPlatform_Options()
   {
-    return (EReference)targetPlatformEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -315,8 +315,8 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     // Create classes and their features
     targetPlatformEClass = createEClass(TARGET_PLATFORM);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__NAME);
+    createEReference(targetPlatformEClass, TARGET_PLATFORM__INCLUDES);
     createEAttribute(targetPlatformEClass, TARGET_PLATFORM__OPTIONS);
-    createEReference(targetPlatformEClass, TARGET_PLATFORM__IMPORTS);
     createEReference(targetPlatformEClass, TARGET_PLATFORM__LOCATIONS);
 
     includeDeclarationEClass = createEClass(INCLUDE_DECLARATION);
@@ -369,8 +369,8 @@ public class TargetplatformPackageImpl extends EPackageImpl implements Targetpla
     // Initialize classes and features; add operations and parameters
     initEClass(targetPlatformEClass, TargetPlatform.class, "TargetPlatform", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTargetPlatform_Name(), ecorePackage.getEString(), "name", null, 0, 1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTargetPlatform_Includes(), this.getIncludeDeclaration(), null, "includes", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetPlatform_Options(), this.getOption(), "options", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTargetPlatform_Imports(), this.getIncludeDeclaration(), null, "imports", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTargetPlatform_Locations(), this.getLocation(), null, "locations", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(includeDeclarationEClass, IncludeDeclaration.class, "IncludeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

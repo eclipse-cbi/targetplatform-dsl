@@ -3,28 +3,45 @@
  */
 package fr.obeo.releng.targetplatform.validation;
 
+import com.google.common.base.Function;
 import com.google.common.base.Objects;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.targetplatform.IU;
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -34,15 +51,22 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
+  @Inject
+  private ImportUriResolver resolver;
+  
   public final static String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
   
   public final static String CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS";
   
-  public final static String CHECK__SUPPORTED_PDE_VERSION = "CHECK__SUPPORTED_PDE_VERSION";
+  public final static String CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS = "CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS";
   
   public final static String DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS";
   
   public final static String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
+  
+  public final static String CHECK__LOCATION_CONFLICTUAL_ID = "CHECK__LOCATION_CONFLICTUAL_ID";
+  
+  public final static String CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -92,7 +116,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _endOffset = lastOption.getEndOffset();
       int _offset_1 = withKeyword.getOffset();
       int _minus = (_endOffset - _offset_1);
-      this.acceptError("You can not define options on location and on target platform.", location, _offset, _minus, TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS);
+      this.acceptError("You can not define options on location and on target platform.", location, _offset, _minus, TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS);
     }
   }
   
@@ -156,32 +180,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void deprecateOptionsOnLocation(final Location location) {
     EObject _eContainer = location.eContainer();
-    final EList<Location> listOptions = ((TargetPlatform) _eContainer).getLocations();
-    final Location first = IterableExtensions.<Location>head(listOptions);
-    Iterable<Location> _tail = IterableExtensions.<Location>tail(listOptions);
-    final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
-      public Boolean apply(final Location _) {
-        EList<Option> _options = _.getOptions();
-        Set<Option> _set = IterableExtensions.<Option>toSet(_options);
-        EList<Option> _options_1 = first.getOptions();
-        Set<Option> _set_1 = IterableExtensions.<Option>toSet(_options_1);
-        Sets.SetView<Option> _symmetricDifference = Sets.<Option>symmetricDifference(_set, _set_1);
-        boolean _isEmpty = _symmetricDifference.isEmpty();
-        return Boolean.valueOf((!_isEmpty));
-      }
-    };
-    final Iterable<Location> conflicts = IterableExtensions.<Location>filter(_tail, _function);
-    boolean _and = false;
-    boolean _isEmpty = IterableExtensions.isEmpty(conflicts);
-    if (!_isEmpty) {
-      _and = false;
-    } else {
-      EList<Option> _options = location.getOptions();
-      boolean _isEmpty_1 = _options.isEmpty();
-      boolean _not = (!_isEmpty_1);
-      _and = _not;
-    }
-    if (_and) {
+    final TargetPlatform targetPlatform = ((TargetPlatform) _eContainer);
+    EList<Option> _options = targetPlatform.getOptions();
+    boolean _isEmpty = _options.isEmpty();
+    if (_isEmpty) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS);
       INode _head = IterableExtensions.<INode>head(nodes);
       final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
@@ -212,5 +214,342 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION);
       }
     }
+  }
+  
+  @Check
+  public void checkImportCycle(final TargetPlatform targetPlatform) {
+    final List<TargetPlatform> cycle = this.checkIncludeCycle(targetPlatform);
+    boolean _isEmpty = cycle.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
+      final Function1<IncludeDeclaration,Boolean> _function = new Function1<IncludeDeclaration,Boolean>() {
+        public Boolean apply(final IncludeDeclaration it) {
+          TargetPlatform _get = cycle.get(1);
+          Resource _eResource = targetPlatform.eResource();
+          TargetPlatform _importedTargetPlatform = TargetPlatformValidator.this.getImportedTargetPlatform(_eResource, it);
+          return Boolean.valueOf(_get.equals(_importedTargetPlatform));
+        }
+      };
+      final IncludeDeclaration cyclingImport = IterableExtensions.<IncludeDeclaration>findFirst(_includes, _function);
+      boolean _notEquals = (!Objects.equal(cyclingImport, null));
+      if (_notEquals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Cycle detected in the included target platforms. Cycle is \'");
+        Iterable<TargetPlatform> _drop = IterableExtensions.<TargetPlatform>drop(cycle, 1);
+        final Function1<TargetPlatform,URI> _function_1 = new Function1<TargetPlatform,URI>() {
+          public URI apply(final TargetPlatform it) {
+            Resource _eResource = it.eResource();
+            return _eResource.getURI();
+          }
+        };
+        Iterable<URI> _map = IterableExtensions.<TargetPlatform, URI>map(_drop, _function_1);
+        String _join = IterableExtensions.join(_map, "\'\' -> \'");
+        _builder.append(_join, "");
+        _builder.append("\'.");
+        this.error(_builder.toString(), cyclingImport, 
+          TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI);
+      }
+    }
+  }
+  
+  @Check
+  public void checkImportedLocationConflictualID(final TargetPlatform targetPlatform) {
+    final ArrayListMultimap<String,Location> index = this.getLocationIndex(targetPlatform);
+    final Resource resource = targetPlatform.eResource();
+    Set<String> _keySet = index.keySet();
+    for (final String locURI : _keySet) {
+      {
+        List<Location> _get = index.get(locURI);
+        final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+          public Boolean apply(final Location it) {
+            Resource _eResource = it.eResource();
+            return Boolean.valueOf((!Objects.equal(_eResource, resource)));
+          }
+        };
+        final Iterable<Location> externalLocations = IterableExtensions.<Location>filter(_get, _function);
+        final Function1<Location,Boolean> _function_1 = new Function1<Location,Boolean>() {
+          public Boolean apply(final Location it) {
+            String _iD = it.getID();
+            return Boolean.valueOf((!Objects.equal(_iD, null)));
+          }
+        };
+        Iterable<Location> _filter = IterableExtensions.<Location>filter(externalLocations, _function_1);
+        final Function1<Location,String> _function_2 = new Function1<Location,String>() {
+          public String apply(final Location it) {
+            return it.getID();
+          }
+        };
+        Iterable<String> _map = IterableExtensions.<Location, String>map(_filter, _function_2);
+        final Set<String> externalIDs = IterableExtensions.<String>toSet(_map);
+        List<Location> _get_1 = index.get(locURI);
+        final Function1<Location,Boolean> _function_3 = new Function1<Location,Boolean>() {
+          public Boolean apply(final Location it) {
+            Resource _eResource = it.eResource();
+            return Boolean.valueOf(Objects.equal(_eResource, resource));
+          }
+        };
+        final Iterable<Location> internalLocations = IterableExtensions.<Location>filter(_get_1, _function_3);
+        final Function1<Location,Boolean> _function_4 = new Function1<Location,Boolean>() {
+          public Boolean apply(final Location it) {
+            String _iD = it.getID();
+            return Boolean.valueOf((!Objects.equal(_iD, null)));
+          }
+        };
+        Iterable<Location> _filter_1 = IterableExtensions.<Location>filter(internalLocations, _function_4);
+        final Function1<Location,String> _function_5 = new Function1<Location,String>() {
+          public String apply(final Location it) {
+            return it.getID();
+          }
+        };
+        Iterable<String> _map_1 = IterableExtensions.<Location, String>map(_filter_1, _function_5);
+        final Set<String> internalIDs = IterableExtensions.<String>toSet(_map_1);
+        int _size = externalIDs.size();
+        boolean _greaterThan = (_size > 1);
+        if (_greaterThan) {
+          final Function1<Location,Boolean> _function_6 = new Function1<Location,Boolean>() {
+            public Boolean apply(final Location it) {
+              String _iD = it.getID();
+              return Boolean.valueOf(externalIDs.contains(_iD));
+            }
+          };
+          final Iterable<Location> externalLocationsWithConflictualID = IterableExtensions.<Location>filter(externalLocations, _function_6);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("The ID for location \'");
+          _builder.append(locURI, "");
+          _builder.append("\' must be unique. Found \'");
+          String _join = IterableExtensions.join(externalIDs, "\', \'");
+          _builder.append(_join, "");
+          _builder.append("\'  in \'");
+          final Function1<Location,String> _function_7 = new Function1<Location,String>() {
+            public String apply(final Location it) {
+              Resource _eResource = it.eResource();
+              URI _uRI = _eResource.getURI();
+              return _uRI.toString();
+            }
+          };
+          Iterable<String> _map_2 = IterableExtensions.<Location, String>map(externalLocationsWithConflictualID, _function_7);
+          Set<String> _set = IterableExtensions.<String>toSet(_map_2);
+          String _join_1 = IterableExtensions.join(_set, "\', \'");
+          _builder.append(_join_1, "");
+          _builder.append("\'.");
+          _builder.newLineIfNotEmpty();
+          final String msg = _builder.toString();
+          final Function1<Location,URI> _function_8 = new Function1<Location,URI>() {
+            public URI apply(final Location it) {
+              Resource _eResource = it.eResource();
+              return _eResource.getURI();
+            }
+          };
+          Iterable<URI> _map_3 = IterableExtensions.<Location, URI>map(externalLocationsWithConflictualID, _function_8);
+          final Set<URI> resourcesURIWithLocationConflictualID = IterableExtensions.<URI>toSet(_map_3);
+          for (final URI resourceURIWithLocationConflictualID : resourcesURIWithLocationConflictualID) {
+            {
+              EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
+              final Function1<IncludeDeclaration,Boolean> _function_9 = new Function1<IncludeDeclaration,Boolean>() {
+                public Boolean apply(final IncludeDeclaration it) {
+                  String _resolve = TargetPlatformValidator.this.resolver.resolve(it);
+                  URI _createURI = URI.createURI(_resolve);
+                  URI _uRI = resource.getURI();
+                  URI _resolve_1 = _createURI.resolve(_uRI);
+                  return Boolean.valueOf(resourceURIWithLocationConflictualID.equals(_resolve_1));
+                }
+              };
+              final Iterable<IncludeDeclaration> includesError = IterableExtensions.<IncludeDeclaration>filter(_includes, _function_9);
+              final Procedure1<IncludeDeclaration> _function_10 = new Procedure1<IncludeDeclaration>() {
+                public void apply(final IncludeDeclaration it) {
+                  TargetPlatformValidator.this.error(msg, it, TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI);
+                }
+              };
+              IterableExtensions.<IncludeDeclaration>forEach(includesError, _function_10);
+            }
+          }
+        }
+        int _size_1 = externalIDs.size();
+        boolean _equals = (_size_1 == 1);
+        if (_equals) {
+          final Sets.SetView<String> diff = Sets.<String>symmetricDifference(externalIDs, internalIDs);
+          boolean _isEmpty = diff.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("The ID for location \'");
+            _builder_1.append(locURI, "");
+            _builder_1.append("\' must be unique across included target platforms and the current one. Found \'");
+            String _head = IterableExtensions.<String>head(externalIDs);
+            _builder_1.append(_head, "");
+            _builder_1.append("\'  in \'");
+            final Function1<Location,String> _function_9 = new Function1<Location,String>() {
+              public String apply(final Location it) {
+                Resource _eResource = it.eResource();
+                URI _uRI = _eResource.getURI();
+                return _uRI.toString();
+              }
+            };
+            Iterable<String> _map_4 = IterableExtensions.<Location, String>map(externalLocations, _function_9);
+            Set<String> _set_1 = IterableExtensions.<String>toSet(_map_4);
+            String _join_2 = IterableExtensions.join(_set_1, "\', \'");
+            _builder_1.append(_join_2, "");
+            _builder_1.append("\'.");
+            _builder_1.newLineIfNotEmpty();
+            final String msg_1 = _builder_1.toString();
+            final Function1<Location,Boolean> _function_10 = new Function1<Location,Boolean>() {
+              public Boolean apply(final Location it) {
+                boolean _and = false;
+                String _iD = it.getID();
+                boolean _notEquals = (!Objects.equal(_iD, null));
+                if (!_notEquals) {
+                  _and = false;
+                } else {
+                  String _iD_1 = it.getID();
+                  boolean _contains = externalIDs.contains(_iD_1);
+                  boolean _not = (!_contains);
+                  _and = _not;
+                }
+                return Boolean.valueOf(_and);
+              }
+            };
+            Iterable<Location> _filter_2 = IterableExtensions.<Location>filter(internalLocations, _function_10);
+            final Procedure1<Location> _function_11 = new Procedure1<Location>() {
+              public void apply(final Location it) {
+                String _head = IterableExtensions.<String>head(externalIDs);
+                Location _head_1 = IterableExtensions.<Location>head(externalLocations);
+                String _uri = _head_1.getUri();
+                TargetPlatformValidator.this.error(msg_1, it, TargetplatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, _head, _uri);
+              }
+            };
+            IterableExtensions.<Location>forEach(_filter_2, _function_11);
+          }
+        }
+        boolean _and = false;
+        int _size_2 = externalIDs.size();
+        boolean _lessThan = (_size_2 < 1);
+        if (!_lessThan) {
+          _and = false;
+        } else {
+          int _size_3 = internalIDs.size();
+          boolean _greaterThan_1 = (_size_3 > 1);
+          _and = _greaterThan_1;
+        }
+        if (_and) {
+          StringConcatenation _builder_2 = new StringConcatenation();
+          _builder_2.append("The ID for location \'");
+          _builder_2.append(locURI, "");
+          _builder_2.append("\' must be unique. Found \'");
+          String _join_3 = IterableExtensions.join(internalIDs, "\', \'");
+          _builder_2.append(_join_3, "");
+          _builder_2.append("\'.");
+          final String msg_2 = _builder_2.toString();
+          final Procedure1<Location> _function_12 = new Procedure1<Location>() {
+            public void apply(final Location it) {
+              TargetPlatformValidator.this.error(msg_2, it, TargetplatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
+            }
+          };
+          IterableExtensions.<Location>forEach(internalLocations, _function_12);
+        }
+      }
+    }
+  }
+  
+  private ArrayListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
+    final EList<Location> locationList = targetPlatform.getLocations();
+    final Function<Location,String> _function = new Function<Location,String>() {
+      public String apply(final Location it) {
+        return it.getUri();
+      }
+    };
+    ImmutableListMultimap<String,Location> _index = Multimaps.<String, Location>index(locationList, _function);
+    final ArrayListMultimap<String,Location> locationIndex = ArrayListMultimap.<String, Location>create(_index);
+    Collection<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
+    final Function1<TargetPlatform,EList<Location>> _function_1 = new Function1<TargetPlatform,EList<Location>>() {
+      public EList<Location> apply(final TargetPlatform it) {
+        return it.getLocations();
+      }
+    };
+    Iterable<EList<Location>> _map = IterableExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function_1);
+    Iterable<Location> _flatten = Iterables.<Location>concat(_map);
+    final Procedure1<Location> _function_2 = new Procedure1<Location>() {
+      public void apply(final Location it) {
+        String _uri = it.getUri();
+        locationIndex.put(_uri, it);
+      }
+    };
+    IterableExtensions.<Location>forEach(_flatten, _function_2);
+    return locationIndex;
+  }
+  
+  private Collection<TargetPlatform> getImportedTargetPlatforms(final TargetPlatform targetPlatform) {
+    final LinkedHashSet<TargetPlatform> acc = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
+    final LinkedList<TargetPlatform> s = CollectionLiterals.<TargetPlatform>newLinkedList();
+    Collection<TargetPlatform> _xifexpression = null;
+    boolean _checkIncludeCycle = this.checkIncludeCycle(targetPlatform, acc, s);
+    if (_checkIncludeCycle) {
+      _xifexpression = CollectionLiterals.<TargetPlatform>newImmutableList();
+    } else {
+      _xifexpression = acc;
+    }
+    return _xifexpression;
+  }
+  
+  private List<TargetPlatform> checkIncludeCycle(final TargetPlatform targetPlatform) {
+    final LinkedHashSet<TargetPlatform> acc = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
+    final LinkedList<TargetPlatform> s = CollectionLiterals.<TargetPlatform>newLinkedList();
+    List<TargetPlatform> _xifexpression = null;
+    boolean _checkIncludeCycle = this.checkIncludeCycle(targetPlatform, acc, s);
+    if (_checkIncludeCycle) {
+      _xifexpression = ListExtensions.<TargetPlatform>reverse(s);
+    } else {
+      _xifexpression = CollectionLiterals.<TargetPlatform>newImmutableList();
+    }
+    return _xifexpression;
+  }
+  
+  private boolean checkIncludeCycle(final TargetPlatform targetPlatform, final Set<TargetPlatform> visited, final LinkedList<TargetPlatform> s) {
+    s.addFirst(targetPlatform);
+    final Resource context = targetPlatform.eResource();
+    EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
+    final Function1<IncludeDeclaration,TargetPlatform> _function = new Function1<IncludeDeclaration,TargetPlatform>() {
+      public TargetPlatform apply(final IncludeDeclaration it) {
+        return TargetPlatformValidator.this.getImportedTargetPlatform(context, it);
+      }
+    };
+    List<TargetPlatform> _map = ListExtensions.<IncludeDeclaration, TargetPlatform>map(_includes, _function);
+    Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
+    final Set<TargetPlatform> includedTPs = IterableExtensions.<TargetPlatform>toSet(_filterNull);
+    for (final TargetPlatform includedTP : includedTPs) {
+      {
+        boolean _contains = s.contains(includedTP);
+        if (_contains) {
+          s.addFirst(includedTP);
+          return true;
+        }
+        visited.add(includedTP);
+        boolean _checkIncludeCycle = this.checkIncludeCycle(includedTP, visited, s);
+        if (_checkIncludeCycle) {
+          return true;
+        }
+      }
+    }
+    s.removeFirst();
+    return false;
+  }
+  
+  private TargetPlatform getImportedTargetPlatform(final Resource context, final IncludeDeclaration include) {
+    TargetPlatform ret = null;
+    String _resolve = this.resolver.resolve(include);
+    final Resource resource = EcoreUtil2.getResource(context, _resolve);
+    EList<EObject> _contents = null;
+    if (resource!=null) {
+      _contents=resource.getContents();
+    }
+    EObject _head = null;
+    if (_contents!=null) {
+      _head=IterableExtensions.<EObject>head(_contents);
+    }
+    EObject root = _head;
+    if ((root instanceof TargetPlatform)) {
+      ret = ((TargetPlatform) root);
+    }
+    return ret;
   }
 }

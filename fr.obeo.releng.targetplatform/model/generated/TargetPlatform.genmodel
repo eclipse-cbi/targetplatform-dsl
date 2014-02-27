@@ -15,8 +15,8 @@
     </genEnums>
     <genClasses ecoreClass="TargetPlatform.ecore#//TargetPlatform">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/includes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetPlatform.ecore#//TargetPlatform/options"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetPlatform.ecore#//TargetPlatform/locations"/>
     </genClasses>
     <genClasses ecoreClass="TargetPlatform.ecore#//IncludeDeclaration">

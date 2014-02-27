@@ -3,21 +3,29 @@
  */
 package fr.obeo.releng.targetplatform.validation
 
+import com.google.common.collect.ArrayListMultimap
+import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
+import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.targetplatform.IU
+import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.targetplatform.Location
 import fr.obeo.releng.targetplatform.targetplatform.Option
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
+import java.util.LinkedList
 import java.util.List
+import java.util.Set
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.scoping.impl.ImportUriResolver
 import org.eclipse.xtext.validation.Check
-
-//import org.eclipse.xtext.validation.Check
 
 /**
  * Custom validation rules. 
@@ -26,11 +34,19 @@ import org.eclipse.xtext.validation.Check
  */
 class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
-	public static final String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
-	public static final String CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS";
-	public static final String CHECK__SUPPORTED_PDE_VERSION = "CHECK__SUPPORTED_PDE_VERSION";
-	public static final String DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS";
-	public static final String DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION";
+	@Inject
+	ImportUriResolver resolver;
+
+	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
+	
+	public static val CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS"
+	public static val CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS = "CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS"
+	
+	public static val DEPRECATE__OPTIONS_ON_LOCATIONS = "DEPRECATE__OPTIONS_ON_LOCATIONS"
+	public static val DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION"
+	
+	public static val CHECK__LOCATION_CONFLICTUAL_ID = "CHECK__LOCATION_CONFLICTUAL_ID"
+	public static val CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID"	
 	
 	@Check
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -58,7 +74,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
 			acceptError("You can not define options on location and on target platform.",
-				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, DEPRECATE__OPTIONS_ON_LOCATIONS)
+				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS)
 		}
 	}
 	
@@ -93,10 +109,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check
 	def deprecateOptionsOnLocation(Location location) {
-		val listOptions = (location.eContainer as TargetPlatform).locations
-		val first = listOptions.head
-		val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
-		if (conflicts.empty && !location.options.empty) {
+		val targetPlatform = location.eContainer as TargetPlatform
+		
+		if (targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
@@ -116,5 +131,131 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					DEPRECATE__STRINGS_ON_IU_VERSION)
 			}
 		}
+	}
+	
+	
+	@Check
+	def checkImportCycle(TargetPlatform targetPlatform) {
+		val cycle = checkIncludeCycle(targetPlatform)
+		if (!cycle.empty) {
+			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(getImportedTargetPlatform(targetPlatform.eResource, it))]
+			if (cyclingImport != null) {
+				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
+					cyclingImport, 
+					TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI
+				)
+			}
+		}
+	}
+	
+	@Check
+	def checkImportedLocationConflictualID(TargetPlatform targetPlatform) {
+		val index = getLocationIndex(targetPlatform)
+		val resource = targetPlatform.eResource
+		
+		for (locURI : index.keySet) {
+			val externalLocations = index.get(locURI).filter[eResource != resource]
+			val externalIDs = externalLocations.filter[ID!=null].map[ID].toSet
+			
+			val internalLocations = index.get(locURI).filter[eResource == resource]
+			val internalIDs = internalLocations.filter[ID!=null].map[ID].toSet
+			
+			if (externalIDs.size > 1) {
+				val externalLocationsWithConflictualID = externalLocations.filter[externalIDs.contains(ID)]
+				val String msg = '''
+					The ID for location '«locURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.
+				''';
+				val resourcesURIWithLocationConflictualID = externalLocationsWithConflictualID.map[eResource.URI].toSet
+				for (resourceURIWithLocationConflictualID : resourcesURIWithLocationConflictualID) {
+					val includesError = targetPlatform.includes.filter[resourceURIWithLocationConflictualID.equals(URI.createURI(resolver.resolve(it)).resolve(resource.URI))]
+					includesError.forEach[
+						error(msg, it, TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI)
+					]
+				}
+			}  
+
+			if (externalIDs.size == 1) {
+				val diff = Sets.symmetricDifference(externalIDs, internalIDs);
+				if (!diff.empty) {
+					val String msg = '''
+						The ID for location '«locURI»' must be unique across included target platforms and the current one. Found '«externalIDs.head»'  in '«externalLocations.map[eResource.URI.toString].toSet.join("', '")»'.
+					''';
+					
+					internalLocations.filter[ID != null && !externalIDs.contains(ID)].forEach[
+						error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.uri)
+					]
+				}
+			} 
+			
+			if (externalIDs.size < 1 && internalIDs.size > 1) {
+				val msg = '''The ID for location '«locURI»' must be unique. Found '«internalIDs.join("', '")»'.''';
+				internalLocations.forEach[
+					error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__LOCATION_CONFLICTUAL_ID)
+				]
+			}
+		}
+	}
+	
+	private def getLocationIndex(TargetPlatform targetPlatform) {
+		val locationList = targetPlatform.getLocations()
+		val locationIndex = ArrayListMultimap.create(Multimaps.index(locationList, [uri]))
+		
+		getImportedTargetPlatforms(targetPlatform).map[locations].flatten.forEach[
+			locationIndex.put(it.uri, it)
+		]
+		
+		return locationIndex;
+	}
+
+	private def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
+		val acc = newLinkedHashSet();
+		val s = newLinkedList();
+		return 
+			if (checkIncludeCycle(targetPlatform, acc, s)) {
+				newImmutableList()
+			} else {
+				acc
+			}
+	}
+	
+	private def checkIncludeCycle(TargetPlatform targetPlatform) {
+		val acc = newLinkedHashSet();
+		val s = newLinkedList();
+		return 
+			if (checkIncludeCycle(targetPlatform, acc, s)) {
+				s.reverse
+			} else {
+				newImmutableList()
+			}
+	}
+	
+	private def boolean checkIncludeCycle(TargetPlatform targetPlatform, Set<TargetPlatform> visited, LinkedList<TargetPlatform> s) {
+		s.addFirst(targetPlatform)
+		val context = targetPlatform.eResource
+		val includedTPs = targetPlatform.includes.map[getImportedTargetPlatform(context, it)].filterNull.toSet
+		for(includedTP : includedTPs) {
+			if (s.contains(includedTP)) {
+				s.addFirst(includedTP)
+				return true
+			}
+			
+			visited.add(includedTP)
+			
+			if (checkIncludeCycle(includedTP, visited, s)) {
+				return true;
+			}
+		}
+		s.removeFirst
+		return false
+	}
+
+	private def TargetPlatform getImportedTargetPlatform(Resource context, IncludeDeclaration include) {
+		var TargetPlatform ret = null;
+		val resource = EcoreUtil2.getResource(context, resolver.resolve(include));
+		var root = resource?.getContents()?.head;
+		if (root instanceof TargetPlatform) {
+			ret = root as TargetPlatform;
+		}
+		return ret;
 	}
 }
