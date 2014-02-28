@@ -29,7 +29,6 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -50,7 +49,7 @@ public class Converter {
 	private Provider<XtextResourceSet> resourceSetProvider;
 	
 	@Inject
-	private ImportUriResolver resolver;
+	private LocationIndexBuilder indexBuilder;
 	
 	public void generateTargetDefinitionFile(URI targetPlatformLocation, IProgressMonitor monitor) throws Exception {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
@@ -96,7 +95,7 @@ public class Converter {
 		IProvisioningAgent agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
 		IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
 
-		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, new LocationIndexBuilder(resolver));
+		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
 		resolvedTargetPlatform.resolve(repositoryManager, monitor);
 		
 		agent.stop();

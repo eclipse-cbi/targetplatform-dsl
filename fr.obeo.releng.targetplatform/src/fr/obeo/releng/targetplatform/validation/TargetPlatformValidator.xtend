@@ -3,6 +3,8 @@
  */
 package fr.obeo.releng.targetplatform.validation
 
+import com.google.common.base.Strings
+import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
 import com.google.inject.Inject
@@ -13,13 +15,11 @@ import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.util.List
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.scoping.impl.ImportUriResolver
 import org.eclipse.xtext.validation.Check
 
 /**
@@ -30,10 +30,8 @@ import org.eclipse.xtext.validation.Check
 class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	@Inject
-	ImportUriResolver resolver;
+	LocationIndexBuilder indexBuilder;
 	
-	val LocationIndexBuilder indexBuilder;
-
 	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
 	
 	public static val CHECK__OPTIONS_EQUALS_ALL_LOCATIONS = "CHECK__OPTIONS_EQUALS_ALL_LOCATIONS"
@@ -43,18 +41,23 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val DEPRECATE__STRINGS_ON_IU_VERSION = "DEPRECATE__STRINGS_ON_IU_VERSION"
 	
 	public static val CHECK__LOCATION_CONFLICTUAL_ID = "CHECK__LOCATION_CONFLICTUAL_ID"
-	public static val CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID"	
+	public static val CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID"
+	public static val CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION = "CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID"
 	
-	new() {
-		indexBuilder = new LocationIndexBuilder(resolver)
-	}
+	public static val CHECK__LOCATION_ID_UNIQNESS = "CHECK__LOCATION_ID_UNIQNESS"	
+	public static val CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE"
 	
-	@Check
+	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
 		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options, TargetplatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
 	}
 	
-	def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
+	@Check // TESTED
+	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
+		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+	}
+	
+	private def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
 		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
 			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
 					optionOwner, 
@@ -68,8 +71,8 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		}
 	}
 	
-	@Check
-	def noLocationOptionIfGlobalOptions(Location location) {
+	@Check // TESTED
+	def checkNoLocationOptionIfGlobalOptions(Location location) {
 		if (!location.options.empty && !(location.eContainer as TargetPlatform).options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
@@ -79,7 +82,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		}
 	}
 	
-	@Check
+	@Check // TESTED
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
 		if (targetPlatform.options.empty) { // else do not check as it is another error.
 			val listOptions = targetPlatform.locations
@@ -103,16 +106,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		}
 	}
 	
-	@Check
-	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
-		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetplatformPackage.Literals.LOCATION__OPTIONS)
-	}
-	
-	@Check
+	@Check // TESTED
 	def deprecateOptionsOnLocation(Location location) {
 		val targetPlatform = location.eContainer as TargetPlatform
 		
-		if (targetPlatform.options.empty) {
+		if (targetPlatform.options.empty && !location.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
@@ -121,7 +119,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		}
 	}
 	
-	@Check
+	@Check // TESTED
 	def deprecateIUVersionRangeWihString(IU iu) {
 		if (iu.version != null) {
 			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetplatformPackage.Literals.IU__VERSION)
@@ -133,48 +131,48 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			}
 		}
 	}
-	
-	@Check
+
+	@Check // TESTED
 	def checkIDUniqueOnAllLocations(TargetPlatform targetPlatform) {
-		val index = indexBuilder.getLocationIndex(targetPlatform)
+		val locationsByURI = indexBuilder.getLocationIndex(targetPlatform)
 		val resource = targetPlatform.eResource
 		
-		val conflictualURI = index.keySet.map[
-			index.get(it).filter[ID != null].map[ID].toSet
-		].filter[
-			size > 1
+		val locationIDsByURI = LinkedHashMultimap.create();  
+		locationsByURI.keySet.forEach[
+			locationIDsByURI.putAll(it, locationsByURI.get(it).map[ID].toSet)
 		]
 		
-		if (conflictualURI.empty) {
-			val uniqueLocation = Multimaps.index(
-				index.keySet.map[index.get(it).filter[ID != null].head].filterNull,
-				[ID]
-			)
-			uniqueLocation.keys
-			val duplicateIDLocation = uniqueLocation.keys.filter[uniqueLocation.keys.count(it) > 1]
-			duplicateIDLocation.forEach[
-				uniqueLocation.get(it).forEach[duplicateID |
-				val allNonUniqIDLocations = index.get(duplicateID.uri);
-				val external = allNonUniqIDLocations.filter[resource != eResource];
-				val internal = allNonUniqIDLocations.filter[resource == eResource];
+		val locationsURIWithoutConflictingID = locationIDsByURI.asMap.filter[key,value|value.size <= 1].keySet
+		val locationsWithoutConflictingID = locationsURIWithoutConflictingID.map[locationsByURI.get(it)].flatten
+		
+		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!=null], [ID])
+		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[uri].toSet.size > 1].values.flatten
+		locationsWithDuplicateID.forEach[location|
+			if (location.eResource == resource) {
+				error('ID must be unique for each location', 
+					location,
+					TargetplatformPackage.Literals.LOCATION__ID, 
+					CHECK__LOCATION_ID_UNIQNESS
+				)
+			} else {
+				val conflictualInclude = targetPlatform.includes.filter[
+					val direct = indexBuilder.getImportedTargetPlatform(resource, it);
+					direct.locations.contains(location) ||
+					indexBuilder.getImportedTargetPlatforms(direct).map[locations].flatten.toSet.contains(location)
+				].toSet
 				
-				internal.forEach[
-					error('ID must be unique for each location', it, TargetplatformPackage.Literals.LOCATION__ID)
+				conflictualInclude.forEach[
+					error('''ID '«location.ID»' is duplicated in the included target platform''', 
+						it, 
+						TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+						CHECK__LOCATION_ID_UNIQNESS
+					)
 				]
-				
-				external.forEach[location |
-					val includeErr = targetPlatform.includes.findFirst[
-						val direct = indexBuilder.getImportedTargetPlatform(resource, it);
-						direct.locations.contains(location) ||
-						indexBuilder.getImportedTargetPlatforms(direct).map[locations].flatten.toSet.contains(location)
-					]
-					error('''ID '«duplicateID.ID»' is duplicated in the included target platform''', includeErr, TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI)
-				]
-			]]
-		}
+			}
+		]
 	}
 	
-	@Check
+	@Check // TESTED
 	def checkImportCycle(TargetPlatform targetPlatform) {
 		val cycle = indexBuilder.checkIncludeCycle(targetPlatform)
 		if (!cycle.empty) {
@@ -182,53 +180,62 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			if (cyclingImport != null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
-					TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI
+					TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+					CHECK__INCLUDE_CYCLE
 				)
 			}
 		}
 	}
 	
-	@Check
-	def checkImportedLocationConflictualID(TargetPlatform targetPlatform) {
-		val index = indexBuilder.getLocationIndex(targetPlatform)
+	@Check // PARTIALLY TESTED
+	def checkSameIDForAllLocationWithSameURI(TargetPlatform targetPlatform) {
+		val locationsByURI = indexBuilder.getLocationIndex(targetPlatform)
 		val resource = targetPlatform.eResource
 		
-		for (locURI : index.keySet) {
-			val externalLocations = index.get(locURI).filter[eResource != resource]
-			val externalIDs = externalLocations.filter[ID!=null].map[ID].toSet
+		for (locationURI : locationsByURI.keySet) {
+			val externalLocations = locationsByURI.get(locationURI).filter[eResource != resource]
+			val externalIDs = externalLocations.map[Strings.nullToEmpty(ID)].toSet
 			
-			val internalLocations = index.get(locURI).filter[eResource == resource]
-			val internalIDs = internalLocations.filter[ID!=null].map[ID].toSet
+			val internalLocations = locationsByURI.get(locationURI).filter[eResource == resource]
+			val internalIDs = internalLocations.map[Strings.nullToEmpty(ID)].toSet
 			
 			if (externalIDs.size > 1) {
 				val externalLocationsWithConflictualID = externalLocations.filter[externalIDs.contains(ID)]
 				val String msg = '''
-					The ID for location '«locURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.
+					The ID for location '«locationURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.
 				''';
-				val resourcesURIWithLocationConflictualID = externalLocationsWithConflictualID.map[eResource.URI].toSet
-				for (resourceURIWithLocationConflictualID : resourcesURIWithLocationConflictualID) {
-					val includesError = targetPlatform.includes.filter[resourceURIWithLocationConflictualID.equals(URI.createURI(resolver.resolve(it)).resolve(resource.URI))]
-					includesError.forEach[
-						error(msg, it, TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI)
+				val conflictualInclude = externalLocationsWithConflictualID.map[location|
+					targetPlatform.includes.filter[
+						val direct = indexBuilder.getImportedTargetPlatform(resource, it);
+						direct.locations.contains(location) ||
+						indexBuilder.getImportedTargetPlatforms(direct).map[locations].flatten.toSet.contains(location)
 					]
-				}
+				].flatten.toSet
+				
+				conflictualInclude.forEach[
+					error(msg, 
+						it, 
+						TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+						CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION
+					)
+				]
 			}  
 
 			if (externalIDs.size == 1) {
 				val diff = Sets.symmetricDifference(externalIDs, internalIDs);
 				if (!diff.empty) {
 					val String msg = '''
-						The ID for location '«locURI»' must be unique across included target platforms and the current one. Found '«externalIDs.head»'  in '«externalLocations.map[eResource.URI.toString].toSet.join("', '")»'.
+						The ID for location '«locationURI»' must be unique across included target platforms and the current one. Found '«externalIDs.head»'  in '«externalLocations.map[eResource.URI.toString].toSet.join("', '")»'.
 					''';
 					
-					internalLocations.filter[ID != null && !externalIDs.contains(ID)].forEach[
+					internalLocations.filter[!externalIDs.contains(Strings.nullToEmpty(ID))].forEach[
 						error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.uri)
 					]
 				}
 			} 
 			
 			if (externalIDs.size < 1 && internalIDs.size > 1) {
-				val msg = '''The ID for location '«locURI»' must be unique. Found '«internalIDs.join("', '")»'.''';
+				val msg = '''The ID for location '«locationURI»' must be unique. Found '«internalIDs.join("', '")»'.''';
 				internalLocations.forEach[
 					error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__LOCATION_CONFLICTUAL_ID)
 				]

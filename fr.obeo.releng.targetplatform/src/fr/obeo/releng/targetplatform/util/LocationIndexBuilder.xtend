@@ -9,14 +9,12 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import com.google.inject.Inject
 
 class LocationIndexBuilder {
 	
-	val ImportUriResolver resolver;
-	
-	new(ImportUriResolver resolver) {
-		this.resolver = resolver;
-	}
+	@Inject
+	ImportUriResolver resolver;
 	
 	def getLocationIndex(TargetPlatform targetPlatform) {
 		val locationList = targetPlatform.getLocations()

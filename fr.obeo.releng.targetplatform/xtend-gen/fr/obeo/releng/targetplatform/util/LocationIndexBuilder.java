@@ -5,6 +5,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimaps;
+import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
@@ -26,11 +27,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class LocationIndexBuilder {
-  private final ImportUriResolver resolver;
-  
-  public LocationIndexBuilder(final ImportUriResolver resolver) {
-    this.resolver = resolver;
-  }
+  @Inject
+  private ImportUriResolver resolver;
   
   public ArrayListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
     final EList<Location> locationList = targetPlatform.getLocations();
