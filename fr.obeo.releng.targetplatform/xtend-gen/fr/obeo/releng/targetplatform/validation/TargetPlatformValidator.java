@@ -23,6 +23,7 @@ import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -320,13 +321,13 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                 if (_contains) {
                   _or = true;
                 } else {
-                  Collection<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
+                  LinkedList<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
                   final Function1<TargetPlatform,EList<Location>> _function = new Function1<TargetPlatform,EList<Location>>() {
                     public EList<Location> apply(final TargetPlatform it) {
                       return it.getLocations();
                     }
                   };
-                  Iterable<EList<Location>> _map = IterableExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function);
+                  List<EList<Location>> _map = ListExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function);
                   Iterable<Location> _flatten = Iterables.<Location>concat(_map);
                   Set<Location> _set = IterableExtensions.<Location>toSet(_flatten);
                   boolean _contains_1 = _set.contains(location);
@@ -480,13 +481,13 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                     if (_contains) {
                       _or = true;
                     } else {
-                      Collection<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
+                      LinkedList<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
                       final Function1<TargetPlatform,EList<Location>> _function = new Function1<TargetPlatform,EList<Location>>() {
                         public EList<Location> apply(final TargetPlatform it) {
                           return it.getLocations();
                         }
                       };
-                      Iterable<EList<Location>> _map = IterableExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function);
+                      List<EList<Location>> _map = ListExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function);
                       Iterable<Location> _flatten = Iterables.<Location>concat(_map);
                       Set<Location> _set = IterableExtensions.<Location>toSet(_flatten);
                       boolean _contains_1 = _set.contains(location);

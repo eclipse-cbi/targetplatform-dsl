@@ -54,6 +54,9 @@ public class ResolvedLocation {
 		
 		SubMonitor loopMonitor = subMonitor.newChild(20).setWorkRemaining(unresolvedIUs.size());
 		for (UnresolvedIU iu : unresolvedIUs) {
+			if (monitor.isCanceled()) {
+				break;
+			}
 			Set<IInstallableUnit> results = metadataRepository.query(iu.getQuery(), loopMonitor.newChild(1)).toUnmodifiableSet();
 			if (!results.isEmpty()) {
 				IInstallableUnit unit =  results.iterator().next();

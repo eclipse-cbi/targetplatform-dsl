@@ -193,7 +193,7 @@ class TestValidation {
 			include "b.tpd"
 			location "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -661,7 +661,7 @@ class TestValidation {
 			target "tp.a"
 			include "b.tpd"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
 
@@ -681,7 +681,7 @@ class TestValidation {
 			
 			location "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
 
@@ -700,7 +700,7 @@ class TestValidation {
 			include "b.tpd"
 			location "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -720,7 +720,7 @@ class TestValidation {
 			include "b.tpd"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -740,7 +740,7 @@ class TestValidation {
 			include "b.tpd"
 			location "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -766,7 +766,7 @@ class TestValidation {
 			include "b.tpd"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -792,7 +792,7 @@ class TestValidation {
 			include "b.tpd"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			location A "locationURI2"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
@@ -812,12 +812,12 @@ class TestValidation {
 			include "b.tpd"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			include "c.tpd"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
-		val tpc = parser.parse('''
+		parser.parse('''
 			target "tp.c"
 			location A "locationURI1"
 		''', URI.createURI("tmp:/c.tpd"), resourceSet);
@@ -978,12 +978,12 @@ class TestValidation {
 			include "b.tpd"
 			location "locationURI1"
 		''', URI.createURI("tmp:/a.tpd"), resourceSet);
-		val tpb = parser.parse('''
+		parser.parse('''
 			target "tp.b"
 			include "c.tpd"
 			location "locationURI1"
 		''', URI.createURI("tmp:/b.tpd"), resourceSet);
-		val tpc = parser.parse('''
+		parser.parse('''
 			target "tp.c"
 			location "locationURI1"
 		''', URI.createURI("tmp:/c.tpd"), resourceSet);

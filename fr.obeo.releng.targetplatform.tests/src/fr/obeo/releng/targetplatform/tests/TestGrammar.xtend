@@ -1,18 +1,12 @@
 package fr.obeo.releng.targetplatform.tests
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.targetplatform.Option
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
-import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidatorTester
-import org.eclipse.xtext.validation.AbstractValidationDiagnostic
-import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,16 +18,6 @@ class TestGrammar {
 	
 	@Inject
 	ParseHelper<TargetPlatform> parser
-	
-	@Inject
-	TargetPlatformValidator validator
-	
-	@Inject
-	EValidatorRegistrar validatorRegistrar
-	
-	@Inject
-	@Named(Constants::LANGUAGE_NAME)
-	String languageName
 	
 	@Test
 	def testEmpty() {
@@ -167,7 +151,7 @@ class TestGrammar {
 	@Test
 	def testIdWithVersionNonString3() {
 		val targetPlatform = parser.parse('''
-			target "a target platform" version 3.8
+			target "a target platform"
 
 			location "my location URL" {
 				myu;version=[3.2.1,10.0)

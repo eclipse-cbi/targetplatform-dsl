@@ -9,7 +9,6 @@ import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,13 +38,13 @@ public class LocationIndexBuilder {
     };
     ImmutableListMultimap<String,Location> _index = Multimaps.<String, Location>index(locationList, _function);
     final ArrayListMultimap<String,Location> locationIndex = ArrayListMultimap.<String, Location>create(_index);
-    Collection<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
+    LinkedList<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
     final Function1<TargetPlatform,EList<Location>> _function_1 = new Function1<TargetPlatform,EList<Location>>() {
       public EList<Location> apply(final TargetPlatform it) {
         return it.getLocations();
       }
     };
-    Iterable<EList<Location>> _map = IterableExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function_1);
+    List<EList<Location>> _map = ListExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function_1);
     Iterable<Location> _flatten = Iterables.<Location>concat(_map);
     final Procedure1<Location> _function_2 = new Procedure1<Location>() {
       public void apply(final Location it) {
@@ -57,17 +56,55 @@ public class LocationIndexBuilder {
     return locationIndex;
   }
   
-  public Collection<TargetPlatform> getImportedTargetPlatforms(final TargetPlatform targetPlatform) {
-    final LinkedHashSet<TargetPlatform> acc = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
-    final LinkedList<TargetPlatform> s = CollectionLiterals.<TargetPlatform>newLinkedList();
-    Collection<TargetPlatform> _xifexpression = null;
-    boolean _checkIncludeCycle = this.checkIncludeCycle(targetPlatform, acc, s);
-    if (_checkIncludeCycle) {
-      _xifexpression = CollectionLiterals.<TargetPlatform>newImmutableList();
-    } else {
-      _xifexpression = acc;
+  /**
+   * Returns all imported target platforms in a BSF fashion. The returned collection has
+   * an iteration order reflecting the import overriding: the last import override precedent ones
+   * and the deepest import is of least importance. E.g.
+   * A includes B, C and D
+   * B includes E, F and G
+   * C includes H, I and J
+   * D includes K, L and M
+   * 
+   * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E
+   */
+  public LinkedList<TargetPlatform> getImportedTargetPlatforms(final TargetPlatform targetPlatform) {
+    final LinkedHashSet<TargetPlatform> visited = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
+    final LinkedList<TargetPlatform> queue = CollectionLiterals.<TargetPlatform>newLinkedList();
+    final LinkedList<TargetPlatform> includeRet = CollectionLiterals.<TargetPlatform>newLinkedList();
+    queue.addLast(targetPlatform);
+    visited.add(targetPlatform);
+    boolean _isEmpty = queue.isEmpty();
+    boolean _not = (!_isEmpty);
+    boolean _while = _not;
+    while (_while) {
+      {
+        final LinkedList<TargetPlatform> tr = CollectionLiterals.<TargetPlatform>newLinkedList();
+        final TargetPlatform t = queue.removeLast();
+        EList<IncludeDeclaration> _includes = t.getIncludes();
+        final Function1<IncludeDeclaration,TargetPlatform> _function = new Function1<IncludeDeclaration,TargetPlatform>() {
+          public TargetPlatform apply(final IncludeDeclaration it) {
+            Resource _eResource = t.eResource();
+            return LocationIndexBuilder.this.getImportedTargetPlatform(_eResource, it);
+          }
+        };
+        List<TargetPlatform> _map = ListExtensions.<IncludeDeclaration, TargetPlatform>map(_includes, _function);
+        Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
+        for (final TargetPlatform unvisited : _filterNull) {
+          boolean _contains = visited.contains(unvisited);
+          boolean _not_1 = (!_contains);
+          if (_not_1) {
+            visited.add(unvisited);
+            queue.addLast(unvisited);
+            tr.addFirst(unvisited);
+          }
+        }
+        includeRet.addAll(tr);
+      }
+      boolean _isEmpty_1 = queue.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      _while = _not_1;
     }
-    return _xifexpression;
+    return includeRet;
   }
   
   public List<TargetPlatform> checkIncludeCycle(final TargetPlatform targetPlatform) {

@@ -1,21 +1,17 @@
 package fr.obeo.releng.targetplatform.tests;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -28,16 +24,6 @@ import org.junit.runner.RunWith;
 public class TestGrammar {
   @Inject
   private ParseHelper<TargetPlatform> parser;
-  
-  @Inject
-  private TargetPlatformValidator validator;
-  
-  @Inject
-  private EValidatorRegistrar validatorRegistrar;
-  
-  @Inject
-  @Named(Constants.LANGUAGE_NAME)
-  private String languageName;
   
   @Test
   public void testEmpty() {
@@ -318,7 +304,7 @@ public class TestGrammar {
   public void testIdWithVersionNonString3() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("target \"a target platform\" version 3.8");
+      _builder.append("target \"a target platform\"");
       _builder.newLine();
       _builder.newLine();
       _builder.append("location \"my location URL\" {");

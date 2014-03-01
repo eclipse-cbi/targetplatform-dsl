@@ -383,7 +383,7 @@ public class TestValidation {
       _builder_1.append("location \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1449,7 +1449,7 @@ public class TestValidation {
       _builder_1.append("target \"tp.b\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1486,7 +1486,7 @@ public class TestValidation {
       _builder_1.append("target \"tp.b\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1524,7 +1524,7 @@ public class TestValidation {
       _builder_1.append("location \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1562,7 +1562,7 @@ public class TestValidation {
       _builder_1.append("location A \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1600,7 +1600,7 @@ public class TestValidation {
       _builder_1.append("location A \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1661,7 +1661,7 @@ public class TestValidation {
       _builder_1.append("location \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1722,7 +1722,7 @@ public class TestValidation {
       _builder_1.append("location A \"locationURI2\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -1762,14 +1762,14 @@ public class TestValidation {
       _builder_1.append("location A \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("target \"tp.c\"");
       _builder_2.newLine();
       _builder_2.append("location A \"locationURI1\"");
       _builder_2.newLine();
       URI _createURI_2 = URI.createURI("tmp:/c.tpd");
-      final TargetPlatform tpc = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      this.parser.parse(_builder_2, _createURI_2, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
@@ -2166,14 +2166,14 @@ public class TestValidation {
       _builder_1.append("location \"locationURI1\"");
       _builder_1.newLine();
       URI _createURI_1 = URI.createURI("tmp:/b.tpd");
-      final TargetPlatform tpb = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("target \"tp.c\"");
       _builder_2.newLine();
       _builder_2.append("location \"locationURI1\"");
       _builder_2.newLine();
       URI _createURI_2 = URI.createURI("tmp:/c.tpd");
-      final TargetPlatform tpc = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      this.parser.parse(_builder_2, _createURI_2, resourceSet);
       Resource _eResource = tpa.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();

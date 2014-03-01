@@ -27,17 +27,38 @@ class LocationIndexBuilder {
 		return locationIndex;
 	}
 
+	/**
+	 * Returns all imported target platforms in a BSF fashion. The returned collection has 
+	 * an iteration order reflecting the import overriding: the last import override precedent ones
+	 * and the deepest import is of least importance. E.g.
+	 * A includes B, C and D
+	 * B includes E, F and G
+	 * C includes H, I and J
+	 * D includes K, L and M
+	 * 
+	 * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E 
+	 */
 	def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
-		val acc = newLinkedHashSet();
-		val s = newLinkedList();
-		return 
-			if (checkIncludeCycle(targetPlatform, acc, s)) {
-				newImmutableList()
-			} else {
-				acc
+		val visited = newLinkedHashSet();
+		val queue = newLinkedList();
+		val includeRet = newLinkedList();
+		queue.addLast(targetPlatform)
+		visited.add(targetPlatform)
+		while(!queue.empty) {
+			val tr = newLinkedList();
+			val t = queue.removeLast
+			for(unvisited : t.includes.map[getImportedTargetPlatform(t.eResource, it)].filterNull) {
+				if (!visited.contains(unvisited)) {
+					visited.add(unvisited)
+					queue.addLast(unvisited)
+					tr.addFirst(unvisited)
+				}
 			}
+			includeRet.addAll(tr)
+		}
+		return includeRet
 	}
-	
+
 	def checkIncludeCycle(TargetPlatform targetPlatform) {
 		val acc = newLinkedHashSet();
 		val s = newLinkedList();
@@ -65,6 +86,7 @@ class LocationIndexBuilder {
 				return true;
 			}
 		}
+		
 		s.removeFirst
 		return false
 	}

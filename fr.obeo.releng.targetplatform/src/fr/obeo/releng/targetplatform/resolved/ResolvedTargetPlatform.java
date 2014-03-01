@@ -58,6 +58,9 @@ public class ResolvedTargetPlatform {
 	public void resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getLocations().size());
 		for (ResolvedLocation location : getLocations()) {
+			if(subMonitor.isCanceled()) {
+				break;
+			}
 			location.resolve(metadataRepositoryManager, subMonitor);
 			subMonitor.worked(1);
 		}

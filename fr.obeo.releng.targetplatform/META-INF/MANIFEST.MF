@@ -28,18 +28,20 @@ Import-Package: org.apache.log4j,
  org.osgi.framework;version="[1.5.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: fr.obeo.releng.targetplatform,
+ fr.obeo.releng.targetplatform.conversion,
+ fr.obeo.releng.targetplatform.formatting,
+ fr.obeo.releng.targetplatform.generator,
+ fr.obeo.releng.targetplatform.parser.antlr,
+ fr.obeo.releng.targetplatform.parser.antlr.internal,
  fr.obeo.releng.targetplatform.pde,
  fr.obeo.releng.targetplatform.resolved,
+ fr.obeo.releng.targetplatform.scoping,
+ fr.obeo.releng.targetplatform.serializer,
  fr.obeo.releng.targetplatform.services,
  fr.obeo.releng.targetplatform.targetplatform,
  fr.obeo.releng.targetplatform.targetplatform.impl,
  fr.obeo.releng.targetplatform.targetplatform.util,
- fr.obeo.releng.targetplatform.serializer,
- fr.obeo.releng.targetplatform.parser.antlr,
- fr.obeo.releng.targetplatform.parser.antlr.internal,
- fr.obeo.releng.targetplatform.validation,
- fr.obeo.releng.targetplatform.scoping,
- fr.obeo.releng.targetplatform.generator,
- fr.obeo.releng.targetplatform.formatting
+ fr.obeo.releng.targetplatform.util,
+ fr.obeo.releng.targetplatform.validation
 Bundle-Activator: fr.obeo.releng.targetplatform.TargetPlatformBundleActivator
 Eclipse-ExtensibleAPI: true

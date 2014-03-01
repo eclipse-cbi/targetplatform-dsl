@@ -70,13 +70,14 @@ public class Converter {
 		}
 		java.net.URI agentLocation = getAgentLocationURI(targetPlatformLocation);
 		ResolvedTargetPlatform resolvedTargetPlatform = getResolvedTargetPlatform(targetPlatform, agentLocation, subMonitor.newChild(90));
-		
-		TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
-		
-		String xml = generator.generate(resolvedTargetPlatform);
-		final URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
-		serialize(targetDefinitionLocation, xml);
-		subMonitor.worked(5);
+
+		if (!subMonitor.isCanceled()) {
+			TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
+			String xml = generator.generate(resolvedTargetPlatform);
+			final URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
+			serialize(targetDefinitionLocation, xml);
+			subMonitor.worked(5);
+		}
 	}
 
 	private void serialize(URI targetPlatformLocation, String xml) throws FileNotFoundException, IOException {
@@ -96,7 +97,9 @@ public class Converter {
 		IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
 
 		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		resolvedTargetPlatform.resolve(repositoryManager, monitor);
+		if (!monitor.isCanceled()) {
+			resolvedTargetPlatform.resolve(repositoryManager, monitor);
+		}
 		
 		agent.stop();
 		return resolvedTargetPlatform;
