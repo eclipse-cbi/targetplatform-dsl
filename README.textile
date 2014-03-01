@@ -91,6 +91,8 @@ h2. Build
 
 Go to @fr.obeo.releng.targetplatform-parent@ and do a @mvn clean package@.
 
+!https://travis-ci.org/mbarbero/fr.obeo.releng.targetplatform.png?branch=master!:https://travis-ci.org/mbarbero/fr.obeo.releng.targetplatform
+
 h2. Contribute
 
 Clone this repository, import all projects in your Eclipse and set your target platform to the one in @fr.obeo.releng.targetplatform-parent/targetdefinitions@.
