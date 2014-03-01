@@ -1,7 +1,6 @@
 package fr.obeo.releng.targetplatform.tests;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -11,11 +10,8 @@ import fr.obeo.releng.targetplatform.pde.Converter;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.io.File;
 import java.net.URI;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -44,9 +40,6 @@ public class TestTargetConvertion {
   
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
-  
-  @Inject
-  private LocationIndexBuilder indexBuilder;
   
   @Test
   public void testBasicBundle() {
@@ -1253,56 +1246,6 @@ public class TestTargetConvertion {
       Version _head_1 = IterableExtensions.<Version>head(((Iterable<Version>)Conversions.doWrapArray(versions)));
       String _string = _head_1.toString();
       Assert.assertEquals("12.0.0.v201212092141", _string);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testIncludeOverrideOrder() {
-    try {
-      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("target \"o\" include \"a.tpd\" include \"b.tpd\" include \"c.tpd\"");
-      org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI("tmp:/o.tpd");
-      final TargetPlatform o = this.parser.parse(_builder, _createURI, resourceSet);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("target \"a\" include \"d.tpd\" include \"e.tpd\" include \"f.tpd\"");
-      org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/a.tpd");
-      this.parser.parse(_builder_1, _createURI_1, resourceSet);
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("target \"b\" include \"g.tpd\" include \"h.tpd\" include \"i.tpd\"");
-      org.eclipse.emf.common.util.URI _createURI_2 = org.eclipse.emf.common.util.URI.createURI("tmp:/b.tpd");
-      this.parser.parse(_builder_2, _createURI_2, resourceSet);
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("target \"c\" include \"j.tpd\" include \"k.tpd\" include \"l.tpd\"");
-      org.eclipse.emf.common.util.URI _createURI_3 = org.eclipse.emf.common.util.URI.createURI("tmp:/c.tpd");
-      this.parser.parse(_builder_3, _createURI_3, resourceSet);
-      for (final String tp : Collections.<String>unmodifiableList(Lists.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("target \"");
-        _builder_4.append(tp, "");
-        _builder_4.append("\"");
-        StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append("tmp:/");
-        _builder_5.append(tp, "");
-        _builder_5.append(".tpd");
-        org.eclipse.emf.common.util.URI _createURI_4 = org.eclipse.emf.common.util.URI.createURI(_builder_5.toString());
-        this.parser.parse(_builder_4, _createURI_4, resourceSet);
-      }
-      final Converter converter = new Converter();
-      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
-      Injector _injector = _targetPlatformInjectorProvider.getInjector();
-      _injector.injectMembers(converter);
-      LinkedList<TargetPlatform> _importedTargetPlatforms = this.indexBuilder.getImportedTargetPlatforms(o);
-      final Function1<TargetPlatform,String> _function = new Function1<TargetPlatform,String>() {
-        public String apply(final TargetPlatform it) {
-          return it.getName();
-        }
-      };
-      List<String> _map = ListExtensions.<TargetPlatform, String>map(_importedTargetPlatforms, _function);
-      Assert.assertEquals(
-        Collections.<String>unmodifiableList(Lists.<String>newArrayList("c", "b", "a", "l", "k", "j", "i", "h", "g", "f", "e", "d")), _map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

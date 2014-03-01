@@ -10,11 +10,11 @@
  *******************************************************************************/
 package fr.obeo.releng.targetplatform.pde;
 
-import java.io.File;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -50,12 +50,15 @@ public class ConverterApplication implements IApplication {
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 
-		URI fileURI = org.eclipse.emf.common.util.URI.createFileURI(path);
-		if (fileURI.isRelative()) {
-			fileURI = org.eclipse.emf.common.util.URI.createFileURI(new File(".").getAbsolutePath() + File.separator + path);
+		URI uri = org.eclipse.emf.common.util.URI.createURI(path);
+		if (uri.isRelative()) {
+			uri = org.eclipse.emf.common.util.URI.createFileURI(path);
 		}
 		
-		converter.generateTargetDefinitionFile(fileURI, createPrintingMonitor());
+		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
+		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+			System.out.println(diagnostic);
+		}
 			
 		return null;
 	}

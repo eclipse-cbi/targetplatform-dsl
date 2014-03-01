@@ -6,9 +6,9 @@ import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.Converter
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
-import java.net.URI
 import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.BasicMonitor.Printing
+import org.eclipse.emf.common.util.URI
 import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -18,7 +18,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -29,9 +28,6 @@ class TestTargetConvertion {
 	
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider
-	
-	@Inject
-	LocationIndexBuilder indexBuilder
 
 	@Test
 	def testBasicBundle() {
@@ -47,7 +43,7 @@ class TestTargetConvertion {
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		for(loc : targetDef.locations) {
@@ -75,7 +71,7 @@ class TestTargetConvertion {
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals(1, targetDef.locations.size)
@@ -96,18 +92,18 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" { 
 				org.eclipse.emf.compare.ide.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9/core/" {
 				org.eclipse.emf.sdk.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -131,18 +127,18 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" { 
 				org.eclipse.emf.compare.ide.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
 				org.eclipse.emf.compare.rcp.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -165,18 +161,18 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" { 
 				org.eclipse.emf.compare.ide.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
 				org.eclipse.emf.compare.ide.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -201,13 +197,13 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
 				org.eclipse.emf.compare.ide.ui.feature.group
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -229,18 +225,18 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" { 
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version="[11.0.0,12.0.0)"
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -260,24 +256,24 @@ class TestTargetConvertion {
 			target "TP1"
 			include "tp2.tpd"
 			include "tp3.tpd"
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version=[11.0.0,12.0.0)
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -297,24 +293,24 @@ class TestTargetConvertion {
 			target "TP1"
 			include "tp3.tpd"
 			include "tp2.tpd"
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version=[11.0.0,12.0.0)
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -333,25 +329,25 @@ class TestTargetConvertion {
 		val tp1 = parser.parse('''
 			target "TP1"
 			include "tp2.tpd"
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			include "tp3.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version=[11.0.0,12.0.0)
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -370,25 +366,25 @@ class TestTargetConvertion {
 		val tp1 = parser.parse('''
 			target "TP1"
 			include "tp2.tpd"
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			include "tp3.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version=[11.0.0,12.0.0)
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -413,12 +409,12 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava;version="[11.0.0,12.0.0)"
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -443,12 +439,12 @@ class TestTargetConvertion {
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" { 
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -471,12 +467,12 @@ class TestTargetConvertion {
 				com.google.guava;version="[11.0.0,12.0.0)"
 				com.google.guava
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -499,12 +495,12 @@ class TestTargetConvertion {
 				com.google.guava
 				com.google.guava;version="[11.0.0,12.0.0)"
 			}
-		''', org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		val converter = new Converter
 		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
 		
 		val tmpDir = Files::createTempDir()
-		val agentUri = URI::create('''file:«tmpDir.absolutePath»''')
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
 		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
 		
 		assertEquals("TP1", targetDef.name)
@@ -515,35 +511,5 @@ class TestTargetConvertion {
 		assertEquals(1, ids.size)
 		assertEquals("com.google.guava", ids.head)
 		assertEquals("12.0.0.v201212092141", versions.head.toString)
-	}
-	
-	@Test
-	def testIncludeOverrideOrder() {
-		val resourceSet = resourceSetProvider.get
-		val o = parser.parse('''target "o" include "a.tpd" include "b.tpd" include "c.tpd"''', 
-			org.eclipse.emf.common.util.URI.createURI("tmp:/o.tpd"), resourceSet
-		)
-		parser.parse('''target "a" include "d.tpd" include "e.tpd" include "f.tpd"''', 
-			org.eclipse.emf.common.util.URI.createURI("tmp:/a.tpd"), resourceSet
-		)
-		parser.parse('''target "b" include "g.tpd" include "h.tpd" include "i.tpd"''', 
-			org.eclipse.emf.common.util.URI.createURI("tmp:/b.tpd"), resourceSet
-		)
-		parser.parse('''target "c" include "j.tpd" include "k.tpd" include "l.tpd"''', 
-			org.eclipse.emf.common.util.URI.createURI("tmp:/c.tpd"), resourceSet
-		)
-		for (tp : #['d', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
-			parser.parse('''target "«tp»"''', 
-			org.eclipse.emf.common.util.URI.createURI('''tmp:/«tp».tpd'''), resourceSet
-		)
-		}
-		val converter = new Converter
-		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
-		
-		assertEquals(
-			#['c', 'b', 'a', 'l', 'k', 'j', 'i', 'h', 'g', 'f', 'e', 'd'],
-			indexBuilder.getImportedTargetPlatforms(o).map[name]
-		)
-		
 	}
 }

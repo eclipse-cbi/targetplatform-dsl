@@ -12,7 +12,6 @@ package fr.obeo.releng.targetplatform.pde;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,6 +19,7 @@ import java.net.URISyntaxException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +30,7 @@ import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.common.base.Throwables;
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -51,7 +52,7 @@ public class Converter {
 	@Inject
 	private LocationIndexBuilder indexBuilder;
 	
-	public void generateTargetDefinitionFile(URI targetPlatformLocation, IProgressMonitor monitor) throws Exception {
+	public Diagnostic generateTargetDefinitionFile(URI targetPlatformLocation, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		if (!"targetplatform".equals(targetPlatformLocation.fileExtension()) && !"tpd".equals(targetPlatformLocation.fileExtension())) {
 			throw new IllegalStateException("The target platform file '" + targetPlatformLocation + "' must ends with .targetplatform or .tpd extensions.");
@@ -59,36 +60,57 @@ public class Converter {
 		
 		TargetPlatform targetPlatform = loadTargetPlatform(targetPlatformLocation);
 		
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(targetPlatform);
-		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
-			throw new IllegalStateException("The file '" + targetPlatformLocation + "' can not be converted. It contains errors.");
-		}
-		
 		subMonitor.worked(5);
 		if (targetPlatform == null) {
-			return;
+			return new BasicDiagnostic(Diagnostic.ERROR, targetPlatformLocation.toString(), -1, "Error occured while loading the file " + targetPlatformLocation, null);
+		} else if (!targetPlatform.eResource().getErrors().isEmpty()) {
+			return new BasicDiagnostic(Diagnostic.ERROR, targetPlatformLocation.toString(), -1, "Error occured while loading the file " + targetPlatformLocation, targetPlatform.eResource().getErrors().toArray());
 		}
-		java.net.URI agentLocation = getAgentLocationURI(targetPlatformLocation);
-		ResolvedTargetPlatform resolvedTargetPlatform = getResolvedTargetPlatform(targetPlatform, agentLocation, subMonitor.newChild(90));
+		
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(targetPlatform);
+		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+			return new BasicDiagnostic(targetPlatformLocation.toString(), -1, diagnostic.getChildren(), "The file '" + targetPlatformLocation + "' can not be converted.", null);
+		}
+		
+		ResolvedTargetPlatform resolvedTargetPlatform = null;
+		if (!subMonitor.isCanceled()) {
+			try {
+				java.net.URI agentLocation = getAgentLocationURI(targetPlatformLocation);
+				resolvedTargetPlatform = getResolvedTargetPlatform(targetPlatform, agentLocation, subMonitor.newChild(90));
+			} catch (Exception e) {
+				return new BasicDiagnostic(targetPlatformLocation.toString(), -1, e.getMessage(), new Object[] {e,});
+			}
+		} else {
+			return Diagnostic.CANCEL_INSTANCE;
+		}
 
 		if (!subMonitor.isCanceled()) {
 			TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
 			String xml = generator.generate(resolvedTargetPlatform);
 			final URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
-			serialize(targetDefinitionLocation, xml);
+			try {
+				serialize(targetDefinitionLocation, xml);
+			} catch (Exception e) {
+				return new BasicDiagnostic(targetPlatformLocation.toString(), -1, e.getMessage(), new Object[] {e,});
+			}
 			subMonitor.worked(5);
+		} else {
+			return Diagnostic.CANCEL_INSTANCE;
 		}
+		
+		return Diagnostic.OK_INSTANCE;
 	}
 
-	private void serialize(URI targetPlatformLocation, String xml) throws FileNotFoundException, IOException {
+	private void serialize(URI targetPlatformLocation, String xml) throws IOException {
 		URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
-		OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())));
+		OutputStream outputStream = null;
 		try {
+			outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())));
 			outputStream.write(xml.getBytes());
-		} catch (IOException e) {
-			handleError(e.getMessage(), e);
+		} catch (Exception e) {
+			Throwables.propagate(e);
 		} finally {
-			Closeables.close(outputStream, true);
+			Closeables.close(outputStream, false);
 		}
 	}
 
@@ -103,11 +125,6 @@ public class Converter {
 		
 		agent.stop();
 		return resolvedTargetPlatform;
-	}
-
-	protected void handleError(String message, IOException e) {
-		e.printStackTrace();
-		
 	}
 
 	private java.net.URI getAgentLocationURI(URI fileLocation) throws URISyntaxException {

@@ -25,6 +25,8 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -69,8 +71,9 @@ public class ConvertTargetPlatform extends AbstractHandler {
 				Injector injector = TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM);
 				Converter converter = new Converter();
 				injector.injectMembers(converter);
+				Diagnostic diagnostic = null;
 				try {
-					converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
+					diagnostic = converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
 				} catch (OperationCanceledException cancel) {
 					ret = new Status(IStatus.CANCEL, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), cancel.getMessage(), cancel);
 				} catch (Exception e) {
@@ -84,7 +87,11 @@ public class ConvertTargetPlatform extends AbstractHandler {
 						return new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
 					}
 				}
-				return ret;
+				if (diagnostic != null) {
+					return BasicDiagnostic.toIStatus(diagnostic);
+				} else {
+					return ret;
+				}
 			}
 		};
 		job.setUser(userJob);
