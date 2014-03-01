@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-SymbolicName: fr.obeo.releng.targetplatform.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: fr.obeo.releng.targetplatform;visibility:=reexport,
@@ -24,5 +24,7 @@ Bundle-Activator: fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActiva
 Export-Package: fr.obeo.releng.targetplatform.ui,
  fr.obeo.releng.targetplatform.ui.contentassist,
  fr.obeo.releng.targetplatform.ui.contentassist.antlr,
+ fr.obeo.releng.targetplatform.ui.contentassist.antlr.internal,
+ fr.obeo.releng.targetplatform.ui.handler,
  fr.obeo.releng.targetplatform.ui.internal,
  fr.obeo.releng.targetplatform.ui.quickfix

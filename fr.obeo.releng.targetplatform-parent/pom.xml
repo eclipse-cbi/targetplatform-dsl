@@ -19,7 +19,7 @@
 
     <groupId>fr.obeo.releng.targetplatform</groupId>
     <artifactId>releng.targetplatform-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <licenses>
@@ -37,8 +37,8 @@
     </licenses>
 
     <properties>
-        <tycho-version>0.19</tycho-version>
-        <tycho-extras-version>0.19</tycho-extras-version>
+        <tycho-version>0.19.0</tycho-version>
+        <tycho-extras-version>0.19.0</tycho-extras-version>
     </properties>
 
 
@@ -214,7 +214,7 @@
 
 <profiles>
   <profile>
-    <id>Juno</id>
+    <id>Kepler</id>
     <activation>
       <activeByDefault>true</activeByDefault>
     </activation>
@@ -229,8 +229,8 @@
               <artifact>
                 <groupId>fr.obeo.releng.targetplatform</groupId>
                 <artifactId>releng.targetplatform-parent</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <classifier>targetdefinitions/juno-4.2-sdk</classifier>
+                <version>2.0.0-SNAPSHOT</version>
+                <classifier>targetdefinitions/kepler-4.3-sdk</classifier>
               </artifact>
             </target>
           </configuration>

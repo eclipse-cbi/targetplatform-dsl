@@ -2,7 +2,7 @@
 <feature
       id="fr.obeo.releng.targetplatform-feature"
       label="%featureName"
-      version="1.2.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%providerName"
       plugin="fr.obeo.releng.targetplatform">
 
@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <update label="Eclipse Juno (3.8/4.2) update site" url="http://download.eclipse.org/releases/juno/"/>
+      <update label="Xtext update site" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
    </url>
 
    <requires>
