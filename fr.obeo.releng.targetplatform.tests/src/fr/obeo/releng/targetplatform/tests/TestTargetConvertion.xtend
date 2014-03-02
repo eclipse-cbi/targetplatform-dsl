@@ -3,12 +3,16 @@ package fr.obeo.releng.targetplatform.tests
 import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.Converter
+import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import java.net.URISyntaxException
 import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.BasicMonitor.Printing
 import org.eclipse.emf.common.util.URI
+import org.eclipse.equinox.p2.core.ProvisionException
 import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -18,6 +22,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -28,6 +34,9 @@ class TestTargetConvertion {
 	
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider
+	
+	@Inject
+	LocationIndexBuilder indexBuilder;
 
 	@Test
 	def testBasicBundle() {
@@ -44,7 +53,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(targetPlatform, agentUri)
 		
 		for(loc : targetDef.locations) {
 			val String[] ids = loc.resolvedIUs.map[id]
@@ -72,7 +81,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(targetPlatform, agentUri)
 		
 		assertEquals(1, targetDef.locations.size)
 		
@@ -104,7 +113,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(2, targetDef.locations.size)
@@ -139,7 +148,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -173,7 +182,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -204,7 +213,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -237,7 +246,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -274,7 +283,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -311,7 +320,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -348,7 +357,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -385,7 +394,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -415,7 +424,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -445,7 +454,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -473,7 +482,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -501,7 +510,7 @@ class TestTargetConvertion {
 		
 		val tmpDir = Files::createTempDir()
 		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
-		val targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, BasicMonitor::toIProgressMonitor(new Printing(System::out)))
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(1, targetDef.locations.size)
@@ -511,5 +520,16 @@ class TestTargetConvertion {
 		assertEquals(1, ids.size)
 		assertEquals("com.google.guava", ids.head)
 		assertEquals("12.0.0.v201212092141", versions.head.toString)
+	}
+	
+	private def getResolvedTargetPlatform(TargetPlatform targetPlatform, java.net.URI agentLocation) throws URISyntaxException, ProvisionException {
+		val agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
+		val repositoryManager = agent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+		resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
+		
+		agent.stop();
+		return resolvedTargetPlatform;
 	}
 }

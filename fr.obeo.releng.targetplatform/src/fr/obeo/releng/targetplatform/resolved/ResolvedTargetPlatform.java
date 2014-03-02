@@ -16,6 +16,8 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
@@ -25,6 +27,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
@@ -55,15 +58,18 @@ public class ResolvedTargetPlatform {
 		return options;
 	}
 	
-	public void resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+		BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Diagnostic of resolution of '" + name + "'", null);
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getLocations().size());
 		for (ResolvedLocation location : getLocations()) {
 			if(subMonitor.isCanceled()) {
 				break;
 			}
-			location.resolve(metadataRepositoryManager, subMonitor);
+			Diagnostic d = location.resolve(metadataRepositoryManager, subMonitor);
+			ret.add(d);
 			subMonitor.worked(1);
 		}
+		return ret;
 	}
 	
 	public static ResolvedTargetPlatform create(TargetPlatform targetPlatform, LocationIndexBuilder indexBuilder) throws URISyntaxException {

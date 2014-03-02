@@ -17,6 +17,8 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.equinox.internal.p2.metadata.InstallableUnit;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
@@ -26,6 +28,7 @@ import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
 import com.google.common.collect.Lists;
 
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 
@@ -48,7 +51,8 @@ public class ResolvedLocation {
 		this.options = options;
 	}
 	
-	public void resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+		BasicDiagnostic diag = (BasicDiagnostic) Diagnostic.OK_INSTANCE;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, subMonitor.newChild(80));
 		
@@ -65,9 +69,14 @@ public class ResolvedLocation {
 				}
 				resolvedIUs.add(unit);
 			} else {
-				System.err.println("No IU found for " + iu.getID() + ";version=\"" + iu.getVersionRange() +"\"");
+				if (diag == Diagnostic.OK_INSTANCE) {
+					diag = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured during resolution of '" + uri.toString() + "'.", null);
+				}
+				String msg = "The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
+				diag.add(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
 			}
 		}
+		return diag;
 	}
 	
 	public URI getURI() {

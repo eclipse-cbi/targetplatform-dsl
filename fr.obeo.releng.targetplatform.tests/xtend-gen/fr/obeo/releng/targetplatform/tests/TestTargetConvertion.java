@@ -5,18 +5,25 @@ import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.pde.Converter;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.io.File;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
+import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.metadata.Version;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -40,6 +47,9 @@ public class TestTargetConvertion {
   
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
+  
+  @Inject
+  private LocationIndexBuilder indexBuilder;
   
   @Test
   public void testBasicBundle() {
@@ -71,9 +81,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(targetPlatform, agentUri);
       List<ResolvedLocation> _locations = targetDef.getLocations();
       for (final ResolvedLocation loc : _locations) {
         {
@@ -135,9 +143,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(targetPlatform, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(targetPlatform, agentUri);
       List<ResolvedLocation> _locations = targetDef.getLocations();
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
@@ -206,9 +212,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -289,9 +293,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -362,9 +364,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -428,9 +428,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -499,9 +497,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -594,9 +590,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -689,9 +683,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -784,9 +776,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -879,9 +869,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -962,9 +950,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -1045,9 +1031,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -1124,9 +1108,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -1203,9 +1185,7 @@ public class TestTargetConvertion {
       String _absolutePath = tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
-      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
-      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-      final ResolvedTargetPlatform targetDef = converter.getResolvedTargetPlatform(tp1, agentUri, _iProgressMonitor);
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
       String _name = targetDef.getName();
       Assert.assertEquals("TP1", _name);
       List<ResolvedLocation> _locations = targetDef.getLocations();
@@ -1249,5 +1229,19 @@ public class TestTargetConvertion {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private ResolvedTargetPlatform getResolvedTargetPlatform(final TargetPlatform targetPlatform, final URI agentLocation) throws URISyntaxException, ProvisionException {
+    TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();
+    IProvisioningAgentProvider _provisioningAgentProvider = _instance.getProvisioningAgentProvider();
+    final IProvisioningAgent agent = _provisioningAgentProvider.createAgent(agentLocation);
+    Object _service = agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+    final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+    final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
+    BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
+    IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
+    resolvedTargetPlatform.resolve(repositoryManager, _iProgressMonitor);
+    agent.stop();
+    return resolvedTargetPlatform;
   }
 }

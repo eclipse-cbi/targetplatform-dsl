@@ -57,10 +57,10 @@ public class ConverterApplication implements IApplication {
 		
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
 		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
-			System.out.println(diagnostic);
+			System.err.println(diagnostic);
 		}
 			
-		return null;
+		return diagnostic.getCode();
 	}
 
 	private static IProgressMonitor createPrintingMonitor() {

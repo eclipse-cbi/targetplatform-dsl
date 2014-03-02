@@ -34,7 +34,9 @@ import com.google.inject.Module;
  */
 public class TargetPlatformBundleActivator implements BundleActivator {
 
-public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.TargetPlatform";
+	public static final String PLUGIN_ID = "fr.obeo.releng.targetplatform";
+	
+	public static final String TARGET_PLATFORM_LANGUAGE_NAME = "fr.obeo.releng.TargetPlatform";
 	
 	private static final Logger logger = Logger.getLogger(TargetPlatformBundleActivator.class);
 	
