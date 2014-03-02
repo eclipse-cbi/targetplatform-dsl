@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Juno 4.2 SDK" sequenceNumber="0">
+<?pde version="3.8"?><target name="Kepler 4.3 SDK" sequenceNumber="0">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.pde.core" version="3.8.1.v20130115-200504"/>
-<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20120913-155553-9N89H_oGMMn84_uucqpkwz0bBdLL"/>
-<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20120521-2346-7H7NFHmBpeIm_Z5ZRXqjnySbXm9T"/>
-<unit id="org.eclipse.sdk.feature.group" version="4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5"/>
-<repository location="http://download.eclipse.org/releases/juno"/>
+<unit id="org.eclipse.pde.core" version="3.9.1.v20130628-1111"/>
+<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.1.v20140221-1852"/>
+<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20140110-1610"/>
+<unit id="org.eclipse.sdk.feature.group" version="4.3.2.v20140221-1852"/>
+<repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.2.v20140203-1126"/>
 <repository location="http://download.eclipse.org/modeling/emf/emf/updates/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.2.v201402120812"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.3.v201402240820"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
