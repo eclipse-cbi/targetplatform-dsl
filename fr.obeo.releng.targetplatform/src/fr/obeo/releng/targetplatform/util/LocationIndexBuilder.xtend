@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
 import com.google.inject.Inject
+import com.google.common.collect.Lists
 
 class LocationIndexBuilder {
 	
@@ -17,7 +18,7 @@ class LocationIndexBuilder {
 	ImportUriResolver resolver;
 	
 	def getLocationIndex(TargetPlatform targetPlatform) {
-		val locationList = targetPlatform.getLocations()
+		val locationList = Lists.newArrayList(targetPlatform.locations).reverse
 		val locationIndex = ArrayListMultimap.create(Multimaps.index(locationList, [uri]))
 		
 		getImportedTargetPlatforms(targetPlatform).map[locations].flatten.forEach[

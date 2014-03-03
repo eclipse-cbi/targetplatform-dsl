@@ -4,11 +4,13 @@ import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +32,9 @@ public class LocationIndexBuilder {
   private ImportUriResolver resolver;
   
   public ArrayListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
-    final EList<Location> locationList = targetPlatform.getLocations();
+    EList<Location> _locations = targetPlatform.getLocations();
+    ArrayList<Location> _newArrayList = Lists.<Location>newArrayList(_locations);
+    final List<Location> locationList = ListExtensions.<Location>reverse(_newArrayList);
     final Function<Location,String> _function = new Function<Location,String>() {
       public String apply(final Location it) {
         return it.getUri();

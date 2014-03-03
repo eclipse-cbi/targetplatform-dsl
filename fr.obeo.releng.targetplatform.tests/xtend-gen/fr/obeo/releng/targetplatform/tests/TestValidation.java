@@ -212,11 +212,11 @@ public class TestValidation {
       AbstractValidationDiagnostic _get = diagnotics.get(0);
       EObject _sourceEObject = _get.getSourceEObject();
       String _uri = ((Location) _sourceEObject).getUri();
-      Assert.assertEquals("mylocationURI2", _uri);
+      Assert.assertEquals("mylocationURI", _uri);
       AbstractValidationDiagnostic _get_1 = diagnotics.get(1);
       EObject _sourceEObject_1 = _get_1.getSourceEObject();
       String _uri_1 = ((Location) _sourceEObject_1).getUri();
-      Assert.assertEquals("mylocationURI", _uri_1);
+      Assert.assertEquals("mylocationURI2", _uri_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -266,11 +266,11 @@ public class TestValidation {
       AbstractValidationDiagnostic _get = diagnotics.get(0);
       EObject _sourceEObject = _get.getSourceEObject();
       String _uri = ((Location) _sourceEObject).getUri();
-      Assert.assertEquals("mylocationURI2", _uri);
+      Assert.assertEquals("mylocationURI", _uri);
       AbstractValidationDiagnostic _get_1 = diagnotics.get(1);
       EObject _sourceEObject_1 = _get_1.getSourceEObject();
       String _uri_1 = ((Location) _sourceEObject_1).getUri();
-      Assert.assertEquals("mylocationURI", _uri_1);
+      Assert.assertEquals("mylocationURI2", _uri_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

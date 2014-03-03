@@ -88,8 +88,8 @@ class TestTargetConvertion {
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 			
 		assertEquals(2, ids.size)
-		assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", ids.head)
-		assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", ids.get(1))
+		assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", ids.head)
+		assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", ids.get(1))
 	}
 	
 	@Test
@@ -433,7 +433,7 @@ class TestTargetConvertion {
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
 		assertEquals(1, ids.size)
 		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0.v201212092141", versions.head.toString)
+		assertEquals("11.0.2.v201303041551", versions.head.toString)
 	}
 	
 	@Test
@@ -463,7 +463,7 @@ class TestTargetConvertion {
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
 		assertEquals(1, ids.size)
 		assertEquals("com.google.guava", ids.head)
-		assertEquals("11.0.2.v201303041551", versions.head.toString)
+		assertEquals("12.0.0.v201212092141", versions.head.toString)
 	}
 	
 	@Test

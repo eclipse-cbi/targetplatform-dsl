@@ -164,9 +164,9 @@ public class TestTargetConvertion {
       int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
       Assert.assertEquals(2, _size_1);
       Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
-      Assert.assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", _head);
+      Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", _head);
       Object _get = ids[1];
-      Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", _get);
+      Assert.assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", _get);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -990,7 +990,7 @@ public class TestTargetConvertion {
       Assert.assertEquals("com.google.guava", _head);
       Version _head_1 = IterableExtensions.<Version>head(((Iterable<Version>)Conversions.doWrapArray(versions)));
       String _string = _head_1.toString();
-      Assert.assertEquals("12.0.0.v201212092141", _string);
+      Assert.assertEquals("11.0.2.v201303041551", _string);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1071,7 +1071,7 @@ public class TestTargetConvertion {
       Assert.assertEquals("com.google.guava", _head);
       Version _head_1 = IterableExtensions.<Version>head(((Iterable<Version>)Conversions.doWrapArray(versions)));
       String _string = _head_1.toString();
-      Assert.assertEquals("11.0.2.v201303041551", _string);
+      Assert.assertEquals("12.0.0.v201212092141", _string);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
