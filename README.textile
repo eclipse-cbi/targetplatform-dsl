@@ -18,7 +18,7 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 Then, select the "Target Platform Definition DSL and Generator" feature suitable for your current Eclipse version and click on @Finish@.
 
-bq. This tool requires Xtext 2.5.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/releases*
+bq. This tool requires Xtext 2.5.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/releases/*
 
 h3. Requirements
 
