@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <update label="Xtext update site" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+      <update label="Target Platform Definition DSL and Generator update site" url="http://mbarbero.github.com/fr.obeo.releng.targetplatform/p2/"/>
    </url>
 
    <requires>
