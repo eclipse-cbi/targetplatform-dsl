@@ -14,7 +14,7 @@ h2. Installation
 
 Add the following p2 repository (update-site) in your update manager (in Eclipse, @Help Menu > Install New Software...@, @Add...@ button on the top right corner)
 
-*http://mbarbero.github.com/fr.obeo.releng.targetplatform/p2/*
+*http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/* or *http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/* for the latest version only.
 
 Then, select the "Target Platform Definition DSL and Generator" feature suitable for your current Eclipse version and click on @Finish@.
 
