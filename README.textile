@@ -50,7 +50,7 @@ You must start by defining the name of your target by specifying the header.
 target "The name of my target"
 </pre>
 
-Then you can optionally include other target platform files if you decided to split your target platform definition into several files. This will still lead to the generation of a single `.target` file.
+Then you can optionally include other target platform files if you decided to split your target platform definition into several files. This will still lead to the generation of a single @.target@ file.
 
 <pre>
 include "base.tpd"
