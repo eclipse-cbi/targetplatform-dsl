@@ -114,7 +114,8 @@ public class TargetPlatformBundleActivator implements BundleActivator {
 	}
 	
 	public <T> T getService(Class<T> clazz) {
-		ServiceReference<T> serviceReference = context.getServiceReference(clazz);
+		@SuppressWarnings("unchecked")
+		ServiceReference<T> serviceReference = (ServiceReference<T>) context.getServiceReference(clazz.getName());
 		
 		final T service;
 		if (serviceReference == null) {

@@ -15,8 +15,8 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.util.Strings
-import org.osgi.framework.VersionRange
 import org.eclipse.xtext.Grammar
+import org.eclipse.equinox.p2.metadata.VersionRange
 
 @Singleton
 class TargetPlatformConverter extends DefaultTerminalConverters {

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import fr.obeo.releng.targetplatform.conversion.FQNConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformSTRINGValueConverter;
 import fr.obeo.releng.targetplatform.conversion.VersionRangeConverter;
+import org.eclipse.equinox.p2.metadata.VersionRange;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -13,7 +14,6 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.osgi.framework.VersionRange;
 
 @Singleton
 @SuppressWarnings("all")
