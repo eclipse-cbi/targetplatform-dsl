@@ -1,8 +1,11 @@
 package fr.obeo.releng.targetplatform.conversion;
 
+import com.google.common.base.Objects;
 import com.google.inject.Singleton;
+import fr.obeo.releng.targetplatform.conversion.FQNConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformSTRINGValueConverter;
 import fr.obeo.releng.targetplatform.conversion.VersionRangeConverter;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
@@ -51,5 +54,18 @@ public class TargetPlatformConverter extends DefaultTerminalConverters {
     } else {
       return string;
     }
+  }
+  
+  private IValueConverter<String> qualifiedNameValueConverter;
+  
+  @ValueConverter(rule = "QualifiedName")
+  public IValueConverter<String> getQualifiedNameConverter() {
+    boolean _equals = Objects.equal(this.qualifiedNameValueConverter, null);
+    if (_equals) {
+      Grammar _grammar = this.getGrammar();
+      FQNConverter _fQNConverter = new FQNConverter(_grammar);
+      this.qualifiedNameValueConverter = _fQNConverter;
+    }
+    return this.qualifiedNameValueConverter;
   }
 }

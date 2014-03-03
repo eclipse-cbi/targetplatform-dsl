@@ -194,5 +194,25 @@ class TestGrammar {
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("myu", iu0.ID)
 		assertEquals("1.2.3.201404071200", iu0.version)
-	}	
+	}
+	
+	@Test
+	def testWithKeywordInIUID() {
+		val tp = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava
+				com.google.guava.^source
+			}
+		''')
+		
+		assertEquals("TP1", tp.name)
+		assertEquals(2, tp.locations.map[ius].flatten.size
+		)
+		
+		val ids = tp.locations.map[ius.map[ID]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("com.google.guava.source", ids.get(1))
+	}
 }

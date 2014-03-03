@@ -24,6 +24,7 @@ import org.junit.runner.RunWith
 import static org.junit.Assert.*
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
+import org.eclipse.emf.common.util.Diagnostic
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -522,12 +523,116 @@ class TestTargetConvertion {
 		assertEquals("12.0.0.v201212092141", versions.head.toString)
 	}
 	
+	@Test
+	def testSource1() {
+		val tp1 = parser.parse('''
+			target "TP1"
+			with source
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava
+			}
+		''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
+		
+		assertEquals("TP1", targetDef.name)
+		assertEquals(1, targetDef.locations.size)
+		
+		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
+		assertEquals(1, ids.size)
+		assertEquals("com.google.guava", ids.head)
+	}
+	
+	@Test
+	def testSource2() {
+		val tp1 = parser.parse('''
+			target "TP1"
+			with source
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava
+				com.google.guava.^source
+			}
+		''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
+		
+		assertEquals("TP1", targetDef.name)
+		assertEquals(1, targetDef.locations.size)
+		
+		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("com.google.guava.source", ids.get(1))
+	}
+	
+	@Test
+	def testSource3() {
+		val tp1 = parser.parse('''
+			target "TP1"
+			with source
+			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
+				org.eclipse.emf.compare.rcp.ui.feature.group
+			}
+		''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
+		
+		assertEquals("TP1", targetDef.name)
+		assertEquals(1, targetDef.locations.size)
+		
+		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
+		assertEquals(1, ids.size)
+		assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", ids.head)
+	}
+	
+	@Test
+	def testSource4() {
+		val tp1 = parser.parse('''
+			target "TP1"
+			with source
+			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
+				org.eclipse.emf.compare.rcp.ui.feature.group
+				org.eclipse.emf.compare.rcp.ui.^source.feature.group
+			}
+		''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val targetDef = getResolvedTargetPlatform(tp1, agentUri)
+		
+		assertEquals("TP1", targetDef.name)
+		assertEquals(1, targetDef.locations.size)
+		
+		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", ids.head)
+		assertEquals("org.eclipse.emf.compare.rcp.ui.source.feature.group", ids.get(1))
+	}
+	
 	private def getResolvedTargetPlatform(TargetPlatform targetPlatform, java.net.URI agentLocation) throws URISyntaxException, ProvisionException {
 		val agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
 		val repositoryManager = agent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
 
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
+		val d = resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
+		
+		if (d.severity == Diagnostic.ERROR) {
+			throw new IllegalStateException(d.toString)
+		}
 		
 		agent.stop();
 		return resolvedTargetPlatform;

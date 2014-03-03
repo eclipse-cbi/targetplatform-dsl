@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
 import org.eclipse.equinox.p2.core.ProvisionException;
@@ -1231,6 +1232,236 @@ public class TestTargetConvertion {
     }
   }
   
+  @Test
+  public void testSource1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("with source");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp1 = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      String _name = targetDef.getName();
+      Assert.assertEquals("TP1", _name);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      int _size = _locations.size();
+      Assert.assertEquals(1, _size);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+        public List<String> apply(final ResolvedLocation it) {
+          List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
+          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+            public String apply(final IInstallableUnit it) {
+              return it.getId();
+            }
+          };
+          return ListExtensions.<IInstallableUnit, String>map(_resolvedIUs, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
+      final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
+      int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
+      Assert.assertEquals(1, _size_1);
+      Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
+      Assert.assertEquals("com.google.guava", _head);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSource2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("with source");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava.^source");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp1 = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      String _name = targetDef.getName();
+      Assert.assertEquals("TP1", _name);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      int _size = _locations.size();
+      Assert.assertEquals(1, _size);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+        public List<String> apply(final ResolvedLocation it) {
+          List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
+          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+            public String apply(final IInstallableUnit it) {
+              return it.getId();
+            }
+          };
+          return ListExtensions.<IInstallableUnit, String>map(_resolvedIUs, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
+      final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
+      int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
+      Assert.assertEquals(2, _size_1);
+      Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
+      Assert.assertEquals("com.google.guava", _head);
+      Object _get = ids[1];
+      Assert.assertEquals("com.google.guava.source", _get);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSource3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("with source");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.eclipse.emf.compare.rcp.ui.feature.group");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp1 = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      String _name = targetDef.getName();
+      Assert.assertEquals("TP1", _name);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      int _size = _locations.size();
+      Assert.assertEquals(1, _size);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+        public List<String> apply(final ResolvedLocation it) {
+          List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
+          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+            public String apply(final IInstallableUnit it) {
+              return it.getId();
+            }
+          };
+          return ListExtensions.<IInstallableUnit, String>map(_resolvedIUs, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
+      final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
+      int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
+      Assert.assertEquals(1, _size_1);
+      Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
+      Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", _head);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSource4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("with source");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.eclipse.emf.compare.rcp.ui.feature.group");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.eclipse.emf.compare.rcp.ui.^source.feature.group");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp1 = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      String _name = targetDef.getName();
+      Assert.assertEquals("TP1", _name);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      int _size = _locations.size();
+      Assert.assertEquals(1, _size);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+        public List<String> apply(final ResolvedLocation it) {
+          List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
+          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+            public String apply(final IInstallableUnit it) {
+              return it.getId();
+            }
+          };
+          return ListExtensions.<IInstallableUnit, String>map(_resolvedIUs, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
+      final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
+      int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
+      Assert.assertEquals(2, _size_1);
+      Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
+      Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", _head);
+      Object _get = ids[1];
+      Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.source.feature.group", _get);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private ResolvedTargetPlatform getResolvedTargetPlatform(final TargetPlatform targetPlatform, final URI agentLocation) throws URISyntaxException, ProvisionException {
     TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();
     IProvisioningAgentProvider _provisioningAgentProvider = _instance.getProvisioningAgentProvider();
@@ -1240,7 +1471,13 @@ public class TestTargetConvertion {
     final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
     BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
     IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
-    resolvedTargetPlatform.resolve(repositoryManager, _iProgressMonitor);
+    final Diagnostic d = resolvedTargetPlatform.resolve(repositoryManager, _iProgressMonitor);
+    int _severity = d.getSeverity();
+    boolean _equals = (_severity == Diagnostic.ERROR);
+    if (_equals) {
+      String _string = d.toString();
+      throw new IllegalStateException(_string);
+    }
     agent.stop();
     return resolvedTargetPlatform;
   }

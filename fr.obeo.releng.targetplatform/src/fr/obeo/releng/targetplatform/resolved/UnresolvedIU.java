@@ -33,8 +33,8 @@ public class UnresolvedIU {
 	}
 
 	private IQuery<IInstallableUnit> createQuery() {
-		if (this.versionRange == null || this.versionRange == LAZY_RANGE) {
-			return QueryUtil.createQuery("latest(x | x.id == $0)", id);
+		if (this.versionRange == LAZY_RANGE) {
+			return QueryUtil.createQuery("latest(x | x.id == $0 )", id);
 		} else {
 			return QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", id, versionRange);
 		}

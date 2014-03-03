@@ -1,19 +1,24 @@
 package fr.obeo.releng.targetplatform.tests;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.targetplatform.IU;
 import fr.obeo.releng.targetplatform.targetplatform.Location;
 import fr.obeo.releng.targetplatform.targetplatform.Option;
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -400,6 +405,60 @@ public class TestGrammar {
       Assert.assertEquals("myu", _iD);
       String _version = iu0.getVersion();
       Assert.assertEquals("1.2.3.201404071200", _version);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithKeywordInIUID() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava.^source");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp = this.parser.parse(_builder);
+      String _name = tp.getName();
+      Assert.assertEquals("TP1", _name);
+      EList<Location> _locations = tp.getLocations();
+      final Function1<Location,EList<IU>> _function = new Function1<Location,EList<IU>>() {
+        public EList<IU> apply(final Location it) {
+          return it.getIus();
+        }
+      };
+      List<EList<IU>> _map = ListExtensions.<Location, EList<IU>>map(_locations, _function);
+      Iterable<IU> _flatten = Iterables.<IU>concat(_map);
+      int _size = IterableExtensions.size(_flatten);
+      Assert.assertEquals(2, _size);
+      EList<Location> _locations_1 = tp.getLocations();
+      final Function1<Location,List<String>> _function_1 = new Function1<Location,List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU,String> _function = new Function1<IU,String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> ids = Iterables.<String>concat(_map_1);
+      int _size_1 = IterableExtensions.size(ids);
+      Assert.assertEquals(2, _size_1);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
+      Assert.assertEquals("com.google.guava.source", _get);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
