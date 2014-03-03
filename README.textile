@@ -6,7 +6,7 @@ Target Platform Definition DSL and Generator provides a DSL with an advanced edi
 
 The greatest thing about this tool is that it avoids you to manage .target files links to strict versions (e.g., @3.2.5.v20093493-sfoit-v-rrel@). It lets you define the bundles and features you want to use in your target platform and it handles the generation of the .target file with the most recent available version. It is possible to restrict the lookup within a version range.
 
-!http://imageshack.us/a/img15/8338/tpeditor.png(The targetplatform DSL editor)!
+!http://imageshack.com/a/img59/4276/m1p2.png(The targetplatform DSL editor)!
 
 !http://imageshack.us/a/img832/1508/tpgenmenucreate.png(The right-click command)!
 
@@ -18,7 +18,7 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 Then, select the "Target Platform Definition DSL and Generator" feature suitable for your current Eclipse version and click on @Finish@.
 
-bq. This tool requires Xtext 2.5.0 (released along with Eclipse Juno - 3.8/4.2) or later. If installing on Eclipse 3.6 or 3.7, you may need to add the Juno repository to the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/releases/juno/*
+bq. This tool requires Xtext 2.5.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/*
 
 h3. Requirements
 
@@ -30,7 +30,7 @@ h3. Requirements
 
 h2. Basic usage
 
-* Create a file with @.targetplatform@ extension
+* Create a file with @.tpd@ extension
 
 * Once done, right-click on the file and select "Create Target Definition File" 
 
@@ -40,25 +40,27 @@ An empty file is a valid file.
 
 Strings can be surrounded by either simple quotes @'@ or double quotes @"@.
 
-You must start by defining the name of your target by specifying the header
+An ID is a character sequence starting with an alpha (no space allowed).
+
+Keywords can be escaped by prefixing them with @^@.
+
+You must start by defining the name of your target by specifying the header.
 
 <pre>
 target "The name of my target"
 </pre>
 
-Then, you define the locations of your p2 repositories. You can add as many locations as your want to your target. Location string must be URL, if your p2 repository is local, don't forget to put a @file:/@ URL.
+Then you can optionally include other target platform files if you decided to split your target platform definition into several files. This will still lead to the generation of a single `.target` file.
 
 <pre>
-location "http://download.eclipse.org/releases/juno/" {
-}
+include "base.tpd"
+include "http://git.some.server.org/tree/tp/all.tpd"
 </pre>
 
-You can define some options (separated with comma) about what should be retrieved from the p2 repository. You can do that with the @with@ keyword immediatly after the opening curl brace:
+You can define some options (separated with comma) about what should be retrieved from the p2 repository. You can do that with the @with@ keyword immediatly after include directives.
 
 <pre>
-location "http://download.eclipse.org/releases/juno/" {
-	with source, allEnvironments	
-}
+with source, allEnvironments	
 </pre>
 
 Available options are:
@@ -68,26 +70,44 @@ Available options are:
 * @source@, whether this location should download and include source bundles for the selected units if the associated source is available in the repository.
 * @configurePhase@, whether this target should execute the configure phase after fetching the selected units.
 
+bq. @source@ and @configurePhase@ are not supported by PDE before 3.8. If you use a version of PDE older than 3.8, these options will simply be ignored.
+
+Then, you define the locations of your p2 repositories. You can add as many locations as your want to your target. Location string must be URL, if your p2 repository is local, don't forget to put a @file:/@ URL.
+
+<pre>
+location "http://download.eclipse.org/releases/kepler/" 
+</pre>
+
+A location may have an ID that can be written before or after the URI. This is useful if you want to apply some maven stuff (providing a password, a mirror...) for this repository (see #17 for examples).
+
+<pre>
+location kepler "http://download.eclipse.org/releases/kepler/" 
+</pre>
+
 Then, you may list the Installable Units (IUs) your want to include in your target. This can be Bundles or Eclipse Features (then it ends with @feature.group@).
 
 <pre>
-location "http://download.eclipse.org/releases/juno/" {
-	with source, allEnvironments	
-	org.eclipse.emf.sdk.feature.group
+location "http://download.eclipse.org/releases/kepler/" {	
+    org.eclipse.emf.sdk.feature.group
 }
 </pre>
 
-If no version specified, the most recent IUs will be selected in the repository. You can restrain the range of version to use by using the same syntax as in @MANIFEST.MF@ files.
+bq. Don't forget that you can escape a keyword by prefixing it with @^@, e.g. if you need to reference @com.google.guava.source@, write it like @com.google.guava.^source@. The @^@ will be automatically stripped during the generation.
+
+If no version is specified, the most recent IUs will be selected in the repository. You can restrain the range of version to use by using the same syntax as in @MANIFEST.MF@ files.
 
 <pre>
 location "http://download.eclipse.org/releases/juno/" {
-	with source, allEnvironments	
-	org.eclipse.emf.sdk.feature.group
-	org.eclipse.rcp.feature.group;version="(4.0.0,4.3.0]"
+    // select the most recent version of EMF after 2.7.0
+    org.eclipse.emf.sdk.feature.group;version=2.7.0
+    // select the most recent eclipse.rcp feature within the given range 
+    org.eclipse.rcp.feature.group;version=(4.0.0,4.3.0]
 }
 </pre>
 
 Then, the most recent version of the given IU within this range will be selected.
+
+bq. You can use the special keyword @lazy@ as version to state that you don't want the generator to select the version to put in the @.target@ file. Instead, it puts @0.0.0@ which is interpreted by PDE during the resolution of the @.target@.
 
 h2. Build
 
