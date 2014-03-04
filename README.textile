@@ -101,7 +101,7 @@ location "http://download.eclipse.org/releases/juno/" {
     // select the most recent version of EMF after 2.7.0
     org.eclipse.emf.sdk.feature.group;version=2.7.0
     // select the most recent eclipse.rcp feature within the given range 
-    org.eclipse.rcp.feature.group;version=(4.0.0,4.3.0]
+    org.eclipse.rcp.feature.group;version=[4.0.0,4.3.0)
 }
 </pre>
 
