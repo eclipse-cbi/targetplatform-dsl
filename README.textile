@@ -6,9 +6,9 @@ Target Platform Definition DSL and Generator provides a DSL with an advanced edi
 
 The greatest thing about this tool is that it avoids you to manage .target files links to strict versions (e.g., @3.2.5.v20093493-sfoit-v-rrel@). It lets you define the bundles and features you want to use in your target platform and it handles the generation of the .target file with the most recent available version. It is possible to restrict the lookup within a version range.
 
-!http://imageshack.com/a/img59/4276/m1p2.png(The targetplatform DSL editor)!
+!http://imageshack.com/a/img691/6196/tl67.png(The targetplatform DSL editor)!
 
-!http://imageshack.us/a/img832/1508/tpgenmenucreate.png(The right-click command)!
+!http://imageshack.com/a/img200/2008/5jb1.png(The right-click command)!
 
 h2. Installation
 
