@@ -1513,6 +1513,75 @@ public class TestTargetConvertion {
     }
   }
   
+  @Test
+  public void testResolutionDiagnosticVerbosity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"target_with_resolution_pb\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/releases/juno/201303010900/\" {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("org.eclipse.pde;version=[3.8.0,3.9.0)");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("org.eclipse.platform;version=[4.2.1,4.3.0)");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/S20130914154012/repository/\" {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("com.google.guava;version=[20.0.0,22.0.0)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.eclipse.emf.compare.rcp.ui.feature.group");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();
+      IProvisioningAgentProvider _provisioningAgentProvider = _instance.getProvisioningAgentProvider();
+      final IProvisioningAgent agent = _provisioningAgentProvider.createAgent(agentUri);
+      Object _service = agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+      final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+      final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, this.indexBuilder);
+      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
+      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
+      final Diagnostic d = resolvedTargetPlatform.resolve(repositoryManager, _iProgressMonitor);
+      int _severity = d.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity);
+      List<Diagnostic> _children = d.getChildren();
+      int _size = _children.size();
+      Assert.assertEquals(1, _size);
+      List<Diagnostic> _children_1 = d.getChildren();
+      Diagnostic _head = IterableExtensions.<Diagnostic>head(_children_1);
+      int _severity_1 = _head.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity_1);
+      agent.stop();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private ResolvedTargetPlatform getResolvedTargetPlatform(final TargetPlatform targetPlatform, final URI agentLocation) throws URISyntaxException, ProvisionException {
     TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();
     IProvisioningAgentProvider _provisioningAgentProvider = _instance.getProvisioningAgentProvider();

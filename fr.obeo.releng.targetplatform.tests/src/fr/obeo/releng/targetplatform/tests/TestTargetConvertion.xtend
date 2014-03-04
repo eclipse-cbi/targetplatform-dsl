@@ -645,6 +645,43 @@ class TestTargetConvertion {
 		assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.locations.get(3).URI.toString)
 	}
 	
+	@Test
+	def testResolutionDiagnosticVerbosity() {
+		val tp = parser.parse('''
+			target "target_with_resolution_pb"
+
+			location "http://download.eclipse.org/releases/juno/201303010900/" {
+			    org.eclipse.pde;version=[3.8.0,3.9.0)
+			    org.eclipse.platform;version=[4.2.1,4.3.0)
+			    }
+			
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/S20130914154012/repository/" {
+			    com.google.guava;version=[20.0.0,22.0.0)
+			}
+			
+			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/" {
+				org.eclipse.emf.compare.rcp.ui.feature.group
+			}
+		''')
+		
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentUri);
+		val repositoryManager = agent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, indexBuilder);
+		val d = resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
+		
+		assertEquals(Diagnostic.ERROR, d.severity);
+		assertEquals(1, d.children.size)
+		assertEquals(Diagnostic.ERROR, d.children.head.severity);
+		
+		agent.stop();
+	}
+	
 	private def getResolvedTargetPlatform(TargetPlatform targetPlatform, java.net.URI agentLocation) throws URISyntaxException, ProvisionException {
 		val agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
 		val repositoryManager = agent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;

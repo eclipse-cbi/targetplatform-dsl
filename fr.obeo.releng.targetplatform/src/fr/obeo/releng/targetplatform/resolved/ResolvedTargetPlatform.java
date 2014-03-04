@@ -67,7 +67,8 @@ public class ResolvedTargetPlatform {
 				break;
 			}
 			Diagnostic d = location.resolve(metadataRepositoryManager, subMonitor);
-			ret.add(d);
+			if (d.getSeverity() > Diagnostic.OK)
+				ret.add(d);
 			subMonitor.worked(1);
 		}
 		return ret;
