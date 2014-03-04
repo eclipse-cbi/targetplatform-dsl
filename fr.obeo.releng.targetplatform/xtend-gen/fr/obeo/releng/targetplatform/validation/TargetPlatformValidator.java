@@ -6,11 +6,11 @@ package fr.obeo.releng.targetplatform.validation;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -236,7 +236,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkIDUniqueOnAllLocations(final TargetPlatform targetPlatform) {
-    final ArrayListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final LinkedListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     final LinkedHashMultimap<String,String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
     Set<String> _keySet = locationsByURI.keySet();
@@ -399,7 +399,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkSameIDForAllLocationWithSameURI(final TargetPlatform targetPlatform) {
-    final ArrayListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final LinkedListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     Set<String> _keySet = locationsByURI.keySet();
     for (final String locationURI : _keySet) {

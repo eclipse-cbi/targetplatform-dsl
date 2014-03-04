@@ -105,7 +105,7 @@ class TestTargetConvertion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
-			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9/core/" {
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
 				org.eclipse.emf.sdk.feature.group
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
@@ -118,14 +118,14 @@ class TestTargetConvertion {
 		
 		assertEquals("TP1", targetDef.name)
 		assertEquals(2, targetDef.locations.size)
-		assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.locations.head.URI.toString)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9/core/", targetDef.locations.get(1).URI.toString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.locations.head.URI.toString)
+		assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.locations.get(1).URI.toString)
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 			
 		assertEquals(2, ids.size)
-		assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", ids.head)
-		assertEquals("org.eclipse.emf.sdk.feature.group", ids.get(1))
+		assertEquals("org.eclipse.emf.sdk.feature.group", ids.head)
+		assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", ids.get(1))
 	}
 	
 	@Test
@@ -621,6 +621,28 @@ class TestTargetConvertion {
 		assertEquals(2, ids.size)
 		assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", ids.head)
 		assertEquals("org.eclipse.emf.compare.rcp.ui.source.feature.group", ids.get(1))
+	}
+	
+	@Test
+	def testLocationOrder() {
+		val o = parser.parse('''
+			target "Kepler 4.3 SDK"
+			location "http://download.eclipse.org/releases/kepler/201402280900"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/"
+			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"
+		''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val tmpDir = Files::createTempDir()
+		val agentUri = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val targetDef = getResolvedTargetPlatform(o, agentUri)
+		
+		assertEquals("http://download.eclipse.org/releases/kepler/201402280900", targetDef.locations.get(0).URI.toString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.locations.get(1).URI.toString)
+		assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.locations.get(2).URI.toString)
+		assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.locations.get(3).URI.toString)
 	}
 	
 	private def getResolvedTargetPlatform(TargetPlatform targetPlatform, java.net.URI agentLocation) throws URISyntaxException, ProvisionException {

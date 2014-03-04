@@ -1,6 +1,6 @@
 package fr.obeo.releng.targetplatform.tests;
 
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -94,7 +94,7 @@ public class TestTargetPlatformIndexer {
       _builder.newLine();
       URI _createURI = URI.createURI("tmp:/o.tpd");
       final TargetPlatform o = this.parser.parse(_builder, _createURI, resourceSet);
-      ArrayListMultimap<String,Location> _locationIndex = this.indexBuilder.getLocationIndex(o);
+      LinkedListMultimap<String,Location> _locationIndex = this.indexBuilder.getLocationIndex(o);
       int _size = _locationIndex.size();
       Assert.assertEquals(4, _size);
     } catch (Throwable _e) {

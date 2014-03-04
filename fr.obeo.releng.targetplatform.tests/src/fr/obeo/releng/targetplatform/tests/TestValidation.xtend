@@ -117,8 +117,8 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, issueCode)
 		]
-		assertEquals("mylocationURI", (diagnotics.get(0).sourceEObject as Location).uri)
-		assertEquals("mylocationURI2", (diagnotics.get(1).sourceEObject as Location).uri)
+		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).uri)
 	}
 	
 	@Test
@@ -138,8 +138,8 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, issueCode)
 		]
-		assertEquals("mylocationURI", (diagnotics.get(0).sourceEObject as Location).uri)
-		assertEquals("mylocationURI2", (diagnotics.get(1).sourceEObject as Location).uri)
+		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).uri)
 	}
 	
 	@Test

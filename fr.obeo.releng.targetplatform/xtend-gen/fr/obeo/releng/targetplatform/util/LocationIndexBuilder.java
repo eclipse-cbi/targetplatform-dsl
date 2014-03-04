@@ -1,9 +1,9 @@
 package fr.obeo.releng.targetplatform.util;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
@@ -31,7 +31,7 @@ public class LocationIndexBuilder {
   @Inject
   private ImportUriResolver resolver;
   
-  public ArrayListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
+  public LinkedListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
     EList<Location> _locations = targetPlatform.getLocations();
     ArrayList<Location> _newArrayList = Lists.<Location>newArrayList(_locations);
     final List<Location> locationList = ListExtensions.<Location>reverse(_newArrayList);
@@ -41,7 +41,7 @@ public class LocationIndexBuilder {
       }
     };
     ImmutableListMultimap<String,Location> _index = Multimaps.<String, Location>index(locationList, _function);
-    final ArrayListMultimap<String,Location> locationIndex = ArrayListMultimap.<String, Location>create(_index);
+    final LinkedListMultimap<String,Location> locationIndex = LinkedListMultimap.<String, Location>create(_index);
     LinkedList<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
     final Function1<TargetPlatform,EList<Location>> _function_1 = new Function1<TargetPlatform,EList<Location>>() {
       public EList<Location> apply(final TargetPlatform it) {

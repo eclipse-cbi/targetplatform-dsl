@@ -194,7 +194,7 @@ public class TestTargetConvertion {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("target \"TP2\"");
       _builder_1.newLine();
-      _builder_1.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9/core/\" {");
+      _builder_1.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("org.eclipse.emf.sdk.feature.group");
@@ -223,12 +223,12 @@ public class TestTargetConvertion {
       ResolvedLocation _head = IterableExtensions.<ResolvedLocation>head(_locations_1);
       URI _uRI = _head.getURI();
       String _string = _uRI.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string);
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string);
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
       ResolvedLocation _get = _locations_2.get(1);
       URI _uRI_1 = _get.getURI();
       String _string_1 = _uRI_1.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9/core/", _string_1);
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_1);
       List<ResolvedLocation> _locations_3 = targetDef.getLocations();
       final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
@@ -246,9 +246,9 @@ public class TestTargetConvertion {
       int _size_1 = ((List<String>)Conversions.doWrapArray(ids)).size();
       Assert.assertEquals(2, _size_1);
       Object _head_1 = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids)));
-      Assert.assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", _head_1);
+      Assert.assertEquals("org.eclipse.emf.sdk.feature.group", _head_1);
       Object _get_1 = ids[1];
-      Assert.assertEquals("org.eclipse.emf.sdk.feature.group", _get_1);
+      Assert.assertEquals("org.eclipse.emf.compare.ide.ui.feature.group", _get_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1457,6 +1457,57 @@ public class TestTargetConvertion {
       Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.feature.group", _head);
       Object _get = ids[1];
       Assert.assertEquals("org.eclipse.emf.compare.rcp.ui.source.feature.group", _get);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLocationOrder() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"Kepler 4.3 SDK\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/releases/kepler/201402280900\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\"");
+      _builder.newLine();
+      final TargetPlatform o = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      final File tmpDir = Files.createTempDir();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_1.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(o, agentUri);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      ResolvedLocation _get = _locations.get(0);
+      URI _uRI = _get.getURI();
+      String _string = _uRI.toString();
+      Assert.assertEquals("http://download.eclipse.org/releases/kepler/201402280900", _string);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      ResolvedLocation _get_1 = _locations_1.get(1);
+      URI _uRI_1 = _get_1.getURI();
+      String _string_1 = _uRI_1.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_1);
+      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
+      ResolvedLocation _get_2 = _locations_2.get(2);
+      URI _uRI_2 = _get_2.getURI();
+      String _string_2 = _uRI_2.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_2);
+      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
+      ResolvedLocation _get_3 = _locations_3.get(3);
+      URI _uRI_3 = _get_3.getURI();
+      String _string_3 = _uRI_3.toString();
+      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

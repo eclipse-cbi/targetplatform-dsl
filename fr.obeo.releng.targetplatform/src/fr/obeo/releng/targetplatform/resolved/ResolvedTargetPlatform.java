@@ -11,6 +11,7 @@
 package fr.obeo.releng.targetplatform.resolved;
 import java.net.URISyntaxException;
 import java.util.EnumSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -73,7 +74,7 @@ public class ResolvedTargetPlatform {
 	}
 	
 	public static ResolvedTargetPlatform create(TargetPlatform targetPlatform, LocationIndexBuilder indexBuilder) throws URISyntaxException {
-		List<ResolvedLocation> locations = Lists.newArrayList();
+		LinkedList<ResolvedLocation> locations = Lists.newLinkedList();
 		
 		ListMultimap<String, Location> locationIndex = indexBuilder.getLocationIndex(targetPlatform);
 		
@@ -92,7 +93,7 @@ public class ResolvedTargetPlatform {
 			}
 			Location firstLocation = locationIndex.get(locationUri).get(0);
 			ResolvedLocation resolvedLocation = new ResolvedLocation(firstLocation.getID(), firstLocation.getUri(), ius, getOptionSet(firstLocation.getOptions()));
-			locations.add(resolvedLocation);
+			locations.addFirst(resolvedLocation);
 		}
 		
 		final EnumSet<Option> options = getOptionSet(targetPlatform.getOptions());
