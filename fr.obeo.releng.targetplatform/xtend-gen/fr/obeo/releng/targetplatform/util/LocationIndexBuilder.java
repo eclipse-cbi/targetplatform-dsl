@@ -43,12 +43,14 @@ public class LocationIndexBuilder {
     ImmutableListMultimap<String,Location> _index = Multimaps.<String, Location>index(locationList, _function);
     final LinkedListMultimap<String,Location> locationIndex = LinkedListMultimap.<String, Location>create(_index);
     LinkedList<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
-    final Function1<TargetPlatform,EList<Location>> _function_1 = new Function1<TargetPlatform,EList<Location>>() {
-      public EList<Location> apply(final TargetPlatform it) {
-        return it.getLocations();
+    final Function1<TargetPlatform,List<Location>> _function_1 = new Function1<TargetPlatform,List<Location>>() {
+      public List<Location> apply(final TargetPlatform it) {
+        EList<Location> _locations = it.getLocations();
+        ArrayList<Location> _newArrayList = Lists.<Location>newArrayList(_locations);
+        return ListExtensions.<Location>reverse(_newArrayList);
       }
     };
-    List<EList<Location>> _map = ListExtensions.<TargetPlatform, EList<Location>>map(_importedTargetPlatforms, _function_1);
+    List<List<Location>> _map = ListExtensions.<TargetPlatform, List<Location>>map(_importedTargetPlatforms, _function_1);
     Iterable<Location> _flatten = Iterables.<Location>concat(_map);
     final Procedure1<Location> _function_2 = new Procedure1<Location>() {
       public void apply(final Location it) {

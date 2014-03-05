@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -51,6 +52,14 @@ public class TestTargetConvertion {
   
   @Inject
   private LocationIndexBuilder indexBuilder;
+  
+  private static File tmpDir;
+  
+  @BeforeClass
+  public static void beforeClass() {
+    File _createTempDir = Files.createTempDir();
+    TestTargetConvertion.tmpDir = _createTempDir;
+  }
   
   @Test
   public void testBasicBundle() {
@@ -76,10 +85,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(targetPlatform, agentUri);
@@ -138,10 +146,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(targetPlatform, agentUri);
@@ -207,10 +214,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -288,10 +294,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -359,10 +364,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -423,10 +427,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -492,10 +495,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_2.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_2.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -585,10 +587,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -678,10 +679,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -771,10 +771,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -864,10 +863,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_3.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_3.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -945,10 +943,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1026,10 +1023,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1103,10 +1099,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1180,10 +1175,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1252,10 +1246,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1310,10 +1303,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1367,10 +1359,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1425,10 +1416,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
@@ -1468,7 +1458,7 @@ public class TestTargetConvertion {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"Kepler 4.3 SDK\"");
       _builder.newLine();
-      _builder.append("location \"http://download.eclipse.org/releases/kepler/201402280900\"");
+      _builder.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
       _builder.newLine();
       _builder.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\"");
       _builder.newLine();
@@ -1481,10 +1471,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(o, agentUri);
@@ -1492,7 +1481,7 @@ public class TestTargetConvertion {
       ResolvedLocation _get = _locations.get(0);
       URI _uRI = _get.getURI();
       String _string = _uRI.toString();
-      Assert.assertEquals("http://download.eclipse.org/releases/kepler/201402280900", _string);
+      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
       ResolvedLocation _get_1 = _locations_1.get(1);
       URI _uRI_1 = _get_1.getURI();
@@ -1514,25 +1503,257 @@ public class TestTargetConvertion {
   }
   
   @Test
+  public void testLocationOrderWithIncludes1() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"Kepler 4.3 SDK\"");
+      _builder.newLine();
+      _builder.append("include \"tp2.tpd\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\"");
+      _builder.newLine();
+      org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd");
+      final TargetPlatform tp1 = this.parser.parse(_builder, _createURI, resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"TP2\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
+      _builder_1.newLine();
+      org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
+      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("file:");
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
+      _builder_2.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_2.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      ResolvedLocation _get = _locations.get(0);
+      URI _uRI = _get.getURI();
+      String _string = _uRI.toString();
+      Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", _string);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      ResolvedLocation _get_1 = _locations_1.get(1);
+      URI _uRI_1 = _get_1.getURI();
+      String _string_1 = _uRI_1.toString();
+      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_1);
+      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
+      ResolvedLocation _get_2 = _locations_2.get(2);
+      URI _uRI_2 = _get_2.getURI();
+      String _string_2 = _uRI_2.toString();
+      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_2);
+      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
+      ResolvedLocation _get_3 = _locations_3.get(3);
+      URI _uRI_3 = _get_3.getURI();
+      String _string_3 = _uRI_3.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_3);
+      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
+      ResolvedLocation _get_4 = _locations_4.get(4);
+      URI _uRI_4 = _get_4.getURI();
+      String _string_4 = _uRI_4.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_4);
+      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
+      ResolvedLocation _get_5 = _locations_5.get(5);
+      URI _uRI_5 = _get_5.getURI();
+      String _string_5 = _uRI_5.toString();
+      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string_5);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLocationOrderWithIncludes2() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"Kepler 4.3 SDK\"");
+      _builder.newLine();
+      _builder.append("include \"tp2.tpd\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\"");
+      _builder.newLine();
+      org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd");
+      final TargetPlatform tp1 = this.parser.parse(_builder, _createURI, resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"TP2\"");
+      _builder_1.newLine();
+      _builder_1.append("include \"tp3.tpd\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
+      _builder_1.newLine();
+      org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
+      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"TP3\"");
+      _builder_2.newLine();
+      _builder_2.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\"");
+      _builder_2.newLine();
+      _builder_2.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
+      _builder_2.newLine();
+      org.eclipse.emf.common.util.URI _createURI_2 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd");
+      final TargetPlatform tp3 = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("file:");
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
+      _builder_3.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_3.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      ResolvedLocation _get = _locations.get(0);
+      URI _uRI = _get.getURI();
+      String _string = _uRI.toString();
+      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      ResolvedLocation _get_1 = _locations_1.get(1);
+      URI _uRI_1 = _get_1.getURI();
+      String _string_1 = _uRI_1.toString();
+      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_1);
+      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
+      ResolvedLocation _get_2 = _locations_2.get(2);
+      URI _uRI_2 = _get_2.getURI();
+      String _string_2 = _uRI_2.toString();
+      Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", _string_2);
+      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
+      ResolvedLocation _get_3 = _locations_3.get(3);
+      URI _uRI_3 = _get_3.getURI();
+      String _string_3 = _uRI_3.toString();
+      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_3);
+      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
+      ResolvedLocation _get_4 = _locations_4.get(4);
+      URI _uRI_4 = _get_4.getURI();
+      String _string_4 = _uRI_4.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_4);
+      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
+      ResolvedLocation _get_5 = _locations_5.get(5);
+      URI _uRI_5 = _get_5.getURI();
+      String _string_5 = _uRI_5.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_5);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLocationOrderWithIncludes3() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"Kepler 4.3 SDK\"");
+      _builder.newLine();
+      _builder.append("include \"tp3.tpd\"");
+      _builder.newLine();
+      _builder.append("include \"tp2.tpd\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/\"");
+      _builder.newLine();
+      org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd");
+      final TargetPlatform tp1 = this.parser.parse(_builder, _createURI, resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"TP2\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/\"");
+      _builder_1.newLine();
+      _builder_1.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
+      _builder_1.newLine();
+      org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
+      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"TP3\"");
+      _builder_2.newLine();
+      _builder_2.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\"");
+      _builder_2.newLine();
+      _builder_2.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
+      _builder_2.newLine();
+      org.eclipse.emf.common.util.URI _createURI_2 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd");
+      final TargetPlatform tp3 = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("file:");
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
+      _builder_3.append(_absolutePath, "");
+      final URI agentUri = URI.create(_builder_3.toString());
+      final ResolvedTargetPlatform targetDef = this.getResolvedTargetPlatform(tp1, agentUri);
+      List<ResolvedLocation> _locations = targetDef.getLocations();
+      ResolvedLocation _get = _locations.get(0);
+      URI _uRI = _get.getURI();
+      String _string = _uRI.toString();
+      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string);
+      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
+      ResolvedLocation _get_1 = _locations_1.get(1);
+      URI _uRI_1 = _get_1.getURI();
+      String _string_1 = _uRI_1.toString();
+      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_1);
+      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
+      ResolvedLocation _get_2 = _locations_2.get(2);
+      URI _uRI_2 = _get_2.getURI();
+      String _string_2 = _uRI_2.toString();
+      Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", _string_2);
+      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
+      ResolvedLocation _get_3 = _locations_3.get(3);
+      URI _uRI_3 = _get_3.getURI();
+      String _string_3 = _uRI_3.toString();
+      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_3);
+      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
+      ResolvedLocation _get_4 = _locations_4.get(4);
+      URI _uRI_4 = _get_4.getURI();
+      String _string_4 = _uRI_4.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_4);
+      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
+      ResolvedLocation _get_5 = _locations_5.get(5);
+      URI _uRI_5 = _get_5.getURI();
+      String _string_5 = _uRI_5.toString();
+      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_5);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testResolutionDiagnosticVerbosity() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"target_with_resolution_pb\"");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("location \"http://download.eclipse.org/releases/juno/201303010900/\" {");
+      _builder.append("location \"http://download.eclipse.org/egit/updates-3.3\" {");
       _builder.newLine();
-      _builder.append("    ");
-      _builder.append("org.eclipse.pde;version=[3.8.0,3.9.0)");
+      _builder.append("\t");
+      _builder.append("org.eclipse.egit.feature.group;version=[3.3,3.4)");
       _builder.newLine();
-      _builder.append("    ");
-      _builder.append("org.eclipse.platform;version=[4.2.1,4.3.0)");
+      _builder.append("\t");
+      _builder.append("org.eclipse.egit.mylyn.feature.group;version=[3.3,3.4)");
       _builder.newLine();
-      _builder.append("    ");
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/S20130914154012/repository/\" {");
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("com.google.guava;version=[20.0.0,22.0.0)");
@@ -1552,10 +1773,9 @@ public class TestTargetConvertion {
       TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
       Injector _injector = _targetPlatformInjectorProvider.getInjector();
       _injector.injectMembers(converter);
-      final File tmpDir = Files.createTempDir();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("file:");
-      String _absolutePath = tmpDir.getAbsolutePath();
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
       _builder_1.append(_absolutePath, "");
       final URI agentUri = URI.create(_builder_1.toString());
       TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();

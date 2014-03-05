@@ -1,7 +1,9 @@
 package fr.obeo.releng.targetplatform.util
 
-import com.google.common.collect.ArrayListMultimap
+import com.google.common.collect.LinkedListMultimap
+import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
+import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import java.util.LinkedList
@@ -9,9 +11,6 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
-import com.google.inject.Inject
-import com.google.common.collect.Lists
-import com.google.common.collect.LinkedListMultimap
 
 class LocationIndexBuilder {
 	
@@ -22,7 +21,9 @@ class LocationIndexBuilder {
 		val locationList = Lists.newArrayList(targetPlatform.locations).reverse
 		val locationIndex = LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
 		
-		getImportedTargetPlatforms(targetPlatform).map[locations].flatten.forEach[
+		getImportedTargetPlatforms(targetPlatform).map[
+			Lists.newArrayList(locations).reverse
+		].flatten.forEach[
 			locationIndex.put(it.uri, it)
 		]
 		
