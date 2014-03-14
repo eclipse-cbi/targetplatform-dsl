@@ -99,9 +99,9 @@ public class Converter {
 			ret = doGenerateTargetDefinitionFile(uri, targetPlatform, agent, monitor);
 		} catch (Exception e) {
 			if (e instanceof WrappedException) {
-				ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, ((WrappedException) e).exception().getMessage(), new Object[] {((WrappedException) e).exception(),});
+				ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, ((WrappedException) e).exception().getMessage(), new Object[] {((WrappedException) e).exception(),});
 			} else {
-				ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, e.getMessage(), new Object[] {e,});
+				ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, e.getMessage(), new Object[] {e,});
 			}
 		} finally {
 			if (agent != null) {
