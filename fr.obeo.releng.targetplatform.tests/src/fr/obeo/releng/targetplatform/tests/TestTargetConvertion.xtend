@@ -77,7 +77,7 @@ class TestTargetConvertion {
 	def testNoRepositoryAtLocation() {
 		val targetPlatform = parser.parse('''
 			target "TestTarget"
-			location "http://localhost/tools/orbit/downloads/drops/R20130517111416/repository/" { 
+			location "http://wrongSite/tools/orbit/downloads/drops/R20130517111416/repository/" { 
 				with source, requirements
 				com.google.guava;version="[11.0.0,12.0.0)"
 				org.junit
@@ -93,7 +93,7 @@ class TestTargetConvertion {
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
 		val d = resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
 		assertEquals(Diagnostic.ERROR, d.severity)
-		assertTrue(d.children.head.message.startsWith("No repository found"))
+		assertTrue("Message is "+d.children.head.message,d.children.head.message.startsWith("No repository found"))
 	}
 	
 	@Test
