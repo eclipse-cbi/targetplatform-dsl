@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Kepler 4.3 SDK" sequenceNumber="1393788317">
+<target name="Kepler 4.3 SDK" sequenceNumber="1399286642">
   <locations>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.3.v201402240820"/>
-      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.0.v201308291703"/>
-      <repository location="http://download.itemis.de/updates"/>
-    </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.pde.core" version="3.9.1.v20130628-1111"/>
       <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.1.v20140221-1852"/>
@@ -21,6 +13,14 @@
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.2.v20140203-1126"/>
       <repository location="http://download.eclipse.org/modeling/emf/emf/updates/releases/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.4.v201404100756"/>
+      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.0.v201308291703"/>
+      <repository location="http://download.itemis.de/updates"/>
     </location>
   </locations>
 </target>

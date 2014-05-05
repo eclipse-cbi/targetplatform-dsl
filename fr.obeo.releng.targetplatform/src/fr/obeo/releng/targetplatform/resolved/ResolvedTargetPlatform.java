@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
 import com.google.common.base.Strings;
@@ -59,7 +58,7 @@ public class ResolvedTargetPlatform {
 		return options;
 	}
 	
-	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
+	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) {
 		BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Diagnostic of resolution of '" + name + "'", null);
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getLocations().size());
 		for (ResolvedLocation location : getLocations()) {

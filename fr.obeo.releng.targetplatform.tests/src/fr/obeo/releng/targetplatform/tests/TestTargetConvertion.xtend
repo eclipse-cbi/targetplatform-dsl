@@ -73,7 +73,29 @@ class TestTargetConvertion {
 		}
 	}
 	
-	//http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/
+	@Test
+	def testNoRepositoryAtLocation() {
+		val targetPlatform = parser.parse('''
+			target "TestTarget"
+			location "http://localhost/tools/orbit/downloads/drops/R20130517111416/repository/" { 
+				with source, requirements
+				com.google.guava;version="[11.0.0,12.0.0)"
+				org.junit
+			}
+			''')
+		val converter = new Converter
+		new TargetPlatformInjectorProvider().injector.injectMembers(converter)
+		
+		val agentLocation = java.net.URI::create('''file:«tmpDir.absolutePath»''')
+		val agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
+		val repositoryManager = agent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+		val d = resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
+		assertEquals(Diagnostic.ERROR, d.severity)
+		assertTrue(d.children.head.message.startsWith("No repository found"))
+	}
+	
 	@Test
 	def testCombination() {
 		val targetPlatform = parser.parse('''

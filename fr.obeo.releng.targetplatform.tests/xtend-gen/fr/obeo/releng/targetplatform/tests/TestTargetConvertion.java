@@ -122,6 +122,56 @@ public class TestTargetConvertion {
   }
   
   @Test
+  public void testNoRepositoryAtLocation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TestTarget\"");
+      _builder.newLine();
+      _builder.append("location \"http://localhost/tools/orbit/downloads/drops/R20130517111416/repository/\" { ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("with source, requirements");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava;version=\"[11.0.0,12.0.0)\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.junit");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      final Converter converter = new Converter();
+      TargetPlatformInjectorProvider _targetPlatformInjectorProvider = new TargetPlatformInjectorProvider();
+      Injector _injector = _targetPlatformInjectorProvider.getInjector();
+      _injector.injectMembers(converter);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("file:");
+      String _absolutePath = TestTargetConvertion.tmpDir.getAbsolutePath();
+      _builder_1.append(_absolutePath, "");
+      final URI agentLocation = URI.create(_builder_1.toString());
+      TargetPlatformBundleActivator _instance = TargetPlatformBundleActivator.getInstance();
+      IProvisioningAgentProvider _provisioningAgentProvider = _instance.getProvisioningAgentProvider();
+      final IProvisioningAgent agent = _provisioningAgentProvider.createAgent(agentLocation);
+      Object _service = agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+      final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+      final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
+      BasicMonitor.Printing _printing = new BasicMonitor.Printing(System.out);
+      IProgressMonitor _iProgressMonitor = BasicMonitor.toIProgressMonitor(_printing);
+      final Diagnostic d = resolvedTargetPlatform.resolve(repositoryManager, _iProgressMonitor);
+      int _severity = d.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity);
+      List<Diagnostic> _children = d.getChildren();
+      Diagnostic _head = IterableExtensions.<Diagnostic>head(_children);
+      String _message = _head.getMessage();
+      boolean _startsWith = _message.startsWith("No repository found");
+      Assert.assertTrue(_startsWith);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testCombination() {
     try {
       StringConcatenation _builder = new StringConcatenation();

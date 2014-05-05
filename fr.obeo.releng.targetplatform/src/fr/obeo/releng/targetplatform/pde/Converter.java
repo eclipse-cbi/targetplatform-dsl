@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -112,7 +111,7 @@ public class Converter {
 		return ret;
 	}
 
-	private Diagnostic doGenerateTargetDefinitionFile(URI uri, TargetPlatform targetPlatform, IProvisioningAgent agent, IProgressMonitor monitor) throws URISyntaxException, ProvisionException {
+	private Diagnostic doGenerateTargetDefinitionFile(URI uri, TargetPlatform targetPlatform, IProvisioningAgent agent, IProgressMonitor monitor) throws URISyntaxException {
 		Diagnostic ret;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		

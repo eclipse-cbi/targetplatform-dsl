@@ -51,31 +51,41 @@ public class ResolvedLocation {
 		this.options = options;
 	}
 	
-	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) throws ProvisionException {
-		BasicDiagnostic diag = (BasicDiagnostic) Diagnostic.OK_INSTANCE;
+	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) {
+		Diagnostic diag = Diagnostic.OK_INSTANCE;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, subMonitor.newChild(80));
 		
-		SubMonitor loopMonitor = subMonitor.newChild(20).setWorkRemaining(unresolvedIUs.size());
-		for (UnresolvedIU iu : unresolvedIUs) {
-			if (monitor.isCanceled()) {
-				break;
+		IMetadataRepository metadataRepository;
+		try {
+			metadataRepository = metadataRepositoryManager.loadRepository(uri, subMonitor.newChild(80));
+			SubMonitor loopMonitor = subMonitor.newChild(20).setWorkRemaining(unresolvedIUs.size());
+			for (UnresolvedIU iu : unresolvedIUs) {
+				if (monitor.isCanceled()) {
+					break;
+				}
+				Set<IInstallableUnit> results = metadataRepository.query(iu.getQuery(), loopMonitor.newChild(1)).toUnmodifiableSet();
+				if (!results.isEmpty()) {
+					IInstallableUnit unit =  results.iterator().next();
+					if (iu.isLazyRange() && unit instanceof InstallableUnit) {
+						((InstallableUnit)unit).setVersion(Version.create("0.0.0"));
+					}
+					resolvedIUs.add(unit);
+				} else {
+					if (diag == Diagnostic.OK_INSTANCE) {
+						diag = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured during resolution of '" + uri.toString() + "'.", null);
+					}
+					String msg = "The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
+					((BasicDiagnostic) diag).add(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
+				}
 			}
-			Set<IInstallableUnit> results = metadataRepository.query(iu.getQuery(), loopMonitor.newChild(1)).toUnmodifiableSet();
-			if (!results.isEmpty()) {
-				IInstallableUnit unit =  results.iterator().next();
-				if (iu.isLazyRange() && unit instanceof InstallableUnit) {
-					((InstallableUnit)unit).setVersion(Version.create("0.0.0"));
-				}
-				resolvedIUs.add(unit);
+		} catch (ProvisionException e) {
+			if (diag == Diagnostic.OK_INSTANCE) {
+				diag = BasicDiagnostic.toDiagnostic(e);
 			} else {
-				if (diag == Diagnostic.OK_INSTANCE) {
-					diag = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured during resolution of '" + uri.toString() + "'.", null);
-				}
-				String msg = "The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
-				diag.add(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
+				((BasicDiagnostic) diag).add(BasicDiagnostic.toDiagnostic(e));
 			}
 		}
+		
 		return diag;
 	}
 	
