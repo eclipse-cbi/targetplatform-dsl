@@ -1,4 +1,4 @@
 language: java
 script: "mvn clean verify -f fr.obeo.releng.targetplatform-parent/pom.xml"
 install: true
-after_failure: travis.print_surefire_reports.sh
+after_failure: echo "Current directory is $(pwd)" && echo "=== SUREFIRE REPORTS ===\n" && for F in target/surefire-reports/*.txt; do echo $F && cat $F && echo; done
