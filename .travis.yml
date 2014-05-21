@@ -1,3 +1,4 @@
 language: java
-script: "mvn -e clean verify -f fr.obeo.releng.targetplatform-parent/pom.xml"
+script: "mvn clean verify -f fr.obeo.releng.targetplatform-parent/pom.xml"
 install: true
+after_failure: .travis.print_surefire_reports.sh
