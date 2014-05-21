@@ -127,7 +127,7 @@ public class TestTargetConvertion {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"TestTarget\"");
       _builder.newLine();
-      _builder.append("location \"http://localhost/tools/orbit/downloads/drops/R20130517111416/repository/\" { ");
+      _builder.append("location \"http://wrongSite/tools/orbit/downloads/drops/R20130517111416/repository/\" { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("with source, requirements");
@@ -164,8 +164,12 @@ public class TestTargetConvertion {
       List<Diagnostic> _children = d.getChildren();
       Diagnostic _head = IterableExtensions.<Diagnostic>head(_children);
       String _message = _head.getMessage();
-      boolean _startsWith = _message.startsWith("No repository found");
-      Assert.assertTrue(_startsWith);
+      String _plus = ("Message is " + _message);
+      List<Diagnostic> _children_1 = d.getChildren();
+      Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_children_1);
+      String _message_1 = _head_1.getMessage();
+      boolean _startsWith = _message_1.startsWith("Unknown Host");
+      Assert.assertTrue(_plus, _startsWith);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

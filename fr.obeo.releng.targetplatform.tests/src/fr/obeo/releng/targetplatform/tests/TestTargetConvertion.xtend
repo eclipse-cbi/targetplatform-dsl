@@ -93,7 +93,7 @@ class TestTargetConvertion {
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
 		val d = resolvedTargetPlatform.resolve(repositoryManager, BasicMonitor::toIProgressMonitor(new Printing(System::out)));
 		assertEquals(Diagnostic.ERROR, d.severity)
-		assertTrue("Message is "+d.children.head.message,d.children.head.message.startsWith("No repository found"))
+		assertTrue("Message is "+d.children.head.message,d.children.head.message.startsWith("Unknown Host"))
 	}
 	
 	@Test
