@@ -40,6 +40,7 @@ Workflow {
     	projectNameUi = "${projectName}.ui"
     	encoding = encoding
     	language = auto-inject {
+    		loadedResource = "platform:/resource/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore"
     		loadedResource = "platform:/resource/${projectName}/model/TargetPlatform.xcore"
 
     		uri = grammarURI
