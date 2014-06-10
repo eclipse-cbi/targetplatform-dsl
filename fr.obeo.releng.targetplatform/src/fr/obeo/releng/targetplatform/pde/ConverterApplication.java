@@ -10,6 +10,7 @@
  *******************************************************************************/
 package fr.obeo.releng.targetplatform.pde;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,8 +57,8 @@ public class ConverterApplication implements IApplication {
 		}
 		
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
-		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
-			System.err.println(diagnostic);
+		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+			printDiagnostic(diagnostic, "");
 		}
 			
 		return diagnostic.getCode();
@@ -67,6 +68,17 @@ public class ConverterApplication implements IApplication {
 		return BasicMonitor.toIProgressMonitor(new BasicMonitor.Printing(System.out));
 	}
 	
+	private static void printDiagnostic(Diagnostic diagnostic, String indent) {
+		System.out.print(indent);
+		System.out.println(diagnostic.getMessage());
+		if (diagnostic.getException() != null) {
+			diagnostic.getException().printStackTrace();
+		}
+		for (Iterator<Diagnostic> i = diagnostic.getChildren().iterator(); i
+				.hasNext();) {
+			printDiagnostic((Diagnostic) i.next(), indent + "  ");
+		}
+	}
 	
 	/**
 	 * {@inheritDoc}
