@@ -3,3 +3,5 @@
 /.MySTRINGValueConverter.java._trace
 /.TargetPlatformSTRINGValueConverter.java._trace
 /.FQNConverter.java._trace
+/.ExecutionEnvironmentConverter.java._trace
+/.LocaleConverter.java._trace

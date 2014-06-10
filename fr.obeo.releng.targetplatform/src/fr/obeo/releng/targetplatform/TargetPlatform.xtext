@@ -15,15 +15,18 @@ TargetContent:
 ;
 
 Options: 
-	'with' options+=Option (',' options+=Option)*
+	'with' options+=Option (','? options+=Option)*
 ;
 
 Environment:
-	'operatingSystem' operatingSystem=ID & 
-	'windowingSystem' windowingSystem=ID & 
-	'architecture' architecture=ID & 
-	'localization' localization=Locale &
-	'executionEnvironment' executionEnvironment=ExecutionEnvironment
+	{Environment} 'environment'
+	(
+		('operatingSystem' operatingSystem=ID ','?)? & 
+		('windowingSystem' windowingSystem=ID ','?)? & 
+		('architecture' architecture=ID ','?)? & 
+		('localization' localization=Locale ','?)? &
+		('executionEnvironment' executionEnvironment=ExecutionEnvironment ','?)?
+	)
 ;
 
 IncludeDeclaration:
@@ -32,7 +35,7 @@ IncludeDeclaration:
 
 Location:
 	'location' ((ID=ID)? & uri=STRING) ('{'
-		('with' options+=Option (',' options+=Option)*)?
+		('with' options+=Option (','? options+=Option)*)?
 		ius+=IU*
 	'}')?
 ;
@@ -65,7 +68,7 @@ Locale returns Locale hidden():
 ;
 
 ExecutionEnvironment returns ExecutionEnvironment hidden():
-	ID
+	ID (=> '.' (ID | INT))*
 ;
 
 terminal INT returns ecore::EInt: ('0'..'9')+;

@@ -11,6 +11,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.Environment
+import org.eclipse.jdt.launching.JavaRuntime
+import java.util.Locale
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -221,12 +224,14 @@ class TestGrammar {
 		val tp = parser.parse('''
 			target "TP1"
 			
-			environment Linux, x86_64, motif, en_US, JavaSE-1_7
-			
-			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
-				com.google.guava.^source
-			}
+			environment operatingSystem Windows, architecture x86_64, windowingSystem motif, localization en_US, executionEnvironment JavaSE-1.7
 		''')
+		assertTrue(tp.eResource.errors.join("\n"), tp.eResource.errors.empty)
+		val env = tp.contents.filter(typeof (Environment)).head
+		assertEquals("Windows", env.operatingSystem)
+		assertEquals("x86_64", env.architecture)
+		assertEquals("motif", env.windowingSystem)
+		assertEquals(new Locale("en", "us"), env.localization)
+		assertEquals(JavaRuntime::executionEnvironmentsManager.getEnvironment("JavaSE-1.7"), env.executionEnvironment)
 	}
 }

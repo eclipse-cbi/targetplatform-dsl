@@ -12,7 +12,7 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 @SuppressWarnings("all")
 public class FQNConverter extends AbstractNullSafeConverter<String> {
-  private Set<String> allKeywords;
+  private final Set<String> allKeywords;
   
   public FQNConverter(final Grammar grammar) {
     Set<String> _allKeywords = GrammarUtil.getAllKeywords(grammar);
