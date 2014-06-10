@@ -2,9 +2,9 @@ package fr.obeo.releng.targetplatform.pde;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
 import java.net.URI;
 import java.util.EnumSet;
 import java.util.List;

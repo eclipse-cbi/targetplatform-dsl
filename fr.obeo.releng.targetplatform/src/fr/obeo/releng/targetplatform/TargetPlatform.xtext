@@ -1,21 +1,31 @@
 grammar fr.obeo.releng.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
 
-generate targetplatform "http://www.obeo.fr/releng/TargetPlatform"
-
+import "fr.obeo.releng.targetplatform"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 											
 TargetPlatform:
 	(
 		'target' name=STRING
-		(
-			(includes+=IncludeDeclaration)*
-			('with' options+=Option (',' options+=Option)*)?
-		)
-		
-		locations+=Location*
+		contents+=TargetContent*
 	)?
 ;
-	
+
+TargetContent: 
+	Options | Environment | IncludeDeclaration | Location
+;
+
+Options: 
+	'with' options+=Option (',' options+=Option)*
+;
+
+Environment:
+	'operatingSystem' operatingSystem=ID & 
+	'windowingSystem' windowingSystem=ID & 
+	'architecture' architecture=ID & 
+	'localization' localization=Locale &
+	'executionEnvironment' executionEnvironment=ExecutionEnvironment
+;
+
 IncludeDeclaration:
 	'include' importURI=STRING
 ;
@@ -28,10 +38,10 @@ Location:
 ;
 
 enum Option:
-	INCLUDE_REQUIRED='requirements' |
-	INCLUDE_ALL_ENVIRONMENTS='allEnvironments' |
-	INCLUDE_SOURCE='source' |
-	INCLUDE_CONFIGURE_PHASE='configurePhase'
+	INCLUDE_REQUIRED |
+	INCLUDE_ALL_ENVIRONMENTS |
+	INCLUDE_SOURCE |
+	INCLUDE_CONFIGURE_PHASE
 ;
 
 IU:
@@ -48,6 +58,14 @@ Version hidden():
 
 VersionRange hidden (WS):
 	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
+;
+
+Locale returns Locale hidden():
+	ID
+;
+
+ExecutionEnvironment returns ExecutionEnvironment hidden():
+	ID
 ;
 
 terminal INT returns ecore::EInt: ('0'..'9')+;

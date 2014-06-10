@@ -29,9 +29,6 @@ public class TargetPlatformStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.obeo.fr/releng/TargetPlatform")) {
-		EPackage.Registry.INSTANCE.put("http://www.obeo.fr/releng/TargetPlatform", fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);

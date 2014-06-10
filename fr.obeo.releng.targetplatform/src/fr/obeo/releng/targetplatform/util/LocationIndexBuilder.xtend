@@ -4,8 +4,8 @@ import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
 import com.google.inject.Inject
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.IncludeDeclaration
+import fr.obeo.releng.targetplatform.TargetPlatform
 import java.util.LinkedList
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource

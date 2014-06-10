@@ -4,13 +4,13 @@
 package fr.obeo.releng.targetplatform.ui.labeling
 
 import com.google.inject.Inject
-import fr.obeo.releng.targetplatform.targetplatform.IU
-import fr.obeo.releng.targetplatform.targetplatform.Location
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.IU
+import fr.obeo.releng.targetplatform.IncludeDeclaration
+import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.TargetPlatform
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 
 /**
  * Provides labels for a EObjects.

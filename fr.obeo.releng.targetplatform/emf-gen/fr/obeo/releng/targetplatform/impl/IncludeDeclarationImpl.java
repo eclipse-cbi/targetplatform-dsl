@@ -1,9 +1,9 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.impl;
+package fr.obeo.releng.targetplatform.impl;
 
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
-import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
+import fr.obeo.releng.targetplatform.IncludeDeclaration;
+import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.IncludeDeclarationImpl#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl#getImportURI <em>Import URI</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,7 +65,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return TargetplatformPackage.Literals.INCLUDE_DECLARATION;
+    return TargetPlatformPackage.Literals.INCLUDE_DECLARATION;
   }
 
   /**
@@ -88,7 +88,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
     String oldImportURI = importURI;
     importURI = newImportURI;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.INCLUDE_DECLARATION__IMPORT_URI, oldImportURI, importURI));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI, oldImportURI, importURI));
   }
 
   /**
@@ -101,7 +101,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case TargetplatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
+      case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
         return getImportURI();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case TargetplatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
+      case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
         setImportURI((String)newValue);
         return;
     }
@@ -134,7 +134,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case TargetplatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
+      case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
         setImportURI(IMPORT_URI_EDEFAULT);
         return;
     }
@@ -151,7 +151,7 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case TargetplatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
+      case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
         return IMPORT_URI_EDEFAULT == null ? importURI != null : !IMPORT_URI_EDEFAULT.equals(importURI);
     }
     return super.eIsSet(featureID);

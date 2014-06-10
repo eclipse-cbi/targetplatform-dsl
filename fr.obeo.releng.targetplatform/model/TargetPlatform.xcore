@@ -1,0 +1,61 @@
+@GenModel(prefix="TargetPlatform", modelName="TargetPlatform")
+package fr.obeo.releng.targetplatform
+
+import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
+import java.util.Locale
+
+class TargetPlatform {
+	String name
+	contains TargetContent[] contents  
+	refers derived IncludeDeclaration[] includes get {
+		new UnmodifiableEList(contents.filter(typeof(IncludeDeclaration)).toList)
+	}
+	derived Option[] options get {
+		new UnmodifiableEList(contents.filter(typeof(Options)).map[options].flatten.toList)
+	}
+	refers derived Location[] locations get {
+		new UnmodifiableEList(contents.filter(typeof(Location)).toList)
+	}
+}
+
+interface TargetContent {
+	
+}
+
+class Options extends TargetContent {
+	Option[] options
+}
+
+class Environment extends TargetContent {
+	String operatingSystem
+	String windowingSystem
+	String architecture
+	Locale localization
+	ExecutionEnvironment executionEnvironment
+}
+
+type Locale wraps Locale
+type ExecutionEnvironment wraps org.eclipse.jdt.launching.environments.IExecutionEnvironment
+
+class Location extends TargetContent {
+	String ID
+	String uri
+	Option[] options
+	contains IU[] ius
+}
+
+class IncludeDeclaration extends TargetContent {
+	String importURI
+}
+
+class IU {
+	String ID
+	String version
+}
+
+enum Option {
+	INCLUDE_REQUIRED as 'requirements' = 0 
+	INCLUDE_ALL_ENVIRONMENTS as 'allEnvironments' = 1 
+	INCLUDE_SOURCE as 'source' = 2
+	INCLUDE_CONFIGURE_PHASE as 'configurePhase' = 3
+}

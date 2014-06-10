@@ -2,11 +2,11 @@ package fr.obeo.releng.targetplatform.tests;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
-import fr.obeo.releng.targetplatform.targetplatform.IU;
-import fr.obeo.releng.targetplatform.targetplatform.Location;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -111,7 +111,7 @@ public class TestGrammar {
   }
   
   @Test
-  public void testLocationOption() {
+  public void testOption() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"a target platform\"");
@@ -459,6 +459,32 @@ public class TestGrammar {
       Assert.assertEquals("com.google.guava", _head);
       Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
       Assert.assertEquals("com.google.guava.source", _get);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("environment Linux, x86_64, motif, en_US, JavaSE-1_7");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava.^source");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp = this.parser.parse(_builder);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

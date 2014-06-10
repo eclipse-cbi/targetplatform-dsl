@@ -5,9 +5,9 @@ package fr.obeo.releng.targetplatform.ui.quickfix;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
-import fr.obeo.releng.targetplatform.targetplatform.Location;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;

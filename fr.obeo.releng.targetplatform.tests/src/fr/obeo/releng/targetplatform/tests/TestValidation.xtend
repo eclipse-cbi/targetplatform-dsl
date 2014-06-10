@@ -3,11 +3,13 @@ package fr.obeo.releng.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.name.Named
+import fr.obeo.releng.targetplatform.IU
+import fr.obeo.releng.targetplatform.IncludeDeclaration
+import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.targetplatform.IU
-import fr.obeo.releng.targetplatform.targetplatform.Location
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -20,8 +22,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.emf.common.util.URI
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

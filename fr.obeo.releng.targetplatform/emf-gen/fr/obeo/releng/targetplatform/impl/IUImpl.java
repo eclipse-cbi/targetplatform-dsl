@@ -1,9 +1,9 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.impl;
+package fr.obeo.releng.targetplatform.impl;
 
-import fr.obeo.releng.targetplatform.targetplatform.IU;
-import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
+import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.IUImpl#getID <em>ID</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.IUImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getID <em>ID</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,7 +86,7 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
   @Override
   protected EClass eStaticClass()
   {
-    return TargetplatformPackage.Literals.IU;
+    return TargetPlatformPackage.Literals.IU;
   }
 
   /**
@@ -109,7 +109,7 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
     String oldID = id;
     id = newID;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.IU__ID, oldID, id));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__ID, oldID, id));
   }
 
   /**
@@ -132,7 +132,7 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
     String oldVersion = version;
     version = newVersion;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.IU__VERSION, oldVersion, version));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__VERSION, oldVersion, version));
   }
 
   /**
@@ -145,9 +145,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
   {
     switch (featureID)
     {
-      case TargetplatformPackage.IU__ID:
+      case TargetPlatformPackage.IU__ID:
         return getID();
-      case TargetplatformPackage.IU__VERSION:
+      case TargetPlatformPackage.IU__VERSION:
         return getVersion();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -163,10 +163,10 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
   {
     switch (featureID)
     {
-      case TargetplatformPackage.IU__ID:
+      case TargetPlatformPackage.IU__ID:
         setID((String)newValue);
         return;
-      case TargetplatformPackage.IU__VERSION:
+      case TargetPlatformPackage.IU__VERSION:
         setVersion((String)newValue);
         return;
     }
@@ -183,10 +183,10 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
   {
     switch (featureID)
     {
-      case TargetplatformPackage.IU__ID:
+      case TargetPlatformPackage.IU__ID:
         setID(ID_EDEFAULT);
         return;
-      case TargetplatformPackage.IU__VERSION:
+      case TargetPlatformPackage.IU__VERSION:
         setVersion(VERSION_EDEFAULT);
         return;
     }
@@ -203,9 +203,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU
   {
     switch (featureID)
     {
-      case TargetplatformPackage.IU__ID:
+      case TargetPlatformPackage.IU__ID:
         return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-      case TargetplatformPackage.IU__VERSION:
+      case TargetPlatformPackage.IU__VERSION:
         return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
     }
     return super.eIsSet(featureID);

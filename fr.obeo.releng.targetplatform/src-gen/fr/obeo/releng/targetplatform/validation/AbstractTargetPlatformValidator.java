@@ -14,7 +14,7 @@ public class AbstractTargetPlatformValidator extends org.eclipse.xtext.validatio
 	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage.eINSTANCE);
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("fr.obeo.releng.targetplatform"));
 		return result;
 	}
 }

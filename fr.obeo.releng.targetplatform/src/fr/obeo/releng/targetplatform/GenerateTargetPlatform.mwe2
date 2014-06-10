@@ -25,10 +25,6 @@ Workflow {
     }
     
     component = DirectoryCleaner {
-    	directory = "${runtimeProject}/model"
-    }
-    
-    component = DirectoryCleaner {
     	directory = "${runtimeProject}.ui/src-gen"
     }
     
@@ -44,6 +40,8 @@ Workflow {
     	projectNameUi = "${projectName}.ui"
     	encoding = encoding
     	language = auto-inject {
+    		loadedResource = "platform:/resource/${projectName}/model/TargetPlatform.xcore"
+
     		uri = grammarURI
     
     		// Java API to access grammar elements (required by several other fragments)

@@ -1,6 +1,6 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform;
+package fr.obeo.releng.targetplatform;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Option</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getOption()
+ * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getOption()
  * @model
  * @generated
  */

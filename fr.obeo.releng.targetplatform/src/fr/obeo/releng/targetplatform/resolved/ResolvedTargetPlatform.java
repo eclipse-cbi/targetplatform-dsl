@@ -27,11 +27,11 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
-import fr.obeo.releng.targetplatform.targetplatform.IU;
-import fr.obeo.releng.targetplatform.targetplatform.Location;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 

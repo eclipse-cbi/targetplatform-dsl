@@ -3,30 +3,30 @@ package fr.obeo.releng.targetplatform.tests
 import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
+import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.Converter
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import java.io.File
 import java.net.URISyntaxException
 import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.BasicMonitor.Printing
+import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.equinox.p2.core.ProvisionException
 import org.eclipse.equinox.p2.metadata.Version
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
-import org.eclipse.emf.common.util.Diagnostic
-import java.io.File
-import org.junit.BeforeClass
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

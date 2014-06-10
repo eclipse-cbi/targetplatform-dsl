@@ -8,11 +8,11 @@ import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
 import com.google.inject.Inject
-import fr.obeo.releng.targetplatform.targetplatform.IU
-import fr.obeo.releng.targetplatform.targetplatform.Location
-import fr.obeo.releng.targetplatform.targetplatform.Option
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
+import fr.obeo.releng.targetplatform.IU
+import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.TargetPlatformPackage
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.util.List
 import org.eclipse.emf.ecore.EObject
@@ -49,12 +49,12 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
-		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options, TargetplatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
+		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options, TargetPlatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
 	}
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
-		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 	}
 	
 	private def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
@@ -74,7 +74,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check // TESTED
 	def checkNoLocationOptionIfGlobalOptions(Location location) {
 		if (!location.options.empty && !(location.eContainer as TargetPlatform).options.empty) {
-			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
 			acceptError("You can not define options on location and on target platform.",
@@ -90,7 +90,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
 			if (!conflicts.empty) {
 				listOptions.forEach[_ |
-					val nodes = NodeModelUtils::findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+					val nodes = NodeModelUtils::findNodesForFeature(_, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 					if (!nodes.empty) {
 						val withKeyword = (nodes.head as CompositeNode).previousSibling
 						val lastOption = (nodes.last as CompositeNode)
@@ -111,7 +111,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val targetPlatform = location.eContainer as TargetPlatform
 		
 		if (targetPlatform.options.empty && !location.options.empty) {
-			val nodes = NodeModelUtils::findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS)
+			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
 			acceptWarning("Options on location are deprecated. Define the option at the target level.",
@@ -122,11 +122,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check // TESTED
 	def deprecateIUVersionRangeWihString(IU iu) {
 		if (iu.version != null) {
-			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetplatformPackage.Literals.IU__VERSION)
+			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION)
 			if ("STRING".equals((nodes.head.grammarElement as RuleCall).rule.name)) {
 				warning("Usage of strings is deprecated for version range. You should remove the quotes.",
 					iu, 
-					TargetplatformPackage.Literals.IU__VERSION,
+					TargetPlatformPackage.Literals.IU__VERSION,
 					DEPRECATE__STRINGS_ON_IU_VERSION)
 			}
 		}
@@ -151,7 +151,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			if (location.eResource == resource) {
 				error('ID must be unique for each location', 
 					location,
-					TargetplatformPackage.Literals.LOCATION__ID, 
+					TargetPlatformPackage.Literals.LOCATION__ID, 
 					CHECK__LOCATION_ID_UNIQNESS
 				)
 			} else {
@@ -164,7 +164,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				conflictualInclude.forEach[
 					error('''ID '«location.ID»' is duplicated in the included target platform''', 
 						it, 
-						TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+						TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
 						CHECK__LOCATION_ID_UNIQNESS
 					)
 				]
@@ -180,7 +180,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			if (cyclingImport != null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
-					TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+					TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
 					CHECK__INCLUDE_CYCLE
 				)
 			}
@@ -215,7 +215,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				conflictualInclude.forEach[
 					error(msg, 
 						it, 
-						TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
+						TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
 						CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION
 					)
 				]
@@ -229,7 +229,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					''';
 					
 					internalLocations.filter[!externalIDs.contains(Strings.nullToEmpty(ID))].forEach[
-						error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.uri)
+						error(msg, it, TargetPlatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.uri)
 					]
 				}
 			} 
@@ -237,7 +237,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			if (externalIDs.size < 1 && internalIDs.size > 1) {
 				val msg = '''The ID for location '«locationURI»' must be unique. Found '«internalIDs.join("', '")»'.''';
 				internalLocations.forEach[
-					error(msg, it, TargetplatformPackage.Literals.LOCATION__ID, CHECK__LOCATION_CONFLICTUAL_ID)
+					error(msg, it, TargetPlatformPackage.Literals.LOCATION__ID, CHECK__LOCATION_CONFLICTUAL_ID)
 				]
 			}
 		}

@@ -24,27 +24,14 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTargetKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Assignment cIncludesAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cIncludesIncludeDeclarationParserRuleCall_2_0_0 = (RuleCall)cIncludesAssignment_2_0.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Keyword cWithKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cOptionsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cOptionsOptionEnumRuleCall_2_1_1_0 = (RuleCall)cOptionsAssignment_2_1_1.eContents().get(0);
-		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
-		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
-		private final Assignment cOptionsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
-		private final RuleCall cOptionsOptionEnumRuleCall_2_1_2_1_0 = (RuleCall)cOptionsAssignment_2_1_2_1.eContents().get(0);
-		private final Assignment cLocationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cLocationsLocationParserRuleCall_3_0 = (RuleCall)cLocationsAssignment_3.eContents().get(0);
+		private final Assignment cContentsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cContentsTargetContentParserRuleCall_2_0 = (RuleCall)cContentsAssignment_2.eContents().get(0);
 		
 		//TargetPlatform:
-		//	("target" name=STRING (includes+=IncludeDeclaration* ("with" options+=Option ("," options+=Option)*)?)
-		//	locations+=Location*)?;
+		//	("target" name=STRING contents+=TargetContent*)?;
 		public ParserRule getRule() { return rule; }
 
-		//("target" name=STRING (includes+=IncludeDeclaration* ("with" options+=Option ("," options+=Option)*)?)
-		//locations+=Location*)?
+		//("target" name=STRING contents+=TargetContent*)?
 		public Group getGroup() { return cGroup; }
 
 		//"target"
@@ -56,44 +43,173 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 
-		//includes+=IncludeDeclaration* ("with" options+=Option ("," options+=Option)*)?
-		public Group getGroup_2() { return cGroup_2; }
+		//contents+=TargetContent*
+		public Assignment getContentsAssignment_2() { return cContentsAssignment_2; }
 
-		//includes+=IncludeDeclaration*
-		public Assignment getIncludesAssignment_2_0() { return cIncludesAssignment_2_0; }
+		//TargetContent
+		public RuleCall getContentsTargetContentParserRuleCall_2_0() { return cContentsTargetContentParserRuleCall_2_0; }
+	}
+
+	public class TargetContentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TargetContent");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cOptionsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEnvironmentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIncludeDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLocationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//TargetContent:
+		//	Options | Environment | IncludeDeclaration | Location;
+		public ParserRule getRule() { return rule; }
+
+		//Options | Environment | IncludeDeclaration | Location
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Options
+		public RuleCall getOptionsParserRuleCall_0() { return cOptionsParserRuleCall_0; }
+
+		//Environment
+		public RuleCall getEnvironmentParserRuleCall_1() { return cEnvironmentParserRuleCall_1; }
 
 		//IncludeDeclaration
-		public RuleCall getIncludesIncludeDeclarationParserRuleCall_2_0_0() { return cIncludesIncludeDeclarationParserRuleCall_2_0_0; }
-
-		//("with" options+=Option ("," options+=Option)*)?
-		public Group getGroup_2_1() { return cGroup_2_1; }
-
-		//"with"
-		public Keyword getWithKeyword_2_1_0() { return cWithKeyword_2_1_0; }
-
-		//options+=Option
-		public Assignment getOptionsAssignment_2_1_1() { return cOptionsAssignment_2_1_1; }
-
-		//Option
-		public RuleCall getOptionsOptionEnumRuleCall_2_1_1_0() { return cOptionsOptionEnumRuleCall_2_1_1_0; }
-
-		//("," options+=Option)*
-		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
-
-		//","
-		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
-
-		//options+=Option
-		public Assignment getOptionsAssignment_2_1_2_1() { return cOptionsAssignment_2_1_2_1; }
-
-		//Option
-		public RuleCall getOptionsOptionEnumRuleCall_2_1_2_1_0() { return cOptionsOptionEnumRuleCall_2_1_2_1_0; }
-
-		//locations+=Location*
-		public Assignment getLocationsAssignment_3() { return cLocationsAssignment_3; }
+		public RuleCall getIncludeDeclarationParserRuleCall_2() { return cIncludeDeclarationParserRuleCall_2; }
 
 		//Location
-		public RuleCall getLocationsLocationParserRuleCall_3_0() { return cLocationsLocationParserRuleCall_3_0; }
+		public RuleCall getLocationParserRuleCall_3() { return cLocationParserRuleCall_3; }
+	}
+
+	public class OptionsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Options");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cOptionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOptionsOptionEnumRuleCall_1_0 = (RuleCall)cOptionsAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOptionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOptionsOptionEnumRuleCall_2_1_0 = (RuleCall)cOptionsAssignment_2_1.eContents().get(0);
+		
+		//Options:
+		//	"with" options+=Option ("," options+=Option)*;
+		public ParserRule getRule() { return rule; }
+
+		//"with" options+=Option ("," options+=Option)*
+		public Group getGroup() { return cGroup; }
+
+		//"with"
+		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
+
+		//options+=Option
+		public Assignment getOptionsAssignment_1() { return cOptionsAssignment_1; }
+
+		//Option
+		public RuleCall getOptionsOptionEnumRuleCall_1_0() { return cOptionsOptionEnumRuleCall_1_0; }
+
+		//("," options+=Option)*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+
+		//options+=Option
+		public Assignment getOptionsAssignment_2_1() { return cOptionsAssignment_2_1; }
+
+		//Option
+		public RuleCall getOptionsOptionEnumRuleCall_2_1_0() { return cOptionsOptionEnumRuleCall_2_1_0; }
+	}
+
+	public class EnvironmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Environment");
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cOperatingSystemKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cOperatingSystemAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cOperatingSystemIDTerminalRuleCall_0_1_0 = (RuleCall)cOperatingSystemAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Keyword cWindowingSystemKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cWindowingSystemAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cWindowingSystemIDTerminalRuleCall_1_1_0 = (RuleCall)cWindowingSystemAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
+		private final Keyword cArchitectureKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cArchitectureAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cArchitectureIDTerminalRuleCall_2_1_0 = (RuleCall)cArchitectureAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
+		private final Keyword cLocalizationKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cLocalizationAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cLocalizationLocaleParserRuleCall_3_1_0 = (RuleCall)cLocalizationAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
+		private final Keyword cExecutionEnvironmentKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cExecutionEnvironmentAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cExecutionEnvironmentExecutionEnvironmentParserRuleCall_4_1_0 = (RuleCall)cExecutionEnvironmentAssignment_4_1.eContents().get(0);
+		
+		//Environment:
+		//	"operatingSystem" operatingSystem=ID & "windowingSystem" windowingSystem=ID & "architecture" architecture=ID &
+		//	"localization" localization=Locale & "executionEnvironment" executionEnvironment=ExecutionEnvironment;
+		public ParserRule getRule() { return rule; }
+
+		//"operatingSystem" operatingSystem=ID & "windowingSystem" windowingSystem=ID & "architecture" architecture=ID &
+		//"localization" localization=Locale & "executionEnvironment" executionEnvironment=ExecutionEnvironment
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+
+		//"operatingSystem" operatingSystem=ID
+		public Group getGroup_0() { return cGroup_0; }
+
+		//"operatingSystem"
+		public Keyword getOperatingSystemKeyword_0_0() { return cOperatingSystemKeyword_0_0; }
+
+		//operatingSystem=ID
+		public Assignment getOperatingSystemAssignment_0_1() { return cOperatingSystemAssignment_0_1; }
+
+		//ID
+		public RuleCall getOperatingSystemIDTerminalRuleCall_0_1_0() { return cOperatingSystemIDTerminalRuleCall_0_1_0; }
+
+		//"windowingSystem" windowingSystem=ID
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"windowingSystem"
+		public Keyword getWindowingSystemKeyword_1_0() { return cWindowingSystemKeyword_1_0; }
+
+		//windowingSystem=ID
+		public Assignment getWindowingSystemAssignment_1_1() { return cWindowingSystemAssignment_1_1; }
+
+		//ID
+		public RuleCall getWindowingSystemIDTerminalRuleCall_1_1_0() { return cWindowingSystemIDTerminalRuleCall_1_1_0; }
+
+		//"architecture" architecture=ID
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"architecture"
+		public Keyword getArchitectureKeyword_2_0() { return cArchitectureKeyword_2_0; }
+
+		//architecture=ID
+		public Assignment getArchitectureAssignment_2_1() { return cArchitectureAssignment_2_1; }
+
+		//ID
+		public RuleCall getArchitectureIDTerminalRuleCall_2_1_0() { return cArchitectureIDTerminalRuleCall_2_1_0; }
+
+		//"localization" localization=Locale
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"localization"
+		public Keyword getLocalizationKeyword_3_0() { return cLocalizationKeyword_3_0; }
+
+		//localization=Locale
+		public Assignment getLocalizationAssignment_3_1() { return cLocalizationAssignment_3_1; }
+
+		//Locale
+		public RuleCall getLocalizationLocaleParserRuleCall_3_1_0() { return cLocalizationLocaleParserRuleCall_3_1_0; }
+
+		//"executionEnvironment" executionEnvironment=ExecutionEnvironment
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"executionEnvironment"
+		public Keyword getExecutionEnvironmentKeyword_4_0() { return cExecutionEnvironmentKeyword_4_0; }
+
+		//executionEnvironment=ExecutionEnvironment
+		public Assignment getExecutionEnvironmentAssignment_4_1() { return cExecutionEnvironmentAssignment_4_1; }
+
+		//ExecutionEnvironment
+		public RuleCall getExecutionEnvironmentExecutionEnvironmentParserRuleCall_4_1_0() { return cExecutionEnvironmentExecutionEnvironmentParserRuleCall_4_1_0; }
 	}
 
 	public class IncludeDeclarationElements extends AbstractParserRuleElementFinder {
@@ -411,6 +527,30 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//"lazy"
 		public Keyword getLazyKeyword_2() { return cLazyKeyword_2; }
 	}
+
+	public class LocaleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Locale");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Locale hidden():
+		//	ID;
+		public ParserRule getRule() { return rule; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
+
+	public class ExecutionEnvironmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExecutionEnvironment");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//ExecutionEnvironment hidden():
+		//	ID;
+		public ParserRule getRule() { return rule; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
 	
 	
 	public class OptionElements extends AbstractEnumRuleElementFinder {
@@ -460,6 +600,9 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	private TargetPlatformElements pTargetPlatform;
+	private TargetContentElements pTargetContent;
+	private OptionsElements pOptions;
+	private EnvironmentElements pEnvironment;
 	private IncludeDeclarationElements pIncludeDeclaration;
 	private LocationElements pLocation;
 	private OptionElements unknownRuleOption;
@@ -467,6 +610,8 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private QualifiedNameElements pQualifiedName;
 	private VersionElements pVersion;
 	private VersionRangeElements pVersionRange;
+	private LocaleElements pLocale;
+	private ExecutionEnvironmentElements pExecutionEnvironment;
 	private TerminalRule tINT;
 	private TerminalRule tID;
 	
@@ -509,14 +654,44 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TargetPlatform:
-	//	("target" name=STRING (includes+=IncludeDeclaration* ("with" options+=Option ("," options+=Option)*)?)
-	//	locations+=Location*)?;
+	//	("target" name=STRING contents+=TargetContent*)?;
 	public TargetPlatformElements getTargetPlatformAccess() {
 		return (pTargetPlatform != null) ? pTargetPlatform : (pTargetPlatform = new TargetPlatformElements());
 	}
 	
 	public ParserRule getTargetPlatformRule() {
 		return getTargetPlatformAccess().getRule();
+	}
+
+	//TargetContent:
+	//	Options | Environment | IncludeDeclaration | Location;
+	public TargetContentElements getTargetContentAccess() {
+		return (pTargetContent != null) ? pTargetContent : (pTargetContent = new TargetContentElements());
+	}
+	
+	public ParserRule getTargetContentRule() {
+		return getTargetContentAccess().getRule();
+	}
+
+	//Options:
+	//	"with" options+=Option ("," options+=Option)*;
+	public OptionsElements getOptionsAccess() {
+		return (pOptions != null) ? pOptions : (pOptions = new OptionsElements());
+	}
+	
+	public ParserRule getOptionsRule() {
+		return getOptionsAccess().getRule();
+	}
+
+	//Environment:
+	//	"operatingSystem" operatingSystem=ID & "windowingSystem" windowingSystem=ID & "architecture" architecture=ID &
+	//	"localization" localization=Locale & "executionEnvironment" executionEnvironment=ExecutionEnvironment;
+	public EnvironmentElements getEnvironmentAccess() {
+		return (pEnvironment != null) ? pEnvironment : (pEnvironment = new EnvironmentElements());
+	}
+	
+	public ParserRule getEnvironmentRule() {
+		return getEnvironmentAccess().getRule();
 	}
 
 	//IncludeDeclaration:
@@ -590,44 +765,64 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersionRangeAccess().getRule();
 	}
 
+	//Locale hidden():
+	//	ID;
+	public LocaleElements getLocaleAccess() {
+		return (pLocale != null) ? pLocale : (pLocale = new LocaleElements());
+	}
+	
+	public ParserRule getLocaleRule() {
+		return getLocaleAccess().getRule();
+	}
+
+	//ExecutionEnvironment hidden():
+	//	ID;
+	public ExecutionEnvironmentElements getExecutionEnvironmentAccess() {
+		return (pExecutionEnvironment != null) ? pExecutionEnvironment : (pExecutionEnvironment = new ExecutionEnvironmentElements());
+	}
+	
+	public ParserRule getExecutionEnvironmentRule() {
+		return getExecutionEnvironmentAccess().getRule();
+	}
+
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
-	//terminal ID:
+	//terminal ID returns ecore::EString:
 	//	"^"? ("a".."z" | "A".."Z" | "_" | "-" | "0".."9")+;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
-	//terminal STRING:
+	//terminal STRING returns ecore::EString:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
-	//terminal ML_COMMENT:
+	//terminal ML_COMMENT returns ecore::EString:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	//terminal SL_COMMENT:
+	//terminal SL_COMMENT returns ecore::EString:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	//terminal WS:
+	//terminal WS returns ecore::EString:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
-	//terminal ANY_OTHER:
+	//terminal ANY_OTHER returns ecore::EString:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

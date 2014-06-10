@@ -1,11 +1,11 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.impl;
+package fr.obeo.releng.targetplatform.impl;
 
-import fr.obeo.releng.targetplatform.targetplatform.IU;
-import fr.obeo.releng.targetplatform.targetplatform.Location;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
-import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
+import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
 import java.util.Collection;
 
@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getID <em>ID</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getOptions <em>Options</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.impl.LocationImpl#getIus <em>Ius</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getID <em>ID</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getIus <em>Ius</em>}</li>
  * </ul>
  * </p>
  *
@@ -120,7 +120,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   @Override
   protected EClass eStaticClass()
   {
-    return TargetplatformPackage.Literals.LOCATION;
+    return TargetPlatformPackage.Literals.LOCATION;
   }
 
   /**
@@ -143,7 +143,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     String oldID = id;
     id = newID;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.LOCATION__ID, oldID, id));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__ID, oldID, id));
   }
 
   /**
@@ -166,7 +166,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
     String oldUri = uri;
     uri = newUri;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetplatformPackage.LOCATION__URI, oldUri, uri));
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__URI, oldUri, uri));
   }
 
   /**
@@ -178,7 +178,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     if (options == null)
     {
-      options = new EDataTypeEList<Option>(Option.class, this, TargetplatformPackage.LOCATION__OPTIONS);
+      options = new EDataTypeEList<Option>(Option.class, this, TargetPlatformPackage.LOCATION__OPTIONS);
     }
     return options;
   }
@@ -192,7 +192,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     if (ius == null)
     {
-      ius = new EObjectContainmentEList<IU>(IU.class, this, TargetplatformPackage.LOCATION__IUS);
+      ius = new EObjectContainmentEList<IU>(IU.class, this, TargetPlatformPackage.LOCATION__IUS);
     }
     return ius;
   }
@@ -207,7 +207,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     switch (featureID)
     {
-      case TargetplatformPackage.LOCATION__IUS:
+      case TargetPlatformPackage.LOCATION__IUS:
         return ((InternalEList<?>)getIus()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -223,13 +223,13 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     switch (featureID)
     {
-      case TargetplatformPackage.LOCATION__ID:
+      case TargetPlatformPackage.LOCATION__ID:
         return getID();
-      case TargetplatformPackage.LOCATION__URI:
+      case TargetPlatformPackage.LOCATION__URI:
         return getUri();
-      case TargetplatformPackage.LOCATION__OPTIONS:
+      case TargetPlatformPackage.LOCATION__OPTIONS:
         return getOptions();
-      case TargetplatformPackage.LOCATION__IUS:
+      case TargetPlatformPackage.LOCATION__IUS:
         return getIus();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -246,17 +246,17 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     switch (featureID)
     {
-      case TargetplatformPackage.LOCATION__ID:
+      case TargetPlatformPackage.LOCATION__ID:
         setID((String)newValue);
         return;
-      case TargetplatformPackage.LOCATION__URI:
+      case TargetPlatformPackage.LOCATION__URI:
         setUri((String)newValue);
         return;
-      case TargetplatformPackage.LOCATION__OPTIONS:
+      case TargetPlatformPackage.LOCATION__OPTIONS:
         getOptions().clear();
         getOptions().addAll((Collection<? extends Option>)newValue);
         return;
-      case TargetplatformPackage.LOCATION__IUS:
+      case TargetPlatformPackage.LOCATION__IUS:
         getIus().clear();
         getIus().addAll((Collection<? extends IU>)newValue);
         return;
@@ -274,16 +274,16 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     switch (featureID)
     {
-      case TargetplatformPackage.LOCATION__ID:
+      case TargetPlatformPackage.LOCATION__ID:
         setID(ID_EDEFAULT);
         return;
-      case TargetplatformPackage.LOCATION__URI:
+      case TargetPlatformPackage.LOCATION__URI:
         setUri(URI_EDEFAULT);
         return;
-      case TargetplatformPackage.LOCATION__OPTIONS:
+      case TargetPlatformPackage.LOCATION__OPTIONS:
         getOptions().clear();
         return;
-      case TargetplatformPackage.LOCATION__IUS:
+      case TargetPlatformPackage.LOCATION__IUS:
         getIus().clear();
         return;
     }
@@ -300,13 +300,13 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
   {
     switch (featureID)
     {
-      case TargetplatformPackage.LOCATION__ID:
+      case TargetPlatformPackage.LOCATION__ID:
         return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-      case TargetplatformPackage.LOCATION__URI:
+      case TargetPlatformPackage.LOCATION__URI:
         return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-      case TargetplatformPackage.LOCATION__OPTIONS:
+      case TargetPlatformPackage.LOCATION__OPTIONS:
         return options != null && !options.isEmpty();
-      case TargetplatformPackage.LOCATION__IUS:
+      case TargetPlatformPackage.LOCATION__IUS:
         return ius != null && !ius.isEmpty();
     }
     return super.eIsSet(featureID);

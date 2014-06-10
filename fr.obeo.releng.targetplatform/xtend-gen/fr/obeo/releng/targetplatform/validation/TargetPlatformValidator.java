@@ -14,12 +14,12 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import fr.obeo.releng.targetplatform.targetplatform.IU;
-import fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration;
-import fr.obeo.releng.targetplatform.targetplatform.Location;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage;
+import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.IncludeDeclaration;
+import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.Collection;
@@ -80,13 +80,13 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
     EList<Option> _options = targetPlatform.getOptions();
-    this.doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, _options, TargetplatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
+    this.doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, _options, TargetPlatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
   }
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
     EList<Option> _options = location.getOptions();
-    this.doCheckAllEnvAndRequiredAreSelfExluding(location, _options, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+    this.doCheckAllEnvAndRequiredAreSelfExluding(location, _options, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
   }
   
   private void doCheckAllEnvAndRequiredAreSelfExluding(final EObject optionOwner, final List<Option> options, final EStructuralFeature feature) {
@@ -122,7 +122,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       _and = _not_1;
     }
     if (_and) {
-      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
       INode _head = IterableExtensions.<INode>head(nodes);
       final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
       INode _last = IterableExtensions.<INode>last(nodes);
@@ -160,7 +160,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       if (_not) {
         final Procedure1<Location> _function_1 = new Procedure1<Location>() {
           public void apply(final Location _) {
-            final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+            final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
             boolean _isEmpty = nodes.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
@@ -202,7 +202,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       _and = _not;
     }
     if (_and) {
-      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetplatformPackage.Literals.LOCATION__OPTIONS);
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
       INode _head = IterableExtensions.<INode>head(nodes);
       final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
       INode _last = IterableExtensions.<INode>last(nodes);
@@ -220,7 +220,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     String _version = iu.getVersion();
     boolean _notEquals = (!Objects.equal(_version, null));
     if (_notEquals) {
-      final List<INode> nodes = NodeModelUtils.findNodesForFeature(iu, TargetplatformPackage.Literals.IU__VERSION);
+      final List<INode> nodes = NodeModelUtils.findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION);
       INode _head = IterableExtensions.<INode>head(nodes);
       EObject _grammarElement = _head.getGrammarElement();
       AbstractRule _rule = ((RuleCall) _grammarElement).getRule();
@@ -228,7 +228,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       boolean _equals = "STRING".equals(_name);
       if (_equals) {
         this.warning("Usage of strings is deprecated for version range. You should remove the quotes.", iu, 
-          TargetplatformPackage.Literals.IU__VERSION, 
+          TargetPlatformPackage.Literals.IU__VERSION, 
           TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION);
       }
     }
@@ -306,7 +306,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         boolean _equals = Objects.equal(_eResource, resource);
         if (_equals) {
           TargetPlatformValidator.this.error("ID must be unique for each location", location, 
-            TargetplatformPackage.Literals.LOCATION__ID, 
+            TargetPlatformPackage.Literals.LOCATION__ID, 
             TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
         } else {
           EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
@@ -348,7 +348,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
               _builder.append(_iD, "");
               _builder.append("\' is duplicated in the included target platform");
               TargetPlatformValidator.this.error(_builder.toString(), it, 
-                TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
+                TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
                 TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
             }
           };
@@ -391,7 +391,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         _builder.append(_join, "");
         _builder.append("\'.");
         this.error(_builder.toString(), cyclingImport, 
-          TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
+          TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
           TargetPlatformValidator.CHECK__INCLUDE_CYCLE);
       }
     }
@@ -507,7 +507,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           final Procedure1<IncludeDeclaration> _function_7 = new Procedure1<IncludeDeclaration>() {
             public void apply(final IncludeDeclaration it) {
               TargetPlatformValidator.this.error(msg, it, 
-                TargetplatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
+                TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
                 TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION);
             }
           };
@@ -555,7 +555,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                 String _head = IterableExtensions.<String>head(externalIDs);
                 Location _head_1 = IterableExtensions.<Location>head(externalLocations);
                 String _uri = _head_1.getUri();
-                TargetPlatformValidator.this.error(msg_1, it, TargetplatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, _head, _uri);
+                TargetPlatformValidator.this.error(msg_1, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, _head, _uri);
               }
             };
             IterableExtensions.<Location>forEach(_filter, _function_10);
@@ -582,7 +582,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           final String msg_2 = _builder_2.toString();
           final Procedure1<Location> _function_11 = new Procedure1<Location>() {
             public void apply(final Location it) {
-              TargetPlatformValidator.this.error(msg_2, it, TargetplatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
+              TargetPlatformValidator.this.error(msg_2, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
             }
           };
           IterableExtensions.<Location>forEach(internalLocations, _function_11);

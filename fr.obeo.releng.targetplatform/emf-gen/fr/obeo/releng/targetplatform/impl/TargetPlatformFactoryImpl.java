@@ -1,8 +1,10 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.impl;
+package fr.obeo.releng.targetplatform.impl;
 
-import fr.obeo.releng.targetplatform.targetplatform.*;
+import fr.obeo.releng.targetplatform.*;
+
+import java.util.Locale;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -13,13 +15,15 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
  * @generated
  */
-public class TargetplatformFactoryImpl extends EFactoryImpl implements TargetplatformFactory
+public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPlatformFactory
 {
   /**
    * Creates the default factory implementation.
@@ -27,21 +31,21 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public static TargetplatformFactory init()
+  public static TargetPlatformFactory init()
   {
     try
     {
-      TargetplatformFactory theTargetplatformFactory = (TargetplatformFactory)EPackage.Registry.INSTANCE.getEFactory(TargetplatformPackage.eNS_URI);
-      if (theTargetplatformFactory != null)
+      TargetPlatformFactory theTargetPlatformFactory = (TargetPlatformFactory)EPackage.Registry.INSTANCE.getEFactory(TargetPlatformPackage.eNS_URI);
+      if (theTargetPlatformFactory != null)
       {
-        return theTargetplatformFactory;
+        return theTargetPlatformFactory;
       }
     }
     catch (Exception exception)
     {
       EcorePlugin.INSTANCE.log(exception);
     }
-    return new TargetplatformFactoryImpl();
+    return new TargetPlatformFactoryImpl();
   }
 
   /**
@@ -50,7 +54,7 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public TargetplatformFactoryImpl()
+  public TargetPlatformFactoryImpl()
   {
     super();
   }
@@ -65,10 +69,12 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     switch (eClass.getClassifierID())
     {
-      case TargetplatformPackage.TARGET_PLATFORM: return createTargetPlatform();
-      case TargetplatformPackage.INCLUDE_DECLARATION: return createIncludeDeclaration();
-      case TargetplatformPackage.LOCATION: return createLocation();
-      case TargetplatformPackage.IU: return createIU();
+      case TargetPlatformPackage.TARGET_PLATFORM: return createTargetPlatform();
+      case TargetPlatformPackage.OPTIONS: return createOptions();
+      case TargetPlatformPackage.ENVIRONMENT: return createEnvironment();
+      case TargetPlatformPackage.LOCATION: return createLocation();
+      case TargetPlatformPackage.INCLUDE_DECLARATION: return createIncludeDeclaration();
+      case TargetPlatformPackage.IU: return createIU();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -84,8 +90,12 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     switch (eDataType.getClassifierID())
     {
-      case TargetplatformPackage.OPTION:
+      case TargetPlatformPackage.OPTION:
         return createOptionFromString(eDataType, initialValue);
+      case TargetPlatformPackage.LOCALE:
+        return createLocaleFromString(eDataType, initialValue);
+      case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
+        return createExecutionEnvironmentFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -101,8 +111,12 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     switch (eDataType.getClassifierID())
     {
-      case TargetplatformPackage.OPTION:
+      case TargetPlatformPackage.OPTION:
         return convertOptionToString(eDataType, instanceValue);
+      case TargetPlatformPackage.LOCALE:
+        return convertLocaleToString(eDataType, instanceValue);
+      case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
+        return convertExecutionEnvironmentToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -124,10 +138,21 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public IncludeDeclaration createIncludeDeclaration()
+  public Options createOptions()
   {
-    IncludeDeclarationImpl includeDeclaration = new IncludeDeclarationImpl();
-    return includeDeclaration;
+    OptionsImpl options = new OptionsImpl();
+    return options;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Environment createEnvironment()
+  {
+    EnvironmentImpl environment = new EnvironmentImpl();
+    return environment;
   }
 
   /**
@@ -139,6 +164,17 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
   {
     LocationImpl location = new LocationImpl();
     return location;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IncludeDeclaration createIncludeDeclaration()
+  {
+    IncludeDeclarationImpl includeDeclaration = new IncludeDeclarationImpl();
+    return includeDeclaration;
   }
 
   /**
@@ -179,9 +215,49 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
    * <!-- end-user-doc -->
    * @generated
    */
-  public TargetplatformPackage getTargetplatformPackage()
+  public Locale createLocaleFromString(EDataType eDataType, String initialValue)
   {
-    return (TargetplatformPackage)getEPackage();
+    return (Locale)super.createFromString(eDataType, initialValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertLocaleToString(EDataType eDataType, Object instanceValue)
+  {
+    return super.convertToString(eDataType, instanceValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IExecutionEnvironment createExecutionEnvironmentFromString(EDataType eDataType, String initialValue)
+  {
+    return (IExecutionEnvironment)super.createFromString(eDataType, initialValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertExecutionEnvironmentToString(EDataType eDataType, Object instanceValue)
+  {
+    return super.convertToString(eDataType, instanceValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TargetPlatformPackage getTargetPlatformPackage()
+  {
+    return (TargetPlatformPackage)getEPackage();
   }
 
   /**
@@ -191,9 +267,9 @@ public class TargetplatformFactoryImpl extends EFactoryImpl implements Targetpla
    * @generated
    */
   @Deprecated
-  public static TargetplatformPackage getPackage()
+  public static TargetPlatformPackage getPackage()
   {
-    return TargetplatformPackage.eINSTANCE;
+    return TargetPlatformPackage.eINSTANCE;
   }
 
-} //TargetplatformFactoryImpl
+} //TargetPlatformFactoryImpl

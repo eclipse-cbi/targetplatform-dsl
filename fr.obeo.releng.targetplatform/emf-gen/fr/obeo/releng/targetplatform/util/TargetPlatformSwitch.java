@@ -1,8 +1,8 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.util;
+package fr.obeo.releng.targetplatform.util;
 
-import fr.obeo.releng.targetplatform.targetplatform.*;
+import fr.obeo.releng.targetplatform.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
+ * @see fr.obeo.releng.targetplatform.TargetPlatformPackage
  * @generated
  */
-public class TargetplatformSwitch<T> extends Switch<T>
+public class TargetPlatformSwitch<T> extends Switch<T>
 {
   /**
    * The cached model package
@@ -30,7 +30,7 @@ public class TargetplatformSwitch<T> extends Switch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static TargetplatformPackage modelPackage;
+  protected static TargetPlatformPackage modelPackage;
 
   /**
    * Creates an instance of the switch.
@@ -38,11 +38,11 @@ public class TargetplatformSwitch<T> extends Switch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  public TargetplatformSwitch()
+  public TargetPlatformSwitch()
   {
     if (modelPackage == null)
     {
-      modelPackage = TargetplatformPackage.eINSTANCE;
+      modelPackage = TargetPlatformPackage.eINSTANCE;
     }
   }
 
@@ -72,28 +72,53 @@ public class TargetplatformSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case TargetplatformPackage.TARGET_PLATFORM:
+      case TargetPlatformPackage.TARGET_PLATFORM:
       {
         TargetPlatform targetPlatform = (TargetPlatform)theEObject;
         T result = caseTargetPlatform(targetPlatform);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case TargetplatformPackage.INCLUDE_DECLARATION:
+      case TargetPlatformPackage.TARGET_CONTENT:
       {
-        IncludeDeclaration includeDeclaration = (IncludeDeclaration)theEObject;
-        T result = caseIncludeDeclaration(includeDeclaration);
+        TargetContent targetContent = (TargetContent)theEObject;
+        T result = caseTargetContent(targetContent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case TargetplatformPackage.LOCATION:
+      case TargetPlatformPackage.OPTIONS:
+      {
+        Options options = (Options)theEObject;
+        T result = caseOptions(options);
+        if (result == null) result = caseTargetContent(options);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case TargetPlatformPackage.ENVIRONMENT:
+      {
+        Environment environment = (Environment)theEObject;
+        T result = caseEnvironment(environment);
+        if (result == null) result = caseTargetContent(environment);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case TargetPlatformPackage.LOCATION:
       {
         Location location = (Location)theEObject;
         T result = caseLocation(location);
+        if (result == null) result = caseTargetContent(location);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case TargetplatformPackage.IU:
+      case TargetPlatformPackage.INCLUDE_DECLARATION:
+      {
+        IncludeDeclaration includeDeclaration = (IncludeDeclaration)theEObject;
+        T result = caseIncludeDeclaration(includeDeclaration);
+        if (result == null) result = caseTargetContent(includeDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case TargetPlatformPackage.IU:
       {
         IU iu = (IU)theEObject;
         T result = caseIU(iu);
@@ -121,17 +146,49 @@ public class TargetplatformSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Target Content</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Target Content</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseIncludeDeclaration(IncludeDeclaration object)
+  public T caseTargetContent(TargetContent object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Options</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Options</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOptions(Options object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Environment</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Environment</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnvironment(Environment object)
   {
     return null;
   }
@@ -148,6 +205,22 @@ public class TargetplatformSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseLocation(Location object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Include Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIncludeDeclaration(IncludeDeclaration object)
   {
     return null;
   }
@@ -185,4 +258,4 @@ public class TargetplatformSwitch<T> extends Switch<T>
     return null;
   }
 
-} //TargetplatformSwitch
+} //TargetPlatformSwitch

@@ -1,8 +1,7 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform;
+package fr.obeo.releng.targetplatform;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,15 +11,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}</li>
  * </ul>
  * </p>
  *
- * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getIncludeDeclaration()
+ * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIncludeDeclaration()
  * @model
  * @generated
  */
-public interface IncludeDeclaration extends EObject
+public interface IncludeDeclaration extends TargetContent
 {
   /**
    * Returns the value of the '<em><b>Import URI</b></em>' attribute.
@@ -32,14 +31,14 @@ public interface IncludeDeclaration extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Import URI</em>' attribute.
    * @see #setImportURI(String)
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage#getIncludeDeclaration_ImportURI()
-   * @model
+   * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIncludeDeclaration_ImportURI()
+   * @model unique="false"
    * @generated
    */
   String getImportURI();
 
   /**
-   * Sets the value of the '{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}' attribute.
+   * Sets the value of the '{@link fr.obeo.releng.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Import URI</em>' attribute.

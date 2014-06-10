@@ -1,6 +1,6 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform;
+package fr.obeo.releng.targetplatform;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
+ * @see fr.obeo.releng.targetplatform.TargetPlatformPackage
  * @generated
  */
-public interface TargetplatformFactory extends EFactory
+public interface TargetPlatformFactory extends EFactory
 {
   /**
    * The singleton instance of the factory.
@@ -20,7 +20,7 @@ public interface TargetplatformFactory extends EFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  TargetplatformFactory eINSTANCE = fr.obeo.releng.targetplatform.targetplatform.impl.TargetplatformFactoryImpl.init();
+  TargetPlatformFactory eINSTANCE = fr.obeo.releng.targetplatform.impl.TargetPlatformFactoryImpl.init();
 
   /**
    * Returns a new object of class '<em>Target Platform</em>'.
@@ -32,13 +32,22 @@ public interface TargetplatformFactory extends EFactory
   TargetPlatform createTargetPlatform();
 
   /**
-   * Returns a new object of class '<em>Include Declaration</em>'.
+   * Returns a new object of class '<em>Options</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Include Declaration</em>'.
+   * @return a new object of class '<em>Options</em>'.
    * @generated
    */
-  IncludeDeclaration createIncludeDeclaration();
+  Options createOptions();
+
+  /**
+   * Returns a new object of class '<em>Environment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Environment</em>'.
+   * @generated
+   */
+  Environment createEnvironment();
 
   /**
    * Returns a new object of class '<em>Location</em>'.
@@ -48,6 +57,15 @@ public interface TargetplatformFactory extends EFactory
    * @generated
    */
   Location createLocation();
+
+  /**
+   * Returns a new object of class '<em>Include Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Include Declaration</em>'.
+   * @generated
+   */
+  IncludeDeclaration createIncludeDeclaration();
 
   /**
    * Returns a new object of class '<em>IU</em>'.
@@ -65,6 +83,6 @@ public interface TargetplatformFactory extends EFactory
    * @return the package supported by this factory.
    * @generated
    */
-  TargetplatformPackage getTargetplatformPackage();
+  TargetPlatformPackage getTargetPlatformPackage();
 
-} //TargetplatformFactory
+} //TargetPlatformFactory

@@ -3,14 +3,14 @@
 
 <plugin>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.obeo.fr/releng/TargetPlatform" 
-       class = "fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage"
-       genModel = "model/generated/TargetPlatform.genmodel" /> 
-	
-  </extension>
-  
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Targetplatform -->
+      <package
+            uri="fr.obeo.releng.targetplatform"
+            class="fr.obeo.releng.targetplatform.TargetPlatformPackage"
+            genModel="model/Targetplatform.xcore"/>
+   </extension>
+
   <extension
         id="targetPlatform.converter"
         point="org.eclipse.core.runtime.applications">

@@ -1,8 +1,8 @@
 package fr.obeo.releng.targetplatform.pde
 
+import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform
-import fr.obeo.releng.targetplatform.targetplatform.Option
 import java.util.concurrent.TimeUnit
 
 import static com.google.common.base.Preconditions.*

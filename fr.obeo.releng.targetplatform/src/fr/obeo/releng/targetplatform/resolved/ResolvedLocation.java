@@ -28,8 +28,8 @@ import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
 import com.google.common.collect.Lists;
 
+import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
-import fr.obeo.releng.targetplatform.targetplatform.Option;
 
 
 public class ResolvedLocation {

@@ -35,9 +35,9 @@ import com.google.common.io.Closeables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 /**

@@ -1,9 +1,9 @@
 package fr.obeo.releng.targetplatform.tests
 
 import com.google.inject.Inject
+import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.targetplatform.Option
-import fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -60,7 +60,7 @@ class TestGrammar {
 	}
 	
 	@Test
-	def testLocationOption() {
+	def testOption() {
 		val targetPlatform = parser.parse('''
 			target "a target platform"
 
@@ -214,5 +214,19 @@ class TestGrammar {
 		assertEquals(2, ids.size)
 		assertEquals("com.google.guava", ids.head)
 		assertEquals("com.google.guava.source", ids.get(1))
+	}
+	
+	@Test
+	def testWithEnvironment() {
+		val tp = parser.parse('''
+			target "TP1"
+			
+			environment Linux, x86_64, motif, en_US, JavaSE-1_7
+			
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava
+				com.google.guava.^source
+			}
+		''')
 	}
 }

@@ -1,8 +1,8 @@
 /**
  */
-package fr.obeo.releng.targetplatform.targetplatform.util;
+package fr.obeo.releng.targetplatform.util;
 
-import fr.obeo.releng.targetplatform.targetplatform.*;
+import fr.obeo.releng.targetplatform.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see fr.obeo.releng.targetplatform.targetplatform.TargetplatformPackage
+ * @see fr.obeo.releng.targetplatform.TargetPlatformPackage
  * @generated
  */
-public class TargetplatformAdapterFactory extends AdapterFactoryImpl
+public class TargetPlatformAdapterFactory extends AdapterFactoryImpl
 {
   /**
    * The cached model package.
@@ -27,7 +27,7 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static TargetplatformPackage modelPackage;
+  protected static TargetPlatformPackage modelPackage;
 
   /**
    * Creates an instance of the adapter factory.
@@ -35,11 +35,11 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public TargetplatformAdapterFactory()
+  public TargetPlatformAdapterFactory()
   {
     if (modelPackage == null)
     {
-      modelPackage = TargetplatformPackage.eINSTANCE;
+      modelPackage = TargetPlatformPackage.eINSTANCE;
     }
   }
 
@@ -71,8 +71,8 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TargetplatformSwitch<Adapter> modelSwitch =
-    new TargetplatformSwitch<Adapter>()
+  protected TargetPlatformSwitch<Adapter> modelSwitch =
+    new TargetPlatformSwitch<Adapter>()
     {
       @Override
       public Adapter caseTargetPlatform(TargetPlatform object)
@@ -80,14 +80,29 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
         return createTargetPlatformAdapter();
       }
       @Override
-      public Adapter caseIncludeDeclaration(IncludeDeclaration object)
+      public Adapter caseTargetContent(TargetContent object)
       {
-        return createIncludeDeclarationAdapter();
+        return createTargetContentAdapter();
+      }
+      @Override
+      public Adapter caseOptions(Options object)
+      {
+        return createOptionsAdapter();
+      }
+      @Override
+      public Adapter caseEnvironment(Environment object)
+      {
+        return createEnvironmentAdapter();
       }
       @Override
       public Adapter caseLocation(Location object)
       {
         return createLocationAdapter();
+      }
+      @Override
+      public Adapter caseIncludeDeclaration(IncludeDeclaration object)
+      {
+        return createIncludeDeclarationAdapter();
       }
       @Override
       public Adapter caseIU(IU object)
@@ -117,13 +132,13 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.targetplatform.TargetPlatform <em>Target Platform</em>}'.
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.TargetPlatform <em>Target Platform</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see fr.obeo.releng.targetplatform.targetplatform.TargetPlatform
+   * @see fr.obeo.releng.targetplatform.TargetPlatform
    * @generated
    */
   public Adapter createTargetPlatformAdapter()
@@ -132,28 +147,58 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration <em>Include Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.TargetContent <em>Target Content</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see fr.obeo.releng.targetplatform.targetplatform.IncludeDeclaration
+   * @see fr.obeo.releng.targetplatform.TargetContent
    * @generated
    */
-  public Adapter createIncludeDeclarationAdapter()
+  public Adapter createTargetContentAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.targetplatform.Location <em>Location</em>}'.
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.Options <em>Options</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see fr.obeo.releng.targetplatform.targetplatform.Location
+   * @see fr.obeo.releng.targetplatform.Options
+   * @generated
+   */
+  public Adapter createOptionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.Environment <em>Environment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.obeo.releng.targetplatform.Environment
+   * @generated
+   */
+  public Adapter createEnvironmentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.Location <em>Location</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.obeo.releng.targetplatform.Location
    * @generated
    */
   public Adapter createLocationAdapter()
@@ -162,13 +207,28 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.targetplatform.IU <em>IU</em>}'.
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.IncludeDeclaration <em>Include Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see fr.obeo.releng.targetplatform.targetplatform.IU
+   * @see fr.obeo.releng.targetplatform.IncludeDeclaration
+   * @generated
+   */
+  public Adapter createIncludeDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.IU <em>IU</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.obeo.releng.targetplatform.IU
    * @generated
    */
   public Adapter createIUAdapter()
@@ -189,4 +249,4 @@ public class TargetplatformAdapterFactory extends AdapterFactoryImpl
     return null;
   }
 
-} //TargetplatformAdapterFactory
+} //TargetPlatformAdapterFactory
