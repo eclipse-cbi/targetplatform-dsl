@@ -264,7 +264,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="targetplatform,tpd"
+            >
       </participant>
    </extension>
    <extension

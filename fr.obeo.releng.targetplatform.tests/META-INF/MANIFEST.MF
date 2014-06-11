@@ -20,7 +20,8 @@ Require-Bundle: fr.obeo.releng.targetplatform,
  org.eclipse.equinox.p2.repository,
  org.eclipse.equinox.p2.metadata.repository,
  org.eclipse.equinox.p2.metadata,
- org.eclipse.jdt.launching
+ org.eclipse.jdt.launching,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.hamcrest.core,
  org.junit;version="4.5.0",

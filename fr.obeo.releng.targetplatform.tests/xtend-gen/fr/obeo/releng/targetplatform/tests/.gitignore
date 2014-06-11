@@ -1,7 +1,10 @@
 /.TestTargetConvertion.java._trace
 /.TestGrammar.java._trace
-/TestGrammar.java
-/TestTargetConvertion.java
 /.TestValidation.java._trace
 /.TestTargetPlatformIndexer.java._trace
-/TestValidation.java
+/.TestTargetGeneration.java._trace
+/.MockMetadataRepositoryManager.java._trace
+/.MockMetadataRepository.java._trace
+/.IQueryResultProvider.java._trace
+/.MockQueryResult.java._trace
+/.MockIU.java._trace

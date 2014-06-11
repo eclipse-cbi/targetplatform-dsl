@@ -436,7 +436,7 @@ public class TestGrammar {
       String _name = tp.getName();
       Assert.assertEquals("TP1", _name);
       EList<Location> _locations = tp.getLocations();
-      final Function1<Location,EList<IU>> _function = new Function1<Location,EList<IU>>() {
+      final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
         public EList<IU> apply(final Location it) {
           return it.getIus();
         }
@@ -446,10 +446,10 @@ public class TestGrammar {
       int _size = IterableExtensions.size(_flatten);
       Assert.assertEquals(2, _size);
       EList<Location> _locations_1 = tp.getLocations();
-      final Function1<Location,List<String>> _function_1 = new Function1<Location,List<String>>() {
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
         public List<String> apply(final Location it) {
           EList<IU> _ius = it.getIus();
-          final Function1<IU,String> _function = new Function1<IU,String>() {
+          final Function1<IU, String> _function = new Function1<IU, String>() {
             public String apply(final IU it) {
               return it.getID();
             }
@@ -477,7 +477,7 @@ public class TestGrammar {
       _builder.append("target \"TP1\"");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("environment operatingSystem Windows, architecture x86_64, windowingSystem motif, localization en_US, executionEnvironment JavaSE-1.7");
+      _builder.append("environment win32 x86_64 motif en_US JavaSE-1.7");
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
       Resource _eResource = tp.eResource();
@@ -491,7 +491,7 @@ public class TestGrammar {
       Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
       final Environment env = IterableExtensions.<Environment>head(_filter);
       String _operatingSystem = env.getOperatingSystem();
-      Assert.assertEquals("Windows", _operatingSystem);
+      Assert.assertEquals("win32", _operatingSystem);
       String _architecture = env.getArchitecture();
       Assert.assertEquals("x86_64", _architecture);
       String _windowingSystem = env.getWindowingSystem();

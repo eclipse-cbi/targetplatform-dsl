@@ -1,13 +1,9 @@
 package fr.obeo.releng.targetplatform.conversion
 
-import com.google.common.base.Splitter
 import com.google.common.collect.ImmutableSet
 import com.google.inject.Singleton
-import java.util.Locale
 import java.util.Set
 import org.eclipse.equinox.p2.metadata.VersionRange
-import org.eclipse.jdt.launching.JavaRuntime
-import org.eclipse.jdt.launching.environments.IExecutionEnvironment
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
@@ -23,20 +19,6 @@ import org.eclipse.xtext.util.Strings
 
 @Singleton
 class TargetPlatformConverter extends DefaultTerminalConverters {
-	
-	val IValueConverter<Locale> localeValueConverter = new LocaleConverter()
-	
-	@ValueConverter(rule = "Locale")
-	def IValueConverter<Locale> getLocaleConverter() {
-		return localeValueConverter
-	}
-	
-	val IValueConverter<IExecutionEnvironment> executionEnvironmentValueConverter = new ExecutionEnvironmentConverter()
-	
-	@ValueConverter(rule = "ExecutionEnvironment")
-	def IValueConverter<IExecutionEnvironment> getExecutionEnvironmentConverter() {
-		return executionEnvironmentValueConverter
-	}
 	
 	val IValueConverter<String> versionRangeValueConverter = new VersionRangeConverter()
 	
@@ -76,61 +58,6 @@ class TargetPlatformConverter extends DefaultTerminalConverters {
 		}
 		return qualifiedNameValueConverter
 	}
-}
-
-class LocaleConverter extends AbstractNullSafeConverter<Locale> {	
-	
-	override protected internalToValue(String string, INode node) throws ValueConverterException {
-		var String language = "";
-		var String country = "";
-		var String variant = "";
-
-		val tokens = Splitter.on('_').trimResults.split(string).iterator;
-		if (tokens.hasNext) {
-			language = tokens.next
-		}
-		if (tokens.hasNext) {
-			country = tokens.next
-		}
-		if (tokens.hasNext) {
-			variant = tokens.next
-		}
-
-		return new Locale(language, country, variant);
-	}
-
-	override protected internalToString(Locale value) {
-		return value.toString
-	}	
-}
-
-class ExecutionEnvironmentConverter extends AbstractNullSafeConverter<IExecutionEnvironment> {	
-	
-	override protected internalToValue(String string, INode node) throws ValueConverterException {
-		if (string == null) {
-			return null;
-		}
-		
-		try {
-			val eeManager = JavaRuntime.executionEnvironmentsManager
-			if (eeManager == null) {
-				throw new ValueConverterException("No ExecutionEnvironmentManager found.", node, null);
-			} else {
-				val env = eeManager.getEnvironment(string)
-				if (env == null) {
-					throw new ValueConverterException(''''«string»' is not a valid Java Execution Environment''', node, null);
-				} else {
-					return env
-				}
-			}
-		} catch (Exception e) {
-			
-		}
-	}
-
-	override protected internalToString(IExecutionEnvironment value) {
-		return value.id
-	}	
 }
 
 class VersionRangeConverter extends AbstractNullSafeConverter<String> {

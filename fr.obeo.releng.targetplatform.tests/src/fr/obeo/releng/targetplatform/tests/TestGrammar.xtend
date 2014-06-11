@@ -224,11 +224,11 @@ class TestGrammar {
 		val tp = parser.parse('''
 			target "TP1"
 			
-			environment operatingSystem Windows, architecture x86_64, windowingSystem motif, localization en_US, executionEnvironment JavaSE-1.7
+			environment win32 x86_64 motif en_US JavaSE-1.7
 		''')
 		assertTrue(tp.eResource.errors.join("\n"), tp.eResource.errors.empty)
 		val env = tp.contents.filter(typeof (Environment)).head
-		assertEquals("Windows", env.operatingSystem)
+		assertEquals("win32", env.operatingSystem)
 		assertEquals("x86_64", env.architecture)
 		assertEquals("motif", env.windowingSystem)
 		assertEquals(new Locale("en", "us"), env.localization)

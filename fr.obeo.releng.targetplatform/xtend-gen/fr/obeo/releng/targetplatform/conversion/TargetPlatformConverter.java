@@ -2,14 +2,10 @@ package fr.obeo.releng.targetplatform.conversion;
 
 import com.google.common.base.Objects;
 import com.google.inject.Singleton;
-import fr.obeo.releng.targetplatform.conversion.ExecutionEnvironmentConverter;
 import fr.obeo.releng.targetplatform.conversion.FQNConverter;
-import fr.obeo.releng.targetplatform.conversion.LocaleConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformSTRINGValueConverter;
 import fr.obeo.releng.targetplatform.conversion.VersionRangeConverter;
-import java.util.Locale;
 import org.eclipse.equinox.p2.metadata.VersionRange;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -22,20 +18,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @Singleton
 @SuppressWarnings("all")
 public class TargetPlatformConverter extends DefaultTerminalConverters {
-  private final IValueConverter<Locale> localeValueConverter = new LocaleConverter();
-  
-  @ValueConverter(rule = "Locale")
-  public IValueConverter<Locale> getLocaleConverter() {
-    return this.localeValueConverter;
-  }
-  
-  private final IValueConverter<IExecutionEnvironment> executionEnvironmentValueConverter = new ExecutionEnvironmentConverter();
-  
-  @ValueConverter(rule = "ExecutionEnvironment")
-  public IValueConverter<IExecutionEnvironment> getExecutionEnvironmentConverter() {
-    return this.executionEnvironmentValueConverter;
-  }
-  
   private final IValueConverter<String> versionRangeValueConverter = new VersionRangeConverter();
   
   @ValueConverter(rule = "VersionRange")

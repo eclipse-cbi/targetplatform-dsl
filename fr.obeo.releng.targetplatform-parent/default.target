@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Kepler 4.3 SDK" sequenceNumber="1402394227">
+<target name="Kepler 4.3 SDK" sequenceNumber="1402499306">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.pde.core" version="3.9.1.v20130628-1111"/>
@@ -11,12 +11,15 @@
       <repository location="http://download.eclipse.org/releases/kepler"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.2.v20140203-1126"/>
-      <unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.1.2.v20131212-0836"/>
-      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/releases/"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140519-0339"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/core/R201405190339/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.4.v201404100756"/>
+      <unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.2.0.v20140521-0402"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/xcore/R201405210402/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.0.v201405210727"/>
       <unit id="org.objectweb.asm" version="5.0.1.v201404251740"/>
       <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
     </location>

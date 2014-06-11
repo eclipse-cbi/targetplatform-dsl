@@ -9,13 +9,16 @@ location "http://download.eclipse.org/releases/kepler" {
 	org.eclipse.sdk.feature.group
 }
 
-location "http://download.eclipse.org/modeling/emf/emf/updates/releases/" {
-	org.eclipse.emf.sdk.feature.group;version=[2.9.0,2.10.0)
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/core/R201405190339/" {
+	org.eclipse.emf.sdk.feature.group;version=[2.9.0,3.0.0)
+}
+
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/xcore/R201405210402/" {
 	org.eclipse.emf.ecore.xcore.sdk.feature.group;version=[1.1.0,2.0.0)
 }
 
 location "http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" {
-	org.eclipse.xtext.sdk.feature.group;version=[2.5,2.6)
+	org.eclipse.xtext.sdk.feature.group;version=[2.6,2.7)
 	org.objectweb.asm;version=[5.0.1,6)
 }
 

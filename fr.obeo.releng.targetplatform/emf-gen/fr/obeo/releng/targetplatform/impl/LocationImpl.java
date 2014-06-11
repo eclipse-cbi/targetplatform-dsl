@@ -40,297 +40,275 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class LocationImpl extends MinimalEObjectImpl.Container implements Location
-{
-  /**
-   * The default value of the '{@link #getID() <em>ID</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getID()
-   * @generated
-   * @ordered
-   */
-  protected static final String ID_EDEFAULT = null;
+public class LocationImpl extends MinimalEObjectImpl.Container implements Location {
+	/**
+	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getID()
-   * @generated
-   * @ordered
-   */
-  protected String id = ID_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getID()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
-  protected static final String URI_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URI_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
-  protected String uri = URI_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uri = URI_EDEFAULT;
 
-  /**
-   * The cached value of the '{@link #getOptions() <em>Options</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOptions()
-   * @generated
-   * @ordered
-   */
-  protected EList<Option> options;
+	/**
+	 * The cached value of the '{@link #getOptions() <em>Options</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Option> options;
 
-  /**
-   * The cached value of the '{@link #getIus() <em>Ius</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIus()
-   * @generated
-   * @ordered
-   */
-  protected EList<IU> ius;
+	/**
+	 * The cached value of the '{@link #getIus() <em>Ius</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIus()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<IU> ius;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected LocationImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LocationImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return TargetPlatformPackage.Literals.LOCATION;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TargetPlatformPackage.Literals.LOCATION;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getID()
-  {
-    return id;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getID() {
+		return id;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setID(String newID)
-  {
-    String oldID = id;
-    id = newID;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__ID, oldID, id));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setID(String newID) {
+		String oldID = id;
+		id = newID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__ID, oldID, id));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getUri()
-  {
-    return uri;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getUri() {
+		return uri;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUri(String newUri)
-  {
-    String oldUri = uri;
-    uri = newUri;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__URI, oldUri, uri));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUri(String newUri) {
+		String oldUri = uri;
+		uri = newUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__URI, oldUri, uri));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Option> getOptions()
-  {
-    if (options == null)
-    {
-      options = new EDataTypeEList<Option>(Option.class, this, TargetPlatformPackage.LOCATION__OPTIONS);
-    }
-    return options;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Option> getOptions() {
+		if (options == null) {
+			options = new EDataTypeEList<Option>(Option.class, this, TargetPlatformPackage.LOCATION__OPTIONS);
+		}
+		return options;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<IU> getIus()
-  {
-    if (ius == null)
-    {
-      ius = new EObjectContainmentEList<IU>(IU.class, this, TargetPlatformPackage.LOCATION__IUS);
-    }
-    return ius;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IU> getIus() {
+		if (ius == null) {
+			ius = new EObjectContainmentEList<IU>(IU.class, this, TargetPlatformPackage.LOCATION__IUS);
+		}
+		return ius;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case TargetPlatformPackage.LOCATION__IUS:
-        return ((InternalEList<?>)getIus()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__IUS:
+				return ((InternalEList<?>)getIus()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case TargetPlatformPackage.LOCATION__ID:
-        return getID();
-      case TargetPlatformPackage.LOCATION__URI:
-        return getUri();
-      case TargetPlatformPackage.LOCATION__OPTIONS:
-        return getOptions();
-      case TargetPlatformPackage.LOCATION__IUS:
-        return getIus();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__ID:
+				return getID();
+			case TargetPlatformPackage.LOCATION__URI:
+				return getUri();
+			case TargetPlatformPackage.LOCATION__OPTIONS:
+				return getOptions();
+			case TargetPlatformPackage.LOCATION__IUS:
+				return getIus();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case TargetPlatformPackage.LOCATION__ID:
-        setID((String)newValue);
-        return;
-      case TargetPlatformPackage.LOCATION__URI:
-        setUri((String)newValue);
-        return;
-      case TargetPlatformPackage.LOCATION__OPTIONS:
-        getOptions().clear();
-        getOptions().addAll((Collection<? extends Option>)newValue);
-        return;
-      case TargetPlatformPackage.LOCATION__IUS:
-        getIus().clear();
-        getIus().addAll((Collection<? extends IU>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__ID:
+				setID((String)newValue);
+				return;
+			case TargetPlatformPackage.LOCATION__URI:
+				setUri((String)newValue);
+				return;
+			case TargetPlatformPackage.LOCATION__OPTIONS:
+				getOptions().clear();
+				getOptions().addAll((Collection<? extends Option>)newValue);
+				return;
+			case TargetPlatformPackage.LOCATION__IUS:
+				getIus().clear();
+				getIus().addAll((Collection<? extends IU>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case TargetPlatformPackage.LOCATION__ID:
-        setID(ID_EDEFAULT);
-        return;
-      case TargetPlatformPackage.LOCATION__URI:
-        setUri(URI_EDEFAULT);
-        return;
-      case TargetPlatformPackage.LOCATION__OPTIONS:
-        getOptions().clear();
-        return;
-      case TargetPlatformPackage.LOCATION__IUS:
-        getIus().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__ID:
+				setID(ID_EDEFAULT);
+				return;
+			case TargetPlatformPackage.LOCATION__URI:
+				setUri(URI_EDEFAULT);
+				return;
+			case TargetPlatformPackage.LOCATION__OPTIONS:
+				getOptions().clear();
+				return;
+			case TargetPlatformPackage.LOCATION__IUS:
+				getIus().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case TargetPlatformPackage.LOCATION__ID:
-        return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-      case TargetPlatformPackage.LOCATION__URI:
-        return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-      case TargetPlatformPackage.LOCATION__OPTIONS:
-        return options != null && !options.isEmpty();
-      case TargetPlatformPackage.LOCATION__IUS:
-        return ius != null && !ius.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case TargetPlatformPackage.LOCATION__URI:
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case TargetPlatformPackage.LOCATION__OPTIONS:
+				return options != null && !options.isEmpty();
+			case TargetPlatformPackage.LOCATION__IUS:
+				return ius != null && !ius.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (ID: ");
-    result.append(id);
-    result.append(", uri: ");
-    result.append(uri);
-    result.append(", options: ");
-    result.append(options);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (ID: ");
+		result.append(id);
+		result.append(", uri: ");
+		result.append(uri);
+		result.append(", options: ");
+		result.append(options);
+		result.append(')');
+		return result.toString();
+	}
 
 } //LocationImpl

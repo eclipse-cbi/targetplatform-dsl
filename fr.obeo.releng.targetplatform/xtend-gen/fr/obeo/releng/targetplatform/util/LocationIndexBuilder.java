@@ -31,19 +31,19 @@ public class LocationIndexBuilder {
   @Inject
   private ImportUriResolver resolver;
   
-  public LinkedListMultimap<String,Location> getLocationIndex(final TargetPlatform targetPlatform) {
+  public LinkedListMultimap<String, Location> getLocationIndex(final TargetPlatform targetPlatform) {
     EList<Location> _locations = targetPlatform.getLocations();
     ArrayList<Location> _newArrayList = Lists.<Location>newArrayList(_locations);
     final List<Location> locationList = ListExtensions.<Location>reverse(_newArrayList);
-    final Function<Location,String> _function = new Function<Location,String>() {
+    final Function<Location, String> _function = new Function<Location, String>() {
       public String apply(final Location it) {
         return it.getUri();
       }
     };
-    ImmutableListMultimap<String,Location> _index = Multimaps.<String, Location>index(locationList, _function);
-    final LinkedListMultimap<String,Location> locationIndex = LinkedListMultimap.<String, Location>create(_index);
+    ImmutableListMultimap<String, Location> _index = Multimaps.<String, Location>index(locationList, _function);
+    final LinkedListMultimap<String, Location> locationIndex = LinkedListMultimap.<String, Location>create(_index);
     LinkedList<TargetPlatform> _importedTargetPlatforms = this.getImportedTargetPlatforms(targetPlatform);
-    final Function1<TargetPlatform,List<Location>> _function_1 = new Function1<TargetPlatform,List<Location>>() {
+    final Function1<TargetPlatform, List<Location>> _function_1 = new Function1<TargetPlatform, List<Location>>() {
       public List<Location> apply(final TargetPlatform it) {
         EList<Location> _locations = it.getLocations();
         ArrayList<Location> _newArrayList = Lists.<Location>newArrayList(_locations);
@@ -87,7 +87,7 @@ public class LocationIndexBuilder {
         final LinkedList<TargetPlatform> tr = CollectionLiterals.<TargetPlatform>newLinkedList();
         final TargetPlatform t = queue.removeLast();
         EList<IncludeDeclaration> _includes = t.getIncludes();
-        final Function1<IncludeDeclaration,TargetPlatform> _function = new Function1<IncludeDeclaration,TargetPlatform>() {
+        final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
           public TargetPlatform apply(final IncludeDeclaration it) {
             Resource _eResource = t.eResource();
             return LocationIndexBuilder.this.getImportedTargetPlatform(_eResource, it);
@@ -130,7 +130,7 @@ public class LocationIndexBuilder {
     s.addFirst(targetPlatform);
     final Resource context = targetPlatform.eResource();
     EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
-    final Function1<IncludeDeclaration,TargetPlatform> _function = new Function1<IncludeDeclaration,TargetPlatform>() {
+    final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
       public TargetPlatform apply(final IncludeDeclaration it) {
         return LocationIndexBuilder.this.getImportedTargetPlatform(context, it);
       }

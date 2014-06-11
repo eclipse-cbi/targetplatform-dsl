@@ -70,7 +70,7 @@ public class TestTargetPlatformIndexer {
         this.parser.parse(_builder_4, _createURI_4, resourceSet);
       }
       LinkedList<TargetPlatform> _importedTargetPlatforms = this.indexBuilder.getImportedTargetPlatforms(o);
-      final Function1<TargetPlatform,String> _function = new Function1<TargetPlatform,String>() {
+      final Function1<TargetPlatform, String> _function = new Function1<TargetPlatform, String>() {
         public String apply(final TargetPlatform it) {
           return it.getName();
         }
@@ -94,7 +94,7 @@ public class TestTargetPlatformIndexer {
       _builder.newLine();
       URI _createURI = URI.createURI("tmp:/o.tpd");
       final TargetPlatform o = this.parser.parse(_builder, _createURI, resourceSet);
-      LinkedListMultimap<String,Location> _locationIndex = this.indexBuilder.getLocationIndex(o);
+      LinkedListMultimap<String, Location> _locationIndex = this.indexBuilder.getLocationIndex(o);
       int _size = _locationIndex.size();
       Assert.assertEquals(4, _size);
     } catch (Throwable _e) {

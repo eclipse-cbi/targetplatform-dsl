@@ -29,8 +29,8 @@ public class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
   private TargetPlatformGrammarAccess _targetPlatformGrammarAccess;
   
   protected void configureFormatting(final FormattingConfig c) {
-    List<Pair<Keyword,Keyword>> _findKeywordPairs = this._targetPlatformGrammarAccess.findKeywordPairs("{", "}");
-    for (final Pair<Keyword,Keyword> pair : _findKeywordPairs) {
+    List<Pair<Keyword, Keyword>> _findKeywordPairs = this._targetPlatformGrammarAccess.findKeywordPairs("{", "}");
+    for (final Pair<Keyword, Keyword> pair : _findKeywordPairs) {
       {
         FormattingConfig.IndentationLocatorStart _setIndentationIncrement = c.setIndentationIncrement();
         Keyword _first = pair.getFirst();

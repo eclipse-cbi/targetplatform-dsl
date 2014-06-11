@@ -95,14 +95,14 @@ public class TestTargetConvertion {
       for (final ResolvedLocation loc : _locations) {
         {
           List<IInstallableUnit> _resolvedIUs = loc.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
           };
           final String[] ids = ((String[])Conversions.unwrapArray(ListExtensions.<IInstallableUnit, String>map(_resolvedIUs, _function), String.class));
           List<IInstallableUnit> _resolvedIUs_1 = loc.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function_1 = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function_1 = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -210,10 +210,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -290,10 +290,10 @@ public class TestTargetConvertion {
       String _string_1 = _uRI_1.toString();
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_1);
       List<ResolvedLocation> _locations_3 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -360,10 +360,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -430,10 +430,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -493,10 +493,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -561,10 +561,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -575,10 +575,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -653,10 +653,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -667,10 +667,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -745,10 +745,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -759,10 +759,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -837,10 +837,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -851,10 +851,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -929,10 +929,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -943,10 +943,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -1009,10 +1009,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1023,10 +1023,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -1089,10 +1089,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1103,10 +1103,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -1165,10 +1165,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1179,10 +1179,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -1241,10 +1241,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1255,10 +1255,10 @@ public class TestTargetConvertion {
       List<List<String>> _map = ListExtensions.<ResolvedLocation, List<String>>map(_locations_1, _function);
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(_map), String.class));
       List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<Version>> _function_1 = new Function1<ResolvedLocation,List<Version>>() {
+      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
         public List<Version> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,Version> _function = new Function1<IInstallableUnit,Version>() {
+          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
             public Version apply(final IInstallableUnit it) {
               return it.getVersion();
             }
@@ -1312,10 +1312,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1369,10 +1369,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1425,10 +1425,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }
@@ -1482,10 +1482,10 @@ public class TestTargetConvertion {
       int _size = _locations.size();
       Assert.assertEquals(1, _size);
       List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      final Function1<ResolvedLocation,List<String>> _function = new Function1<ResolvedLocation,List<String>>() {
+      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
         public List<String> apply(final ResolvedLocation it) {
           List<IInstallableUnit> _resolvedIUs = it.getResolvedIUs();
-          final Function1<IInstallableUnit,String> _function = new Function1<IInstallableUnit,String>() {
+          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
             public String apply(final IInstallableUnit it) {
               return it.getId();
             }

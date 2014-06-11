@@ -3,17 +3,14 @@ package fr.obeo.releng.targetplatform.pde
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform
-import java.util.concurrent.TimeUnit
 
 import static com.google.common.base.Preconditions.*
 
 class TargetDefinitionGenerator {
 	
 	
-	def String generate(ResolvedTargetPlatform targetPlatform) {
+	def String generate(ResolvedTargetPlatform targetPlatform, int sequenceNumber) {
 		checkNotNull(targetPlatform)
-		
-		val sequenceNumber = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis) as int
 		
 		'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -26,6 +23,30 @@ class TargetDefinitionGenerator {
 		    «generateLocation(targetPlatform, location)»
 		    «ENDFOR»
 		  </locations>
+		  «ENDIF»
+		  «IF (targetPlatform.environment != null && 
+			  	(!targetPlatform.environment.os.nullOrEmpty || 
+			  	 !targetPlatform.environment.ws.nullOrEmpty || 
+			  	 !targetPlatform.environment.arch.nullOrEmpty || 
+			  	 !targetPlatform.environment.nl.nullOrEmpty)
+		  )»
+		  <environment>
+		    «IF (!targetPlatform.environment.os.nullOrEmpty)»
+		    <os>«targetPlatform.environment.os»</os>
+		    «ENDIF»
+		    «IF (!targetPlatform.environment.ws.nullOrEmpty)»
+		    <ws>«targetPlatform.environment.ws»</ws>
+		    «ENDIF»
+		    «IF (!targetPlatform.environment.arch.nullOrEmpty)»
+		    <arch>«targetPlatform.environment.arch»</arch>
+		    «ENDIF»
+		    «IF (!targetPlatform.environment.nl.nullOrEmpty)»
+		    <nl>«targetPlatform.environment.nl»</nl>
+		    «ENDIF»
+		  </environment>
+		  «ENDIF»
+		  «IF (targetPlatform.environment != null && !targetPlatform.environment.targetJRE.nullOrEmpty)»
+		  <targetJRE path="«targetPlatform.environment.targetJRE»"/>
 		  «ENDIF»
 		</target>
 		'''

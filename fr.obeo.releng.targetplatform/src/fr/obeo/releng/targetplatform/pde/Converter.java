@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -26,6 +27,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -63,27 +65,34 @@ public class Converter {
 	}
 
 	private Diagnostic doGenerateTargetDefinitionFile(URI uri, IProgressMonitor monitor) {
-		final Diagnostic ret;
+		final BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, 0, "Problems occured while generating target platform definition file from '" + uri+"'", new Object[] {uri,});
 		
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		TargetPlatform targetPlatform = loadTargetPlatform(uri);
+		Resource resource = loadTargetPlatform(uri);
 		subMonitor.worked(2);
 		
-		if (targetPlatform == null) {
-			ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", null);
-		} else if (!targetPlatform.eResource().getErrors().isEmpty()) {
-			ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", targetPlatform.eResource().getErrors().toArray());
-		} else if (subMonitor.isCanceled()) {
-			ret = Diagnostic.CANCEL_INSTANCE;
+		Diagnostic resourceDiagnostic = EcoreUtil.computeDiagnostic(resource, true);
+		if (resourceDiagnostic.getSeverity() >= Diagnostic.ERROR) {
+			ret.merge(resourceDiagnostic);
 		} else {
-			Diagnostic validation = Diagnostician.INSTANCE.validate(targetPlatform);
-			subMonitor.worked(2);
-			if (validation.getSeverity() == Diagnostic.ERROR) {
-				ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, validation.getChildren(), "The file '" + uri + "' can not be converted because it contains errors.", null);
+			TargetPlatform targetPlatform = null;
+			if (resource != null && !resource.getContents().isEmpty()) {
+				targetPlatform = (TargetPlatform) resource.getContents().get(0);
+			}
+			if (targetPlatform == null) {
+				ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", null));
 			} else if (subMonitor.isCanceled()) {
-				ret = Diagnostic.CANCEL_INSTANCE;
+				ret.merge(Diagnostic.CANCEL_INSTANCE);
 			} else {
-				ret = doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(96));
+				Diagnostic validation = Diagnostician.INSTANCE.validate(targetPlatform);
+				subMonitor.worked(2);
+				if (validation.getSeverity() == Diagnostic.ERROR) {
+					ret.merge(validation);
+				} else if (subMonitor.isCanceled()) {
+					ret.merge(Diagnostic.CANCEL_INSTANCE);
+				} else {
+					ret.merge(doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(96)));
+				}
 			}
 		}
 		return ret;
@@ -138,7 +147,7 @@ public class Converter {
 	private Diagnostic doGenerateTargetDefinitionFile(URI uri, ResolvedTargetPlatform resolvedTargetPlatform) {
 		Diagnostic ret;
 		TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
-		String xml = generator.generate(resolvedTargetPlatform);
+		String xml = generator.generate(resolvedTargetPlatform, (int)TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
 		final URI targetDefinitionLocation = uri.trimFileExtension().appendFileExtension("target");
 		try {
 			serialize(targetDefinitionLocation, xml);
@@ -168,13 +177,8 @@ public class Converter {
 		return agentLocation;
 	}
 
-	private TargetPlatform loadTargetPlatform(URI fileLocation) {
+	private Resource loadTargetPlatform(URI fileLocation) {
 		ResourceSet resourceSet = resourceSetProvider.get();
-		Resource resource = resourceSet.getResource(fileLocation, true);
-		TargetPlatform targetPlatform = null;
-		if (resource != null && !resource.getContents().isEmpty()) {
-			targetPlatform = (TargetPlatform) resource.getContents().get(0);
-		}
-		return targetPlatform;
+		return resourceSet.getResource(fileLocation, true);
 	}
 }

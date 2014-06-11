@@ -187,7 +187,7 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
         if (_notEquals) {
           EObject _eContainer = element.eContainer();
           EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
-          final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+          final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
             public Boolean apply(final Location it) {
               boolean _and = false;
               boolean _notEquals = (!Objects.equal(uri, null));
@@ -226,7 +226,7 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
         final String uri = _data_1[1];
         EObject _eContainer = element.eContainer();
         EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
-        final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+        final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
           public Boolean apply(final Location it) {
             boolean _and = false;
             boolean _notEquals = (!Objects.equal(uri, null));

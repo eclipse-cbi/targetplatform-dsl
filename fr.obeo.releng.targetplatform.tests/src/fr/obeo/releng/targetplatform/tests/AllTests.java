@@ -21,9 +21,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestGrammar.class, 
-	TestValidation.class, 
+	TestValidation.class,
+	TestTargetGeneration.class,
 	TestTargetPlatformIndexer.class,
-	TestTargetConvertion.class
+	TestTargetConvertion.class,
 })
 public class AllTests {
 }

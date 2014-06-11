@@ -76,7 +76,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (operatingSystem=ID? windowingSystem=ID? architecture=ID? localization=Locale? executionEnvironment=ExecutionEnvironment?)
+	 *     (env+=QualifiedName env+=QualifiedName*)
 	 */
 	protected void sequence_Environment(EObject context, Environment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

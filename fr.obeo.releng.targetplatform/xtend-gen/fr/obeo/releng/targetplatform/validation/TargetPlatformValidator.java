@@ -143,7 +143,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       final EList<Location> listOptions = targetPlatform.getLocations();
       final Location first = IterableExtensions.<Location>head(listOptions);
       Iterable<Location> _tail = IterableExtensions.<Location>tail(listOptions);
-      final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+      final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
         public Boolean apply(final Location _) {
           EList<Option> _options = _.getOptions();
           Set<Option> _set = IterableExtensions.<Option>toSet(_options);
@@ -236,14 +236,14 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkIDUniqueOnAllLocations(final TargetPlatform targetPlatform) {
-    final LinkedListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final LinkedListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
-    final LinkedHashMultimap<String,String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
+    final LinkedHashMultimap<String, String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
     Set<String> _keySet = locationsByURI.keySet();
     final Procedure1<String> _function = new Procedure1<String>() {
       public void apply(final String it) {
         List<Location> _get = locationsByURI.get(it);
-        final Function1<Location,String> _function = new Function1<Location,String>() {
+        final Function1<Location, String> _function = new Function1<Location, String>() {
           public String apply(final Location it) {
             return it.getID();
           }
@@ -254,39 +254,39 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     IterableExtensions.<String>forEach(_keySet, _function);
-    Map<String,Collection<String>> _asMap = locationIDsByURI.asMap();
-    final Function2<String,Collection<String>,Boolean> _function_1 = new Function2<String,Collection<String>,Boolean>() {
+    Map<String, Collection<String>> _asMap = locationIDsByURI.asMap();
+    final Function2<String, Collection<String>, Boolean> _function_1 = new Function2<String, Collection<String>, Boolean>() {
       public Boolean apply(final String key, final Collection<String> value) {
         int _size = value.size();
         return Boolean.valueOf((_size <= 1));
       }
     };
-    Map<String,Collection<String>> _filter = MapExtensions.<String, Collection<String>>filter(_asMap, _function_1);
+    Map<String, Collection<String>> _filter = MapExtensions.<String, Collection<String>>filter(_asMap, _function_1);
     final Set<String> locationsURIWithoutConflictingID = _filter.keySet();
-    final Function1<String,List<Location>> _function_2 = new Function1<String,List<Location>>() {
+    final Function1<String, List<Location>> _function_2 = new Function1<String, List<Location>>() {
       public List<Location> apply(final String it) {
         return locationsByURI.get(it);
       }
     };
     Iterable<List<Location>> _map = IterableExtensions.<String, List<Location>>map(locationsURIWithoutConflictingID, _function_2);
     final Iterable<Location> locationsWithoutConflictingID = Iterables.<Location>concat(_map);
-    final Function1<Location,Boolean> _function_3 = new Function1<Location,Boolean>() {
+    final Function1<Location, Boolean> _function_3 = new Function1<Location, Boolean>() {
       public Boolean apply(final Location it) {
         String _iD = it.getID();
         return Boolean.valueOf((!Objects.equal(_iD, null)));
       }
     };
     Iterable<Location> _filter_1 = IterableExtensions.<Location>filter(locationsWithoutConflictingID, _function_3);
-    final Function<Location,String> _function_4 = new Function<Location,String>() {
+    final Function<Location, String> _function_4 = new Function<Location, String>() {
       public String apply(final Location it) {
         return it.getID();
       }
     };
-    final ImmutableListMultimap<String,Location> locationsWithoutConflictingIDByID = Multimaps.<String, Location>index(_filter_1, _function_4);
-    ImmutableMap<String,Collection<Location>> _asMap_1 = locationsWithoutConflictingIDByID.asMap();
-    final Function2<String,Collection<Location>,Boolean> _function_5 = new Function2<String,Collection<Location>,Boolean>() {
+    final ImmutableListMultimap<String, Location> locationsWithoutConflictingIDByID = Multimaps.<String, Location>index(_filter_1, _function_4);
+    ImmutableMap<String, Collection<Location>> _asMap_1 = locationsWithoutConflictingIDByID.asMap();
+    final Function2<String, Collection<Location>, Boolean> _function_5 = new Function2<String, Collection<Location>, Boolean>() {
       public Boolean apply(final String key, final Collection<Location> value) {
-        final Function1<Location,String> _function = new Function1<Location,String>() {
+        final Function1<Location, String> _function = new Function1<Location, String>() {
           public String apply(final Location it) {
             return it.getUri();
           }
@@ -297,7 +297,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         return Boolean.valueOf((_size > 1));
       }
     };
-    Map<String,Collection<Location>> _filter_2 = MapExtensions.<String, Collection<Location>>filter(_asMap_1, _function_5);
+    Map<String, Collection<Location>> _filter_2 = MapExtensions.<String, Collection<Location>>filter(_asMap_1, _function_5);
     Collection<Collection<Location>> _values = _filter_2.values();
     final Iterable<Location> locationsWithDuplicateID = Iterables.<Location>concat(_values);
     final Procedure1<Location> _function_6 = new Procedure1<Location>() {
@@ -310,7 +310,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
             TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
         } else {
           EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
-          final Function1<IncludeDeclaration,Boolean> _function = new Function1<IncludeDeclaration,Boolean>() {
+          final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
             public Boolean apply(final IncludeDeclaration it) {
               boolean _xblockexpression = false;
               {
@@ -322,7 +322,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                   _or = true;
                 } else {
                   LinkedList<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
-                  final Function1<TargetPlatform,EList<Location>> _function = new Function1<TargetPlatform,EList<Location>>() {
+                  final Function1<TargetPlatform, EList<Location>> _function = new Function1<TargetPlatform, EList<Location>>() {
                     public EList<Location> apply(final TargetPlatform it) {
                       return it.getLocations();
                     }
@@ -366,7 +366,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _not = (!_isEmpty);
     if (_not) {
       EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
-      final Function1<IncludeDeclaration,Boolean> _function = new Function1<IncludeDeclaration,Boolean>() {
+      final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
         public Boolean apply(final IncludeDeclaration it) {
           TargetPlatform _get = cycle.get(1);
           Resource _eResource = targetPlatform.eResource();
@@ -380,7 +380,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cycle detected in the included target platforms. Cycle is \'");
         Iterable<TargetPlatform> _drop = IterableExtensions.<TargetPlatform>drop(cycle, 1);
-        final Function1<TargetPlatform,URI> _function_1 = new Function1<TargetPlatform,URI>() {
+        final Function1<TargetPlatform, URI> _function_1 = new Function1<TargetPlatform, URI>() {
           public URI apply(final TargetPlatform it) {
             Resource _eResource = it.eResource();
             return _eResource.getURI();
@@ -399,20 +399,20 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkSameIDForAllLocationWithSameURI(final TargetPlatform targetPlatform) {
-    final LinkedListMultimap<String,Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final LinkedListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     Set<String> _keySet = locationsByURI.keySet();
     for (final String locationURI : _keySet) {
       {
         List<Location> _get = locationsByURI.get(locationURI);
-        final Function1<Location,Boolean> _function = new Function1<Location,Boolean>() {
+        final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
           public Boolean apply(final Location it) {
             Resource _eResource = it.eResource();
             return Boolean.valueOf((!Objects.equal(_eResource, resource)));
           }
         };
         final Iterable<Location> externalLocations = IterableExtensions.<Location>filter(_get, _function);
-        final Function1<Location,String> _function_1 = new Function1<Location,String>() {
+        final Function1<Location, String> _function_1 = new Function1<Location, String>() {
           public String apply(final Location it) {
             String _iD = it.getID();
             return Strings.nullToEmpty(_iD);
@@ -421,14 +421,14 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         Iterable<String> _map = IterableExtensions.<Location, String>map(externalLocations, _function_1);
         final Set<String> externalIDs = IterableExtensions.<String>toSet(_map);
         List<Location> _get_1 = locationsByURI.get(locationURI);
-        final Function1<Location,Boolean> _function_2 = new Function1<Location,Boolean>() {
+        final Function1<Location, Boolean> _function_2 = new Function1<Location, Boolean>() {
           public Boolean apply(final Location it) {
             Resource _eResource = it.eResource();
             return Boolean.valueOf(Objects.equal(_eResource, resource));
           }
         };
         final Iterable<Location> internalLocations = IterableExtensions.<Location>filter(_get_1, _function_2);
-        final Function1<Location,String> _function_3 = new Function1<Location,String>() {
+        final Function1<Location, String> _function_3 = new Function1<Location, String>() {
           public String apply(final Location it) {
             String _iD = it.getID();
             return Strings.nullToEmpty(_iD);
@@ -439,7 +439,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         int _size = externalIDs.size();
         boolean _greaterThan = (_size > 1);
         if (_greaterThan) {
-          final Function1<Location,Boolean> _function_4 = new Function1<Location,Boolean>() {
+          final Function1<Location, Boolean> _function_4 = new Function1<Location, Boolean>() {
             public Boolean apply(final Location it) {
               String _iD = it.getID();
               return Boolean.valueOf(externalIDs.contains(_iD));
@@ -453,7 +453,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           String _join = IterableExtensions.join(externalIDs, "\', \'");
           _builder.append(_join, "");
           _builder.append("\'  in \'");
-          final Function1<Location,String> _function_5 = new Function1<Location,String>() {
+          final Function1<Location, String> _function_5 = new Function1<Location, String>() {
             public String apply(final Location it) {
               Resource _eResource = it.eResource();
               URI _uRI = _eResource.getURI();
@@ -467,10 +467,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _builder.append("\'.");
           _builder.newLineIfNotEmpty();
           final String msg = _builder.toString();
-          final Function1<Location,Iterable<IncludeDeclaration>> _function_6 = new Function1<Location,Iterable<IncludeDeclaration>>() {
+          final Function1<Location, Iterable<IncludeDeclaration>> _function_6 = new Function1<Location, Iterable<IncludeDeclaration>>() {
             public Iterable<IncludeDeclaration> apply(final Location location) {
               EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
-              final Function1<IncludeDeclaration,Boolean> _function = new Function1<IncludeDeclaration,Boolean>() {
+              final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
                 public Boolean apply(final IncludeDeclaration it) {
                   boolean _xblockexpression = false;
                   {
@@ -482,7 +482,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                       _or = true;
                     } else {
                       LinkedList<TargetPlatform> _importedTargetPlatforms = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct);
-                      final Function1<TargetPlatform,EList<Location>> _function = new Function1<TargetPlatform,EList<Location>>() {
+                      final Function1<TargetPlatform, EList<Location>> _function = new Function1<TargetPlatform, EList<Location>>() {
                         public EList<Location> apply(final TargetPlatform it) {
                           return it.getLocations();
                         }
@@ -527,7 +527,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
             String _head = IterableExtensions.<String>head(externalIDs);
             _builder_1.append(_head, "");
             _builder_1.append("\'  in \'");
-            final Function1<Location,String> _function_8 = new Function1<Location,String>() {
+            final Function1<Location, String> _function_8 = new Function1<Location, String>() {
               public String apply(final Location it) {
                 Resource _eResource = it.eResource();
                 URI _uRI = _eResource.getURI();
@@ -541,7 +541,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
             _builder_1.append("\'.");
             _builder_1.newLineIfNotEmpty();
             final String msg_1 = _builder_1.toString();
-            final Function1<Location,Boolean> _function_9 = new Function1<Location,Boolean>() {
+            final Function1<Location, Boolean> _function_9 = new Function1<Location, Boolean>() {
               public Boolean apply(final Location it) {
                 String _iD = it.getID();
                 String _nullToEmpty = Strings.nullToEmpty(_iD);

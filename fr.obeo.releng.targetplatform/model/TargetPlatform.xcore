@@ -1,8 +1,11 @@
 @GenModel(prefix="TargetPlatform", modelName="TargetPlatform")
 package fr.obeo.releng.targetplatform
 
-import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
 import java.util.Locale
+import com.google.common.base.Splitter
+import org.eclipse.core.runtime.Platform
+import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
+import org.eclipse.jdt.launching.JavaRuntime
 
 class TargetPlatform {
 	String name
@@ -16,6 +19,9 @@ class TargetPlatform {
 	refers derived Location[] locations get {
 		new UnmodifiableEList(contents.filter(typeof(Location)).toList)
 	}
+	refers derived Environment environment get {
+		contents.filter(typeof(Environment)).head
+	}
 }
 
 interface TargetContent {
@@ -27,11 +33,83 @@ class Options extends TargetContent {
 }
 
 class Environment extends TargetContent {
-	String operatingSystem
-	String windowingSystem
-	String architecture
-	Locale localization
-	ExecutionEnvironment executionEnvironment
+	String[] env
+	
+	derived String operatingSystem get {
+		val envToUpper = env.map[toUpperCase]
+		return Platform.knownOSValues.findFirst[
+			envToUpper.contains(it.toUpperCase)
+		]
+	}
+	
+	derived String windowingSystem get {
+		val envToUpper = env.map[toUpperCase]
+		val mathchingWS = Platform.knownWSValues.findFirst[
+			envToUpper.contains(it.toUpperCase)
+		]
+		
+		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
+		val allWS = env.filter[
+			knownWSUpperValues.contains(it.toUpperCase)
+		]
+		
+		if (allWS.size <= 1 && (allWS.head == null || allWS.head.equalsIgnoreCase(operatingSystem))) {
+			// case for win32 which is an os and an ws. Let's consider the first one 
+			// as the os and the second as ws
+			return null
+		} else {
+			return mathchingWS
+		}
+	}
+	
+	derived String architecture get {
+		val envToUpper = env.map[toUpperCase]
+		return Platform.knownOSArchValues.findFirst[
+			envToUpper.contains(it.toUpperCase)
+		]
+	}
+	
+	derived Locale localization get {
+		val availableLocales = Locale.availableLocales.map[toString].map[toUpperCase]
+		val locale = env.findFirst[
+			availableLocales.contains(it.toUpperCase)
+		]
+		
+		if (locale != null) {
+			var String language = "";
+			var String country = "";
+			var String variant = "";
+	
+			val tokens = Splitter.on('_').trimResults.split(locale).iterator;
+			if (tokens.hasNext) {
+				language = tokens.next
+			}
+			if (tokens.hasNext) {
+				country = tokens.next
+			}
+			if (tokens.hasNext) {
+				variant = tokens.next
+			}
+	
+			return new Locale(language, country, variant);
+		} else {
+			return null;
+		}
+	}
+	
+	derived ExecutionEnvironment executionEnvironment get {
+		val eeManager = JavaRuntime.executionEnvironmentsManager
+		if (eeManager != null) {
+			val ee = env.findFirst[eeManager.getEnvironment(it) != null]
+			if (ee != null) {
+				return eeManager.getEnvironment(ee)
+			} else {
+				return null
+			}
+		} else {
+			return null
+		}
+	}
 }
 
 type Locale wraps Locale

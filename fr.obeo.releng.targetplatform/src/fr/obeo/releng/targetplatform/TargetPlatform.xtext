@@ -19,14 +19,8 @@ Options:
 ;
 
 Environment:
-	{Environment} 'environment'
-	(
-		('operatingSystem' operatingSystem=ID ','?)? & 
-		('windowingSystem' windowingSystem=ID ','?)? & 
-		('architecture' architecture=ID ','?)? & 
-		('localization' localization=Locale ','?)? &
-		('executionEnvironment' executionEnvironment=ExecutionEnvironment ','?)?
-	)
+	'environment'
+		env+=QualifiedName (','? env+=QualifiedName)*
 ;
 
 IncludeDeclaration:
@@ -52,7 +46,7 @@ IU:
 ;
 
 QualifiedName hidden ():
-	ID (=> '.' ID)*
+	ID (=> '.' (ID | INT))*
 ;
 
 Version hidden():
@@ -61,14 +55,6 @@ Version hidden():
 
 VersionRange hidden (WS):
 	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
-;
-
-Locale returns Locale hidden():
-	ID
-;
-
-ExecutionEnvironment returns ExecutionEnvironment hidden():
-	ID (=> '.' (ID | INT))*
 ;
 
 terminal INT returns ecore::EInt: ('0'..'9')+;

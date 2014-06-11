@@ -194,7 +194,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(2, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -248,7 +248,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(2, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -576,7 +576,7 @@ public class TestValidation {
       Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
       Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -655,7 +655,7 @@ public class TestValidation {
       Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
       Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -854,7 +854,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(2, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -997,7 +997,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1045,7 +1045,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1100,7 +1100,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IU));
@@ -1363,7 +1363,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(2, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1410,7 +1410,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(2, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1613,7 +1613,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1674,7 +1674,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1829,7 +1829,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -1865,7 +1865,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -1948,7 +1948,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -1984,7 +1984,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -2067,7 +2067,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2103,7 +2103,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -2233,7 +2233,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2269,7 +2269,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -2352,7 +2352,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2388,7 +2388,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof Location));
@@ -2480,7 +2480,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2534,7 +2534,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnoticsa = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnoticsa.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2564,7 +2564,7 @@ public class TestValidation {
       final List<AbstractValidationDiagnostic> diagnoticsb = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter_1);
       int _size_1 = diagnoticsb.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2625,7 +2625,7 @@ public class TestValidation {
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
       int _size = diagnotics.size();
       Assert.assertEquals(1, _size);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2656,7 +2656,7 @@ public class TestValidation {
       diagnotics = _list;
       int _size_1 = diagnotics.size();
       Assert.assertEquals(1, _size_1);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_2 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
@@ -2687,7 +2687,7 @@ public class TestValidation {
       diagnotics = _list_1;
       int _size_2 = diagnotics.size();
       Assert.assertEquals(1, _size_2);
-      final Function1<AbstractValidationDiagnostic,Boolean> _function_4 = new Function1<AbstractValidationDiagnostic,Boolean>() {
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_4 = new Function1<AbstractValidationDiagnostic, Boolean>() {
         public Boolean apply(final AbstractValidationDiagnostic it) {
           EObject _sourceEObject = it.getSourceEObject();
           return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
