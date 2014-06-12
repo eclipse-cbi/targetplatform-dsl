@@ -11,6 +11,9 @@ import fr.obeo.releng.targetplatform.TargetPlatform
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
+import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.Environment
+import fr.obeo.releng.targetplatform.Options
 
 /**
  * Provides labels for a EObjects.
@@ -60,5 +63,17 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	
 	def image(IncludeDeclaration object) {
 		"obj16/inc_obj.gif"
+	}
+	
+	def image(Option option) {
+		"obj16/option_obj.gif"
+	}
+	
+	def image(Options option) {
+		"obj16/option_obj.gif"
+	}
+	
+	def image(Environment option) {
+		"obj16/env_obj.gif"
 	}
 }

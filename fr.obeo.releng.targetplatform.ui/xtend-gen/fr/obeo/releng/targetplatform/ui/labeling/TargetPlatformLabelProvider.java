@@ -5,9 +5,12 @@ package fr.obeo.releng.targetplatform.ui.labeling;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import fr.obeo.releng.targetplatform.Environment;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
@@ -79,5 +82,17 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   
   public String image(final IncludeDeclaration object) {
     return "obj16/inc_obj.gif";
+  }
+  
+  public String image(final Option option) {
+    return "obj16/option_obj.gif";
+  }
+  
+  public String image(final Options option) {
+    return "obj16/option_obj.gif";
+  }
+  
+  public String image(final Environment option) {
+    return "obj16/env_obj.gif";
   }
 }
