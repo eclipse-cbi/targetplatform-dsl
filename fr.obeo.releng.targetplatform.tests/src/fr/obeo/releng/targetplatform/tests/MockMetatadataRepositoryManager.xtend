@@ -30,7 +30,7 @@ class MockMetadataRepositoryManager implements IMetadataRepositoryManager {
 	}
 	
 	override loadRepository(URI location, IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
-		monitor.subTask('''mocke loading '«location»''')
+		monitor.subTask('''mock loading '«location»''')
 		return new MockMetadataRepository(location, resultProvider)
 	}
 	
@@ -188,10 +188,24 @@ class MockIU implements IInstallableUnit {
 	
 	val String id
 	val Version version
+	val Map<String, String> properties
 	
 	new(String id, Version version) {
+		this(id, version, null)
+	}
+	
+	new(String id, Version version, Map<String, String> properties) {
 		this.id = id
 		this.version = version
+		this.properties = properties
+	}
+	
+	def static createBundle(String id, Version version) {
+		return new MockIU(id, version)
+	}
+	
+	def static createFeature(String id, Version version) {
+		return new MockIU(id, version, #{'org.eclipse.equinox.p2.type.group' -> 'true'})
 	}
 	
 	override getArtifacts() {
@@ -227,15 +241,15 @@ class MockIU implements IInstallableUnit {
 	}
 	
 	override getProperties() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return properties
 	}
 	
 	override getProperty(String key) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return properties.get(key)
 	}
 	
 	override getProperty(String key, String locale) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return getProperty(key)
 	}
 	
 	override getProvidedCapabilities() {

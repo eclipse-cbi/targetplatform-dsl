@@ -29,7 +29,7 @@ public class MockMetadataRepositoryManager implements IMetadataRepositoryManager
   
   public IMetadataRepository loadRepository(final URI location, final IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("mocke loading \'");
+    _builder.append("mock loading \'");
     _builder.append(location, "");
     monitor.subTask(_builder.toString());
     return new MockMetadataRepository(location, this.resultProvider);

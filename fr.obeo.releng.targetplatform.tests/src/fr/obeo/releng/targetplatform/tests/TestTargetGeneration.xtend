@@ -2,7 +2,6 @@ package fr.obeo.releng.targetplatform.tests
 
 import com.google.common.io.Files
 import com.google.inject.Inject
-import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.pde.TargetDefinitionGenerator
@@ -17,7 +16,6 @@ import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,9 +29,6 @@ class TestTargetGeneration {
 	
 	@Inject
 	ParseHelper<TargetPlatform> parser
-	
-	@Inject
-	Provider<XtextResourceSet> resourceSetProvider
 	
 	@Inject
 	LocationIndexBuilder indexBuilder;
@@ -109,7 +104,7 @@ class TestTargetGeneration {
 		</target>
 		'''.toString, content)
 	}
-	
+
 	@Test
 	def void testSingleLocationManyIU() {
 		val tp1 = parser.parse('''

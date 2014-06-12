@@ -24,7 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestValidation.class,
 	TestTargetGeneration.class,
 	TestTargetPlatformIndexer.class,
-	TestTargetConvertion.class,
+	TestTargetConversion.class,
 })
 public class AllTests {
 }

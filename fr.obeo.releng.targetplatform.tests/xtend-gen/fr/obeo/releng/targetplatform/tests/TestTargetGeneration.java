@@ -2,7 +2,6 @@ package fr.obeo.releng.targetplatform.tests;
 
 import com.google.common.io.Files;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.pde.TargetDefinitionGenerator;
@@ -21,7 +20,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
@@ -35,9 +33,6 @@ import org.junit.runner.RunWith;
 public class TestTargetGeneration {
   @Inject
   private ParseHelper<TargetPlatform> parser;
-  
-  @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
   
   @Inject
   private LocationIndexBuilder indexBuilder;

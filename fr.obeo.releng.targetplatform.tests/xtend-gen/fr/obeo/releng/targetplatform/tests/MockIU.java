@@ -1,6 +1,8 @@
 package fr.obeo.releng.targetplatform.tests;
 
+import com.google.common.collect.Maps;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import org.eclipse.equinox.p2.metadata.IArtifactKey;
 import org.eclipse.equinox.p2.metadata.ICopyright;
@@ -21,9 +23,28 @@ public class MockIU implements IInstallableUnit {
   
   private final Version version;
   
+  private final Map<String, String> properties;
+  
   public MockIU(final String id, final Version version) {
+    this(id, version, null);
+  }
+  
+  public MockIU(final String id, final Version version, final Map<String, String> properties) {
     this.id = id;
     this.version = version;
+    this.properties = properties;
+  }
+  
+  public static MockIU createBundle(final String id, final Version version) {
+    return new MockIU(id, version);
+  }
+  
+  public static MockIU createFeature(final String id, final Version version) {
+    Map<String, String> _xsetliteral = null;
+    Map<String, String> _tempMap = Maps.<String, String>newHashMap();
+    _tempMap.put("org.eclipse.equinox.p2.type.group", "true");
+    _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
+    return new MockIU(id, version, _xsetliteral);
   }
   
   public Collection<IArtifactKey> getArtifacts() {
@@ -59,15 +80,15 @@ public class MockIU implements IInstallableUnit {
   }
   
   public Map<String, String> getProperties() {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return this.properties;
   }
   
   public String getProperty(final String key) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return this.properties.get(key);
   }
   
   public String getProperty(final String key, final String locale) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return this.getProperty(key);
   }
   
   public Collection<IProvidedCapability> getProvidedCapabilities() {
