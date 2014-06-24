@@ -42,7 +42,7 @@ enum Option:
 ;
 
 IU:
-	ID=QualifiedName ( ';' 'version' '=' (version=VersionRange|version=STRING) )? 
+	ID=QualifiedName ( ';'? 'version'? '='? (version=VersionRange|version=STRING) )? 
 ;
 
 QualifiedName hidden ():

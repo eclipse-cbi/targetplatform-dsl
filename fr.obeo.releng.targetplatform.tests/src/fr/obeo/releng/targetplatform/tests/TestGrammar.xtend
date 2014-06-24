@@ -210,8 +210,7 @@ class TestGrammar {
 		''')
 		
 		assertEquals("TP1", tp.name)
-		assertEquals(2, tp.locations.map[ius].flatten.size
-		)
+		assertEquals(2, tp.locations.map[ius].flatten.size)
 		
 		val ids = tp.locations.map[ius.map[ID]].flatten
 		assertEquals(2, ids.size)
@@ -233,5 +232,77 @@ class TestGrammar {
 		assertEquals("motif", env.windowingSystem)
 		assertEquals(new Locale("en", "us"), env.localization)
 		assertEquals(JavaRuntime::executionEnvironmentsManager.getEnvironment("JavaSE-1.7"), env.executionEnvironment)
+	}
+	
+	@Test
+	def testVersionWithoutKeywords1() {
+		val targetPlatform = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava 1.2.0
+			}
+		''')
+		
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val ids = targetPlatform.locations.map[ius.map[ID]].flatten
+		val versions = targetPlatform.locations.map[ius.map[version]].flatten
+		assertEquals(1, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("1.2.0", versions.head)
+	}
+	
+	@Test
+	def testVersionWithoutKeywords2() {
+		val targetPlatform = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava [1.2.0 , 2.4.54)
+			}
+		''')
+		
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val ids = targetPlatform.locations.map[ius.map[ID]].flatten
+		val versions = targetPlatform.locations.map[ius.map[version]].flatten
+		assertEquals(1, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("[1.2.0,2.4.54)", versions.head)
+	}
+	
+	@Test
+	def testVersionWithoutKeywords3() {
+		val targetPlatform = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava [1.2.0 , 2.4.54)
+				org.apacahe.commons
+			}
+		''')
+		
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val ids = targetPlatform.locations.map[ius.map[ID]].flatten
+		val versions = targetPlatform.locations.map[ius.map[version]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("org.apacahe.commons", ids.get(1))
+		assertEquals("[1.2.0,2.4.54)", versions.head)
+	}
+	
+	@Test
+	def testVersionWithoutKeywords4() {
+		val targetPlatform = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava 1.2.0
+				org.apacahe.commons
+			}
+		''')
+		
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		val ids = targetPlatform.locations.map[ius.map[ID]].flatten
+		val versions = targetPlatform.locations.map[ius.map[version]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("org.apacahe.commons", ids.get(1))
+		assertEquals("1.2.0", versions.head)
 	}
 }

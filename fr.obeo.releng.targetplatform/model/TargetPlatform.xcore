@@ -1,12 +1,11 @@
 @GenModel(prefix="TargetPlatform", modelName="TargetPlatform")
 package fr.obeo.releng.targetplatform
 
-import java.util.Locale
 import com.google.common.base.Splitter
+import java.util.Locale
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
 import org.eclipse.jdt.launching.JavaRuntime
-import com.google.common.base.Predicates
 
 class TargetPlatform {
 	String name

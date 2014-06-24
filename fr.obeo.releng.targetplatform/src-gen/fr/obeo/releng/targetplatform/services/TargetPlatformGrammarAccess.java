@@ -286,10 +286,10 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVersionSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cVersionAssignment_1_3_1.eContents().get(0);
 		
 		//IU:
-		//	ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?;
+		//	ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?;
 		public ParserRule getRule() { return rule; }
 
-		//ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?
+		//ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?
 		public Group getGroup() { return cGroup; }
 
 		//ID=QualifiedName
@@ -298,16 +298,16 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getIDQualifiedNameParserRuleCall_0_0() { return cIDQualifiedNameParserRuleCall_0_0; }
 
-		//(";" "version" "=" (version=VersionRange | version=STRING))?
+		//(";"? "version"? "="? (version=VersionRange | version=STRING))?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//";"
+		//";"?
 		public Keyword getSemicolonKeyword_1_0() { return cSemicolonKeyword_1_0; }
 
-		//"version"
+		//"version"?
 		public Keyword getVersionKeyword_1_1() { return cVersionKeyword_1_1; }
 
-		//"="
+		//"="?
 		public Keyword getEqualsSignKeyword_1_2() { return cEqualsSignKeyword_1_2; }
 
 		//version=VersionRange | version=STRING
@@ -653,7 +653,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IU:
-	//	ID=QualifiedName (";" "version" "=" (version=VersionRange | version=STRING))?;
+	//	ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?;
 	public IUElements getIUAccess() {
 		return (pIU != null) ? pIU : (pIU = new IUElements());
 	}

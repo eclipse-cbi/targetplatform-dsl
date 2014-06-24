@@ -1541,7 +1541,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIU"
-    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:543:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= ruleQualifiedName ) ) (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
+    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:543:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= ruleQualifiedName ) ) ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
     public final EObject ruleIU() throws RecognitionException {
         EObject current = null;
 
@@ -1557,11 +1557,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:546:28: ( ( ( (lv_ID_0_0= ruleQualifiedName ) ) (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:1: ( ( (lv_ID_0_0= ruleQualifiedName ) ) (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:546:28: ( ( ( (lv_ID_0_0= ruleQualifiedName ) ) ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:1: ( ( (lv_ID_0_0= ruleQualifiedName ) ) ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
             {
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:1: ( ( (lv_ID_0_0= ruleQualifiedName ) ) (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:2: ( (lv_ID_0_0= ruleQualifiedName ) ) (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:1: ( ( (lv_ID_0_0= ruleQualifiedName ) ) ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:2: ( (lv_ID_0_0= ruleQualifiedName ) ) ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
             {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:547:2: ( (lv_ID_0_0= ruleQualifiedName ) )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:548:1: (lv_ID_0_0= ruleQualifiedName )
@@ -1598,57 +1598,108 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:2: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:2: ( (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            int alt18=2;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA15_0==19) ) {
-                alt15=1;
+            if ( (LA18_0==RULE_STRING||LA18_0==RULE_INT||(LA18_0>=19 && LA18_0<=21)||(LA18_0>=23 && LA18_0<=24)||LA18_0==27) ) {
+                alt18=1;
             }
-            switch (alt15) {
+            switch (alt18) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:4: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:3: (otherlv_1= ';' )? (otherlv_2= 'version' )? (otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
                     {
-                    otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleIU1232); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0());
-                          
-                    }
-                    otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleIU1244); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_1());
-                          
-                    }
-                    otherlv_3=(Token)match(input,21,FOLLOW_21_in_ruleIU1256); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_2());
-                          
-                    }
-                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:1: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:3: (otherlv_1= ';' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
-                    if ( (LA14_0==RULE_INT||(LA14_0>=23 && LA14_0<=24)||LA14_0==27) ) {
+                    if ( (LA14_0==19) ) {
                         alt14=1;
                     }
-                    else if ( (LA14_0==RULE_STRING) ) {
-                        alt14=2;
+                    switch (alt14) {
+                        case 1 :
+                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:565:5: otherlv_1= ';'
+                            {
+                            otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleIU1233); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                                  	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0());
+                                  
+                            }
+
+                            }
+                            break;
+
+                    }
+
+                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:569:3: (otherlv_2= 'version' )?
+                    int alt15=2;
+                    int LA15_0 = input.LA(1);
+
+                    if ( (LA15_0==20) ) {
+                        alt15=1;
+                    }
+                    switch (alt15) {
+                        case 1 :
+                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:569:5: otherlv_2= 'version'
+                            {
+                            otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleIU1248); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                                  	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_1());
+                                  
+                            }
+
+                            }
+                            break;
+
+                    }
+
+                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:573:3: (otherlv_3= '=' )?
+                    int alt16=2;
+                    int LA16_0 = input.LA(1);
+
+                    if ( (LA16_0==21) ) {
+                        alt16=1;
+                    }
+                    switch (alt16) {
+                        case 1 :
+                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:573:5: otherlv_3= '='
+                            {
+                            otherlv_3=(Token)match(input,21,FOLLOW_21_in_ruleIU1263); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                                  	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_2());
+                                  
+                            }
+
+                            }
+                            break;
+
+                    }
+
+                    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:3: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    int alt17=2;
+                    int LA17_0 = input.LA(1);
+
+                    if ( (LA17_0==RULE_INT||(LA17_0>=23 && LA17_0<=24)||LA17_0==27) ) {
+                        alt17=1;
+                    }
+                    else if ( (LA17_0==RULE_STRING) ) {
+                        alt17=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 14, 0, input);
+                            new NoViableAltException("", 17, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt14) {
+                    switch (alt17) {
                         case 1 :
-                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:2: ( (lv_version_4_0= ruleVersionRange ) )
+                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:4: ( (lv_version_4_0= ruleVersionRange ) )
                             {
-                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:2: ( (lv_version_4_0= ruleVersionRange ) )
+                            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:577:4: ( (lv_version_4_0= ruleVersionRange ) )
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:578:1: (lv_version_4_0= ruleVersionRange )
                             {
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:578:1: (lv_version_4_0= ruleVersionRange )
@@ -1659,7 +1710,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleVersionRange_in_ruleIU1278);
+                            pushFollow(FOLLOW_ruleVersionRange_in_ruleIU1287);
                             lv_version_4_0=ruleVersionRange();
 
                             state._fsp--;
@@ -1695,7 +1746,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:597:1: (lv_version_5_0= RULE_STRING )
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:598:3: lv_version_5_0= RULE_STRING
                             {
-                            lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIU1301); if (state.failed) return current;
+                            lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIU1310); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_1_0()); 
@@ -1771,7 +1822,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName1352);
+            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName1361);
             iv_ruleQualifiedName=ruleQualifiedName();
 
             state._fsp--;
@@ -1779,7 +1830,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleQualifiedName.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName1363); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName1372); if (state.failed) return current;
 
             }
 
@@ -1819,7 +1870,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:642:1: (this_ID_0= RULE_ID ( ( ( '.' )=>kw= '.' ) (this_ID_2= RULE_ID | this_INT_3= RULE_INT ) )* )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:642:6: this_ID_0= RULE_ID ( ( ( '.' )=>kw= '.' ) (this_ID_2= RULE_ID | this_INT_3= RULE_INT ) )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQualifiedName1407); if (state.failed) return current;
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQualifiedName1416); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_ID_0);
@@ -1831,24 +1882,24 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                   
             }
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:649:1: ( ( ( '.' )=>kw= '.' ) (this_ID_2= RULE_ID | this_INT_3= RULE_INT ) )*
-            loop17:
+            loop20:
             do {
-                int alt17=2;
-                int LA17_0 = input.LA(1);
+                int alt20=2;
+                int LA20_0 = input.LA(1);
 
-                if ( (LA17_0==22) && (synpred1_InternalTargetPlatform())) {
-                    alt17=1;
+                if ( (LA20_0==22) && (synpred1_InternalTargetPlatform())) {
+                    alt20=1;
                 }
 
 
-                switch (alt17) {
+                switch (alt20) {
             	case 1 :
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:649:2: ( ( '.' )=>kw= '.' ) (this_ID_2= RULE_ID | this_INT_3= RULE_INT )
             	    {
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:649:2: ( ( '.' )=>kw= '.' )
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:649:3: ( '.' )=>kw= '.'
             	    {
-            	    kw=(Token)match(input,22,FOLLOW_22_in_ruleQualifiedName1435); if (state.failed) return current;
+            	    kw=(Token)match(input,22,FOLLOW_22_in_ruleQualifiedName1444); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
@@ -1859,27 +1910,27 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
 
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:657:2: (this_ID_2= RULE_ID | this_INT_3= RULE_INT )
-            	    int alt16=2;
-            	    int LA16_0 = input.LA(1);
+            	    int alt19=2;
+            	    int LA19_0 = input.LA(1);
 
-            	    if ( (LA16_0==RULE_ID) ) {
-            	        alt16=1;
+            	    if ( (LA19_0==RULE_ID) ) {
+            	        alt19=1;
             	    }
-            	    else if ( (LA16_0==RULE_INT) ) {
-            	        alt16=2;
+            	    else if ( (LA19_0==RULE_INT) ) {
+            	        alt19=2;
             	    }
             	    else {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        NoViableAltException nvae =
-            	            new NoViableAltException("", 16, 0, input);
+            	            new NoViableAltException("", 19, 0, input);
 
             	        throw nvae;
             	    }
-            	    switch (alt16) {
+            	    switch (alt19) {
             	        case 1 :
             	            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:657:7: this_ID_2= RULE_ID
             	            {
-            	            this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQualifiedName1452); if (state.failed) return current;
+            	            this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQualifiedName1461); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              		current.merge(this_ID_2);
@@ -1896,7 +1947,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	        case 2 :
             	            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:665:10: this_INT_3= RULE_INT
             	            {
-            	            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleQualifiedName1478); if (state.failed) return current;
+            	            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleQualifiedName1487); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              		current.merge(this_INT_3);
@@ -1918,7 +1969,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop17;
+            	    break loop20;
                 }
             } while (true);
 
@@ -1965,7 +2016,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getVersionRule()); 
             }
-            pushFollow(FOLLOW_ruleVersion_in_entryRuleVersion1537);
+            pushFollow(FOLLOW_ruleVersion_in_entryRuleVersion1546);
             iv_ruleVersion=ruleVersion();
 
             state._fsp--;
@@ -1973,7 +2024,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleVersion.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersion1548); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersion1557); if (state.failed) return current;
 
             }
 
@@ -2015,7 +2066,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:703:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )? )? )? )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:703:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )? )? )?
             {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1592); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1601); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_INT_0);
@@ -2027,24 +2078,24 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                   
             }
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:710:1: (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )? )? )?
-            int alt21=2;
-            int LA21_0 = input.LA(1);
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            if ( (LA21_0==22) ) {
-                alt21=1;
+            if ( (LA24_0==22) ) {
+                alt24=1;
             }
-            switch (alt21) {
+            switch (alt24) {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:711:2: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )? )?
                     {
-                    kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1611); if (state.failed) return current;
+                    kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1620); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
                               newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_0()); 
                           
                     }
-                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1626); if (state.failed) return current;
+                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1635); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_INT_2);
@@ -2056,24 +2107,24 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                           
                     }
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:723:1: (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )? )?
-                    int alt20=2;
-                    int LA20_0 = input.LA(1);
+                    int alt23=2;
+                    int LA23_0 = input.LA(1);
 
-                    if ( (LA20_0==22) ) {
-                        alt20=1;
+                    if ( (LA23_0==22) ) {
+                        alt23=1;
                     }
-                    switch (alt20) {
+                    switch (alt23) {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:724:2: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )?
                             {
-                            kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1645); if (state.failed) return current;
+                            kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1654); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
                                       newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_0()); 
                                   
                             }
-                            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1660); if (state.failed) return current;
+                            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1669); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               		current.merge(this_INT_4);
@@ -2085,17 +2136,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                   
                             }
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:736:1: (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT ) )?
-                            int alt19=2;
-                            int LA19_0 = input.LA(1);
+                            int alt22=2;
+                            int LA22_0 = input.LA(1);
 
-                            if ( (LA19_0==22) ) {
-                                alt19=1;
+                            if ( (LA22_0==22) ) {
+                                alt22=1;
                             }
-                            switch (alt19) {
+                            switch (alt22) {
                                 case 1 :
                                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:737:2: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT )
                                     {
-                                    kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1679); if (state.failed) return current;
+                                    kw=(Token)match(input,22,FOLLOW_22_in_ruleVersion1688); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                               current.merge(kw);
@@ -2103,27 +2154,27 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                           
                                     }
                                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:742:1: (this_ID_6= RULE_ID | this_INT_7= RULE_INT )
-                                    int alt18=2;
-                                    int LA18_0 = input.LA(1);
+                                    int alt21=2;
+                                    int LA21_0 = input.LA(1);
 
-                                    if ( (LA18_0==RULE_ID) ) {
-                                        alt18=1;
+                                    if ( (LA21_0==RULE_ID) ) {
+                                        alt21=1;
                                     }
-                                    else if ( (LA18_0==RULE_INT) ) {
-                                        alt18=2;
+                                    else if ( (LA21_0==RULE_INT) ) {
+                                        alt21=2;
                                     }
                                     else {
                                         if (state.backtracking>0) {state.failed=true; return current;}
                                         NoViableAltException nvae =
-                                            new NoViableAltException("", 18, 0, input);
+                                            new NoViableAltException("", 21, 0, input);
 
                                         throw nvae;
                                     }
-                                    switch (alt18) {
+                                    switch (alt21) {
                                         case 1 :
                                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:742:6: this_ID_6= RULE_ID
                                             {
-                                            this_ID_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVersion1695); if (state.failed) return current;
+                                            this_ID_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVersion1704); if (state.failed) return current;
                                             if ( state.backtracking==0 ) {
 
                                               		current.merge(this_ID_6);
@@ -2140,7 +2191,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                         case 2 :
                                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:750:10: this_INT_7= RULE_INT
                                             {
-                                            this_INT_7=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1721); if (state.failed) return current;
+                                            this_INT_7=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1730); if (state.failed) return current;
                                             if ( state.backtracking==0 ) {
 
                                               		current.merge(this_INT_7);
@@ -2218,7 +2269,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getVersionRangeRule()); 
             }
-            pushFollow(FOLLOW_ruleVersionRange_in_entryRuleVersionRange1784);
+            pushFollow(FOLLOW_ruleVersionRange_in_entryRuleVersionRange1793);
             iv_ruleVersionRange=ruleVersionRange();
 
             state._fsp--;
@@ -2226,7 +2277,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleVersionRange.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersionRange1795); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersionRange1804); if (state.failed) return current;
 
             }
 
@@ -2267,33 +2318,33 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:788:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
             {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:788:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
-            int alt24=3;
+            int alt27=3;
             switch ( input.LA(1) ) {
             case 23:
             case 24:
                 {
-                alt24=1;
+                alt27=1;
                 }
                 break;
             case RULE_INT:
                 {
-                alt24=2;
+                alt27=2;
                 }
                 break;
             case 27:
                 {
-                alt24=3;
+                alt27=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 24, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt24) {
+            switch (alt27) {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:788:2: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
                     {
@@ -2301,27 +2352,27 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:788:3: (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' )
                     {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:788:3: (kw= '(' | kw= '[' )
-                    int alt22=2;
-                    int LA22_0 = input.LA(1);
+                    int alt25=2;
+                    int LA25_0 = input.LA(1);
 
-                    if ( (LA22_0==23) ) {
-                        alt22=1;
+                    if ( (LA25_0==23) ) {
+                        alt25=1;
                     }
-                    else if ( (LA22_0==24) ) {
-                        alt22=2;
+                    else if ( (LA25_0==24) ) {
+                        alt25=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 22, 0, input);
+                            new NoViableAltException("", 25, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt22) {
+                    switch (alt25) {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:789:2: kw= '('
                             {
-                            kw=(Token)match(input,23,FOLLOW_23_in_ruleVersionRange1839); if (state.failed) return current;
+                            kw=(Token)match(input,23,FOLLOW_23_in_ruleVersionRange1848); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -2334,7 +2385,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:796:2: kw= '['
                             {
-                            kw=(Token)match(input,24,FOLLOW_24_in_ruleVersionRange1858); if (state.failed) return current;
+                            kw=(Token)match(input,24,FOLLOW_24_in_ruleVersionRange1867); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -2352,7 +2403,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1881);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1890);
                     this_Version_2=ruleVersion();
 
                     state._fsp--;
@@ -2367,7 +2418,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                               afterParserOrEnumRuleCall();
                           
                     }
-                    kw=(Token)match(input,13,FOLLOW_13_in_ruleVersionRange1899); if (state.failed) return current;
+                    kw=(Token)match(input,13,FOLLOW_13_in_ruleVersionRange1908); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -2379,7 +2430,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_3()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1921);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1930);
                     this_Version_4=ruleVersion();
 
                     state._fsp--;
@@ -2395,27 +2446,27 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                           
                     }
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:829:1: (kw= ')' | kw= ']' )
-                    int alt23=2;
-                    int LA23_0 = input.LA(1);
+                    int alt26=2;
+                    int LA26_0 = input.LA(1);
 
-                    if ( (LA23_0==25) ) {
-                        alt23=1;
+                    if ( (LA26_0==25) ) {
+                        alt26=1;
                     }
-                    else if ( (LA23_0==26) ) {
-                        alt23=2;
+                    else if ( (LA26_0==26) ) {
+                        alt26=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 23, 0, input);
+                            new NoViableAltException("", 26, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt23) {
+                    switch (alt26) {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:830:2: kw= ')'
                             {
-                            kw=(Token)match(input,25,FOLLOW_25_in_ruleVersionRange1940); if (state.failed) return current;
+                            kw=(Token)match(input,25,FOLLOW_25_in_ruleVersionRange1949); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -2428,7 +2479,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:837:2: kw= ']'
                             {
-                            kw=(Token)match(input,26,FOLLOW_26_in_ruleVersionRange1959); if (state.failed) return current;
+                            kw=(Token)match(input,26,FOLLOW_26_in_ruleVersionRange1968); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -2455,7 +2506,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1989);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange1998);
                     this_Version_7=ruleVersion();
 
                     state._fsp--;
@@ -2476,7 +2527,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:856:2: kw= 'lazy'
                     {
-                    kw=(Token)match(input,27,FOLLOW_27_in_ruleVersionRange2013); if (state.failed) return current;
+                    kw=(Token)match(input,27,FOLLOW_27_in_ruleVersionRange2022); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -2527,44 +2578,44 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:875:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
             {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:875:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
-            int alt25=4;
+            int alt28=4;
             switch ( input.LA(1) ) {
             case 28:
                 {
-                alt25=1;
+                alt28=1;
                 }
                 break;
             case 29:
                 {
-                alt25=2;
+                alt28=2;
                 }
                 break;
             case 30:
                 {
-                alt25=3;
+                alt28=3;
                 }
                 break;
             case 31:
                 {
-                alt25=4;
+                alt28=4;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
+                    new NoViableAltException("", 28, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt25) {
+            switch (alt28) {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:875:2: (enumLiteral_0= 'requirements' )
                     {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:875:2: (enumLiteral_0= 'requirements' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:875:4: enumLiteral_0= 'requirements'
                     {
-                    enumLiteral_0=(Token)match(input,28,FOLLOW_28_in_ruleOption2071); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,28,FOLLOW_28_in_ruleOption2080); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getOptionAccess().getINCLUDE_REQUIREDEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -2583,7 +2634,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:881:6: (enumLiteral_1= 'allEnvironments' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:881:8: enumLiteral_1= 'allEnvironments'
                     {
-                    enumLiteral_1=(Token)match(input,29,FOLLOW_29_in_ruleOption2088); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,29,FOLLOW_29_in_ruleOption2097); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getOptionAccess().getINCLUDE_ALL_ENVIRONMENTSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -2602,7 +2653,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:887:6: (enumLiteral_2= 'source' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:887:8: enumLiteral_2= 'source'
                     {
-                    enumLiteral_2=(Token)match(input,30,FOLLOW_30_in_ruleOption2105); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,30,FOLLOW_30_in_ruleOption2114); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getOptionAccess().getINCLUDE_SOURCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -2621,7 +2672,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:893:6: (enumLiteral_3= 'configurePhase' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:893:8: enumLiteral_3= 'configurePhase'
                     {
-                    enumLiteral_3=(Token)match(input,31,FOLLOW_31_in_ruleOption2122); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,31,FOLLOW_31_in_ruleOption2131); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getOptionAccess().getINCLUDE_CONFIGURE_PHASEEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -2660,7 +2711,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:649:3: ( '.' )
         // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:650:2: '.'
         {
-        match(input,22,FOLLOW_22_in_synpred1_InternalTargetPlatform1426); if (state.failed) return ;
+        match(input,22,FOLLOW_22_in_synpred1_InternalTargetPlatform1435); if (state.failed) return ;
 
         }
     }
@@ -2727,43 +2778,43 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_18_in_ruleLocation1125 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleIU_in_entryRuleIU1163 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleIU1173 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleIU1219 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleIU1232 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleIU1244 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_ruleIU1256 = new BitSet(new long[]{0x0000000009800050L});
-    public static final BitSet FOLLOW_ruleVersionRange_in_ruleIU1278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleIU1301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName1352 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName1363 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName1407 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_ruleQualifiedName1435 = new BitSet(new long[]{0x0000000000000060L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName1452 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleQualifiedName1478 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_ruleVersion_in_entryRuleVersion1537 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersion1548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1592 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_ruleVersion1611 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1626 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_ruleVersion1645 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1660 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_ruleVersion1679 = new BitSet(new long[]{0x0000000000000060L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleVersion1695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersionRange_in_entryRuleVersionRange1784 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersionRange1795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleVersionRange1839 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_24_in_ruleVersionRange1858 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1881 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleVersionRange1899 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1921 = new BitSet(new long[]{0x0000000006000000L});
-    public static final BitSet FOLLOW_25_in_ruleVersionRange1940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleVersionRange1959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleVersionRange2013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleOption2071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_ruleOption2088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleOption2105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleOption2122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_synpred1_InternalTargetPlatform1426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleIU1219 = new BitSet(new long[]{0x0000000009B80052L});
+    public static final BitSet FOLLOW_19_in_ruleIU1233 = new BitSet(new long[]{0x0000000009B00050L});
+    public static final BitSet FOLLOW_20_in_ruleIU1248 = new BitSet(new long[]{0x0000000009A00050L});
+    public static final BitSet FOLLOW_21_in_ruleIU1263 = new BitSet(new long[]{0x0000000009800050L});
+    public static final BitSet FOLLOW_ruleVersionRange_in_ruleIU1287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleIU1310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName1361 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName1372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName1416 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_ruleQualifiedName1444 = new BitSet(new long[]{0x0000000000000060L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName1461 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleQualifiedName1487 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_ruleVersion_in_entryRuleVersion1546 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersion1557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1601 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_ruleVersion1620 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1635 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_ruleVersion1654 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1669 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_ruleVersion1688 = new BitSet(new long[]{0x0000000000000060L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleVersion1704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion1730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersionRange_in_entryRuleVersionRange1793 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersionRange1804 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleVersionRange1848 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_24_in_ruleVersionRange1867 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1890 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleVersionRange1908 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1930 = new BitSet(new long[]{0x0000000006000000L});
+    public static final BitSet FOLLOW_25_in_ruleVersionRange1949 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleVersionRange1968 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange1998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleVersionRange2022 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleOption2080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_ruleOption2097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleOption2114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleOption2131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_synpred1_InternalTargetPlatform1435 = new BitSet(new long[]{0x0000000000000002L});
 
 }

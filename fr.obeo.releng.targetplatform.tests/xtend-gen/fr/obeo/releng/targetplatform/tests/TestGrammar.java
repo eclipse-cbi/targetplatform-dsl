@@ -507,4 +507,254 @@ public class TestGrammar {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testVersionWithoutKeywords1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava 1.2.0");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
+      final Iterable<String> ids = Iterables.<String>concat(_map);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getVersion();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> versions = Iterables.<String>concat(_map_1);
+      int _size = IterableExtensions.size(ids);
+      Assert.assertEquals(1, _size);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      String _head_1 = IterableExtensions.<String>head(versions);
+      Assert.assertEquals("1.2.0", _head_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVersionWithoutKeywords2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava [1.2.0 , 2.4.54)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
+      final Iterable<String> ids = Iterables.<String>concat(_map);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getVersion();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> versions = Iterables.<String>concat(_map_1);
+      int _size = IterableExtensions.size(ids);
+      Assert.assertEquals(1, _size);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      String _head_1 = IterableExtensions.<String>head(versions);
+      Assert.assertEquals("[1.2.0,2.4.54)", _head_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVersionWithoutKeywords3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava [1.2.0 , 2.4.54)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.apacahe.commons");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
+      final Iterable<String> ids = Iterables.<String>concat(_map);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getVersion();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> versions = Iterables.<String>concat(_map_1);
+      int _size = IterableExtensions.size(ids);
+      Assert.assertEquals(2, _size);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
+      Assert.assertEquals("org.apacahe.commons", _get);
+      String _head_1 = IterableExtensions.<String>head(versions);
+      Assert.assertEquals("[1.2.0,2.4.54)", _head_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVersionWithoutKeywords4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava 1.2.0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.apacahe.commons");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
+      final Iterable<String> ids = Iterables.<String>concat(_map);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getVersion();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> versions = Iterables.<String>concat(_map_1);
+      int _size = IterableExtensions.size(ids);
+      Assert.assertEquals(2, _size);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
+      Assert.assertEquals("org.apacahe.commons", _get);
+      String _head_1 = IterableExtensions.<String>head(versions);
+      Assert.assertEquals("1.2.0", _head_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

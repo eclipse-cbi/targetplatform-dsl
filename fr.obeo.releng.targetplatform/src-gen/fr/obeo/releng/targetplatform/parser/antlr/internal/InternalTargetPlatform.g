@@ -562,19 +562,19 @@ ruleIU returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_1=';' 
+)((	otherlv_1=';' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0());
     }
-	otherlv_2='version' 
+)?(	otherlv_2='version' 
     {
     	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_1());
     }
-	otherlv_3='=' 
+)?(	otherlv_3='=' 
     {
     	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_2());
     }
-((
+)?((
 (
 		{ 
 	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); 
