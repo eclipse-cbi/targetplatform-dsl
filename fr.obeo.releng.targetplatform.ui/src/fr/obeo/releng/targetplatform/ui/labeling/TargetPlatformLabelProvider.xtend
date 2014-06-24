@@ -65,15 +65,23 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 		"obj16/inc_obj.gif"
 	}
 	
-	def image(Option option) {
+	def image(Option object) {
 		"obj16/option_obj.gif"
 	}
 	
-	def image(Options option) {
+	def text(Options object) {
+		"Options"
+	}
+	
+	def image(Options object) {
 		"obj16/option_obj.gif"
 	}
 	
-	def image(Environment option) {
+	def text(Environment object) {
+		"Environment"
+	}
+	
+	def image(Environment object) {
 		"obj16/env_obj.gif"
 	}
 }

@@ -84,15 +84,23 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
     return "obj16/inc_obj.gif";
   }
   
-  public String image(final Option option) {
+  public String image(final Option object) {
     return "obj16/option_obj.gif";
   }
   
-  public String image(final Options option) {
+  public String text(final Options object) {
+    return "Options";
+  }
+  
+  public String image(final Options object) {
     return "obj16/option_obj.gif";
   }
   
-  public String image(final Environment option) {
+  public String text(final Environment object) {
+    return "Environment";
+  }
+  
+  public String image(final Environment object) {
     return "obj16/env_obj.gif";
   }
 }

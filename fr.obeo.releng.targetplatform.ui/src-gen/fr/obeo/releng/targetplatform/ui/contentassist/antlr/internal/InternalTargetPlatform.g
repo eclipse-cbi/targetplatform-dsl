@@ -1532,9 +1532,9 @@ rule__IU__Group_1__0__Impl
 :
 (
 { before(grammarAccess.getIUAccess().getSemicolonKeyword_1_0()); }
-
+(
 	';' 
-
+)?
 { after(grammarAccess.getIUAccess().getSemicolonKeyword_1_0()); }
 )
 
@@ -1563,9 +1563,9 @@ rule__IU__Group_1__1__Impl
 :
 (
 { before(grammarAccess.getIUAccess().getVersionKeyword_1_1()); }
-
+(
 	'version' 
-
+)?
 { after(grammarAccess.getIUAccess().getVersionKeyword_1_1()); }
 )
 
@@ -1594,9 +1594,9 @@ rule__IU__Group_1__2__Impl
 :
 (
 { before(grammarAccess.getIUAccess().getEqualsSignKeyword_1_2()); }
-
+(
 	'=' 
-
+)?
 { after(grammarAccess.getIUAccess().getEqualsSignKeyword_1_2()); }
 )
 
