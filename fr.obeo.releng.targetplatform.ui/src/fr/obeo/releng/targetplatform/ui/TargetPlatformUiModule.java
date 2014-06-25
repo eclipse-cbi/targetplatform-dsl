@@ -6,10 +6,16 @@ package fr.obeo.releng.targetplatform.ui;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 import com.google.inject.Provider;
 
 import fr.obeo.releng.targetplatform.ui.editor.autoedit.TargetPlatformAutoEditStrategyProvider;
+import fr.obeo.releng.targetplatform.ui.editor.syntaxcoloring.TargetPlatformHighlightingConfiguration;
+import fr.obeo.releng.targetplatform.ui.editor.syntaxcoloring.TargetPlatformSemanticHighlightingCalculator;
+import fr.obeo.releng.targetplatform.ui.editor.syntaxcoloring.TargetPlatformTokenToAttributeIdMapper;
 import fr.obeo.releng.targetplatform.ui.internal.CustomTargetPlatformActivator;
 
 /**
@@ -24,6 +30,18 @@ public class TargetPlatformUiModule extends fr.obeo.releng.targetplatform.ui.Abs
 	@Override
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return TargetPlatformAutoEditStrategyProvider.class;
+	}
+	
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return TargetPlatformHighlightingConfiguration.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return TargetPlatformSemanticHighlightingCalculator.class;
+	}
+	
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return TargetPlatformTokenToAttributeIdMapper.class;
 	}
 	
 	public Provider<IProvisioningAgent> provideIProvisioningAgent() {
