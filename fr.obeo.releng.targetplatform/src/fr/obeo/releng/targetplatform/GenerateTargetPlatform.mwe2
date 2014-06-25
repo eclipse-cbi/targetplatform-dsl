@@ -110,7 +110,7 @@ Workflow {
     		fragment = junit.Junit4Fragment auto-inject {}
     
     		// rename refactoring
-    		fragment = refactoring.RefactorElementNameFragment auto-inject {}
+    		// fragment = refactoring.RefactorElementNameFragment auto-inject {}
     
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}

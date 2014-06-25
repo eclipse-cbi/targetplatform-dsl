@@ -6,13 +6,13 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-              default="true"
-              extensions="targetplatform,tpd"
-              icon="icons/target_def_file.gif"
-              id="fr.obeo.releng.targetplatform.TargetPlatform"
-              name="TargetPlatform Editor">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="targetplatform,tpd"
+            icon="icons/target_def_file.gif"
+            id="fr.obeo.releng.targetplatform.TargetPlatform"
+            name="Target Platform DSL Editor">
         </editor>
     </extension>
     <extension
@@ -83,7 +83,7 @@
         <page
             class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="fr.obeo.releng.targetplatform.TargetPlatform"
-            name="TargetPlatform">
+            name="Target Platform">
             <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
         <page
@@ -239,33 +239,35 @@
     </extension>
 
 
-    <!-- marker definitions for fr.obeo.releng.targetplatform.TargetPlatform -->
-    <extension
-            id="targetplatform.check.fast"
-            name="TargetPlatform Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="targetplatform.check.normal"
-            name="TargetPlatform Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="targetplatform.check.expensive"
-            name="TargetPlatform Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
+	<!-- marker definitions for fr.obeo.releng.targetplatform.TargetPlatform -->
+	<extension
+	        id="targetplatform.check.fast"
+	        name="TargetPlatform Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="targetplatform.check.normal"
+	        name="TargetPlatform Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="targetplatform.check.expensive"
+	        name="TargetPlatform Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="targetplatform,tpd"
+            >
       </participant>
    </extension>
    <extension
@@ -354,40 +356,6 @@
             </attribute>
         </markerResolutionGenerator>
     </extension>
-   	<!-- Rename Refactoring -->
-	<extension point="org.eclipse.ui.handlers">
-		<handler 
-			class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
-			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
-			<activeWhen>
-				<reference
-					definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-    <extension point="org.eclipse.ui.menus">
-         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
-               style="push">
-            <visibleWhen checkEnabled="false">
-               <reference
-                     definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-   </extension>
-   <extension point="org.eclipse.ui.preferencePages">
-	    <page
-	        category="fr.obeo.releng.targetplatform.TargetPlatform"
-	        class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-	        id="fr.obeo.releng.targetplatform.TargetPlatform.refactoring"
-	        name="Refactoring">
-	        <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
-	    </page>
-	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="fr.obeo.releng.targetplatform.TargetPlatform.compare.contentViewers"
