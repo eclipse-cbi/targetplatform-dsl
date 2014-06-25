@@ -123,39 +123,39 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEnvironmentKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cEnvAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cEnvQualifiedNameParserRuleCall_1_0 = (RuleCall)cEnvAssignment_1.eContents().get(0);
+		private final RuleCall cEnvIDTerminalRuleCall_1_0 = (RuleCall)cEnvAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cEnvAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cEnvQualifiedNameParserRuleCall_2_1_0 = (RuleCall)cEnvAssignment_2_1.eContents().get(0);
+		private final RuleCall cEnvIDTerminalRuleCall_2_1_0 = (RuleCall)cEnvAssignment_2_1.eContents().get(0);
 		
 		//Environment:
-		//	"environment" env+=QualifiedName (","? env+=QualifiedName)*;
+		//	"environment" env+=ID (","? env+=ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//"environment" env+=QualifiedName (","? env+=QualifiedName)*
+		//"environment" env+=ID (","? env+=ID)*
 		public Group getGroup() { return cGroup; }
 
 		//"environment"
 		public Keyword getEnvironmentKeyword_0() { return cEnvironmentKeyword_0; }
 
-		//env+=QualifiedName
+		//env+=ID
 		public Assignment getEnvAssignment_1() { return cEnvAssignment_1; }
 
-		//QualifiedName
-		public RuleCall getEnvQualifiedNameParserRuleCall_1_0() { return cEnvQualifiedNameParserRuleCall_1_0; }
+		//ID
+		public RuleCall getEnvIDTerminalRuleCall_1_0() { return cEnvIDTerminalRuleCall_1_0; }
 
-		//(","? env+=QualifiedName)*
+		//(","? env+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//","?
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
-		//env+=QualifiedName
+		//env+=ID
 		public Assignment getEnvAssignment_2_1() { return cEnvAssignment_2_1; }
 
-		//QualifiedName
-		public RuleCall getEnvQualifiedNameParserRuleCall_2_1_0() { return cEnvQualifiedNameParserRuleCall_2_1_0; }
+		//ID
+		public RuleCall getEnvIDTerminalRuleCall_2_1_0() { return cEnvIDTerminalRuleCall_2_1_0; }
 	}
 
 	public class IncludeDeclarationElements extends AbstractParserRuleElementFinder {
@@ -274,7 +274,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IU");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cIDAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cIDQualifiedNameParserRuleCall_0_0 = (RuleCall)cIDAssignment_0.eContents().get(0);
+		private final RuleCall cIDIDTerminalRuleCall_0_0 = (RuleCall)cIDAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cSemicolonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Keyword cVersionKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
@@ -286,17 +286,17 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVersionSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cVersionAssignment_1_3_1.eContents().get(0);
 		
 		//IU:
-		//	ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?;
+		//	ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?;
 		public ParserRule getRule() { return rule; }
 
-		//ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?
+		//ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?
 		public Group getGroup() { return cGroup; }
 
-		//ID=QualifiedName
+		//ID=ID
 		public Assignment getIDAssignment_0() { return cIDAssignment_0; }
 
-		//QualifiedName
-		public RuleCall getIDQualifiedNameParserRuleCall_0_0() { return cIDQualifiedNameParserRuleCall_0_0; }
+		//ID
+		public RuleCall getIDIDTerminalRuleCall_0_0() { return cIDIDTerminalRuleCall_0_0; }
 
 		//(";"? "version"? "="? (version=VersionRange | version=STRING))?
 		public Group getGroup_1() { return cGroup_1; }
@@ -324,42 +324,6 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 		//STRING
 		public RuleCall getVersionSTRINGTerminalRuleCall_1_3_1_0() { return cVersionSTRINGTerminalRuleCall_1_3_1_0; }
-	}
-
-	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final RuleCall cIDTerminalRuleCall_1_1_0 = (RuleCall)cAlternatives_1_1.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_1_1_1 = (RuleCall)cAlternatives_1_1.eContents().get(1);
-		
-		//QualifiedName hidden():
-		//	ID ("." (ID | INT))*;
-		public ParserRule getRule() { return rule; }
-
-		//ID ("." (ID | INT))*
-		public Group getGroup() { return cGroup; }
-
-		//ID
-		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
-		//(=> "." (ID | INT))*
-		public Group getGroup_1() { return cGroup_1; }
-
-		//=> "."
-		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
-		//ID | INT
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
-
-		//ID
-		public RuleCall getIDTerminalRuleCall_1_1_0() { return cIDTerminalRuleCall_1_1_0; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_1_1_1() { return cINTTerminalRuleCall_1_1_1; }
 	}
 
 	public class VersionElements extends AbstractParserRuleElementFinder {
@@ -537,7 +501,6 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private LocationElements pLocation;
 	private OptionElements unknownRuleOption;
 	private IUElements pIU;
-	private QualifiedNameElements pQualifiedName;
 	private VersionElements pVersion;
 	private VersionRangeElements pVersionRange;
 	private TerminalRule tINT;
@@ -612,7 +575,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Environment:
-	//	"environment" env+=QualifiedName (","? env+=QualifiedName)*;
+	//	"environment" env+=ID (","? env+=ID)*;
 	public EnvironmentElements getEnvironmentAccess() {
 		return (pEnvironment != null) ? pEnvironment : (pEnvironment = new EnvironmentElements());
 	}
@@ -653,23 +616,13 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IU:
-	//	ID=QualifiedName (";"? "version"? "="? (version=VersionRange | version=STRING))?;
+	//	ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?;
 	public IUElements getIUAccess() {
 		return (pIU != null) ? pIU : (pIU = new IUElements());
 	}
 	
 	public ParserRule getIURule() {
 		return getIUAccess().getRule();
-	}
-
-	//QualifiedName hidden():
-	//	ID ("." (ID | INT))*;
-	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
-	}
-	
-	public ParserRule getQualifiedNameRule() {
-		return getQualifiedNameAccess().getRule();
 	}
 
 	//Version hidden():
@@ -699,7 +652,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ID returns ecore::EString:
-	//	"^"? ("a".."z" | "A".."Z" | "_" | "-" | "0".."9")+;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("."? ("a".."z" | "A".."Z" | "^" | "_" | "-" | "0".."9"))*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 

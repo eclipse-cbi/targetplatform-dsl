@@ -200,12 +200,31 @@ class TestGrammar {
 	}
 	
 	@Test
-	def testWithKeywordInIUID() {
+	def testWithKeywordInIUID1() {
 		val tp = parser.parse('''
 			target "TP1"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
 				com.google.guava
 				com.google.guava.^source
+			}
+		''')
+		
+		assertEquals("TP1", tp.name)
+		assertEquals(2, tp.locations.map[ius].flatten.size)
+		
+		val ids = tp.locations.map[ius.map[ID]].flatten
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.head)
+		assertEquals("com.google.guava.source", ids.get(1))
+	}
+	
+	@Test
+	def testWithKeywordInIUID2() {
+		val tp = parser.parse('''
+			target "TP1"
+			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
+				com.google.guava
+				com.google.guava.source
 			}
 		''')
 		

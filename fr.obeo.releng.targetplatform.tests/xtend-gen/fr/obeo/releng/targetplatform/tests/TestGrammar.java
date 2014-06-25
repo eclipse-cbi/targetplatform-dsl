@@ -417,7 +417,7 @@ public class TestGrammar {
   }
   
   @Test
-  public void testWithKeywordInIUID() {
+  public void testWithKeywordInIUID1() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"TP1\"");
@@ -429,6 +429,60 @@ public class TestGrammar {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("com.google.guava.^source");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform tp = this.parser.parse(_builder);
+      String _name = tp.getName();
+      Assert.assertEquals("TP1", _name);
+      EList<Location> _locations = tp.getLocations();
+      final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
+        public EList<IU> apply(final Location it) {
+          return it.getIus();
+        }
+      };
+      List<EList<IU>> _map = ListExtensions.<Location, EList<IU>>map(_locations, _function);
+      Iterable<IU> _flatten = Iterables.<IU>concat(_map);
+      int _size = IterableExtensions.size(_flatten);
+      Assert.assertEquals(2, _size);
+      EList<Location> _locations_1 = tp.getLocations();
+      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        public List<String> apply(final Location it) {
+          EList<IU> _ius = it.getIus();
+          final Function1<IU, String> _function = new Function1<IU, String>() {
+            public String apply(final IU it) {
+              return it.getID();
+            }
+          };
+          return ListExtensions.<IU, String>map(_ius, _function);
+        }
+      };
+      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
+      final Iterable<String> ids = Iterables.<String>concat(_map_1);
+      int _size_1 = IterableExtensions.size(ids);
+      Assert.assertEquals(2, _size_1);
+      String _head = IterableExtensions.<String>head(ids);
+      Assert.assertEquals("com.google.guava", _head);
+      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
+      Assert.assertEquals("com.google.guava.source", _get);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithKeywordInIUID2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"TP1\"");
+      _builder.newLine();
+      _builder.append("location \"http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("com.google.guava.source");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

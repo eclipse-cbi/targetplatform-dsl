@@ -39,7 +39,6 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getTargetContentAccess().getAlternatives(), "rule__TargetContent__Alternatives");
 					put(grammarAccess.getIUAccess().getAlternatives_1_3(), "rule__IU__Alternatives_1_3");
-					put(grammarAccess.getQualifiedNameAccess().getAlternatives_1_1(), "rule__QualifiedName__Alternatives_1_1");
 					put(grammarAccess.getVersionAccess().getAlternatives_1_2_2_1(), "rule__Version__Alternatives_1_2_2_1");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives(), "rule__VersionRange__Alternatives");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives_0_0(), "rule__VersionRange__Alternatives_0_0");
@@ -57,8 +56,6 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLocationAccess().getGroup_2_1_2(), "rule__Location__Group_2_1_2__0");
 					put(grammarAccess.getIUAccess().getGroup(), "rule__IU__Group__0");
 					put(grammarAccess.getIUAccess().getGroup_1(), "rule__IU__Group_1__0");
-					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
-					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getVersionAccess().getGroup(), "rule__Version__Group__0");
 					put(grammarAccess.getVersionAccess().getGroup_1(), "rule__Version__Group_1__0");
 					put(grammarAccess.getVersionAccess().getGroup_1_2(), "rule__Version__Group_1_2__0");

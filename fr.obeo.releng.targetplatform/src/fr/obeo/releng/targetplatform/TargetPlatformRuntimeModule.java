@@ -4,8 +4,10 @@
 package fr.obeo.releng.targetplatform;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformConverter;
+import fr.obeo.releng.targetplatform.conversion.TargetPlatformIDValueConverter;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 /**
@@ -16,6 +18,10 @@ public class TargetPlatformRuntimeModule extends fr.obeo.releng.targetplatform.A
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return TargetPlatformConverter.class;
+	}
+	
+	public Class<? extends AbstractIDValueConverter> bindAbstractIDValueConverter() {
+		return TargetPlatformIDValueConverter.class;
 	}
 	
 	public Class<? extends LocationIndexBuilder> bindLocationIndexBuilder() {

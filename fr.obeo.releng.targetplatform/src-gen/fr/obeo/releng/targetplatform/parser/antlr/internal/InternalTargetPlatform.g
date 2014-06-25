@@ -270,19 +270,19 @@ ruleEnvironment returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getEnvironmentAccess().getEnvQualifiedNameParserRuleCall_1_0()); 
-	    }
-		lv_env_1_0=ruleQualifiedName		{
+		lv_env_1_0=RULE_ID
+		{
+			newLeafNode(lv_env_1_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_1_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getEnvironmentRule());
+	            $current = createModelElement(grammarAccess.getEnvironmentRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"env",
         		lv_env_1_0, 
-        		"QualifiedName");
-	        afterParserOrEnumRuleCall();
+        		"ID");
 	    }
 
 )
@@ -292,19 +292,19 @@ ruleEnvironment returns [EObject current=null]
     }
 )?(
 (
-		{ 
-	        newCompositeNode(grammarAccess.getEnvironmentAccess().getEnvQualifiedNameParserRuleCall_2_1_0()); 
-	    }
-		lv_env_3_0=ruleQualifiedName		{
+		lv_env_3_0=RULE_ID
+		{
+			newLeafNode(lv_env_3_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_2_1_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getEnvironmentRule());
+	            $current = createModelElement(grammarAccess.getEnvironmentRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"env",
         		lv_env_3_0, 
-        		"QualifiedName");
-	        afterParserOrEnumRuleCall();
+        		"ID");
 	    }
 
 )
@@ -546,19 +546,19 @@ ruleIU returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		{ 
-	        newCompositeNode(grammarAccess.getIUAccess().getIDQualifiedNameParserRuleCall_0_0()); 
-	    }
-		lv_ID_0_0=ruleQualifiedName		{
+		lv_ID_0_0=RULE_ID
+		{
+			newLeafNode(lv_ID_0_0, grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getIURule());
+	            $current = createModelElement(grammarAccess.getIURule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"ID",
         		lv_ID_0_0, 
-        		"QualifiedName");
-	        afterParserOrEnumRuleCall();
+        		"ID");
 	    }
 
 )
@@ -613,67 +613,6 @@ ruleIU returns [EObject current=null]
 )
 )))?)
 ;
-
-
-
-
-
-// Entry rule entryRuleQualifiedName
-entryRuleQualifiedName returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getQualifiedNameRule()); } 
-	 iv_ruleQualifiedName=ruleQualifiedName 
-	 { $current=$iv_ruleQualifiedName.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule QualifiedName
-ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-(    this_ID_0=RULE_ID    {
-		$current.merge(this_ID_0);
-    }
-
-    { 
-    newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
-    }
-(((
-	'.' 
-)=>
-	kw='.' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
-    }
-)(    this_ID_2=RULE_ID    {
-		$current.merge(this_ID_2);
-    }
-
-    { 
-    newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1_0()); 
-    }
-
-    |    this_INT_3=RULE_INT    {
-		$current.merge(this_INT_3);
-    }
-
-    { 
-    newLeafNode(this_INT_3, grammarAccess.getQualifiedNameAccess().getINTTerminalRuleCall_1_1_1()); 
-    }
-))*)
-    ;
-finally {
-	myHiddenTokenState.restore();
-}
 
 
 
@@ -901,7 +840,7 @@ ruleOption returns [Enumerator current=null]
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')+;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
 
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 

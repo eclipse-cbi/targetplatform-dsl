@@ -20,7 +20,7 @@ Options:
 
 Environment:
 	'environment'
-		env+=QualifiedName (','? env+=QualifiedName)*
+		env+=ID (','? env+=ID)*
 ;
 
 IncludeDeclaration:
@@ -42,11 +42,7 @@ enum Option:
 ;
 
 IU:
-	ID=QualifiedName ( ';'? 'version'? '='? (version=VersionRange|version=STRING) )? 
-;
-
-QualifiedName hidden ():
-	ID (=> '.' (ID | INT))*
+	ID=ID ( ';'? 'version'? '='? (version=VersionRange|version=STRING) )? 
 ;
 
 Version hidden():
@@ -58,4 +54,4 @@ VersionRange hidden (WS):
 ;
 
 terminal INT returns ecore::EInt: ('0'..'9')+;
-terminal ID: '^'?('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')+;
+terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;

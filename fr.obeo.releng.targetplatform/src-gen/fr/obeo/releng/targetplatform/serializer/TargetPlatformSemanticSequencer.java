@@ -76,7 +76,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (env+=QualifiedName env+=QualifiedName*)
+	 *     (env+=ID env+=ID*)
 	 */
 	protected void sequence_Environment(EObject context, Environment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,7 +85,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=QualifiedName (version=VersionRange | version=STRING)?)
+	 *     (ID=ID (version=VersionRange | version=STRING)?)
 	 */
 	protected void sequence_IU(EObject context, IU semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
