@@ -83,7 +83,7 @@
         <page
             class="fr.obeo.releng.targetplatform.ui.TargetPlatformExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="fr.obeo.releng.targetplatform.TargetPlatform"
-            name="Target Platform">
+            name="Target Platform DSL">
             <keywordReference id="fr.obeo.releng.targetplatform.ui.keyword_TargetPlatform"/>
         </page>
         <page

@@ -113,7 +113,7 @@ Workflow {
     		// fragment = refactoring.RefactorElementNameFragment auto-inject {}
     
     		// provides the necessary bindings for java types integration
-    		fragment = types.TypesGeneratorFragment auto-inject {}
+    		// fragment = types.TypesGeneratorFragment auto-inject {}
     
     		// generates the required bindings only if the grammar inherits from Xbase
     		// fragment = xbase.XbaseGeneratorFragment auto-inject {}
