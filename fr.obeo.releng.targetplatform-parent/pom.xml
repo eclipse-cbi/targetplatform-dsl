@@ -30,7 +30,8 @@
     </license>
   </licenses>
   <properties>
-    <tycho-version>0.19.0</tycho-version>
+    <tycho-version>0.20.0</tycho-version>
+    <os-jvm-flags/>
   </properties>
   <modules>
     <module>../fr.obeo.releng.targetplatform</module>
