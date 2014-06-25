@@ -59,6 +59,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	static val TARGET_PLATFORM__NAME_PLACEHOLDER = "Target Platform Name"
 	static val INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd"
 	static val LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/"
+	static val LOCATION__ID_PLACEHOLDER = "locationID"
 	
 	new() {
 	}
@@ -85,7 +86,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	
 	private def getIUAssistQuery() {
 		if (iuAssistQuery == null) {
-		  iuAssistQuery = QueryUtil.createMatchQuery("properties[$0] != true && properties[$1] != true", 
+		  iuAssistQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
 							MetadataFactory.InstallableUnitDescription.PROP_TYPE_CATEGORY, 
 							MetadataFactory.InstallableUnitDescription.PROP_TYPE_PRODUCT)
 		}
@@ -110,7 +111,6 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			context)
 			
 		if (p instanceof ConfigurableCompletionProposal) {
-			p.autoInsertable = true
 			p.setSelectionStart(p.getReplacementOffset() + offset);
 			p.setSelectionLength(TARGET_PLATFORM__NAME_PLACEHOLDER.length);
 			p.setSimpleLinkedMode(context.getViewer(), '\t');
@@ -119,10 +119,14 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 
 	override completeTargetPlatform_Contents(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val size = context.offset - context.lastCompleteNode.endOffset;
-		val text =  context.currentNode.text.substring(0,size)
-		if (text.contains("\n")) {
-			// only propose TP Contents assist if on a new line, it feels better for user
+		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val text = 
+			if (context.currentNode.text.length >= currentNodeSizeToCursor) 
+				context.currentNode.text.substring(0, currentNodeSizeToCursor)
+			else
+				''
+		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
+			// only propose TP Contents assist if on a new line, the UX is better
 			
 			val tp = model as TargetPlatform
 			if (tp.options.empty) {
@@ -178,9 +182,13 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	override completeOptions_Options(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val size = context.offset - context.lastCompleteNode.endOffset;
-		val text =  context.currentNode.text.substring(0,size)
-		if (!text.contains("\n")) {
+		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val text =
+			if (context.currentNode.text.length >= currentNodeSizeToCursor)  
+				context.currentNode.text.substring(0, currentNodeSizeToCursor)
+			else 
+				''
+		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val options = model as Options
 			if (!options.options.contains(Option.INCLUDE_REQUIRED)) {
 				acceptor.accept(createCompletionProposal(Option.INCLUDE_REQUIRED.literal, 'all required software will be added to the target platform', options, 440, context))
@@ -214,9 +222,13 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	override completeEnvironment_Env(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val size = context.offset - context.lastCompleteNode.endOffset;
-		val text =  context.currentNode.text.substring(0,size)
-		if (!text.contains("\n")) {
+		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val text =
+			if (context.currentNode.text.length >= currentNodeSizeToCursor)  
+				context.currentNode.text.substring(0, currentNodeSizeToCursor)
+			else 
+				''
+		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val env = model as Environment
 			if (env.operatingSystem == null) {
 				Platform.knownOSValues.forEach[
@@ -254,9 +266,13 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	override completeIU_ID(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val size = context.offset - context.lastCompleteNode.endOffset;
-		val text =  context.currentNode.text.substring(0,size)
-		if (text.contains("\n")) {
+		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val text = 
+			if (context.currentNode.text.length >= currentNodeSizeToCursor) 
+				context.currentNode.text.substring(0, currentNodeSizeToCursor)
+			else
+				''
+		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
 			val uri = location.uri 
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
@@ -266,7 +282,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 					val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 					val metadataRepository = repositoryManager.loadRepository(new URI(uri), wpm.newChild(90))
 					val results = metadataRepository.query(getIUAssistQuery, wpm.newChild(5)).toUnmodifiableSet()
-					results.forEach[
+					results.filter[!location.ius.map[ID].contains(it.id)].forEach[
 						val allVersions = metadataRepository.query(QueryUtil.createIUQuery(id), wpm.newChild(5))
 						acceptor.accept(createCompletionProposal(id, allVersions.map[version.toString].join(', '), IU, 0, context))
 					]
@@ -280,72 +296,138 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	override completeIU_Version(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val size = context.offset - context.lastCompleteNode.endOffset;
-		val text =  context.currentNode.text.substring(0,size)
-		if (!text.contains("\n")) {
+		val docText = context.viewer.document.get
+		val offset = context.offset
+		
+		val charBefore = 
+			if (docText.length >= 1) {
+				docText.substring(offset-1,offset)
+			} else {
+				''
+			}
+		
+		val prefix = 
+			if (!charBefore.equals(' ') && !charBefore.equals('\n')) {
+				' '
+			} else {
+				''
+			}
+		
+		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val text = 
+			if (context.currentNode.text.length >= currentNodeSizeToCursor) 
+				context.currentNode.text.substring(0, currentNodeSizeToCursor)
+			else
+				''
+		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
 			val uri = (iu.eContainer as Location).uri 
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
-			val op = versionProposalRunnable(uri, iu, '', window.shell.display, context, acceptor)
+			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)
 		}
 	}
 	
 	
 	override completeLocation_ID(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val location = model as Location
-		if (location.ID.nullOrEmpty) {
-			val proposal = 'locationID'
-			val p = createCompletionProposal(
-				proposal, 
-				new StyledString(proposal).append(" - ID of this location ", StyledString.QUALIFIER_STYLER), 
-				getImage(LOCATION), 
-				context
-			)
-			
-			if (p instanceof ConfigurableCompletionProposal) {
-				p.setSelectionStart(p.getReplacementOffset());
-				p.setSelectionLength(proposal.length);
-				p.setSimpleLinkedMode(context.getViewer(), '\t');
+		val docText = context.viewer.document.get
+		val offset = context.offset
+		
+		val charBefore = 
+			if (docText.length >= 1) {
+				docText.substring(offset-1,offset)
+			} else {
+				''
 			}
-			acceptor.accept(p);
+		val charAfter =
+			if (docText.length > offset) { 
+				docText.substring(offset,offset+1)
+			} else {
+				''
+			}
+		
+		val prefix = 
+			if (!charBefore.equals(' ') && !charBefore.equals('\n')) {
+				' '
+			} else {
+				''
+			}
+		
+		val suffix =
+			if (!charAfter.equals(' ')) {
+				' '
+			} else {
+				''
+			}
+		
+		val proposal =  prefix + LOCATION__ID_PLACEHOLDER + suffix
+		 
+		val p = createCompletionProposal(
+			proposal, 
+			new StyledString(LOCATION__ID_PLACEHOLDER).append(" - ID of this location ", StyledString.QUALIFIER_STYLER), 
+			getImage(LOCATION), 
+			context
+		)
+		
+		if (p instanceof ConfigurableCompletionProposal) {
+			p.setSelectionStart(p.getReplacementOffset() + prefix.length);
+			p.setSelectionLength(LOCATION__ID_PLACEHOLDER.length);
+			p.setSimpleLinkedMode(context.getViewer(), '\t');
 		}
+		acceptor.accept(p);
 	}
 	
 	override completeLocation_Uri(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val location = model as Location
-		if (location.uri.nullOrEmpty) {
-			var String textProposal
-			var int offset 
-			if (context.currentNode.grammarElement == grammarAccess.locationAccess.locationKeyword_0) {
-				textProposal = ''' "«LOCATION__URI_PLACEHOLDER»"«context.viewer.textWidget.lineDelimiter»'''
-				offset = 2
+		val docText = context.viewer.document.get
+		val offset = context.offset
+		
+		val charBefore = 
+			if (docText.length >= 1) {
+				docText.substring(offset-1,offset)
 			} else {
-				textProposal = '''"«LOCATION__URI_PLACEHOLDER»"«context.viewer.textWidget.lineDelimiter»'''
-				offset = 1
+				''
 			}
+		val charAfter =
+			if (docText.length > offset) { 
+				docText.substring(offset,offset+1)
+			} else {
+				''
+			}
+		
+		val prefix = 
+			if (!charBefore.equals(' ') && !charBefore.equals('\n')) {
+				' "'
+			} else {
+				'"'
+			}
+		
+		val suffix =
+			if (!charAfter.equals(' ')) {
+				'" '
+			} else {
+				'"'
+			}
+		
+		val proposal =  prefix + LOCATION__URI_PLACEHOLDER + suffix
+		
+		val p = createCompletionProposal(
+			proposal,
+			new StyledString(LOCATION__URI_PLACEHOLDER).append(" - URI of the location", StyledString.QUALIFIER_STYLER),
+			getImage(LOCATION),
+			context)
 			
-			val p = createCompletionProposal(
-				textProposal,
-				new StyledString('''"«LOCATION__URI_PLACEHOLDER»"''').append(" - URI of the location", StyledString.QUALIFIER_STYLER),
-				getImage(LOCATION),
-				context)
-				
-			if (p instanceof ConfigurableCompletionProposal) {
-				p.autoInsertable = true
-				p.setSelectionStart(p.getReplacementOffset() + offset);
-				p.setSelectionLength(LOCATION__URI_PLACEHOLDER.length);
-				p.setSimpleLinkedMode(context.getViewer(), '\t');
-			}
-			acceptor.accept(p)
+		if (p instanceof ConfigurableCompletionProposal) {
+			p.setSelectionStart(p.getReplacementOffset() + prefix.length);
+			p.setSelectionLength(LOCATION__URI_PLACEHOLDER.length);
+			p.setSimpleLinkedMode(context.getViewer(), '\t');
 		}
+		acceptor.accept(p)
 	}
 	
 	override completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 	}
 	
 	override complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		
 	}
 	
 	private def IRunnableWithProgress versionProposalRunnable(String uri, IU iu, String prefix, Display display, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

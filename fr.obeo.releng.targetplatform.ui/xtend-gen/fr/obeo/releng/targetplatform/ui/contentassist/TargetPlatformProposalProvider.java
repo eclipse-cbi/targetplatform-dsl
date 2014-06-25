@@ -16,6 +16,7 @@ import fr.obeo.releng.targetplatform.ui.contentassist.ReadAndDispatchProgressMon
 import fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActivator;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -38,6 +39,7 @@ import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
@@ -60,8 +62,8 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
@@ -93,6 +95,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   private final static String INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd";
   
   private final static String LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/";
+  
+  private final static String LOCATION__ID_PLACEHOLDER = "locationID";
   
   public TargetPlatformProposalProvider() {
   }
@@ -134,10 +138,10 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   private IQuery<IInstallableUnit> getIUAssistQuery() {
     boolean _equals = Objects.equal(this.iuAssistQuery, null);
     if (_equals) {
-      IQuery<IInstallableUnit> _createMatchQuery = QueryUtil.createMatchQuery("properties[$0] != true && properties[$1] != true", 
+      IQuery<IInstallableUnit> _createQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
         MetadataFactory.InstallableUnitDescription.PROP_TYPE_CATEGORY, 
         MetadataFactory.InstallableUnitDescription.PROP_TYPE_PRODUCT);
-      this.iuAssistQuery = _createMatchQuery;
+      this.iuAssistQuery = _createQuery;
     }
     return this.iuAssistQuery;
   }
@@ -183,7 +187,6 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     Image _image = this.getImage(TargetPlatformProposalProvider.TARGET_PLATFORM);
     final ICompletionProposal p = this.createCompletionProposal(textProposal, _append, _image, context);
     if ((p instanceof ConfigurableCompletionProposal)) {
-      ((ConfigurableCompletionProposal)p).setAutoInsertable(true);
       int _replacementOffset = ((ConfigurableCompletionProposal)p).getReplacementOffset();
       int _plus = (_replacementOffset + offset);
       ((ConfigurableCompletionProposal)p).setSelectionStart(_plus);
@@ -199,12 +202,32 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     int _offset = context.getOffset();
     INode _lastCompleteNode = context.getLastCompleteNode();
     int _endOffset = _lastCompleteNode.getEndOffset();
-    final int size = (_offset - _endOffset);
+    final int currentNodeSizeToCursor = (_offset - _endOffset);
+    String _xifexpression = null;
     INode _currentNode = context.getCurrentNode();
     String _text = _currentNode.getText();
-    final String text = _text.substring(0, size);
+    int _length = _text.length();
+    boolean _greaterEqualsThan = (_length >= currentNodeSizeToCursor);
+    if (_greaterEqualsThan) {
+      INode _currentNode_1 = context.getCurrentNode();
+      String _text_1 = _currentNode_1.getText();
+      _xifexpression = _text_1.substring(0, currentNodeSizeToCursor);
+    } else {
+      _xifexpression = "";
+    }
+    final String text = _xifexpression;
+    boolean _or = false;
     boolean _contains = text.contains("\n");
     if (_contains) {
+      _or = true;
+    } else {
+      INode _currentNode_2 = context.getCurrentNode();
+      String _text_2 = _currentNode_2.getText();
+      int _length_1 = _text_2.length();
+      boolean _lessThan = (_length_1 < currentNodeSizeToCursor);
+      _or = _lessThan;
+    }
+    if (_or) {
       final TargetPlatform tp = ((TargetPlatform) model);
       EList<Option> _options = tp.getOptions();
       boolean _isEmpty = _options.isEmpty();
@@ -299,13 +322,33 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     int _offset = context.getOffset();
     INode _lastCompleteNode = context.getLastCompleteNode();
     int _endOffset = _lastCompleteNode.getEndOffset();
-    final int size = (_offset - _endOffset);
+    final int currentNodeSizeToCursor = (_offset - _endOffset);
+    String _xifexpression = null;
     INode _currentNode = context.getCurrentNode();
     String _text = _currentNode.getText();
-    final String text = _text.substring(0, size);
+    int _length = _text.length();
+    boolean _greaterEqualsThan = (_length >= currentNodeSizeToCursor);
+    if (_greaterEqualsThan) {
+      INode _currentNode_1 = context.getCurrentNode();
+      String _text_1 = _currentNode_1.getText();
+      _xifexpression = _text_1.substring(0, currentNodeSizeToCursor);
+    } else {
+      _xifexpression = "";
+    }
+    final String text = _xifexpression;
+    boolean _or = false;
     boolean _contains = text.contains("\n");
     boolean _not = (!_contains);
     if (_not) {
+      _or = true;
+    } else {
+      INode _currentNode_2 = context.getCurrentNode();
+      String _text_2 = _currentNode_2.getText();
+      int _length_1 = _text_2.length();
+      boolean _lessThan = (_length_1 < currentNodeSizeToCursor);
+      _or = _lessThan;
+    }
+    if (_or) {
       final Options options = ((Options) model);
       EList<Option> _options = options.getOptions();
       boolean _contains_1 = _options.contains(Option.INCLUDE_REQUIRED);
@@ -364,13 +407,33 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     int _offset = context.getOffset();
     INode _lastCompleteNode = context.getLastCompleteNode();
     int _endOffset = _lastCompleteNode.getEndOffset();
-    final int size = (_offset - _endOffset);
+    final int currentNodeSizeToCursor = (_offset - _endOffset);
+    String _xifexpression = null;
     INode _currentNode = context.getCurrentNode();
     String _text = _currentNode.getText();
-    final String text = _text.substring(0, size);
+    int _length = _text.length();
+    boolean _greaterEqualsThan = (_length >= currentNodeSizeToCursor);
+    if (_greaterEqualsThan) {
+      INode _currentNode_1 = context.getCurrentNode();
+      String _text_1 = _currentNode_1.getText();
+      _xifexpression = _text_1.substring(0, currentNodeSizeToCursor);
+    } else {
+      _xifexpression = "";
+    }
+    final String text = _xifexpression;
+    boolean _or = false;
     boolean _contains = text.contains("\n");
     boolean _not = (!_contains);
     if (_not) {
+      _or = true;
+    } else {
+      INode _currentNode_2 = context.getCurrentNode();
+      String _text_2 = _currentNode_2.getText();
+      int _length_1 = _text_2.length();
+      boolean _lessThan = (_length_1 < currentNodeSizeToCursor);
+      _or = _lessThan;
+    }
+    if (_or) {
       final Environment env = ((Environment) model);
       String _operatingSystem = env.getOperatingSystem();
       boolean _equals = Objects.equal(_operatingSystem, null);
@@ -448,12 +511,32 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       int _offset = context.getOffset();
       INode _lastCompleteNode = context.getLastCompleteNode();
       int _endOffset = _lastCompleteNode.getEndOffset();
-      final int size = (_offset - _endOffset);
+      final int currentNodeSizeToCursor = (_offset - _endOffset);
+      String _xifexpression = null;
       INode _currentNode = context.getCurrentNode();
       String _text = _currentNode.getText();
-      final String text = _text.substring(0, size);
+      int _length = _text.length();
+      boolean _greaterEqualsThan = (_length >= currentNodeSizeToCursor);
+      if (_greaterEqualsThan) {
+        INode _currentNode_1 = context.getCurrentNode();
+        String _text_1 = _currentNode_1.getText();
+        _xifexpression = _text_1.substring(0, currentNodeSizeToCursor);
+      } else {
+        _xifexpression = "";
+      }
+      final String text = _xifexpression;
+      boolean _or = false;
       boolean _contains = text.contains("\n");
       if (_contains) {
+        _or = true;
+      } else {
+        INode _currentNode_2 = context.getCurrentNode();
+        String _text_2 = _currentNode_2.getText();
+        int _length_1 = _text_2.length();
+        boolean _lessThan = (_length_1 < currentNodeSizeToCursor);
+        _or = _lessThan;
+      }
+      if (_or) {
         final Location location = ((Location) model);
         final String uri = location.getUri();
         TargetPlatformActivator _instance = TargetPlatformActivator.getInstance();
@@ -475,7 +558,22 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
               SubMonitor _newChild_1 = wpm.newChild(5);
               IQueryResult<IInstallableUnit> _query = metadataRepository.query(_iUAssistQuery, _newChild_1);
               final Set<IInstallableUnit> results = _query.toUnmodifiableSet();
-              final Procedure1<IInstallableUnit> _function = new Procedure1<IInstallableUnit>() {
+              final Function1<IInstallableUnit, Boolean> _function = new Function1<IInstallableUnit, Boolean>() {
+                public Boolean apply(final IInstallableUnit it) {
+                  EList<IU> _ius = location.getIus();
+                  final Function1<IU, String> _function = new Function1<IU, String>() {
+                    public String apply(final IU it) {
+                      return it.getID();
+                    }
+                  };
+                  List<String> _map = ListExtensions.<IU, String>map(_ius, _function);
+                  String _id = it.getId();
+                  boolean _contains = _map.contains(_id);
+                  return Boolean.valueOf((!_contains));
+                }
+              };
+              Iterable<IInstallableUnit> _filter = IterableExtensions.<IInstallableUnit>filter(results, _function);
+              final Procedure1<IInstallableUnit> _function_1 = new Procedure1<IInstallableUnit>() {
                 public void apply(final IInstallableUnit it) {
                   String _id = it.getId();
                   IQuery<IInstallableUnit> _createIUQuery = QueryUtil.createIUQuery(_id);
@@ -494,7 +592,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
                   acceptor.accept(_createCompletionProposal);
                 }
               };
-              IterableExtensions.<IInstallableUnit>forEach(results, _function);
+              IterableExtensions.<IInstallableUnit>forEach(_filter, _function_1);
             } catch (final Throwable _t) {
               if (_t instanceof Exception) {
                 final Exception e = (Exception)_t;
@@ -514,16 +612,66 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   
   public void completeIU_Version(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
+      ITextViewer _viewer = context.getViewer();
+      IDocument _document = _viewer.getDocument();
+      final String docText = _document.get();
+      final int offset = context.getOffset();
+      String _xifexpression = null;
+      int _length = docText.length();
+      boolean _greaterEqualsThan = (_length >= 1);
+      if (_greaterEqualsThan) {
+        _xifexpression = docText.substring((offset - 1), offset);
+      } else {
+        _xifexpression = "";
+      }
+      final String charBefore = _xifexpression;
+      String _xifexpression_1 = null;
+      boolean _and = false;
+      boolean _equals = charBefore.equals(" ");
+      boolean _not = (!_equals);
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _equals_1 = charBefore.equals("\n");
+        boolean _not_1 = (!_equals_1);
+        _and = _not_1;
+      }
+      if (_and) {
+        _xifexpression_1 = " ";
+      } else {
+        _xifexpression_1 = "";
+      }
+      final String prefix = _xifexpression_1;
       int _offset = context.getOffset();
       INode _lastCompleteNode = context.getLastCompleteNode();
       int _endOffset = _lastCompleteNode.getEndOffset();
-      final int size = (_offset - _endOffset);
+      final int currentNodeSizeToCursor = (_offset - _endOffset);
+      String _xifexpression_2 = null;
       INode _currentNode = context.getCurrentNode();
       String _text = _currentNode.getText();
-      final String text = _text.substring(0, size);
+      int _length_1 = _text.length();
+      boolean _greaterEqualsThan_1 = (_length_1 >= currentNodeSizeToCursor);
+      if (_greaterEqualsThan_1) {
+        INode _currentNode_1 = context.getCurrentNode();
+        String _text_1 = _currentNode_1.getText();
+        _xifexpression_2 = _text_1.substring(0, currentNodeSizeToCursor);
+      } else {
+        _xifexpression_2 = "";
+      }
+      final String text = _xifexpression_2;
+      boolean _or = false;
       boolean _contains = text.contains("\n");
-      boolean _not = (!_contains);
-      if (_not) {
+      boolean _not_2 = (!_contains);
+      if (_not_2) {
+        _or = true;
+      } else {
+        INode _currentNode_2 = context.getCurrentNode();
+        String _text_2 = _currentNode_2.getText();
+        int _length_2 = _text_2.length();
+        boolean _lessThan = (_length_2 < currentNodeSizeToCursor);
+        _or = _lessThan;
+      }
+      if (_or) {
         final IU iu = ((IU) model);
         EObject _eContainer = iu.eContainer();
         final String uri = ((Location) _eContainer).getUri();
@@ -532,7 +680,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         final IWorkbenchWindow window = _workbench.getActiveWorkbenchWindow();
         Shell _shell = window.getShell();
         Display _display = _shell.getDisplay();
-        final IRunnableWithProgress op = this.versionProposalRunnable(uri, iu, "", _display, context, acceptor);
+        final IRunnableWithProgress op = this.versionProposalRunnable(uri, iu, prefix, _display, context, acceptor);
         window.run(false, true, op);
       }
     } catch (Throwable _e) {
@@ -541,83 +689,137 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   }
   
   public void completeLocation_ID(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final Location location = ((Location) model);
-    String _iD = location.getID();
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_iD);
-    if (_isNullOrEmpty) {
-      final String proposal = "locationID";
-      StyledString _styledString = new StyledString(proposal);
-      StyledString _append = _styledString.append(" - ID of this location ", StyledString.QUALIFIER_STYLER);
-      Image _image = this.getImage(TargetPlatformProposalProvider.LOCATION);
-      final ICompletionProposal p = this.createCompletionProposal(proposal, _append, _image, context);
-      if ((p instanceof ConfigurableCompletionProposal)) {
-        int _replacementOffset = ((ConfigurableCompletionProposal)p).getReplacementOffset();
-        ((ConfigurableCompletionProposal)p).setSelectionStart(_replacementOffset);
-        int _length = proposal.length();
-        ((ConfigurableCompletionProposal)p).setSelectionLength(_length);
-        ITextViewer _viewer = context.getViewer();
-        ((ConfigurableCompletionProposal)p).setSimpleLinkedMode(_viewer, '\t');
-      }
-      acceptor.accept(p);
+    ITextViewer _viewer = context.getViewer();
+    IDocument _document = _viewer.getDocument();
+    final String docText = _document.get();
+    final int offset = context.getOffset();
+    String _xifexpression = null;
+    int _length = docText.length();
+    boolean _greaterEqualsThan = (_length >= 1);
+    if (_greaterEqualsThan) {
+      _xifexpression = docText.substring((offset - 1), offset);
+    } else {
+      _xifexpression = "";
     }
+    final String charBefore = _xifexpression;
+    String _xifexpression_1 = null;
+    int _length_1 = docText.length();
+    boolean _greaterThan = (_length_1 > offset);
+    if (_greaterThan) {
+      _xifexpression_1 = docText.substring(offset, (offset + 1));
+    } else {
+      _xifexpression_1 = "";
+    }
+    final String charAfter = _xifexpression_1;
+    String _xifexpression_2 = null;
+    boolean _and = false;
+    boolean _equals = charBefore.equals(" ");
+    boolean _not = (!_equals);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _equals_1 = charBefore.equals("\n");
+      boolean _not_1 = (!_equals_1);
+      _and = _not_1;
+    }
+    if (_and) {
+      _xifexpression_2 = " ";
+    } else {
+      _xifexpression_2 = "";
+    }
+    final String prefix = _xifexpression_2;
+    String _xifexpression_3 = null;
+    boolean _equals_2 = charAfter.equals(" ");
+    boolean _not_2 = (!_equals_2);
+    if (_not_2) {
+      _xifexpression_3 = " ";
+    } else {
+      _xifexpression_3 = "";
+    }
+    final String suffix = _xifexpression_3;
+    final String proposal = ((prefix + TargetPlatformProposalProvider.LOCATION__ID_PLACEHOLDER) + suffix);
+    StyledString _styledString = new StyledString(TargetPlatformProposalProvider.LOCATION__ID_PLACEHOLDER);
+    StyledString _append = _styledString.append(" - ID of this location ", StyledString.QUALIFIER_STYLER);
+    Image _image = this.getImage(TargetPlatformProposalProvider.LOCATION);
+    final ICompletionProposal p = this.createCompletionProposal(proposal, _append, _image, context);
+    if ((p instanceof ConfigurableCompletionProposal)) {
+      int _replacementOffset = ((ConfigurableCompletionProposal)p).getReplacementOffset();
+      int _length_2 = prefix.length();
+      int _plus = (_replacementOffset + _length_2);
+      ((ConfigurableCompletionProposal)p).setSelectionStart(_plus);
+      int _length_3 = TargetPlatformProposalProvider.LOCATION__ID_PLACEHOLDER.length();
+      ((ConfigurableCompletionProposal)p).setSelectionLength(_length_3);
+      ITextViewer _viewer_1 = context.getViewer();
+      ((ConfigurableCompletionProposal)p).setSimpleLinkedMode(_viewer_1, '\t');
+    }
+    acceptor.accept(p);
   }
   
   public void completeLocation_Uri(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final Location location = ((Location) model);
-    String _uri = location.getUri();
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_uri);
-    if (_isNullOrEmpty) {
-      String textProposal = null;
-      int offset = 0;
-      INode _currentNode = context.getCurrentNode();
-      EObject _grammarElement = _currentNode.getGrammarElement();
-      TargetPlatformGrammarAccess.LocationElements _locationAccess = this.grammarAccess.getLocationAccess();
-      Keyword _locationKeyword_0 = _locationAccess.getLocationKeyword_0();
-      boolean _equals = Objects.equal(_grammarElement, _locationKeyword_0);
-      if (_equals) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append(" ");
-        _builder.append("\"");
-        _builder.append(TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER, " ");
-        _builder.append("\"");
-        ITextViewer _viewer = context.getViewer();
-        StyledText _textWidget = _viewer.getTextWidget();
-        String _lineDelimiter = _textWidget.getLineDelimiter();
-        _builder.append(_lineDelimiter, " ");
-        textProposal = _builder.toString();
-        offset = 2;
-      } else {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("\"");
-        _builder_1.append(TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER, "");
-        _builder_1.append("\"");
-        ITextViewer _viewer_1 = context.getViewer();
-        StyledText _textWidget_1 = _viewer_1.getTextWidget();
-        String _lineDelimiter_1 = _textWidget_1.getLineDelimiter();
-        _builder_1.append(_lineDelimiter_1, "");
-        textProposal = _builder_1.toString();
-        offset = 1;
-      }
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("\"");
-      _builder_2.append(TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER, "");
-      _builder_2.append("\"");
-      StyledString _styledString = new StyledString(_builder_2.toString());
-      StyledString _append = _styledString.append(" - URI of the location", StyledString.QUALIFIER_STYLER);
-      Image _image = this.getImage(TargetPlatformProposalProvider.LOCATION);
-      final ICompletionProposal p = this.createCompletionProposal(textProposal, _append, _image, context);
-      if ((p instanceof ConfigurableCompletionProposal)) {
-        ((ConfigurableCompletionProposal)p).setAutoInsertable(true);
-        int _replacementOffset = ((ConfigurableCompletionProposal)p).getReplacementOffset();
-        int _plus = (_replacementOffset + offset);
-        ((ConfigurableCompletionProposal)p).setSelectionStart(_plus);
-        int _length = TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER.length();
-        ((ConfigurableCompletionProposal)p).setSelectionLength(_length);
-        ITextViewer _viewer_2 = context.getViewer();
-        ((ConfigurableCompletionProposal)p).setSimpleLinkedMode(_viewer_2, '\t');
-      }
-      acceptor.accept(p);
+    ITextViewer _viewer = context.getViewer();
+    IDocument _document = _viewer.getDocument();
+    final String docText = _document.get();
+    final int offset = context.getOffset();
+    String _xifexpression = null;
+    int _length = docText.length();
+    boolean _greaterEqualsThan = (_length >= 1);
+    if (_greaterEqualsThan) {
+      _xifexpression = docText.substring((offset - 1), offset);
+    } else {
+      _xifexpression = "";
     }
+    final String charBefore = _xifexpression;
+    String _xifexpression_1 = null;
+    int _length_1 = docText.length();
+    boolean _greaterThan = (_length_1 > offset);
+    if (_greaterThan) {
+      _xifexpression_1 = docText.substring(offset, (offset + 1));
+    } else {
+      _xifexpression_1 = "";
+    }
+    final String charAfter = _xifexpression_1;
+    String _xifexpression_2 = null;
+    boolean _and = false;
+    boolean _equals = charBefore.equals(" ");
+    boolean _not = (!_equals);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _equals_1 = charBefore.equals("\n");
+      boolean _not_1 = (!_equals_1);
+      _and = _not_1;
+    }
+    if (_and) {
+      _xifexpression_2 = " \"";
+    } else {
+      _xifexpression_2 = "\"";
+    }
+    final String prefix = _xifexpression_2;
+    String _xifexpression_3 = null;
+    boolean _equals_2 = charAfter.equals(" ");
+    boolean _not_2 = (!_equals_2);
+    if (_not_2) {
+      _xifexpression_3 = "\" ";
+    } else {
+      _xifexpression_3 = "\"";
+    }
+    final String suffix = _xifexpression_3;
+    final String proposal = ((prefix + TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER) + suffix);
+    StyledString _styledString = new StyledString(TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER);
+    StyledString _append = _styledString.append(" - URI of the location", StyledString.QUALIFIER_STYLER);
+    Image _image = this.getImage(TargetPlatformProposalProvider.LOCATION);
+    final ICompletionProposal p = this.createCompletionProposal(proposal, _append, _image, context);
+    if ((p instanceof ConfigurableCompletionProposal)) {
+      int _replacementOffset = ((ConfigurableCompletionProposal)p).getReplacementOffset();
+      int _length_2 = prefix.length();
+      int _plus = (_replacementOffset + _length_2);
+      ((ConfigurableCompletionProposal)p).setSelectionStart(_plus);
+      int _length_3 = TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER.length();
+      ((ConfigurableCompletionProposal)p).setSelectionLength(_length_3);
+      ITextViewer _viewer_1 = context.getViewer();
+      ((ConfigurableCompletionProposal)p).setSimpleLinkedMode(_viewer_1, '\t');
+    }
+    acceptor.accept(p);
   }
   
   public void completeKeyword(final Keyword keyword, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {

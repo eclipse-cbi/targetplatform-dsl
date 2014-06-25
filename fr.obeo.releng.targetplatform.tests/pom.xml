@@ -18,7 +18,9 @@
         <artifactId>tycho-surefire-plugin</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+          <argLine>-Xmx1024m -XX:MaxPermSize=256m ${os-jvm-flags}</argLine>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>true</useUIThread>
           <dependencies>
             <dependency>
               <type>p2-installable-unit</type>
