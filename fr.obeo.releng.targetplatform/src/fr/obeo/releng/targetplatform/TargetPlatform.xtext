@@ -19,8 +19,8 @@ Options:
 ;
 
 Environment:
-	'environment'
-		env+=ID (','? env+=ID)*
+	{Environment}
+	'environment' env+=ID (','? env+=ID)*
 ;
 
 IncludeDeclaration:

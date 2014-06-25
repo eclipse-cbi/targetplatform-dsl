@@ -27,11 +27,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.metadata.IInstallableUnit;
+import org.eclipse.equinox.p2.metadata.VersionRange;
+import org.eclipse.equinox.p2.query.IQuery;
+import org.eclipse.equinox.p2.query.IQueryResult;
+import org.eclipse.equinox.p2.query.QueryUtil;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -40,12 +49,15 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * Custom validation rules.
@@ -56,6 +68,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Inject
   private LocationIndexBuilder indexBuilder;
+  
+  @Inject
+  private IProvisioningAgent provisioningAgent;
   
   public final static String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
   
@@ -76,6 +91,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__LOCATION_ID_UNIQNESS = "CHECK__LOCATION_ID_UNIQNESS";
   
   public final static String CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE";
+  
+  public final static String CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION";
+  
+  public final static String CHECK__LOCATION_URI = "CHECK__LOCATION_URI";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -588,6 +607,105 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           IterableExtensions.<Location>forEach(internalLocations, _function_11);
         }
       }
+    }
+  }
+  
+  @Check(value = CheckType.EXPENSIVE)
+  public IMetadataRepository checkLocationURI(final Location location) {
+    IMetadataRepository _xifexpression = null;
+    String _uri = location.getUri();
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_uri);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      IMetadataRepository _xblockexpression = null;
+      {
+        Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+        final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+        IMetadataRepository _xtrycatchfinallyexpression = null;
+        try {
+          String _uri_1 = location.getUri();
+          java.net.URI _uRI = new java.net.URI(_uri_1);
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          _xtrycatchfinallyexpression = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception e = (Exception)_t;
+            String _message = e.getMessage();
+            this.error(_message, location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        _xblockexpression = _xtrycatchfinallyexpression;
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
+  }
+  
+  @Check(value = CheckType.EXPENSIVE)
+  public void checkIUIDAndRangeInRepository(final IU iu) {
+    try {
+      Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+      final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+      EObject _eContainer = iu.eContainer();
+      String _uri = ((Location) _eContainer).getUri();
+      java.net.URI _uRI = new java.net.URI(_uri);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
+      String _iD = iu.getID();
+      IQuery<IInstallableUnit> _createIUQuery = QueryUtil.createIUQuery(_iD);
+      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+      IQueryResult<IInstallableUnit> _query = metadataRepository.query(_createIUQuery, _nullProgressMonitor_1);
+      final Set<IInstallableUnit> idResults = _query.toUnmodifiableSet();
+      boolean _isEmpty = idResults.isEmpty();
+      if (_isEmpty) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("No installable unit with ID \'");
+        String _iD_1 = iu.getID();
+        _builder.append(_iD_1, "");
+        _builder.append("\' can be found in \'");
+        EObject _eContainer_1 = iu.eContainer();
+        String _uri_1 = ((Location) _eContainer_1).getUri();
+        _builder.append(_uri_1, "");
+        _builder.append("\'.");
+        this.error(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
+      } else {
+        boolean _and = false;
+        String _version = iu.getVersion();
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_version);
+        boolean _not = (!_isNullOrEmpty);
+        if (!_not) {
+          _and = false;
+        } else {
+          String _version_1 = iu.getVersion();
+          boolean _equals = "lazy".equals(_version_1);
+          boolean _not_1 = (!_equals);
+          _and = _not_1;
+        }
+        if (_and) {
+          String _iD_2 = iu.getID();
+          String _version_2 = iu.getVersion();
+          VersionRange _versionRange = new VersionRange(_version_2);
+          IQuery<IInstallableUnit> _createQuery = QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", _iD_2, _versionRange);
+          NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+          final IQueryResult<IInstallableUnit> versionResult = metadataRepository.query(_createQuery, _nullProgressMonitor_2);
+          boolean _isEmpty_1 = versionResult.isEmpty();
+          if (_isEmpty_1) {
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("No installable unit with ID \'");
+            String _iD_3 = iu.getID();
+            _builder_1.append(_iD_3, "");
+            _builder_1.append("\' can be found with range constraint \'");
+            String _version_3 = iu.getVersion();
+            _builder_1.append(_version_3, "");
+            _builder_1.append("\'.");
+            this.error(_builder_1.toString(), iu, TargetPlatformPackage.Literals.IU__VERSION, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
+          }
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }

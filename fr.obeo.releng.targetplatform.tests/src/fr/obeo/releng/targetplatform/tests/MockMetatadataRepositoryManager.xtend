@@ -31,6 +31,9 @@ class MockMetadataRepositoryManager implements IMetadataRepositoryManager {
 	
 	override loadRepository(URI location, IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
 		monitor.subTask('''mock loading '«location»''')
+		if (location.toString.startsWith("bad")) {
+			throw new ProvisionException("Bad location uri '" + location.toString + "'")
+		}
 		return new MockMetadataRepository(location, resultProvider)
 	}
 	

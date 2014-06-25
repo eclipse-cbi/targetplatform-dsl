@@ -18,7 +18,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class TargetPlatformSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected TargetPlatformGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Environment_CommaKeyword_2_0_q;
+	protected AbstractElementAlias match_Environment_CommaKeyword_3_0_q;
 	protected AbstractElementAlias match_IU_EqualsSignKeyword_1_2_q;
 	protected AbstractElementAlias match_IU_SemicolonKeyword_1_0_q;
 	protected AbstractElementAlias match_IU_VersionKeyword_1_1_q;
@@ -29,7 +29,7 @@ public class TargetPlatformSyntacticSequencer extends AbstractSyntacticSequencer
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (TargetPlatformGrammarAccess) access;
-		match_Environment_CommaKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getEnvironmentAccess().getCommaKeyword_2_0());
+		match_Environment_CommaKeyword_3_0_q = new TokenAlias(false, true, grammarAccess.getEnvironmentAccess().getCommaKeyword_3_0());
 		match_IU_EqualsSignKeyword_1_2_q = new TokenAlias(false, true, grammarAccess.getIUAccess().getEqualsSignKeyword_1_2());
 		match_IU_SemicolonKeyword_1_0_q = new TokenAlias(false, true, grammarAccess.getIUAccess().getSemicolonKeyword_1_0());
 		match_IU_VersionKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getIUAccess().getVersionKeyword_1_1());
@@ -50,8 +50,8 @@ public class TargetPlatformSyntacticSequencer extends AbstractSyntacticSequencer
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Environment_CommaKeyword_2_0_q.equals(syntax))
-				emit_Environment_CommaKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_Environment_CommaKeyword_3_0_q.equals(syntax))
+				emit_Environment_CommaKeyword_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_IU_EqualsSignKeyword_1_2_q.equals(syntax))
 				emit_IU_EqualsSignKeyword_1_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_IU_SemicolonKeyword_1_0_q.equals(syntax))
@@ -72,7 +72,7 @@ public class TargetPlatformSyntacticSequencer extends AbstractSyntacticSequencer
 	 * Syntax:
 	 *     ','?
 	 */
-	protected void emit_Environment_CommaKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Environment_CommaKeyword_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -3,8 +3,11 @@
  */
 package fr.obeo.releng.targetplatform;
 
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
+
+import com.google.inject.Provider;
 
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformIDValueConverter;
@@ -26,5 +29,13 @@ public class TargetPlatformRuntimeModule extends fr.obeo.releng.targetplatform.A
 	
 	public Class<? extends LocationIndexBuilder> bindLocationIndexBuilder() {
 		return LocationIndexBuilder.class;
+	}
+	
+	public Provider<IProvisioningAgent> provideIProvisioningAgent() {
+		return new Provider<IProvisioningAgent>() {
+			public IProvisioningAgent get() {
+				return TargetPlatformBundleActivator.getInstance().getProvisioningAgent();
+			}
+		};
 	}
 }

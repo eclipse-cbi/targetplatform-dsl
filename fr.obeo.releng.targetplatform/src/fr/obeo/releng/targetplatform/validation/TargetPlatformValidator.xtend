@@ -21,6 +21,13 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.validation.CheckType
+import org.eclipse.equinox.p2.core.IProvisioningAgent
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
+import java.net.URI
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.equinox.p2.query.QueryUtil
+import org.eclipse.equinox.p2.metadata.VersionRange
 
 /**
  * Custom validation rules. 
@@ -31,6 +38,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	@Inject
 	LocationIndexBuilder indexBuilder;
+	
+	@Inject
+	IProvisioningAgent provisioningAgent;
 	
 	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
 	
@@ -46,6 +56,8 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	public static val CHECK__LOCATION_ID_UNIQNESS = "CHECK__LOCATION_ID_UNIQNESS"	
 	public static val CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE"
+	public static val CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION"
+	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -239,6 +251,33 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				internalLocations.forEach[
 					error(msg, it, TargetPlatformPackage.Literals.LOCATION__ID, CHECK__LOCATION_CONFLICTUAL_ID)
 				]
+			}
+		}
+	}
+	
+	@Check(value=CheckType.EXPENSIVE)
+	def checkLocationURI(Location location) {
+		if (!location.uri.nullOrEmpty) {
+			val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
+			try {
+				repositoryManager.loadRepository(new URI(location.uri), new NullProgressMonitor)
+			} catch (Exception e) {
+				error(e.message, location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)
+			}
+		}
+	}
+	
+	@Check(value=CheckType.EXPENSIVE)
+	def checkIUIDAndRangeInRepository(IU iu) {
+		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
+		val metadataRepository = repositoryManager.loadRepository(new URI((iu.eContainer as Location).uri), new NullProgressMonitor)
+		val idResults = metadataRepository.query(QueryUtil.createIUQuery(iu.ID), new NullProgressMonitor).toUnmodifiableSet()
+		if (idResults.empty) {
+			error('''No installable unit with ID '«iu.ID»' can be found in '«(iu.eContainer as Location).uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
+		} else if (!iu.version.nullOrEmpty && !"lazy".equals(iu.version)) {
+			val versionResult = metadataRepository.query(QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", iu.ID, new VersionRange(iu.version)), new NullProgressMonitor)
+			if (versionResult.empty) {
+				error('''No installable unit with ID '«iu.ID»' can be found with range constraint '«iu.version»'.''', iu, TargetPlatformPackage.Literals.IU__VERSION, CHECK__IU_IN_LOCATION)
 			}
 		}
 	}

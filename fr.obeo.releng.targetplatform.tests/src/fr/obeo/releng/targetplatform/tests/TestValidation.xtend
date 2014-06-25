@@ -22,8 +22,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class TestValidation {
 	
@@ -1199,6 +1200,145 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
 			assertEquals("a.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
+		]
+	}
+	
+	@Test
+	def checkIUIDAndRange1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location1" {
+				org.iu1
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkIUIDAndRange2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location1" {
+				org.iu2
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof IU])
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__IU_IN_LOCATION, issueCode)
+			assertEquals("org.iu2", (it.sourceEObject as IU).ID)
+		]
+	}
+	
+	@Test
+	def checkIUIDAndRange3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location2" {
+				org.iu4
+				org.iu2
+				org.iu5
+				org.iu1
+				org.iu3
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(3, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof IU])
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__IU_IN_LOCATION, issueCode)
+		]
+	}
+	
+	@Test
+	def checkIUIDAndRange4() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location2" {
+				org.iu1 [1.0.0,2)
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkIUIDAndRange5() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location2" {
+				org.iu1 [1.2.1,1.2.3)
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof IU])
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__IU_IN_LOCATION, issueCode)
+			assertEquals("org.iu1", (it.sourceEObject as IU).ID)
+		]
+	}
+	
+	@Test
+	def checkLocationURI1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "location2" {
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.forEach[tester.validator.checkLocationURI(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkLocationURI2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "emptyRepository" {
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.forEach[tester.validator.checkLocationURI(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkLocationURI3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "badLocation" {
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		targetPlatform.locations.forEach[tester.validator.checkLocationURI(it)]
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__LOCATION_URI, issueCode)
+			assertEquals("badLocation", (it.sourceEObject as Location).uri)
 		]
 	}
 }

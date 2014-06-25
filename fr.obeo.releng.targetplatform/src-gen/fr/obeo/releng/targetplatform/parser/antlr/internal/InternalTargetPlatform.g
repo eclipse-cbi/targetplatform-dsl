@@ -264,15 +264,21 @@ ruleEnvironment returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='environment' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getEnvironmentAccess().getEnvironmentAction_0(),
+            $current);
+    }
+)	otherlv_1='environment' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_1());
     }
 (
 (
-		lv_env_1_0=RULE_ID
+		lv_env_2_0=RULE_ID
 		{
-			newLeafNode(lv_env_1_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_env_2_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -281,20 +287,20 @@ ruleEnvironment returns [EObject current=null]
        		addWithLastConsumed(
        			$current, 
        			"env",
-        		lv_env_1_0, 
+        		lv_env_2_0, 
         		"ID");
 	    }
 
 )
-)((	otherlv_2=',' 
+)((	otherlv_3=',' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getEnvironmentAccess().getCommaKeyword_2_0());
+    	newLeafNode(otherlv_3, grammarAccess.getEnvironmentAccess().getCommaKeyword_3_0());
     }
 )?(
 (
-		lv_env_3_0=RULE_ID
+		lv_env_4_0=RULE_ID
 		{
-			newLeafNode(lv_env_3_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_2_1_0()); 
+			newLeafNode(lv_env_4_0, grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_3_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -303,7 +309,7 @@ ruleEnvironment returns [EObject current=null]
        		addWithLastConsumed(
        			$current, 
        			"env",
-        		lv_env_3_0, 
+        		lv_env_4_0, 
         		"ID");
 	    }
 

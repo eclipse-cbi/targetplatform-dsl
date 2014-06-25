@@ -8,7 +8,7 @@ import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -34,7 +34,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestValidation {
@@ -2705,6 +2705,376 @@ public class TestValidation {
         }
       };
       IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function_5);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkIUIDAndRange1() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location1\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      IU _head_1 = IterableExtensions.<IU>head(_ius);
+      _validator.checkIUIDAndRangeInRepository(_head_1);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkIUIDAndRange2() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location1\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu2");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      IU _head_1 = IterableExtensions.<IU>head(_ius);
+      _validator.checkIUIDAndRangeInRepository(_head_1);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(1, _size);
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
+        public Boolean apply(final AbstractValidationDiagnostic it) {
+          EObject _sourceEObject = it.getSourceEObject();
+          return Boolean.valueOf((_sourceEObject instanceof IU));
+        }
+      };
+      boolean _forall = IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function);
+      Assert.assertTrue(_forall);
+      final Procedure1<AbstractValidationDiagnostic> _function_1 = new Procedure1<AbstractValidationDiagnostic>() {
+        public void apply(final AbstractValidationDiagnostic it) {
+          String _issueCode = it.getIssueCode();
+          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, _issueCode);
+          EObject _sourceEObject = it.getSourceEObject();
+          String _iD = ((IU) _sourceEObject).getID();
+          Assert.assertEquals("org.iu2", _iD);
+        }
+      };
+      IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkIUIDAndRange3() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location2\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu4");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu5");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      final Procedure1<IU> _function = new Procedure1<IU>() {
+        public void apply(final IU it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkIUIDAndRangeInRepository(it);
+        }
+      };
+      IterableExtensions.<IU>forEach(_ius, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(3, _size);
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = new Function1<AbstractValidationDiagnostic, Boolean>() {
+        public Boolean apply(final AbstractValidationDiagnostic it) {
+          EObject _sourceEObject = it.getSourceEObject();
+          return Boolean.valueOf((_sourceEObject instanceof IU));
+        }
+      };
+      boolean _forall = IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_1);
+      Assert.assertTrue(_forall);
+      final Procedure1<AbstractValidationDiagnostic> _function_2 = new Procedure1<AbstractValidationDiagnostic>() {
+        public void apply(final AbstractValidationDiagnostic it) {
+          String _issueCode = it.getIssueCode();
+          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, _issueCode);
+        }
+      };
+      IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkIUIDAndRange4() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location2\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1 [1.0.0,2)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      final Procedure1<IU> _function = new Procedure1<IU>() {
+        public void apply(final IU it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkIUIDAndRangeInRepository(it);
+        }
+      };
+      IterableExtensions.<IU>forEach(_ius, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkIUIDAndRange5() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location2\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1 [1.2.1,1.2.3)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      final Procedure1<IU> _function = new Procedure1<IU>() {
+        public void apply(final IU it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkIUIDAndRangeInRepository(it);
+        }
+      };
+      IterableExtensions.<IU>forEach(_ius, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(1, _size);
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = new Function1<AbstractValidationDiagnostic, Boolean>() {
+        public Boolean apply(final AbstractValidationDiagnostic it) {
+          EObject _sourceEObject = it.getSourceEObject();
+          return Boolean.valueOf((_sourceEObject instanceof IU));
+        }
+      };
+      boolean _forall = IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_1);
+      Assert.assertTrue(_forall);
+      final Procedure1<AbstractValidationDiagnostic> _function_2 = new Procedure1<AbstractValidationDiagnostic>() {
+        public void apply(final AbstractValidationDiagnostic it) {
+          String _issueCode = it.getIssueCode();
+          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, _issueCode);
+          EObject _sourceEObject = it.getSourceEObject();
+          String _iD = ((IU) _sourceEObject).getID();
+          Assert.assertEquals("org.iu1", _iD);
+        }
+      };
+      IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkLocationURI1() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"location2\" {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Procedure1<Location> _function = new Procedure1<Location>() {
+        public void apply(final Location it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkLocationURI(it);
+        }
+      };
+      IterableExtensions.<Location>forEach(_locations, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkLocationURI2() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"emptyRepository\" {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Procedure1<Location> _function = new Procedure1<Location>() {
+        public void apply(final Location it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkLocationURI(it);
+        }
+      };
+      IterableExtensions.<Location>forEach(_locations, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkLocationURI3() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"badLocation\" {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      EList<Location> _locations = targetPlatform.getLocations();
+      final Procedure1<Location> _function = new Procedure1<Location>() {
+        public void apply(final Location it) {
+          TargetPlatformValidator _validator = tester.validator();
+          _validator.checkLocationURI(it);
+        }
+      };
+      IterableExtensions.<Location>forEach(_locations, _function);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(1, _size);
+      final Procedure1<AbstractValidationDiagnostic> _function_1 = new Procedure1<AbstractValidationDiagnostic>() {
+        public void apply(final AbstractValidationDiagnostic it) {
+          String _issueCode = it.getIssueCode();
+          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_URI, _issueCode);
+          EObject _sourceEObject = it.getSourceEObject();
+          String _uri = ((Location) _sourceEObject).getUri();
+          Assert.assertEquals("badLocation", _uri);
+        }
+      };
+      IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

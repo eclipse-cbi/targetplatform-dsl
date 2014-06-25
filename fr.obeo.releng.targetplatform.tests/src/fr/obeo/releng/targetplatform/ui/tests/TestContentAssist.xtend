@@ -1,31 +1,33 @@
 package fr.obeo.releng.targetplatform.ui.tests
 
+import com.google.common.collect.ImmutableList
 import com.google.inject.Guice
 import com.google.inject.Module
+import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatformRuntimeModule
 import fr.obeo.releng.targetplatform.TargetPlatformStandaloneSetup
+import fr.obeo.releng.targetplatform.tests.IQueryResultProvider
+import fr.obeo.releng.targetplatform.tests.MockIU
+import fr.obeo.releng.targetplatform.tests.MockProvisioningAgent
 import fr.obeo.releng.targetplatform.ui.TargetPlatformUiModule
 import fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActivator
+import java.net.URI
+import java.util.Locale
+import org.eclipse.core.runtime.Platform
+import org.eclipse.equinox.p2.core.IProvisioningAgent
+import org.eclipse.equinox.p2.metadata.IInstallableUnit
+import org.eclipse.equinox.p2.metadata.Version
+import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest
 import org.eclipse.xtext.ui.shared.SharedStateModule
 import org.eclipse.xtext.util.Modules2
 import org.junit.Test
-import com.google.inject.Provider
-import org.eclipse.equinox.p2.core.IProvisioningAgent
-import fr.obeo.releng.targetplatform.tests.MockProvisioningAgent
-import fr.obeo.releng.targetplatform.tests.IQueryResultProvider
-import org.eclipse.equinox.p2.metadata.IInstallableUnit
-import java.net.URI
-import fr.obeo.releng.targetplatform.tests.MockIU
-import org.eclipse.equinox.p2.metadata.Version
-import org.eclipse.core.runtime.Platform
-import com.google.common.collect.ImmutableList
-import org.eclipse.jdt.launching.JavaRuntime
-import java.util.Locale
+
+import static fr.obeo.releng.targetplatform.ui.tests.TestContentAssist.*
 
 class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
-	static val MOCK_UI_MODULE = new TargetPlatformUiModule(TargetPlatformActivator.getInstance()) {
+	static val MOCK_RUNTIME_MODULE = new TargetPlatformRuntimeModule() {
 		override provideIProvisioningAgent() {
 			return new Provider<IProvisioningAgent>() {
 				override IProvisioningAgent get() {
@@ -75,9 +77,9 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 		return new TargetPlatformStandaloneSetup() {
 			override createInjector() {
 				return Guice.createInjector(Modules2.mixin(
-						new TargetPlatformRuntimeModule(),
+						MOCK_RUNTIME_MODULE,
 						new SharedStateModule(),
-						MOCK_UI_MODULE as Module));
+						new TargetPlatformUiModule(TargetPlatformActivator.getInstance) as Module));
 			}
 		};
 	}
@@ -215,6 +217,21 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 		newBuilder.append('''
 			target "TPName"
 			environment macosx ''')
+		.assertText(p)
+	}
+	
+	@Test
+	def void testTargetContentEnv3() {
+		
+		val p = ImmutableList.builder()
+			.addAll(Platform.knownOSValues)
+			.addAll(Platform.knownOSArchValues)
+			.addAll(JavaRuntime.executionEnvironmentsManager.executionEnvironments.map[id])
+			.addAll(Locale.getAvailableLocales.map[toString]).build()
+		
+		newBuilder.append('''
+			target "TPName"
+			environment cocoa ''')
 		.assertText(p)
 	}
 	

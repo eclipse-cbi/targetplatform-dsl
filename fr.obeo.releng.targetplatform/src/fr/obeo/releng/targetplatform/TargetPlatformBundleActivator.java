@@ -15,9 +15,12 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleActivator;
+import org.eclipse.equinox.p2.core.ProvisionException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
@@ -32,7 +35,7 @@ import com.google.inject.Module;
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>
  *
  */
-public class TargetPlatformBundleActivator implements BundleActivator {
+public class TargetPlatformBundleActivator extends Plugin {
 
 	public static final String PLUGIN_ID = "fr.obeo.releng.targetplatform";
 	
@@ -50,8 +53,12 @@ public class TargetPlatformBundleActivator implements BundleActivator {
 
 	private IProvisioningAgentProvider provisioningAgentProvider;
 	
+	private IProvisioningAgent agent;
+	
 	@Override
 	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		
 		INSTANCE = this;
 		this.context = context;
 		injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
@@ -60,6 +67,12 @@ public class TargetPlatformBundleActivator implements BundleActivator {
 	
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		IProvisioningAgent oldAgent = agent;
+		agent = null;
+		if (oldAgent != null) {
+			oldAgent.stop();
+		}
+		
 		for (ServiceReference<?> serviceReference : serviceReferencesToUnget) {
 			context.ungetService(serviceReference);
 		}
@@ -68,20 +81,14 @@ public class TargetPlatformBundleActivator implements BundleActivator {
 		
 		context = null;
 		INSTANCE = null;
+		
+		super.stop(context);
 	}
 	
 	public static TargetPlatformBundleActivator getInstance() {
 		return INSTANCE;
 	}
-	
-	public BundleContext getContext() {
-		return context;
-	}
-	
-	public Bundle getBundle() {
-		return context.getBundle();
-	}
-	
+
 	public Injector getInjector(String language) {
 		synchronized (injectors) {
 			Injector injector = injectors.get(language);
@@ -111,6 +118,19 @@ public class TargetPlatformBundleActivator implements BundleActivator {
 			provisioningAgentProvider = getService(IProvisioningAgentProvider.class);
 		}
 		return provisioningAgentProvider;
+	}
+	
+	public IProvisioningAgent getProvisioningAgent() {
+		if (agent == null) {
+			try {
+				agent = getProvisioningAgentProvider().createAgent(getStateLocation().toFile().toURI());
+			} catch (ProvisionException e) {
+				getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+			} catch (IllegalStateException e) {
+				getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+			}
+		}
+		return agent;
 	}
 	
 	public <T> T getService(Class<T> clazz) {

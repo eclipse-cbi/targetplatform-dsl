@@ -48,7 +48,7 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOptionsAccess().getGroup(), "rule__Options__Group__0");
 					put(grammarAccess.getOptionsAccess().getGroup_2(), "rule__Options__Group_2__0");
 					put(grammarAccess.getEnvironmentAccess().getGroup(), "rule__Environment__Group__0");
-					put(grammarAccess.getEnvironmentAccess().getGroup_2(), "rule__Environment__Group_2__0");
+					put(grammarAccess.getEnvironmentAccess().getGroup_3(), "rule__Environment__Group_3__0");
 					put(grammarAccess.getIncludeDeclarationAccess().getGroup(), "rule__IncludeDeclaration__Group__0");
 					put(grammarAccess.getLocationAccess().getGroup(), "rule__Location__Group__0");
 					put(grammarAccess.getLocationAccess().getGroup_2(), "rule__Location__Group_2__0");
@@ -65,8 +65,8 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTargetPlatformAccess().getContentsAssignment_2(), "rule__TargetPlatform__ContentsAssignment_2");
 					put(grammarAccess.getOptionsAccess().getOptionsAssignment_1(), "rule__Options__OptionsAssignment_1");
 					put(grammarAccess.getOptionsAccess().getOptionsAssignment_2_1(), "rule__Options__OptionsAssignment_2_1");
-					put(grammarAccess.getEnvironmentAccess().getEnvAssignment_1(), "rule__Environment__EnvAssignment_1");
-					put(grammarAccess.getEnvironmentAccess().getEnvAssignment_2_1(), "rule__Environment__EnvAssignment_2_1");
+					put(grammarAccess.getEnvironmentAccess().getEnvAssignment_2(), "rule__Environment__EnvAssignment_2");
+					put(grammarAccess.getEnvironmentAccess().getEnvAssignment_3_1(), "rule__Environment__EnvAssignment_3_1");
 					put(grammarAccess.getIncludeDeclarationAccess().getImportURIAssignment_1(), "rule__IncludeDeclaration__ImportURIAssignment_1");
 					put(grammarAccess.getLocationAccess().getIDAssignment_1_0(), "rule__Location__IDAssignment_1_0");
 					put(grammarAccess.getLocationAccess().getUriAssignment_1_1(), "rule__Location__UriAssignment_1_1");

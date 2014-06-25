@@ -37,7 +37,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class TestContentAssist extends AbstractContentAssistProcessorTest {
-  private final static TargetPlatformUiModule MOCK_UI_MODULE = new TargetPlatformUiModule(TargetPlatformActivator.getInstance()) {
+  private final static TargetPlatformRuntimeModule MOCK_RUNTIME_MODULE = new TargetPlatformRuntimeModule() {
     public Provider<IProvisioningAgent> provideIProvisioningAgent() {
       return new Provider<IProvisioningAgent>() {
         public IProvisioningAgent get() {
@@ -126,10 +126,12 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
   protected ISetup doGetSetup() {
     return new TargetPlatformStandaloneSetup() {
       public Injector createInjector() {
-        TargetPlatformRuntimeModule _targetPlatformRuntimeModule = new TargetPlatformRuntimeModule();
         SharedStateModule _sharedStateModule = new SharedStateModule();
-        Module _mixin = Modules2.mixin(_targetPlatformRuntimeModule, _sharedStateModule, 
-          ((Module) TestContentAssist.MOCK_UI_MODULE));
+        TargetPlatformActivator _instance = TargetPlatformActivator.getInstance();
+        TargetPlatformUiModule _targetPlatformUiModule = new TargetPlatformUiModule(_instance);
+        Module _mixin = Modules2.mixin(
+          TestContentAssist.MOCK_RUNTIME_MODULE, _sharedStateModule, 
+          ((Module) _targetPlatformUiModule));
         return Guice.createInjector(_mixin);
       }
     };
@@ -400,6 +402,44 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
       _builder_1.append("target \"TPName\"");
       _builder_1.newLine();
       _builder_1.append("environment macosx ");
+      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder_1.toString());
+      _append.assertText(((String[])Conversions.unwrapArray(p, String.class)));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTargetContentEnv3() {
+    try {
+      ImmutableList.Builder<String> _builder = ImmutableList.<String>builder();
+      String[] _knownOSValues = Platform.knownOSValues();
+      ImmutableList.Builder<String> _addAll = _builder.addAll(((Iterable<? extends String>)Conversions.doWrapArray(_knownOSValues)));
+      String[] _knownOSArchValues = Platform.knownOSArchValues();
+      ImmutableList.Builder<String> _addAll_1 = _addAll.addAll(((Iterable<? extends String>)Conversions.doWrapArray(_knownOSArchValues)));
+      IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
+      IExecutionEnvironment[] _executionEnvironments = _executionEnvironmentsManager.getExecutionEnvironments();
+      final Function1<IExecutionEnvironment, String> _function = new Function1<IExecutionEnvironment, String>() {
+        public String apply(final IExecutionEnvironment it) {
+          return it.getId();
+        }
+      };
+      List<String> _map = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(_executionEnvironments)), _function);
+      ImmutableList.Builder<String> _addAll_2 = _addAll_1.addAll(_map);
+      Locale[] _availableLocales = Locale.getAvailableLocales();
+      final Function1<Locale, String> _function_1 = new Function1<Locale, String>() {
+        public String apply(final Locale it) {
+          return it.toString();
+        }
+      };
+      List<String> _map_1 = ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(_availableLocales)), _function_1);
+      ImmutableList.Builder<String> _addAll_3 = _addAll_2.addAll(_map_1);
+      final ImmutableList<String> p = _addAll_3.build();
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"TPName\"");
+      _builder_1.newLine();
+      _builder_1.append("environment cocoa ");
       ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder_1.toString());
       _append.assertText(((String[])Conversions.unwrapArray(p, String.class)));
     } catch (Throwable _e) {

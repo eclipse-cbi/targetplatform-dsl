@@ -32,6 +32,14 @@ public class MockMetadataRepositoryManager implements IMetadataRepositoryManager
     _builder.append("mock loading \'");
     _builder.append(location, "");
     monitor.subTask(_builder.toString());
+    String _string = location.toString();
+    boolean _startsWith = _string.startsWith("bad");
+    if (_startsWith) {
+      String _string_1 = location.toString();
+      String _plus = ("Bad location uri \'" + _string_1);
+      String _plus_1 = (_plus + "\'");
+      throw new ProvisionException(_plus_1);
+    }
     return new MockMetadataRepository(location, this.resultProvider);
   }
   

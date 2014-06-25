@@ -121,41 +121,45 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	public class EnvironmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Environment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEnvironmentKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cEnvAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cEnvIDTerminalRuleCall_1_0 = (RuleCall)cEnvAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cEnvAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cEnvIDTerminalRuleCall_2_1_0 = (RuleCall)cEnvAssignment_2_1.eContents().get(0);
+		private final Action cEnvironmentAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEnvironmentKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cEnvAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cEnvIDTerminalRuleCall_2_0 = (RuleCall)cEnvAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cEnvAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cEnvIDTerminalRuleCall_3_1_0 = (RuleCall)cEnvAssignment_3_1.eContents().get(0);
 		
 		//Environment:
-		//	"environment" env+=ID (","? env+=ID)*;
+		//	{Environment} "environment" env+=ID (","? env+=ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//"environment" env+=ID (","? env+=ID)*
+		//{Environment} "environment" env+=ID (","? env+=ID)*
 		public Group getGroup() { return cGroup; }
 
+		//{Environment}
+		public Action getEnvironmentAction_0() { return cEnvironmentAction_0; }
+
 		//"environment"
-		public Keyword getEnvironmentKeyword_0() { return cEnvironmentKeyword_0; }
+		public Keyword getEnvironmentKeyword_1() { return cEnvironmentKeyword_1; }
 
 		//env+=ID
-		public Assignment getEnvAssignment_1() { return cEnvAssignment_1; }
+		public Assignment getEnvAssignment_2() { return cEnvAssignment_2; }
 
 		//ID
-		public RuleCall getEnvIDTerminalRuleCall_1_0() { return cEnvIDTerminalRuleCall_1_0; }
+		public RuleCall getEnvIDTerminalRuleCall_2_0() { return cEnvIDTerminalRuleCall_2_0; }
 
 		//(","? env+=ID)*
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//","?
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
 		//env+=ID
-		public Assignment getEnvAssignment_2_1() { return cEnvAssignment_2_1; }
+		public Assignment getEnvAssignment_3_1() { return cEnvAssignment_3_1; }
 
 		//ID
-		public RuleCall getEnvIDTerminalRuleCall_2_1_0() { return cEnvIDTerminalRuleCall_2_1_0; }
+		public RuleCall getEnvIDTerminalRuleCall_3_1_0() { return cEnvIDTerminalRuleCall_3_1_0; }
 	}
 
 	public class IncludeDeclarationElements extends AbstractParserRuleElementFinder {
@@ -575,7 +579,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Environment:
-	//	"environment" env+=ID (","? env+=ID)*;
+	//	{Environment} "environment" env+=ID (","? env+=ID)*;
 	public EnvironmentElements getEnvironmentAccess() {
 		return (pEnvironment != null) ? pEnvironment : (pEnvironment = new EnvironmentElements());
 	}
