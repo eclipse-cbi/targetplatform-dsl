@@ -5,29 +5,31 @@ package fr.obeo.releng.targetplatform.validation
 
 import com.google.common.base.Strings
 import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
 import com.google.inject.Inject
+import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformPackage
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import java.net.URI
 import java.util.List
+import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.equinox.p2.core.IProvisioningAgent
+import org.eclipse.equinox.p2.metadata.VersionRange
+import org.eclipse.equinox.p2.query.QueryUtil
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
-import org.eclipse.equinox.p2.core.IProvisioningAgent
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
-import java.net.URI
-import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.equinox.p2.query.QueryUtil
-import org.eclipse.equinox.p2.metadata.VersionRange
 
 /**
  * Custom validation rules. 
@@ -58,6 +60,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE"
 	public static val CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION"
 	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
+	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -279,6 +282,30 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			if (versionResult.empty) {
 				error('''No installable unit with ID '«iu.ID»' can be found with range constraint '«iu.version»'.''', iu, TargetPlatformPackage.Literals.IU__VERSION, CHECK__IU_IN_LOCATION)
 			}
+		}
+	}
+	
+	@Check
+	def checkEnvironment(Environment env) {
+		val dupEnv = Lists.newArrayList(env.env)
+		val dupEnvIt = dupEnv.iterator 
+		while(dupEnvIt.hasNext) {
+			val envValue = dupEnvIt.next
+			switch(envValue.toUpperCase) {
+				case env?.operatingSystem?.toUpperCase,
+				case env?.architecture?.toUpperCase,
+				case env?.windowingSystem?.toUpperCase,
+				case env?.localization?.toString?.toUpperCase,
+				case env?.executionEnvironment?.id?.toUpperCase:
+				dupEnvIt.remove	
+			}
+		}
+		
+		for(String errorEnv: dupEnv) {
+			error(''''«errorEnv»' is not a valid environment specification value''', 
+					env, 
+					TargetPlatformPackage.Literals.ENVIRONMENT__ENV, 
+					env.env.indexOf(errorEnv), CHECK__ENVIRONMENT_VALIDITY)
 		}
 	}
 }

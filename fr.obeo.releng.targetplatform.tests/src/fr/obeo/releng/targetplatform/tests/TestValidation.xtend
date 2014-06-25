@@ -1341,4 +1341,33 @@ class TestValidation {
 			assertEquals("badLocation", (it.sourceEObject as Location).uri)
 		]
 	}
+	
+	@Test
+	def checkEnvironmentValidity1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx COCOA x86_64 JavaSE-1.6 fr_FR
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironment(targetPlatform.environment)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkEnvironmentValidity2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx COCOA qsdf x86_64
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironment(targetPlatform.environment)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_VALIDITY, issueCode)
+		]
+	}
 }

@@ -11,9 +11,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import fr.obeo.releng.targetplatform.Environment;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
@@ -22,9 +24,12 @@ import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -41,6 +46,7 @@ import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -95,6 +101,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION";
   
   public final static String CHECK__LOCATION_URI = "CHECK__LOCATION_URI";
+  
+  public final static String CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -706,6 +714,110 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Check
+  public void checkEnvironment(final Environment env) {
+    EList<String> _env = env.getEnv();
+    final ArrayList<String> dupEnv = Lists.<String>newArrayList(_env);
+    final Iterator<String> dupEnvIt = dupEnv.iterator();
+    boolean _hasNext = dupEnvIt.hasNext();
+    boolean _while = _hasNext;
+    while (_while) {
+      {
+        final String envValue = dupEnvIt.next();
+        String _upperCase = envValue.toUpperCase();
+        boolean _matched = false;
+        if (!_matched) {
+          String _operatingSystem = null;
+          if (env!=null) {
+            _operatingSystem=env.getOperatingSystem();
+          }
+          String _upperCase_1 = null;
+          if (_operatingSystem!=null) {
+            _upperCase_1=_operatingSystem.toUpperCase();
+          }
+          if (Objects.equal(_upperCase, _upperCase_1)) {
+            _matched=true;
+          }
+          if (!_matched) {
+            String _architecture = null;
+            if (env!=null) {
+              _architecture=env.getArchitecture();
+            }
+            String _upperCase_2 = null;
+            if (_architecture!=null) {
+              _upperCase_2=_architecture.toUpperCase();
+            }
+            if (Objects.equal(_upperCase, _upperCase_2)) {
+              _matched=true;
+            }
+          }
+          if (!_matched) {
+            String _windowingSystem = null;
+            if (env!=null) {
+              _windowingSystem=env.getWindowingSystem();
+            }
+            String _upperCase_3 = null;
+            if (_windowingSystem!=null) {
+              _upperCase_3=_windowingSystem.toUpperCase();
+            }
+            if (Objects.equal(_upperCase, _upperCase_3)) {
+              _matched=true;
+            }
+          }
+          if (!_matched) {
+            Locale _localization = null;
+            if (env!=null) {
+              _localization=env.getLocalization();
+            }
+            String _string = null;
+            if (_localization!=null) {
+              _string=_localization.toString();
+            }
+            String _upperCase_4 = null;
+            if (_string!=null) {
+              _upperCase_4=_string.toUpperCase();
+            }
+            if (Objects.equal(_upperCase, _upperCase_4)) {
+              _matched=true;
+            }
+          }
+          if (!_matched) {
+            IExecutionEnvironment _executionEnvironment = null;
+            if (env!=null) {
+              _executionEnvironment=env.getExecutionEnvironment();
+            }
+            String _id = null;
+            if (_executionEnvironment!=null) {
+              _id=_executionEnvironment.getId();
+            }
+            String _upperCase_5 = null;
+            if (_id!=null) {
+              _upperCase_5=_id.toUpperCase();
+            }
+            if (Objects.equal(_upperCase, _upperCase_5)) {
+              _matched=true;
+            }
+          }
+          if (_matched) {
+            dupEnvIt.remove();
+          }
+        }
+      }
+      boolean _hasNext_1 = dupEnvIt.hasNext();
+      _while = _hasNext_1;
+    }
+    for (final String errorEnv : dupEnv) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\'");
+      _builder.append(errorEnv, "");
+      _builder.append("\' is not a valid environment specification value");
+      EList<String> _env_1 = env.getEnv();
+      int _indexOf = _env_1.indexOf(errorEnv);
+      this.error(_builder.toString(), env, 
+        TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_VALIDITY);
     }
   }
 }
