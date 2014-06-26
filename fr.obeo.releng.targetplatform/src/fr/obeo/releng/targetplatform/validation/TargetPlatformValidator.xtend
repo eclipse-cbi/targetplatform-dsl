@@ -30,6 +30,9 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
+import org.eclipse.core.runtime.Platform
+import org.eclipse.jdt.launching.JavaRuntime
+import java.util.Locale
 
 /**
  * Custom validation rules. 
@@ -61,6 +64,8 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION"
 	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
 	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
+	public static val CHECK__ENVIRONMENT_UNICITY = "CHECK__ENVIRONMENT_UNICITY"
+	public static val CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -216,9 +221,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			
 			if (externalIDs.size > 1) {
 				val externalLocationsWithConflictualID = externalLocations.filter[externalIDs.contains(ID)]
-				val String msg = '''
-					The ID for location '«locationURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.
-				''';
+				val String msg = '''The ID for location '«locationURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.''';
 				val conflictualInclude = externalLocationsWithConflictualID.map[location|
 					targetPlatform.includes.filter[
 						val direct = indexBuilder.getImportedTargetPlatform(resource, it);
@@ -289,23 +292,98 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	def checkEnvironment(Environment env) {
 		val dupEnv = Lists.newArrayList(env.env)
 		val dupEnvIt = dupEnv.iterator 
+		
+		val knownOSUpperValues = Platform.knownOSValues.map[toUpperCase]
+		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
+		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
+		val knownLocale = Locale.availableLocales.map[toString].map[toUpperCase]
+		val knownEE = JavaRuntime.executionEnvironmentsManager.executionEnvironments.map[id.toUpperCase]
+		
 		while(dupEnvIt.hasNext) {
-			val envValue = dupEnvIt.next
-			switch(envValue.toUpperCase) {
-				case env?.operatingSystem?.toUpperCase,
-				case env?.architecture?.toUpperCase,
-				case env?.windowingSystem?.toUpperCase,
-				case env?.localization?.toString?.toUpperCase,
-				case env?.executionEnvironment?.id?.toUpperCase:
+			val envValue = dupEnvIt.next.toUpperCase
+			if (knownOSUpperValues.contains(envValue) ||
+				knownWSUpperValues.contains(envValue) ||
+				knownArchUpperValues.contains(envValue) ||
+				knownLocale.contains(envValue) ||
+				knownEE.contains(envValue)) {
 				dupEnvIt.remove	
 			}
 		}
 		
 		for(String errorEnv: dupEnv) {
-			error(''''«errorEnv»' is not a valid environment specification value''', 
+			error(''''«errorEnv»' is not a valid environment specification value.''', 
 					env, 
 					TargetPlatformPackage.Literals.ENVIRONMENT__ENV, 
 					env.env.indexOf(errorEnv), CHECK__ENVIRONMENT_VALIDITY)
+		}
+	}
+	
+	@Check
+	def checkOneEnvironment(TargetPlatform tp) {
+		val envList = tp.contents.filter(typeof(Environment)).toList
+		if (envList.size > 1) {
+			envList.tail.forEach[
+				warning('''Environment definition should not be splitted accros the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__ENVIRONMENT_UNICITY)
+			]
+		}
+	}
+	
+	@Check
+	def checkEnvironmentCohesion(TargetPlatform tp) {
+		val tpEnv = tp.environment
+	
+		val knownOSUpperValues = Platform.knownOSValues.map[toUpperCase]
+		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
+		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
+		val knownLocale = Locale.availableLocales.map[toString.toUpperCase]
+		val knownEE = JavaRuntime.executionEnvironmentsManager.executionEnvironments.map[id.toUpperCase]
+		
+		val envList = tp.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].toList
+		
+		val allOS = envList.filter[!toUpperCase.equals(tpEnv.windowingSystem?.toUpperCase)].filter[knownOSUpperValues.contains(it.toUpperCase)].toList
+		val allWS = envList.filter[!toUpperCase.equals(tpEnv.operatingSystem?.toUpperCase)].filter[knownWSUpperValues.contains(it.toUpperCase)].toList
+		val allArch = envList.filter[knownArchUpperValues.contains(it.toUpperCase)].toList
+		val allLocale = envList.filter[knownLocale.contains(it.toUpperCase)].toList
+		val allEE = envList.filter[knownEE.contains(it.toUpperCase)].toList
+		
+		if (allOS.size > 1) {
+			allOS.forEach[e|
+				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
+					error('''Cannot define multiple operating system.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+				]
+			]
+		}
+		
+		if (allWS.size > 1) {
+			allWS.forEach[e|
+				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
+					error('''Cannot define multiple windowing system.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+				]
+			]
+		}
+		
+		if (allArch.size > 1) {
+			allArch.forEach[e|
+				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
+					error('''Cannot define multiple architecture.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+				]
+			]
+		}
+		
+		if (allLocale.size > 1) {
+			allLocale.forEach[e|
+				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
+					error('''Cannot define multiple locale.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+				]
+			]
+		}
+		
+		if (allEE.size > 1) {
+			allEE.forEach[e|
+				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
+					error('''Cannot define multiple execution environment.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+				]
+			]
 		}
 	}
 }

@@ -8,6 +8,7 @@ import fr.obeo.releng.targetplatform.Environment;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
+import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
@@ -16,6 +17,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Constants;
@@ -27,6 +29,7 @@ import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -3139,6 +3142,410 @@ public class TestValidation {
         }
       };
       IterableExtensions.<AbstractValidationDiagnostic>forEach(diagnotics, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentValidity3() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment macosx linux");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      Environment _environment = targetPlatform.getEnvironment();
+      _validator.checkEnvironment(_environment);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentValidity4() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment macosx macosx");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      Environment _environment = targetPlatform.getEnvironment();
+      _validator.checkEnvironment(_environment);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<AbstractValidationDiagnostic> _filter = Iterables.<AbstractValidationDiagnostic>filter(_allDiagnostics, AbstractValidationDiagnostic.class);
+      final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkUniqueEnvironment1() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment macosx COCOA x86_64");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("environment win32");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"location\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkOneEnvironment(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnotics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnotics.size();
+      Assert.assertEquals(1, _size);
+      final Procedure1<FeatureBasedDiagnostic> _function = new Procedure1<FeatureBasedDiagnostic>() {
+        public void apply(final FeatureBasedDiagnostic it) {
+          String _issueCode = it.getIssueCode();
+          Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY, _issueCode);
+          int _severity = it.getSeverity();
+          Assert.assertEquals(Diagnostic.WARNING, _severity);
+          EList<TargetContent> _contents = targetPlatform.getContents();
+          TargetContent _get = _contents.get(1);
+          EObject _sourceEObject = it.getSourceEObject();
+          EStructuralFeature _feature = it.getFeature();
+          Object _eGet = _sourceEObject.eGet(_feature);
+          int _index = it.getIndex();
+          Object _get_1 = ((List<?>) _eGet).get(_index);
+          Assert.assertEquals(_get, _get_1);
+        }
+      };
+      IterableExtensions.<FeatureBasedDiagnostic>forEach(diagnotics, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkUniqueEnvironment2() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment macosx COCOA x86_64");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("environment win32");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"location\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("environment gtk");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkOneEnvironment(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(2, _size);
+      FeatureBasedDiagnostic it = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = it.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY, _issueCode);
+      int _severity = it.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+      EList<TargetContent> _contents = targetPlatform.getContents();
+      TargetContent _get = _contents.get(1);
+      EObject _sourceEObject = it.getSourceEObject();
+      EStructuralFeature _feature = it.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      int _index = it.getIndex();
+      Object _get_1 = ((List<?>) _eGet).get(_index);
+      Assert.assertEquals(_get, _get_1);
+      FeatureBasedDiagnostic _get_2 = diagnostics.get(1);
+      it = _get_2;
+      String _issueCode_1 = it.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY, _issueCode_1);
+      int _severity_1 = it.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity_1);
+      EList<TargetContent> _contents_1 = targetPlatform.getContents();
+      TargetContent _get_3 = _contents_1.get(3);
+      EObject _sourceEObject_1 = it.getSourceEObject();
+      EStructuralFeature _feature_1 = it.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      int _index_1 = it.getIndex();
+      Object _get_4 = ((List<?>) _eGet_1).get(_index_1);
+      Assert.assertEquals(_get_3, _get_4);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion1() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment linux gtk cocoa");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 2, _size);
+      FeatureBasedDiagnostic it = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = it.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION, _issueCode);
+      int _severity = it.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity);
+      Environment _environment = targetPlatform.getEnvironment();
+      EList<String> _env = _environment.getEnv();
+      String _get = _env.get(1);
+      EObject _sourceEObject = it.getSourceEObject();
+      EStructuralFeature _feature = it.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      int _index = it.getIndex();
+      Object _get_1 = ((List<?>) _eGet).get(_index);
+      Assert.assertEquals(_get, _get_1);
+      FeatureBasedDiagnostic it_1 = diagnostics.get(1);
+      String _issueCode_1 = it_1.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION, _issueCode_1);
+      int _severity_1 = it_1.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity_1);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      EList<String> _env_1 = _environment_1.getEnv();
+      String _get_2 = _env_1.get(2);
+      EObject _sourceEObject_1 = it_1.getSourceEObject();
+      EStructuralFeature _feature_1 = it_1.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      int _index_1 = it_1.getIndex();
+      Object _get_3 = ((List<?>) _eGet_1).get(_index_1);
+      Assert.assertEquals(_get_2, _get_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion2() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment linux gtk");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("environment cocoa");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(2, _size);
+      FeatureBasedDiagnostic it = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = it.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION, _issueCode);
+      int _severity = it.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity);
+      EList<TargetContent> _contents = targetPlatform.getContents();
+      TargetContent _get = _contents.get(0);
+      EList<String> _env = ((Environment) _get).getEnv();
+      String _get_1 = _env.get(1);
+      EObject _sourceEObject = it.getSourceEObject();
+      EStructuralFeature _feature = it.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      int _index = it.getIndex();
+      Object _get_2 = ((List<?>) _eGet).get(_index);
+      Assert.assertEquals(_get_1, _get_2);
+      FeatureBasedDiagnostic it_1 = diagnostics.get(1);
+      String _issueCode_1 = it_1.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION, _issueCode_1);
+      int _severity_1 = it_1.getSeverity();
+      Assert.assertEquals(Diagnostic.ERROR, _severity_1);
+      EList<TargetContent> _contents_1 = targetPlatform.getContents();
+      TargetContent _get_3 = _contents_1.get(1);
+      EList<String> _env_1 = ((Environment) _get_3).getEnv();
+      String _head = IterableExtensions.<String>head(_env_1);
+      EObject _sourceEObject_1 = it_1.getSourceEObject();
+      EStructuralFeature _feature_1 = it_1.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      int _index_1 = it_1.getIndex();
+      Object _get_4 = ((List<?>) _eGet_1).get(_index_1);
+      Assert.assertEquals(_head, _get_4);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion3() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 cocoa");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion4() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 linux");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion5() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 win32");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(0, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkEnvironmentCohesion6() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 ");
+      _builder.newLine();
+      _builder.append("environment win32");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkEnvironmentCohesion(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 0, _size);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

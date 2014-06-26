@@ -238,7 +238,7 @@ class TestGrammar {
 	}
 	
 	@Test
-	def testWithEnvironment() {
+	def testWithEnvironment1() {
 		val tp = parser.parse('''
 			target "TP1"
 			
@@ -251,6 +251,72 @@ class TestGrammar {
 		assertEquals("motif", env.windowingSystem)
 		assertEquals(new Locale("en", "us"), env.localization)
 		assertEquals(JavaRuntime::executionEnvironmentsManager.getEnvironment("JavaSE-1.7"), env.executionEnvironment)
+	}
+	
+	@Test
+	def testWithEnvironment2() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 
+			environment win32
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		assertTrue(targetPlatform.eResource.errors.empty)
+		assertEquals("win32", targetPlatform.environment.operatingSystem)
+		assertEquals("win32", targetPlatform.environment.windowingSystem)
+		
+		assertEquals("win32", (targetPlatform.contents.get(0) as Environment).operatingSystem)
+		assertEquals("win32", (targetPlatform.contents.get(0) as Environment).windowingSystem)
+		assertEquals("win32", (targetPlatform.contents.get(1) as Environment).windowingSystem)
+		assertEquals("win32", (targetPlatform.contents.get(1) as Environment).operatingSystem)
+	}
+	
+	@Test
+	def testWithEnvironment5() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 linux
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		assertTrue(targetPlatform.eResource.errors.empty)
+		assertEquals("linux", targetPlatform.environment.operatingSystem)
+		assertEquals("win32", targetPlatform.environment.windowingSystem)
+	}
+	
+	@Test
+	def testWithEnvironment6() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 cocoa
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		assertTrue(targetPlatform.eResource.errors.empty)
+		assertEquals("win32", targetPlatform.environment.operatingSystem)
+		assertEquals("cocoa", targetPlatform.environment.windowingSystem)
+	}
+	
+	@Test
+	def testWithEnvironment7() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment linux win32
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		assertTrue(targetPlatform.eResource.errors.empty)
+		assertEquals("linux", targetPlatform.environment.operatingSystem)
+		assertEquals("win32", targetPlatform.environment.windowingSystem)
+	}
+	
+	@Test
+	def testWithEnvironment8() {
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment cocoa win32
+		''')
+		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
+		assertTrue(targetPlatform.eResource.errors.empty)
+		assertEquals("win32", targetPlatform.environment.operatingSystem)
+		assertEquals("cocoa", targetPlatform.environment.windowingSystem)
 	}
 	
 	@Test

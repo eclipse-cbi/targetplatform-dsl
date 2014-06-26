@@ -3,12 +3,15 @@ package fr.obeo.releng.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.name.Named
+import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
+import java.util.List
+import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
@@ -18,11 +21,11 @@ import org.eclipse.xtext.junit4.validation.ValidatorTester
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 import org.eclipse.xtext.validation.EValidatorRegistrar
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -1369,5 +1372,181 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_VALIDITY, issueCode)
 		]
+	}
+	
+	@Test
+	def checkEnvironmentValidity3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx linux
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironment(targetPlatform.environment)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkEnvironmentValidity4() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx macosx
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironment(targetPlatform.environment)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkUniqueEnvironment1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx COCOA x86_64
+			
+			environment win32
+			
+			location "location" {
+				
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneEnvironment(targetPlatform)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_UNICITY, issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		]
+	}
+	
+	@Test
+	def checkUniqueEnvironment2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx COCOA x86_64
+			
+			environment win32
+			
+			location "location" {
+				
+			}
+			
+			environment gtk
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneEnvironment(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(2, diagnostics.size)
+		var it = diagnostics.head
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_UNICITY, it.issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		it = diagnostics.get(1)
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_UNICITY, it.issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(3), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+	}
+	
+	@Test
+	def checkEnvironmentCohesion1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment linux gtk cocoa
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		var it = diagnostics.head
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(Diagnostic.ERROR, it.severity)
+			assertEquals(targetPlatform.environment.env.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		var it = diagnostics.get(1)
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(Diagnostic.ERROR, it.severity)
+			assertEquals(targetPlatform.environment.env.get(2), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+	}
+	
+	@Test
+	def checkEnvironmentCohesion2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment linux gtk
+			
+			environment cocoa
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(2, diagnostics.size)
+		var it = diagnostics.head
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(Diagnostic.ERROR, it.severity)
+			assertEquals((targetPlatform.contents.get(0) as Environment).env.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		var it = diagnostics.get(1)
+			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(Diagnostic.ERROR, it.severity)
+			assertEquals((targetPlatform.contents.get(1) as Environment).env.head, (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+	}
+	
+	@Test
+	def checkEnvironmentCohesion3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 cocoa
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(0, diagnostics.size)
+	}
+	
+	@Test
+	def checkEnvironmentCohesion4() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 linux
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(0, diagnostics.size)
+	}
+	
+	@Test
+	def checkEnvironmentCohesion5() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 win32
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(0, diagnostics.size)
+	}
+	
+	@Test
+	def checkEnvironmentCohesion6() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment win32 
+			environment win32
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
 	}
 }

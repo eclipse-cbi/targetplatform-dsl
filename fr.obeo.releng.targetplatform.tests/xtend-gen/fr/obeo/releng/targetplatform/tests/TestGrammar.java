@@ -525,7 +525,7 @@ public class TestGrammar {
   }
   
   @Test
-  public void testWithEnvironment() {
+  public void testWithEnvironment1() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("target \"TP1\"");
@@ -557,6 +557,179 @@ public class TestGrammar {
       IExecutionEnvironment _environment = _executionEnvironmentsManager.getEnvironment("JavaSE-1.7");
       IExecutionEnvironment _executionEnvironment = env.getExecutionEnvironment();
       Assert.assertEquals(_environment, _executionEnvironment);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 ");
+      _builder.newLine();
+      _builder.append("environment win32");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      Resource _eResource_2 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
+      boolean _isEmpty_1 = _errors_2.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
+      Environment _environment = targetPlatform.getEnvironment();
+      String _operatingSystem = _environment.getOperatingSystem();
+      Assert.assertEquals("win32", _operatingSystem);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      String _windowingSystem = _environment_1.getWindowingSystem();
+      Assert.assertEquals("win32", _windowingSystem);
+      EList<TargetContent> _contents = targetPlatform.getContents();
+      TargetContent _get = _contents.get(0);
+      String _operatingSystem_1 = ((Environment) _get).getOperatingSystem();
+      Assert.assertEquals("win32", _operatingSystem_1);
+      EList<TargetContent> _contents_1 = targetPlatform.getContents();
+      TargetContent _get_1 = _contents_1.get(0);
+      String _windowingSystem_1 = ((Environment) _get_1).getWindowingSystem();
+      Assert.assertEquals("win32", _windowingSystem_1);
+      EList<TargetContent> _contents_2 = targetPlatform.getContents();
+      TargetContent _get_2 = _contents_2.get(1);
+      String _windowingSystem_2 = ((Environment) _get_2).getWindowingSystem();
+      Assert.assertEquals("win32", _windowingSystem_2);
+      EList<TargetContent> _contents_3 = targetPlatform.getContents();
+      TargetContent _get_3 = _contents_3.get(1);
+      String _operatingSystem_2 = ((Environment) _get_3).getOperatingSystem();
+      Assert.assertEquals("win32", _operatingSystem_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 linux");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      Resource _eResource_2 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
+      boolean _isEmpty_1 = _errors_2.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
+      Environment _environment = targetPlatform.getEnvironment();
+      String _operatingSystem = _environment.getOperatingSystem();
+      Assert.assertEquals("linux", _operatingSystem);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      String _windowingSystem = _environment_1.getWindowingSystem();
+      Assert.assertEquals("win32", _windowingSystem);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment win32 cocoa");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      Resource _eResource_2 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
+      boolean _isEmpty_1 = _errors_2.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
+      Environment _environment = targetPlatform.getEnvironment();
+      String _operatingSystem = _environment.getOperatingSystem();
+      Assert.assertEquals("win32", _operatingSystem);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      String _windowingSystem = _environment_1.getWindowingSystem();
+      Assert.assertEquals("cocoa", _windowingSystem);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment linux win32");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      Resource _eResource_2 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
+      boolean _isEmpty_1 = _errors_2.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
+      Environment _environment = targetPlatform.getEnvironment();
+      String _operatingSystem = _environment.getOperatingSystem();
+      Assert.assertEquals("linux", _operatingSystem);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      String _windowingSystem = _environment_1.getWindowingSystem();
+      Assert.assertEquals("win32", _windowingSystem);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWithEnvironment8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("environment cocoa win32");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      String _join = IterableExtensions.join(_errors, "\n");
+      Resource _eResource_1 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_join, _isEmpty);
+      Resource _eResource_2 = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
+      boolean _isEmpty_1 = _errors_2.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
+      Environment _environment = targetPlatform.getEnvironment();
+      String _operatingSystem = _environment.getOperatingSystem();
+      Assert.assertEquals("win32", _operatingSystem);
+      Environment _environment_1 = targetPlatform.getEnvironment();
+      String _windowingSystem = _environment_1.getWindowingSystem();
+      Assert.assertEquals("cocoa", _windowingSystem);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

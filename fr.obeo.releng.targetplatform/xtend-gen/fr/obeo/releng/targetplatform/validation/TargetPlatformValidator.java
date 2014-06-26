@@ -20,6 +20,7 @@ import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
@@ -33,6 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -46,7 +48,9 @@ import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -56,6 +60,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -103,6 +108,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__LOCATION_URI = "CHECK__LOCATION_URI";
   
   public final static String CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY";
+  
+  public final static String CHECK__ENVIRONMENT_UNICITY = "CHECK__ENVIRONMENT_UNICITY";
+  
+  public final static String CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -492,7 +501,6 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           String _join_1 = IterableExtensions.join(_set, "\', \'");
           _builder.append(_join_1, "");
           _builder.append("\'.");
-          _builder.newLineIfNotEmpty();
           final String msg = _builder.toString();
           final Function1<Location, Iterable<IncludeDeclaration>> _function_6 = new Function1<Location, Iterable<IncludeDeclaration>>() {
             public Iterable<IncludeDeclaration> apply(final Location location) {
@@ -722,88 +730,86 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     EList<String> _env = env.getEnv();
     final ArrayList<String> dupEnv = Lists.<String>newArrayList(_env);
     final Iterator<String> dupEnvIt = dupEnv.iterator();
+    String[] _knownOSValues = Platform.knownOSValues();
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownOSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownOSValues)), _function);
+    String[] _knownWSValues = Platform.knownWSValues();
+    final Function1<String, String> _function_1 = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownWSValues)), _function_1);
+    String[] _knownOSArchValues = Platform.knownOSArchValues();
+    final Function1<String, String> _function_2 = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownArchUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownOSArchValues)), _function_2);
+    Locale[] _availableLocales = Locale.getAvailableLocales();
+    final Function1<Locale, String> _function_3 = new Function1<Locale, String>() {
+      public String apply(final Locale it) {
+        return it.toString();
+      }
+    };
+    List<String> _map = ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(_availableLocales)), _function_3);
+    final Function1<String, String> _function_4 = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownLocale = ListExtensions.<String, String>map(_map, _function_4);
+    IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
+    IExecutionEnvironment[] _executionEnvironments = _executionEnvironmentsManager.getExecutionEnvironments();
+    final Function1<IExecutionEnvironment, String> _function_5 = new Function1<IExecutionEnvironment, String>() {
+      public String apply(final IExecutionEnvironment it) {
+        String _id = it.getId();
+        return _id.toUpperCase();
+      }
+    };
+    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(_executionEnvironments)), _function_5);
     boolean _hasNext = dupEnvIt.hasNext();
     boolean _while = _hasNext;
     while (_while) {
       {
-        final String envValue = dupEnvIt.next();
-        String _upperCase = envValue.toUpperCase();
-        boolean _matched = false;
-        if (!_matched) {
-          String _operatingSystem = null;
-          if (env!=null) {
-            _operatingSystem=env.getOperatingSystem();
-          }
-          String _upperCase_1 = null;
-          if (_operatingSystem!=null) {
-            _upperCase_1=_operatingSystem.toUpperCase();
-          }
-          if (Objects.equal(_upperCase, _upperCase_1)) {
-            _matched=true;
-          }
-          if (!_matched) {
-            String _architecture = null;
-            if (env!=null) {
-              _architecture=env.getArchitecture();
-            }
-            String _upperCase_2 = null;
-            if (_architecture!=null) {
-              _upperCase_2=_architecture.toUpperCase();
-            }
-            if (Objects.equal(_upperCase, _upperCase_2)) {
-              _matched=true;
-            }
-          }
-          if (!_matched) {
-            String _windowingSystem = null;
-            if (env!=null) {
-              _windowingSystem=env.getWindowingSystem();
-            }
-            String _upperCase_3 = null;
-            if (_windowingSystem!=null) {
-              _upperCase_3=_windowingSystem.toUpperCase();
-            }
-            if (Objects.equal(_upperCase, _upperCase_3)) {
-              _matched=true;
-            }
-          }
-          if (!_matched) {
-            Locale _localization = null;
-            if (env!=null) {
-              _localization=env.getLocalization();
-            }
-            String _string = null;
-            if (_localization!=null) {
-              _string=_localization.toString();
-            }
-            String _upperCase_4 = null;
-            if (_string!=null) {
-              _upperCase_4=_string.toUpperCase();
-            }
-            if (Objects.equal(_upperCase, _upperCase_4)) {
-              _matched=true;
-            }
-          }
-          if (!_matched) {
-            IExecutionEnvironment _executionEnvironment = null;
-            if (env!=null) {
-              _executionEnvironment=env.getExecutionEnvironment();
-            }
-            String _id = null;
-            if (_executionEnvironment!=null) {
-              _id=_executionEnvironment.getId();
-            }
-            String _upperCase_5 = null;
-            if (_id!=null) {
-              _upperCase_5=_id.toUpperCase();
-            }
-            if (Objects.equal(_upperCase, _upperCase_5)) {
-              _matched=true;
-            }
-          }
-          if (_matched) {
-            dupEnvIt.remove();
-          }
+        String _next = dupEnvIt.next();
+        final String envValue = _next.toUpperCase();
+        boolean _or = false;
+        boolean _or_1 = false;
+        boolean _or_2 = false;
+        boolean _or_3 = false;
+        boolean _contains = knownOSUpperValues.contains(envValue);
+        if (_contains) {
+          _or_3 = true;
+        } else {
+          boolean _contains_1 = knownWSUpperValues.contains(envValue);
+          _or_3 = _contains_1;
+        }
+        if (_or_3) {
+          _or_2 = true;
+        } else {
+          boolean _contains_2 = knownArchUpperValues.contains(envValue);
+          _or_2 = _contains_2;
+        }
+        if (_or_2) {
+          _or_1 = true;
+        } else {
+          boolean _contains_3 = knownLocale.contains(envValue);
+          _or_1 = _contains_3;
+        }
+        if (_or_1) {
+          _or = true;
+        } else {
+          boolean _contains_4 = knownEE.contains(envValue);
+          _or = _contains_4;
+        }
+        if (_or) {
+          dupEnvIt.remove();
         }
       }
       boolean _hasNext_1 = dupEnvIt.hasNext();
@@ -813,11 +819,299 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\'");
       _builder.append(errorEnv, "");
-      _builder.append("\' is not a valid environment specification value");
+      _builder.append("\' is not a valid environment specification value.");
       EList<String> _env_1 = env.getEnv();
       int _indexOf = _env_1.indexOf(errorEnv);
       this.error(_builder.toString(), env, 
         TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_VALIDITY);
+    }
+  }
+  
+  @Check
+  public void checkOneEnvironment(final TargetPlatform tp) {
+    EList<TargetContent> _contents = tp.getContents();
+    Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+    final List<Environment> envList = IterableExtensions.<Environment>toList(_filter);
+    int _size = envList.size();
+    boolean _greaterThan = (_size > 1);
+    if (_greaterThan) {
+      Iterable<Environment> _tail = IterableExtensions.<Environment>tail(envList);
+      final Procedure1<Environment> _function = new Procedure1<Environment>() {
+        public void apply(final Environment it) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Environment definition should not be splitted accros the file.");
+          EList<TargetContent> _contents = tp.getContents();
+          int _indexOf = _contents.indexOf(it);
+          TargetPlatformValidator.this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY);
+        }
+      };
+      IterableExtensions.<Environment>forEach(_tail, _function);
+    }
+  }
+  
+  @Check
+  public void checkEnvironmentCohesion(final TargetPlatform tp) {
+    final Environment tpEnv = tp.getEnvironment();
+    String[] _knownOSValues = Platform.knownOSValues();
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownOSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownOSValues)), _function);
+    String[] _knownWSValues = Platform.knownWSValues();
+    final Function1<String, String> _function_1 = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownWSValues)), _function_1);
+    String[] _knownOSArchValues = Platform.knownOSArchValues();
+    final Function1<String, String> _function_2 = new Function1<String, String>() {
+      public String apply(final String it) {
+        return it.toUpperCase();
+      }
+    };
+    final List<String> knownArchUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_knownOSArchValues)), _function_2);
+    Locale[] _availableLocales = Locale.getAvailableLocales();
+    final Function1<Locale, String> _function_3 = new Function1<Locale, String>() {
+      public String apply(final Locale it) {
+        String _string = it.toString();
+        return _string.toUpperCase();
+      }
+    };
+    final List<String> knownLocale = ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(_availableLocales)), _function_3);
+    IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
+    IExecutionEnvironment[] _executionEnvironments = _executionEnvironmentsManager.getExecutionEnvironments();
+    final Function1<IExecutionEnvironment, String> _function_4 = new Function1<IExecutionEnvironment, String>() {
+      public String apply(final IExecutionEnvironment it) {
+        String _id = it.getId();
+        return _id.toUpperCase();
+      }
+    };
+    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(_executionEnvironments)), _function_4);
+    EList<TargetContent> _contents = tp.getContents();
+    Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+    final Function1<Environment, EList<String>> _function_5 = new Function1<Environment, EList<String>>() {
+      public EList<String> apply(final Environment it) {
+        return it.getEnv();
+      }
+    };
+    Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function_5);
+    Iterable<String> _flatten = Iterables.<String>concat(_map);
+    final Function1<String, Boolean> _function_6 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
+        return Boolean.valueOf((!_isNullOrEmpty));
+      }
+    };
+    Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_6);
+    final List<String> envList = IterableExtensions.<String>toList(_filter_1);
+    final Function1<String, Boolean> _function_7 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        String _windowingSystem = tpEnv.getWindowingSystem();
+        String _upperCase_1 = null;
+        if (_windowingSystem!=null) {
+          _upperCase_1=_windowingSystem.toUpperCase();
+        }
+        boolean _equals = _upperCase.equals(_upperCase_1);
+        return Boolean.valueOf((!_equals));
+      }
+    };
+    Iterable<String> _filter_2 = IterableExtensions.<String>filter(envList, _function_7);
+    final Function1<String, Boolean> _function_8 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return Boolean.valueOf(knownOSUpperValues.contains(_upperCase));
+      }
+    };
+    Iterable<String> _filter_3 = IterableExtensions.<String>filter(_filter_2, _function_8);
+    final List<String> allOS = IterableExtensions.<String>toList(_filter_3);
+    final Function1<String, Boolean> _function_9 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        String _operatingSystem = tpEnv.getOperatingSystem();
+        String _upperCase_1 = null;
+        if (_operatingSystem!=null) {
+          _upperCase_1=_operatingSystem.toUpperCase();
+        }
+        boolean _equals = _upperCase.equals(_upperCase_1);
+        return Boolean.valueOf((!_equals));
+      }
+    };
+    Iterable<String> _filter_4 = IterableExtensions.<String>filter(envList, _function_9);
+    final Function1<String, Boolean> _function_10 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return Boolean.valueOf(knownWSUpperValues.contains(_upperCase));
+      }
+    };
+    Iterable<String> _filter_5 = IterableExtensions.<String>filter(_filter_4, _function_10);
+    final List<String> allWS = IterableExtensions.<String>toList(_filter_5);
+    final Function1<String, Boolean> _function_11 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return Boolean.valueOf(knownArchUpperValues.contains(_upperCase));
+      }
+    };
+    Iterable<String> _filter_6 = IterableExtensions.<String>filter(envList, _function_11);
+    final List<String> allArch = IterableExtensions.<String>toList(_filter_6);
+    final Function1<String, Boolean> _function_12 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return Boolean.valueOf(knownLocale.contains(_upperCase));
+      }
+    };
+    Iterable<String> _filter_7 = IterableExtensions.<String>filter(envList, _function_12);
+    final List<String> allLocale = IterableExtensions.<String>toList(_filter_7);
+    final Function1<String, Boolean> _function_13 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return Boolean.valueOf(knownEE.contains(_upperCase));
+      }
+    };
+    Iterable<String> _filter_8 = IterableExtensions.<String>filter(envList, _function_13);
+    final List<String> allEE = IterableExtensions.<String>toList(_filter_8);
+    int _size = allOS.size();
+    boolean _greaterThan = (_size > 1);
+    if (_greaterThan) {
+      final Procedure1<String> _function_14 = new Procedure1<String>() {
+        public void apply(final String e) {
+          EList<TargetContent> _contents = tp.getContents();
+          Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+          final Function1<Environment, Boolean> _function = new Function1<Environment, Boolean>() {
+            public Boolean apply(final Environment it) {
+              EList<String> _env = it.getEnv();
+              return Boolean.valueOf(_env.contains(e));
+            }
+          };
+          Iterable<Environment> _filter_1 = IterableExtensions.<Environment>filter(_filter, _function);
+          final Procedure1<Environment> _function_1 = new Procedure1<Environment>() {
+            public void apply(final Environment env) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Cannot define multiple operating system.");
+              EList<String> _env = env.getEnv();
+              int _indexOf = _env.indexOf(e);
+              TargetPlatformValidator.this.error(_builder.toString(), env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION);
+            }
+          };
+          IterableExtensions.<Environment>forEach(_filter_1, _function_1);
+        }
+      };
+      IterableExtensions.<String>forEach(allOS, _function_14);
+    }
+    int _size_1 = allWS.size();
+    boolean _greaterThan_1 = (_size_1 > 1);
+    if (_greaterThan_1) {
+      final Procedure1<String> _function_15 = new Procedure1<String>() {
+        public void apply(final String e) {
+          EList<TargetContent> _contents = tp.getContents();
+          Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+          final Function1<Environment, Boolean> _function = new Function1<Environment, Boolean>() {
+            public Boolean apply(final Environment it) {
+              EList<String> _env = it.getEnv();
+              return Boolean.valueOf(_env.contains(e));
+            }
+          };
+          Iterable<Environment> _filter_1 = IterableExtensions.<Environment>filter(_filter, _function);
+          final Procedure1<Environment> _function_1 = new Procedure1<Environment>() {
+            public void apply(final Environment env) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Cannot define multiple windowing system.");
+              EList<String> _env = env.getEnv();
+              int _indexOf = _env.indexOf(e);
+              TargetPlatformValidator.this.error(_builder.toString(), env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION);
+            }
+          };
+          IterableExtensions.<Environment>forEach(_filter_1, _function_1);
+        }
+      };
+      IterableExtensions.<String>forEach(allWS, _function_15);
+    }
+    int _size_2 = allArch.size();
+    boolean _greaterThan_2 = (_size_2 > 1);
+    if (_greaterThan_2) {
+      final Procedure1<String> _function_16 = new Procedure1<String>() {
+        public void apply(final String e) {
+          EList<TargetContent> _contents = tp.getContents();
+          Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+          final Function1<Environment, Boolean> _function = new Function1<Environment, Boolean>() {
+            public Boolean apply(final Environment it) {
+              EList<String> _env = it.getEnv();
+              return Boolean.valueOf(_env.contains(e));
+            }
+          };
+          Iterable<Environment> _filter_1 = IterableExtensions.<Environment>filter(_filter, _function);
+          final Procedure1<Environment> _function_1 = new Procedure1<Environment>() {
+            public void apply(final Environment env) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Cannot define multiple architecture.");
+              EList<String> _env = env.getEnv();
+              int _indexOf = _env.indexOf(e);
+              TargetPlatformValidator.this.error(_builder.toString(), env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION);
+            }
+          };
+          IterableExtensions.<Environment>forEach(_filter_1, _function_1);
+        }
+      };
+      IterableExtensions.<String>forEach(allArch, _function_16);
+    }
+    int _size_3 = allLocale.size();
+    boolean _greaterThan_3 = (_size_3 > 1);
+    if (_greaterThan_3) {
+      final Procedure1<String> _function_17 = new Procedure1<String>() {
+        public void apply(final String e) {
+          EList<TargetContent> _contents = tp.getContents();
+          Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+          final Function1<Environment, Boolean> _function = new Function1<Environment, Boolean>() {
+            public Boolean apply(final Environment it) {
+              EList<String> _env = it.getEnv();
+              return Boolean.valueOf(_env.contains(e));
+            }
+          };
+          Iterable<Environment> _filter_1 = IterableExtensions.<Environment>filter(_filter, _function);
+          final Procedure1<Environment> _function_1 = new Procedure1<Environment>() {
+            public void apply(final Environment env) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Cannot define multiple locale.");
+              EList<String> _env = env.getEnv();
+              int _indexOf = _env.indexOf(e);
+              TargetPlatformValidator.this.error(_builder.toString(), env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION);
+            }
+          };
+          IterableExtensions.<Environment>forEach(_filter_1, _function_1);
+        }
+      };
+      IterableExtensions.<String>forEach(allLocale, _function_17);
+    }
+    int _size_4 = allEE.size();
+    boolean _greaterThan_4 = (_size_4 > 1);
+    if (_greaterThan_4) {
+      final Procedure1<String> _function_18 = new Procedure1<String>() {
+        public void apply(final String e) {
+          EList<TargetContent> _contents = tp.getContents();
+          Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+          final Function1<Environment, Boolean> _function = new Function1<Environment, Boolean>() {
+            public Boolean apply(final Environment it) {
+              EList<String> _env = it.getEnv();
+              return Boolean.valueOf(_env.contains(e));
+            }
+          };
+          Iterable<Environment> _filter_1 = IterableExtensions.<Environment>filter(_filter, _function);
+          final Procedure1<Environment> _function_1 = new Procedure1<Environment>() {
+            public void apply(final Environment env) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Cannot define multiple execution environment.");
+              EList<String> _env = env.getEnv();
+              int _indexOf = _env.indexOf(e);
+              TargetPlatformValidator.this.error(_builder.toString(), env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_COHESION);
+            }
+          };
+          IterableExtensions.<Environment>forEach(_filter_1, _function_1);
+        }
+      };
+      IterableExtensions.<String>forEach(allEE, _function_18);
     }
   }
 }
