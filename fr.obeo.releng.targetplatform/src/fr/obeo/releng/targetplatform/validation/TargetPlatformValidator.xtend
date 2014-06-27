@@ -402,7 +402,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		]
 		
 		val id =
-			if (idRule.text.startsWith('^')) {
+			if (idRule.text.startsWith('^') && !idRule.text.contains('.')) {
 				idRule.text.substring(1)
 			} else {
 				idRule.text

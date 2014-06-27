@@ -1139,17 +1139,26 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     };
     final INode idRule = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
     String _xifexpression = null;
+    boolean _and = false;
     String _text = idRule.getText();
     boolean _startsWith = _text.startsWith("^");
-    if (_startsWith) {
+    if (!_startsWith) {
+      _and = false;
+    } else {
       String _text_1 = idRule.getText();
-      _xifexpression = _text_1.substring(1);
+      boolean _contains = _text_1.contains(".");
+      boolean _not = (!_contains);
+      _and = _not;
+    }
+    if (_and) {
+      String _text_2 = idRule.getText();
+      _xifexpression = _text_2.substring(1);
     } else {
       _xifexpression = idRule.getText();
     }
     final String id = _xifexpression;
-    boolean _contains = id.contains("^");
-    if (_contains) {
+    boolean _contains_1 = id.contains("^");
+    if (_contains_1) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Usage of escape character \'^\' in the ID of IUs is not required anymore and has been deprecated.");
       this.warning(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID);
