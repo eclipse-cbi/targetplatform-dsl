@@ -79,6 +79,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	public static val CHECK__OPTIONS_UNICITY = "CHECK__OPTIONS_UNICITY"
 	public static val CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS"
+	public static val CHECK__NO_DUPLICATED_IU = "CHECK__NO_DUPLICATED_IU"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -447,5 +448,28 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		if (semicolonKeywordRule != null) {
 			acceptWarning("Usage of keywords ';version=' are not required anymore and has been deprecated.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
+	}
+	
+	@Check
+	def checkNoDuplicatedIU(TargetPlatform targetPlatform) {
+		val importedTPs = indexBuilder.getImportedTargetPlatforms(targetPlatform)
+		val importedIUs = importedTPs.map[locations].flatten.map[ius].flatten.toSet
+		val localIUsID = HashMultiset.create(targetPlatform.locations.map[ius].flatten.map[ID])
+		val importedIUsID = importedIUs.map[ID].toSet
+		
+		targetPlatform.locations.map[ius].flatten
+			.filter[importedIUsID.contains(ID) || localIUsID.count(ID) > 1].
+			forEach[entry|
+				val localLocationsWithDup = targetPlatform.locations.filter[ius.map[ID].contains(entry.ID)].map[uri].toSet
+				val importedTPsWithDup = importedIUs.filter[ID.equals(entry.ID)].map[eResource.URI].toSet
+				
+				val msg = if (importedIUsID.contains(entry.ID)) {
+					'''Duplicated IU for locations '«localLocationsWithDup.join("', '")»'. It is included from target platforms '«importedTPsWithDup.join("', '")»'.'''
+				} else {
+					'''Duplicated IU for locations '«localLocationsWithDup.join("', '")»'.''' 
+				}
+				
+				warning(msg, entry.eContainer, TargetPlatformPackage.Literals.LOCATION__IUS, (entry.eContainer as Location).ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
+			]
 	}
 }

@@ -1756,4 +1756,131 @@ class TestValidation {
 		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
 		assertEquals(TargetPlatformValidator::CHECK__VERSION_KEYWORDS, diagnostics.head.issueCode)
 	}
+	
+	@Test
+	def testNoDuplicatedIU1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "locationURI" {
+				org.iu1
+			}
+			
+			location "locationURI2" {
+				org.iu1
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedIU(targetPlatform)
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_IU, diagnostics.head.issueCode)
+		assertEquals(targetPlatform.locations.head.ius.head, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
+		assertEquals(targetPlatform.locations.get(1).ius.head, (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(1).severity)
+	}
+	
+	@Test
+	def testNoDuplicatedIU2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "locationURI" {
+				org.iu1
+				org.iu1
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedIU(targetPlatform)
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_IU, diagnostics.head.issueCode)
+		assertEquals(targetPlatform.locations.head.ius.head, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
+		assertEquals(targetPlatform.locations.head.ius.head, (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(1).severity)
+	}
+	
+	@Test
+	def testNoDuplicatedIU3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "locationURI" {
+				org.iu1
+			}
+			
+			location "locationURI" {
+				org.iu1
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedIU(targetPlatform)
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_IU, diagnostics.head.issueCode)
+		assertEquals(targetPlatform.locations.head.ius.head, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
+		assertEquals(targetPlatform.locations.get(1).ius.head, (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(1).severity)
+	}
+	
+	@Test
+	def testNoDuplicatedIU4() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val tpa = parser.parse('''
+			target "tp.a"
+			include "b.tpd"
+			
+			location "locationURI1" {
+				org.iu1
+			}
+		''', URI.createURI("tmp:/a.tpd"), resourceSet);
+		parser.parse('''
+			target "tp.b"
+			
+			location "locationURI2" {
+				org.iu1
+			}
+		''', URI.createURI("tmp:/b.tpd"), resourceSet);
+
+		assertTrue(tpa.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedIU(tpa)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(1, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_IU, diagnostics.head.issueCode)
+		assertEquals(tpa.locations.head.ius.head, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
+	}
+	
+	@Test
+	def testNoDuplicatedIU5() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val tpa = parser.parse('''
+			target "tp.a"
+			include "b.tpd"
+			
+			location "locationURI1" {
+				org.iu1
+			}
+		''', URI.createURI("tmp:/a.tpd"), resourceSet);
+		parser.parse('''
+			target "tp.b"
+			
+			location "locationURI1" {
+				org.iu1
+			}
+		''', URI.createURI("tmp:/b.tpd"), resourceSet);
+
+		assertTrue(tpa.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedIU(tpa)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(1, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_IU, diagnostics.head.issueCode)
+		assertEquals(tpa.locations.head.ius.head, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(0))
+		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
+	}
 }

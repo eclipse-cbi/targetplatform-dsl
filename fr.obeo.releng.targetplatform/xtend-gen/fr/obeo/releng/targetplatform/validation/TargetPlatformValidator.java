@@ -130,6 +130,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   public final static String CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS";
   
+  public final static String CHECK__NO_DUPLICATED_IU = "CHECK__NO_DUPLICATED_IU";
+  
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
     EList<TargetContent> _contents = targetPlatform.getContents();
@@ -1213,5 +1215,142 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _minus = (_endOffset - _offset_1);
       this.acceptWarning("Usage of keywords \';version=\' are not required anymore and has been deprecated.", iu, _offset, _minus, TargetPlatformValidator.CHECK__VERSION_KEYWORDS);
     }
+  }
+  
+  @Check
+  public void checkNoDuplicatedIU(final TargetPlatform targetPlatform) {
+    final LinkedList<TargetPlatform> importedTPs = this.indexBuilder.getImportedTargetPlatforms(targetPlatform);
+    final Function1<TargetPlatform, EList<Location>> _function = new Function1<TargetPlatform, EList<Location>>() {
+      public EList<Location> apply(final TargetPlatform it) {
+        return it.getLocations();
+      }
+    };
+    List<EList<Location>> _map = ListExtensions.<TargetPlatform, EList<Location>>map(importedTPs, _function);
+    Iterable<Location> _flatten = Iterables.<Location>concat(_map);
+    final Function1<Location, EList<IU>> _function_1 = new Function1<Location, EList<IU>>() {
+      public EList<IU> apply(final Location it) {
+        return it.getIus();
+      }
+    };
+    Iterable<EList<IU>> _map_1 = IterableExtensions.<Location, EList<IU>>map(_flatten, _function_1);
+    Iterable<IU> _flatten_1 = Iterables.<IU>concat(_map_1);
+    final Set<IU> importedIUs = IterableExtensions.<IU>toSet(_flatten_1);
+    EList<Location> _locations = targetPlatform.getLocations();
+    final Function1<Location, EList<IU>> _function_2 = new Function1<Location, EList<IU>>() {
+      public EList<IU> apply(final Location it) {
+        return it.getIus();
+      }
+    };
+    List<EList<IU>> _map_2 = ListExtensions.<Location, EList<IU>>map(_locations, _function_2);
+    Iterable<IU> _flatten_2 = Iterables.<IU>concat(_map_2);
+    final Function1<IU, String> _function_3 = new Function1<IU, String>() {
+      public String apply(final IU it) {
+        return it.getID();
+      }
+    };
+    Iterable<String> _map_3 = IterableExtensions.<IU, String>map(_flatten_2, _function_3);
+    final HashMultiset<String> localIUsID = HashMultiset.<String>create(_map_3);
+    final Function1<IU, String> _function_4 = new Function1<IU, String>() {
+      public String apply(final IU it) {
+        return it.getID();
+      }
+    };
+    Iterable<String> _map_4 = IterableExtensions.<IU, String>map(importedIUs, _function_4);
+    final Set<String> importedIUsID = IterableExtensions.<String>toSet(_map_4);
+    EList<Location> _locations_1 = targetPlatform.getLocations();
+    final Function1<Location, EList<IU>> _function_5 = new Function1<Location, EList<IU>>() {
+      public EList<IU> apply(final Location it) {
+        return it.getIus();
+      }
+    };
+    List<EList<IU>> _map_5 = ListExtensions.<Location, EList<IU>>map(_locations_1, _function_5);
+    Iterable<IU> _flatten_3 = Iterables.<IU>concat(_map_5);
+    final Function1<IU, Boolean> _function_6 = new Function1<IU, Boolean>() {
+      public Boolean apply(final IU it) {
+        boolean _or = false;
+        String _iD = it.getID();
+        boolean _contains = importedIUsID.contains(_iD);
+        if (_contains) {
+          _or = true;
+        } else {
+          String _iD_1 = it.getID();
+          int _count = localIUsID.count(_iD_1);
+          boolean _greaterThan = (_count > 1);
+          _or = _greaterThan;
+        }
+        return Boolean.valueOf(_or);
+      }
+    };
+    Iterable<IU> _filter = IterableExtensions.<IU>filter(_flatten_3, _function_6);
+    final Procedure1<IU> _function_7 = new Procedure1<IU>() {
+      public void apply(final IU entry) {
+        EList<Location> _locations = targetPlatform.getLocations();
+        final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
+          public Boolean apply(final Location it) {
+            EList<IU> _ius = it.getIus();
+            final Function1<IU, String> _function = new Function1<IU, String>() {
+              public String apply(final IU it) {
+                return it.getID();
+              }
+            };
+            List<String> _map = ListExtensions.<IU, String>map(_ius, _function);
+            String _iD = entry.getID();
+            return Boolean.valueOf(_map.contains(_iD));
+          }
+        };
+        Iterable<Location> _filter = IterableExtensions.<Location>filter(_locations, _function);
+        final Function1<Location, String> _function_1 = new Function1<Location, String>() {
+          public String apply(final Location it) {
+            return it.getUri();
+          }
+        };
+        Iterable<String> _map = IterableExtensions.<Location, String>map(_filter, _function_1);
+        final Set<String> localLocationsWithDup = IterableExtensions.<String>toSet(_map);
+        final Function1<IU, Boolean> _function_2 = new Function1<IU, Boolean>() {
+          public Boolean apply(final IU it) {
+            String _iD = it.getID();
+            String _iD_1 = entry.getID();
+            return Boolean.valueOf(_iD.equals(_iD_1));
+          }
+        };
+        Iterable<IU> _filter_1 = IterableExtensions.<IU>filter(importedIUs, _function_2);
+        final Function1<IU, URI> _function_3 = new Function1<IU, URI>() {
+          public URI apply(final IU it) {
+            Resource _eResource = it.eResource();
+            return _eResource.getURI();
+          }
+        };
+        Iterable<URI> _map_1 = IterableExtensions.<IU, URI>map(_filter_1, _function_3);
+        final Set<URI> importedTPsWithDup = IterableExtensions.<URI>toSet(_map_1);
+        String _xifexpression = null;
+        String _iD = entry.getID();
+        boolean _contains = importedIUsID.contains(_iD);
+        if (_contains) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Duplicated IU for locations \'");
+          String _join = IterableExtensions.join(localLocationsWithDup, "\', \'");
+          _builder.append(_join, "");
+          _builder.append("\'. It is included from target platforms \'");
+          String _join_1 = IterableExtensions.join(importedTPsWithDup, "\', \'");
+          _builder.append(_join_1, "");
+          _builder.append("\'.");
+          _xifexpression = _builder.toString();
+        } else {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Duplicated IU for locations \'");
+          String _join_2 = IterableExtensions.join(localLocationsWithDup, "\', \'");
+          _builder_1.append(_join_2, "");
+          _builder_1.append("\'.");
+          _xifexpression = _builder_1.toString();
+        }
+        final String msg = _xifexpression;
+        EObject _eContainer = entry.eContainer();
+        EObject _eContainer_1 = entry.eContainer();
+        EList<IU> _ius = ((Location) _eContainer_1).getIus();
+        int _indexOf = _ius.indexOf(entry);
+        TargetPlatformValidator.this.warning(msg, _eContainer, TargetPlatformPackage.Literals.LOCATION__IUS, _indexOf, TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+      }
+    };
+    IterableExtensions.<IU>forEach(_filter, _function_7);
   }
 }

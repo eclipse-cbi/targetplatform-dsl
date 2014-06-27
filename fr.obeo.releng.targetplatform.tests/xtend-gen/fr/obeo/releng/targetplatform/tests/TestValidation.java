@@ -4074,4 +4074,349 @@ public class TestValidation {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testNoDuplicatedIU1() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"locationURI\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"locationURI2\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkNoDuplicatedIU(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 2, _size);
+      FeatureBasedDiagnostic _head = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_IU, _issueCode);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head_1.getIus();
+      IU _head_2 = IterableExtensions.<IU>head(_ius);
+      FeatureBasedDiagnostic _get = diagnostics.get(0);
+      EObject _sourceEObject = _get.getSourceEObject();
+      FeatureBasedDiagnostic _get_1 = diagnostics.get(0);
+      EStructuralFeature _feature = _get_1.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      Object _get_2 = ((List<?>) _eGet).get(0);
+      Assert.assertEquals(_head_2, _get_2);
+      FeatureBasedDiagnostic _get_3 = diagnostics.get(0);
+      int _severity = _get_3.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      Location _get_4 = _locations_1.get(1);
+      EList<IU> _ius_1 = _get_4.getIus();
+      IU _head_3 = IterableExtensions.<IU>head(_ius_1);
+      FeatureBasedDiagnostic _get_5 = diagnostics.get(1);
+      EObject _sourceEObject_1 = _get_5.getSourceEObject();
+      FeatureBasedDiagnostic _get_6 = diagnostics.get(1);
+      EStructuralFeature _feature_1 = _get_6.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      Object _get_7 = ((List<?>) _eGet_1).get(0);
+      Assert.assertEquals(_head_3, _get_7);
+      FeatureBasedDiagnostic _get_8 = diagnostics.get(1);
+      int _severity_1 = _get_8.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoDuplicatedIU2() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"locationURI\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkNoDuplicatedIU(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 2, _size);
+      FeatureBasedDiagnostic _head = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_IU, _issueCode);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head_1.getIus();
+      IU _head_2 = IterableExtensions.<IU>head(_ius);
+      FeatureBasedDiagnostic _get = diagnostics.get(0);
+      EObject _sourceEObject = _get.getSourceEObject();
+      FeatureBasedDiagnostic _get_1 = diagnostics.get(0);
+      EStructuralFeature _feature = _get_1.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      Object _get_2 = ((List<?>) _eGet).get(0);
+      Assert.assertEquals(_head_2, _get_2);
+      FeatureBasedDiagnostic _get_3 = diagnostics.get(0);
+      int _severity = _get_3.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      Location _head_3 = IterableExtensions.<Location>head(_locations_1);
+      EList<IU> _ius_1 = _head_3.getIus();
+      IU _head_4 = IterableExtensions.<IU>head(_ius_1);
+      FeatureBasedDiagnostic _get_4 = diagnostics.get(1);
+      EObject _sourceEObject_1 = _get_4.getSourceEObject();
+      FeatureBasedDiagnostic _get_5 = diagnostics.get(1);
+      EStructuralFeature _feature_1 = _get_5.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      Object _get_6 = ((List<?>) _eGet_1).get(0);
+      Assert.assertEquals(_head_4, _get_6);
+      FeatureBasedDiagnostic _get_7 = diagnostics.get(1);
+      int _severity_1 = _get_7.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoDuplicatedIU3() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"locationURI\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"locationURI\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkNoDuplicatedIU(targetPlatform);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 2, _size);
+      FeatureBasedDiagnostic _head = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_IU, _issueCode);
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head_1.getIus();
+      IU _head_2 = IterableExtensions.<IU>head(_ius);
+      FeatureBasedDiagnostic _get = diagnostics.get(0);
+      EObject _sourceEObject = _get.getSourceEObject();
+      FeatureBasedDiagnostic _get_1 = diagnostics.get(0);
+      EStructuralFeature _feature = _get_1.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      Object _get_2 = ((List<?>) _eGet).get(0);
+      Assert.assertEquals(_head_2, _get_2);
+      FeatureBasedDiagnostic _get_3 = diagnostics.get(0);
+      int _severity = _get_3.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      Location _get_4 = _locations_1.get(1);
+      EList<IU> _ius_1 = _get_4.getIus();
+      IU _head_3 = IterableExtensions.<IU>head(_ius_1);
+      FeatureBasedDiagnostic _get_5 = diagnostics.get(1);
+      EObject _sourceEObject_1 = _get_5.getSourceEObject();
+      FeatureBasedDiagnostic _get_6 = diagnostics.get(1);
+      EStructuralFeature _feature_1 = _get_6.getFeature();
+      Object _eGet_1 = _sourceEObject_1.eGet(_feature_1);
+      Object _get_7 = ((List<?>) _eGet_1).get(0);
+      Assert.assertEquals(_head_3, _get_7);
+      FeatureBasedDiagnostic _get_8 = diagnostics.get(1);
+      int _severity_1 = _get_8.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoDuplicatedIU4() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"tp.a\"");
+      _builder.newLine();
+      _builder.append("include \"b.tpd\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"locationURI1\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _createURI = URI.createURI("tmp:/a.tpd");
+      final TargetPlatform tpa = this.parser.parse(_builder, _createURI, resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"tp.b\"");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("location \"locationURI2\" {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("org.iu1");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _createURI_1 = URI.createURI("tmp:/b.tpd");
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      Resource _eResource = tpa.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkNoDuplicatedIU(tpa);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(1, _size);
+      FeatureBasedDiagnostic _head = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_IU, _issueCode);
+      EList<Location> _locations = tpa.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head_1.getIus();
+      IU _head_2 = IterableExtensions.<IU>head(_ius);
+      FeatureBasedDiagnostic _get = diagnostics.get(0);
+      EObject _sourceEObject = _get.getSourceEObject();
+      FeatureBasedDiagnostic _get_1 = diagnostics.get(0);
+      EStructuralFeature _feature = _get_1.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      Object _get_2 = ((List<?>) _eGet).get(0);
+      Assert.assertEquals(_head_2, _get_2);
+      FeatureBasedDiagnostic _get_3 = diagnostics.get(0);
+      int _severity = _get_3.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoDuplicatedIU5() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"tp.a\"");
+      _builder.newLine();
+      _builder.append("include \"b.tpd\"");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"locationURI1\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _createURI = URI.createURI("tmp:/a.tpd");
+      final TargetPlatform tpa = this.parser.parse(_builder, _createURI, resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"tp.b\"");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("location \"locationURI1\" {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("org.iu1");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _createURI_1 = URI.createURI("tmp:/b.tpd");
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      Resource _eResource = tpa.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      _validator.checkNoDuplicatedIU(tpa);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<FeatureBasedDiagnostic> _filter = Iterables.<FeatureBasedDiagnostic>filter(_allDiagnostics, FeatureBasedDiagnostic.class);
+      final List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(_filter);
+      int _size = diagnostics.size();
+      Assert.assertEquals(1, _size);
+      FeatureBasedDiagnostic _head = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_IU, _issueCode);
+      EList<Location> _locations = tpa.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head_1.getIus();
+      IU _head_2 = IterableExtensions.<IU>head(_ius);
+      FeatureBasedDiagnostic _get = diagnostics.get(0);
+      EObject _sourceEObject = _get.getSourceEObject();
+      FeatureBasedDiagnostic _get_1 = diagnostics.get(0);
+      EStructuralFeature _feature = _get_1.getFeature();
+      Object _eGet = _sourceEObject.eGet(_feature);
+      Object _get_2 = ((List<?>) _eGet).get(0);
+      Assert.assertEquals(_head_2, _get_2);
+      FeatureBasedDiagnostic _get_3 = diagnostics.get(0);
+      int _severity = _get_3.getSeverity();
+      Assert.assertEquals(Diagnostic.WARNING, _severity);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
