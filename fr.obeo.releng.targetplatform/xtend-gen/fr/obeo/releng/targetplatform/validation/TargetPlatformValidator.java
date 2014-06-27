@@ -729,12 +729,20 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     IMetadataRepository _xblockexpression = null;
     {
       IProgressMonitor _xifexpression = null;
+      boolean _and = false;
       Map<Object, Object> _context = this.getContext();
-      Object _get = _context.get(IProgressMonitor.class);
-      boolean _notEquals = (!Objects.equal(_get, null));
-      if (_notEquals) {
+      boolean _notEquals = (!Objects.equal(_context, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
         Map<Object, Object> _context_1 = this.getContext();
-        Object _get_1 = _context_1.get(IProgressMonitor.class);
+        Object _get = _context_1.get(IProgressMonitor.class);
+        boolean _notEquals_1 = (!Objects.equal(_get, null));
+        _and = _notEquals_1;
+      }
+      if (_and) {
+        Map<Object, Object> _context_2 = this.getContext();
+        Object _get_1 = _context_2.get(IProgressMonitor.class);
         _xifexpression = ((IProgressMonitor) _get_1);
       } else {
         _xifexpression = new NullProgressMonitor();

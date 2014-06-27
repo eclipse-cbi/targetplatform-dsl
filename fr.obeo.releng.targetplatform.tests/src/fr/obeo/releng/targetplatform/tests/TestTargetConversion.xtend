@@ -986,7 +986,6 @@ class TestTargetConversion {
 		}), new NullProgressMonitor());
 		
 		assertEquals(Diagnostic.ERROR, d.severity);
-		assertEquals(1, d.children.size)
-		assertEquals(Diagnostic.ERROR, d.children.head.severity);
+		assertEquals(d.children.join(', '), 1, d.children.filter[severity >= Diagnostic.WARNING].size)
 	}
 }

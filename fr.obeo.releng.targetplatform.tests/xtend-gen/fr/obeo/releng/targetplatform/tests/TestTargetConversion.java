@@ -2074,12 +2074,17 @@ public class TestTargetConversion {
       int _severity = d.getSeverity();
       Assert.assertEquals(Diagnostic.ERROR, _severity);
       List<Diagnostic> _children = d.getChildren();
-      int _size = _children.size();
-      Assert.assertEquals(1, _size);
+      String _join = IterableExtensions.join(_children, ", ");
       List<Diagnostic> _children_1 = d.getChildren();
-      Diagnostic _head = IterableExtensions.<Diagnostic>head(_children_1);
-      int _severity_1 = _head.getSeverity();
-      Assert.assertEquals(Diagnostic.ERROR, _severity_1);
+      final Function1<Diagnostic, Boolean> _function = new Function1<Diagnostic, Boolean>() {
+        public Boolean apply(final Diagnostic it) {
+          int _severity = it.getSeverity();
+          return Boolean.valueOf((_severity >= Diagnostic.WARNING));
+        }
+      };
+      Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_children_1, _function);
+      int _size = IterableExtensions.size(_filter);
+      Assert.assertEquals(_join, 1, _size);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

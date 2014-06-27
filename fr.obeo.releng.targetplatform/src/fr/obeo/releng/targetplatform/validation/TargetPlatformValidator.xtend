@@ -305,11 +305,12 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
-		val monitor = if (context.get(typeof(IProgressMonitor)) != null) {
-			context.get(typeof(IProgressMonitor)) as IProgressMonitor
-		} else {
-			new NullProgressMonitor
-		}
+		val monitor = 
+			if (context != null && context.get(typeof(IProgressMonitor)) != null) {
+				context.get(typeof(IProgressMonitor)) as IProgressMonitor
+			} else {
+				new NullProgressMonitor
+			}
 		
 		if (!location.uri.nullOrEmpty) {
 			val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
