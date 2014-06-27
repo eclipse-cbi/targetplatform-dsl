@@ -34,7 +34,6 @@ import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 
@@ -68,15 +67,14 @@ public class ResolvedTargetPlatform {
 	}
 	
 	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) {
-		BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Diagnostic of resolution of '" + name + "'", null);
+		BasicDiagnostic ret = new BasicDiagnostic();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getLocations().size());
 		for (ResolvedLocation location : getLocations()) {
 			if(subMonitor.isCanceled()) {
+				ret.merge(BasicDiagnostic.CANCEL_INSTANCE);
 				break;
 			}
-			Diagnostic d = location.resolve(metadataRepositoryManager, subMonitor);
-			if (d.getSeverity() > Diagnostic.OK)
-				ret.add(d);
+			ret.merge(location.resolve(metadataRepositoryManager, subMonitor));
 			subMonitor.worked(1);
 		}
 		return ret;

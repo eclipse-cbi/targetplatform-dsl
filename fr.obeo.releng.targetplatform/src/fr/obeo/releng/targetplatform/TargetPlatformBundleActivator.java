@@ -11,7 +11,6 @@
 package fr.obeo.releng.targetplatform;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -24,7 +23,6 @@ import org.eclipse.equinox.p2.core.ProvisionException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -49,10 +47,6 @@ public class TargetPlatformBundleActivator extends Plugin {
 
 	private BundleContext context;
 	
-	private LinkedList<ServiceReference<?>> serviceReferencesToUnget;
-
-	private IProvisioningAgentProvider provisioningAgentProvider;
-	
 	private IProvisioningAgent agent;
 	
 	@Override
@@ -62,7 +56,6 @@ public class TargetPlatformBundleActivator extends Plugin {
 		INSTANCE = this;
 		this.context = context;
 		injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
-		serviceReferencesToUnget = Lists.newLinkedList();
 	}
 	
 	@Override
@@ -71,10 +64,6 @@ public class TargetPlatformBundleActivator extends Plugin {
 		agent = null;
 		if (oldAgent != null) {
 			oldAgent.stop();
-		}
-		
-		for (ServiceReference<?> serviceReference : serviceReferencesToUnget) {
-			context.ungetService(serviceReference);
 		}
 		
 		injectors.clear();
@@ -110,42 +99,24 @@ public class TargetPlatformBundleActivator extends Plugin {
 		}
 	}
 	
-	/**
-	 * @return the provisioningAgentProvider
-	 */
-	public IProvisioningAgentProvider getProvisioningAgentProvider() {
-		if (provisioningAgentProvider == null) {
-			provisioningAgentProvider = getService(IProvisioningAgentProvider.class);
-		}
-		return provisioningAgentProvider;
-	}
-	
 	public IProvisioningAgent getProvisioningAgent() {
 		if (agent == null) {
-			try {
-				agent = getProvisioningAgentProvider().createAgent(getStateLocation().toFile().toURI());
-			} catch (ProvisionException e) {
-				getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
-			} catch (IllegalStateException e) {
-				getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+			ServiceReference<?> serviceReference = context.getServiceReference(IProvisioningAgentProvider.class.getName());
+			if (serviceReference != null) {
+				IProvisioningAgentProvider agentProvider = (IProvisioningAgentProvider) context.getService(serviceReference);
+				if (agentProvider != null) {
+					try {
+						agent = agentProvider.createAgent(getStateLocation().toFile().toURI());
+					} catch (ProvisionException e) {
+						getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+					} catch (IllegalStateException e) {
+						getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+					}
+				}
+				context.ungetService(serviceReference);
 			}
 		}
 		return agent;
-	}
-	
-	public <T> T getService(Class<T> clazz) {
-		@SuppressWarnings("unchecked")
-		ServiceReference<T> serviceReference = (ServiceReference<T>) context.getServiceReference(clazz.getName());
-		
-		final T service;
-		if (serviceReference == null) {
-			service = null;
-		} else {
-			serviceReferencesToUnget.addFirst(serviceReference);
-			service = (T) context.getService(serviceReference);  
-		}
-		
-		return service;
 	}
 	
 	protected Module getRuntimeModule(String grammar) {

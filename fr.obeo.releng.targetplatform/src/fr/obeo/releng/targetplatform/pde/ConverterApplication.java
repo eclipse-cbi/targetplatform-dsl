@@ -43,7 +43,7 @@ public class ConverterApplication implements IApplication {
 		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
 		String path;
 		if (args.length <= 0) {
-			System.err.println("Must provide path to a a target form file");
+			System.out.println("Must provide path to a target form file");
 			return -256;
 		} else {
 			path = args[0];
@@ -57,13 +57,21 @@ public class ConverterApplication implements IApplication {
 		URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
 		
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
+		
 		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
-			printDiagnostic(diagnostic, "");
+			for (Diagnostic child : diagnostic.getChildren()) {
+				printDiagnostic(child, "");
+			}
 		}
 		
 		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+			System.out.println("Problems occurred during generation of target platform definition file.");
 			return -1;
+		} else if (diagnostic.getSeverity() == Diagnostic.CANCEL) {
+			System.out.println("Operation cancelled.");
+			return -2;
 		} else {
+			System.out.println("The target platform definition file has been successfully generated.");
 			return 0;
 		}
 	}
@@ -73,15 +81,13 @@ public class ConverterApplication implements IApplication {
 	}
 	
 	private static void printDiagnostic(Diagnostic diagnostic, String indent) {
-		System.out.print(indent);
-		final String severity = getSeverityString(diagnostic);
-		System.out.println(severity + " " + diagnostic.getMessage());
-		if (diagnostic.getException() != null) {
-			diagnostic.getException().printStackTrace();
-		}
-		for (Iterator<Diagnostic> i = diagnostic.getChildren().iterator(); i
-				.hasNext();) {
-			printDiagnostic((Diagnostic) i.next(), indent + "  ");
+		if (diagnostic.getSeverity() > Diagnostic.OK) {
+			System.out.print(indent);
+			final String severity = getSeverityString(diagnostic);
+			System.out.println(severity + " " + diagnostic.getMessage());
+			for (Iterator<Diagnostic> i = diagnostic.getChildren().iterator(); i.hasNext();) {
+				printDiagnostic((Diagnostic) i.next(), indent + "  ");
+			}
 		}
 	}
 
@@ -89,19 +95,19 @@ public class ConverterApplication implements IApplication {
 		final String severity;
 		switch (diagnostic.getSeverity()) {
 			case Diagnostic.OK:
-				severity = "OK     ";
+				severity = "[OK]     ";
 				break;
 			case Diagnostic.INFO:
-				severity = "INFO   ";
+				severity = "[INFO]   ";
 				break;
 			case Diagnostic.WARNING:
-				severity = "WARNING";
+				severity = "[WARNING]";
 				break;
 			case Diagnostic.ERROR:
-				severity = "ERROR  ";
+				severity = "[ERROR]  ";
 				break;
 			case Diagnostic.CANCEL:
-				severity = "CANCEL ";
+				severity = "[CANCEL] ";
 				break;
 			default:
 				severity = Integer.toHexString(diagnostic.getSeverity());

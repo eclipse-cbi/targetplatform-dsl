@@ -52,7 +52,7 @@ public class ResolvedLocation {
 	}
 	
 	public Diagnostic resolve(IMetadataRepositoryManager metadataRepositoryManager, IProgressMonitor monitor) {
-		Diagnostic diag = Diagnostic.OK_INSTANCE;
+		BasicDiagnostic diag = new BasicDiagnostic();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		
 		IMetadataRepository metadataRepository;
@@ -71,19 +71,12 @@ public class ResolvedLocation {
 					}
 					resolvedIUs.add(unit);
 				} else {
-					if (diag == Diagnostic.OK_INSTANCE) {
-						diag = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured during resolution of '" + uri.toString() + "'.", null);
-					}
-					String msg = "The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
-					((BasicDiagnostic) diag).add(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
+					String msg = "Error occured during resolution of '" + uri.toString() + "'. The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
+					diag.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
 				}
 			}
 		} catch (ProvisionException e) {
-			if (diag == Diagnostic.OK_INSTANCE) {
-				diag = BasicDiagnostic.toDiagnostic(e);
-			} else {
-				((BasicDiagnostic) diag).add(BasicDiagnostic.toDiagnostic(e));
-			}
+			diag.merge(BasicDiagnostic.toDiagnostic(e));
 		}
 		
 		return diag;

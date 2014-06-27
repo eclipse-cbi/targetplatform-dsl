@@ -23,6 +23,7 @@ import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.net.URI
 import java.util.List
 import java.util.Locale
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.ecore.EObject
@@ -304,10 +305,16 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
+		val monitor = if (context.get(typeof(IProgressMonitor)) != null) {
+			context.get(typeof(IProgressMonitor)) as IProgressMonitor
+		} else {
+			new NullProgressMonitor
+		}
+		
 		if (!location.uri.nullOrEmpty) {
 			val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 			try {
-				repositoryManager.loadRepository(new URI(location.uri), new NullProgressMonitor)
+				repositoryManager.loadRepository(new URI(location.uri), monitor)
 			} catch (Exception e) {
 				if (e.message.nullOrEmpty) {
 					error('''Error occured while loading p2 repository at '«location.uri»'.''', location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)					
@@ -321,15 +328,19 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check(value=CheckType.EXPENSIVE)
 	def checkIUIDAndRangeInRepository(IU iu) {
 		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
-		val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
-		val idResults = metadataRepository.query(QueryUtil.createIUQuery(iu.ID), new NullProgressMonitor).toUnmodifiableSet()
-		if (idResults.empty) {
-			error('''No installable unit with ID '«iu.ID»' can be found in '«iu.location.uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
-		} else if (!iu.version.nullOrEmpty && !"lazy".equals(iu.version)) {
-			val versionResult = metadataRepository.query(QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", iu.ID, new VersionRange(iu.version)), new NullProgressMonitor)
-			if (versionResult.empty) {
-				error('''No installable unit with ID '«iu.ID»' can be found with range constraint '«iu.version»'.''', iu, TargetPlatformPackage.Literals.IU__VERSION, CHECK__IU_IN_LOCATION)
+		try {
+			val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
+			val idResults = metadataRepository.query(QueryUtil.createIUQuery(iu.ID), new NullProgressMonitor).toUnmodifiableSet()
+			if (idResults.empty) {
+				error('''No installable unit with ID '«iu.ID»' can be found in '«iu.location.uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
+			} else if (!iu.version.nullOrEmpty && !"lazy".equals(iu.version)) {
+				val versionResult = metadataRepository.query(QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", iu.ID, new VersionRange(iu.version)), new NullProgressMonitor)
+				if (versionResult.empty) {
+					error('''No installable unit with ID '«iu.ID»' can be found with range constraint '«iu.version»'.''', iu, TargetPlatformPackage.Literals.IU__VERSION, CHECK__IU_IN_LOCATION)
+				}
 			}
+		 } catch (Exception e) {
+			// this should have been logged by CHECK__LOCATION_URI rule
 		}
 	}
 	

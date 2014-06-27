@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
@@ -725,112 +726,138 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check(value = CheckType.EXPENSIVE)
   public IMetadataRepository checkLocationURI(final Location location) {
-    IMetadataRepository _xifexpression = null;
-    String _uri = location.getUri();
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_uri);
-    boolean _not = (!_isNullOrEmpty);
-    if (_not) {
-      IMetadataRepository _xblockexpression = null;
-      {
-        Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-        final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
-        IMetadataRepository _xtrycatchfinallyexpression = null;
-        try {
-          String _uri_1 = location.getUri();
-          java.net.URI _uRI = new java.net.URI(_uri_1);
-          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-          _xtrycatchfinallyexpression = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
-        } catch (final Throwable _t) {
-          if (_t instanceof Exception) {
-            final Exception e = (Exception)_t;
-            String _message = e.getMessage();
-            boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(_message);
-            if (_isNullOrEmpty_1) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Error occured while loading p2 repository at \'");
-              String _uri_2 = location.getUri();
-              _builder.append(_uri_2, "");
-              _builder.append("\'.");
-              this.error(_builder.toString(), location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
-            } else {
-              String _message_1 = e.getMessage();
-              this.error(_message_1, location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
-            }
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        _xblockexpression = _xtrycatchfinallyexpression;
+    IMetadataRepository _xblockexpression = null;
+    {
+      IProgressMonitor _xifexpression = null;
+      Map<Object, Object> _context = this.getContext();
+      Object _get = _context.get(IProgressMonitor.class);
+      boolean _notEquals = (!Objects.equal(_get, null));
+      if (_notEquals) {
+        Map<Object, Object> _context_1 = this.getContext();
+        Object _get_1 = _context_1.get(IProgressMonitor.class);
+        _xifexpression = ((IProgressMonitor) _get_1);
+      } else {
+        _xifexpression = new NullProgressMonitor();
       }
-      _xifexpression = _xblockexpression;
+      final IProgressMonitor monitor = _xifexpression;
+      IMetadataRepository _xifexpression_1 = null;
+      String _uri = location.getUri();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_uri);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        IMetadataRepository _xblockexpression_1 = null;
+        {
+          Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+          final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+          IMetadataRepository _xtrycatchfinallyexpression = null;
+          try {
+            String _uri_1 = location.getUri();
+            java.net.URI _uRI = new java.net.URI(_uri_1);
+            _xtrycatchfinallyexpression = repositoryManager.loadRepository(_uRI, monitor);
+          } catch (final Throwable _t) {
+            if (_t instanceof Exception) {
+              final Exception e = (Exception)_t;
+              String _message = e.getMessage();
+              boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(_message);
+              if (_isNullOrEmpty_1) {
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("Error occured while loading p2 repository at \'");
+                String _uri_2 = location.getUri();
+                _builder.append(_uri_2, "");
+                _builder.append("\'.");
+                this.error(_builder.toString(), location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+              } else {
+                String _message_1 = e.getMessage();
+                this.error(_message_1, location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+              }
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+          _xblockexpression_1 = _xtrycatchfinallyexpression;
+        }
+        _xifexpression_1 = _xblockexpression_1;
+      }
+      _xblockexpression = _xifexpression_1;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   @Check(value = CheckType.EXPENSIVE)
-  public void checkIUIDAndRangeInRepository(final IU iu) {
-    try {
+  public Object checkIUIDAndRangeInRepository(final IU iu) {
+    Object _xblockexpression = null;
+    {
       Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
-      Location _location = iu.getLocation();
-      String _uri = _location.getUri();
-      java.net.URI _uRI = new java.net.URI(_uri);
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
-      String _iD = iu.getID();
-      IQuery<IInstallableUnit> _createIUQuery = QueryUtil.createIUQuery(_iD);
-      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-      IQueryResult<IInstallableUnit> _query = metadataRepository.query(_createIUQuery, _nullProgressMonitor_1);
-      final Set<IInstallableUnit> idResults = _query.toUnmodifiableSet();
-      boolean _isEmpty = idResults.isEmpty();
-      if (_isEmpty) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("No installable unit with ID \'");
-        String _iD_1 = iu.getID();
-        _builder.append(_iD_1, "");
-        _builder.append("\' can be found in \'");
-        Location _location_1 = iu.getLocation();
-        String _uri_1 = _location_1.getUri();
-        _builder.append(_uri_1, "");
-        _builder.append("\'.");
-        this.error(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
-      } else {
-        boolean _and = false;
-        String _version = iu.getVersion();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_version);
-        boolean _not = (!_isNullOrEmpty);
-        if (!_not) {
-          _and = false;
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        Location _location = iu.getLocation();
+        String _uri = _location.getUri();
+        java.net.URI _uRI = new java.net.URI(_uri);
+        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+        final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
+        String _iD = iu.getID();
+        IQuery<IInstallableUnit> _createIUQuery = QueryUtil.createIUQuery(_iD);
+        NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+        IQueryResult<IInstallableUnit> _query = metadataRepository.query(_createIUQuery, _nullProgressMonitor_1);
+        final Set<IInstallableUnit> idResults = _query.toUnmodifiableSet();
+        boolean _isEmpty = idResults.isEmpty();
+        if (_isEmpty) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("No installable unit with ID \'");
+          String _iD_1 = iu.getID();
+          _builder.append(_iD_1, "");
+          _builder.append("\' can be found in \'");
+          Location _location_1 = iu.getLocation();
+          String _uri_1 = _location_1.getUri();
+          _builder.append(_uri_1, "");
+          _builder.append("\'.");
+          this.error(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
         } else {
-          String _version_1 = iu.getVersion();
-          boolean _equals = "lazy".equals(_version_1);
-          boolean _not_1 = (!_equals);
-          _and = _not_1;
-        }
-        if (_and) {
-          String _iD_2 = iu.getID();
-          String _version_2 = iu.getVersion();
-          VersionRange _versionRange = new VersionRange(_version_2);
-          IQuery<IInstallableUnit> _createQuery = QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", _iD_2, _versionRange);
-          NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-          final IQueryResult<IInstallableUnit> versionResult = metadataRepository.query(_createQuery, _nullProgressMonitor_2);
-          boolean _isEmpty_1 = versionResult.isEmpty();
-          if (_isEmpty_1) {
-            StringConcatenation _builder_1 = new StringConcatenation();
-            _builder_1.append("No installable unit with ID \'");
-            String _iD_3 = iu.getID();
-            _builder_1.append(_iD_3, "");
-            _builder_1.append("\' can be found with range constraint \'");
-            String _version_3 = iu.getVersion();
-            _builder_1.append(_version_3, "");
-            _builder_1.append("\'.");
-            this.error(_builder_1.toString(), iu, TargetPlatformPackage.Literals.IU__VERSION, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
+          boolean _and = false;
+          String _version = iu.getVersion();
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_version);
+          boolean _not = (!_isNullOrEmpty);
+          if (!_not) {
+            _and = false;
+          } else {
+            String _version_1 = iu.getVersion();
+            boolean _equals = "lazy".equals(_version_1);
+            boolean _not_1 = (!_equals);
+            _and = _not_1;
+          }
+          if (_and) {
+            String _iD_2 = iu.getID();
+            String _version_2 = iu.getVersion();
+            VersionRange _versionRange = new VersionRange(_version_2);
+            IQuery<IInstallableUnit> _createQuery = QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", _iD_2, _versionRange);
+            NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+            final IQueryResult<IInstallableUnit> versionResult = metadataRepository.query(_createQuery, _nullProgressMonitor_2);
+            boolean _isEmpty_1 = versionResult.isEmpty();
+            if (_isEmpty_1) {
+              StringConcatenation _builder_1 = new StringConcatenation();
+              _builder_1.append("No installable unit with ID \'");
+              String _iD_3 = iu.getID();
+              _builder_1.append(_iD_3, "");
+              _builder_1.append("\' can be found with range constraint \'");
+              String _version_3 = iu.getVersion();
+              _builder_1.append(_version_3, "");
+              _builder_1.append("\'.");
+              this.error(_builder_1.toString(), iu, TargetPlatformPackage.Literals.IU__VERSION, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
+            }
           }
         }
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+          final Exception e = (Exception)_t;
+          _xtrycatchfinallyexpression = null;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _xblockexpression = _xtrycatchfinallyexpression;
     }
+    return _xblockexpression;
   }
   
   @Check

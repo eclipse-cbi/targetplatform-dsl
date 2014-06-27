@@ -15,15 +15,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -39,6 +41,7 @@ import com.google.inject.Provider;
 
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
+import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
@@ -54,106 +57,97 @@ public class Converter {
 	@Inject
 	private LocationIndexBuilder indexBuilder;
 	
+	@Inject
+	private IProvisioningAgent agent;
+	
 	public Diagnostic generateTargetDefinitionFile(URI uri, IProgressMonitor monitor) {
-		final Diagnostic ret;
+		BasicDiagnostic ret = new BasicDiagnostic();
 		if (!"targetplatform".equals(uri.fileExtension()) && !"tpd".equals(uri.fileExtension())) {
-			ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target platform file '" + uri + "' must ends with .targetplatform or .tpd extensions.", null);
+			ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target platform file '" + uri + "' must ends with '.tpd' or '.targetplatform' extensions.", null));
 		} else {
-			ret = doGenerateTargetDefinitionFile(uri, monitor);
+			ret.merge(doGenerateTargetDefinitionFile(uri, monitor));
 		}
 		return ret;
 	}
 
 	private Diagnostic doGenerateTargetDefinitionFile(URI uri, IProgressMonitor monitor) {
-		final BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, 0, "Problems occured while generating target platform definition file from '" + uri+"'", new Object[] {uri,});
-		
+		BasicDiagnostic ret = new BasicDiagnostic();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		Resource resource = loadTargetPlatform(uri);
-		subMonitor.worked(2);
 		
-		Diagnostic resourceDiagnostic = EcoreUtil.computeDiagnostic(resource, true);
-		if (resourceDiagnostic.getSeverity() >= Diagnostic.WARNING) {
+		try {
+			Resource resource = loadTargetPlatform(uri);
+			subMonitor.worked(2);
+			
+			Diagnostic resourceDiagnostic = EcoreUtil.computeDiagnostic(resource, true);
 			ret.merge(resourceDiagnostic);
-		} else {
-			TargetPlatform targetPlatform = null;
-			if (resource != null && !resource.getContents().isEmpty()) {
-				targetPlatform = (TargetPlatform) resource.getContents().get(0);
-			}
-			if (targetPlatform == null) {
-				ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", null));
-			} else if (subMonitor.isCanceled()) {
-				ret.merge(Diagnostic.CANCEL_INSTANCE);
-			} else {
-				Diagnostic validation = Diagnostician.INSTANCE.validate(targetPlatform);
-				subMonitor.worked(2);
-				if (validation.getSeverity() == Diagnostic.ERROR) {
-					ret.merge(validation);
+
+			if (resourceDiagnostic.getSeverity() < Diagnostic.ERROR) {
+				TargetPlatform targetPlatform = null;
+				if (resource != null && !resource.getContents().isEmpty()) {
+					targetPlatform = (TargetPlatform) resource.getContents().get(0);
+				}
+				if (targetPlatform == null) {
+					ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", null));
 				} else if (subMonitor.isCanceled()) {
 					ret.merge(Diagnostic.CANCEL_INSTANCE);
 				} else {
-					ret.merge(doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(96)));
+					SubMonitor diagnosticianMonitor = subMonitor.newChild(90).setWorkRemaining(targetPlatform.getLocations().size());
+					Diagnostic validation = new CustomDiagnostician(diagnosticianMonitor).validate(targetPlatform);
+					if (validation.getSeverity() >= Diagnostic.WARNING) {
+						ret.merge(validation);
+					} else if (subMonitor.isCanceled()) {
+						ret.merge(Diagnostic.CANCEL_INSTANCE);
+					} 
+					
+					if (validation.getSeverity() < Diagnostic.ERROR) {
+						ret.merge(doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(8)));
+					}
+					subMonitor.setWorkRemaining(0);
 				}
 			}
-		}
-		return ret;
-	}
-
-	private Diagnostic doGenerateTargetDefinitionFile(URI uri, TargetPlatform targetPlatform, IProgressMonitor monitor) {
-		Diagnostic ret = Diagnostic.OK_INSTANCE;
-		IProvisioningAgent agent = null;
-		try {
-			java.net.URI agentLocation = getAgentLocationURI(uri);
-			agent = TargetPlatformBundleActivator.getInstance().getProvisioningAgentProvider().createAgent(agentLocation);
-			ret = doGenerateTargetDefinitionFile(uri, targetPlatform, agent, monitor);
 		} catch (Exception e) {
-			if (e instanceof WrappedException) {
-				ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, ((WrappedException) e).exception().getMessage(), new Object[] {((WrappedException) e).exception(),});
-			} else {
-				ret = new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, e.getMessage(), new Object[] {e,});
-			}
-		} finally {
-			if (agent != null) {
-				agent.stop();
-			}
+			ret.merge(BasicDiagnostic.toDiagnostic(e));
 		}
-		
 		return ret;
 	}
 
-	private Diagnostic doGenerateTargetDefinitionFile(URI uri, TargetPlatform targetPlatform, IProvisioningAgent agent, IProgressMonitor monitor) throws URISyntaxException {
-		Diagnostic ret;
+	private Diagnostic doGenerateTargetDefinitionFile(URI uri, TargetPlatform targetPlatform, IProgressMonitor monitor)  {
+		final BasicDiagnostic ret = new BasicDiagnostic();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		
-		IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-		ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		subMonitor.worked(5);
-		
-		if (monitor.isCanceled()) {
-			return Diagnostic.CANCEL_INSTANCE;
-		} else {
-			ret = resolvedTargetPlatform.resolve(repositoryManager, subMonitor.newChild(90));
-			if (ret.getSeverity() == Diagnostic.ERROR) {
-				ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, ret.getChildren(), "The file '" + uri + "' can not be resolved.", null);
-			} else if (subMonitor.isCanceled()) {
-				ret = Diagnostic.CANCEL_INSTANCE;
+		try {
+			IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+			ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+			subMonitor.worked(5);
+			
+			if (subMonitor.isCanceled()) {
+				ret.merge(Diagnostic.CANCEL_INSTANCE);
 			} else {
-				ret = doGenerateTargetDefinitionFile(uri, resolvedTargetPlatform);
-				subMonitor.worked(5);
+				ret.merge(resolvedTargetPlatform.resolve(repositoryManager, subMonitor.newChild(90)));
+				if (subMonitor.isCanceled()) {
+					ret.merge(Diagnostic.CANCEL_INSTANCE);
+				} else if (ret.getSeverity() < Diagnostic.ERROR) {
+					ret.merge(doGenerateTargetDefinitionFile(uri, resolvedTargetPlatform));
+					subMonitor.worked(5);
+				}
 			}
+		} catch (Exception e) {
+			ret.merge(BasicDiagnostic.toDiagnostic(e));
 		}
+		
+		
 		return ret;
 	}
 
 	private Diagnostic doGenerateTargetDefinitionFile(URI uri, ResolvedTargetPlatform resolvedTargetPlatform) {
-		Diagnostic ret;
+		BasicDiagnostic ret = new BasicDiagnostic();
 		TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
 		String xml = generator.generate(resolvedTargetPlatform, (int)TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
 		final URI targetDefinitionLocation = uri.trimFileExtension().appendFileExtension("target");
 		try {
 			serialize(targetDefinitionLocation, xml);
-			ret = Diagnostic.OK_INSTANCE;
 		} catch (Exception e) {
-			ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, -1, e.getMessage(), new Object[] {e,});
+			ret.merge(BasicDiagnostic.toDiagnostic(e));
 		}
 		return ret;
 	}
@@ -171,14 +165,30 @@ public class Converter {
 		}
 	}
 
-	private java.net.URI getAgentLocationURI(URI fileLocation) throws URISyntaxException {
-		String fileName = fileLocation.lastSegment();
-		java.net.URI agentLocation = new java.net.URI(fileLocation.trimSegments(1).appendSegment("." + fileName).toString());
-		return agentLocation;
-	}
-
 	private Resource loadTargetPlatform(URI fileLocation) {
 		ResourceSet resourceSet = resourceSetProvider.get();
 		return resourceSet.getResource(fileLocation, true);
+	}
+	
+	private static class CustomDiagnostician extends Diagnostician {
+		
+		private final SubMonitor monitor;
+		
+		public CustomDiagnostician(SubMonitor monitor) {
+			this.monitor = monitor;
+		}
+		
+		@Override
+		public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+			if (monitor.isCanceled()) {
+				return true;
+			}
+			
+			if (eClass == TargetPlatformPackage.Literals.LOCATION) {
+				context.put(IProgressMonitor.class, monitor.newChild(1));
+			}
+			
+			return super.validate(eClass, eObject, diagnostics, context);
+		}
 	}
 }
