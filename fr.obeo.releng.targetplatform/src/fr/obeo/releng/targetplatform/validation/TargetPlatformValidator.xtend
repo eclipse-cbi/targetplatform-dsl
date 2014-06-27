@@ -408,7 +408,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				idRule.text
 			}
 		if (id.contains('^')) {
-			warning('''Escaping keywords with '^' in the ID of IUs is not required anymore.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__ESCAPE_CHAR_IU_ID)
+			warning('''Usage of escape character '^' in the ID of IUs is not required anymore and has been deprecated.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__ESCAPE_CHAR_IU_ID)
 		}
 	}
 	
@@ -419,7 +419,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val equalSignKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.equalsSignKeyword_1_0_2]
 		
 		if (semicolonKeywordRule != null) {
-			acceptWarning("Keywords ';version=' are not required anymore.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
+			acceptWarning("Usage of keywords ';version=' are not required anymore and has been deprecated.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
 	}
 }

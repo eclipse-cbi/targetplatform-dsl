@@ -1151,7 +1151,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _contains = id.contains("^");
     if (_contains) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Escaping keywords with \'^\' in the ID of IUs is not required anymore.");
+      _builder.append("Usage of escape character \'^\' in the ID of IUs is not required anymore and has been deprecated.");
       this.warning(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID);
     }
   }
@@ -1185,7 +1185,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _endOffset = equalSignKeywordRule.getEndOffset();
       int _offset_1 = semicolonKeywordRule.getOffset();
       int _minus = (_endOffset - _offset_1);
-      this.acceptWarning("Keywords \';version=\' are not required anymore.", iu, _offset, _minus, TargetPlatformValidator.CHECK__VERSION_KEYWORDS);
+      this.acceptWarning("Usage of keywords \';version=\' are not required anymore and has been deprecated.", iu, _offset, _minus, TargetPlatformValidator.CHECK__VERSION_KEYWORDS);
     }
   }
 }
