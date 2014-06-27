@@ -744,7 +744,18 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           if (_t instanceof Exception) {
             final Exception e = (Exception)_t;
             String _message = e.getMessage();
-            this.error(_message, location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+            boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(_message);
+            if (_isNullOrEmpty_1) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Error occured while loading p2 repository at \'");
+              String _uri_2 = location.getUri();
+              _builder.append(_uri_2, "");
+              _builder.append("\'.");
+              this.error(_builder.toString(), location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+            } else {
+              String _message_1 = e.getMessage();
+              this.error(_message_1, location, TargetPlatformPackage.Literals.LOCATION__URI, TargetPlatformValidator.CHECK__LOCATION_URI);
+            }
           } else {
             throw Exceptions.sneakyThrow(_t);
           }

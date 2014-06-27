@@ -72,7 +72,7 @@ public class Converter {
 		subMonitor.worked(2);
 		
 		Diagnostic resourceDiagnostic = EcoreUtil.computeDiagnostic(resource, true);
-		if (resourceDiagnostic.getSeverity() >= Diagnostic.ERROR) {
+		if (resourceDiagnostic.getSeverity() >= Diagnostic.WARNING) {
 			ret.merge(resourceDiagnostic);
 		} else {
 			TargetPlatform targetPlatform = null;

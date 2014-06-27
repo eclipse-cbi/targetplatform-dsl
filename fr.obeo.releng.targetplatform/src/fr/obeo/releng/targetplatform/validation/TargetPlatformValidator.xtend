@@ -309,7 +309,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			try {
 				repositoryManager.loadRepository(new URI(location.uri), new NullProgressMonitor)
 			} catch (Exception e) {
-				error(e.message, location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)
+				if (e.message.nullOrEmpty) {
+					error('''Error occured while loading p2 repository at '«location.uri»'.''', location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)					
+				} else {
+					error(e.message, location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)					
+				}
 			}
 		}
 	}

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package fr.obeo.releng.targetplatform.pde;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import org.eclipse.equinox.app.IApplicationContext;
 import com.google.inject.Injector;
 
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
+import fr.obeo.releng.targetplatform.TargetPlatformStandaloneSetup;
 
 
 /**
@@ -42,26 +44,28 @@ public class ConverterApplication implements IApplication {
 		String path;
 		if (args.length <= 0) {
 			System.err.println("Must provide path to a a target form file");
-			return null;
+			return -256;
 		} else {
 			path = args[0];
 		}
 		
+		TargetPlatformStandaloneSetup.doSetup();
 		Injector injector = TargetPlatformBundleActivator.getInstance().getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 
-		URI uri = org.eclipse.emf.common.util.URI.createURI(path);
-		if (uri.isRelative()) {
-			uri = org.eclipse.emf.common.util.URI.createFileURI(path);
-		}
+		URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
 		
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
 		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
 			printDiagnostic(diagnostic, "");
 		}
-			
-		return diagnostic.getCode();
+		
+		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 
 	private static IProgressMonitor createPrintingMonitor() {
@@ -70,7 +74,8 @@ public class ConverterApplication implements IApplication {
 	
 	private static void printDiagnostic(Diagnostic diagnostic, String indent) {
 		System.out.print(indent);
-		System.out.println(diagnostic.getMessage());
+		final String severity = getSeverityString(diagnostic);
+		System.out.println(severity + " " + diagnostic.getMessage());
 		if (diagnostic.getException() != null) {
 			diagnostic.getException().printStackTrace();
 		}
@@ -78,6 +83,60 @@ public class ConverterApplication implements IApplication {
 				.hasNext();) {
 			printDiagnostic((Diagnostic) i.next(), indent + "  ");
 		}
+	}
+
+	private static String getSeverityString(Diagnostic diagnostic) {
+		final String severity;
+		switch (diagnostic.getSeverity()) {
+			case Diagnostic.OK:
+				severity = "OK     ";
+				break;
+			case Diagnostic.INFO:
+				severity = "INFO   ";
+				break;
+			case Diagnostic.WARNING:
+				severity = "WARNING";
+				break;
+			case Diagnostic.ERROR:
+				severity = "ERROR  ";
+				break;
+			case Diagnostic.CANCEL:
+				severity = "CANCEL ";
+				break;
+			default:
+				severity = Integer.toHexString(diagnostic.getSeverity());
+				break;
+		}
+		return severity;
+	}
+	
+	private static URI normalize(URI uri) {
+		String fragment = uri.fragment();
+		String query = uri.query();
+		URI trimmedURI = uri.trimFragment().trimQuery();
+		URI result = trimmedURI;
+		String scheme = result.scheme();
+		if (scheme == null) {
+			if (result.hasAbsolutePath()) {
+				result = URI.createURI("file:" + result);
+			} else {
+				result = URI.createFileURI(new File(result.toString())
+						.getAbsolutePath());
+			}
+		}
+
+		if (result == trimmedURI) {
+			return uri;
+		}
+
+		if (query != null) {
+			result = result.appendQuery(query);
+		}
+		if (fragment != null) {
+			result = result.appendFragment(fragment);
+		}
+
+		return result;
 	}
 	
 	/**
