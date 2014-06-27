@@ -4,36 +4,39 @@
 package fr.obeo.releng.targetplatform.validation
 
 import com.google.common.base.Strings
+import com.google.common.collect.HashMultiset
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
+import com.google.common.collect.Multiset
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformPackage
+import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.net.URI
 import java.util.List
+import java.util.Locale
 import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.metadata.VersionRange
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
+import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
-import org.eclipse.core.runtime.Platform
-import org.eclipse.jdt.launching.JavaRuntime
-import java.util.Locale
-import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
 
 /**
  * Custom validation rules. 
@@ -69,33 +72,63 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
 	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
 	public static val CHECK__ENVIRONMENT_UNICITY = "CHECK__ENVIRONMENT_UNICITY"
-	public static val CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION"
+	public static val CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS = "CHECK__ENVIRONMENT_COHESION"
 	
 	public static val CHECK__ESCAPE_CHAR_IU_ID = " CHECK__ESCAPE_CHAR_IU_ID"
 	public static val CHECK__VERSION_KEYWORDS = "CHECK__VERSION_KEYWORDS"
 	
+	public static val CHECK__OPTIONS_UNICITY = "CHECK__OPTIONS_UNICITY"
+	public static val CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS"
+	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
-		doCheckAllEnvAndRequiredAreSelfExluding(targetPlatform, targetPlatform.options, TargetPlatformPackage.Literals.TARGET_PLATFORM__OPTIONS);
+		val allOptions = targetPlatform.contents.filter(typeof(Options)).map[options].flatten.toSet
+		if (allOptions.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && allOptions.contains(Option.INCLUDE_REQUIRED)) {
+			targetPlatform.contents.filter(typeof(Options)).forEach [
+				doReportAllEnvAndRequiredAreSelfExluding(it, options, TargetPlatformPackage.Literals.OPTIONS__OPTIONS)
+			]
+		}
 	}
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
-		doCheckAllEnvAndRequiredAreSelfExluding(location, location.options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
+		val options = location.options
+		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
+			doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
+		}
 	}
 	
-	private def doCheckAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
-		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
+	private def doReportAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
+		if (options.contains(Option.INCLUDE_REQUIRED)) {
 			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
 					optionOwner, 
 					feature, 
 					options.indexOf(Option.INCLUDE_REQUIRED), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
-			
+		}
+		
+		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS)) {
 			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
 					optionOwner, 
 					feature, 
 					options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
 		}
+	}
+	
+	@Check
+	def checkNoDuplicateOptions(TargetPlatform targetPlatform) {
+		val allOptions = HashMultiset.create(targetPlatform.contents.filter(typeof(Options)).map[options].flatten)
+		allOptions.entrySet.forEach[e|
+			if (e.count > 1) {
+				targetPlatform.contents.filter(typeof(Options)).forEach[o|
+					for (var i = 0; i < o.options.size; i++) {
+						val it = o.options.get(i)
+						if (e.element == it) {
+							error('''Cannot define multiple option '«it»'.''', o, TargetPlatformPackage.Literals.OPTIONS__OPTIONS, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_OPTIONS_OPTIONS)
+						}
+					}
+				]
+			}
+		]
 	}
 	
 	@Check // TESTED
@@ -336,7 +369,17 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	}
 	
 	@Check
-	def checkEnvironmentCohesion(TargetPlatform tp) {
+	def checkOneOptions(TargetPlatform tp) {
+		val envList = tp.contents.filter(typeof(Options)).toList
+		if (envList.size > 1) {
+			envList.tail.forEach[
+				warning('''Options definition should not be splitted accros the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__OPTIONS_UNICITY)
+			]
+		}
+	}
+	
+	@Check
+	def checkNoDuplicateEnvironmentOptions(TargetPlatform tp) {
 		val tpEnv = tp.environment
 	
 		val knownOSUpperValues = Platform.knownOSValues.map[toUpperCase]
@@ -347,48 +390,31 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		
 		val envList = tp.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].toList
 		
-		val allOS = envList.filter[!toUpperCase.equals(tpEnv.windowingSystem?.toUpperCase)].filter[knownOSUpperValues.contains(it.toUpperCase)].toList
-		val allWS = envList.filter[!toUpperCase.equals(tpEnv.operatingSystem?.toUpperCase)].filter[knownWSUpperValues.contains(it.toUpperCase)].toList
-		val allArch = envList.filter[knownArchUpperValues.contains(it.toUpperCase)].toList
-		val allLocale = envList.filter[knownLocale.contains(it.toUpperCase)].toList
-		val allEE = envList.filter[knownEE.contains(it.toUpperCase)].toList
+		val allOS = HashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.windowingSystem?.toUpperCase)].filter[knownOSUpperValues.contains(it.toUpperCase)])
+		val allWS = HashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.operatingSystem?.toUpperCase)].filter[knownWSUpperValues.contains(it.toUpperCase)])
+		val allArch = HashMultiset.create(envList.filter[knownArchUpperValues.contains(it.toUpperCase)])
+		val allLocale = HashMultiset.create(envList.filter[knownLocale.contains(it.toUpperCase)])
+		val allEE = HashMultiset.create(envList.filter[knownEE.contains(it.toUpperCase)])
 		
-		if (allOS.size > 1) {
-			allOS.forEach[e|
-				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
-					error('''Cannot define multiple operating system.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
-				]
-			]
-		}
+		reportDuplicatedEnvironmentOptions(tp, allOS, 'Cannot define multiple operating system.')
+		reportDuplicatedEnvironmentOptions(tp, allWS, 'Cannot define multiple windowing system.')
+		reportDuplicatedEnvironmentOptions(tp, allArch, 'Cannot define multiple processor architecture.')
+		reportDuplicatedEnvironmentOptions(tp, allLocale, 'Cannot define multiple localization.')
+		reportDuplicatedEnvironmentOptions(tp, allEE, 'Cannot define multiple execution environment.')
 		
-		if (allWS.size > 1) {
-			allWS.forEach[e|
-				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
-					error('''Cannot define multiple windowing system.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
-				]
-			]
-		}
-		
-		if (allArch.size > 1) {
-			allArch.forEach[e|
-				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
-					error('''Cannot define multiple architecture.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
-				]
-			]
-		}
-		
-		if (allLocale.size > 1) {
-			allLocale.forEach[e|
-				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
-					error('''Cannot define multiple locale.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
-				]
-			]
-		}
-		
-		if (allEE.size > 1) {
-			allEE.forEach[e|
-				tp.contents.filter(typeof(Environment)).filter[env.contains(e)].forEach[env|
-					error('''Cannot define multiple execution environment.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
+	}
+	
+	private def reportDuplicatedEnvironmentOptions(TargetPlatform targetPlatform, Multiset<String> valuesInFile, String msg) {
+		// if there are many values or one value repeated multiple times
+		if (valuesInFile.size > 1 || valuesInFile.entrySet.exists[count > 1]) {
+			valuesInFile.elementSet.forEach[e|
+				targetPlatform.contents.filter(typeof(Environment)).forEach[env|
+					for(var i = 0; i < env.env.size; i++) {
+						val it = env.env.get(i)
+						if (e.equals(it)) {
+							error(msg, env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS)
+						}
+					}
 				]
 			]
 		}

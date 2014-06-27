@@ -27,6 +27,8 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.validation.RangeBasedDiagnostic
+import fr.obeo.releng.targetplatform.Options
+import fr.obeo.releng.targetplatform.Option
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -85,12 +87,62 @@ class TestValidation {
 		assertTrue(targetPlatform.eResource.errors.empty)
 		tester.validator.checkAllEnvAndRequiredAreSelfExluding(targetPlatform)
 		for (diag: tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic))) {
-			assertTrue(diag.sourceEObject instanceof TargetPlatform)
-			assertEquals("a target platform", (diag.sourceEObject as TargetPlatform).name)
+			assertTrue(diag.sourceEObject instanceof Options)
 			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, 
 				diag.issueCode
 			)
 		}
+	}
+	
+	@Test
+	def checkAllEnvAndRequiredAreSelfExluding3() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with requirements allEnvironments
+			with source 
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkAllEnvAndRequiredAreSelfExluding(targetPlatform)
+		val diag = tester.diagnose.allDiagnostics
+		assertEquals(2, diag.size)
+		diag.filter(typeof(AbstractValidationDiagnostic)).forEach[
+			assertTrue(sourceEObject instanceof Options)
+			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, issueCode)
+		]
+	}
+	
+	@Test
+	def checkNoDuplicateOptionsOptions1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with source configurePhase source
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicateOptions(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals(Option.INCLUDE_SOURCE, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(diagnostics.get(0).index))
+		assertEquals(Option.INCLUDE_SOURCE, (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(diagnostics.get(1).index))
+	}
+	
+	@Test
+	def checkNoDuplicateOptionsOptions2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with source configurePhase
+			with configurePhase
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicateOptions(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals(targetPlatform.contents.get(0), diagnostics.get(0).sourceEObject)
+		assertEquals(Option.INCLUDE_CONFIGURE_PHASE, (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(diagnostics.get(0).index))
+		assertEquals(targetPlatform.contents.get(1), diagnostics.get(1).sourceEObject)
+		assertEquals(Option.INCLUDE_CONFIGURE_PHASE, (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(diagnostics.get(1).index))
 	}
 	
 	@Test
@@ -1402,6 +1454,23 @@ class TestValidation {
 	}
 	
 	@Test
+	def checkUniqueEnvironment0() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment macosx COCOA x86_64
+			
+			location "location" {
+				
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneEnvironment(targetPlatform)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
 	def checkUniqueEnvironment1() {
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val targetPlatform = parser.parse('''
@@ -1455,6 +1524,76 @@ class TestValidation {
 	}
 	
 	@Test
+	def checkUniqueOptions0() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with requirements
+			
+			location "location" {
+				
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneOptions(targetPlatform)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(0, diagnotics.size)
+	}
+	
+	@Test
+	def checkUniqueOptions1() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with requirements
+			
+			with source
+			
+			location "location" {
+				
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneOptions(targetPlatform)
+		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_UNICITY, issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		]
+	}
+	
+	@Test
+	def checkUniqueOptions2() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			with requirements
+			
+			with source
+			
+			location "location" {
+				
+			}
+			
+			with configurePhase
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkOneOptions(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(2, diagnostics.size)
+		var it = diagnostics.head
+			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_UNICITY, it.issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+		it = diagnostics.get(1)
+			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_UNICITY, it.issueCode)
+			assertEquals(Diagnostic.WARNING, it.severity)
+			assertEquals(targetPlatform.contents.get(3), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
+	}
+	
+	@Test
 	def checkEnvironmentCohesion1() {
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val targetPlatform = parser.parse('''
@@ -1462,15 +1601,15 @@ class TestValidation {
 			environment linux gtk cocoa
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
 		var it = diagnostics.head
-			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS, it.issueCode)
 			assertEquals(Diagnostic.ERROR, it.severity)
 			assertEquals(targetPlatform.environment.env.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
 		var it = diagnostics.get(1)
-			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS, it.issueCode)
 			assertEquals(Diagnostic.ERROR, it.severity)
 			assertEquals(targetPlatform.environment.env.get(2), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
 	}
@@ -1485,15 +1624,15 @@ class TestValidation {
 			environment cocoa
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(2, diagnostics.size)
 		var it = diagnostics.head
-			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS, it.issueCode)
 			assertEquals(Diagnostic.ERROR, it.severity)
 			assertEquals((targetPlatform.contents.get(0) as Environment).env.get(1), (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
 		var it = diagnostics.get(1)
-			assertEquals(TargetPlatformValidator::CHECK__ENVIRONMENT_COHESION, it.issueCode)
+			assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS, it.issueCode)
 			assertEquals(Diagnostic.ERROR, it.severity)
 			assertEquals((targetPlatform.contents.get(1) as Environment).env.head, (it.sourceEObject.eGet(it.feature) as List<?>).get(it.index))
 	}
@@ -1506,7 +1645,7 @@ class TestValidation {
 			environment win32 cocoa
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(0, diagnostics.size)
 	}
@@ -1519,7 +1658,7 @@ class TestValidation {
 			environment win32 linux
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(0, diagnostics.size)
 	}
@@ -1532,7 +1671,7 @@ class TestValidation {
 			environment win32 win32
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(0, diagnostics.size)
 	}
@@ -1546,9 +1685,24 @@ class TestValidation {
 			environment win32
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		tester.validator.checkEnvironmentCohesion(targetPlatform)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
+	}
+	
+	@Test
+	def checkEnvironmentCohesion7() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			environment cocoa linux cocoa 
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoDuplicateEnvironmentOptions(targetPlatform)
+		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 2, diagnostics.size)
+		assertEquals('cocoa', (diagnostics.get(0).sourceEObject.eGet(diagnostics.get(0).feature) as List<?>).get(diagnostics.get(0).index))
+		assertEquals('cocoa', (diagnostics.get(1).sourceEObject.eGet(diagnostics.get(1).feature) as List<?>).get(diagnostics.get(1).index))
 	}
 	
 	@Test
