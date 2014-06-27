@@ -30,6 +30,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
+import org.eclipse.xtext.validation.RangeBasedDiagnostic;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -3620,6 +3621,80 @@ public class TestValidation {
       FeatureBasedDiagnostic _head_3 = IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics);
       String _issueCode = _head_3.getIssueCode();
       Assert.assertEquals(TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID, _issueCode);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoVersionKeywords() {
+    try {
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"a target platform\"");
+      _builder.newLine();
+      _builder.append("location \"locationURI\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu2 [2,3)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.iu3; version  =   [10,25)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final TargetPlatform targetPlatform = this.parser.parse(_builder);
+      Resource _eResource = targetPlatform.eResource();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      TargetPlatformValidator _validator = tester.validator();
+      EList<Location> _locations = targetPlatform.getLocations();
+      Location _head = IterableExtensions.<Location>head(_locations);
+      EList<IU> _ius = _head.getIus();
+      IU _get = _ius.get(0);
+      _validator.checkVersionKeywords(_get);
+      AssertableDiagnostics _diagnose = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics = _diagnose.getAllDiagnostics();
+      Iterable<RangeBasedDiagnostic> _filter = Iterables.<RangeBasedDiagnostic>filter(_allDiagnostics, RangeBasedDiagnostic.class);
+      List<RangeBasedDiagnostic> diagnostics = IterableExtensions.<RangeBasedDiagnostic>toList(_filter);
+      String _join = IterableExtensions.join(diagnostics, ", ");
+      int _size = diagnostics.size();
+      Assert.assertEquals(_join, 0, _size);
+      TargetPlatformValidator _validator_1 = tester.validator();
+      EList<Location> _locations_1 = targetPlatform.getLocations();
+      Location _head_1 = IterableExtensions.<Location>head(_locations_1);
+      EList<IU> _ius_1 = _head_1.getIus();
+      IU _get_1 = _ius_1.get(1);
+      _validator_1.checkVersionKeywords(_get_1);
+      AssertableDiagnostics _diagnose_1 = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics_1 = _diagnose_1.getAllDiagnostics();
+      Iterable<RangeBasedDiagnostic> _filter_1 = Iterables.<RangeBasedDiagnostic>filter(_allDiagnostics_1, RangeBasedDiagnostic.class);
+      List<RangeBasedDiagnostic> _list = IterableExtensions.<RangeBasedDiagnostic>toList(_filter_1);
+      diagnostics = _list;
+      String _join_1 = IterableExtensions.join(diagnostics, ", ");
+      int _size_1 = diagnostics.size();
+      Assert.assertEquals(_join_1, 0, _size_1);
+      TargetPlatformValidator _validator_2 = tester.validator();
+      EList<Location> _locations_2 = targetPlatform.getLocations();
+      Location _head_2 = IterableExtensions.<Location>head(_locations_2);
+      EList<IU> _ius_2 = _head_2.getIus();
+      IU _get_2 = _ius_2.get(2);
+      _validator_2.checkVersionKeywords(_get_2);
+      AssertableDiagnostics _diagnose_2 = tester.diagnose();
+      Iterable<Diagnostic> _allDiagnostics_2 = _diagnose_2.getAllDiagnostics();
+      Iterable<RangeBasedDiagnostic> _filter_2 = Iterables.<RangeBasedDiagnostic>filter(_allDiagnostics_2, RangeBasedDiagnostic.class);
+      List<RangeBasedDiagnostic> _list_1 = IterableExtensions.<RangeBasedDiagnostic>toList(_filter_2);
+      diagnostics = _list_1;
+      String _join_2 = IterableExtensions.join(diagnostics, ", ");
+      int _size_2 = diagnostics.size();
+      Assert.assertEquals(_join_2, 1, _size_2);
+      RangeBasedDiagnostic _head_3 = IterableExtensions.<RangeBasedDiagnostic>head(diagnostics);
+      String _issueCode = _head_3.getIssueCode();
+      Assert.assertEquals(TargetPlatformValidator.CHECK__VERSION_KEYWORDS, _issueCode);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -570,20 +570,20 @@ ruleIU returns [EObject current=null]
 )
 )((	otherlv_1=';' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0());
+    	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0());
     }
-)?(	otherlv_2='version' 
+	otherlv_2='version' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_1());
+    	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_0_1());
     }
-)?(	otherlv_3='=' 
+	otherlv_3='=' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_2());
+    	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2());
     }
 )?((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_3_0_0()); 
+	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0()); 
 	    }
 		lv_version_4_0=ruleVersionRange		{
 	        if ($current==null) {
@@ -603,7 +603,7 @@ ruleIU returns [EObject current=null]
 (
 		lv_version_5_0=RULE_STRING
 		{
-			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_3_1_0()); 
+			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_1_0()); 
 		}
 		{
 	        if ($current==null) {

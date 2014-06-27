@@ -38,7 +38,7 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getTargetContentAccess().getAlternatives(), "rule__TargetContent__Alternatives");
-					put(grammarAccess.getIUAccess().getAlternatives_1_3(), "rule__IU__Alternatives_1_3");
+					put(grammarAccess.getIUAccess().getAlternatives_1_1(), "rule__IU__Alternatives_1_1");
 					put(grammarAccess.getVersionAccess().getAlternatives_1_2_2_1(), "rule__Version__Alternatives_1_2_2_1");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives(), "rule__VersionRange__Alternatives");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives_0_0(), "rule__VersionRange__Alternatives_0_0");
@@ -56,6 +56,7 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLocationAccess().getGroup_2_1_2(), "rule__Location__Group_2_1_2__0");
 					put(grammarAccess.getIUAccess().getGroup(), "rule__IU__Group__0");
 					put(grammarAccess.getIUAccess().getGroup_1(), "rule__IU__Group_1__0");
+					put(grammarAccess.getIUAccess().getGroup_1_0(), "rule__IU__Group_1_0__0");
 					put(grammarAccess.getVersionAccess().getGroup(), "rule__Version__Group__0");
 					put(grammarAccess.getVersionAccess().getGroup_1(), "rule__Version__Group_1__0");
 					put(grammarAccess.getVersionAccess().getGroup_1_2(), "rule__Version__Group_1_2__0");
@@ -74,8 +75,8 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLocationAccess().getOptionsAssignment_2_1_2_1(), "rule__Location__OptionsAssignment_2_1_2_1");
 					put(grammarAccess.getLocationAccess().getIusAssignment_2_2(), "rule__Location__IusAssignment_2_2");
 					put(grammarAccess.getIUAccess().getIDAssignment_0(), "rule__IU__IDAssignment_0");
-					put(grammarAccess.getIUAccess().getVersionAssignment_1_3_0(), "rule__IU__VersionAssignment_1_3_0");
-					put(grammarAccess.getIUAccess().getVersionAssignment_1_3_1(), "rule__IU__VersionAssignment_1_3_1");
+					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_0(), "rule__IU__VersionAssignment_1_1_0");
+					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_1(), "rule__IU__VersionAssignment_1_1_1");
 					put(grammarAccess.getLocationAccess().getUnorderedGroup_1(), "rule__Location__UnorderedGroup_1");
 				}
 			};

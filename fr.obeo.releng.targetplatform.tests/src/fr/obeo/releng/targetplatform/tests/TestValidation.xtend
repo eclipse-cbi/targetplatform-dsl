@@ -26,6 +26,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.validation.RangeBasedDiagnostic
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -1574,5 +1575,31 @@ class TestValidation {
 		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
 		assertEquals(TargetPlatformValidator::CHECK__ESCAPE_CHAR_IU_ID, diagnostics.head.issueCode)
+	}
+	
+	@Test
+	def testNoVersionKeywords() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "locationURI" {
+				org.iu1
+				org.iu2 [2,3)
+				org.iu3; version  =   [10,25)
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkVersionKeywords(targetPlatform.locations.head.ius.get(0))
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(RangeBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
+		
+		tester.validator.checkVersionKeywords(targetPlatform.locations.head.ius.get(1))
+		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(RangeBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
+		
+		tester.validator.checkVersionKeywords(targetPlatform.locations.head.ius.get(2))
+		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(RangeBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__VERSION_KEYWORDS, diagnostics.head.issueCode)
 	}
 }

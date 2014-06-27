@@ -54,6 +54,7 @@ import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -119,6 +120,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION";
   
   public final static String CHECK__ESCAPE_CHAR_IU_ID = " CHECK__ESCAPE_CHAR_IU_ID";
+  
+  public final static String CHECK__VERSION_KEYWORDS = "CHECK__VERSION_KEYWORDS";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -1150,6 +1153,39 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Escaping keywords with \'^\' in the ID of IUs is not required anymore.");
       this.warning(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID);
+    }
+  }
+  
+  @Check
+  public void checkVersionKeywords(final IU iu) {
+    final ICompositeNode node = NodeModelUtils.getNode(iu);
+    BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
+    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
+      public Boolean apply(final INode it) {
+        EObject _grammarElement = it.getGrammarElement();
+        TargetPlatformGrammarAccess.IUElements _iUAccess = TargetPlatformValidator.this.grammarAccess.getIUAccess();
+        Keyword _semicolonKeyword_1_0_0 = _iUAccess.getSemicolonKeyword_1_0_0();
+        return Boolean.valueOf(Objects.equal(_grammarElement, _semicolonKeyword_1_0_0));
+      }
+    };
+    final INode semicolonKeywordRule = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
+    BidiTreeIterable<INode> _asTreeIterable_1 = node.getAsTreeIterable();
+    final Function1<INode, Boolean> _function_1 = new Function1<INode, Boolean>() {
+      public Boolean apply(final INode it) {
+        EObject _grammarElement = it.getGrammarElement();
+        TargetPlatformGrammarAccess.IUElements _iUAccess = TargetPlatformValidator.this.grammarAccess.getIUAccess();
+        Keyword _equalsSignKeyword_1_0_2 = _iUAccess.getEqualsSignKeyword_1_0_2();
+        return Boolean.valueOf(Objects.equal(_grammarElement, _equalsSignKeyword_1_0_2));
+      }
+    };
+    final INode equalSignKeywordRule = IterableExtensions.<INode>findFirst(_asTreeIterable_1, _function_1);
+    boolean _notEquals = (!Objects.equal(semicolonKeywordRule, null));
+    if (_notEquals) {
+      int _offset = semicolonKeywordRule.getOffset();
+      int _endOffset = equalSignKeywordRule.getEndOffset();
+      int _offset_1 = semicolonKeywordRule.getOffset();
+      int _minus = (_endOffset - _offset_1);
+      this.acceptWarning("Keywords \';version=\' are not required anymore.", iu, _offset, _minus, TargetPlatformValidator.CHECK__VERSION_KEYWORDS);
     }
   }
 }

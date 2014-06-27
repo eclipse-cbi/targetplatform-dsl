@@ -280,20 +280,21 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIDAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cIDIDTerminalRuleCall_0_0 = (RuleCall)cIDAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cSemicolonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Keyword cVersionKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Alternatives cAlternatives_1_3 = (Alternatives)cGroup_1.eContents().get(3);
-		private final Assignment cVersionAssignment_1_3_0 = (Assignment)cAlternatives_1_3.eContents().get(0);
-		private final RuleCall cVersionVersionRangeParserRuleCall_1_3_0_0 = (RuleCall)cVersionAssignment_1_3_0.eContents().get(0);
-		private final Assignment cVersionAssignment_1_3_1 = (Assignment)cAlternatives_1_3.eContents().get(1);
-		private final RuleCall cVersionSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cVersionAssignment_1_3_1.eContents().get(0);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Keyword cVersionKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_1_0_2 = (Keyword)cGroup_1_0.eContents().get(2);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Assignment cVersionAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
+		private final RuleCall cVersionVersionRangeParserRuleCall_1_1_0_0 = (RuleCall)cVersionAssignment_1_1_0.eContents().get(0);
+		private final Assignment cVersionAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cVersionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cVersionAssignment_1_1_1.eContents().get(0);
 		
 		//IU:
-		//	ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?;
+		//	ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?;
 		public ParserRule getRule() { return rule; }
 
-		//ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?
+		//ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?
 		public Group getGroup() { return cGroup; }
 
 		//ID=ID
@@ -302,32 +303,35 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDIDTerminalRuleCall_0_0() { return cIDIDTerminalRuleCall_0_0; }
 
-		//(";"? "version"? "="? (version=VersionRange | version=STRING))?
+		//((";" "version" "=")? (version=VersionRange | version=STRING))?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//";"?
-		public Keyword getSemicolonKeyword_1_0() { return cSemicolonKeyword_1_0; }
+		//(";" "version" "=")?
+		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"version"?
-		public Keyword getVersionKeyword_1_1() { return cVersionKeyword_1_1; }
+		//";"
+		public Keyword getSemicolonKeyword_1_0_0() { return cSemicolonKeyword_1_0_0; }
 
-		//"="?
-		public Keyword getEqualsSignKeyword_1_2() { return cEqualsSignKeyword_1_2; }
+		//"version"
+		public Keyword getVersionKeyword_1_0_1() { return cVersionKeyword_1_0_1; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1_0_2() { return cEqualsSignKeyword_1_0_2; }
 
 		//version=VersionRange | version=STRING
-		public Alternatives getAlternatives_1_3() { return cAlternatives_1_3; }
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//version=VersionRange
-		public Assignment getVersionAssignment_1_3_0() { return cVersionAssignment_1_3_0; }
+		public Assignment getVersionAssignment_1_1_0() { return cVersionAssignment_1_1_0; }
 
 		//VersionRange
-		public RuleCall getVersionVersionRangeParserRuleCall_1_3_0_0() { return cVersionVersionRangeParserRuleCall_1_3_0_0; }
+		public RuleCall getVersionVersionRangeParserRuleCall_1_1_0_0() { return cVersionVersionRangeParserRuleCall_1_1_0_0; }
 
 		//version=STRING
-		public Assignment getVersionAssignment_1_3_1() { return cVersionAssignment_1_3_1; }
+		public Assignment getVersionAssignment_1_1_1() { return cVersionAssignment_1_1_1; }
 
 		//STRING
-		public RuleCall getVersionSTRINGTerminalRuleCall_1_3_1_0() { return cVersionSTRINGTerminalRuleCall_1_3_1_0; }
+		public RuleCall getVersionSTRINGTerminalRuleCall_1_1_1_0() { return cVersionSTRINGTerminalRuleCall_1_1_1_0; }
 	}
 
 	public class VersionElements extends AbstractParserRuleElementFinder {
@@ -620,7 +624,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IU:
-	//	ID=ID (";"? "version"? "="? (version=VersionRange | version=STRING))?;
+	//	ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?;
 	public IUElements getIUAccess() {
 		return (pIU != null) ? pIU : (pIU = new IUElements());
 	}

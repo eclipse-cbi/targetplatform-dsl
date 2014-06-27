@@ -42,7 +42,7 @@ enum Option:
 ;
 
 IU:
-	ID=ID ( ';'? 'version'? '='? (version=VersionRange|version=STRING) )? 
+	ID=ID ( (';' 'version' '=')? (version=VersionRange|version=STRING) )? 
 ;
 
 Version hidden():

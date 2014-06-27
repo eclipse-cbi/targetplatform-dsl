@@ -72,6 +72,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION"
 	
 	public static val CHECK__ESCAPE_CHAR_IU_ID = " CHECK__ESCAPE_CHAR_IU_ID"
+	public static val CHECK__VERSION_KEYWORDS = "CHECK__VERSION_KEYWORDS"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -408,6 +409,17 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			}
 		if (id.contains('^')) {
 			warning('''Escaping keywords with '^' in the ID of IUs is not required anymore.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__ESCAPE_CHAR_IU_ID)
+		}
+	}
+	
+	@Check
+	def checkVersionKeywords(IU iu) {
+		val node = NodeModelUtils.getNode(iu)
+		val semicolonKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.semicolonKeyword_1_0_0]
+		val equalSignKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.equalsSignKeyword_1_0_2]
+		
+		if (semicolonKeywordRule != null) {
+			acceptWarning("Keywords ';version=' are not required anymore.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
 	}
 }
