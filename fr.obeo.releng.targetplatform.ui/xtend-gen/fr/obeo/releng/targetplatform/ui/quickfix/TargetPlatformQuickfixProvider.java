@@ -253,4 +253,34 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
       "Set the IDs of all locations with the same URI to the same value as included location.", 
       "Set the IDs of all locations with the same URI to the same value as included location.", null, _function);
   }
+  
+  @Fix(TargetPlatformValidator.CHECK__VERSION_KEYWORDS)
+  public void removeVersionKeywords(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = new IModification() {
+      public void apply(final IModificationContext context) throws Exception {
+        final IXtextDocument xtextDocument = context.getXtextDocument();
+        Integer _offset = issue.getOffset();
+        Integer _length = issue.getLength();
+        xtextDocument.replace((_offset).intValue(), (_length).intValue(), "");
+      }
+    };
+    acceptor.accept(issue, "Remove deprecated keywords.", "Remove deprecated keywords.", null, _function);
+  }
+  
+  @Fix(TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID)
+  public void removeEscapeCharInIUID(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = new IModification() {
+      public void apply(final IModificationContext context) throws Exception {
+        final IXtextDocument xtextDocument = context.getXtextDocument();
+        Integer _offset = issue.getOffset();
+        Integer _length = issue.getLength();
+        final String fullId = xtextDocument.get((_offset).intValue(), (_length).intValue());
+        final String replaceID = fullId.replaceAll("\\^", "");
+        Integer _offset_1 = issue.getOffset();
+        Integer _length_1 = issue.getLength();
+        xtextDocument.replace((_offset_1).intValue(), (_length_1).intValue(), replaceID);
+      }
+    };
+    acceptor.accept(issue, "Remove deprecated escape character.", "Remove deprecated escape character.", null, _function);
+  }
 }

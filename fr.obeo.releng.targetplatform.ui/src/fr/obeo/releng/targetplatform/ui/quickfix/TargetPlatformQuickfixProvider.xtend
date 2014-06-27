@@ -125,4 +125,24 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    ]
 	}
 	
+	@Fix(TargetPlatformValidator::CHECK__VERSION_KEYWORDS)
+	def removeVersionKeywords(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Remove deprecated keywords.', 'Remove deprecated keywords.', null) [
+			context |
+			val xtextDocument = context.xtextDocument
+			xtextDocument.replace(issue.offset, issue.length, "")
+		]
+	}
+	
+	@Fix(TargetPlatformValidator::CHECK__ESCAPE_CHAR_IU_ID)
+	def removeEscapeCharInIUID(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Remove deprecated escape character.', 'Remove deprecated escape character.', null) [
+			context |
+			val xtextDocument = context.xtextDocument
+			val fullId = xtextDocument.get(issue.offset, issue.length)
+			val replaceID = fullId.replaceAll('\\^', '')
+			xtextDocument.replace(issue.offset, issue.length, replaceID)
+		]
+	}
+	
 }
