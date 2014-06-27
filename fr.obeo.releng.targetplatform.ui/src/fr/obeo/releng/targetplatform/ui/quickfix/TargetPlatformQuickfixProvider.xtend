@@ -35,7 +35,8 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 		acceptor.accept(issue, 
 	    "Set all options equals to this one.", "Set all options equals to this one.", null) [
 	    	element, context |
-	    	(element.eContainer as TargetPlatform).locations.forEach[_ |
+	    	val location = element as Location
+	    	location.targetPlatform.locations.forEach[_ |
 	    		val elemLoc = element as Location;
 	    		val locOptions = elemLoc.options;
 	    		if (_ != element && !Sets::symmetricDifference(locOptions.toSet, _.options.toSet).empty) {
@@ -78,9 +79,10 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    "Move options to the target level and remove all location specific options.", 
 	    "Move options to the target level and remove all location specific options.", null) [
 	    	element, context | 
-	    		(element.eContainer as TargetPlatform).options.clear;
-	    		(element as Location).options.forEach[(element.eContainer as TargetPlatform).options.add(it)];
-	    		(element.eContainer as TargetPlatform).locations.forEach[options.clear]
+	    	val location = element as Location
+	    		location.targetPlatform.options.clear;
+	    		(element as Location).options.forEach[location.targetPlatform.options.add(it)];
+	    		location.targetPlatform.locations.forEach[options.clear]
 	    		context.xtextDocument
 	    ]
 	}
@@ -91,7 +93,8 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    "Remove all location specific options.", 
 	    "Remove all location specific options.", null) [
 	    	element, context | 
-	    		(element.eContainer as TargetPlatform).locations.forEach[options.clear];
+	    		val location = element as Location
+	    		location.targetPlatform.locations.forEach[options.clear];
 	    ]
 	}
 	
@@ -104,7 +107,8 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    		val id = (element as Location).ID;
 	    		val uri = (element as Location).uri;
 	    		if (uri != null) {
-		    		(element.eContainer as TargetPlatform).locations
+	    			val location = element as Location
+		    		location.targetPlatform.locations
 		    			.filter[uri != null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    		}
@@ -119,7 +123,8 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    	element, context | 
 	    		val id = issue.data.get(0);
 	    		val uri = issue.data.get(1);
-	    		(element.eContainer as TargetPlatform).locations
+	    		val location = element as Location
+	    		location.targetPlatform.locations
 		    			.filter[uri != null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    ]

@@ -673,8 +673,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       }
       if (_or) {
         final IU iu = ((IU) model);
-        EObject _eContainer = iu.eContainer();
-        final String uri = ((Location) _eContainer).getUri();
+        Location _location = iu.getLocation();
+        final String uri = _location.getUri();
         TargetPlatformActivator _instance = TargetPlatformActivator.getInstance();
         IWorkbench _workbench = _instance.getWorkbench();
         final IWorkbenchWindow window = _workbench.getActiveWorkbenchWindow();

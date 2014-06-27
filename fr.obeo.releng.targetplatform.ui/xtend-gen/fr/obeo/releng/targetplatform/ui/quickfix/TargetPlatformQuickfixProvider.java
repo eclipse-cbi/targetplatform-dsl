@@ -52,8 +52,9 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
   public void equalizeOptions(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final ISemanticModification _function = new ISemanticModification() {
       public void apply(final EObject element, final IModificationContext context) throws Exception {
-        EObject _eContainer = element.eContainer();
-        EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
+        final Location location = ((Location) element);
+        TargetPlatform _targetPlatform = location.getTargetPlatform();
+        EList<Location> _locations = _targetPlatform.getLocations();
         final Procedure1<Location> _function = new Procedure1<Location>() {
           public void apply(final Location _) {
             final Location elemLoc = ((Location) element);
@@ -128,20 +129,21 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
   public void moveOptionsToTargetLevel(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final ISemanticModification _function = new ISemanticModification() {
       public void apply(final EObject element, final IModificationContext context) throws Exception {
-        EObject _eContainer = element.eContainer();
-        EList<Option> _options = ((TargetPlatform) _eContainer).getOptions();
+        final Location location = ((Location) element);
+        TargetPlatform _targetPlatform = location.getTargetPlatform();
+        EList<Option> _options = _targetPlatform.getOptions();
         _options.clear();
         EList<Option> _options_1 = ((Location) element).getOptions();
         final Procedure1<Option> _function = new Procedure1<Option>() {
           public void apply(final Option it) {
-            EObject _eContainer = element.eContainer();
-            EList<Option> _options = ((TargetPlatform) _eContainer).getOptions();
+            TargetPlatform _targetPlatform = location.getTargetPlatform();
+            EList<Option> _options = _targetPlatform.getOptions();
             _options.add(it);
           }
         };
         IterableExtensions.<Option>forEach(_options_1, _function);
-        EObject _eContainer_1 = element.eContainer();
-        EList<Location> _locations = ((TargetPlatform) _eContainer_1).getLocations();
+        TargetPlatform _targetPlatform_1 = location.getTargetPlatform();
+        EList<Location> _locations = _targetPlatform_1.getLocations();
         final Procedure1<Location> _function_1 = new Procedure1<Location>() {
           public void apply(final Location it) {
             EList<Option> _options = it.getOptions();
@@ -161,8 +163,9 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
   public void removeAllLocationSpecificOptions(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final ISemanticModification _function = new ISemanticModification() {
       public void apply(final EObject element, final IModificationContext context) throws Exception {
-        EObject _eContainer = element.eContainer();
-        EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
+        final Location location = ((Location) element);
+        TargetPlatform _targetPlatform = location.getTargetPlatform();
+        EList<Location> _locations = _targetPlatform.getLocations();
         final Procedure1<Location> _function = new Procedure1<Location>() {
           public void apply(final Location it) {
             EList<Option> _options = it.getOptions();
@@ -185,8 +188,9 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
         final String uri = ((Location) element).getUri();
         boolean _notEquals = (!Objects.equal(uri, null));
         if (_notEquals) {
-          EObject _eContainer = element.eContainer();
-          EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
+          final Location location = ((Location) element);
+          TargetPlatform _targetPlatform = location.getTargetPlatform();
+          EList<Location> _locations = _targetPlatform.getLocations();
           final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
             public Boolean apply(final Location it) {
               boolean _and = false;
@@ -224,8 +228,9 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
         final String id = _data[0];
         String[] _data_1 = issue.getData();
         final String uri = _data_1[1];
-        EObject _eContainer = element.eContainer();
-        EList<Location> _locations = ((TargetPlatform) _eContainer).getLocations();
+        final Location location = ((Location) element);
+        TargetPlatform _targetPlatform = location.getTargetPlatform();
+        EList<Location> _locations = _targetPlatform.getLocations();
         final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
           public Boolean apply(final Location it) {
             boolean _and = false;

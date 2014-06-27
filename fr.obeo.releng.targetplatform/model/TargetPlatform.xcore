@@ -36,7 +36,7 @@ class Environment extends TargetContent {
 	String[] env
 	
 	derived String operatingSystem get {
-		val envToUpper = (eContainer as TargetPlatform).contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
+		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		return 
 			Platform.knownOSValues.findFirst[
 				envToUpper.contains(it.toUpperCase)
@@ -44,7 +44,7 @@ class Environment extends TargetContent {
 	}
 	
 	derived String windowingSystem get {
-		val envToUpper = (eContainer as TargetPlatform).contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
+		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
 		
 		val allWS = envToUpper.filter[
@@ -64,14 +64,14 @@ class Environment extends TargetContent {
 	}
 	
 	derived String architecture get {
-		val envToUpper = (eContainer as TargetPlatform).contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
+		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		return Platform.knownOSArchValues.findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
 	}
 	
 	derived Locale localization get {
-		val envToUpper = (eContainer as TargetPlatform).contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
+		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		val locale = Locale.availableLocales.map[toString].findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
@@ -101,7 +101,7 @@ class Environment extends TargetContent {
 	derived ExecutionEnvironment executionEnvironment get {
 		val eeManager = JavaRuntime.executionEnvironmentsManager
 		if (eeManager != null) {
-			val envToUpper = (eContainer as TargetPlatform).contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
+			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 			
 			for (env : envToUpper) {
 				val ee = eeManager.executionEnvironments.findFirst[it.id.toUpperCase.equals(env)]

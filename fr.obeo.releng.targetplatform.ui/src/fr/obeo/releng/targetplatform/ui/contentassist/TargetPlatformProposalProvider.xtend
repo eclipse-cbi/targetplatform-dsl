@@ -321,7 +321,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
-			val uri = (iu.eContainer as Location).uri 
+			val uri = iu.location.uri 
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)

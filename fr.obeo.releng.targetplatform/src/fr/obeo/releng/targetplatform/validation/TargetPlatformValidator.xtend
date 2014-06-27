@@ -134,7 +134,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkNoLocationOptionIfGlobalOptions(Location location) {
-		if (!location.options.empty && !(location.eContainer as TargetPlatform).options.empty) {
+		if (!location.options.empty && !location.targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
@@ -169,7 +169,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateOptionsOnLocation(Location location) {
-		val targetPlatform = location.eContainer as TargetPlatform
+		val targetPlatform = location.targetPlatform
 		
 		if (targetPlatform.options.empty && !location.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
@@ -317,10 +317,10 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check(value=CheckType.EXPENSIVE)
 	def checkIUIDAndRangeInRepository(IU iu) {
 		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
-		val metadataRepository = repositoryManager.loadRepository(new URI((iu.eContainer as Location).uri), new NullProgressMonitor)
+		val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
 		val idResults = metadataRepository.query(QueryUtil.createIUQuery(iu.ID), new NullProgressMonitor).toUnmodifiableSet()
 		if (idResults.empty) {
-			error('''No installable unit with ID '«iu.ID»' can be found in '«(iu.eContainer as Location).uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
+			error('''No installable unit with ID '«iu.ID»' can be found in '«iu.location.uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
 		} else if (!iu.version.nullOrEmpty && !"lazy".equals(iu.version)) {
 			val versionResult = metadataRepository.query(QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", iu.ID, new VersionRange(iu.version)), new NullProgressMonitor)
 			if (versionResult.empty) {
@@ -469,7 +469,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					'''Duplicated IU for locations '«localLocationsWithDup.join("', '")»'.''' 
 				}
 				
-				warning(msg, entry.eContainer, TargetPlatformPackage.Literals.LOCATION__IUS, (entry.eContainer as Location).ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
+				warning(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
 			]
 	}
 }

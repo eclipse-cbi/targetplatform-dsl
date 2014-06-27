@@ -249,8 +249,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     if (!_not) {
       _and = false;
     } else {
-      EObject _eContainer = location.eContainer();
-      EList<Option> _options_1 = ((TargetPlatform) _eContainer).getOptions();
+      TargetPlatform _targetPlatform = location.getTargetPlatform();
+      EList<Option> _options_1 = _targetPlatform.getOptions();
       boolean _isEmpty_1 = _options_1.isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       _and = _not_1;
@@ -322,8 +322,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void deprecateOptionsOnLocation(final Location location) {
-    EObject _eContainer = location.eContainer();
-    final TargetPlatform targetPlatform = ((TargetPlatform) _eContainer);
+    final TargetPlatform targetPlatform = location.getTargetPlatform();
     boolean _and = false;
     EList<Option> _options = targetPlatform.getOptions();
     boolean _isEmpty = _options.isEmpty();
@@ -762,8 +761,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     try {
       Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
-      EObject _eContainer = iu.eContainer();
-      String _uri = ((Location) _eContainer).getUri();
+      Location _location = iu.getLocation();
+      String _uri = _location.getUri();
       java.net.URI _uRI = new java.net.URI(_uri);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, _nullProgressMonitor);
@@ -779,8 +778,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         String _iD_1 = iu.getID();
         _builder.append(_iD_1, "");
         _builder.append("\' can be found in \'");
-        EObject _eContainer_1 = iu.eContainer();
-        String _uri_1 = ((Location) _eContainer_1).getUri();
+        Location _location_1 = iu.getLocation();
+        String _uri_1 = _location_1.getUri();
         _builder.append(_uri_1, "");
         _builder.append("\'.");
         this.error(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__IU_IN_LOCATION);
@@ -1344,11 +1343,11 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _xifexpression = _builder_1.toString();
         }
         final String msg = _xifexpression;
-        EObject _eContainer = entry.eContainer();
-        EObject _eContainer_1 = entry.eContainer();
-        EList<IU> _ius = ((Location) _eContainer_1).getIus();
+        Location _location = entry.getLocation();
+        Location _location_1 = entry.getLocation();
+        EList<IU> _ius = _location_1.getIus();
         int _indexOf = _ius.indexOf(entry);
-        TargetPlatformValidator.this.warning(msg, _eContainer, TargetPlatformPackage.Literals.LOCATION__IUS, _indexOf, TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+        TargetPlatformValidator.this.warning(msg, _location, TargetPlatformPackage.Literals.LOCATION__IUS, _indexOf, TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
       }
     };
     IterableExtensions.<IU>forEach(_filter, _function_7);

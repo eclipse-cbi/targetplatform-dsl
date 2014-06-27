@@ -27,7 +27,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -215,8 +214,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getOperatingSystem() {
-		EObject _eContainer = this.eContainer();
-		EList<TargetContent> _contents = ((TargetPlatform) _eContainer).getContents();
+		TargetPlatform _targetPlatform = this.getTargetPlatform();
+		EList<TargetContent> _contents = _targetPlatform.getContents();
 		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
@@ -255,8 +254,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getWindowingSystem() {
-		EObject _eContainer = this.eContainer();
-		EList<TargetContent> _contents = ((TargetPlatform) _eContainer).getContents();
+		TargetPlatform _targetPlatform = this.getTargetPlatform();
+		EList<TargetContent> _contents = _targetPlatform.getContents();
 		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
@@ -328,8 +327,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getArchitecture() {
-		EObject _eContainer = this.eContainer();
-		EList<TargetContent> _contents = ((TargetPlatform) _eContainer).getContents();
+		TargetPlatform _targetPlatform = this.getTargetPlatform();
+		EList<TargetContent> _contents = _targetPlatform.getContents();
 		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
@@ -368,8 +367,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public Locale getLocalization() {
-		EObject _eContainer = this.eContainer();
-		EList<TargetContent> _contents = ((TargetPlatform) _eContainer).getContents();
+		TargetPlatform _targetPlatform = this.getTargetPlatform();
+		EList<TargetContent> _contents = _targetPlatform.getContents();
 		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
@@ -446,8 +445,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
 		boolean _notEquals = (!Objects.equal(eeManager, null));
 		if (_notEquals) {
-			EObject _eContainer = this.eContainer();
-			EList<TargetContent> _contents = ((TargetPlatform) _eContainer).getContents();
+			TargetPlatform _targetPlatform = this.getTargetPlatform();
+			EList<TargetContent> _contents = _targetPlatform.getContents();
 			Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 			final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 				public EList<String> apply(final Environment it) {
