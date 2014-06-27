@@ -33,6 +33,7 @@ import org.eclipse.xtext.validation.CheckType
 import org.eclipse.core.runtime.Platform
 import org.eclipse.jdt.launching.JavaRuntime
 import java.util.Locale
+import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
 
 /**
  * Custom validation rules. 
@@ -46,6 +47,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Inject
 	IProvisioningAgent provisioningAgent;
+	
+	@Inject 
+	TargetPlatformGrammarAccess grammarAccess;
 	
 	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
 	
@@ -66,6 +70,8 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
 	public static val CHECK__ENVIRONMENT_UNICITY = "CHECK__ENVIRONMENT_UNICITY"
 	public static val CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION"
+	
+	public static val CHECK__ESCAPE_CHAR_IU_ID = " CHECK__ESCAPE_CHAR_IU_ID"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -384,6 +390,24 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					error('''Cannot define multiple execution environment.''', env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, env.env.indexOf(e), CHECK__ENVIRONMENT_COHESION)
 				]
 			]
+		}
+	}
+	
+	@Check
+	def checkNoEscapeCharacterInIUID(IU iu) {
+		val node = NodeModelUtils.getNode(iu)
+		val idRule = node.asTreeIterable.findFirst[
+			grammarElement == grammarAccess.IUAccess.IDIDTerminalRuleCall_0_0
+		]
+		
+		val id =
+			if (idRule.text.startsWith('^')) {
+				idRule.text.substring(1)
+			} else {
+				idRule.text
+			}
+		if (id.contains('^')) {
+			warning('''Escaping keywords with '^' in the ID of IUs is not required anymore.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__ESCAPE_CHAR_IU_ID)
 		}
 	}
 }

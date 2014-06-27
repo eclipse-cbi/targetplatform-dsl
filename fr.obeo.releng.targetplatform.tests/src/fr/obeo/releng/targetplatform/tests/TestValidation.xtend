@@ -1549,4 +1549,30 @@ class TestValidation {
 		val diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
 	}
+	
+	@Test
+	def testNoEscapeCharInIUID() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val targetPlatform = parser.parse('''
+			target "a target platform"
+			location "locationURI" {
+				org.iu1
+				^source
+				org.iu1.^source.feature.group
+			}
+		''')
+		assertTrue(targetPlatform.eResource.errors.empty)
+		tester.validator.checkNoEscapeCharacterInIUID(targetPlatform.locations.head.ius.get(0))
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
+		
+		tester.validator.checkNoEscapeCharacterInIUID(targetPlatform.locations.head.ius.get(1))
+		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
+		
+		tester.validator.checkNoEscapeCharacterInIUID(targetPlatform.locations.head.ius.get(2))
+		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__ESCAPE_CHAR_IU_ID, diagnostics.head.issueCode)
+	}
 }

@@ -23,6 +23,7 @@ import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
@@ -82,6 +84,9 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Inject
   private IProvisioningAgent provisioningAgent;
+  
+  @Inject
+  private TargetPlatformGrammarAccess grammarAccess;
   
   public final static String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
   
@@ -112,6 +117,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__ENVIRONMENT_UNICITY = "CHECK__ENVIRONMENT_UNICITY";
   
   public final static String CHECK__ENVIRONMENT_COHESION = "CHECK__ENVIRONMENT_COHESION";
+  
+  public final static String CHECK__ESCAPE_CHAR_IU_ID = " CHECK__ESCAPE_CHAR_IU_ID";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -1112,6 +1119,37 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         }
       };
       IterableExtensions.<String>forEach(allEE, _function_18);
+    }
+  }
+  
+  @Check
+  public void checkNoEscapeCharacterInIUID(final IU iu) {
+    final ICompositeNode node = NodeModelUtils.getNode(iu);
+    BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
+    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
+      public Boolean apply(final INode it) {
+        EObject _grammarElement = it.getGrammarElement();
+        TargetPlatformGrammarAccess.IUElements _iUAccess = TargetPlatformValidator.this.grammarAccess.getIUAccess();
+        RuleCall _iDIDTerminalRuleCall_0_0 = _iUAccess.getIDIDTerminalRuleCall_0_0();
+        return Boolean.valueOf(Objects.equal(_grammarElement, _iDIDTerminalRuleCall_0_0));
+      }
+    };
+    final INode idRule = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
+    String _xifexpression = null;
+    String _text = idRule.getText();
+    boolean _startsWith = _text.startsWith("^");
+    if (_startsWith) {
+      String _text_1 = idRule.getText();
+      _xifexpression = _text_1.substring(1);
+    } else {
+      _xifexpression = idRule.getText();
+    }
+    final String id = _xifexpression;
+    boolean _contains = id.contains("^");
+    if (_contains) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Escaping keywords with \'^\' in the ID of IUs is not required anymore.");
+      this.warning(_builder.toString(), iu, TargetPlatformPackage.Literals.IU__ID, TargetPlatformValidator.CHECK__ESCAPE_CHAR_IU_ID);
     }
   }
 }
