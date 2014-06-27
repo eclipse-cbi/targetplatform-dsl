@@ -3,14 +3,19 @@
 package fr.obeo.releng.targetplatform.impl;
 
 import fr.obeo.releng.targetplatform.IU;
+import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,6 +139,101 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Location getLocation() {
+		if (eContainerFeatureID() != TargetPlatformPackage.IU__LOCATION) return null;
+		return (Location)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location basicGetLocation() {
+		if (eContainerFeatureID() != TargetPlatformPackage.IU__LOCATION) return null;
+		return (Location)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newLocation, TargetPlatformPackage.IU__LOCATION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != eInternalContainer() || (eContainerFeatureID() != TargetPlatformPackage.IU__LOCATION && newLocation != null)) {
+			if (EcoreUtil.isAncestor(this, newLocation))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, TargetPlatformPackage.LOCATION__IUS, Location.class, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__LOCATION, newLocation, newLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.IU__LOCATION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetLocation((Location)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.IU__LOCATION:
+				return basicSetLocation(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TargetPlatformPackage.IU__LOCATION:
+				return eInternalContainer().eInverseRemove(this, TargetPlatformPackage.LOCATION__IUS, Location.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -140,6 +241,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return getID();
 			case TargetPlatformPackage.IU__VERSION:
 				return getVersion();
+			case TargetPlatformPackage.IU__LOCATION:
+				if (resolve) return getLocation();
+				return basicGetLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,6 +261,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return;
 			case TargetPlatformPackage.IU__VERSION:
 				setVersion((String)newValue);
+				return;
+			case TargetPlatformPackage.IU__LOCATION:
+				setLocation((Location)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,6 +283,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 			case TargetPlatformPackage.IU__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
+			case TargetPlatformPackage.IU__LOCATION:
+				setLocation((Location)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,6 +302,8 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case TargetPlatformPackage.IU__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case TargetPlatformPackage.IU__LOCATION:
+				return basicGetLocation() != null;
 		}
 		return super.eIsSet(featureID);
 	}

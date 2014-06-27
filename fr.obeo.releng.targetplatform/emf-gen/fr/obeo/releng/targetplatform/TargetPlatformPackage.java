@@ -152,13 +152,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int TARGET_CONTENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_CONTENT__TARGET_PLATFORM = 0;
+
+	/**
 	 * The number of structural features of the '<em>Target Content</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_CONTENT_FEATURE_COUNT = 0;
+	int TARGET_CONTENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Target Content</em>' class.
@@ -178,6 +187,15 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	int OPTIONS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONS__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' attribute list.
@@ -215,6 +233,15 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	int ENVIRONMENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENVIRONMENT__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
 
 	/**
 	 * The feature id for the '<em><b>Env</b></em>' attribute list.
@@ -299,6 +326,15 @@ public interface TargetPlatformPackage extends EPackage {
 	int LOCATION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
+
+	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -363,6 +399,15 @@ public interface TargetPlatformPackage extends EPackage {
 	int INCLUDE_DECLARATION = 5;
 
 	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_DECLARATION__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
+
+	/**
 	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -418,13 +463,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int IU__VERSION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IU__LOCATION = 2;
+
+	/**
 	 * The number of structural features of the '<em>IU</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IU_FEATURE_COUNT = 2;
+	int IU_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>IU</em>' class.
@@ -551,6 +605,17 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTargetContent();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.obeo.releng.targetplatform.TargetContent#getTargetPlatform <em>Target Platform</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Target Platform</em>'.
+	 * @see fr.obeo.releng.targetplatform.TargetContent#getTargetPlatform()
+	 * @see #getTargetContent()
+	 * @generated
+	 */
+	EReference getTargetContent_TargetPlatform();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.Options <em>Options</em>}'.
@@ -757,6 +822,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getIU_Version();
 
 	/**
+	 * Returns the meta object for the container reference '{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Location</em>'.
+	 * @see fr.obeo.releng.targetplatform.IU#getLocation()
+	 * @see #getIU()
+	 * @generated
+	 */
+	EReference getIU_Location();
+
+	/**
 	 * Returns the meta object for enum '{@link fr.obeo.releng.targetplatform.Option <em>Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -878,6 +954,14 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TARGET_CONTENT = eINSTANCE.getTargetContent();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Platform</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TARGET_CONTENT__TARGET_PLATFORM = eINSTANCE.getTargetContent_TargetPlatform();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.OptionsImpl <em>Options</em>}' class.
@@ -1040,6 +1124,14 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IU__VERSION = eINSTANCE.getIU_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IU__LOCATION = eINSTANCE.getIU_Location();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.Option <em>Option</em>}' enum.

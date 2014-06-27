@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getVersion <em>Version</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,5 +74,33 @@ public interface IU extends EObject {
 	 * @generated
 	 */
 	void setVersion(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Location</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.obeo.releng.targetplatform.Location#getIus <em>Ius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location</em>' container reference.
+	 * @see #setLocation(Location)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIU_Location()
+	 * @see fr.obeo.releng.targetplatform.Location#getIus
+	 * @model opposite="ius" transient="false"
+	 * @generated
+	 */
+	Location getLocation();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Location</em>' container reference.
+	 * @see #getLocation()
+	 * @generated
+	 */
+	void setLocation(Location value);
 
 } // IU

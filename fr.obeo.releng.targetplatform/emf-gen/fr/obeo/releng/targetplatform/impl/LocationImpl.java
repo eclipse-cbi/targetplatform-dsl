@@ -5,6 +5,7 @@ package fr.obeo.releng.targetplatform.impl;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
+import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
 import java.util.Collection;
@@ -21,7 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -31,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getOptions <em>Options</em>}</li>
@@ -125,6 +128,57 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TargetPlatform getTargetPlatform() {
+		if (eContainerFeatureID() != TargetPlatformPackage.LOCATION__TARGET_PLATFORM) return null;
+		return (TargetPlatform)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TargetPlatform basicGetTargetPlatform() {
+		if (eContainerFeatureID() != TargetPlatformPackage.LOCATION__TARGET_PLATFORM) return null;
+		return (TargetPlatform)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTargetPlatform(TargetPlatform newTargetPlatform, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTargetPlatform, TargetPlatformPackage.LOCATION__TARGET_PLATFORM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetPlatform(TargetPlatform newTargetPlatform) {
+		if (newTargetPlatform != eInternalContainer() || (eContainerFeatureID() != TargetPlatformPackage.LOCATION__TARGET_PLATFORM && newTargetPlatform != null)) {
+			if (EcoreUtil.isAncestor(this, newTargetPlatform))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTargetPlatform != null)
+				msgs = ((InternalEObject)newTargetPlatform).eInverseAdd(this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS, TargetPlatform.class, msgs);
+			msgs = basicSetTargetPlatform(newTargetPlatform, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.LOCATION__TARGET_PLATFORM, newTargetPlatform, newTargetPlatform));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getID() {
 		return id;
 	}
@@ -181,9 +235,28 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 */
 	public EList<IU> getIus() {
 		if (ius == null) {
-			ius = new EObjectContainmentEList<IU>(IU.class, this, TargetPlatformPackage.LOCATION__IUS);
+			ius = new EObjectContainmentWithInverseEList<IU>(IU.class, this, TargetPlatformPackage.LOCATION__IUS, TargetPlatformPackage.IU__LOCATION);
 		}
 		return ius;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetTargetPlatform((TargetPlatform)otherEnd, msgs);
+			case TargetPlatformPackage.LOCATION__IUS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIus()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -194,6 +267,8 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				return basicSetTargetPlatform(null, msgs);
 			case TargetPlatformPackage.LOCATION__IUS:
 				return ((InternalEList<?>)getIus()).basicRemove(otherEnd, msgs);
 		}
@@ -206,8 +281,25 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				return eInternalContainer().eInverseRemove(this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS, TargetPlatform.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				if (resolve) return getTargetPlatform();
+				return basicGetTargetPlatform();
 			case TargetPlatformPackage.LOCATION__ID:
 				return getID();
 			case TargetPlatformPackage.LOCATION__URI:
@@ -229,6 +321,9 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				setTargetPlatform((TargetPlatform)newValue);
+				return;
 			case TargetPlatformPackage.LOCATION__ID:
 				setID((String)newValue);
 				return;
@@ -255,6 +350,9 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				setTargetPlatform((TargetPlatform)null);
+				return;
 			case TargetPlatformPackage.LOCATION__ID:
 				setID(ID_EDEFAULT);
 				return;
@@ -279,6 +377,8 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.LOCATION__TARGET_PLATFORM:
+				return basicGetTargetPlatform() != null;
 			case TargetPlatformPackage.LOCATION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case TargetPlatformPackage.LOCATION__URI:

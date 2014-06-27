@@ -21,14 +21,20 @@ import java.util.Locale;
 
 import org.eclipse.core.runtime.Platform;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.jdt.launching.JavaRuntime;
 
@@ -48,6 +54,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getEnv <em>Env</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getOperatingSystem <em>Operating System</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getWindowingSystem <em>Windowing System</em>}</li>
@@ -137,6 +144,57 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	protected EClass eStaticClass() {
 		return TargetPlatformPackage.Literals.ENVIRONMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TargetPlatform getTargetPlatform() {
+		if (eContainerFeatureID() != TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM) return null;
+		return (TargetPlatform)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TargetPlatform basicGetTargetPlatform() {
+		if (eContainerFeatureID() != TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM) return null;
+		return (TargetPlatform)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTargetPlatform(TargetPlatform newTargetPlatform, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTargetPlatform, TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetPlatform(TargetPlatform newTargetPlatform) {
+		if (newTargetPlatform != eInternalContainer() || (eContainerFeatureID() != TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM && newTargetPlatform != null)) {
+			if (EcoreUtil.isAncestor(this, newTargetPlatform))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTargetPlatform != null)
+				msgs = ((InternalEObject)newTargetPlatform).eInverseAdd(this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS, TargetPlatform.class, msgs);
+			msgs = basicSetTargetPlatform(newTargetPlatform, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM, newTargetPlatform, newTargetPlatform));
 	}
 
 	/**
@@ -442,8 +500,55 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetTargetPlatform((TargetPlatform)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				return basicSetTargetPlatform(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				return eInternalContainer().eInverseRemove(this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS, TargetPlatform.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				if (resolve) return getTargetPlatform();
+				return basicGetTargetPlatform();
 			case TargetPlatformPackage.ENVIRONMENT__ENV:
 				return getEnv();
 			case TargetPlatformPackage.ENVIRONMENT__OPERATING_SYSTEM:
@@ -469,6 +574,9 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				setTargetPlatform((TargetPlatform)newValue);
+				return;
 			case TargetPlatformPackage.ENVIRONMENT__ENV:
 				getEnv().clear();
 				getEnv().addAll((Collection<? extends String>)newValue);
@@ -485,6 +593,9 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				setTargetPlatform((TargetPlatform)null);
+				return;
 			case TargetPlatformPackage.ENVIRONMENT__ENV:
 				getEnv().clear();
 				return;
@@ -500,6 +611,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.ENVIRONMENT__TARGET_PLATFORM:
+				return basicGetTargetPlatform() != null;
 			case TargetPlatformPackage.ENVIRONMENT__ENV:
 				return env != null && !env.isEmpty();
 			case TargetPlatformPackage.ENVIRONMENT__OPERATING_SYSTEM:

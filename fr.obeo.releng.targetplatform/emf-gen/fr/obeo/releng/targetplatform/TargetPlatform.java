@@ -57,6 +57,7 @@ public interface TargetPlatform extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.obeo.releng.targetplatform.TargetContent}.
+	 * It is bidirectional and its opposite is '{@link fr.obeo.releng.targetplatform.TargetContent#getTargetPlatform <em>Target Platform</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contents</em>' containment reference list isn't clear,
@@ -65,7 +66,8 @@ public interface TargetPlatform extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Contents</em>' containment reference list.
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Contents()
-	 * @model containment="true"
+	 * @see fr.obeo.releng.targetplatform.TargetContent#getTargetPlatform
+	 * @model opposite="targetPlatform" containment="true"
 	 * @generated
 	 */
 	EList<TargetContent> getContents();

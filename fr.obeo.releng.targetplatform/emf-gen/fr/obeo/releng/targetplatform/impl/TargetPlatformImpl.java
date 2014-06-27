@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -134,7 +134,7 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<TargetContent> getContents() {
 		if (contents == null) {
-			contents = new EObjectContainmentEList<TargetContent>(TargetContent.class, this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS);
+			contents = new EObjectContainmentWithInverseEList<TargetContent>(TargetContent.class, this, TargetPlatformPackage.TARGET_PLATFORM__CONTENTS, TargetPlatformPackage.TARGET_CONTENT__TARGET_PLATFORM);
 		}
 		return contents;
 	}
@@ -201,6 +201,21 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 		EList<TargetContent> _contents = this.getContents();
 		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		return IterableExtensions.<Environment>head(_filter);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContents()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

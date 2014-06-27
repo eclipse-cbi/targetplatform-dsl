@@ -9,7 +9,7 @@ import org.eclipse.jdt.launching.JavaRuntime
 
 class TargetPlatform {
 	String name
-	contains TargetContent[] contents  
+	contains TargetContent[] contents opposite targetPlatform  
 	refers derived IncludeDeclaration[] includes get {
 		new UnmodifiableEList(contents.filter(typeof(IncludeDeclaration)).toList)
 	}
@@ -25,7 +25,7 @@ class TargetPlatform {
 }
 
 interface TargetContent {
-	
+	container TargetPlatform targetPlatform opposite contents
 }
 
 class Options extends TargetContent {
@@ -117,14 +117,14 @@ class Environment extends TargetContent {
 	}
 }
 
-type Locale wraps Locale
+type Locale wraps java.util.Locale
 type ExecutionEnvironment wraps org.eclipse.jdt.launching.environments.IExecutionEnvironment
 
 class Location extends TargetContent {
 	String ID
 	String uri
 	Option[] options
-	contains IU[] ius
+	contains IU[] ius opposite location
 }
 
 class IncludeDeclaration extends TargetContent {
@@ -134,6 +134,7 @@ class IncludeDeclaration extends TargetContent {
 class IU {
 	String ID
 	String version
+	container Location location opposite ius
 }
 
 enum Option {

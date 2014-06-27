@@ -97,6 +97,7 @@ public interface Location extends TargetContent {
 	/**
 	 * Returns the value of the '<em><b>Ius</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.obeo.releng.targetplatform.IU}.
+	 * It is bidirectional and its opposite is '{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ius</em>' containment reference list isn't clear,
@@ -105,7 +106,8 @@ public interface Location extends TargetContent {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ius</em>' containment reference list.
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getLocation_Ius()
-	 * @model containment="true"
+	 * @see fr.obeo.releng.targetplatform.IU#getLocation
+	 * @model opposite="location" containment="true"
 	 * @generated
 	 */
 	EList<IU> getIus();
