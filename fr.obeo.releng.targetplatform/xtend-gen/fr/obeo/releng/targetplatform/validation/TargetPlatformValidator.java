@@ -1372,7 +1372,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         boolean _contains = importedIUsID.contains(_iD);
         if (_contains) {
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Duplicated IU for locations \'");
+          _builder.append("Duplicated IU \'");
+          String _iD_1 = entry.getID();
+          _builder.append(_iD_1, "");
+          _builder.append("\' for locations \'");
           String _join = IterableExtensions.join(localLocationsWithDup, "\', \'");
           _builder.append(_join, "");
           _builder.append("\'. It is included from target platforms \'");
@@ -1382,7 +1385,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _xifexpression = _builder.toString();
         } else {
           StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("Duplicated IU for locations \'");
+          _builder_1.append("Duplicated IU \'");
+          String _iD_2 = entry.getID();
+          _builder_1.append(_iD_2, "");
+          _builder_1.append("\' for locations \'");
           String _join_2 = IterableExtensions.join(localLocationsWithDup, "\', \'");
           _builder_1.append(_join_2, "");
           _builder_1.append("\'.");

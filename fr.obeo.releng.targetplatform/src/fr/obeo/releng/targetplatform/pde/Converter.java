@@ -61,11 +61,14 @@ public class Converter {
 	private IProvisioningAgent agent;
 	
 	public Diagnostic generateTargetDefinitionFile(URI uri, IProgressMonitor monitor) {
-		BasicDiagnostic ret = new BasicDiagnostic();
+		BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, 0, "Diagnostic of the generation of the target platform.", null);
 		if (!"targetplatform".equals(uri.fileExtension()) && !"tpd".equals(uri.fileExtension())) {
 			ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target platform file '" + uri + "' must ends with '.tpd' or '.targetplatform' extensions.", null));
 		} else {
-			ret.merge(doGenerateTargetDefinitionFile(uri, monitor));
+			Diagnostic diagnostic = doGenerateTargetDefinitionFile(uri, monitor);
+			if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+				ret.merge(diagnostic);
+			}
 		}
 		return ret;
 	}
@@ -79,7 +82,9 @@ public class Converter {
 			subMonitor.worked(2);
 			
 			Diagnostic resourceDiagnostic = EcoreUtil.computeDiagnostic(resource, true);
-			ret.merge(resourceDiagnostic);
+			if (resourceDiagnostic.getSeverity() >= Diagnostic.WARNING) {
+				ret.merge(resourceDiagnostic);
+			}
 
 			if (resourceDiagnostic.getSeverity() < Diagnostic.ERROR) {
 				TargetPlatform targetPlatform = null;
@@ -100,7 +105,10 @@ public class Converter {
 					} 
 					
 					if (validation.getSeverity() < Diagnostic.ERROR) {
-						ret.merge(doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(8)));
+						Diagnostic diagnostic = doGenerateTargetDefinitionFile(uri, targetPlatform, subMonitor.newChild(8));
+						if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+							ret.merge(diagnostic);
+						}
 					}
 					subMonitor.setWorkRemaining(0);
 				}
@@ -123,11 +131,17 @@ public class Converter {
 			if (subMonitor.isCanceled()) {
 				ret.merge(Diagnostic.CANCEL_INSTANCE);
 			} else {
-				ret.merge(resolvedTargetPlatform.resolve(repositoryManager, subMonitor.newChild(90)));
+				Diagnostic diagnostic = resolvedTargetPlatform.resolve(repositoryManager, subMonitor.newChild(90));
+				if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+					ret.merge(diagnostic);
+				}
 				if (subMonitor.isCanceled()) {
 					ret.merge(Diagnostic.CANCEL_INSTANCE);
 				} else if (ret.getSeverity() < Diagnostic.ERROR) {
-					ret.merge(doGenerateTargetDefinitionFile(uri, resolvedTargetPlatform));
+					diagnostic = doGenerateTargetDefinitionFile(uri, resolvedTargetPlatform);
+					if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+						ret.merge(diagnostic);
+					}
 					subMonitor.worked(5);
 				}
 			}

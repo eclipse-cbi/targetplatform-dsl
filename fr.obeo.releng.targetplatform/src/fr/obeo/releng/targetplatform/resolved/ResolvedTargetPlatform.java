@@ -74,7 +74,10 @@ public class ResolvedTargetPlatform {
 				ret.merge(BasicDiagnostic.CANCEL_INSTANCE);
 				break;
 			}
-			ret.merge(location.resolve(metadataRepositoryManager, subMonitor));
+			Diagnostic diagnostic = location.resolve(metadataRepositoryManager, subMonitor);
+			if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+				ret.merge(diagnostic);
+			}
 			subMonitor.worked(1);
 		}
 		return ret;

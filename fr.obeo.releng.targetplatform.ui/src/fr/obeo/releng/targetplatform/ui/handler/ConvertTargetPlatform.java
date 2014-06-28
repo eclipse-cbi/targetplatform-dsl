@@ -75,9 +75,9 @@ public class ConvertTargetPlatform extends AbstractHandler {
 				try {
 					diagnostic = converter.generateTargetDefinitionFile(URI.createFileURI(path), subMonitor.newChild(95));
 				} catch (OperationCanceledException cancel) {
-					ret = new Status(IStatus.CANCEL, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), cancel.getMessage(), cancel);
+					ret = new Status(IStatus.CANCEL, TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM, cancel.getMessage(), cancel);
 				} catch (Exception e) {
-					ret = new Status(IStatus.ERROR, TargetPlatformActivator.getInstance().getBundle().getSymbolicName(), e.getMessage(), e);
+					ret = new Status(IStatus.ERROR, TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM, e.getMessage(), e);
 				}
 				IContainer container = ((IFile) selectedElement).getParent();
 				if (container != null) {

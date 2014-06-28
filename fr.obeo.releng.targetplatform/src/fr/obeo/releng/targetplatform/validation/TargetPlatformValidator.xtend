@@ -480,9 +480,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				val importedTPsWithDup = importedIUs.filter[ID.equals(entry.ID)].map[eResource.URI].toSet
 				
 				val msg = if (importedIUsID.contains(entry.ID)) {
-					'''Duplicated IU for locations '«localLocationsWithDup.join("', '")»'. It is included from target platforms '«importedTPsWithDup.join("', '")»'.'''
+					'''Duplicated IU '«entry.ID»' for locations '«localLocationsWithDup.join("', '")»'. It is included from target platforms '«importedTPsWithDup.join("', '")»'.'''
 				} else {
-					'''Duplicated IU for locations '«localLocationsWithDup.join("', '")»'.''' 
+					'''Duplicated IU '«entry.ID»' for locations '«localLocationsWithDup.join("', '")»'.''' 
 				}
 				
 				warning(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
