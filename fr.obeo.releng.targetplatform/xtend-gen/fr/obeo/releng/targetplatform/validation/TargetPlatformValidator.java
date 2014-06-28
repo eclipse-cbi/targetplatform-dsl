@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Multiset;
@@ -370,7 +370,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkIDUniqueOnAllLocations(final TargetPlatform targetPlatform) {
-    final LinkedListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final ListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     final LinkedHashMultimap<String, String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
     Set<String> _keySet = locationsByURI.keySet();
@@ -533,7 +533,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkSameIDForAllLocationWithSameURI(final TargetPlatform targetPlatform) {
-    final LinkedListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
+    final ListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     Set<String> _keySet = locationsByURI.keySet();
     for (final String locationURI : _keySet) {

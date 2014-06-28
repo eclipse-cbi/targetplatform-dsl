@@ -45,12 +45,89 @@ class TestTargetPlatformIndexer {
 		)
 		for (tp : #['d', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
 			parser.parse('''target "«tp»"''', 
-			URI.createURI('''tmp:/«tp».tpd'''), resourceSet
-		)
+			URI.createURI('''tmp:/«tp».tpd'''), resourceSet)
 		}
 		assertEquals(
 			#['c', 'b', 'a', 'l', 'k', 'j', 'i', 'h', 'g', 'f', 'e', 'd'],
 			indexBuilder.getImportedTargetPlatforms(o).map[name]
+		)
+	}
+	
+	@Test
+	def testIncludeOverrideOrder2() {
+		val resourceSet = resourceSetProvider.get
+		val o = parser.parse('''target "o" include "a.tpd" include "b.tpd" include "c.tpd"
+		location "o1"
+		''', 
+			URI.createURI("tmp:/o.tpd"), resourceSet
+		)
+		parser.parse('''target "a" include "d.tpd" include "e.tpd" include "f.tpd"
+		location "a1"
+		''', 
+			URI.createURI("tmp:/a.tpd"), resourceSet
+		)
+		parser.parse('''target "b" include "g.tpd" include "h.tpd" include "i.tpd"
+		location "b1"''', 
+			URI.createURI("tmp:/b.tpd"), resourceSet
+		)
+		parser.parse('''target "c" include "j.tpd" include "k.tpd" include "l.tpd"
+		location "c1"''', 
+			URI.createURI("tmp:/c.tpd"), resourceSet
+		)
+		for (tp : #['d', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
+			parser.parse('''target "«tp»"
+			location "«tp»1"''', 
+			URI.createURI('''tmp:/«tp».tpd'''), resourceSet)
+		}
+		
+		assertArrayEquals(
+			#['o1', 'c1','l1', 'k1', 'j1',  'b1', 'i1', 'h1', 'g1', 'a1', 'f1', 'e1', 'd1'],
+			indexBuilder.getLocationIndex(o).keySet
+		)
+	}
+	
+	@Test
+	def testIncludeOverrideOrder3() {
+		val resourceSet = resourceSetProvider.get
+		val o = parser.parse('''target "o" 
+		include "a.tpd" 
+		include "b.tpd" 
+		location "o1"
+		include "c.tpd"
+		''', 
+			URI.createURI("tmp:/o.tpd"), resourceSet
+		)
+		parser.parse('''target "a" 
+		include "d.tpd" 
+		location "a1"
+		include "e.tpd" 
+		include "f.tpd"
+		''', 
+			URI.createURI("tmp:/a.tpd"), resourceSet
+		)
+		parser.parse('''target "b" 
+		location "b1"
+		include "g.tpd" 
+		include "h.tpd" 
+		include "i.tpd"''', 
+			URI.createURI("tmp:/b.tpd"), resourceSet
+		)
+		parser.parse('''target "c" 
+		include "j.tpd" 
+		include "k.tpd" 
+		include "l.tpd"
+		location "c1"''', 
+			URI.createURI("tmp:/c.tpd"), resourceSet
+		)
+		for (tp : #['d', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
+			parser.parse('''target "«tp»"
+			location "«tp»1"''', 
+			URI.createURI('''tmp:/«tp».tpd'''), resourceSet)
+		}
+		
+		assertArrayEquals(
+			#['c1', 'l1', 'k1', 'j1', 'o1', 'i1', 'h1', 'g1', 'b1', 'f1', 'e1', 'a1', 'd1'],
+			indexBuilder.getLocationIndex(o).keySet
 		)
 	}
 	
@@ -63,7 +140,7 @@ class TestTargetPlatformIndexer {
 			''', 
 			URI.createURI("tmp:/o.tpd"), resourceSet
 		)
-		
-		assertEquals(4, indexBuilder.getLocationIndex(o).size)
+		val index = indexBuilder.getLocationIndex(o)
+		assertEquals(4, index.size)
 	}
 }

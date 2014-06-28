@@ -1,12 +1,14 @@
-package fr.obeo.releng.targetplatform.util
+ package fr.obeo.releng.targetplatform.util
 
 import com.google.common.collect.LinkedListMultimap
-import com.google.common.collect.Lists
+import com.google.common.collect.ListMultimap
 import com.google.common.collect.Multimaps
 import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.IncludeDeclaration
+import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.TargetPlatform
 import java.util.LinkedList
+import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
@@ -17,17 +19,48 @@ class LocationIndexBuilder {
 	@Inject
 	ImportUriResolver resolver;
 	
-	def getLocationIndex(TargetPlatform targetPlatform) {
-		val locationList = Lists.newArrayList(targetPlatform.locations).reverse
-		val locationIndex = LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+	def ListMultimap<String, Location> getLocationIndex(TargetPlatform targetPlatform) {
+		val locationList = getLocations(
+			newLinkedHashSet(targetPlatform), 
+			newLinkedList(targetPlatform)
+		)
+		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+	}
+	
+	private def List<Location> getLocations(Set<TargetPlatform> visited, List<TargetPlatform> toBeVisited) {
+		val locations = newArrayList()
 		
-		getImportedTargetPlatforms(targetPlatform).map[
-			Lists.newArrayList(locations).reverse
-		].flatten.forEach[
-			locationIndex.put(it.uri, it)
+		toBeVisited.forEach[
+			val includes = newLinkedList
+			it.contents.reverseView.forEach[content|
+				if (content instanceof Location) {
+					if (!includes.empty) {
+						locations.addAll(getLocationFromVisitedIncludes(it, includes, visited))
+						includes.clear
+					}
+					locations.add(content)
+				} else if (content instanceof IncludeDeclaration) {
+					includes.add(content)
+				}
+			]
+			
+			if (!includes.empty) {
+				locations.addAll(getLocationFromVisitedIncludes(it, includes, visited))
+				includes.clear
+			}
 		]
+		return locations
+	}
+	
+	private def getLocationFromVisitedIncludes(TargetPlatform parent, List<IncludeDeclaration> includes, Set<TargetPlatform> visited) {
+		val importedLocation = includes
+			.map[getImportedTargetPlatform(parent.eResource, it)]
+			.filterNull
+			.filter[!visited.contains(it)].toList
 		
-		return locationIndex;
+		visited.addAll(importedLocation)
+		
+		return getLocations(visited, importedLocation)
 	}
 
 	/**
