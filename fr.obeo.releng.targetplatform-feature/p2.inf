@@ -1,3 +1,7 @@
-update.id=fr.obeo.releng.targetplatform-feature_3.8.feature.group
-update.range=0.0.0
-update.severity=0
+update.0.id=fr.obeo.releng.targetplatform-feature_3.8.feature.group
+update.0.range=0.0.0
+update.0.severity=0
+
+update.1.id=fr.obeo.releng.targetplatform-feature.feature.group
+update.1.range=0.0.0
+update.1.severity=0
