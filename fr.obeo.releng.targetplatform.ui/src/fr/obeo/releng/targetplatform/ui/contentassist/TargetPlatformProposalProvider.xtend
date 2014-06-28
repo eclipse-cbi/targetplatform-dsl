@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.core.ProvisionException
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
-import org.eclipse.equinox.p2.metadata.MetadataFactory
 import org.eclipse.equinox.p2.query.IQuery
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
@@ -41,7 +40,13 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
  */
 class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvider {
 	
-	var IQuery<IInstallableUnit> iuAssistQuery
+	static val PROP_TYPE_CATEGORY = "org.eclipse.equinox.p2.type.category"; //$NON-NLS-1$
+	static val PROP_TYPE_PRODUCT = "org.eclipse.equinox.p2.type.product"; //$NON-NLS-1$
+
+	static val TARGET_PLATFORM__NAME_PLACEHOLDER = "Target Platform Name"
+	static val INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd"
+	static val LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/"
+	static val LOCATION__ID_PLACEHOLDER = "locationID"
 	
 	static val TARGET_PLATFORM = TargetPlatformFactory.eINSTANCE.createTargetPlatform
 	static val INCLUDE_DECLARATION = TargetPlatformFactory.eINSTANCE.createIncludeDeclaration
@@ -56,10 +61,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	@Inject
 	private IProvisioningAgent provisioningAgent
 	
-	static val TARGET_PLATFORM__NAME_PLACEHOLDER = "Target Platform Name"
-	static val INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd"
-	static val LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/"
-	static val LOCATION__ID_PLACEHOLDER = "locationID"
+	var IQuery<IInstallableUnit> iuAssistQuery
 	
 	new() {
 	}
@@ -87,8 +89,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	private def getIUAssistQuery() {
 		if (iuAssistQuery == null) {
 		  iuAssistQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
-							MetadataFactory.InstallableUnitDescription.PROP_TYPE_CATEGORY, 
-							MetadataFactory.InstallableUnitDescription.PROP_TYPE_PRODUCT)
+							PROP_TYPE_CATEGORY, PROP_TYPE_PRODUCT)
 		}
 		return iuAssistQuery
 	}
@@ -284,7 +285,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 					val results = metadataRepository.query(getIUAssistQuery, wpm.newChild(5)).toUnmodifiableSet()
 					results.filter[!location.ius.map[ID].contains(it.id)].forEach[
 						val allVersions = metadataRepository.query(QueryUtil.createIUQuery(id), wpm.newChild(5))
-						acceptor.accept(createCompletionProposal(id, allVersions.map[version.toString].join(', '), IU, 0, context))
+						acceptor.accept(createCompletionProposal(id, allVersions.iterator.map[version.toString].join(', '), IU, 0, context))
 					]
 				} catch (Exception e) {
 					// a lot of thing can happen while trying to load arbitrary string as a p2 url. Ignore all errors, and do not provide

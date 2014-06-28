@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Kepler 4.3 SDK" sequenceNumber="1402499306">
+<target name="Target Platform DSL 2.1.0" sequenceNumber="1403994546">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.pde.core" version="3.9.1.v20130628-1111"/>
-      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.1.v20140221-1852"/>
-      <unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20140110-1610"/>
-      <unit id="org.eclipse.sdk.feature.group" version="4.3.2.v20140221-1852"/>
-      <repository location="http://download.eclipse.org/releases/kepler"/>
+      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.7.1.R37x_v20110907-9N7sHDdGIUw3H-591a16Tcf5FePP"/>
+      <unit id="org.eclipse.core.runtime.feature.feature.group" version="1.0.1.R37x_v20110907-7H7KFD6BpeIkWN-XxegWjHnQa9Df"/>
+      <unit id="org.eclipse.sdk.feature.group" version="3.7.2.r37x_v20111213-7Q7xALDPb32vCjY6UACVPdFTz-icPtJkUadz0lMmk4z-8"/>
+      <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140519-0339"/>
-      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/core/R201405190339/"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+      <unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.1.0.v20130612-0809"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.9"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.2.0.v20140521-0402"/>
-      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10milestones/xcore/R201405210402/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.0.v201405210727"/>
+      <unit id="org.eclipse.xtext.ui.feature.group" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.runtime.feature.group" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.junit" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.junit4" version="2.6.1.v201406120726"/>
       <unit id="org.objectweb.asm" version="5.0.1.v201404251740"/>
-      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201406120726/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>

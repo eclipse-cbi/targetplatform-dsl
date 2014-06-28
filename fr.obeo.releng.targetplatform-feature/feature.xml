@@ -23,8 +23,8 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.5.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.xtext.ui" version="2.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.6.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.ui" version="2.6.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -36,13 +36,6 @@
 
    <plugin
          id="fr.obeo.releng.targetplatform.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.guava"
          download-size="0"
          install-size="0"
          version="0.0.0"

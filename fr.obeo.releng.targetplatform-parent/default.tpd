@@ -1,0 +1,26 @@
+target "Target Platform DSL 2.1.0"
+
+with source, requirements
+
+location "http://download.eclipse.org/eclipse/updates/3.7" {
+	org.eclipse.equinox.p2.sdk.feature.group
+	org.eclipse.core.runtime.feature.feature.group
+	org.eclipse.sdk.feature.group
+}
+
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.9" {
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.emf.ecore.xcore.sdk.feature.group
+}
+
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201406120726/" {
+	org.eclipse.xtext.ui.feature.group
+	org.eclipse.xtext.runtime.feature.group
+	org.eclipse.xtext.junit
+	org.eclipse.xtext.junit4
+	org.objectweb.asm
+}
+
+location "http://download.itemis.de/updates" {
+	de.itemis.xtext.antlr.sdk.feature.group
+}

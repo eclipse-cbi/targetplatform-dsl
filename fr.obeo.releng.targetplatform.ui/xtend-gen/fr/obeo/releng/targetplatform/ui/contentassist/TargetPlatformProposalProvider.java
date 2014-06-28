@@ -16,6 +16,7 @@ import fr.obeo.releng.targetplatform.ui.contentassist.ReadAndDispatchProgressMon
 import fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActivator;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -28,7 +29,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
-import org.eclipse.equinox.p2.metadata.MetadataFactory;
 import org.eclipse.equinox.p2.metadata.Version;
 import org.eclipse.equinox.p2.query.IQuery;
 import org.eclipse.equinox.p2.query.IQueryResult;
@@ -62,6 +62,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -70,7 +71,17 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvider {
-  private IQuery<IInstallableUnit> iuAssistQuery;
+  private final static String PROP_TYPE_CATEGORY = "org.eclipse.equinox.p2.type.category";
+  
+  private final static String PROP_TYPE_PRODUCT = "org.eclipse.equinox.p2.type.product";
+  
+  private final static String TARGET_PLATFORM__NAME_PLACEHOLDER = "Target Platform Name";
+  
+  private final static String INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd";
+  
+  private final static String LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/";
+  
+  private final static String LOCATION__ID_PLACEHOLDER = "locationID";
   
   private final static TargetPlatform TARGET_PLATFORM = TargetPlatformFactory.eINSTANCE.createTargetPlatform();
   
@@ -90,13 +101,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   @Inject
   private IProvisioningAgent provisioningAgent;
   
-  private final static String TARGET_PLATFORM__NAME_PLACEHOLDER = "Target Platform Name";
-  
-  private final static String INCLUDE_DECLARATION__URI_PLACEHOLDER = "includedFile.tpd";
-  
-  private final static String LOCATION__URI_PLACEHOLDER = "http://p2.repository.url/";
-  
-  private final static String LOCATION__ID_PLACEHOLDER = "locationID";
+  private IQuery<IInstallableUnit> iuAssistQuery;
   
   public TargetPlatformProposalProvider() {
   }
@@ -139,8 +144,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     boolean _equals = Objects.equal(this.iuAssistQuery, null);
     if (_equals) {
       IQuery<IInstallableUnit> _createQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
-        MetadataFactory.InstallableUnitDescription.PROP_TYPE_CATEGORY, 
-        MetadataFactory.InstallableUnitDescription.PROP_TYPE_PRODUCT);
+        TargetPlatformProposalProvider.PROP_TYPE_CATEGORY, TargetPlatformProposalProvider.PROP_TYPE_PRODUCT);
       this.iuAssistQuery = _createQuery;
     }
     return this.iuAssistQuery;
@@ -580,14 +584,15 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
                   SubMonitor _newChild = wpm.newChild(5);
                   final IQueryResult<IInstallableUnit> allVersions = metadataRepository.query(_createIUQuery, _newChild);
                   String _id_1 = it.getId();
+                  Iterator<IInstallableUnit> _iterator = allVersions.iterator();
                   final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
                     public String apply(final IInstallableUnit it) {
                       Version _version = it.getVersion();
                       return _version.toString();
                     }
                   };
-                  Iterable<String> _map = IterableExtensions.<IInstallableUnit, String>map(allVersions, _function);
-                  String _join = IterableExtensions.join(_map, ", ");
+                  Iterator<String> _map = IteratorExtensions.<IInstallableUnit, String>map(_iterator, _function);
+                  String _join = IteratorExtensions.join(_map, ", ");
                   ICompletionProposal _createCompletionProposal = TargetPlatformProposalProvider.this.createCompletionProposal(_id_1, _join, TargetPlatformProposalProvider.IU, 0, context);
                   acceptor.accept(_createCompletionProposal);
                 }
