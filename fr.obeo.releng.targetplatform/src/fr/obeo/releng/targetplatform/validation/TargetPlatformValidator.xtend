@@ -38,6 +38,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
+import com.google.common.collect.LinkedHashMultiset
 
 /**
  * Custom validation rules. 
@@ -407,11 +408,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		
 		val envList = tp.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].toList
 		
-		val allOS = HashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.windowingSystem?.toUpperCase)].filter[knownOSUpperValues.contains(it.toUpperCase)])
-		val allWS = HashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.operatingSystem?.toUpperCase)].filter[knownWSUpperValues.contains(it.toUpperCase)])
-		val allArch = HashMultiset.create(envList.filter[knownArchUpperValues.contains(it.toUpperCase)])
-		val allLocale = HashMultiset.create(envList.filter[knownLocale.contains(it.toUpperCase)])
-		val allEE = HashMultiset.create(envList.filter[knownEE.contains(it.toUpperCase)])
+		val allOS = LinkedHashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.windowingSystem?.toUpperCase)].filter[knownOSUpperValues.contains(it.toUpperCase)])
+		val allWS = LinkedHashMultiset.create(envList.filter[!toUpperCase.equals(tpEnv.operatingSystem?.toUpperCase)].filter[knownWSUpperValues.contains(it.toUpperCase)])
+		val allArch = LinkedHashMultiset.create(envList.filter[knownArchUpperValues.contains(it.toUpperCase)])
+		val allLocale = LinkedHashMultiset.create(envList.filter[knownLocale.contains(it.toUpperCase)])
+		val allEE = LinkedHashMultiset.create(envList.filter[knownEE.contains(it.toUpperCase)])
 		
 		reportDuplicatedEnvironmentOptions(tp, allOS, 'Cannot define multiple operating system.')
 		reportDuplicatedEnvironmentOptions(tp, allWS, 'Cannot define multiple windowing system.')

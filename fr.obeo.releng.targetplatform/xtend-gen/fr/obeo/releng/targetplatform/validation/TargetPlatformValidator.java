@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -1092,7 +1093,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<String> _filter_3 = IterableExtensions.<String>filter(_filter_2, _function_8);
-    final HashMultiset<String> allOS = HashMultiset.<String>create(_filter_3);
+    final LinkedHashMultiset<String> allOS = LinkedHashMultiset.<String>create(_filter_3);
     final Function1<String, Boolean> _function_9 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         String _upperCase = it.toUpperCase();
@@ -1113,7 +1114,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<String> _filter_5 = IterableExtensions.<String>filter(_filter_4, _function_10);
-    final HashMultiset<String> allWS = HashMultiset.<String>create(_filter_5);
+    final LinkedHashMultiset<String> allWS = LinkedHashMultiset.<String>create(_filter_5);
     final Function1<String, Boolean> _function_11 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         String _upperCase = it.toUpperCase();
@@ -1121,7 +1122,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<String> _filter_6 = IterableExtensions.<String>filter(envList, _function_11);
-    final HashMultiset<String> allArch = HashMultiset.<String>create(_filter_6);
+    final LinkedHashMultiset<String> allArch = LinkedHashMultiset.<String>create(_filter_6);
     final Function1<String, Boolean> _function_12 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         String _upperCase = it.toUpperCase();
@@ -1129,7 +1130,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<String> _filter_7 = IterableExtensions.<String>filter(envList, _function_12);
-    final HashMultiset<String> allLocale = HashMultiset.<String>create(_filter_7);
+    final LinkedHashMultiset<String> allLocale = LinkedHashMultiset.<String>create(_filter_7);
     final Function1<String, Boolean> _function_13 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         String _upperCase = it.toUpperCase();
@@ -1137,7 +1138,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<String> _filter_8 = IterableExtensions.<String>filter(envList, _function_13);
-    final HashMultiset<String> allEE = HashMultiset.<String>create(_filter_8);
+    final LinkedHashMultiset<String> allEE = LinkedHashMultiset.<String>create(_filter_8);
     this.reportDuplicatedEnvironmentOptions(tp, allOS, "Cannot define multiple operating system.");
     this.reportDuplicatedEnvironmentOptions(tp, allWS, "Cannot define multiple windowing system.");
     this.reportDuplicatedEnvironmentOptions(tp, allArch, "Cannot define multiple processor architecture.");
