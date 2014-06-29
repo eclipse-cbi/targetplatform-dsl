@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Target Platform DSL 2.1.0" sequenceNumber="1403994546">
+<target name="Target Platform DSL 2.1.0" sequenceNumber="1404033635">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.7.1.R37x_v20110907-9N7sHDdGIUw3H-591a16Tcf5FePP"/>
-      <unit id="org.eclipse.core.runtime.feature.feature.group" version="1.0.1.R37x_v20110907-7H7KFD6BpeIkWN-XxegWjHnQa9Df"/>
       <unit id="org.eclipse.sdk.feature.group" version="3.7.2.r37x_v20111213-7Q7xALDPb32vCjY6UACVPdFTz-icPtJkUadz0lMmk4z-8"/>
       <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
     </location>
@@ -16,10 +15,13 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.ui.feature.group" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.ui.source.feature.group" version="2.6.1.v201406120726"/>
       <unit id="org.eclipse.xtext.runtime.feature.group" version="2.6.1.v201406120726"/>
-      <unit id="org.eclipse.xtext.junit" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.runtime.source.feature.group" version="2.6.1.v201406120726"/>
       <unit id="org.eclipse.xtext.junit4" version="2.6.1.v201406120726"/>
+      <unit id="org.eclipse.xtext.junit4.source" version="2.6.1.v201406120726"/>
       <unit id="org.objectweb.asm" version="5.0.1.v201404251740"/>
+      <unit id="org.objectweb.asm.source" version="5.0.1.v201404251740"/>
       <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201406120726/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
