@@ -8,6 +8,8 @@ The greatest thing about this tool is that it avoids you to manage the links to 
 
 !http://s21.postimg.org/4jw573f5z/targetplatform_editor.png(The targetplatform DSL editor)!
 
+!http://s27.postimg.org/kbb16lkn7/targetplatform_completion.png(Content assist example)!
+
 h2. Installation
 
 Add the following p2 repository (update-site) in your update manager (in Eclipse, @Help Menu > Install New Software...@, @Add...@ button on the top right corner)
