@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Obeo.
+ * Copyright (c) 2014 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,9 +22,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
- * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>
+ * @author <a href="mailto:cedric.brun@obeo.fr">Cedric Brun</a>
  */
-public class ConvertTargetPlatform extends AbstractHandler {
+public class SetAsTargetPlatform extends AbstractHandler {
 
 	/**
 	 * {@inheritDoc}
@@ -38,7 +38,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 			List<?> selectedObjects = ((IStructuredSelection) selection).toList();
 			for (Object selectedObject : selectedObjects) {
 				if (selectedObject instanceof IFile) {
-					scheduleJob((IFile) selectedObject,selectedObjects.size() <= 1);
+					scheduleJob((IFile) selectedObject, selectedObjects.size() <= 1);
 				}
 			}
 		}
@@ -46,7 +46,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 	}
 
 	private void scheduleJob(final IFile selectedElement, boolean userJob) {
-		Job job = new ConvertTargetPlatformJob("Creating target platform definition file", selectedElement, false);
+		Job job = new ConvertTargetPlatformJob("Set as current target platform", selectedElement, true);
 		job.setUser(userJob);
 		job.schedule();
 	}

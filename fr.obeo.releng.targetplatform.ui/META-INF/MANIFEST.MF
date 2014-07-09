@@ -20,7 +20,8 @@ Require-Bundle: fr.obeo.releng.targetplatform;visibility:=reexport,
  org.eclipse.jdt.launching,
  org.eclipse.equinox.p2.repository,
  org.eclipse.equinox.p2.core,
- org.eclipse.equinox.p2.metadata
+ org.eclipse.equinox.p2.metadata,
+ org.eclipse.pde.core;bundle-version="3.8.0"
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

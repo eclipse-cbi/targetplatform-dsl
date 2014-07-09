@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Target Platform DSL 2.1.1" sequenceNumber="1405094772">
+<target name="Target Platform DSL 2.1.1" sequenceNumber="1405095780">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.7.1.R37x_v20110907-9N7sHDdGIUw3H-591a16Tcf5FePP"/>
-      <unit id="org.eclipse.sdk.feature.group" version="3.7.2.r37x_v20111213-7Q7xALDPb32vCjY6UACVPdFTz-icPtJkUadz0lMmk4z-8"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
+      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20120913-155553-9N89H_oGMMn84_uucqpkwz0bBdLL"/>
+      <unit id="org.eclipse.sdk.feature.group" version="3.8.2.v20130116-114247-7Q85DVDQQ3JLtb_hNUm3_MTesRM5RqdjCSfXEI7waiJ_N"/>
+      <unit id="org.eclipse.pde.core" version="3.8.1.v20130115-200504"/>
+      <repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140519-0339"/>
