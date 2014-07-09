@@ -42,6 +42,8 @@ h2. Basic usage
 
 !http://s21.postimg.org/r61gjtsw7/targetplatform_validateresult.png(The validation result)!
 
+* To activate the target platform, you can either use the "Set as Target Platform" action which is available on right-clicking on a .targetplatform file, or use the CTRL+R keybinding.
+
 h3. Syntax
 
 An empty file is a valid file.
