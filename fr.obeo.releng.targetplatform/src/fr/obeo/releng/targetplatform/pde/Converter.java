@@ -11,14 +11,19 @@
 package fr.obeo.releng.targetplatform.pde;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -34,8 +39,10 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.io.Closeables;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -50,6 +57,8 @@ import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
  *
  */
 public class Converter {
+
+	private static final Pattern SEQUENCE_NUMBER__PATTERN = Pattern.compile("sequenceNumber\\s*=\\s*\"[0-9]+\"");
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
@@ -158,25 +167,53 @@ public class Converter {
 		TargetDefinitionGenerator generator = new TargetDefinitionGenerator();
 		String xml = generator.generate(resolvedTargetPlatform, (int)TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
 		final URI targetDefinitionLocation = uri.trimFileExtension().appendFileExtension("target");
-		try {
-			serialize(targetDefinitionLocation, xml);
-		} catch (Exception e) {
-			ret.merge(BasicDiagnostic.toDiagnostic(e));
+		
+		Diagnostic diagnostic = serialize(targetDefinitionLocation, xml);
+		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+			ret.merge(diagnostic);
 		}
+		
 		return ret;
 	}
 
-	private void serialize(URI targetPlatformLocation, String xml) throws IOException {
+	private Diagnostic serialize(URI targetPlatformLocation, String xml) {
+		BasicDiagnostic ret = new BasicDiagnostic();
 		URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
-		OutputStream outputStream = null;
-		try {
-			outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())));
-			outputStream.write(xml.getBytes());
-		} catch (Exception e) {
-			Throwables.propagate(e);
-		} finally {
-			Closeables.close(outputStream, false);
+		
+		if (hasContentDifferencesOtherThanSequenceNumber(targetDefinitionLocation, xml)) {
+			OutputStream outputStream = null;
+			try {
+				outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())));
+				outputStream.write(xml.getBytes());
+			} catch (Exception e) {
+				ret.merge(BasicDiagnostic.toDiagnostic(e));
+			} finally {
+				try {
+					Closeables.close(outputStream, true);
+				} catch (IOException e) {
+					// swallowed
+				}
+			}
+		} else {
+			ret.merge(new BasicDiagnostic(Diagnostic.INFO, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target definition '"+targetDefinitionLocation+"' did not changed since previous generation, we did not overwrote it.", null));
 		}
+		
+		return ret;
+	}
+
+	private boolean hasContentDifferencesOtherThanSequenceNumber(URI targetDefinitionLocation, String xml) {
+		try {
+			File targetDefinition = new File(targetDefinitionLocation.toFileString());
+			if (targetDefinition.exists()) {
+				String oldXml = Files.toString(targetDefinition, Charsets.UTF_8);
+				oldXml = SEQUENCE_NUMBER__PATTERN.matcher(oldXml).replaceFirst("");
+				String newXml = SEQUENCE_NUMBER__PATTERN.matcher(xml).replaceFirst("");
+				return !oldXml.equals(newXml);
+			}
+		} catch (IOException e) {
+			TargetPlatformBundleActivator.getInstance().getLog().log(new Status(IStatus.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, e.getMessage()));
+		}
+		return true;
 	}
 
 	private Resource loadTargetPlatform(URI fileLocation) {
