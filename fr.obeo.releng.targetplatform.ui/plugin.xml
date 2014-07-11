@@ -408,12 +408,65 @@
            </with>
         </activeWhen>
      </handler>
+     <handler
+           class="fr.obeo.releng.targetplatform.ui.handler.SetAsTargetPlatform"
+           commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform">
+        <activeWhen>
+             <with
+                 variable="selection">
+              <and>
+                 <count
+                       value="1">
+                 </count>
+                 <iterate
+                       ifEmpty="false"
+                       operator="and">
+                    <instanceof
+                          value="org.eclipse.core.resources.IFile">
+                    </instanceof>
+                    <or>
+                       <adapt
+                             type="org.eclipse.core.resources.IFile">
+                          <test
+                                property="org.eclipse.core.resources.extension"
+                                value="targetplatform">
+                          </test>
+                       </adapt>
+                       <adapt
+                             type="org.eclipse.core.resources.IFile">
+                          <test
+                                property="org.eclipse.core.resources.extension"
+                                value="tpd">
+                          </test>
+                       </adapt>
+                    </or>
+                 </iterate>
+              </and>
+           </with>
+        </activeWhen>
+     </handler>
+     <handler
+           class="fr.obeo.releng.targetplatform.ui.handler.SetAsTargetPlatformFromEditor"
+           commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform">
+        <activeWhen>
+            <reference
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
+            </reference>            
+        </activeWhen>
+     </handler>
   </extension>
   <extension
         point="org.eclipse.ui.commands">
      <command
            id="fr.obeo.releng.targetplatform.ui.convertTargetPlatform"
            name="Create Target Definition File">
+     </command>
+  </extension>
+    <extension
+        point="org.eclipse.ui.commands">
+     <command
+           id="fr.obeo.releng.targetplatform.ui.setTargetPlatform"
+           name="Set as Target Platform">
      </command>
   </extension>
   <extension
@@ -429,6 +482,38 @@
            </visibleWhen>
         </command>
      </menuContribution>
+  </extension>  
+    <extension
+        point="org.eclipse.ui.menus">
+     <menuContribution
+           allPopups="false"
+           locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <command
+              commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform"
+              style="push">
+           <visibleWhen
+                 checkEnabled="true">
+           </visibleWhen>
+        </command>
+     </menuContribution>
+  </extension>  
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="Target Platform Editor Context"
+            id="fr.obeo.releng.targetplatform.ui.TargetPlatformEditorScope"
+            name="Target Platform Editor Context"
+            parentId="org.eclipse.xtext.ui.XtextEditorScope">
+      </context>
+   </extension>
+  <extension
+        point="org.eclipse.ui.bindings">
+     <key
+           commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform"
+           contextId="org.eclipse.ui.contexts.dialogAndWindow"
+           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+           sequence="M1+R">
+     </key>
   </extension>
 
 </plugin>

@@ -22,10 +22,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
- * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>
+ * @author <a href="mailto:cedric.brun@obeo.fr">Cedric Brun</a>
  *
  */
-public class ConvertTargetPlatform extends AbstractHandler {
+public class SetAsTargetPlatform extends AbstractHandler {
 
 	/**
 	 * {@inheritDoc}
@@ -34,7 +34,6 @@ public class ConvertTargetPlatform extends AbstractHandler {
 	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof IStructuredSelection) {
 			List<?> selectedObjects = ((IStructuredSelection) selection)
@@ -52,8 +51,7 @@ public class ConvertTargetPlatform extends AbstractHandler {
 
 	private void scheduleJob(final IFile selectedElement, boolean userJob) {
 		Job job = new ConvertTargetPlatformJob(
-				"Creating target platform definition file", selectedElement,
-				false);
+				"Set as current target platform", selectedElement, true);
 		job.setUser(userJob);
 		job.schedule();
 	}
