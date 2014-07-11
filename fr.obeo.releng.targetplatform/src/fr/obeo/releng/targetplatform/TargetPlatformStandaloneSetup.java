@@ -2,8 +2,11 @@
 package fr.obeo.releng.targetplatform;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import com.google.inject.Injector;
+
+import fr.obeo.releng.targetplatform.resource.B3AggrConResourceFactory;
 
 /**
  * Initialization support for running Xtext languages 
@@ -13,6 +16,11 @@ public class TargetPlatformStandaloneSetup extends TargetPlatformStandaloneSetup
 
 	public static void doSetup() {
 		new TargetPlatformStandaloneSetup().createInjectorAndDoEMFRegistration();
+		/*
+		 * add support for b3aggr models
+		 */
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("b3aggrcon", new B3AggrConResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("b3aggr", new B3AggrConResourceFactory());
 	}
 	
 	@Override
