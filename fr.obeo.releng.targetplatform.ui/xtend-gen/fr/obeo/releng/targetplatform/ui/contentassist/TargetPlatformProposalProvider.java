@@ -968,6 +968,18 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
               }
             };
             IterableExtensions.<IInstallableUnit>forEach(results, _function);
+            boolean _isEmpty = results.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append(prefix, "");
+              _builder.append("lazy");
+              StringConcatenation _builder_1 = new StringConcatenation();
+              _builder_1.append("lazy");
+              Image _image = TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU);
+              ICompletionProposal _createCompletionProposal = TargetPlatformProposalProvider.this.createCompletionProposal(_builder.toString(), _builder_1.toString(), _image, context);
+              acceptor.accept(_createCompletionProposal);
+            }
           } catch (final Throwable _t) {
             if (_t instanceof IllegalStateException) {
               final IllegalStateException e = (IllegalStateException)_t;

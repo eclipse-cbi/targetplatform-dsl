@@ -448,6 +448,9 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 					acceptor.accept(createCompletionProposal('''«prefix»[«major».«minor».«micro»,«major».«minor».«micro+1»)''', '''[«major».«minor».«micro»,«major».«minor».«micro+1»)''', getImage(IU), context))
 					acceptor.accept(createCompletionProposal('''«prefix»[«version»,«version»]''', '''[«version»,«version»]''', getImage(IU), context))
 				]
+				if (!results.empty) {
+					acceptor.accept(createCompletionProposal('''«prefix»lazy''', '''lazy''', getImage(IU), context))
+				}
 			} catch (IllegalStateException e) {
 			} catch (ProvisionException e) {
 			} catch (OperationCanceledException e) {

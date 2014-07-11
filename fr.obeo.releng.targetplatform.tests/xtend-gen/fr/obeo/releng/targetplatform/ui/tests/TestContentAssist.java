@@ -678,7 +678,8 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
         "[1.2.0,1.2.1)", 
         "[1.2.0,1.3.0)", 
         "[1.2.0,2.0.0)", 
-        "[1.2.0,1.2.0]");
+        "[1.2.0,1.2.0]", 
+        "lazy");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -724,7 +725,8 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
         "[3.9.0,3.9.1)", 
         "[3.9.0,3.10.0)", 
         "[3.9.0,4.0.0)", 
-        "[3.9.0,3.9.0]");
+        "[3.9.0,3.9.0]", 
+        "lazy");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -802,7 +804,8 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
         " [1.2.0,1.2.1)", 
         " [1.2.0,1.3.0)", 
         " [1.2.0,2.0.0)", 
-        " [1.2.0,1.2.0]");
+        " [1.2.0,1.2.0]", 
+        " lazy");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
