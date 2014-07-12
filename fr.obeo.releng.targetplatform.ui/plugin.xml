@@ -497,15 +497,6 @@
         </command>
      </menuContribution>
   </extension>  
-   <extension
-         point="org.eclipse.ui.contexts">
-      <context
-            description="Target Platform Editor Context"
-            id="fr.obeo.releng.targetplatform.ui.TargetPlatformEditorScope"
-            name="Target Platform Editor Context"
-            parentId="org.eclipse.xtext.ui.XtextEditorScope">
-      </context>
-   </extension>
   <extension
         point="org.eclipse.ui.bindings">
      <key
