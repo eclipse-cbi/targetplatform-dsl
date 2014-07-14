@@ -1793,7 +1793,7 @@ public class TestTargetConversion {
       _builder_1.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
       _builder_1.newLine();
       org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
-      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
       MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
         public List<IInstallableUnit> listIUs(final URI location) {
@@ -1862,7 +1862,7 @@ public class TestTargetConversion {
       _builder_1.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
       _builder_1.newLine();
       org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
-      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("target \"TP3\"");
       _builder_2.newLine();
@@ -1871,7 +1871,7 @@ public class TestTargetConversion {
       _builder_2.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
       _builder_2.newLine();
       org.eclipse.emf.common.util.URI _createURI_2 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd");
-      final TargetPlatform tp3 = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      this.parser.parse(_builder_2, _createURI_2, resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
       MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
         public List<IInstallableUnit> listIUs(final URI location) {
@@ -1940,7 +1940,7 @@ public class TestTargetConversion {
       _builder_1.append("location \"http://download.eclipse.org/egit/updates-3.3\"");
       _builder_1.newLine();
       org.eclipse.emf.common.util.URI _createURI_1 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd");
-      final TargetPlatform tp2 = this.parser.parse(_builder_1, _createURI_1, resourceSet);
+      this.parser.parse(_builder_1, _createURI_1, resourceSet);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("target \"TP3\"");
       _builder_2.newLine();
@@ -1949,7 +1949,7 @@ public class TestTargetConversion {
       _builder_2.append("location \"http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler\"");
       _builder_2.newLine();
       org.eclipse.emf.common.util.URI _createURI_2 = org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd");
-      final TargetPlatform tp3 = this.parser.parse(_builder_2, _createURI_2, resourceSet);
+      this.parser.parse(_builder_2, _createURI_2, resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
       MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
         public List<IInstallableUnit> listIUs(final URI location) {

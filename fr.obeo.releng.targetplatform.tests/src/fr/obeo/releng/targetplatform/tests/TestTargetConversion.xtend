@@ -848,7 +848,7 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
-		val tp2 = parser.parse('''
+		parser.parse('''
 			target "TP2"
 			location "http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/"
 			location "http://download.eclipse.org/egit/updates-3.3"
@@ -879,13 +879,13 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/"
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/"
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
-		val tp2 = parser.parse('''
+		parser.parse('''
 			target "TP2"
 			include "tp3.tpd"
 			location "http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/"
 			location "http://download.eclipse.org/egit/updates-3.3"
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
-		val tp3 = parser.parse('''
+		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"
 			location "http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler"
@@ -916,12 +916,12 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/"
 			location "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/"
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
-		val tp2 = parser.parse('''
+		parser.parse('''
 			target "TP2"
 			location "http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/"
 			location "http://download.eclipse.org/egit/updates-3.3"
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
-		val tp3 = parser.parse('''
+		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"
 			location "http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler"

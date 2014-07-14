@@ -32,6 +32,7 @@ import com.google.common.base.Optional;
  * 
  * @author <a href="mailto:cedric.brun@obeo.fr">Cedric Brun</a>
  */
+@SuppressWarnings("restriction")
 public class PDEIntegration {
 
 	private Optional<ITargetPlatformService> service;

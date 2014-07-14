@@ -32,6 +32,7 @@ import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 
 
+@SuppressWarnings("restriction")
 public class ResolvedLocation {
 	private final String id;
 	private final URI uri;
