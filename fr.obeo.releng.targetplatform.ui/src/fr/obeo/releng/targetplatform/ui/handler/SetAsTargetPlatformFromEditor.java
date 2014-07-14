@@ -43,7 +43,7 @@ public class SetAsTargetPlatformFromEditor extends AbstractHandler {
 	}
 
 	private void scheduleJob(final IFile selectedElement, boolean userJob) {
-		Job job = new ConvertTargetPlatformJob("Set as current target platform", selectedElement, true);
+		Job job = new ConvertTargetPlatformJob("Setting target platform definition file", selectedElement, true);
 		job.setUser(userJob);
 		job.schedule();
 	}

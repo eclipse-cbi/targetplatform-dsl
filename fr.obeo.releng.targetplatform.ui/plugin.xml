@@ -446,6 +446,15 @@
         </activeWhen>
      </handler>
      <handler
+           class="fr.obeo.releng.targetplatform.ui.handler.ConvertTargetPlatformFromEditor"
+           commandId="fr.obeo.releng.targetplatform.ui.convertTargetPlatform">
+        <activeWhen>
+            <reference
+                    definitionId="fr.obeo.releng.targetplatform.TargetPlatform.Editor.opened">
+            </reference>            
+        </activeWhen>
+     </handler>
+     <handler
            class="fr.obeo.releng.targetplatform.ui.handler.SetAsTargetPlatformFromEditor"
            commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform">
         <activeWhen>
@@ -461,9 +470,6 @@
            id="fr.obeo.releng.targetplatform.ui.convertTargetPlatform"
            name="Create Target Definition File">
      </command>
-  </extension>
-    <extension
-        point="org.eclipse.ui.commands">
      <command
            id="fr.obeo.releng.targetplatform.ui.setTargetPlatform"
            name="Set as Target Platform">
@@ -482,9 +488,6 @@
            </visibleWhen>
         </command>
      </menuContribution>
-  </extension>  
-    <extension
-        point="org.eclipse.ui.menus">
      <menuContribution
            allPopups="false"
            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
@@ -499,6 +502,12 @@
   </extension>  
   <extension
         point="org.eclipse.ui.bindings">
+     <key
+           commandId="fr.obeo.releng.targetplatform.ui.convertTargetPlatform"
+           contextId="org.eclipse.ui.contexts.dialogAndWindow"
+           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+           sequence="M3+R">
+     </key>
      <key
            commandId="fr.obeo.releng.targetplatform.ui.setTargetPlatform"
            contextId="org.eclipse.ui.contexts.dialogAndWindow"

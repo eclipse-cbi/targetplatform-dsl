@@ -94,6 +94,7 @@ public class ConvertTargetPlatformJob extends Job {
 						e.getMessage(), e);
 			}
 		}
+
 		if (diagnostic != null) {
 			return BasicDiagnostic.toIStatus(diagnostic);
 		} else {
