@@ -18,7 +18,7 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 Then, select the _Target Platform Definition DSL and Generator_ feature and click on @Finish@.
 
-bq. This tool requires Xtext 2.6.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/releases/*
+bq. This tool requires Xtext 2.6.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/*
 
 h3. Requirements
 
@@ -26,13 +26,13 @@ h3. Requirements
 
 * Eclipse 3.7+ (tested on 3.8/4.2 and 4.3)
 
-* Xtext 2.6.0+
+* Xtext 2.7.0+
 
 h2. Basic usage
 
 * Create a file with @.tpd@ extension
 
-* Once done, right-click on the file and select _Create Target Definition File_
+* Once done, right-click on the file and select _Create Target Definition File_. You can also use the the keyboard shortcut @Alt + R@ (@⌥ Alt + R@ on Mac).
 
 !http://imageshack.com/a/img200/2008/5jb1.png(The right-click command)!
 
@@ -42,7 +42,7 @@ h2. Basic usage
 
 !http://s21.postimg.org/r61gjtsw7/targetplatform_validateresult.png(The validation result)!
 
-* To activate the target platform, you can either use the "Set as Target Platform" action which is available on right-clicking on a .targetplatform file, or use the CTRL+R keybinding.
+* To activate the target platform, you can either use the "Set as Target Platform" action which is available on right-clicking on a @.tpd@ file, or use the @Ctrl + R@ (@⌘ Cmd + R@ on Mac) keybinding.
 
 h3. Syntax
 
