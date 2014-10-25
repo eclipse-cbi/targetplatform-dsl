@@ -6,9 +6,9 @@ Target Platform Definition DSL and Generator provides a DSL with an advanced edi
 
 The greatest thing about this tool is that it avoids you to manage the links to strict versions (e.g., @3.2.5.v20093493-sfoit-v-rrel@) in @.target@ files. It lets you define the bundles and features you want to use in your target platform and it handles the generation of the @.target@ file with the most recent available version. It is possible to restrict the lookup within a version range.
 
-!http://s21.postimg.org/4jw573f5z/targetplatform_editor.png(The targetplatform DSL editor)!
+!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/editor-outline.png(The targetplatform DSL editor)!
 
-!http://s27.postimg.org/kbb16lkn7/targetplatform_completion.png(Content assist example)!
+!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/completion.png(Content assist example)!
 
 h2. Installation
 
@@ -18,7 +18,7 @@ Add the following p2 repository (update-site) in your update manager (in Eclipse
 
 Then, select the _Target Platform Definition DSL and Generator_ feature and click on @Finish@.
 
-bq. This tool requires Xtext 2.6.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/*
+bq. This tool requires Xtext 2.7.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/*
 
 h3. Requirements
 
@@ -34,13 +34,13 @@ h2. Basic usage
 
 * Once done, right-click on the file and select _Create Target Definition File_. You can also use the the keyboard shortcut @Alt + R@ (@⌥ Alt + R@ on Mac).
 
-!http://imageshack.com/a/img200/2008/5jb1.png(The right-click command)!
+!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/context-menu.png(The right-click command)!
 
 * You can also right-click on an opened file and choose @Validate@, it will look for any error and will also check if all repositories are available and if all specified installation unit are available within the repository (and respecting the version range if any).
 
-!http://s21.postimg.org/xxrvmohvr/targetplatform_validate_action.png(The right-click validate command)!
+!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validate-action.png(The right-click validate command)!
 
-!http://s21.postimg.org/r61gjtsw7/targetplatform_validateresult.png(The validation result)!
+!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validation-error.png(The validation result)!
 
 * To activate the target platform, you can either use the "Set as Target Platform" action which is available on right-clicking on a @.tpd@ file, or use the @Ctrl + R@ (@⌘ Cmd + R@ on Mac) keybinding.
 
