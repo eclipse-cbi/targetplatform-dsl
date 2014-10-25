@@ -1,6 +1,5 @@
 package fr.obeo.releng.targetplatform.tests;
 
-import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -16,6 +15,8 @@ import org.eclipse.equinox.p2.metadata.ITouchpointType;
 import org.eclipse.equinox.p2.metadata.IUpdateDescriptor;
 import org.eclipse.equinox.p2.metadata.Version;
 import org.eclipse.equinox.p2.metadata.expression.IMatchExpression;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class MockIU implements IInstallableUnit {
@@ -40,11 +41,8 @@ public class MockIU implements IInstallableUnit {
   }
   
   public static MockIU createFeature(final String id, final Version version) {
-    Map<String, String> _xsetliteral = null;
-    Map<String, String> _tempMap = Maps.<String, String>newHashMap();
-    _tempMap.put("org.eclipse.equinox.p2.type.group", "true");
-    _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
-    return new MockIU(id, version, _xsetliteral);
+    Pair<String, String> _mappedTo = Pair.<String, String>of("org.eclipse.equinox.p2.type.group", "true");
+    return new MockIU(id, version, Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
   }
   
   public Collection<IArtifactKey> getArtifacts() {

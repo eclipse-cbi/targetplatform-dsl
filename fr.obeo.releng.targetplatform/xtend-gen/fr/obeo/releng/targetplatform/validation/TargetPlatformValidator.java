@@ -917,9 +917,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(_executionEnvironments)), _function_5);
-    boolean _hasNext = dupEnvIt.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
+    while (dupEnvIt.hasNext()) {
       {
         String _next = dupEnvIt.next();
         final String envValue = _next.toUpperCase();
@@ -956,8 +954,6 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           dupEnvIt.remove();
         }
       }
-      boolean _hasNext_1 = dupEnvIt.hasNext();
-      _while = _hasNext_1;
     }
     for (final String errorEnv : dupEnv) {
       StringConcatenation _builder = new StringConcatenation();

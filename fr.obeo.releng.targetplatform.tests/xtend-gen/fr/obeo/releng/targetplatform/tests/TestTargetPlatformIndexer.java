@@ -1,7 +1,6 @@
 package fr.obeo.releng.targetplatform.tests;
 
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import fr.obeo.releng.targetplatform.Location;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -59,7 +59,7 @@ public class TestTargetPlatformIndexer {
       _builder_3.append("target \"c\" include \"j.tpd\" include \"k.tpd\" include \"l.tpd\"");
       URI _createURI_3 = URI.createURI("tmp:/c.tpd");
       this.parser.parse(_builder_3, _createURI_3, resourceSet);
-      for (final String tp : Collections.<String>unmodifiableList(Lists.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
+      for (final String tp : Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
         StringConcatenation _builder_4 = new StringConcatenation();
         _builder_4.append("target \"");
         _builder_4.append(tp, "");
@@ -79,7 +79,7 @@ public class TestTargetPlatformIndexer {
       };
       List<String> _map = ListExtensions.<TargetPlatform, String>map(_importedTargetPlatforms, _function);
       Assert.assertEquals(
-        Collections.<String>unmodifiableList(Lists.<String>newArrayList("c", "b", "a", "l", "k", "j", "i", "h", "g", "f", "e", "d")), _map);
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("c", "b", "a", "l", "k", "j", "i", "h", "g", "f", "e", "d")), _map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -119,7 +119,7 @@ public class TestTargetPlatformIndexer {
       _builder_3.append("location \"c1\"");
       URI _createURI_3 = URI.createURI("tmp:/c.tpd");
       this.parser.parse(_builder_3, _createURI_3, resourceSet);
-      for (final String tp : Collections.<String>unmodifiableList(Lists.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
+      for (final String tp : Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
         StringConcatenation _builder_4 = new StringConcatenation();
         _builder_4.append("target \"");
         _builder_4.append(tp, "");
@@ -215,7 +215,7 @@ public class TestTargetPlatformIndexer {
       _builder_3.append("location \"c1\"");
       URI _createURI_3 = URI.createURI("tmp:/c.tpd");
       this.parser.parse(_builder_3, _createURI_3, resourceSet);
-      for (final String tp : Collections.<String>unmodifiableList(Lists.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
+      for (final String tp : Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("d", "e", "f", "g", "h", "i", "j", "k", "l"))) {
         StringConcatenation _builder_4 = new StringConcatenation();
         _builder_4.append("target \"");
         _builder_4.append(tp, "");

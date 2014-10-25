@@ -16,23 +16,23 @@ location "http://download.eclipse.org/modeling/emf/emf/updates/2.10" {
 	org.eclipse.emf.ecore.xcore.source.feature.group [1.2.0,2.0.0)
 }
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201407030533" {
-	org.eclipse.xtext.ui.feature.group [2.6.2,3.0.0)
-	org.eclipse.xtext.ui.source.feature.group [2.6.2,3.0.0)
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201409160908/" {
+	org.eclipse.xtext.ui.feature.group [2.7.2,3.0.0)
+	org.eclipse.xtext.ui.source.feature.group [2.7.2,3.0.0)
 	
-	org.eclipse.xtext.runtime.feature.group [2.6.2,3.0.0)
-	org.eclipse.xtext.runtime.source.feature.group [2.6.2,3.0.0)
+	org.eclipse.xtext.runtime.feature.group [2.7.2,3.0.0)
+	org.eclipse.xtext.runtime.source.feature.group [2.7.2,3.0.0)
 	
-	org.eclipse.xtext.junit4 [2.6.2,3.0.0)
-	org.eclipse.xtext.junit4.source [2.6.2,3.0.0)
+	org.eclipse.xtext.junit4 [2.7.2,3.0.0)
+	org.eclipse.xtext.junit4.source [2.7.2,3.0.0)
 	
 	org.objectweb.asm 
 	org.objectweb.asm.source
 }
 
 // required for resolving dependencies of Xtext
-location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201406110919/mwe"
-location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201406120758/mwe2lang/"
+location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021027/mwe/"
+location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021051/mwe2lang/"
 location "http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201406030414"
 
 location "http://download.itemis.de/updates/releases/2.1.1" {

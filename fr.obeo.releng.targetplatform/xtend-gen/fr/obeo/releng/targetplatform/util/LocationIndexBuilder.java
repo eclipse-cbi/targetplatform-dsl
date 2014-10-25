@@ -121,10 +121,7 @@ public class LocationIndexBuilder {
     final LinkedList<TargetPlatform> includeRet = CollectionLiterals.<TargetPlatform>newLinkedList();
     queue.addLast(targetPlatform);
     visited.add(targetPlatform);
-    boolean _isEmpty = queue.isEmpty();
-    boolean _not = (!_isEmpty);
-    boolean _while = _not;
-    while (_while) {
+    while ((!queue.isEmpty())) {
       {
         final LinkedList<TargetPlatform> tr = CollectionLiterals.<TargetPlatform>newLinkedList();
         final TargetPlatform t = queue.removeLast();
@@ -139,8 +136,8 @@ public class LocationIndexBuilder {
         Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
         for (final TargetPlatform unvisited : _filterNull) {
           boolean _contains = visited.contains(unvisited);
-          boolean _not_1 = (!_contains);
-          if (_not_1) {
+          boolean _not = (!_contains);
+          if (_not) {
             visited.add(unvisited);
             queue.addLast(unvisited);
             tr.addFirst(unvisited);
@@ -148,9 +145,6 @@ public class LocationIndexBuilder {
         }
         includeRet.addAll(tr);
       }
-      boolean _isEmpty_1 = queue.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      _while = _not_1;
     }
     return includeRet;
   }
