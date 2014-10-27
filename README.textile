@@ -34,6 +34,8 @@ h2. Basic usage
 
 * Once done, right-click on the file and select _Create Target Definition File_. You can also use the the keyboard shortcut @Alt + R@ (@⌥ Alt + R@ on Mac).
 
+* To activate the target platform, you can either use the _Set as Target Platform_ action which is available on right-clicking on a @.tpd@ file, or use the @Ctrl + R@ (@⌘ Cmd + R@ on Mac) keybinding.
+
 !http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/context-menu.png(The right-click command)!
 
 * You can also right-click on an opened file and choose @Validate@, it will look for any error and will also check if all repositories are available and if all specified installation unit are available within the repository (and respecting the version range if any).
@@ -41,8 +43,6 @@ h2. Basic usage
 !http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validate-action.png(The right-click validate command)!
 
 !http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validation-error.png(The validation result)!
-
-* To activate the target platform, you can either use the "Set as Target Platform" action which is available on right-clicking on a @.tpd@ file, or use the @Ctrl + R@ (@⌘ Cmd + R@ on Mac) keybinding.
 
 h3. Syntax
 
