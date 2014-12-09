@@ -41,6 +41,11 @@ class TestGrammar {
 			location "https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/" {
 				org.eclipse.uml2.sdk.feature.group
 			}
+			
+			location "https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/" {
+				org.eclipse.uml2.sdk.feature.group;version=10.1.1.20141228-2310-BUILD1 
+			}
+			
 		''')
 		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
