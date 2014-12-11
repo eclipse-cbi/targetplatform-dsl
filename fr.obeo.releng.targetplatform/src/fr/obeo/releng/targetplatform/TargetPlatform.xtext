@@ -46,7 +46,7 @@ IU:
 ;
 
 Version hidden():
-	INT ('.' INT ('.' INT ('.' (ID|INT))?)?)?
+	INT ('.' INT ('.' INT ('.' (ID|INT|QUALIFIER))?)?)?
 ;
 
 VersionRange hidden (WS):
@@ -55,3 +55,4 @@ VersionRange hidden (WS):
 
 terminal INT returns ecore::EInt: ('0'..'9')+;
 terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
+terminal QUALIFIER: ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
