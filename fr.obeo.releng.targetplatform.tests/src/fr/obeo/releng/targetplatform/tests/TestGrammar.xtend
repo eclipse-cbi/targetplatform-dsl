@@ -64,7 +64,7 @@ class TestGrammar {
 		assertEquals(1, lastLocation.ius.size)
 		val uml2iu = lastLocation.ius.head
 		assertEquals("org.eclipse.uml2.sdk.feature.group", uml2iu.ID)
-		assertEquals(null, uml2iu.version)
+		assertEquals("10.1.1.20141228-2310-BUILD1", uml2iu.version)
 	}
 	
 	@Test

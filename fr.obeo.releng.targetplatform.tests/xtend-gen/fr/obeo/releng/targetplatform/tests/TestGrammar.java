@@ -119,7 +119,7 @@ public class TestGrammar {
       String _iD_2 = uml2iu.getID();
       Assert.assertEquals("org.eclipse.uml2.sdk.feature.group", _iD_2);
       String _version_2 = uml2iu.getVersion();
-      Assert.assertEquals(null, _version_2);
+      Assert.assertEquals("10.1.1.20141228-2310-BUILD1", _version_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
