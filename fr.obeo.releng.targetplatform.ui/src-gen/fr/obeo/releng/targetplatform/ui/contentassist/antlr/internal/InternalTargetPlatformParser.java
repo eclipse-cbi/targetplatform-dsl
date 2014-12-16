@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalTargetPlatformParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'lazy'", "'('", "'['", "')'", "']'", "'requirements'", "'allEnvironments'", "'source'", "'configurePhase'", "'target'", "'with'", "','", "'environment'", "'include'", "'location'", "'{'", "'}'", "';'", "'version'", "'='", "'.'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_QUALIFIER", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'lazy'", "'('", "'['", "')'", "']'", "'requirements'", "'allEnvironments'", "'source'", "'configurePhase'", "'target'", "'with'", "','", "'environment'", "'include'", "'location'", "'{'", "'}'", "';'", "'version'", "'='", "'.'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -33,26 +33,27 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_ANY_OTHER=11;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=9;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ML_COMMENT=8;
     public static final int T__30=30;
     public static final int T__19=19;
     public static final int T__31=31;
-    public static final int RULE_STRING=6;
+    public static final int RULE_STRING=7;
+    public static final int T__32=32;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int T__12=12;
-    public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
     public static final int RULE_INT=5;
-    public static final int RULE_WS=9;
+    public static final int RULE_WS=10;
+    public static final int RULE_QUALIFIER=6;
 
     // delegates
     // delegators
@@ -139,7 +140,7 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==20) ) {
+            if ( (LA1_0==21) ) {
                 alt1=1;
             }
             switch (alt1) {
@@ -868,22 +869,22 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:351:1: ( ( ruleOptions ) | ( ruleEnvironment ) | ( ruleIncludeDeclaration ) | ( ruleLocation ) )
             int alt2=4;
             switch ( input.LA(1) ) {
-            case 21:
+            case 22:
                 {
                 alt2=1;
                 }
                 break;
-            case 23:
+            case 24:
                 {
                 alt2=2;
                 }
                 break;
-            case 24:
+            case 25:
                 {
                 alt2=3;
                 }
                 break;
-            case 25:
+            case 26:
                 {
                 alt2=4;
                 }
@@ -1000,7 +1001,7 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==RULE_INT||(LA3_0>=11 && LA3_0<=13)) ) {
+            if ( (LA3_0==RULE_INT||(LA3_0>=12 && LA3_0<=14)) ) {
                 alt3=1;
             }
             else if ( (LA3_0==RULE_STRING) ) {
@@ -1081,28 +1082,37 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Alternatives_1_2_2_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:403:1: rule__Version__Alternatives_1_2_2_1 : ( ( RULE_ID ) | ( RULE_INT ) );
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:403:1: rule__Version__Alternatives_1_2_2_1 : ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_QUALIFIER ) );
     public final void rule__Version__Alternatives_1_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:407:1: ( ( RULE_ID ) | ( RULE_INT ) )
-            int alt4=2;
-            int LA4_0 = input.LA(1);
-
-            if ( (LA4_0==RULE_ID) ) {
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:407:1: ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_QUALIFIER ) )
+            int alt4=3;
+            switch ( input.LA(1) ) {
+            case RULE_ID:
+                {
                 alt4=1;
-            }
-            else if ( (LA4_0==RULE_INT) ) {
+                }
+                break;
+            case RULE_INT:
+                {
                 alt4=2;
-            }
-            else {
+                }
+                break;
+            case RULE_QUALIFIER:
+                {
+                alt4=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
+
             switch (alt4) {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:408:1: ( RULE_ID )
@@ -1134,6 +1144,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
                     }
                     break;
+                case 3 :
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:420:6: ( RULE_QUALIFIER )
+                    {
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:420:6: ( RULE_QUALIFIER )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:421:1: RULE_QUALIFIER
+                    {
+                     before(grammarAccess.getVersionAccess().getQUALIFIERTerminalRuleCall_1_2_2_1_2()); 
+                    match(input,RULE_QUALIFIER,FOLLOW_RULE_QUALIFIER_in_rule__Version__Alternatives_1_2_2_1833); 
+                     after(grammarAccess.getVersionAccess().getQUALIFIERTerminalRuleCall_1_2_2_1_2()); 
+
+                    }
+
+
+                    }
+                    break;
 
             }
         }
@@ -1152,17 +1177,17 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Alternatives"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:425:1: rule__VersionRange__Alternatives : ( ( ( rule__VersionRange__Group_0__0 ) ) | ( ruleVersion ) | ( 'lazy' ) );
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:431:1: rule__VersionRange__Alternatives : ( ( ( rule__VersionRange__Group_0__0 ) ) | ( ruleVersion ) | ( 'lazy' ) );
     public final void rule__VersionRange__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:429:1: ( ( ( rule__VersionRange__Group_0__0 ) ) | ( ruleVersion ) | ( 'lazy' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:435:1: ( ( ( rule__VersionRange__Group_0__0 ) ) | ( ruleVersion ) | ( 'lazy' ) )
             int alt5=3;
             switch ( input.LA(1) ) {
-            case 12:
             case 13:
+            case 14:
                 {
                 alt5=1;
                 }
@@ -1172,7 +1197,7 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                 alt5=2;
                 }
                 break;
-            case 11:
+            case 12:
                 {
                 alt5=3;
                 }
@@ -1186,16 +1211,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
             switch (alt5) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:430:1: ( ( rule__VersionRange__Group_0__0 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:436:1: ( ( rule__VersionRange__Group_0__0 ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:430:1: ( ( rule__VersionRange__Group_0__0 ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:431:1: ( rule__VersionRange__Group_0__0 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:436:1: ( ( rule__VersionRange__Group_0__0 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:437:1: ( rule__VersionRange__Group_0__0 )
                     {
                      before(grammarAccess.getVersionRangeAccess().getGroup_0()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:432:1: ( rule__VersionRange__Group_0__0 )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:432:2: rule__VersionRange__Group_0__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:438:1: ( rule__VersionRange__Group_0__0 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:438:2: rule__VersionRange__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__VersionRange__Group_0__0_in_rule__VersionRange__Alternatives848);
+                    pushFollow(FOLLOW_rule__VersionRange__Group_0__0_in_rule__VersionRange__Alternatives865);
                     rule__VersionRange__Group_0__0();
 
                     state._fsp--;
@@ -1211,13 +1236,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:436:6: ( ruleVersion )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:442:6: ( ruleVersion )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:436:6: ( ruleVersion )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:437:1: ruleVersion
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:442:6: ( ruleVersion )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:443:1: ruleVersion
                     {
                      before(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Alternatives866);
+                    pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Alternatives883);
                     ruleVersion();
 
                     state._fsp--;
@@ -1230,13 +1255,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 3 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:442:6: ( 'lazy' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:448:6: ( 'lazy' )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:442:6: ( 'lazy' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:443:1: 'lazy'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:448:6: ( 'lazy' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:449:1: 'lazy'
                     {
                      before(grammarAccess.getVersionRangeAccess().getLazyKeyword_2()); 
-                    match(input,11,FOLLOW_11_in_rule__VersionRange__Alternatives884); 
+                    match(input,12,FOLLOW_12_in_rule__VersionRange__Alternatives901); 
                      after(grammarAccess.getVersionRangeAccess().getLazyKeyword_2()); 
 
                     }
@@ -1262,20 +1287,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Alternatives_0_0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:455:1: rule__VersionRange__Alternatives_0_0 : ( ( '(' ) | ( '[' ) );
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:461:1: rule__VersionRange__Alternatives_0_0 : ( ( '(' ) | ( '[' ) );
     public final void rule__VersionRange__Alternatives_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:459:1: ( ( '(' ) | ( '[' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:465:1: ( ( '(' ) | ( '[' ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==12) ) {
+            if ( (LA6_0==13) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==13) ) {
+            else if ( (LA6_0==14) ) {
                 alt6=2;
             }
             else {
@@ -1286,13 +1311,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             }
             switch (alt6) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:460:1: ( '(' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:466:1: ( '(' )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:460:1: ( '(' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:461:1: '('
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:466:1: ( '(' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:467:1: '('
                     {
                      before(grammarAccess.getVersionRangeAccess().getLeftParenthesisKeyword_0_0_0()); 
-                    match(input,12,FOLLOW_12_in_rule__VersionRange__Alternatives_0_0919); 
+                    match(input,13,FOLLOW_13_in_rule__VersionRange__Alternatives_0_0936); 
                      after(grammarAccess.getVersionRangeAccess().getLeftParenthesisKeyword_0_0_0()); 
 
                     }
@@ -1301,13 +1326,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:468:6: ( '[' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:474:6: ( '[' )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:468:6: ( '[' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:469:1: '['
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:474:6: ( '[' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:475:1: '['
                     {
                      before(grammarAccess.getVersionRangeAccess().getLeftSquareBracketKeyword_0_0_1()); 
-                    match(input,13,FOLLOW_13_in_rule__VersionRange__Alternatives_0_0939); 
+                    match(input,14,FOLLOW_14_in_rule__VersionRange__Alternatives_0_0956); 
                      after(grammarAccess.getVersionRangeAccess().getLeftSquareBracketKeyword_0_0_1()); 
 
                     }
@@ -1333,20 +1358,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Alternatives_0_4"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:481:1: rule__VersionRange__Alternatives_0_4 : ( ( ')' ) | ( ']' ) );
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:487:1: rule__VersionRange__Alternatives_0_4 : ( ( ')' ) | ( ']' ) );
     public final void rule__VersionRange__Alternatives_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:485:1: ( ( ')' ) | ( ']' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:491:1: ( ( ')' ) | ( ']' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==14) ) {
+            if ( (LA7_0==15) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==15) ) {
+            else if ( (LA7_0==16) ) {
                 alt7=2;
             }
             else {
@@ -1357,13 +1382,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             }
             switch (alt7) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:486:1: ( ')' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:492:1: ( ')' )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:486:1: ( ')' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:487:1: ')'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:492:1: ( ')' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:493:1: ')'
                     {
                      before(grammarAccess.getVersionRangeAccess().getRightParenthesisKeyword_0_4_0()); 
-                    match(input,14,FOLLOW_14_in_rule__VersionRange__Alternatives_0_4974); 
+                    match(input,15,FOLLOW_15_in_rule__VersionRange__Alternatives_0_4991); 
                      after(grammarAccess.getVersionRangeAccess().getRightParenthesisKeyword_0_4_0()); 
 
                     }
@@ -1372,13 +1397,13 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:494:6: ( ']' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:500:6: ( ']' )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:494:6: ( ']' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:495:1: ']'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:500:6: ( ']' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:501:1: ']'
                     {
                      before(grammarAccess.getVersionRangeAccess().getRightSquareBracketKeyword_0_4_1()); 
-                    match(input,15,FOLLOW_15_in_rule__VersionRange__Alternatives_0_4994); 
+                    match(input,16,FOLLOW_16_in_rule__VersionRange__Alternatives_0_41011); 
                      after(grammarAccess.getVersionRangeAccess().getRightSquareBracketKeyword_0_4_1()); 
 
                     }
@@ -1404,31 +1429,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Option__Alternatives"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:507:1: rule__Option__Alternatives : ( ( ( 'requirements' ) ) | ( ( 'allEnvironments' ) ) | ( ( 'source' ) ) | ( ( 'configurePhase' ) ) );
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:513:1: rule__Option__Alternatives : ( ( ( 'requirements' ) ) | ( ( 'allEnvironments' ) ) | ( ( 'source' ) ) | ( ( 'configurePhase' ) ) );
     public final void rule__Option__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:511:1: ( ( ( 'requirements' ) ) | ( ( 'allEnvironments' ) ) | ( ( 'source' ) ) | ( ( 'configurePhase' ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:517:1: ( ( ( 'requirements' ) ) | ( ( 'allEnvironments' ) ) | ( ( 'source' ) ) | ( ( 'configurePhase' ) ) )
             int alt8=4;
             switch ( input.LA(1) ) {
-            case 16:
+            case 17:
                 {
                 alt8=1;
                 }
                 break;
-            case 17:
+            case 18:
                 {
                 alt8=2;
                 }
                 break;
-            case 18:
+            case 19:
                 {
                 alt8=3;
                 }
                 break;
-            case 19:
+            case 20:
                 {
                 alt8=4;
                 }
@@ -1442,16 +1467,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
             switch (alt8) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:512:1: ( ( 'requirements' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:518:1: ( ( 'requirements' ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:512:1: ( ( 'requirements' ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:513:1: ( 'requirements' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:518:1: ( ( 'requirements' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:519:1: ( 'requirements' )
                     {
                      before(grammarAccess.getOptionAccess().getINCLUDE_REQUIREDEnumLiteralDeclaration_0()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:514:1: ( 'requirements' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:514:3: 'requirements'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:520:1: ( 'requirements' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:520:3: 'requirements'
                     {
-                    match(input,16,FOLLOW_16_in_rule__Option__Alternatives1029); 
+                    match(input,17,FOLLOW_17_in_rule__Option__Alternatives1046); 
 
                     }
 
@@ -1463,16 +1488,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:519:6: ( ( 'allEnvironments' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:525:6: ( ( 'allEnvironments' ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:519:6: ( ( 'allEnvironments' ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:520:1: ( 'allEnvironments' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:525:6: ( ( 'allEnvironments' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:526:1: ( 'allEnvironments' )
                     {
                      before(grammarAccess.getOptionAccess().getINCLUDE_ALL_ENVIRONMENTSEnumLiteralDeclaration_1()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:521:1: ( 'allEnvironments' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:521:3: 'allEnvironments'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:527:1: ( 'allEnvironments' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:527:3: 'allEnvironments'
                     {
-                    match(input,17,FOLLOW_17_in_rule__Option__Alternatives1050); 
+                    match(input,18,FOLLOW_18_in_rule__Option__Alternatives1067); 
 
                     }
 
@@ -1484,16 +1509,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 3 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:526:6: ( ( 'source' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:532:6: ( ( 'source' ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:526:6: ( ( 'source' ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:527:1: ( 'source' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:532:6: ( ( 'source' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:533:1: ( 'source' )
                     {
                      before(grammarAccess.getOptionAccess().getINCLUDE_SOURCEEnumLiteralDeclaration_2()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:528:1: ( 'source' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:528:3: 'source'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:534:1: ( 'source' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:534:3: 'source'
                     {
-                    match(input,18,FOLLOW_18_in_rule__Option__Alternatives1071); 
+                    match(input,19,FOLLOW_19_in_rule__Option__Alternatives1088); 
 
                     }
 
@@ -1505,16 +1530,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 4 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:533:6: ( ( 'configurePhase' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:539:6: ( ( 'configurePhase' ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:533:6: ( ( 'configurePhase' ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:534:1: ( 'configurePhase' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:539:6: ( ( 'configurePhase' ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:540:1: ( 'configurePhase' )
                     {
                      before(grammarAccess.getOptionAccess().getINCLUDE_CONFIGURE_PHASEEnumLiteralDeclaration_3()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:535:1: ( 'configurePhase' )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:535:3: 'configurePhase'
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:541:1: ( 'configurePhase' )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:541:3: 'configurePhase'
                     {
-                    match(input,19,FOLLOW_19_in_rule__Option__Alternatives1092); 
+                    match(input,20,FOLLOW_20_in_rule__Option__Alternatives1109); 
 
                     }
 
@@ -1543,21 +1568,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:547:1: rule__TargetPlatform__Group__0 : rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:553:1: rule__TargetPlatform__Group__0 : rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1 ;
     public final void rule__TargetPlatform__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:551:1: ( rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:552:2: rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:557:1: ( rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:558:2: rule__TargetPlatform__Group__0__Impl rule__TargetPlatform__Group__1
             {
-            pushFollow(FOLLOW_rule__TargetPlatform__Group__0__Impl_in_rule__TargetPlatform__Group__01125);
+            pushFollow(FOLLOW_rule__TargetPlatform__Group__0__Impl_in_rule__TargetPlatform__Group__01142);
             rule__TargetPlatform__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__TargetPlatform__Group__1_in_rule__TargetPlatform__Group__01128);
+            pushFollow(FOLLOW_rule__TargetPlatform__Group__1_in_rule__TargetPlatform__Group__01145);
             rule__TargetPlatform__Group__1();
 
             state._fsp--;
@@ -1581,20 +1606,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:559:1: rule__TargetPlatform__Group__0__Impl : ( 'target' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:565:1: rule__TargetPlatform__Group__0__Impl : ( 'target' ) ;
     public final void rule__TargetPlatform__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:563:1: ( ( 'target' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:564:1: ( 'target' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:569:1: ( ( 'target' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:570:1: ( 'target' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:564:1: ( 'target' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:565:1: 'target'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:570:1: ( 'target' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:571:1: 'target'
             {
              before(grammarAccess.getTargetPlatformAccess().getTargetKeyword_0()); 
-            match(input,20,FOLLOW_20_in_rule__TargetPlatform__Group__0__Impl1156); 
+            match(input,21,FOLLOW_21_in_rule__TargetPlatform__Group__0__Impl1173); 
              after(grammarAccess.getTargetPlatformAccess().getTargetKeyword_0()); 
 
             }
@@ -1618,21 +1643,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:578:1: rule__TargetPlatform__Group__1 : rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:584:1: rule__TargetPlatform__Group__1 : rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2 ;
     public final void rule__TargetPlatform__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:582:1: ( rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:583:2: rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:588:1: ( rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:589:2: rule__TargetPlatform__Group__1__Impl rule__TargetPlatform__Group__2
             {
-            pushFollow(FOLLOW_rule__TargetPlatform__Group__1__Impl_in_rule__TargetPlatform__Group__11187);
+            pushFollow(FOLLOW_rule__TargetPlatform__Group__1__Impl_in_rule__TargetPlatform__Group__11204);
             rule__TargetPlatform__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__TargetPlatform__Group__2_in_rule__TargetPlatform__Group__11190);
+            pushFollow(FOLLOW_rule__TargetPlatform__Group__2_in_rule__TargetPlatform__Group__11207);
             rule__TargetPlatform__Group__2();
 
             state._fsp--;
@@ -1656,23 +1681,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:590:1: rule__TargetPlatform__Group__1__Impl : ( ( rule__TargetPlatform__NameAssignment_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:596:1: rule__TargetPlatform__Group__1__Impl : ( ( rule__TargetPlatform__NameAssignment_1 ) ) ;
     public final void rule__TargetPlatform__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:594:1: ( ( ( rule__TargetPlatform__NameAssignment_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:595:1: ( ( rule__TargetPlatform__NameAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:600:1: ( ( ( rule__TargetPlatform__NameAssignment_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:601:1: ( ( rule__TargetPlatform__NameAssignment_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:595:1: ( ( rule__TargetPlatform__NameAssignment_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:596:1: ( rule__TargetPlatform__NameAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:601:1: ( ( rule__TargetPlatform__NameAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:602:1: ( rule__TargetPlatform__NameAssignment_1 )
             {
              before(grammarAccess.getTargetPlatformAccess().getNameAssignment_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:597:1: ( rule__TargetPlatform__NameAssignment_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:597:2: rule__TargetPlatform__NameAssignment_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:603:1: ( rule__TargetPlatform__NameAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:603:2: rule__TargetPlatform__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__TargetPlatform__NameAssignment_1_in_rule__TargetPlatform__Group__1__Impl1217);
+            pushFollow(FOLLOW_rule__TargetPlatform__NameAssignment_1_in_rule__TargetPlatform__Group__1__Impl1234);
             rule__TargetPlatform__NameAssignment_1();
 
             state._fsp--;
@@ -1703,16 +1728,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:607:1: rule__TargetPlatform__Group__2 : rule__TargetPlatform__Group__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:613:1: rule__TargetPlatform__Group__2 : rule__TargetPlatform__Group__2__Impl ;
     public final void rule__TargetPlatform__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:611:1: ( rule__TargetPlatform__Group__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:612:2: rule__TargetPlatform__Group__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:617:1: ( rule__TargetPlatform__Group__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:618:2: rule__TargetPlatform__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__TargetPlatform__Group__2__Impl_in_rule__TargetPlatform__Group__21247);
+            pushFollow(FOLLOW_rule__TargetPlatform__Group__2__Impl_in_rule__TargetPlatform__Group__21264);
             rule__TargetPlatform__Group__2__Impl();
 
             state._fsp--;
@@ -1736,35 +1761,35 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__Group__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:618:1: rule__TargetPlatform__Group__2__Impl : ( ( rule__TargetPlatform__ContentsAssignment_2 )* ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:624:1: rule__TargetPlatform__Group__2__Impl : ( ( rule__TargetPlatform__ContentsAssignment_2 )* ) ;
     public final void rule__TargetPlatform__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:622:1: ( ( ( rule__TargetPlatform__ContentsAssignment_2 )* ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:623:1: ( ( rule__TargetPlatform__ContentsAssignment_2 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:628:1: ( ( ( rule__TargetPlatform__ContentsAssignment_2 )* ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:629:1: ( ( rule__TargetPlatform__ContentsAssignment_2 )* )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:623:1: ( ( rule__TargetPlatform__ContentsAssignment_2 )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:624:1: ( rule__TargetPlatform__ContentsAssignment_2 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:629:1: ( ( rule__TargetPlatform__ContentsAssignment_2 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:630:1: ( rule__TargetPlatform__ContentsAssignment_2 )*
             {
              before(grammarAccess.getTargetPlatformAccess().getContentsAssignment_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:625:1: ( rule__TargetPlatform__ContentsAssignment_2 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:631:1: ( rule__TargetPlatform__ContentsAssignment_2 )*
             loop9:
             do {
                 int alt9=2;
                 int LA9_0 = input.LA(1);
 
-                if ( (LA9_0==21||(LA9_0>=23 && LA9_0<=25)) ) {
+                if ( (LA9_0==22||(LA9_0>=24 && LA9_0<=26)) ) {
                     alt9=1;
                 }
 
 
                 switch (alt9) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:625:2: rule__TargetPlatform__ContentsAssignment_2
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:631:2: rule__TargetPlatform__ContentsAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__TargetPlatform__ContentsAssignment_2_in_rule__TargetPlatform__Group__2__Impl1274);
+            	    pushFollow(FOLLOW_rule__TargetPlatform__ContentsAssignment_2_in_rule__TargetPlatform__Group__2__Impl1291);
             	    rule__TargetPlatform__ContentsAssignment_2();
 
             	    state._fsp--;
@@ -1801,21 +1826,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:641:1: rule__Options__Group__0 : rule__Options__Group__0__Impl rule__Options__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:647:1: rule__Options__Group__0 : rule__Options__Group__0__Impl rule__Options__Group__1 ;
     public final void rule__Options__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:645:1: ( rule__Options__Group__0__Impl rule__Options__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:646:2: rule__Options__Group__0__Impl rule__Options__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:651:1: ( rule__Options__Group__0__Impl rule__Options__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:652:2: rule__Options__Group__0__Impl rule__Options__Group__1
             {
-            pushFollow(FOLLOW_rule__Options__Group__0__Impl_in_rule__Options__Group__01311);
+            pushFollow(FOLLOW_rule__Options__Group__0__Impl_in_rule__Options__Group__01328);
             rule__Options__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Options__Group__1_in_rule__Options__Group__01314);
+            pushFollow(FOLLOW_rule__Options__Group__1_in_rule__Options__Group__01331);
             rule__Options__Group__1();
 
             state._fsp--;
@@ -1839,20 +1864,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:653:1: rule__Options__Group__0__Impl : ( 'with' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:659:1: rule__Options__Group__0__Impl : ( 'with' ) ;
     public final void rule__Options__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:657:1: ( ( 'with' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:658:1: ( 'with' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:663:1: ( ( 'with' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:664:1: ( 'with' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:658:1: ( 'with' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:659:1: 'with'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:664:1: ( 'with' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:665:1: 'with'
             {
              before(grammarAccess.getOptionsAccess().getWithKeyword_0()); 
-            match(input,21,FOLLOW_21_in_rule__Options__Group__0__Impl1342); 
+            match(input,22,FOLLOW_22_in_rule__Options__Group__0__Impl1359); 
              after(grammarAccess.getOptionsAccess().getWithKeyword_0()); 
 
             }
@@ -1876,21 +1901,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:672:1: rule__Options__Group__1 : rule__Options__Group__1__Impl rule__Options__Group__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:678:1: rule__Options__Group__1 : rule__Options__Group__1__Impl rule__Options__Group__2 ;
     public final void rule__Options__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:676:1: ( rule__Options__Group__1__Impl rule__Options__Group__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:677:2: rule__Options__Group__1__Impl rule__Options__Group__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:682:1: ( rule__Options__Group__1__Impl rule__Options__Group__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:683:2: rule__Options__Group__1__Impl rule__Options__Group__2
             {
-            pushFollow(FOLLOW_rule__Options__Group__1__Impl_in_rule__Options__Group__11373);
+            pushFollow(FOLLOW_rule__Options__Group__1__Impl_in_rule__Options__Group__11390);
             rule__Options__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Options__Group__2_in_rule__Options__Group__11376);
+            pushFollow(FOLLOW_rule__Options__Group__2_in_rule__Options__Group__11393);
             rule__Options__Group__2();
 
             state._fsp--;
@@ -1914,23 +1939,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:684:1: rule__Options__Group__1__Impl : ( ( rule__Options__OptionsAssignment_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:690:1: rule__Options__Group__1__Impl : ( ( rule__Options__OptionsAssignment_1 ) ) ;
     public final void rule__Options__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:688:1: ( ( ( rule__Options__OptionsAssignment_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:689:1: ( ( rule__Options__OptionsAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:694:1: ( ( ( rule__Options__OptionsAssignment_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:695:1: ( ( rule__Options__OptionsAssignment_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:689:1: ( ( rule__Options__OptionsAssignment_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:690:1: ( rule__Options__OptionsAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:695:1: ( ( rule__Options__OptionsAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:696:1: ( rule__Options__OptionsAssignment_1 )
             {
              before(grammarAccess.getOptionsAccess().getOptionsAssignment_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:691:1: ( rule__Options__OptionsAssignment_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:691:2: rule__Options__OptionsAssignment_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:697:1: ( rule__Options__OptionsAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:697:2: rule__Options__OptionsAssignment_1
             {
-            pushFollow(FOLLOW_rule__Options__OptionsAssignment_1_in_rule__Options__Group__1__Impl1403);
+            pushFollow(FOLLOW_rule__Options__OptionsAssignment_1_in_rule__Options__Group__1__Impl1420);
             rule__Options__OptionsAssignment_1();
 
             state._fsp--;
@@ -1961,16 +1986,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:701:1: rule__Options__Group__2 : rule__Options__Group__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:707:1: rule__Options__Group__2 : rule__Options__Group__2__Impl ;
     public final void rule__Options__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:705:1: ( rule__Options__Group__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:706:2: rule__Options__Group__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:711:1: ( rule__Options__Group__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:712:2: rule__Options__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Options__Group__2__Impl_in_rule__Options__Group__21433);
+            pushFollow(FOLLOW_rule__Options__Group__2__Impl_in_rule__Options__Group__21450);
             rule__Options__Group__2__Impl();
 
             state._fsp--;
@@ -1994,35 +2019,35 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:712:1: rule__Options__Group__2__Impl : ( ( rule__Options__Group_2__0 )* ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:718:1: rule__Options__Group__2__Impl : ( ( rule__Options__Group_2__0 )* ) ;
     public final void rule__Options__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:716:1: ( ( ( rule__Options__Group_2__0 )* ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:717:1: ( ( rule__Options__Group_2__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:722:1: ( ( ( rule__Options__Group_2__0 )* ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:723:1: ( ( rule__Options__Group_2__0 )* )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:717:1: ( ( rule__Options__Group_2__0 )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:718:1: ( rule__Options__Group_2__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:723:1: ( ( rule__Options__Group_2__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:724:1: ( rule__Options__Group_2__0 )*
             {
              before(grammarAccess.getOptionsAccess().getGroup_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:719:1: ( rule__Options__Group_2__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:725:1: ( rule__Options__Group_2__0 )*
             loop10:
             do {
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( ((LA10_0>=16 && LA10_0<=19)||LA10_0==22) ) {
+                if ( ((LA10_0>=17 && LA10_0<=20)||LA10_0==23) ) {
                     alt10=1;
                 }
 
 
                 switch (alt10) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:719:2: rule__Options__Group_2__0
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:725:2: rule__Options__Group_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__Options__Group_2__0_in_rule__Options__Group__2__Impl1460);
+            	    pushFollow(FOLLOW_rule__Options__Group_2__0_in_rule__Options__Group__2__Impl1477);
             	    rule__Options__Group_2__0();
 
             	    state._fsp--;
@@ -2059,21 +2084,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group_2__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:735:1: rule__Options__Group_2__0 : rule__Options__Group_2__0__Impl rule__Options__Group_2__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:741:1: rule__Options__Group_2__0 : rule__Options__Group_2__0__Impl rule__Options__Group_2__1 ;
     public final void rule__Options__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:739:1: ( rule__Options__Group_2__0__Impl rule__Options__Group_2__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:740:2: rule__Options__Group_2__0__Impl rule__Options__Group_2__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:745:1: ( rule__Options__Group_2__0__Impl rule__Options__Group_2__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:746:2: rule__Options__Group_2__0__Impl rule__Options__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Options__Group_2__0__Impl_in_rule__Options__Group_2__01497);
+            pushFollow(FOLLOW_rule__Options__Group_2__0__Impl_in_rule__Options__Group_2__01514);
             rule__Options__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Options__Group_2__1_in_rule__Options__Group_2__01500);
+            pushFollow(FOLLOW_rule__Options__Group_2__1_in_rule__Options__Group_2__01517);
             rule__Options__Group_2__1();
 
             state._fsp--;
@@ -2097,31 +2122,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group_2__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:747:1: rule__Options__Group_2__0__Impl : ( ( ',' )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:753:1: rule__Options__Group_2__0__Impl : ( ( ',' )? ) ;
     public final void rule__Options__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:751:1: ( ( ( ',' )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:752:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:757:1: ( ( ( ',' )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:758:1: ( ( ',' )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:752:1: ( ( ',' )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:753:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:758:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:759:1: ( ',' )?
             {
              before(grammarAccess.getOptionsAccess().getCommaKeyword_2_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:754:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:760:1: ( ',' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==22) ) {
+            if ( (LA11_0==23) ) {
                 alt11=1;
             }
             switch (alt11) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:755:2: ','
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:761:2: ','
                     {
-                    match(input,22,FOLLOW_22_in_rule__Options__Group_2__0__Impl1529); 
+                    match(input,23,FOLLOW_23_in_rule__Options__Group_2__0__Impl1546); 
 
                     }
                     break;
@@ -2151,16 +2176,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group_2__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:766:1: rule__Options__Group_2__1 : rule__Options__Group_2__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:772:1: rule__Options__Group_2__1 : rule__Options__Group_2__1__Impl ;
     public final void rule__Options__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:770:1: ( rule__Options__Group_2__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:771:2: rule__Options__Group_2__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:776:1: ( rule__Options__Group_2__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:777:2: rule__Options__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__Options__Group_2__1__Impl_in_rule__Options__Group_2__11562);
+            pushFollow(FOLLOW_rule__Options__Group_2__1__Impl_in_rule__Options__Group_2__11579);
             rule__Options__Group_2__1__Impl();
 
             state._fsp--;
@@ -2184,23 +2209,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__Group_2__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:777:1: rule__Options__Group_2__1__Impl : ( ( rule__Options__OptionsAssignment_2_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:783:1: rule__Options__Group_2__1__Impl : ( ( rule__Options__OptionsAssignment_2_1 ) ) ;
     public final void rule__Options__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:781:1: ( ( ( rule__Options__OptionsAssignment_2_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:782:1: ( ( rule__Options__OptionsAssignment_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:787:1: ( ( ( rule__Options__OptionsAssignment_2_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:788:1: ( ( rule__Options__OptionsAssignment_2_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:782:1: ( ( rule__Options__OptionsAssignment_2_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:783:1: ( rule__Options__OptionsAssignment_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:788:1: ( ( rule__Options__OptionsAssignment_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:789:1: ( rule__Options__OptionsAssignment_2_1 )
             {
              before(grammarAccess.getOptionsAccess().getOptionsAssignment_2_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:784:1: ( rule__Options__OptionsAssignment_2_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:784:2: rule__Options__OptionsAssignment_2_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:790:1: ( rule__Options__OptionsAssignment_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:790:2: rule__Options__OptionsAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Options__OptionsAssignment_2_1_in_rule__Options__Group_2__1__Impl1589);
+            pushFollow(FOLLOW_rule__Options__OptionsAssignment_2_1_in_rule__Options__Group_2__1__Impl1606);
             rule__Options__OptionsAssignment_2_1();
 
             state._fsp--;
@@ -2231,21 +2256,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:798:1: rule__Environment__Group__0 : rule__Environment__Group__0__Impl rule__Environment__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:804:1: rule__Environment__Group__0 : rule__Environment__Group__0__Impl rule__Environment__Group__1 ;
     public final void rule__Environment__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:802:1: ( rule__Environment__Group__0__Impl rule__Environment__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:803:2: rule__Environment__Group__0__Impl rule__Environment__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:808:1: ( rule__Environment__Group__0__Impl rule__Environment__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:809:2: rule__Environment__Group__0__Impl rule__Environment__Group__1
             {
-            pushFollow(FOLLOW_rule__Environment__Group__0__Impl_in_rule__Environment__Group__01623);
+            pushFollow(FOLLOW_rule__Environment__Group__0__Impl_in_rule__Environment__Group__01640);
             rule__Environment__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Environment__Group__1_in_rule__Environment__Group__01626);
+            pushFollow(FOLLOW_rule__Environment__Group__1_in_rule__Environment__Group__01643);
             rule__Environment__Group__1();
 
             state._fsp--;
@@ -2269,21 +2294,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:810:1: rule__Environment__Group__0__Impl : ( () ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:816:1: rule__Environment__Group__0__Impl : ( () ) ;
     public final void rule__Environment__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:814:1: ( ( () ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:815:1: ( () )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:820:1: ( ( () ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:821:1: ( () )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:815:1: ( () )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:816:1: ()
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:821:1: ( () )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:822:1: ()
             {
              before(grammarAccess.getEnvironmentAccess().getEnvironmentAction_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:817:1: ()
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:819:1: 
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:823:1: ()
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:825:1: 
             {
             }
 
@@ -2306,21 +2331,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:829:1: rule__Environment__Group__1 : rule__Environment__Group__1__Impl rule__Environment__Group__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:835:1: rule__Environment__Group__1 : rule__Environment__Group__1__Impl rule__Environment__Group__2 ;
     public final void rule__Environment__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:833:1: ( rule__Environment__Group__1__Impl rule__Environment__Group__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:834:2: rule__Environment__Group__1__Impl rule__Environment__Group__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:839:1: ( rule__Environment__Group__1__Impl rule__Environment__Group__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:840:2: rule__Environment__Group__1__Impl rule__Environment__Group__2
             {
-            pushFollow(FOLLOW_rule__Environment__Group__1__Impl_in_rule__Environment__Group__11684);
+            pushFollow(FOLLOW_rule__Environment__Group__1__Impl_in_rule__Environment__Group__11701);
             rule__Environment__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Environment__Group__2_in_rule__Environment__Group__11687);
+            pushFollow(FOLLOW_rule__Environment__Group__2_in_rule__Environment__Group__11704);
             rule__Environment__Group__2();
 
             state._fsp--;
@@ -2344,20 +2369,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:841:1: rule__Environment__Group__1__Impl : ( 'environment' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:847:1: rule__Environment__Group__1__Impl : ( 'environment' ) ;
     public final void rule__Environment__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:845:1: ( ( 'environment' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:846:1: ( 'environment' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:851:1: ( ( 'environment' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:852:1: ( 'environment' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:846:1: ( 'environment' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:847:1: 'environment'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:852:1: ( 'environment' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:853:1: 'environment'
             {
              before(grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_1()); 
-            match(input,23,FOLLOW_23_in_rule__Environment__Group__1__Impl1715); 
+            match(input,24,FOLLOW_24_in_rule__Environment__Group__1__Impl1732); 
              after(grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_1()); 
 
             }
@@ -2381,21 +2406,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:860:1: rule__Environment__Group__2 : rule__Environment__Group__2__Impl rule__Environment__Group__3 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:866:1: rule__Environment__Group__2 : rule__Environment__Group__2__Impl rule__Environment__Group__3 ;
     public final void rule__Environment__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:864:1: ( rule__Environment__Group__2__Impl rule__Environment__Group__3 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:865:2: rule__Environment__Group__2__Impl rule__Environment__Group__3
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:870:1: ( rule__Environment__Group__2__Impl rule__Environment__Group__3 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:871:2: rule__Environment__Group__2__Impl rule__Environment__Group__3
             {
-            pushFollow(FOLLOW_rule__Environment__Group__2__Impl_in_rule__Environment__Group__21746);
+            pushFollow(FOLLOW_rule__Environment__Group__2__Impl_in_rule__Environment__Group__21763);
             rule__Environment__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Environment__Group__3_in_rule__Environment__Group__21749);
+            pushFollow(FOLLOW_rule__Environment__Group__3_in_rule__Environment__Group__21766);
             rule__Environment__Group__3();
 
             state._fsp--;
@@ -2419,23 +2444,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:872:1: rule__Environment__Group__2__Impl : ( ( rule__Environment__EnvAssignment_2 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:878:1: rule__Environment__Group__2__Impl : ( ( rule__Environment__EnvAssignment_2 ) ) ;
     public final void rule__Environment__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:876:1: ( ( ( rule__Environment__EnvAssignment_2 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:877:1: ( ( rule__Environment__EnvAssignment_2 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:882:1: ( ( ( rule__Environment__EnvAssignment_2 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:883:1: ( ( rule__Environment__EnvAssignment_2 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:877:1: ( ( rule__Environment__EnvAssignment_2 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:878:1: ( rule__Environment__EnvAssignment_2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:883:1: ( ( rule__Environment__EnvAssignment_2 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:884:1: ( rule__Environment__EnvAssignment_2 )
             {
              before(grammarAccess.getEnvironmentAccess().getEnvAssignment_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:879:1: ( rule__Environment__EnvAssignment_2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:879:2: rule__Environment__EnvAssignment_2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:885:1: ( rule__Environment__EnvAssignment_2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:885:2: rule__Environment__EnvAssignment_2
             {
-            pushFollow(FOLLOW_rule__Environment__EnvAssignment_2_in_rule__Environment__Group__2__Impl1776);
+            pushFollow(FOLLOW_rule__Environment__EnvAssignment_2_in_rule__Environment__Group__2__Impl1793);
             rule__Environment__EnvAssignment_2();
 
             state._fsp--;
@@ -2466,16 +2491,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__3"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:889:1: rule__Environment__Group__3 : rule__Environment__Group__3__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:895:1: rule__Environment__Group__3 : rule__Environment__Group__3__Impl ;
     public final void rule__Environment__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:893:1: ( rule__Environment__Group__3__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:894:2: rule__Environment__Group__3__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:899:1: ( rule__Environment__Group__3__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:900:2: rule__Environment__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Environment__Group__3__Impl_in_rule__Environment__Group__31806);
+            pushFollow(FOLLOW_rule__Environment__Group__3__Impl_in_rule__Environment__Group__31823);
             rule__Environment__Group__3__Impl();
 
             state._fsp--;
@@ -2499,35 +2524,35 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group__3__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:900:1: rule__Environment__Group__3__Impl : ( ( rule__Environment__Group_3__0 )* ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:906:1: rule__Environment__Group__3__Impl : ( ( rule__Environment__Group_3__0 )* ) ;
     public final void rule__Environment__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:904:1: ( ( ( rule__Environment__Group_3__0 )* ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:905:1: ( ( rule__Environment__Group_3__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:910:1: ( ( ( rule__Environment__Group_3__0 )* ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:911:1: ( ( rule__Environment__Group_3__0 )* )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:905:1: ( ( rule__Environment__Group_3__0 )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:906:1: ( rule__Environment__Group_3__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:911:1: ( ( rule__Environment__Group_3__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:912:1: ( rule__Environment__Group_3__0 )*
             {
              before(grammarAccess.getEnvironmentAccess().getGroup_3()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:907:1: ( rule__Environment__Group_3__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:913:1: ( rule__Environment__Group_3__0 )*
             loop12:
             do {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==RULE_ID||LA12_0==22) ) {
+                if ( (LA12_0==RULE_ID||LA12_0==23) ) {
                     alt12=1;
                 }
 
 
                 switch (alt12) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:907:2: rule__Environment__Group_3__0
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:913:2: rule__Environment__Group_3__0
             	    {
-            	    pushFollow(FOLLOW_rule__Environment__Group_3__0_in_rule__Environment__Group__3__Impl1833);
+            	    pushFollow(FOLLOW_rule__Environment__Group_3__0_in_rule__Environment__Group__3__Impl1850);
             	    rule__Environment__Group_3__0();
 
             	    state._fsp--;
@@ -2564,21 +2589,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group_3__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:925:1: rule__Environment__Group_3__0 : rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:931:1: rule__Environment__Group_3__0 : rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1 ;
     public final void rule__Environment__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:929:1: ( rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:930:2: rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:935:1: ( rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:936:2: rule__Environment__Group_3__0__Impl rule__Environment__Group_3__1
             {
-            pushFollow(FOLLOW_rule__Environment__Group_3__0__Impl_in_rule__Environment__Group_3__01872);
+            pushFollow(FOLLOW_rule__Environment__Group_3__0__Impl_in_rule__Environment__Group_3__01889);
             rule__Environment__Group_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Environment__Group_3__1_in_rule__Environment__Group_3__01875);
+            pushFollow(FOLLOW_rule__Environment__Group_3__1_in_rule__Environment__Group_3__01892);
             rule__Environment__Group_3__1();
 
             state._fsp--;
@@ -2602,31 +2627,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group_3__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:937:1: rule__Environment__Group_3__0__Impl : ( ( ',' )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:943:1: rule__Environment__Group_3__0__Impl : ( ( ',' )? ) ;
     public final void rule__Environment__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:941:1: ( ( ( ',' )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:942:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:947:1: ( ( ( ',' )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:948:1: ( ( ',' )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:942:1: ( ( ',' )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:943:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:948:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:949:1: ( ',' )?
             {
              before(grammarAccess.getEnvironmentAccess().getCommaKeyword_3_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:944:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:950:1: ( ',' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==22) ) {
+            if ( (LA13_0==23) ) {
                 alt13=1;
             }
             switch (alt13) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:945:2: ','
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:951:2: ','
                     {
-                    match(input,22,FOLLOW_22_in_rule__Environment__Group_3__0__Impl1904); 
+                    match(input,23,FOLLOW_23_in_rule__Environment__Group_3__0__Impl1921); 
 
                     }
                     break;
@@ -2656,16 +2681,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group_3__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:956:1: rule__Environment__Group_3__1 : rule__Environment__Group_3__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:962:1: rule__Environment__Group_3__1 : rule__Environment__Group_3__1__Impl ;
     public final void rule__Environment__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:960:1: ( rule__Environment__Group_3__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:961:2: rule__Environment__Group_3__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:966:1: ( rule__Environment__Group_3__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:967:2: rule__Environment__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__Environment__Group_3__1__Impl_in_rule__Environment__Group_3__11937);
+            pushFollow(FOLLOW_rule__Environment__Group_3__1__Impl_in_rule__Environment__Group_3__11954);
             rule__Environment__Group_3__1__Impl();
 
             state._fsp--;
@@ -2689,23 +2714,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__Group_3__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:967:1: rule__Environment__Group_3__1__Impl : ( ( rule__Environment__EnvAssignment_3_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:973:1: rule__Environment__Group_3__1__Impl : ( ( rule__Environment__EnvAssignment_3_1 ) ) ;
     public final void rule__Environment__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:971:1: ( ( ( rule__Environment__EnvAssignment_3_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:972:1: ( ( rule__Environment__EnvAssignment_3_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:977:1: ( ( ( rule__Environment__EnvAssignment_3_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:978:1: ( ( rule__Environment__EnvAssignment_3_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:972:1: ( ( rule__Environment__EnvAssignment_3_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:973:1: ( rule__Environment__EnvAssignment_3_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:978:1: ( ( rule__Environment__EnvAssignment_3_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:979:1: ( rule__Environment__EnvAssignment_3_1 )
             {
              before(grammarAccess.getEnvironmentAccess().getEnvAssignment_3_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:974:1: ( rule__Environment__EnvAssignment_3_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:974:2: rule__Environment__EnvAssignment_3_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:980:1: ( rule__Environment__EnvAssignment_3_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:980:2: rule__Environment__EnvAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__Environment__EnvAssignment_3_1_in_rule__Environment__Group_3__1__Impl1964);
+            pushFollow(FOLLOW_rule__Environment__EnvAssignment_3_1_in_rule__Environment__Group_3__1__Impl1981);
             rule__Environment__EnvAssignment_3_1();
 
             state._fsp--;
@@ -2736,21 +2761,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IncludeDeclaration__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:988:1: rule__IncludeDeclaration__Group__0 : rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:994:1: rule__IncludeDeclaration__Group__0 : rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1 ;
     public final void rule__IncludeDeclaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:992:1: ( rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:993:2: rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:998:1: ( rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:999:2: rule__IncludeDeclaration__Group__0__Impl rule__IncludeDeclaration__Group__1
             {
-            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__0__Impl_in_rule__IncludeDeclaration__Group__01998);
+            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__0__Impl_in_rule__IncludeDeclaration__Group__02015);
             rule__IncludeDeclaration__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__1_in_rule__IncludeDeclaration__Group__02001);
+            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__1_in_rule__IncludeDeclaration__Group__02018);
             rule__IncludeDeclaration__Group__1();
 
             state._fsp--;
@@ -2774,20 +2799,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IncludeDeclaration__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1000:1: rule__IncludeDeclaration__Group__0__Impl : ( 'include' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1006:1: rule__IncludeDeclaration__Group__0__Impl : ( 'include' ) ;
     public final void rule__IncludeDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1004:1: ( ( 'include' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1005:1: ( 'include' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1010:1: ( ( 'include' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1011:1: ( 'include' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1005:1: ( 'include' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1006:1: 'include'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1011:1: ( 'include' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1012:1: 'include'
             {
              before(grammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0()); 
-            match(input,24,FOLLOW_24_in_rule__IncludeDeclaration__Group__0__Impl2029); 
+            match(input,25,FOLLOW_25_in_rule__IncludeDeclaration__Group__0__Impl2046); 
              after(grammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0()); 
 
             }
@@ -2811,16 +2836,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IncludeDeclaration__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1019:1: rule__IncludeDeclaration__Group__1 : rule__IncludeDeclaration__Group__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1025:1: rule__IncludeDeclaration__Group__1 : rule__IncludeDeclaration__Group__1__Impl ;
     public final void rule__IncludeDeclaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1023:1: ( rule__IncludeDeclaration__Group__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1024:2: rule__IncludeDeclaration__Group__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1029:1: ( rule__IncludeDeclaration__Group__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1030:2: rule__IncludeDeclaration__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__1__Impl_in_rule__IncludeDeclaration__Group__12060);
+            pushFollow(FOLLOW_rule__IncludeDeclaration__Group__1__Impl_in_rule__IncludeDeclaration__Group__12077);
             rule__IncludeDeclaration__Group__1__Impl();
 
             state._fsp--;
@@ -2844,23 +2869,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IncludeDeclaration__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1030:1: rule__IncludeDeclaration__Group__1__Impl : ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1036:1: rule__IncludeDeclaration__Group__1__Impl : ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) ) ;
     public final void rule__IncludeDeclaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1034:1: ( ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1035:1: ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1040:1: ( ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1041:1: ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1035:1: ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1036:1: ( rule__IncludeDeclaration__ImportURIAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1041:1: ( ( rule__IncludeDeclaration__ImportURIAssignment_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1042:1: ( rule__IncludeDeclaration__ImportURIAssignment_1 )
             {
              before(grammarAccess.getIncludeDeclarationAccess().getImportURIAssignment_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1037:1: ( rule__IncludeDeclaration__ImportURIAssignment_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1037:2: rule__IncludeDeclaration__ImportURIAssignment_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1043:1: ( rule__IncludeDeclaration__ImportURIAssignment_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1043:2: rule__IncludeDeclaration__ImportURIAssignment_1
             {
-            pushFollow(FOLLOW_rule__IncludeDeclaration__ImportURIAssignment_1_in_rule__IncludeDeclaration__Group__1__Impl2087);
+            pushFollow(FOLLOW_rule__IncludeDeclaration__ImportURIAssignment_1_in_rule__IncludeDeclaration__Group__1__Impl2104);
             rule__IncludeDeclaration__ImportURIAssignment_1();
 
             state._fsp--;
@@ -2891,21 +2916,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1051:1: rule__Location__Group__0 : rule__Location__Group__0__Impl rule__Location__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1057:1: rule__Location__Group__0 : rule__Location__Group__0__Impl rule__Location__Group__1 ;
     public final void rule__Location__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1055:1: ( rule__Location__Group__0__Impl rule__Location__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1056:2: rule__Location__Group__0__Impl rule__Location__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1061:1: ( rule__Location__Group__0__Impl rule__Location__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1062:2: rule__Location__Group__0__Impl rule__Location__Group__1
             {
-            pushFollow(FOLLOW_rule__Location__Group__0__Impl_in_rule__Location__Group__02121);
+            pushFollow(FOLLOW_rule__Location__Group__0__Impl_in_rule__Location__Group__02138);
             rule__Location__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group__1_in_rule__Location__Group__02124);
+            pushFollow(FOLLOW_rule__Location__Group__1_in_rule__Location__Group__02141);
             rule__Location__Group__1();
 
             state._fsp--;
@@ -2929,20 +2954,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1063:1: rule__Location__Group__0__Impl : ( 'location' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1069:1: rule__Location__Group__0__Impl : ( 'location' ) ;
     public final void rule__Location__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1067:1: ( ( 'location' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1068:1: ( 'location' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1073:1: ( ( 'location' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1074:1: ( 'location' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1068:1: ( 'location' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1069:1: 'location'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1074:1: ( 'location' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1075:1: 'location'
             {
              before(grammarAccess.getLocationAccess().getLocationKeyword_0()); 
-            match(input,25,FOLLOW_25_in_rule__Location__Group__0__Impl2152); 
+            match(input,26,FOLLOW_26_in_rule__Location__Group__0__Impl2169); 
              after(grammarAccess.getLocationAccess().getLocationKeyword_0()); 
 
             }
@@ -2966,21 +2991,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1082:1: rule__Location__Group__1 : rule__Location__Group__1__Impl rule__Location__Group__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1088:1: rule__Location__Group__1 : rule__Location__Group__1__Impl rule__Location__Group__2 ;
     public final void rule__Location__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1086:1: ( rule__Location__Group__1__Impl rule__Location__Group__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1087:2: rule__Location__Group__1__Impl rule__Location__Group__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1092:1: ( rule__Location__Group__1__Impl rule__Location__Group__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1093:2: rule__Location__Group__1__Impl rule__Location__Group__2
             {
-            pushFollow(FOLLOW_rule__Location__Group__1__Impl_in_rule__Location__Group__12183);
+            pushFollow(FOLLOW_rule__Location__Group__1__Impl_in_rule__Location__Group__12200);
             rule__Location__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group__2_in_rule__Location__Group__12186);
+            pushFollow(FOLLOW_rule__Location__Group__2_in_rule__Location__Group__12203);
             rule__Location__Group__2();
 
             state._fsp--;
@@ -3004,23 +3029,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1094:1: rule__Location__Group__1__Impl : ( ( rule__Location__UnorderedGroup_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1100:1: rule__Location__Group__1__Impl : ( ( rule__Location__UnorderedGroup_1 ) ) ;
     public final void rule__Location__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1098:1: ( ( ( rule__Location__UnorderedGroup_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1099:1: ( ( rule__Location__UnorderedGroup_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1104:1: ( ( ( rule__Location__UnorderedGroup_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1105:1: ( ( rule__Location__UnorderedGroup_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1099:1: ( ( rule__Location__UnorderedGroup_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1100:1: ( rule__Location__UnorderedGroup_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1105:1: ( ( rule__Location__UnorderedGroup_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1106:1: ( rule__Location__UnorderedGroup_1 )
             {
              before(grammarAccess.getLocationAccess().getUnorderedGroup_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1101:1: ( rule__Location__UnorderedGroup_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1101:2: rule__Location__UnorderedGroup_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1107:1: ( rule__Location__UnorderedGroup_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1107:2: rule__Location__UnorderedGroup_1
             {
-            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1_in_rule__Location__Group__1__Impl2213);
+            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1_in_rule__Location__Group__1__Impl2230);
             rule__Location__UnorderedGroup_1();
 
             state._fsp--;
@@ -3051,16 +3076,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1111:1: rule__Location__Group__2 : rule__Location__Group__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1117:1: rule__Location__Group__2 : rule__Location__Group__2__Impl ;
     public final void rule__Location__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1115:1: ( rule__Location__Group__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1116:2: rule__Location__Group__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1121:1: ( rule__Location__Group__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1122:2: rule__Location__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Location__Group__2__Impl_in_rule__Location__Group__22243);
+            pushFollow(FOLLOW_rule__Location__Group__2__Impl_in_rule__Location__Group__22260);
             rule__Location__Group__2__Impl();
 
             state._fsp--;
@@ -3084,31 +3109,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1122:1: rule__Location__Group__2__Impl : ( ( rule__Location__Group_2__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1128:1: rule__Location__Group__2__Impl : ( ( rule__Location__Group_2__0 )? ) ;
     public final void rule__Location__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1126:1: ( ( ( rule__Location__Group_2__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1127:1: ( ( rule__Location__Group_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1132:1: ( ( ( rule__Location__Group_2__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1133:1: ( ( rule__Location__Group_2__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1127:1: ( ( rule__Location__Group_2__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1128:1: ( rule__Location__Group_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1133:1: ( ( rule__Location__Group_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1134:1: ( rule__Location__Group_2__0 )?
             {
              before(grammarAccess.getLocationAccess().getGroup_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1129:1: ( rule__Location__Group_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1135:1: ( rule__Location__Group_2__0 )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==26) ) {
+            if ( (LA14_0==27) ) {
                 alt14=1;
             }
             switch (alt14) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1129:2: rule__Location__Group_2__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1135:2: rule__Location__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Location__Group_2__0_in_rule__Location__Group__2__Impl2270);
+                    pushFollow(FOLLOW_rule__Location__Group_2__0_in_rule__Location__Group__2__Impl2287);
                     rule__Location__Group_2__0();
 
                     state._fsp--;
@@ -3142,21 +3167,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1145:1: rule__Location__Group_2__0 : rule__Location__Group_2__0__Impl rule__Location__Group_2__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1151:1: rule__Location__Group_2__0 : rule__Location__Group_2__0__Impl rule__Location__Group_2__1 ;
     public final void rule__Location__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1149:1: ( rule__Location__Group_2__0__Impl rule__Location__Group_2__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1150:2: rule__Location__Group_2__0__Impl rule__Location__Group_2__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1155:1: ( rule__Location__Group_2__0__Impl rule__Location__Group_2__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1156:2: rule__Location__Group_2__0__Impl rule__Location__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Location__Group_2__0__Impl_in_rule__Location__Group_2__02307);
+            pushFollow(FOLLOW_rule__Location__Group_2__0__Impl_in_rule__Location__Group_2__02324);
             rule__Location__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2__1_in_rule__Location__Group_2__02310);
+            pushFollow(FOLLOW_rule__Location__Group_2__1_in_rule__Location__Group_2__02327);
             rule__Location__Group_2__1();
 
             state._fsp--;
@@ -3180,20 +3205,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1157:1: rule__Location__Group_2__0__Impl : ( '{' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1163:1: rule__Location__Group_2__0__Impl : ( '{' ) ;
     public final void rule__Location__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1161:1: ( ( '{' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1162:1: ( '{' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1167:1: ( ( '{' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1168:1: ( '{' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1162:1: ( '{' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1163:1: '{'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1168:1: ( '{' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1169:1: '{'
             {
              before(grammarAccess.getLocationAccess().getLeftCurlyBracketKeyword_2_0()); 
-            match(input,26,FOLLOW_26_in_rule__Location__Group_2__0__Impl2338); 
+            match(input,27,FOLLOW_27_in_rule__Location__Group_2__0__Impl2355); 
              after(grammarAccess.getLocationAccess().getLeftCurlyBracketKeyword_2_0()); 
 
             }
@@ -3217,21 +3242,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1176:1: rule__Location__Group_2__1 : rule__Location__Group_2__1__Impl rule__Location__Group_2__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1182:1: rule__Location__Group_2__1 : rule__Location__Group_2__1__Impl rule__Location__Group_2__2 ;
     public final void rule__Location__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1180:1: ( rule__Location__Group_2__1__Impl rule__Location__Group_2__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1181:2: rule__Location__Group_2__1__Impl rule__Location__Group_2__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1186:1: ( rule__Location__Group_2__1__Impl rule__Location__Group_2__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1187:2: rule__Location__Group_2__1__Impl rule__Location__Group_2__2
             {
-            pushFollow(FOLLOW_rule__Location__Group_2__1__Impl_in_rule__Location__Group_2__12369);
+            pushFollow(FOLLOW_rule__Location__Group_2__1__Impl_in_rule__Location__Group_2__12386);
             rule__Location__Group_2__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2__2_in_rule__Location__Group_2__12372);
+            pushFollow(FOLLOW_rule__Location__Group_2__2_in_rule__Location__Group_2__12389);
             rule__Location__Group_2__2();
 
             state._fsp--;
@@ -3255,31 +3280,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1188:1: rule__Location__Group_2__1__Impl : ( ( rule__Location__Group_2_1__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1194:1: rule__Location__Group_2__1__Impl : ( ( rule__Location__Group_2_1__0 )? ) ;
     public final void rule__Location__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1192:1: ( ( ( rule__Location__Group_2_1__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1193:1: ( ( rule__Location__Group_2_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1198:1: ( ( ( rule__Location__Group_2_1__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1199:1: ( ( rule__Location__Group_2_1__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1193:1: ( ( rule__Location__Group_2_1__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1194:1: ( rule__Location__Group_2_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1199:1: ( ( rule__Location__Group_2_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1200:1: ( rule__Location__Group_2_1__0 )?
             {
              before(grammarAccess.getLocationAccess().getGroup_2_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1195:1: ( rule__Location__Group_2_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1201:1: ( rule__Location__Group_2_1__0 )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==21) ) {
+            if ( (LA15_0==22) ) {
                 alt15=1;
             }
             switch (alt15) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1195:2: rule__Location__Group_2_1__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1201:2: rule__Location__Group_2_1__0
                     {
-                    pushFollow(FOLLOW_rule__Location__Group_2_1__0_in_rule__Location__Group_2__1__Impl2399);
+                    pushFollow(FOLLOW_rule__Location__Group_2_1__0_in_rule__Location__Group_2__1__Impl2416);
                     rule__Location__Group_2_1__0();
 
                     state._fsp--;
@@ -3313,21 +3338,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1205:1: rule__Location__Group_2__2 : rule__Location__Group_2__2__Impl rule__Location__Group_2__3 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1211:1: rule__Location__Group_2__2 : rule__Location__Group_2__2__Impl rule__Location__Group_2__3 ;
     public final void rule__Location__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1209:1: ( rule__Location__Group_2__2__Impl rule__Location__Group_2__3 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1210:2: rule__Location__Group_2__2__Impl rule__Location__Group_2__3
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1215:1: ( rule__Location__Group_2__2__Impl rule__Location__Group_2__3 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1216:2: rule__Location__Group_2__2__Impl rule__Location__Group_2__3
             {
-            pushFollow(FOLLOW_rule__Location__Group_2__2__Impl_in_rule__Location__Group_2__22430);
+            pushFollow(FOLLOW_rule__Location__Group_2__2__Impl_in_rule__Location__Group_2__22447);
             rule__Location__Group_2__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2__3_in_rule__Location__Group_2__22433);
+            pushFollow(FOLLOW_rule__Location__Group_2__3_in_rule__Location__Group_2__22450);
             rule__Location__Group_2__3();
 
             state._fsp--;
@@ -3351,20 +3376,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1217:1: rule__Location__Group_2__2__Impl : ( ( rule__Location__IusAssignment_2_2 )* ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1223:1: rule__Location__Group_2__2__Impl : ( ( rule__Location__IusAssignment_2_2 )* ) ;
     public final void rule__Location__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1221:1: ( ( ( rule__Location__IusAssignment_2_2 )* ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1222:1: ( ( rule__Location__IusAssignment_2_2 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1227:1: ( ( ( rule__Location__IusAssignment_2_2 )* ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1228:1: ( ( rule__Location__IusAssignment_2_2 )* )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1222:1: ( ( rule__Location__IusAssignment_2_2 )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1223:1: ( rule__Location__IusAssignment_2_2 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1228:1: ( ( rule__Location__IusAssignment_2_2 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1229:1: ( rule__Location__IusAssignment_2_2 )*
             {
              before(grammarAccess.getLocationAccess().getIusAssignment_2_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1224:1: ( rule__Location__IusAssignment_2_2 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1230:1: ( rule__Location__IusAssignment_2_2 )*
             loop16:
             do {
                 int alt16=2;
@@ -3377,9 +3402,9 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
                 switch (alt16) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1224:2: rule__Location__IusAssignment_2_2
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1230:2: rule__Location__IusAssignment_2_2
             	    {
-            	    pushFollow(FOLLOW_rule__Location__IusAssignment_2_2_in_rule__Location__Group_2__2__Impl2460);
+            	    pushFollow(FOLLOW_rule__Location__IusAssignment_2_2_in_rule__Location__Group_2__2__Impl2477);
             	    rule__Location__IusAssignment_2_2();
 
             	    state._fsp--;
@@ -3416,16 +3441,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__3"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1234:1: rule__Location__Group_2__3 : rule__Location__Group_2__3__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1240:1: rule__Location__Group_2__3 : rule__Location__Group_2__3__Impl ;
     public final void rule__Location__Group_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1238:1: ( rule__Location__Group_2__3__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1239:2: rule__Location__Group_2__3__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1244:1: ( rule__Location__Group_2__3__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1245:2: rule__Location__Group_2__3__Impl
             {
-            pushFollow(FOLLOW_rule__Location__Group_2__3__Impl_in_rule__Location__Group_2__32491);
+            pushFollow(FOLLOW_rule__Location__Group_2__3__Impl_in_rule__Location__Group_2__32508);
             rule__Location__Group_2__3__Impl();
 
             state._fsp--;
@@ -3449,20 +3474,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2__3__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1245:1: rule__Location__Group_2__3__Impl : ( '}' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1251:1: rule__Location__Group_2__3__Impl : ( '}' ) ;
     public final void rule__Location__Group_2__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1249:1: ( ( '}' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1250:1: ( '}' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1255:1: ( ( '}' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1256:1: ( '}' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1250:1: ( '}' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1251:1: '}'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1256:1: ( '}' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1257:1: '}'
             {
              before(grammarAccess.getLocationAccess().getRightCurlyBracketKeyword_2_3()); 
-            match(input,27,FOLLOW_27_in_rule__Location__Group_2__3__Impl2519); 
+            match(input,28,FOLLOW_28_in_rule__Location__Group_2__3__Impl2536); 
              after(grammarAccess.getLocationAccess().getRightCurlyBracketKeyword_2_3()); 
 
             }
@@ -3486,21 +3511,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1272:1: rule__Location__Group_2_1__0 : rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1278:1: rule__Location__Group_2_1__0 : rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1 ;
     public final void rule__Location__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1276:1: ( rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1277:2: rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1282:1: ( rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1283:2: rule__Location__Group_2_1__0__Impl rule__Location__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__Location__Group_2_1__0__Impl_in_rule__Location__Group_2_1__02558);
+            pushFollow(FOLLOW_rule__Location__Group_2_1__0__Impl_in_rule__Location__Group_2_1__02575);
             rule__Location__Group_2_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2_1__1_in_rule__Location__Group_2_1__02561);
+            pushFollow(FOLLOW_rule__Location__Group_2_1__1_in_rule__Location__Group_2_1__02578);
             rule__Location__Group_2_1__1();
 
             state._fsp--;
@@ -3524,20 +3549,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1284:1: rule__Location__Group_2_1__0__Impl : ( 'with' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1290:1: rule__Location__Group_2_1__0__Impl : ( 'with' ) ;
     public final void rule__Location__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1288:1: ( ( 'with' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1289:1: ( 'with' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1294:1: ( ( 'with' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1295:1: ( 'with' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1289:1: ( 'with' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1290:1: 'with'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1295:1: ( 'with' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1296:1: 'with'
             {
              before(grammarAccess.getLocationAccess().getWithKeyword_2_1_0()); 
-            match(input,21,FOLLOW_21_in_rule__Location__Group_2_1__0__Impl2589); 
+            match(input,22,FOLLOW_22_in_rule__Location__Group_2_1__0__Impl2606); 
              after(grammarAccess.getLocationAccess().getWithKeyword_2_1_0()); 
 
             }
@@ -3561,21 +3586,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1303:1: rule__Location__Group_2_1__1 : rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1309:1: rule__Location__Group_2_1__1 : rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2 ;
     public final void rule__Location__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1307:1: ( rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1308:2: rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1313:1: ( rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1314:2: rule__Location__Group_2_1__1__Impl rule__Location__Group_2_1__2
             {
-            pushFollow(FOLLOW_rule__Location__Group_2_1__1__Impl_in_rule__Location__Group_2_1__12620);
+            pushFollow(FOLLOW_rule__Location__Group_2_1__1__Impl_in_rule__Location__Group_2_1__12637);
             rule__Location__Group_2_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2_1__2_in_rule__Location__Group_2_1__12623);
+            pushFollow(FOLLOW_rule__Location__Group_2_1__2_in_rule__Location__Group_2_1__12640);
             rule__Location__Group_2_1__2();
 
             state._fsp--;
@@ -3599,23 +3624,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1315:1: rule__Location__Group_2_1__1__Impl : ( ( rule__Location__OptionsAssignment_2_1_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1321:1: rule__Location__Group_2_1__1__Impl : ( ( rule__Location__OptionsAssignment_2_1_1 ) ) ;
     public final void rule__Location__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1319:1: ( ( ( rule__Location__OptionsAssignment_2_1_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1320:1: ( ( rule__Location__OptionsAssignment_2_1_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1325:1: ( ( ( rule__Location__OptionsAssignment_2_1_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1326:1: ( ( rule__Location__OptionsAssignment_2_1_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1320:1: ( ( rule__Location__OptionsAssignment_2_1_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1321:1: ( rule__Location__OptionsAssignment_2_1_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1326:1: ( ( rule__Location__OptionsAssignment_2_1_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1327:1: ( rule__Location__OptionsAssignment_2_1_1 )
             {
              before(grammarAccess.getLocationAccess().getOptionsAssignment_2_1_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1322:1: ( rule__Location__OptionsAssignment_2_1_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1322:2: rule__Location__OptionsAssignment_2_1_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1328:1: ( rule__Location__OptionsAssignment_2_1_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1328:2: rule__Location__OptionsAssignment_2_1_1
             {
-            pushFollow(FOLLOW_rule__Location__OptionsAssignment_2_1_1_in_rule__Location__Group_2_1__1__Impl2650);
+            pushFollow(FOLLOW_rule__Location__OptionsAssignment_2_1_1_in_rule__Location__Group_2_1__1__Impl2667);
             rule__Location__OptionsAssignment_2_1_1();
 
             state._fsp--;
@@ -3646,16 +3671,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1332:1: rule__Location__Group_2_1__2 : rule__Location__Group_2_1__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1338:1: rule__Location__Group_2_1__2 : rule__Location__Group_2_1__2__Impl ;
     public final void rule__Location__Group_2_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1336:1: ( rule__Location__Group_2_1__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1337:2: rule__Location__Group_2_1__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1342:1: ( rule__Location__Group_2_1__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1343:2: rule__Location__Group_2_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Location__Group_2_1__2__Impl_in_rule__Location__Group_2_1__22680);
+            pushFollow(FOLLOW_rule__Location__Group_2_1__2__Impl_in_rule__Location__Group_2_1__22697);
             rule__Location__Group_2_1__2__Impl();
 
             state._fsp--;
@@ -3679,35 +3704,35 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1343:1: rule__Location__Group_2_1__2__Impl : ( ( rule__Location__Group_2_1_2__0 )* ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1349:1: rule__Location__Group_2_1__2__Impl : ( ( rule__Location__Group_2_1_2__0 )* ) ;
     public final void rule__Location__Group_2_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1347:1: ( ( ( rule__Location__Group_2_1_2__0 )* ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1348:1: ( ( rule__Location__Group_2_1_2__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1353:1: ( ( ( rule__Location__Group_2_1_2__0 )* ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1354:1: ( ( rule__Location__Group_2_1_2__0 )* )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1348:1: ( ( rule__Location__Group_2_1_2__0 )* )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1349:1: ( rule__Location__Group_2_1_2__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1354:1: ( ( rule__Location__Group_2_1_2__0 )* )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1355:1: ( rule__Location__Group_2_1_2__0 )*
             {
              before(grammarAccess.getLocationAccess().getGroup_2_1_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1350:1: ( rule__Location__Group_2_1_2__0 )*
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1356:1: ( rule__Location__Group_2_1_2__0 )*
             loop17:
             do {
                 int alt17=2;
                 int LA17_0 = input.LA(1);
 
-                if ( ((LA17_0>=16 && LA17_0<=19)||LA17_0==22) ) {
+                if ( ((LA17_0>=17 && LA17_0<=20)||LA17_0==23) ) {
                     alt17=1;
                 }
 
 
                 switch (alt17) {
             	case 1 :
-            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1350:2: rule__Location__Group_2_1_2__0
+            	    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1356:2: rule__Location__Group_2_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__Location__Group_2_1_2__0_in_rule__Location__Group_2_1__2__Impl2707);
+            	    pushFollow(FOLLOW_rule__Location__Group_2_1_2__0_in_rule__Location__Group_2_1__2__Impl2724);
             	    rule__Location__Group_2_1_2__0();
 
             	    state._fsp--;
@@ -3744,21 +3769,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1_2__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1366:1: rule__Location__Group_2_1_2__0 : rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1372:1: rule__Location__Group_2_1_2__0 : rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1 ;
     public final void rule__Location__Group_2_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1370:1: ( rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1371:2: rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1376:1: ( rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1377:2: rule__Location__Group_2_1_2__0__Impl rule__Location__Group_2_1_2__1
             {
-            pushFollow(FOLLOW_rule__Location__Group_2_1_2__0__Impl_in_rule__Location__Group_2_1_2__02744);
+            pushFollow(FOLLOW_rule__Location__Group_2_1_2__0__Impl_in_rule__Location__Group_2_1_2__02761);
             rule__Location__Group_2_1_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Location__Group_2_1_2__1_in_rule__Location__Group_2_1_2__02747);
+            pushFollow(FOLLOW_rule__Location__Group_2_1_2__1_in_rule__Location__Group_2_1_2__02764);
             rule__Location__Group_2_1_2__1();
 
             state._fsp--;
@@ -3782,31 +3807,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1_2__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1378:1: rule__Location__Group_2_1_2__0__Impl : ( ( ',' )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1384:1: rule__Location__Group_2_1_2__0__Impl : ( ( ',' )? ) ;
     public final void rule__Location__Group_2_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1382:1: ( ( ( ',' )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1383:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1388:1: ( ( ( ',' )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1389:1: ( ( ',' )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1383:1: ( ( ',' )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1384:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1389:1: ( ( ',' )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1390:1: ( ',' )?
             {
              before(grammarAccess.getLocationAccess().getCommaKeyword_2_1_2_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1385:1: ( ',' )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1391:1: ( ',' )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==22) ) {
+            if ( (LA18_0==23) ) {
                 alt18=1;
             }
             switch (alt18) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1386:2: ','
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1392:2: ','
                     {
-                    match(input,22,FOLLOW_22_in_rule__Location__Group_2_1_2__0__Impl2776); 
+                    match(input,23,FOLLOW_23_in_rule__Location__Group_2_1_2__0__Impl2793); 
 
                     }
                     break;
@@ -3836,16 +3861,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1_2__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1397:1: rule__Location__Group_2_1_2__1 : rule__Location__Group_2_1_2__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1403:1: rule__Location__Group_2_1_2__1 : rule__Location__Group_2_1_2__1__Impl ;
     public final void rule__Location__Group_2_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1401:1: ( rule__Location__Group_2_1_2__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1402:2: rule__Location__Group_2_1_2__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1407:1: ( rule__Location__Group_2_1_2__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1408:2: rule__Location__Group_2_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__Location__Group_2_1_2__1__Impl_in_rule__Location__Group_2_1_2__12809);
+            pushFollow(FOLLOW_rule__Location__Group_2_1_2__1__Impl_in_rule__Location__Group_2_1_2__12826);
             rule__Location__Group_2_1_2__1__Impl();
 
             state._fsp--;
@@ -3869,23 +3894,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__Group_2_1_2__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1408:1: rule__Location__Group_2_1_2__1__Impl : ( ( rule__Location__OptionsAssignment_2_1_2_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1414:1: rule__Location__Group_2_1_2__1__Impl : ( ( rule__Location__OptionsAssignment_2_1_2_1 ) ) ;
     public final void rule__Location__Group_2_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1412:1: ( ( ( rule__Location__OptionsAssignment_2_1_2_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1413:1: ( ( rule__Location__OptionsAssignment_2_1_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1418:1: ( ( ( rule__Location__OptionsAssignment_2_1_2_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1419:1: ( ( rule__Location__OptionsAssignment_2_1_2_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1413:1: ( ( rule__Location__OptionsAssignment_2_1_2_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1414:1: ( rule__Location__OptionsAssignment_2_1_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1419:1: ( ( rule__Location__OptionsAssignment_2_1_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1420:1: ( rule__Location__OptionsAssignment_2_1_2_1 )
             {
              before(grammarAccess.getLocationAccess().getOptionsAssignment_2_1_2_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1415:1: ( rule__Location__OptionsAssignment_2_1_2_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1415:2: rule__Location__OptionsAssignment_2_1_2_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1421:1: ( rule__Location__OptionsAssignment_2_1_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1421:2: rule__Location__OptionsAssignment_2_1_2_1
             {
-            pushFollow(FOLLOW_rule__Location__OptionsAssignment_2_1_2_1_in_rule__Location__Group_2_1_2__1__Impl2836);
+            pushFollow(FOLLOW_rule__Location__OptionsAssignment_2_1_2_1_in_rule__Location__Group_2_1_2__1__Impl2853);
             rule__Location__OptionsAssignment_2_1_2_1();
 
             state._fsp--;
@@ -3916,21 +3941,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1429:1: rule__IU__Group__0 : rule__IU__Group__0__Impl rule__IU__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1435:1: rule__IU__Group__0 : rule__IU__Group__0__Impl rule__IU__Group__1 ;
     public final void rule__IU__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1433:1: ( rule__IU__Group__0__Impl rule__IU__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1434:2: rule__IU__Group__0__Impl rule__IU__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1439:1: ( rule__IU__Group__0__Impl rule__IU__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1440:2: rule__IU__Group__0__Impl rule__IU__Group__1
             {
-            pushFollow(FOLLOW_rule__IU__Group__0__Impl_in_rule__IU__Group__02870);
+            pushFollow(FOLLOW_rule__IU__Group__0__Impl_in_rule__IU__Group__02887);
             rule__IU__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__IU__Group__1_in_rule__IU__Group__02873);
+            pushFollow(FOLLOW_rule__IU__Group__1_in_rule__IU__Group__02890);
             rule__IU__Group__1();
 
             state._fsp--;
@@ -3954,23 +3979,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1441:1: rule__IU__Group__0__Impl : ( ( rule__IU__IDAssignment_0 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1447:1: rule__IU__Group__0__Impl : ( ( rule__IU__IDAssignment_0 ) ) ;
     public final void rule__IU__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1445:1: ( ( ( rule__IU__IDAssignment_0 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1446:1: ( ( rule__IU__IDAssignment_0 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1451:1: ( ( ( rule__IU__IDAssignment_0 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1452:1: ( ( rule__IU__IDAssignment_0 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1446:1: ( ( rule__IU__IDAssignment_0 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1447:1: ( rule__IU__IDAssignment_0 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1452:1: ( ( rule__IU__IDAssignment_0 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1453:1: ( rule__IU__IDAssignment_0 )
             {
              before(grammarAccess.getIUAccess().getIDAssignment_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1448:1: ( rule__IU__IDAssignment_0 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1448:2: rule__IU__IDAssignment_0
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1454:1: ( rule__IU__IDAssignment_0 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1454:2: rule__IU__IDAssignment_0
             {
-            pushFollow(FOLLOW_rule__IU__IDAssignment_0_in_rule__IU__Group__0__Impl2900);
+            pushFollow(FOLLOW_rule__IU__IDAssignment_0_in_rule__IU__Group__0__Impl2917);
             rule__IU__IDAssignment_0();
 
             state._fsp--;
@@ -4001,16 +4026,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1458:1: rule__IU__Group__1 : rule__IU__Group__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1464:1: rule__IU__Group__1 : rule__IU__Group__1__Impl ;
     public final void rule__IU__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1462:1: ( rule__IU__Group__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1463:2: rule__IU__Group__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1468:1: ( rule__IU__Group__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1469:2: rule__IU__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__IU__Group__1__Impl_in_rule__IU__Group__12930);
+            pushFollow(FOLLOW_rule__IU__Group__1__Impl_in_rule__IU__Group__12947);
             rule__IU__Group__1__Impl();
 
             state._fsp--;
@@ -4034,31 +4059,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1469:1: rule__IU__Group__1__Impl : ( ( rule__IU__Group_1__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1475:1: rule__IU__Group__1__Impl : ( ( rule__IU__Group_1__0 )? ) ;
     public final void rule__IU__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1473:1: ( ( ( rule__IU__Group_1__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1474:1: ( ( rule__IU__Group_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1479:1: ( ( ( rule__IU__Group_1__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1480:1: ( ( rule__IU__Group_1__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1474:1: ( ( rule__IU__Group_1__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1475:1: ( rule__IU__Group_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1480:1: ( ( rule__IU__Group_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1481:1: ( rule__IU__Group_1__0 )?
             {
              before(grammarAccess.getIUAccess().getGroup_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1476:1: ( rule__IU__Group_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1482:1: ( rule__IU__Group_1__0 )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
-            if ( ((LA19_0>=RULE_INT && LA19_0<=RULE_STRING)||(LA19_0>=11 && LA19_0<=13)||LA19_0==28) ) {
+            if ( (LA19_0==RULE_INT||LA19_0==RULE_STRING||(LA19_0>=12 && LA19_0<=14)||LA19_0==29) ) {
                 alt19=1;
             }
             switch (alt19) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1476:2: rule__IU__Group_1__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1482:2: rule__IU__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__IU__Group_1__0_in_rule__IU__Group__1__Impl2957);
+                    pushFollow(FOLLOW_rule__IU__Group_1__0_in_rule__IU__Group__1__Impl2974);
                     rule__IU__Group_1__0();
 
                     state._fsp--;
@@ -4092,21 +4117,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1490:1: rule__IU__Group_1__0 : rule__IU__Group_1__0__Impl rule__IU__Group_1__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1496:1: rule__IU__Group_1__0 : rule__IU__Group_1__0__Impl rule__IU__Group_1__1 ;
     public final void rule__IU__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1494:1: ( rule__IU__Group_1__0__Impl rule__IU__Group_1__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1495:2: rule__IU__Group_1__0__Impl rule__IU__Group_1__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1500:1: ( rule__IU__Group_1__0__Impl rule__IU__Group_1__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1501:2: rule__IU__Group_1__0__Impl rule__IU__Group_1__1
             {
-            pushFollow(FOLLOW_rule__IU__Group_1__0__Impl_in_rule__IU__Group_1__02992);
+            pushFollow(FOLLOW_rule__IU__Group_1__0__Impl_in_rule__IU__Group_1__03009);
             rule__IU__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__IU__Group_1__1_in_rule__IU__Group_1__02995);
+            pushFollow(FOLLOW_rule__IU__Group_1__1_in_rule__IU__Group_1__03012);
             rule__IU__Group_1__1();
 
             state._fsp--;
@@ -4130,31 +4155,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1502:1: rule__IU__Group_1__0__Impl : ( ( rule__IU__Group_1_0__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1508:1: rule__IU__Group_1__0__Impl : ( ( rule__IU__Group_1_0__0 )? ) ;
     public final void rule__IU__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1506:1: ( ( ( rule__IU__Group_1_0__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1507:1: ( ( rule__IU__Group_1_0__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1512:1: ( ( ( rule__IU__Group_1_0__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1513:1: ( ( rule__IU__Group_1_0__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1507:1: ( ( rule__IU__Group_1_0__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1508:1: ( rule__IU__Group_1_0__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1513:1: ( ( rule__IU__Group_1_0__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1514:1: ( rule__IU__Group_1_0__0 )?
             {
              before(grammarAccess.getIUAccess().getGroup_1_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1509:1: ( rule__IU__Group_1_0__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1515:1: ( rule__IU__Group_1_0__0 )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( (LA20_0==28) ) {
+            if ( (LA20_0==29) ) {
                 alt20=1;
             }
             switch (alt20) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1509:2: rule__IU__Group_1_0__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1515:2: rule__IU__Group_1_0__0
                     {
-                    pushFollow(FOLLOW_rule__IU__Group_1_0__0_in_rule__IU__Group_1__0__Impl3022);
+                    pushFollow(FOLLOW_rule__IU__Group_1_0__0_in_rule__IU__Group_1__0__Impl3039);
                     rule__IU__Group_1_0__0();
 
                     state._fsp--;
@@ -4188,16 +4213,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1519:1: rule__IU__Group_1__1 : rule__IU__Group_1__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1525:1: rule__IU__Group_1__1 : rule__IU__Group_1__1__Impl ;
     public final void rule__IU__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1523:1: ( rule__IU__Group_1__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1524:2: rule__IU__Group_1__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1529:1: ( rule__IU__Group_1__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1530:2: rule__IU__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__IU__Group_1__1__Impl_in_rule__IU__Group_1__13053);
+            pushFollow(FOLLOW_rule__IU__Group_1__1__Impl_in_rule__IU__Group_1__13070);
             rule__IU__Group_1__1__Impl();
 
             state._fsp--;
@@ -4221,23 +4246,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1530:1: rule__IU__Group_1__1__Impl : ( ( rule__IU__Alternatives_1_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1536:1: rule__IU__Group_1__1__Impl : ( ( rule__IU__Alternatives_1_1 ) ) ;
     public final void rule__IU__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1534:1: ( ( ( rule__IU__Alternatives_1_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1535:1: ( ( rule__IU__Alternatives_1_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1540:1: ( ( ( rule__IU__Alternatives_1_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1541:1: ( ( rule__IU__Alternatives_1_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1535:1: ( ( rule__IU__Alternatives_1_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1536:1: ( rule__IU__Alternatives_1_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1541:1: ( ( rule__IU__Alternatives_1_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1542:1: ( rule__IU__Alternatives_1_1 )
             {
              before(grammarAccess.getIUAccess().getAlternatives_1_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1537:1: ( rule__IU__Alternatives_1_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1537:2: rule__IU__Alternatives_1_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1543:1: ( rule__IU__Alternatives_1_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1543:2: rule__IU__Alternatives_1_1
             {
-            pushFollow(FOLLOW_rule__IU__Alternatives_1_1_in_rule__IU__Group_1__1__Impl3080);
+            pushFollow(FOLLOW_rule__IU__Alternatives_1_1_in_rule__IU__Group_1__1__Impl3097);
             rule__IU__Alternatives_1_1();
 
             state._fsp--;
@@ -4268,21 +4293,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1551:1: rule__IU__Group_1_0__0 : rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1557:1: rule__IU__Group_1_0__0 : rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1 ;
     public final void rule__IU__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1555:1: ( rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1556:2: rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1561:1: ( rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1562:2: rule__IU__Group_1_0__0__Impl rule__IU__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__IU__Group_1_0__0__Impl_in_rule__IU__Group_1_0__03114);
+            pushFollow(FOLLOW_rule__IU__Group_1_0__0__Impl_in_rule__IU__Group_1_0__03131);
             rule__IU__Group_1_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__IU__Group_1_0__1_in_rule__IU__Group_1_0__03117);
+            pushFollow(FOLLOW_rule__IU__Group_1_0__1_in_rule__IU__Group_1_0__03134);
             rule__IU__Group_1_0__1();
 
             state._fsp--;
@@ -4306,20 +4331,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1563:1: rule__IU__Group_1_0__0__Impl : ( ';' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1569:1: rule__IU__Group_1_0__0__Impl : ( ';' ) ;
     public final void rule__IU__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1567:1: ( ( ';' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1568:1: ( ';' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1573:1: ( ( ';' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1574:1: ( ';' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1568:1: ( ';' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1569:1: ';'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1574:1: ( ';' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1575:1: ';'
             {
              before(grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0()); 
-            match(input,28,FOLLOW_28_in_rule__IU__Group_1_0__0__Impl3145); 
+            match(input,29,FOLLOW_29_in_rule__IU__Group_1_0__0__Impl3162); 
              after(grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0()); 
 
             }
@@ -4343,21 +4368,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1582:1: rule__IU__Group_1_0__1 : rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1588:1: rule__IU__Group_1_0__1 : rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2 ;
     public final void rule__IU__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1586:1: ( rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1587:2: rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1592:1: ( rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1593:2: rule__IU__Group_1_0__1__Impl rule__IU__Group_1_0__2
             {
-            pushFollow(FOLLOW_rule__IU__Group_1_0__1__Impl_in_rule__IU__Group_1_0__13176);
+            pushFollow(FOLLOW_rule__IU__Group_1_0__1__Impl_in_rule__IU__Group_1_0__13193);
             rule__IU__Group_1_0__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__IU__Group_1_0__2_in_rule__IU__Group_1_0__13179);
+            pushFollow(FOLLOW_rule__IU__Group_1_0__2_in_rule__IU__Group_1_0__13196);
             rule__IU__Group_1_0__2();
 
             state._fsp--;
@@ -4381,20 +4406,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1594:1: rule__IU__Group_1_0__1__Impl : ( 'version' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1600:1: rule__IU__Group_1_0__1__Impl : ( 'version' ) ;
     public final void rule__IU__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1598:1: ( ( 'version' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1599:1: ( 'version' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1604:1: ( ( 'version' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1605:1: ( 'version' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1599:1: ( 'version' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1600:1: 'version'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1605:1: ( 'version' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1606:1: 'version'
             {
              before(grammarAccess.getIUAccess().getVersionKeyword_1_0_1()); 
-            match(input,29,FOLLOW_29_in_rule__IU__Group_1_0__1__Impl3207); 
+            match(input,30,FOLLOW_30_in_rule__IU__Group_1_0__1__Impl3224); 
              after(grammarAccess.getIUAccess().getVersionKeyword_1_0_1()); 
 
             }
@@ -4418,16 +4443,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1613:1: rule__IU__Group_1_0__2 : rule__IU__Group_1_0__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1619:1: rule__IU__Group_1_0__2 : rule__IU__Group_1_0__2__Impl ;
     public final void rule__IU__Group_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1617:1: ( rule__IU__Group_1_0__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1618:2: rule__IU__Group_1_0__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1623:1: ( rule__IU__Group_1_0__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1624:2: rule__IU__Group_1_0__2__Impl
             {
-            pushFollow(FOLLOW_rule__IU__Group_1_0__2__Impl_in_rule__IU__Group_1_0__23238);
+            pushFollow(FOLLOW_rule__IU__Group_1_0__2__Impl_in_rule__IU__Group_1_0__23255);
             rule__IU__Group_1_0__2__Impl();
 
             state._fsp--;
@@ -4451,20 +4476,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__Group_1_0__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1624:1: rule__IU__Group_1_0__2__Impl : ( '=' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1630:1: rule__IU__Group_1_0__2__Impl : ( '=' ) ;
     public final void rule__IU__Group_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1628:1: ( ( '=' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1629:1: ( '=' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1634:1: ( ( '=' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1635:1: ( '=' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1629:1: ( '=' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1630:1: '='
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1635:1: ( '=' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1636:1: '='
             {
              before(grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2()); 
-            match(input,30,FOLLOW_30_in_rule__IU__Group_1_0__2__Impl3266); 
+            match(input,31,FOLLOW_31_in_rule__IU__Group_1_0__2__Impl3283); 
              after(grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2()); 
 
             }
@@ -4488,21 +4513,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1649:1: rule__Version__Group__0 : rule__Version__Group__0__Impl rule__Version__Group__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1655:1: rule__Version__Group__0 : rule__Version__Group__0__Impl rule__Version__Group__1 ;
     public final void rule__Version__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1653:1: ( rule__Version__Group__0__Impl rule__Version__Group__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1654:2: rule__Version__Group__0__Impl rule__Version__Group__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1659:1: ( rule__Version__Group__0__Impl rule__Version__Group__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1660:2: rule__Version__Group__0__Impl rule__Version__Group__1
             {
-            pushFollow(FOLLOW_rule__Version__Group__0__Impl_in_rule__Version__Group__03303);
+            pushFollow(FOLLOW_rule__Version__Group__0__Impl_in_rule__Version__Group__03320);
             rule__Version__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group__1_in_rule__Version__Group__03306);
+            pushFollow(FOLLOW_rule__Version__Group__1_in_rule__Version__Group__03323);
             rule__Version__Group__1();
 
             state._fsp--;
@@ -4526,20 +4551,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1661:1: rule__Version__Group__0__Impl : ( RULE_INT ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1667:1: rule__Version__Group__0__Impl : ( RULE_INT ) ;
     public final void rule__Version__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1665:1: ( ( RULE_INT ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1666:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1671:1: ( ( RULE_INT ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1672:1: ( RULE_INT )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1666:1: ( RULE_INT )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1667:1: RULE_INT
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1672:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1673:1: RULE_INT
             {
              before(grammarAccess.getVersionAccess().getINTTerminalRuleCall_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group__0__Impl3333); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group__0__Impl3350); 
              after(grammarAccess.getVersionAccess().getINTTerminalRuleCall_0()); 
 
             }
@@ -4563,16 +4588,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1678:1: rule__Version__Group__1 : rule__Version__Group__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1684:1: rule__Version__Group__1 : rule__Version__Group__1__Impl ;
     public final void rule__Version__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1682:1: ( rule__Version__Group__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1683:2: rule__Version__Group__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1688:1: ( rule__Version__Group__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1689:2: rule__Version__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Version__Group__1__Impl_in_rule__Version__Group__13362);
+            pushFollow(FOLLOW_rule__Version__Group__1__Impl_in_rule__Version__Group__13379);
             rule__Version__Group__1__Impl();
 
             state._fsp--;
@@ -4596,31 +4621,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1689:1: rule__Version__Group__1__Impl : ( ( rule__Version__Group_1__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1695:1: rule__Version__Group__1__Impl : ( ( rule__Version__Group_1__0 )? ) ;
     public final void rule__Version__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1693:1: ( ( ( rule__Version__Group_1__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1694:1: ( ( rule__Version__Group_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1699:1: ( ( ( rule__Version__Group_1__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1700:1: ( ( rule__Version__Group_1__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1694:1: ( ( rule__Version__Group_1__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1695:1: ( rule__Version__Group_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1700:1: ( ( rule__Version__Group_1__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1701:1: ( rule__Version__Group_1__0 )?
             {
              before(grammarAccess.getVersionAccess().getGroup_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1696:1: ( rule__Version__Group_1__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1702:1: ( rule__Version__Group_1__0 )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==31) ) {
+            if ( (LA21_0==32) ) {
                 alt21=1;
             }
             switch (alt21) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1696:2: rule__Version__Group_1__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1702:2: rule__Version__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Version__Group_1__0_in_rule__Version__Group__1__Impl3389);
+                    pushFollow(FOLLOW_rule__Version__Group_1__0_in_rule__Version__Group__1__Impl3406);
                     rule__Version__Group_1__0();
 
                     state._fsp--;
@@ -4654,21 +4679,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1710:1: rule__Version__Group_1__0 : rule__Version__Group_1__0__Impl rule__Version__Group_1__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1716:1: rule__Version__Group_1__0 : rule__Version__Group_1__0__Impl rule__Version__Group_1__1 ;
     public final void rule__Version__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1714:1: ( rule__Version__Group_1__0__Impl rule__Version__Group_1__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1715:2: rule__Version__Group_1__0__Impl rule__Version__Group_1__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1720:1: ( rule__Version__Group_1__0__Impl rule__Version__Group_1__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1721:2: rule__Version__Group_1__0__Impl rule__Version__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Version__Group_1__0__Impl_in_rule__Version__Group_1__03424);
+            pushFollow(FOLLOW_rule__Version__Group_1__0__Impl_in_rule__Version__Group_1__03441);
             rule__Version__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group_1__1_in_rule__Version__Group_1__03427);
+            pushFollow(FOLLOW_rule__Version__Group_1__1_in_rule__Version__Group_1__03444);
             rule__Version__Group_1__1();
 
             state._fsp--;
@@ -4692,20 +4717,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1722:1: rule__Version__Group_1__0__Impl : ( '.' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1728:1: rule__Version__Group_1__0__Impl : ( '.' ) ;
     public final void rule__Version__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1726:1: ( ( '.' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1727:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1732:1: ( ( '.' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1733:1: ( '.' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1727:1: ( '.' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1728:1: '.'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1733:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1734:1: '.'
             {
              before(grammarAccess.getVersionAccess().getFullStopKeyword_1_0()); 
-            match(input,31,FOLLOW_31_in_rule__Version__Group_1__0__Impl3455); 
+            match(input,32,FOLLOW_32_in_rule__Version__Group_1__0__Impl3472); 
              after(grammarAccess.getVersionAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -4729,21 +4754,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1741:1: rule__Version__Group_1__1 : rule__Version__Group_1__1__Impl rule__Version__Group_1__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1747:1: rule__Version__Group_1__1 : rule__Version__Group_1__1__Impl rule__Version__Group_1__2 ;
     public final void rule__Version__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1745:1: ( rule__Version__Group_1__1__Impl rule__Version__Group_1__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1746:2: rule__Version__Group_1__1__Impl rule__Version__Group_1__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1751:1: ( rule__Version__Group_1__1__Impl rule__Version__Group_1__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1752:2: rule__Version__Group_1__1__Impl rule__Version__Group_1__2
             {
-            pushFollow(FOLLOW_rule__Version__Group_1__1__Impl_in_rule__Version__Group_1__13486);
+            pushFollow(FOLLOW_rule__Version__Group_1__1__Impl_in_rule__Version__Group_1__13503);
             rule__Version__Group_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group_1__2_in_rule__Version__Group_1__13489);
+            pushFollow(FOLLOW_rule__Version__Group_1__2_in_rule__Version__Group_1__13506);
             rule__Version__Group_1__2();
 
             state._fsp--;
@@ -4767,20 +4792,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1753:1: rule__Version__Group_1__1__Impl : ( RULE_INT ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1759:1: rule__Version__Group_1__1__Impl : ( RULE_INT ) ;
     public final void rule__Version__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1757:1: ( ( RULE_INT ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1758:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1763:1: ( ( RULE_INT ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1764:1: ( RULE_INT )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1758:1: ( RULE_INT )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1759:1: RULE_INT
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1764:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1765:1: RULE_INT
             {
              before(grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_1()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group_1__1__Impl3516); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group_1__1__Impl3533); 
              after(grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_1()); 
 
             }
@@ -4804,16 +4829,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1770:1: rule__Version__Group_1__2 : rule__Version__Group_1__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1776:1: rule__Version__Group_1__2 : rule__Version__Group_1__2__Impl ;
     public final void rule__Version__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1774:1: ( rule__Version__Group_1__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1775:2: rule__Version__Group_1__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1780:1: ( rule__Version__Group_1__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1781:2: rule__Version__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Version__Group_1__2__Impl_in_rule__Version__Group_1__23545);
+            pushFollow(FOLLOW_rule__Version__Group_1__2__Impl_in_rule__Version__Group_1__23562);
             rule__Version__Group_1__2__Impl();
 
             state._fsp--;
@@ -4837,31 +4862,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1781:1: rule__Version__Group_1__2__Impl : ( ( rule__Version__Group_1_2__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1787:1: rule__Version__Group_1__2__Impl : ( ( rule__Version__Group_1_2__0 )? ) ;
     public final void rule__Version__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1785:1: ( ( ( rule__Version__Group_1_2__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1786:1: ( ( rule__Version__Group_1_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1791:1: ( ( ( rule__Version__Group_1_2__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1792:1: ( ( rule__Version__Group_1_2__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1786:1: ( ( rule__Version__Group_1_2__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1787:1: ( rule__Version__Group_1_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1792:1: ( ( rule__Version__Group_1_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1793:1: ( rule__Version__Group_1_2__0 )?
             {
              before(grammarAccess.getVersionAccess().getGroup_1_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1788:1: ( rule__Version__Group_1_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1794:1: ( rule__Version__Group_1_2__0 )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==31) ) {
+            if ( (LA22_0==32) ) {
                 alt22=1;
             }
             switch (alt22) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1788:2: rule__Version__Group_1_2__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1794:2: rule__Version__Group_1_2__0
                     {
-                    pushFollow(FOLLOW_rule__Version__Group_1_2__0_in_rule__Version__Group_1__2__Impl3572);
+                    pushFollow(FOLLOW_rule__Version__Group_1_2__0_in_rule__Version__Group_1__2__Impl3589);
                     rule__Version__Group_1_2__0();
 
                     state._fsp--;
@@ -4895,21 +4920,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1804:1: rule__Version__Group_1_2__0 : rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1810:1: rule__Version__Group_1_2__0 : rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1 ;
     public final void rule__Version__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1808:1: ( rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1809:2: rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1814:1: ( rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1815:2: rule__Version__Group_1_2__0__Impl rule__Version__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__Version__Group_1_2__0__Impl_in_rule__Version__Group_1_2__03609);
+            pushFollow(FOLLOW_rule__Version__Group_1_2__0__Impl_in_rule__Version__Group_1_2__03626);
             rule__Version__Group_1_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group_1_2__1_in_rule__Version__Group_1_2__03612);
+            pushFollow(FOLLOW_rule__Version__Group_1_2__1_in_rule__Version__Group_1_2__03629);
             rule__Version__Group_1_2__1();
 
             state._fsp--;
@@ -4933,20 +4958,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1816:1: rule__Version__Group_1_2__0__Impl : ( '.' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1822:1: rule__Version__Group_1_2__0__Impl : ( '.' ) ;
     public final void rule__Version__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1820:1: ( ( '.' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1821:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1826:1: ( ( '.' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1827:1: ( '.' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1821:1: ( '.' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1822:1: '.'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1827:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1828:1: '.'
             {
              before(grammarAccess.getVersionAccess().getFullStopKeyword_1_2_0()); 
-            match(input,31,FOLLOW_31_in_rule__Version__Group_1_2__0__Impl3640); 
+            match(input,32,FOLLOW_32_in_rule__Version__Group_1_2__0__Impl3657); 
              after(grammarAccess.getVersionAccess().getFullStopKeyword_1_2_0()); 
 
             }
@@ -4970,21 +4995,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1835:1: rule__Version__Group_1_2__1 : rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1841:1: rule__Version__Group_1_2__1 : rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2 ;
     public final void rule__Version__Group_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1839:1: ( rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1840:2: rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1845:1: ( rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1846:2: rule__Version__Group_1_2__1__Impl rule__Version__Group_1_2__2
             {
-            pushFollow(FOLLOW_rule__Version__Group_1_2__1__Impl_in_rule__Version__Group_1_2__13671);
+            pushFollow(FOLLOW_rule__Version__Group_1_2__1__Impl_in_rule__Version__Group_1_2__13688);
             rule__Version__Group_1_2__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group_1_2__2_in_rule__Version__Group_1_2__13674);
+            pushFollow(FOLLOW_rule__Version__Group_1_2__2_in_rule__Version__Group_1_2__13691);
             rule__Version__Group_1_2__2();
 
             state._fsp--;
@@ -5008,20 +5033,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1847:1: rule__Version__Group_1_2__1__Impl : ( RULE_INT ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1853:1: rule__Version__Group_1_2__1__Impl : ( RULE_INT ) ;
     public final void rule__Version__Group_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1851:1: ( ( RULE_INT ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1852:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1857:1: ( ( RULE_INT ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1858:1: ( RULE_INT )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1852:1: ( RULE_INT )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1853:1: RULE_INT
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1858:1: ( RULE_INT )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1859:1: RULE_INT
             {
              before(grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_1()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group_1_2__1__Impl3701); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Version__Group_1_2__1__Impl3718); 
              after(grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_1()); 
 
             }
@@ -5045,16 +5070,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1864:1: rule__Version__Group_1_2__2 : rule__Version__Group_1_2__2__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1870:1: rule__Version__Group_1_2__2 : rule__Version__Group_1_2__2__Impl ;
     public final void rule__Version__Group_1_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1868:1: ( rule__Version__Group_1_2__2__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1869:2: rule__Version__Group_1_2__2__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1874:1: ( rule__Version__Group_1_2__2__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1875:2: rule__Version__Group_1_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__Version__Group_1_2__2__Impl_in_rule__Version__Group_1_2__23730);
+            pushFollow(FOLLOW_rule__Version__Group_1_2__2__Impl_in_rule__Version__Group_1_2__23747);
             rule__Version__Group_1_2__2__Impl();
 
             state._fsp--;
@@ -5078,31 +5103,31 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1875:1: rule__Version__Group_1_2__2__Impl : ( ( rule__Version__Group_1_2_2__0 )? ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1881:1: rule__Version__Group_1_2__2__Impl : ( ( rule__Version__Group_1_2_2__0 )? ) ;
     public final void rule__Version__Group_1_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1879:1: ( ( ( rule__Version__Group_1_2_2__0 )? ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1880:1: ( ( rule__Version__Group_1_2_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1885:1: ( ( ( rule__Version__Group_1_2_2__0 )? ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1886:1: ( ( rule__Version__Group_1_2_2__0 )? )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1880:1: ( ( rule__Version__Group_1_2_2__0 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1881:1: ( rule__Version__Group_1_2_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1886:1: ( ( rule__Version__Group_1_2_2__0 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1887:1: ( rule__Version__Group_1_2_2__0 )?
             {
              before(grammarAccess.getVersionAccess().getGroup_1_2_2()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1882:1: ( rule__Version__Group_1_2_2__0 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1888:1: ( rule__Version__Group_1_2_2__0 )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0==31) ) {
+            if ( (LA23_0==32) ) {
                 alt23=1;
             }
             switch (alt23) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1882:2: rule__Version__Group_1_2_2__0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1888:2: rule__Version__Group_1_2_2__0
                     {
-                    pushFollow(FOLLOW_rule__Version__Group_1_2_2__0_in_rule__Version__Group_1_2__2__Impl3757);
+                    pushFollow(FOLLOW_rule__Version__Group_1_2_2__0_in_rule__Version__Group_1_2__2__Impl3774);
                     rule__Version__Group_1_2_2__0();
 
                     state._fsp--;
@@ -5136,21 +5161,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2_2__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1898:1: rule__Version__Group_1_2_2__0 : rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1904:1: rule__Version__Group_1_2_2__0 : rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1 ;
     public final void rule__Version__Group_1_2_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1902:1: ( rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1903:2: rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1908:1: ( rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1909:2: rule__Version__Group_1_2_2__0__Impl rule__Version__Group_1_2_2__1
             {
-            pushFollow(FOLLOW_rule__Version__Group_1_2_2__0__Impl_in_rule__Version__Group_1_2_2__03794);
+            pushFollow(FOLLOW_rule__Version__Group_1_2_2__0__Impl_in_rule__Version__Group_1_2_2__03811);
             rule__Version__Group_1_2_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Version__Group_1_2_2__1_in_rule__Version__Group_1_2_2__03797);
+            pushFollow(FOLLOW_rule__Version__Group_1_2_2__1_in_rule__Version__Group_1_2_2__03814);
             rule__Version__Group_1_2_2__1();
 
             state._fsp--;
@@ -5174,20 +5199,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2_2__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1910:1: rule__Version__Group_1_2_2__0__Impl : ( '.' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1916:1: rule__Version__Group_1_2_2__0__Impl : ( '.' ) ;
     public final void rule__Version__Group_1_2_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1914:1: ( ( '.' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1915:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1920:1: ( ( '.' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1921:1: ( '.' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1915:1: ( '.' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1916:1: '.'
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1921:1: ( '.' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1922:1: '.'
             {
              before(grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0()); 
-            match(input,31,FOLLOW_31_in_rule__Version__Group_1_2_2__0__Impl3825); 
+            match(input,32,FOLLOW_32_in_rule__Version__Group_1_2_2__0__Impl3842); 
              after(grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0()); 
 
             }
@@ -5211,16 +5236,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2_2__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1929:1: rule__Version__Group_1_2_2__1 : rule__Version__Group_1_2_2__1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1935:1: rule__Version__Group_1_2_2__1 : rule__Version__Group_1_2_2__1__Impl ;
     public final void rule__Version__Group_1_2_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1933:1: ( rule__Version__Group_1_2_2__1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1934:2: rule__Version__Group_1_2_2__1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1939:1: ( rule__Version__Group_1_2_2__1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1940:2: rule__Version__Group_1_2_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__Version__Group_1_2_2__1__Impl_in_rule__Version__Group_1_2_2__13856);
+            pushFollow(FOLLOW_rule__Version__Group_1_2_2__1__Impl_in_rule__Version__Group_1_2_2__13873);
             rule__Version__Group_1_2_2__1__Impl();
 
             state._fsp--;
@@ -5244,23 +5269,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Version__Group_1_2_2__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1940:1: rule__Version__Group_1_2_2__1__Impl : ( ( rule__Version__Alternatives_1_2_2_1 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1946:1: rule__Version__Group_1_2_2__1__Impl : ( ( rule__Version__Alternatives_1_2_2_1 ) ) ;
     public final void rule__Version__Group_1_2_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1944:1: ( ( ( rule__Version__Alternatives_1_2_2_1 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1945:1: ( ( rule__Version__Alternatives_1_2_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1950:1: ( ( ( rule__Version__Alternatives_1_2_2_1 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1951:1: ( ( rule__Version__Alternatives_1_2_2_1 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1945:1: ( ( rule__Version__Alternatives_1_2_2_1 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1946:1: ( rule__Version__Alternatives_1_2_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1951:1: ( ( rule__Version__Alternatives_1_2_2_1 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1952:1: ( rule__Version__Alternatives_1_2_2_1 )
             {
              before(grammarAccess.getVersionAccess().getAlternatives_1_2_2_1()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1947:1: ( rule__Version__Alternatives_1_2_2_1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1947:2: rule__Version__Alternatives_1_2_2_1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1953:1: ( rule__Version__Alternatives_1_2_2_1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1953:2: rule__Version__Alternatives_1_2_2_1
             {
-            pushFollow(FOLLOW_rule__Version__Alternatives_1_2_2_1_in_rule__Version__Group_1_2_2__1__Impl3883);
+            pushFollow(FOLLOW_rule__Version__Alternatives_1_2_2_1_in_rule__Version__Group_1_2_2__1__Impl3900);
             rule__Version__Alternatives_1_2_2_1();
 
             state._fsp--;
@@ -5291,21 +5316,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1961:1: rule__VersionRange__Group_0__0 : rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1967:1: rule__VersionRange__Group_0__0 : rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1 ;
     public final void rule__VersionRange__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1965:1: ( rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1966:2: rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1971:1: ( rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1972:2: rule__VersionRange__Group_0__0__Impl rule__VersionRange__Group_0__1
             {
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__0__Impl_in_rule__VersionRange__Group_0__03917);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__0__Impl_in_rule__VersionRange__Group_0__03934);
             rule__VersionRange__Group_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__1_in_rule__VersionRange__Group_0__03920);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__1_in_rule__VersionRange__Group_0__03937);
             rule__VersionRange__Group_0__1();
 
             state._fsp--;
@@ -5329,23 +5354,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__0__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1973:1: rule__VersionRange__Group_0__0__Impl : ( ( rule__VersionRange__Alternatives_0_0 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1979:1: rule__VersionRange__Group_0__0__Impl : ( ( rule__VersionRange__Alternatives_0_0 ) ) ;
     public final void rule__VersionRange__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1977:1: ( ( ( rule__VersionRange__Alternatives_0_0 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1978:1: ( ( rule__VersionRange__Alternatives_0_0 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1983:1: ( ( ( rule__VersionRange__Alternatives_0_0 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1984:1: ( ( rule__VersionRange__Alternatives_0_0 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1978:1: ( ( rule__VersionRange__Alternatives_0_0 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1979:1: ( rule__VersionRange__Alternatives_0_0 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1984:1: ( ( rule__VersionRange__Alternatives_0_0 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1985:1: ( rule__VersionRange__Alternatives_0_0 )
             {
              before(grammarAccess.getVersionRangeAccess().getAlternatives_0_0()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1980:1: ( rule__VersionRange__Alternatives_0_0 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1980:2: rule__VersionRange__Alternatives_0_0
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1986:1: ( rule__VersionRange__Alternatives_0_0 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1986:2: rule__VersionRange__Alternatives_0_0
             {
-            pushFollow(FOLLOW_rule__VersionRange__Alternatives_0_0_in_rule__VersionRange__Group_0__0__Impl3947);
+            pushFollow(FOLLOW_rule__VersionRange__Alternatives_0_0_in_rule__VersionRange__Group_0__0__Impl3964);
             rule__VersionRange__Alternatives_0_0();
 
             state._fsp--;
@@ -5376,21 +5401,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1990:1: rule__VersionRange__Group_0__1 : rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1996:1: rule__VersionRange__Group_0__1 : rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2 ;
     public final void rule__VersionRange__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1994:1: ( rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:1995:2: rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2000:1: ( rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2001:2: rule__VersionRange__Group_0__1__Impl rule__VersionRange__Group_0__2
             {
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__1__Impl_in_rule__VersionRange__Group_0__13977);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__1__Impl_in_rule__VersionRange__Group_0__13994);
             rule__VersionRange__Group_0__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__2_in_rule__VersionRange__Group_0__13980);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__2_in_rule__VersionRange__Group_0__13997);
             rule__VersionRange__Group_0__2();
 
             state._fsp--;
@@ -5414,20 +5439,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2002:1: rule__VersionRange__Group_0__1__Impl : ( ruleVersion ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2008:1: rule__VersionRange__Group_0__1__Impl : ( ruleVersion ) ;
     public final void rule__VersionRange__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2006:1: ( ( ruleVersion ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2007:1: ( ruleVersion )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2012:1: ( ( ruleVersion ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2013:1: ( ruleVersion )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2007:1: ( ruleVersion )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2008:1: ruleVersion
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2013:1: ( ruleVersion )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2014:1: ruleVersion
             {
              before(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_1()); 
-            pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__1__Impl4007);
+            pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__1__Impl4024);
             ruleVersion();
 
             state._fsp--;
@@ -5455,21 +5480,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2019:1: rule__VersionRange__Group_0__2 : rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2025:1: rule__VersionRange__Group_0__2 : rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3 ;
     public final void rule__VersionRange__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2023:1: ( rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2024:2: rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2029:1: ( rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2030:2: rule__VersionRange__Group_0__2__Impl rule__VersionRange__Group_0__3
             {
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__2__Impl_in_rule__VersionRange__Group_0__24036);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__2__Impl_in_rule__VersionRange__Group_0__24053);
             rule__VersionRange__Group_0__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__3_in_rule__VersionRange__Group_0__24039);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__3_in_rule__VersionRange__Group_0__24056);
             rule__VersionRange__Group_0__3();
 
             state._fsp--;
@@ -5493,20 +5518,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__2__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2031:1: rule__VersionRange__Group_0__2__Impl : ( ',' ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2037:1: rule__VersionRange__Group_0__2__Impl : ( ',' ) ;
     public final void rule__VersionRange__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2035:1: ( ( ',' ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2036:1: ( ',' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2041:1: ( ( ',' ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2042:1: ( ',' )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2036:1: ( ',' )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2037:1: ','
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2042:1: ( ',' )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2043:1: ','
             {
              before(grammarAccess.getVersionRangeAccess().getCommaKeyword_0_2()); 
-            match(input,22,FOLLOW_22_in_rule__VersionRange__Group_0__2__Impl4067); 
+            match(input,23,FOLLOW_23_in_rule__VersionRange__Group_0__2__Impl4084); 
              after(grammarAccess.getVersionRangeAccess().getCommaKeyword_0_2()); 
 
             }
@@ -5530,21 +5555,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__3"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2050:1: rule__VersionRange__Group_0__3 : rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4 ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2056:1: rule__VersionRange__Group_0__3 : rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4 ;
     public final void rule__VersionRange__Group_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2054:1: ( rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2055:2: rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2060:1: ( rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2061:2: rule__VersionRange__Group_0__3__Impl rule__VersionRange__Group_0__4
             {
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__3__Impl_in_rule__VersionRange__Group_0__34098);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__3__Impl_in_rule__VersionRange__Group_0__34115);
             rule__VersionRange__Group_0__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__4_in_rule__VersionRange__Group_0__34101);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__4_in_rule__VersionRange__Group_0__34118);
             rule__VersionRange__Group_0__4();
 
             state._fsp--;
@@ -5568,20 +5593,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__3__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2062:1: rule__VersionRange__Group_0__3__Impl : ( ruleVersion ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2068:1: rule__VersionRange__Group_0__3__Impl : ( ruleVersion ) ;
     public final void rule__VersionRange__Group_0__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2066:1: ( ( ruleVersion ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2067:1: ( ruleVersion )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2072:1: ( ( ruleVersion ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2073:1: ( ruleVersion )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2067:1: ( ruleVersion )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2068:1: ruleVersion
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2073:1: ( ruleVersion )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2074:1: ruleVersion
             {
              before(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_3()); 
-            pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__3__Impl4128);
+            pushFollow(FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__3__Impl4145);
             ruleVersion();
 
             state._fsp--;
@@ -5609,16 +5634,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__4"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2079:1: rule__VersionRange__Group_0__4 : rule__VersionRange__Group_0__4__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2085:1: rule__VersionRange__Group_0__4 : rule__VersionRange__Group_0__4__Impl ;
     public final void rule__VersionRange__Group_0__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2083:1: ( rule__VersionRange__Group_0__4__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2084:2: rule__VersionRange__Group_0__4__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2089:1: ( rule__VersionRange__Group_0__4__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2090:2: rule__VersionRange__Group_0__4__Impl
             {
-            pushFollow(FOLLOW_rule__VersionRange__Group_0__4__Impl_in_rule__VersionRange__Group_0__44157);
+            pushFollow(FOLLOW_rule__VersionRange__Group_0__4__Impl_in_rule__VersionRange__Group_0__44174);
             rule__VersionRange__Group_0__4__Impl();
 
             state._fsp--;
@@ -5642,23 +5667,23 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VersionRange__Group_0__4__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2090:1: rule__VersionRange__Group_0__4__Impl : ( ( rule__VersionRange__Alternatives_0_4 ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2096:1: rule__VersionRange__Group_0__4__Impl : ( ( rule__VersionRange__Alternatives_0_4 ) ) ;
     public final void rule__VersionRange__Group_0__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2094:1: ( ( ( rule__VersionRange__Alternatives_0_4 ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2095:1: ( ( rule__VersionRange__Alternatives_0_4 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2100:1: ( ( ( rule__VersionRange__Alternatives_0_4 ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2101:1: ( ( rule__VersionRange__Alternatives_0_4 ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2095:1: ( ( rule__VersionRange__Alternatives_0_4 ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2096:1: ( rule__VersionRange__Alternatives_0_4 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2101:1: ( ( rule__VersionRange__Alternatives_0_4 ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2102:1: ( rule__VersionRange__Alternatives_0_4 )
             {
              before(grammarAccess.getVersionRangeAccess().getAlternatives_0_4()); 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2097:1: ( rule__VersionRange__Alternatives_0_4 )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2097:2: rule__VersionRange__Alternatives_0_4
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2103:1: ( rule__VersionRange__Alternatives_0_4 )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2103:2: rule__VersionRange__Alternatives_0_4
             {
-            pushFollow(FOLLOW_rule__VersionRange__Alternatives_0_4_in_rule__VersionRange__Group_0__4__Impl4184);
+            pushFollow(FOLLOW_rule__VersionRange__Alternatives_0_4_in_rule__VersionRange__Group_0__4__Impl4201);
             rule__VersionRange__Alternatives_0_4();
 
             state._fsp--;
@@ -5689,17 +5714,17 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__UnorderedGroup_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2118:1: rule__Location__UnorderedGroup_1 : rule__Location__UnorderedGroup_1__0 {...}?;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2124:1: rule__Location__UnorderedGroup_1 : rule__Location__UnorderedGroup_1__0 {...}?;
     public final void rule__Location__UnorderedGroup_1() throws RecognitionException {
 
             	int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getLocationAccess().getUnorderedGroup_1());
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2123:1: ( rule__Location__UnorderedGroup_1__0 {...}?)
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2124:2: rule__Location__UnorderedGroup_1__0 {...}?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2129:1: ( rule__Location__UnorderedGroup_1__0 {...}?)
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2130:2: rule__Location__UnorderedGroup_1__0 {...}?
             {
-            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__0_in_rule__Location__UnorderedGroup_14225);
+            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__0_in_rule__Location__UnorderedGroup_14242);
             rule__Location__UnorderedGroup_1__0();
 
             state._fsp--;
@@ -5727,17 +5752,17 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__UnorderedGroup_1__Impl"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2135:1: rule__Location__UnorderedGroup_1__Impl : ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2141:1: rule__Location__UnorderedGroup_1__Impl : ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) ) ;
     public final void rule__Location__UnorderedGroup_1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2140:1: ( ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2141:3: ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2146:1: ( ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2147:3: ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2141:3: ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2147:3: ( ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) ) | ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -5755,16 +5780,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             }
             switch (alt24) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2143:4: ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2149:4: ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2143:4: ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2144:5: {...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2149:4: ({...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2150:5: {...}? => ( ( ( rule__Location__IDAssignment_1_0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0) ) {
                         throw new FailedPredicateException(input, "rule__Location__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0)");
                     }
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2144:105: ( ( ( rule__Location__IDAssignment_1_0 ) ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2145:6: ( ( rule__Location__IDAssignment_1_0 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2150:105: ( ( ( rule__Location__IDAssignment_1_0 ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2151:6: ( ( rule__Location__IDAssignment_1_0 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0);
@@ -5772,14 +5797,14 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
                     	 				  selected = true;
                     	 				
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2151:6: ( ( rule__Location__IDAssignment_1_0 ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2153:7: ( rule__Location__IDAssignment_1_0 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2157:6: ( ( rule__Location__IDAssignment_1_0 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2159:7: ( rule__Location__IDAssignment_1_0 )
                     {
                      before(grammarAccess.getLocationAccess().getIDAssignment_1_0()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2154:7: ( rule__Location__IDAssignment_1_0 )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2154:8: rule__Location__IDAssignment_1_0
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2160:7: ( rule__Location__IDAssignment_1_0 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2160:8: rule__Location__IDAssignment_1_0
                     {
-                    pushFollow(FOLLOW_rule__Location__IDAssignment_1_0_in_rule__Location__UnorderedGroup_1__Impl4314);
+                    pushFollow(FOLLOW_rule__Location__IDAssignment_1_0_in_rule__Location__UnorderedGroup_1__Impl4331);
                     rule__Location__IDAssignment_1_0();
 
                     state._fsp--;
@@ -5801,16 +5826,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2160:4: ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2166:4: ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) )
                     {
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2160:4: ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2161:5: {...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2166:4: ({...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2167:5: {...}? => ( ( ( rule__Location__UriAssignment_1_1 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1) ) {
                         throw new FailedPredicateException(input, "rule__Location__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1)");
                     }
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2161:105: ( ( ( rule__Location__UriAssignment_1_1 ) ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2162:6: ( ( rule__Location__UriAssignment_1_1 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2167:105: ( ( ( rule__Location__UriAssignment_1_1 ) ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2168:6: ( ( rule__Location__UriAssignment_1_1 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1);
@@ -5818,14 +5843,14 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
                     	 				  selected = true;
                     	 				
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2168:6: ( ( rule__Location__UriAssignment_1_1 ) )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2170:7: ( rule__Location__UriAssignment_1_1 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2174:6: ( ( rule__Location__UriAssignment_1_1 ) )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2176:7: ( rule__Location__UriAssignment_1_1 )
                     {
                      before(grammarAccess.getLocationAccess().getUriAssignment_1_1()); 
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2171:7: ( rule__Location__UriAssignment_1_1 )
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2171:8: rule__Location__UriAssignment_1_1
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2177:7: ( rule__Location__UriAssignment_1_1 )
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2177:8: rule__Location__UriAssignment_1_1
                     {
-                    pushFollow(FOLLOW_rule__Location__UriAssignment_1_1_in_rule__Location__UnorderedGroup_1__Impl4405);
+                    pushFollow(FOLLOW_rule__Location__UriAssignment_1_1_in_rule__Location__UnorderedGroup_1__Impl4422);
                     rule__Location__UriAssignment_1_1();
 
                     state._fsp--;
@@ -5870,21 +5895,21 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__UnorderedGroup_1__0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2186:1: rule__Location__UnorderedGroup_1__0 : rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )? ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2192:1: rule__Location__UnorderedGroup_1__0 : rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )? ;
     public final void rule__Location__UnorderedGroup_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2190:1: ( rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )? )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2191:2: rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2196:1: ( rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )? )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2197:2: rule__Location__UnorderedGroup_1__Impl ( rule__Location__UnorderedGroup_1__1 )?
             {
-            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__04464);
+            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__04481);
             rule__Location__UnorderedGroup_1__Impl();
 
             state._fsp--;
 
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2192:2: ( rule__Location__UnorderedGroup_1__1 )?
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2198:2: ( rule__Location__UnorderedGroup_1__1 )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -5896,9 +5921,9 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
             }
             switch (alt25) {
                 case 1 :
-                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2192:2: rule__Location__UnorderedGroup_1__1
+                    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2198:2: rule__Location__UnorderedGroup_1__1
                     {
-                    pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__1_in_rule__Location__UnorderedGroup_1__04467);
+                    pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__1_in_rule__Location__UnorderedGroup_1__04484);
                     rule__Location__UnorderedGroup_1__1();
 
                     state._fsp--;
@@ -5928,16 +5953,16 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__UnorderedGroup_1__1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2199:1: rule__Location__UnorderedGroup_1__1 : rule__Location__UnorderedGroup_1__Impl ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2205:1: rule__Location__UnorderedGroup_1__1 : rule__Location__UnorderedGroup_1__Impl ;
     public final void rule__Location__UnorderedGroup_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2203:1: ( rule__Location__UnorderedGroup_1__Impl )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2204:2: rule__Location__UnorderedGroup_1__Impl
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2209:1: ( rule__Location__UnorderedGroup_1__Impl )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2210:2: rule__Location__UnorderedGroup_1__Impl
             {
-            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__14492);
+            pushFollow(FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__14509);
             rule__Location__UnorderedGroup_1__Impl();
 
             state._fsp--;
@@ -5961,20 +5986,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__NameAssignment_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2215:1: rule__TargetPlatform__NameAssignment_1 : ( RULE_STRING ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2221:1: rule__TargetPlatform__NameAssignment_1 : ( RULE_STRING ) ;
     public final void rule__TargetPlatform__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2219:1: ( ( RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2220:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2225:1: ( ( RULE_STRING ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2226:1: ( RULE_STRING )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2220:1: ( RULE_STRING )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2221:1: RULE_STRING
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2226:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2227:1: RULE_STRING
             {
              before(grammarAccess.getTargetPlatformAccess().getNameSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__TargetPlatform__NameAssignment_14524); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__TargetPlatform__NameAssignment_14541); 
              after(grammarAccess.getTargetPlatformAccess().getNameSTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -5998,20 +6023,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__TargetPlatform__ContentsAssignment_2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2230:1: rule__TargetPlatform__ContentsAssignment_2 : ( ruleTargetContent ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2236:1: rule__TargetPlatform__ContentsAssignment_2 : ( ruleTargetContent ) ;
     public final void rule__TargetPlatform__ContentsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2234:1: ( ( ruleTargetContent ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2235:1: ( ruleTargetContent )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2240:1: ( ( ruleTargetContent ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2241:1: ( ruleTargetContent )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2235:1: ( ruleTargetContent )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2236:1: ruleTargetContent
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2241:1: ( ruleTargetContent )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2242:1: ruleTargetContent
             {
              before(grammarAccess.getTargetPlatformAccess().getContentsTargetContentParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleTargetContent_in_rule__TargetPlatform__ContentsAssignment_24555);
+            pushFollow(FOLLOW_ruleTargetContent_in_rule__TargetPlatform__ContentsAssignment_24572);
             ruleTargetContent();
 
             state._fsp--;
@@ -6039,20 +6064,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__OptionsAssignment_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2245:1: rule__Options__OptionsAssignment_1 : ( ruleOption ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2251:1: rule__Options__OptionsAssignment_1 : ( ruleOption ) ;
     public final void rule__Options__OptionsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2249:1: ( ( ruleOption ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2250:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2255:1: ( ( ruleOption ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2256:1: ( ruleOption )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2250:1: ( ruleOption )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2251:1: ruleOption
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2256:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2257:1: ruleOption
             {
              before(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_14586);
+            pushFollow(FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_14603);
             ruleOption();
 
             state._fsp--;
@@ -6080,20 +6105,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Options__OptionsAssignment_2_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2260:1: rule__Options__OptionsAssignment_2_1 : ( ruleOption ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2266:1: rule__Options__OptionsAssignment_2_1 : ( ruleOption ) ;
     public final void rule__Options__OptionsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2264:1: ( ( ruleOption ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2265:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2270:1: ( ( ruleOption ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2271:1: ( ruleOption )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2265:1: ( ruleOption )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2266:1: ruleOption
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2271:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2272:1: ruleOption
             {
              before(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_2_14617);
+            pushFollow(FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_2_14634);
             ruleOption();
 
             state._fsp--;
@@ -6121,20 +6146,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__EnvAssignment_2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2275:1: rule__Environment__EnvAssignment_2 : ( RULE_ID ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2281:1: rule__Environment__EnvAssignment_2 : ( RULE_ID ) ;
     public final void rule__Environment__EnvAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2279:1: ( ( RULE_ID ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2280:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2285:1: ( ( RULE_ID ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2286:1: ( RULE_ID )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2280:1: ( RULE_ID )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2281:1: RULE_ID
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2286:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2287:1: RULE_ID
             {
              before(grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_24648); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_24665); 
              after(grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_2_0()); 
 
             }
@@ -6158,20 +6183,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Environment__EnvAssignment_3_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2290:1: rule__Environment__EnvAssignment_3_1 : ( RULE_ID ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2296:1: rule__Environment__EnvAssignment_3_1 : ( RULE_ID ) ;
     public final void rule__Environment__EnvAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2294:1: ( ( RULE_ID ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2295:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2300:1: ( ( RULE_ID ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2301:1: ( RULE_ID )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2295:1: ( RULE_ID )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2296:1: RULE_ID
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2301:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2302:1: RULE_ID
             {
              before(grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_3_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_3_14679); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_3_14696); 
              after(grammarAccess.getEnvironmentAccess().getEnvIDTerminalRuleCall_3_1_0()); 
 
             }
@@ -6195,20 +6220,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IncludeDeclaration__ImportURIAssignment_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2305:1: rule__IncludeDeclaration__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2311:1: rule__IncludeDeclaration__ImportURIAssignment_1 : ( RULE_STRING ) ;
     public final void rule__IncludeDeclaration__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2309:1: ( ( RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2310:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2315:1: ( ( RULE_STRING ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2316:1: ( RULE_STRING )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2310:1: ( RULE_STRING )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2311:1: RULE_STRING
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2316:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2317:1: RULE_STRING
             {
              before(grammarAccess.getIncludeDeclarationAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__IncludeDeclaration__ImportURIAssignment_14710); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__IncludeDeclaration__ImportURIAssignment_14727); 
              after(grammarAccess.getIncludeDeclarationAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -6232,20 +6257,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__IDAssignment_1_0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2320:1: rule__Location__IDAssignment_1_0 : ( RULE_ID ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2326:1: rule__Location__IDAssignment_1_0 : ( RULE_ID ) ;
     public final void rule__Location__IDAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2324:1: ( ( RULE_ID ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2325:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2330:1: ( ( RULE_ID ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2331:1: ( RULE_ID )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2325:1: ( RULE_ID )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2326:1: RULE_ID
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2331:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2332:1: RULE_ID
             {
              before(grammarAccess.getLocationAccess().getIDIDTerminalRuleCall_1_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Location__IDAssignment_1_04741); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Location__IDAssignment_1_04758); 
              after(grammarAccess.getLocationAccess().getIDIDTerminalRuleCall_1_0_0()); 
 
             }
@@ -6269,20 +6294,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__UriAssignment_1_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2335:1: rule__Location__UriAssignment_1_1 : ( RULE_STRING ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2341:1: rule__Location__UriAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__Location__UriAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2339:1: ( ( RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2340:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2345:1: ( ( RULE_STRING ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2346:1: ( RULE_STRING )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2340:1: ( RULE_STRING )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2341:1: RULE_STRING
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2346:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2347:1: RULE_STRING
             {
              before(grammarAccess.getLocationAccess().getUriSTRINGTerminalRuleCall_1_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Location__UriAssignment_1_14772); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Location__UriAssignment_1_14789); 
              after(grammarAccess.getLocationAccess().getUriSTRINGTerminalRuleCall_1_1_0()); 
 
             }
@@ -6306,20 +6331,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__OptionsAssignment_2_1_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2350:1: rule__Location__OptionsAssignment_2_1_1 : ( ruleOption ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2356:1: rule__Location__OptionsAssignment_2_1_1 : ( ruleOption ) ;
     public final void rule__Location__OptionsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2354:1: ( ( ruleOption ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2355:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2360:1: ( ( ruleOption ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2361:1: ( ruleOption )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2355:1: ( ruleOption )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2356:1: ruleOption
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2361:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2362:1: ruleOption
             {
              before(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_1_0()); 
-            pushFollow(FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_14803);
+            pushFollow(FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_14820);
             ruleOption();
 
             state._fsp--;
@@ -6347,20 +6372,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__OptionsAssignment_2_1_2_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2365:1: rule__Location__OptionsAssignment_2_1_2_1 : ( ruleOption ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2371:1: rule__Location__OptionsAssignment_2_1_2_1 : ( ruleOption ) ;
     public final void rule__Location__OptionsAssignment_2_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2369:1: ( ( ruleOption ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2370:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2375:1: ( ( ruleOption ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2376:1: ( ruleOption )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2370:1: ( ruleOption )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2371:1: ruleOption
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2376:1: ( ruleOption )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2377:1: ruleOption
             {
              before(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0()); 
-            pushFollow(FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_2_14834);
+            pushFollow(FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_2_14851);
             ruleOption();
 
             state._fsp--;
@@ -6388,20 +6413,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Location__IusAssignment_2_2"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2380:1: rule__Location__IusAssignment_2_2 : ( ruleIU ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2386:1: rule__Location__IusAssignment_2_2 : ( ruleIU ) ;
     public final void rule__Location__IusAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2384:1: ( ( ruleIU ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:1: ( ruleIU )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2390:1: ( ( ruleIU ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2391:1: ( ruleIU )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2385:1: ( ruleIU )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2386:1: ruleIU
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2391:1: ( ruleIU )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2392:1: ruleIU
             {
              before(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0()); 
-            pushFollow(FOLLOW_ruleIU_in_rule__Location__IusAssignment_2_24865);
+            pushFollow(FOLLOW_ruleIU_in_rule__Location__IusAssignment_2_24882);
             ruleIU();
 
             state._fsp--;
@@ -6429,20 +6454,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__IDAssignment_0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2395:1: rule__IU__IDAssignment_0 : ( RULE_ID ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2401:1: rule__IU__IDAssignment_0 : ( RULE_ID ) ;
     public final void rule__IU__IDAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2399:1: ( ( RULE_ID ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2400:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2405:1: ( ( RULE_ID ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2406:1: ( RULE_ID )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2400:1: ( RULE_ID )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2401:1: RULE_ID
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2406:1: ( RULE_ID )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2407:1: RULE_ID
             {
              before(grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__IU__IDAssignment_04896); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__IU__IDAssignment_04913); 
              after(grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0()); 
 
             }
@@ -6466,20 +6491,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__VersionAssignment_1_1_0"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2410:1: rule__IU__VersionAssignment_1_1_0 : ( ruleVersionRange ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2416:1: rule__IU__VersionAssignment_1_1_0 : ( ruleVersionRange ) ;
     public final void rule__IU__VersionAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2414:1: ( ( ruleVersionRange ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2415:1: ( ruleVersionRange )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2420:1: ( ( ruleVersionRange ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2421:1: ( ruleVersionRange )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2415:1: ( ruleVersionRange )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2416:1: ruleVersionRange
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2421:1: ( ruleVersionRange )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2422:1: ruleVersionRange
             {
              before(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0()); 
-            pushFollow(FOLLOW_ruleVersionRange_in_rule__IU__VersionAssignment_1_1_04927);
+            pushFollow(FOLLOW_ruleVersionRange_in_rule__IU__VersionAssignment_1_1_04944);
             ruleVersionRange();
 
             state._fsp--;
@@ -6507,20 +6532,20 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__IU__VersionAssignment_1_1_1"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2425:1: rule__IU__VersionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2431:1: rule__IU__VersionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__IU__VersionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2429:1: ( ( RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2430:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2435:1: ( ( RULE_STRING ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2436:1: ( RULE_STRING )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2430:1: ( RULE_STRING )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2431:1: RULE_STRING
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2436:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2437:1: RULE_STRING
             {
              before(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__IU__VersionAssignment_1_1_14958); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__IU__VersionAssignment_1_1_14975); 
              after(grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_1_0()); 
 
             }
@@ -6583,168 +6608,169 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
     public static final BitSet FOLLOW_rule__IU__VersionAssignment_1_1_1_in_rule__IU__Alternatives_1_1766 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__Version__Alternatives_1_2_2_1799 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Alternatives_1_2_2_1816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__0_in_rule__VersionRange__Alternatives848 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Alternatives866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__VersionRange__Alternatives884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__VersionRange__Alternatives_0_0919 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__VersionRange__Alternatives_0_0939 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__VersionRange__Alternatives_0_4974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__VersionRange__Alternatives_0_4994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Option__Alternatives1029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Option__Alternatives1050 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Option__Alternatives1071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Option__Alternatives1092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__Group__0__Impl_in_rule__TargetPlatform__Group__01125 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__Group__1_in_rule__TargetPlatform__Group__01128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__TargetPlatform__Group__0__Impl1156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__Group__1__Impl_in_rule__TargetPlatform__Group__11187 = new BitSet(new long[]{0x0000000003A00000L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__Group__2_in_rule__TargetPlatform__Group__11190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__NameAssignment_1_in_rule__TargetPlatform__Group__1__Impl1217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__Group__2__Impl_in_rule__TargetPlatform__Group__21247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TargetPlatform__ContentsAssignment_2_in_rule__TargetPlatform__Group__2__Impl1274 = new BitSet(new long[]{0x0000000003A00002L});
-    public static final BitSet FOLLOW_rule__Options__Group__0__Impl_in_rule__Options__Group__01311 = new BitSet(new long[]{0x00000000000F0000L});
-    public static final BitSet FOLLOW_rule__Options__Group__1_in_rule__Options__Group__01314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Options__Group__0__Impl1342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__Group__1__Impl_in_rule__Options__Group__11373 = new BitSet(new long[]{0x00000000004F0000L});
-    public static final BitSet FOLLOW_rule__Options__Group__2_in_rule__Options__Group__11376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__OptionsAssignment_1_in_rule__Options__Group__1__Impl1403 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__Group__2__Impl_in_rule__Options__Group__21433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__Group_2__0_in_rule__Options__Group__2__Impl1460 = new BitSet(new long[]{0x00000000004F0002L});
-    public static final BitSet FOLLOW_rule__Options__Group_2__0__Impl_in_rule__Options__Group_2__01497 = new BitSet(new long[]{0x00000000004F0000L});
-    public static final BitSet FOLLOW_rule__Options__Group_2__1_in_rule__Options__Group_2__01500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Options__Group_2__0__Impl1529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__Group_2__1__Impl_in_rule__Options__Group_2__11562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Options__OptionsAssignment_2_1_in_rule__Options__Group_2__1__Impl1589 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group__0__Impl_in_rule__Environment__Group__01623 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__Environment__Group__1_in_rule__Environment__Group__01626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group__1__Impl_in_rule__Environment__Group__11684 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Environment__Group__2_in_rule__Environment__Group__11687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__Environment__Group__1__Impl1715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group__2__Impl_in_rule__Environment__Group__21746 = new BitSet(new long[]{0x0000000000400010L});
-    public static final BitSet FOLLOW_rule__Environment__Group__3_in_rule__Environment__Group__21749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__EnvAssignment_2_in_rule__Environment__Group__2__Impl1776 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group__3__Impl_in_rule__Environment__Group__31806 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group_3__0_in_rule__Environment__Group__3__Impl1833 = new BitSet(new long[]{0x0000000000400012L});
-    public static final BitSet FOLLOW_rule__Environment__Group_3__0__Impl_in_rule__Environment__Group_3__01872 = new BitSet(new long[]{0x0000000000400010L});
-    public static final BitSet FOLLOW_rule__Environment__Group_3__1_in_rule__Environment__Group_3__01875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Environment__Group_3__0__Impl1904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__Group_3__1__Impl_in_rule__Environment__Group_3__11937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Environment__EnvAssignment_3_1_in_rule__Environment__Group_3__1__Impl1964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__0__Impl_in_rule__IncludeDeclaration__Group__01998 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__1_in_rule__IncludeDeclaration__Group__02001 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__IncludeDeclaration__Group__0__Impl2029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__1__Impl_in_rule__IncludeDeclaration__Group__12060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IncludeDeclaration__ImportURIAssignment_1_in_rule__IncludeDeclaration__Group__1__Impl2087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group__0__Impl_in_rule__Location__Group__02121 = new BitSet(new long[]{0x0000000000000050L});
-    public static final BitSet FOLLOW_rule__Location__Group__1_in_rule__Location__Group__02124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__Location__Group__0__Impl2152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group__1__Impl_in_rule__Location__Group__12183 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__Location__Group__2_in_rule__Location__Group__12186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1_in_rule__Location__Group__1__Impl2213 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group__2__Impl_in_rule__Location__Group__22243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__0_in_rule__Location__Group__2__Impl2270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__0__Impl_in_rule__Location__Group_2__02307 = new BitSet(new long[]{0x0000000008200010L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__1_in_rule__Location__Group_2__02310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__Location__Group_2__0__Impl2338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__1__Impl_in_rule__Location__Group_2__12369 = new BitSet(new long[]{0x0000000008200010L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__2_in_rule__Location__Group_2__12372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__0_in_rule__Location__Group_2__1__Impl2399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__2__Impl_in_rule__Location__Group_2__22430 = new BitSet(new long[]{0x0000000008200010L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__3_in_rule__Location__Group_2__22433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__IusAssignment_2_2_in_rule__Location__Group_2__2__Impl2460 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_rule__Location__Group_2__3__Impl_in_rule__Location__Group_2__32491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__Location__Group_2__3__Impl2519 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__0__Impl_in_rule__Location__Group_2_1__02558 = new BitSet(new long[]{0x00000000000F0000L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__1_in_rule__Location__Group_2_1__02561 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Location__Group_2_1__0__Impl2589 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__1__Impl_in_rule__Location__Group_2_1__12620 = new BitSet(new long[]{0x00000000004F0000L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__2_in_rule__Location__Group_2_1__12623 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__OptionsAssignment_2_1_1_in_rule__Location__Group_2_1__1__Impl2650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1__2__Impl_in_rule__Location__Group_2_1__22680 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__0_in_rule__Location__Group_2_1__2__Impl2707 = new BitSet(new long[]{0x00000000004F0002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__0__Impl_in_rule__Location__Group_2_1_2__02744 = new BitSet(new long[]{0x00000000004F0000L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__1_in_rule__Location__Group_2_1_2__02747 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Location__Group_2_1_2__0__Impl2776 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__1__Impl_in_rule__Location__Group_2_1_2__12809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__OptionsAssignment_2_1_2_1_in_rule__Location__Group_2_1_2__1__Impl2836 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group__0__Impl_in_rule__IU__Group__02870 = new BitSet(new long[]{0x0000000010003860L});
-    public static final BitSet FOLLOW_rule__IU__Group__1_in_rule__IU__Group__02873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__IDAssignment_0_in_rule__IU__Group__0__Impl2900 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group__1__Impl_in_rule__IU__Group__12930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1__0_in_rule__IU__Group__1__Impl2957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1__0__Impl_in_rule__IU__Group_1__02992 = new BitSet(new long[]{0x0000000010003860L});
-    public static final BitSet FOLLOW_rule__IU__Group_1__1_in_rule__IU__Group_1__02995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__0_in_rule__IU__Group_1__0__Impl3022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1__1__Impl_in_rule__IU__Group_1__13053 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Alternatives_1_1_in_rule__IU__Group_1__1__Impl3080 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__0__Impl_in_rule__IU__Group_1_0__03114 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__1_in_rule__IU__Group_1_0__03117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__IU__Group_1_0__0__Impl3145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__1__Impl_in_rule__IU__Group_1_0__13176 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__2_in_rule__IU__Group_1_0__13179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__IU__Group_1_0__1__Impl3207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IU__Group_1_0__2__Impl_in_rule__IU__Group_1_0__23238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__IU__Group_1_0__2__Impl3266 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group__0__Impl_in_rule__Version__Group__03303 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__Version__Group__1_in_rule__Version__Group__03306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group__0__Impl3333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group__1__Impl_in_rule__Version__Group__13362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__0_in_rule__Version__Group__1__Impl3389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__0__Impl_in_rule__Version__Group_1__03424 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__1_in_rule__Version__Group_1__03427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Version__Group_1__0__Impl3455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__1__Impl_in_rule__Version__Group_1__13486 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__2_in_rule__Version__Group_1__13489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group_1__1__Impl3516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1__2__Impl_in_rule__Version__Group_1__23545 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__0_in_rule__Version__Group_1__2__Impl3572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__0__Impl_in_rule__Version__Group_1_2__03609 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__1_in_rule__Version__Group_1_2__03612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Version__Group_1_2__0__Impl3640 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__1__Impl_in_rule__Version__Group_1_2__13671 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__2_in_rule__Version__Group_1_2__13674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group_1_2__1__Impl3701 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2__2__Impl_in_rule__Version__Group_1_2__23730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__0_in_rule__Version__Group_1_2__2__Impl3757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__0__Impl_in_rule__Version__Group_1_2_2__03794 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__1_in_rule__Version__Group_1_2_2__03797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Version__Group_1_2_2__0__Impl3825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__1__Impl_in_rule__Version__Group_1_2_2__13856 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Version__Alternatives_1_2_2_1_in_rule__Version__Group_1_2_2__1__Impl3883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__0__Impl_in_rule__VersionRange__Group_0__03917 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__1_in_rule__VersionRange__Group_0__03920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Alternatives_0_0_in_rule__VersionRange__Group_0__0__Impl3947 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__1__Impl_in_rule__VersionRange__Group_0__13977 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__2_in_rule__VersionRange__Group_0__13980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__1__Impl4007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__2__Impl_in_rule__VersionRange__Group_0__24036 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__3_in_rule__VersionRange__Group_0__24039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__VersionRange__Group_0__2__Impl4067 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__3__Impl_in_rule__VersionRange__Group_0__34098 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__4_in_rule__VersionRange__Group_0__34101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__3__Impl4128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Group_0__4__Impl_in_rule__VersionRange__Group_0__44157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersionRange__Alternatives_0_4_in_rule__VersionRange__Group_0__4__Impl4184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__0_in_rule__Location__UnorderedGroup_14225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__IDAssignment_1_0_in_rule__Location__UnorderedGroup_1__Impl4314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__UriAssignment_1_1_in_rule__Location__UnorderedGroup_1__Impl4405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__04464 = new BitSet(new long[]{0x0000000000000052L});
-    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__1_in_rule__Location__UnorderedGroup_1__04467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__14492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__TargetPlatform__NameAssignment_14524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTargetContent_in_rule__TargetPlatform__ContentsAssignment_24555 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_14586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_2_14617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_24648 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_3_14679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__IncludeDeclaration__ImportURIAssignment_14710 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Location__IDAssignment_1_04741 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Location__UriAssignment_1_14772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_14803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_2_14834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIU_in_rule__Location__IusAssignment_2_24865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__IU__IDAssignment_04896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersionRange_in_rule__IU__VersionAssignment_1_1_04927 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__IU__VersionAssignment_1_1_14958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_QUALIFIER_in_rule__Version__Alternatives_1_2_2_1833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__0_in_rule__VersionRange__Alternatives865 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Alternatives883 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__VersionRange__Alternatives901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__VersionRange__Alternatives_0_0936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__VersionRange__Alternatives_0_0956 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__VersionRange__Alternatives_0_4991 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__VersionRange__Alternatives_0_41011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Option__Alternatives1046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Option__Alternatives1067 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Option__Alternatives1088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Option__Alternatives1109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__Group__0__Impl_in_rule__TargetPlatform__Group__01142 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__Group__1_in_rule__TargetPlatform__Group__01145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__TargetPlatform__Group__0__Impl1173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__Group__1__Impl_in_rule__TargetPlatform__Group__11204 = new BitSet(new long[]{0x0000000007400000L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__Group__2_in_rule__TargetPlatform__Group__11207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__NameAssignment_1_in_rule__TargetPlatform__Group__1__Impl1234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__Group__2__Impl_in_rule__TargetPlatform__Group__21264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TargetPlatform__ContentsAssignment_2_in_rule__TargetPlatform__Group__2__Impl1291 = new BitSet(new long[]{0x0000000007400002L});
+    public static final BitSet FOLLOW_rule__Options__Group__0__Impl_in_rule__Options__Group__01328 = new BitSet(new long[]{0x00000000001E0000L});
+    public static final BitSet FOLLOW_rule__Options__Group__1_in_rule__Options__Group__01331 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__Options__Group__0__Impl1359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__Group__1__Impl_in_rule__Options__Group__11390 = new BitSet(new long[]{0x00000000009E0000L});
+    public static final BitSet FOLLOW_rule__Options__Group__2_in_rule__Options__Group__11393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__OptionsAssignment_1_in_rule__Options__Group__1__Impl1420 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__Group__2__Impl_in_rule__Options__Group__21450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__Group_2__0_in_rule__Options__Group__2__Impl1477 = new BitSet(new long[]{0x00000000009E0002L});
+    public static final BitSet FOLLOW_rule__Options__Group_2__0__Impl_in_rule__Options__Group_2__01514 = new BitSet(new long[]{0x00000000009E0000L});
+    public static final BitSet FOLLOW_rule__Options__Group_2__1_in_rule__Options__Group_2__01517 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Options__Group_2__0__Impl1546 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__Group_2__1__Impl_in_rule__Options__Group_2__11579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Options__OptionsAssignment_2_1_in_rule__Options__Group_2__1__Impl1606 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group__0__Impl_in_rule__Environment__Group__01640 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__Environment__Group__1_in_rule__Environment__Group__01643 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group__1__Impl_in_rule__Environment__Group__11701 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Environment__Group__2_in_rule__Environment__Group__11704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__Environment__Group__1__Impl1732 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group__2__Impl_in_rule__Environment__Group__21763 = new BitSet(new long[]{0x0000000000800010L});
+    public static final BitSet FOLLOW_rule__Environment__Group__3_in_rule__Environment__Group__21766 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__EnvAssignment_2_in_rule__Environment__Group__2__Impl1793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group__3__Impl_in_rule__Environment__Group__31823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group_3__0_in_rule__Environment__Group__3__Impl1850 = new BitSet(new long[]{0x0000000000800012L});
+    public static final BitSet FOLLOW_rule__Environment__Group_3__0__Impl_in_rule__Environment__Group_3__01889 = new BitSet(new long[]{0x0000000000800010L});
+    public static final BitSet FOLLOW_rule__Environment__Group_3__1_in_rule__Environment__Group_3__01892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Environment__Group_3__0__Impl1921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__Group_3__1__Impl_in_rule__Environment__Group_3__11954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Environment__EnvAssignment_3_1_in_rule__Environment__Group_3__1__Impl1981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__0__Impl_in_rule__IncludeDeclaration__Group__02015 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__1_in_rule__IncludeDeclaration__Group__02018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_rule__IncludeDeclaration__Group__0__Impl2046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IncludeDeclaration__Group__1__Impl_in_rule__IncludeDeclaration__Group__12077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IncludeDeclaration__ImportURIAssignment_1_in_rule__IncludeDeclaration__Group__1__Impl2104 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group__0__Impl_in_rule__Location__Group__02138 = new BitSet(new long[]{0x0000000000000090L});
+    public static final BitSet FOLLOW_rule__Location__Group__1_in_rule__Location__Group__02141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__Location__Group__0__Impl2169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group__1__Impl_in_rule__Location__Group__12200 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_rule__Location__Group__2_in_rule__Location__Group__12203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1_in_rule__Location__Group__1__Impl2230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group__2__Impl_in_rule__Location__Group__22260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__0_in_rule__Location__Group__2__Impl2287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__0__Impl_in_rule__Location__Group_2__02324 = new BitSet(new long[]{0x0000000010400010L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__1_in_rule__Location__Group_2__02327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__Location__Group_2__0__Impl2355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__1__Impl_in_rule__Location__Group_2__12386 = new BitSet(new long[]{0x0000000010400010L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__2_in_rule__Location__Group_2__12389 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__0_in_rule__Location__Group_2__1__Impl2416 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__2__Impl_in_rule__Location__Group_2__22447 = new BitSet(new long[]{0x0000000010400010L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__3_in_rule__Location__Group_2__22450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__IusAssignment_2_2_in_rule__Location__Group_2__2__Impl2477 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__Location__Group_2__3__Impl_in_rule__Location__Group_2__32508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__Location__Group_2__3__Impl2536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__0__Impl_in_rule__Location__Group_2_1__02575 = new BitSet(new long[]{0x00000000001E0000L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__1_in_rule__Location__Group_2_1__02578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__Location__Group_2_1__0__Impl2606 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__1__Impl_in_rule__Location__Group_2_1__12637 = new BitSet(new long[]{0x00000000009E0000L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__2_in_rule__Location__Group_2_1__12640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__OptionsAssignment_2_1_1_in_rule__Location__Group_2_1__1__Impl2667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1__2__Impl_in_rule__Location__Group_2_1__22697 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__0_in_rule__Location__Group_2_1__2__Impl2724 = new BitSet(new long[]{0x00000000009E0002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__0__Impl_in_rule__Location__Group_2_1_2__02761 = new BitSet(new long[]{0x00000000009E0000L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__1_in_rule__Location__Group_2_1_2__02764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Location__Group_2_1_2__0__Impl2793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__Group_2_1_2__1__Impl_in_rule__Location__Group_2_1_2__12826 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__OptionsAssignment_2_1_2_1_in_rule__Location__Group_2_1_2__1__Impl2853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group__0__Impl_in_rule__IU__Group__02887 = new BitSet(new long[]{0x00000000200070A0L});
+    public static final BitSet FOLLOW_rule__IU__Group__1_in_rule__IU__Group__02890 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__IDAssignment_0_in_rule__IU__Group__0__Impl2917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group__1__Impl_in_rule__IU__Group__12947 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1__0_in_rule__IU__Group__1__Impl2974 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1__0__Impl_in_rule__IU__Group_1__03009 = new BitSet(new long[]{0x00000000200070A0L});
+    public static final BitSet FOLLOW_rule__IU__Group_1__1_in_rule__IU__Group_1__03012 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__0_in_rule__IU__Group_1__0__Impl3039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1__1__Impl_in_rule__IU__Group_1__13070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Alternatives_1_1_in_rule__IU__Group_1__1__Impl3097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__0__Impl_in_rule__IU__Group_1_0__03131 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__1_in_rule__IU__Group_1_0__03134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__IU__Group_1_0__0__Impl3162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__1__Impl_in_rule__IU__Group_1_0__13193 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__2_in_rule__IU__Group_1_0__13196 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__IU__Group_1_0__1__Impl3224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IU__Group_1_0__2__Impl_in_rule__IU__Group_1_0__23255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__IU__Group_1_0__2__Impl3283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group__0__Impl_in_rule__Version__Group__03320 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__Version__Group__1_in_rule__Version__Group__03323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group__0__Impl3350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group__1__Impl_in_rule__Version__Group__13379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__0_in_rule__Version__Group__1__Impl3406 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__0__Impl_in_rule__Version__Group_1__03441 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__1_in_rule__Version__Group_1__03444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Version__Group_1__0__Impl3472 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__1__Impl_in_rule__Version__Group_1__13503 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__2_in_rule__Version__Group_1__13506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group_1__1__Impl3533 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1__2__Impl_in_rule__Version__Group_1__23562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__0_in_rule__Version__Group_1__2__Impl3589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__0__Impl_in_rule__Version__Group_1_2__03626 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__1_in_rule__Version__Group_1_2__03629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Version__Group_1_2__0__Impl3657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__1__Impl_in_rule__Version__Group_1_2__13688 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__2_in_rule__Version__Group_1_2__13691 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Version__Group_1_2__1__Impl3718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2__2__Impl_in_rule__Version__Group_1_2__23747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__0_in_rule__Version__Group_1_2__2__Impl3774 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__0__Impl_in_rule__Version__Group_1_2_2__03811 = new BitSet(new long[]{0x0000000000000070L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__1_in_rule__Version__Group_1_2_2__03814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Version__Group_1_2_2__0__Impl3842 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Group_1_2_2__1__Impl_in_rule__Version__Group_1_2_2__13873 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Version__Alternatives_1_2_2_1_in_rule__Version__Group_1_2_2__1__Impl3900 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__0__Impl_in_rule__VersionRange__Group_0__03934 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__1_in_rule__VersionRange__Group_0__03937 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Alternatives_0_0_in_rule__VersionRange__Group_0__0__Impl3964 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__1__Impl_in_rule__VersionRange__Group_0__13994 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__2_in_rule__VersionRange__Group_0__13997 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__1__Impl4024 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__2__Impl_in_rule__VersionRange__Group_0__24053 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__3_in_rule__VersionRange__Group_0__24056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__VersionRange__Group_0__2__Impl4084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__3__Impl_in_rule__VersionRange__Group_0__34115 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__4_in_rule__VersionRange__Group_0__34118 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_rule__VersionRange__Group_0__3__Impl4145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Group_0__4__Impl_in_rule__VersionRange__Group_0__44174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersionRange__Alternatives_0_4_in_rule__VersionRange__Group_0__4__Impl4201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__0_in_rule__Location__UnorderedGroup_14242 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__IDAssignment_1_0_in_rule__Location__UnorderedGroup_1__Impl4331 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__UriAssignment_1_1_in_rule__Location__UnorderedGroup_1__Impl4422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__04481 = new BitSet(new long[]{0x0000000000000092L});
+    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__1_in_rule__Location__UnorderedGroup_1__04484 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Location__UnorderedGroup_1__Impl_in_rule__Location__UnorderedGroup_1__14509 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__TargetPlatform__NameAssignment_14541 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTargetContent_in_rule__TargetPlatform__ContentsAssignment_24572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_14603 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOption_in_rule__Options__OptionsAssignment_2_14634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_24665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_3_14696 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__IncludeDeclaration__ImportURIAssignment_14727 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Location__IDAssignment_1_04758 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Location__UriAssignment_1_14789 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_14820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOption_in_rule__Location__OptionsAssignment_2_1_2_14851 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIU_in_rule__Location__IusAssignment_2_24882 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__IU__IDAssignment_04913 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersionRange_in_rule__IU__VersionAssignment_1_1_04944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__IU__VersionAssignment_1_1_14975 = new BitSet(new long[]{0x0000000000000002L});
 
 }

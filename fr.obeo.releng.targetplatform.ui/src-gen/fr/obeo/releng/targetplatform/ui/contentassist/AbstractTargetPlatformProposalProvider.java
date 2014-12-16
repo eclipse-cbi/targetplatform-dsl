@@ -86,4 +86,7 @@ public class AbstractTargetPlatformProposalProvider extends org.eclipse.xtext.co
 	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_QUALIFIER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

@@ -349,18 +349,19 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives_1_2_2_1 = (Alternatives)cGroup_1_2_2.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_1_2_2_1_0 = (RuleCall)cAlternatives_1_2_2_1.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1_2_2_1_1 = (RuleCall)cAlternatives_1_2_2_1.eContents().get(1);
+		private final RuleCall cQUALIFIERTerminalRuleCall_1_2_2_1_2 = (RuleCall)cAlternatives_1_2_2_1.eContents().get(2);
 		
 		//Version hidden():
-		//	INT ("." INT ("." INT ("." (ID | INT))?)?)?;
+		//	INT ("." INT ("." INT ("." (ID | INT | QUALIFIER))?)?)?;
 		public ParserRule getRule() { return rule; }
 
-		//INT ("." INT ("." INT ("." (ID | INT))?)?)?
+		//INT ("." INT ("." INT ("." (ID | INT | QUALIFIER))?)?)?
 		public Group getGroup() { return cGroup; }
 
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//("." INT ("." INT ("." (ID | INT))?)?)?
+		//("." INT ("." INT ("." (ID | INT | QUALIFIER))?)?)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
@@ -369,7 +370,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 
-		//("." INT ("." (ID | INT))?)?
+		//("." INT ("." (ID | INT | QUALIFIER))?)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//"."
@@ -378,13 +379,13 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_2_1() { return cINTTerminalRuleCall_1_2_1; }
 
-		//("." (ID | INT))?
+		//("." (ID | INT | QUALIFIER))?
 		public Group getGroup_1_2_2() { return cGroup_1_2_2; }
 
 		//"."
 		public Keyword getFullStopKeyword_1_2_2_0() { return cFullStopKeyword_1_2_2_0; }
 
-		//ID | INT
+		//ID | INT | QUALIFIER
 		public Alternatives getAlternatives_1_2_2_1() { return cAlternatives_1_2_2_1; }
 
 		//ID
@@ -392,6 +393,9 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_2_2_1_1() { return cINTTerminalRuleCall_1_2_2_1_1; }
+
+		//QUALIFIER
+		public RuleCall getQUALIFIERTerminalRuleCall_1_2_2_1_2() { return cQUALIFIERTerminalRuleCall_1_2_2_1_2; }
 	}
 
 	public class VersionRangeElements extends AbstractParserRuleElementFinder {
@@ -501,28 +505,42 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getINCLUDE_CONFIGURE_PHASEConfigurePhaseKeyword_3_0() { return cINCLUDE_CONFIGURE_PHASEConfigurePhaseKeyword_3_0; }
 	}
 	
-	private TargetPlatformElements pTargetPlatform;
-	private TargetContentElements pTargetContent;
-	private OptionsElements pOptions;
-	private EnvironmentElements pEnvironment;
-	private IncludeDeclarationElements pIncludeDeclaration;
-	private LocationElements pLocation;
-	private OptionElements unknownRuleOption;
-	private IUElements pIU;
-	private VersionElements pVersion;
-	private VersionRangeElements pVersionRange;
-	private TerminalRule tINT;
-	private TerminalRule tID;
+	private final TargetPlatformElements pTargetPlatform;
+	private final TargetContentElements pTargetContent;
+	private final OptionsElements pOptions;
+	private final EnvironmentElements pEnvironment;
+	private final IncludeDeclarationElements pIncludeDeclaration;
+	private final LocationElements pLocation;
+	private final OptionElements unknownRuleOption;
+	private final IUElements pIU;
+	private final VersionElements pVersion;
+	private final VersionRangeElements pVersionRange;
+	private final TerminalRule tINT;
+	private final TerminalRule tID;
+	private final TerminalRule tQUALIFIER;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TargetPlatformGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pTargetPlatform = new TargetPlatformElements();
+		this.pTargetContent = new TargetContentElements();
+		this.pOptions = new OptionsElements();
+		this.pEnvironment = new EnvironmentElements();
+		this.pIncludeDeclaration = new IncludeDeclarationElements();
+		this.pLocation = new LocationElements();
+		this.unknownRuleOption = new OptionElements();
+		this.pIU = new IUElements();
+		this.pVersion = new VersionElements();
+		this.pVersionRange = new VersionRangeElements();
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tQUALIFIER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "QUALIFIER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -555,7 +573,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//TargetPlatform:
 	//	("target" name=STRING contents+=TargetContent*)?;
 	public TargetPlatformElements getTargetPlatformAccess() {
-		return (pTargetPlatform != null) ? pTargetPlatform : (pTargetPlatform = new TargetPlatformElements());
+		return pTargetPlatform;
 	}
 	
 	public ParserRule getTargetPlatformRule() {
@@ -565,7 +583,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//TargetContent:
 	//	Options | Environment | IncludeDeclaration | Location;
 	public TargetContentElements getTargetContentAccess() {
-		return (pTargetContent != null) ? pTargetContent : (pTargetContent = new TargetContentElements());
+		return pTargetContent;
 	}
 	
 	public ParserRule getTargetContentRule() {
@@ -575,7 +593,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//Options:
 	//	"with" options+=Option (","? options+=Option)*;
 	public OptionsElements getOptionsAccess() {
-		return (pOptions != null) ? pOptions : (pOptions = new OptionsElements());
+		return pOptions;
 	}
 	
 	public ParserRule getOptionsRule() {
@@ -585,7 +603,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//Environment:
 	//	{Environment} "environment" env+=ID (","? env+=ID)*;
 	public EnvironmentElements getEnvironmentAccess() {
-		return (pEnvironment != null) ? pEnvironment : (pEnvironment = new EnvironmentElements());
+		return pEnvironment;
 	}
 	
 	public ParserRule getEnvironmentRule() {
@@ -595,7 +613,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//IncludeDeclaration:
 	//	"include" importURI=STRING;
 	public IncludeDeclarationElements getIncludeDeclarationAccess() {
-		return (pIncludeDeclaration != null) ? pIncludeDeclaration : (pIncludeDeclaration = new IncludeDeclarationElements());
+		return pIncludeDeclaration;
 	}
 	
 	public ParserRule getIncludeDeclarationRule() {
@@ -605,7 +623,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//Location:
 	//	"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?;
 	public LocationElements getLocationAccess() {
-		return (pLocation != null) ? pLocation : (pLocation = new LocationElements());
+		return pLocation;
 	}
 	
 	public ParserRule getLocationRule() {
@@ -616,7 +634,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//	INCLUDE_REQUIRED="requirements" | INCLUDE_ALL_ENVIRONMENTS="allEnvironments" | INCLUDE_SOURCE="source" |
 	//	INCLUDE_CONFIGURE_PHASE="configurePhase";
 	public OptionElements getOptionAccess() {
-		return (unknownRuleOption != null) ? unknownRuleOption : (unknownRuleOption = new OptionElements());
+		return unknownRuleOption;
 	}
 	
 	public EnumRule getOptionRule() {
@@ -626,7 +644,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//IU:
 	//	ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?;
 	public IUElements getIUAccess() {
-		return (pIU != null) ? pIU : (pIU = new IUElements());
+		return pIU;
 	}
 	
 	public ParserRule getIURule() {
@@ -634,9 +652,9 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Version hidden():
-	//	INT ("." INT ("." INT ("." (ID | INT))?)?)?;
+	//	INT ("." INT ("." INT ("." (ID | INT | QUALIFIER))?)?)?;
 	public VersionElements getVersionAccess() {
-		return (pVersion != null) ? pVersion : (pVersion = new VersionElements());
+		return pVersion;
 	}
 	
 	public ParserRule getVersionRule() {
@@ -646,7 +664,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//VersionRange hidden(WS):
 	//	("(" | "[") Version "," Version (")" | "]") | Version | "lazy";
 	public VersionRangeElements getVersionRangeAccess() {
-		return (pVersionRange != null) ? pVersionRange : (pVersionRange = new VersionRangeElements());
+		return pVersionRange;
 	}
 	
 	public ParserRule getVersionRangeRule() {
@@ -656,18 +674,24 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
-		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return tINT;
 	} 
 
 	//terminal ID returns ecore::EString:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("."? ("a".."z" | "A".."Z" | "^" | "_" | "-" | "0".."9"))*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
+	} 
+
+	//terminal QUALIFIER returns ecore::EString:
+	//	("a".."z" | "A".."Z" | "_" | "-" | "0".."9")*;
+	public TerminalRule getQUALIFIERRule() {
+		return tQUALIFIER;
 	} 
 
 	//terminal STRING returns ecore::EString:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

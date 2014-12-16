@@ -699,6 +699,14 @@ ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     { 
     newLeafNode(this_INT_7, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_2_1_1()); 
     }
+
+    |    this_QUALIFIER_8=RULE_QUALIFIER    {
+		$current.merge(this_QUALIFIER_8);
+    }
+
+    { 
+    newLeafNode(this_QUALIFIER_8, grammarAccess.getVersionAccess().getQUALIFIERTerminalRuleCall_1_2_2_1_2()); 
+    }
 ))?)?)?)
     ;
 finally {
@@ -848,7 +856,9 @@ RULE_INT : ('0'..'9')+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
 
-RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
+RULE_QUALIFIER : ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+
+RULE_STRING : ('"' ('\\' .|~(('\\'|'"')))* '"'|'\'' ('\\' .|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 

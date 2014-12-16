@@ -417,6 +417,12 @@ rule__Version__Alternatives_1_2_2_1
 { after(grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_2_1_1()); }
 )
 
+    |(
+{ before(grammarAccess.getVersionAccess().getQUALIFIERTerminalRuleCall_1_2_2_1_2()); }
+	RULE_QUALIFIER
+{ after(grammarAccess.getVersionAccess().getQUALIFIERTerminalRuleCall_1_2_2_1_2()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2442,7 +2448,9 @@ RULE_INT : ('0'..'9')+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
 
-RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
+RULE_QUALIFIER : ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+
+RULE_STRING : ('"' ('\\' .|~(('\\'|'"')))* '"'|'\'' ('\\' .|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 

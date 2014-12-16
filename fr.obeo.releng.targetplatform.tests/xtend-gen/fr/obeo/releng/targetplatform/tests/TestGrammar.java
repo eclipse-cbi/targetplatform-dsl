@@ -71,6 +71,15 @@ public class TestGrammar {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
+      _builder.newLine();
+      _builder.append("location \"https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("org.eclipse.uml2.sdk.feature.group;version=10.1.1.20141228-2310-BUILD1 ");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Resource _eResource = targetPlatform.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
