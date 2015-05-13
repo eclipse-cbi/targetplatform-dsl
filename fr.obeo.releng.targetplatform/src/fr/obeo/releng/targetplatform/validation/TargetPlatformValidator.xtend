@@ -103,14 +103,14 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	private def doReportAllEnvAndRequiredAreSelfExluding(EObject optionOwner, List<Option> options, EStructuralFeature feature) {
 		if (options.contains(Option.INCLUDE_REQUIRED)) {
-			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
+			error("All environments cannot be included along with required artifacts, you must choose one of the two options.", 
 					optionOwner, 
 					feature, 
 					options.indexOf(Option.INCLUDE_REQUIRED), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
 		}
 		
 		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS)) {
-			error("All environments can not be included along with required artifacts, you must choose one of the two options.", 
+			error("All environments cannot be included along with required artifacts, you must choose one of the two options.", 
 					optionOwner, 
 					feature, 
 					options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS), CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED)
@@ -140,7 +140,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
 			val lastOption = (nodes.last as CompositeNode);
-			acceptError("You can not define options on location and on target platform.",
+			acceptError("You cannot define options on location and on target platform.",
 				location, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS)
 		}
 	}
@@ -157,11 +157,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					if (!nodes.empty) {
 						val withKeyword = (nodes.head as CompositeNode).previousSibling
 						val lastOption = (nodes.last as CompositeNode)
-						acceptError("Options of every locations must be the same",
+						acceptError("Options of all locations must be the same",
 							_, withKeyword.offset, lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
 					} else {
 						val node = NodeModelUtils::getNode(_)
-						acceptError("Options of every locations must be the same",
+						acceptError("Options of all locations must be the same",
 							_, node.offset, node.length, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
 					}
 				]
@@ -381,7 +381,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val envList = tp.contents.filter(typeof(Environment)).toList
 		if (envList.size > 1) {
 			envList.tail.forEach[
-				warning('''Environment definition should not be splitted accros the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__ENVIRONMENT_UNICITY)
+				warning('''Environment definition should not be split across the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__ENVIRONMENT_UNICITY)
 			]
 		}
 	}
@@ -391,7 +391,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val envList = tp.contents.filter(typeof(Options)).toList
 		if (envList.size > 1) {
 			envList.tail.forEach[
-				warning('''Options definition should not be splitted accros the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__OPTIONS_UNICITY)
+				warning('''Options definition should not be split across the file.''', tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.contents.indexOf(it), CHECK__OPTIONS_UNICITY)
 			]
 		}
 	}
@@ -414,11 +414,11 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val allLocale = LinkedHashMultiset.create(envList.filter[knownLocale.contains(it.toUpperCase)])
 		val allEE = LinkedHashMultiset.create(envList.filter[knownEE.contains(it.toUpperCase)])
 		
-		reportDuplicatedEnvironmentOptions(tp, allOS, 'Cannot define multiple operating system.')
-		reportDuplicatedEnvironmentOptions(tp, allWS, 'Cannot define multiple windowing system.')
-		reportDuplicatedEnvironmentOptions(tp, allArch, 'Cannot define multiple processor architecture.')
-		reportDuplicatedEnvironmentOptions(tp, allLocale, 'Cannot define multiple localization.')
-		reportDuplicatedEnvironmentOptions(tp, allEE, 'Cannot define multiple execution environment.')
+		reportDuplicatedEnvironmentOptions(tp, allOS, 'Cannot define multiple operating systems.')
+		reportDuplicatedEnvironmentOptions(tp, allWS, 'Cannot define multiple windowing systems.')
+		reportDuplicatedEnvironmentOptions(tp, allArch, 'Cannot define multiple processor architectures.')
+		reportDuplicatedEnvironmentOptions(tp, allLocale, 'Cannot define multiple localizations.')
+		reportDuplicatedEnvironmentOptions(tp, allEE, 'Cannot define multiple execution environments.')
 		
 	}
 	

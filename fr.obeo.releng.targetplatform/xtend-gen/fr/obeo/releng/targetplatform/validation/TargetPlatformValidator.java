@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
@@ -75,7 +76,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -157,13 +157,13 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     if (_and) {
       EList<TargetContent> _contents_1 = targetPlatform.getContents();
       Iterable<Options> _filter_1 = Iterables.<Options>filter(_contents_1, Options.class);
-      final Procedure1<Options> _function_1 = new Procedure1<Options>() {
-        public void apply(final Options it) {
+      final Consumer<Options> _function_1 = new Consumer<Options>() {
+        public void accept(final Options it) {
           EList<Option> _options = it.getOptions();
           TargetPlatformValidator.this.doReportAllEnvAndRequiredAreSelfExluding(it, _options, TargetPlatformPackage.Literals.OPTIONS__OPTIONS);
         }
       };
-      IterableExtensions.<Options>forEach(_filter_1, _function_1);
+      _filter_1.forEach(_function_1);
     }
   }
   
@@ -187,12 +187,12 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _contains = options.contains(Option.INCLUDE_REQUIRED);
     if (_contains) {
       int _indexOf = options.indexOf(Option.INCLUDE_REQUIRED);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+      this.error("All environments cannot be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
     }
     boolean _contains_1 = options.contains(Option.INCLUDE_ALL_ENVIRONMENTS);
     if (_contains_1) {
       int _indexOf_1 = options.indexOf(Option.INCLUDE_ALL_ENVIRONMENTS);
-      this.error("All environments can not be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf_1, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
+      this.error("All environments cannot be included along with required artifacts, you must choose one of the two options.", optionOwner, feature, _indexOf_1, TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED);
     }
   }
   
@@ -209,15 +209,15 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     Iterable<Option> _flatten = Iterables.<Option>concat(_map);
     final HashMultiset<Option> allOptions = HashMultiset.<Option>create(_flatten);
     Set<Multiset.Entry<Option>> _entrySet = allOptions.entrySet();
-    final Procedure1<Multiset.Entry<Option>> _function_1 = new Procedure1<Multiset.Entry<Option>>() {
-      public void apply(final Multiset.Entry<Option> e) {
+    final Consumer<Multiset.Entry<Option>> _function_1 = new Consumer<Multiset.Entry<Option>>() {
+      public void accept(final Multiset.Entry<Option> e) {
         int _count = e.getCount();
         boolean _greaterThan = (_count > 1);
         if (_greaterThan) {
           EList<TargetContent> _contents = targetPlatform.getContents();
           Iterable<Options> _filter = Iterables.<Options>filter(_contents, Options.class);
-          final Procedure1<Options> _function = new Procedure1<Options>() {
-            public void apply(final Options o) {
+          final Consumer<Options> _function = new Consumer<Options>() {
+            public void accept(final Options o) {
               for (int i = 0; (i < o.getOptions().size()); i++) {
                 {
                   EList<Option> _options = o.getOptions();
@@ -235,11 +235,11 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
               }
             }
           };
-          IterableExtensions.<Options>forEach(_filter, _function);
+          _filter.forEach(_function);
         }
       }
     };
-    IterableExtensions.<Multiset.Entry<Option>>forEach(_entrySet, _function_1);
+    _entrySet.forEach(_function_1);
   }
   
   @Check
@@ -267,7 +267,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       int _endOffset = lastOption.getEndOffset();
       int _offset_1 = withKeyword.getOffset();
       int _minus = (_endOffset - _offset_1);
-      this.acceptError("You can not define options on location and on target platform.", location, _offset, _minus, TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS);
+      this.acceptError("You cannot define options on location and on target platform.", location, _offset, _minus, TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS);
     }
   }
   
@@ -294,8 +294,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       boolean _isEmpty_1 = IterableExtensions.isEmpty(conflicts);
       boolean _not = (!_isEmpty_1);
       if (_not) {
-        final Procedure1<Location> _function_1 = new Procedure1<Location>() {
-          public void apply(final Location _) {
+        final Consumer<Location> _function_1 = new Consumer<Location>() {
+          public void accept(final Location _) {
             final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
             boolean _isEmpty = nodes.isEmpty();
             boolean _not = (!_isEmpty);
@@ -308,16 +308,16 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
               int _endOffset = lastOption.getEndOffset();
               int _offset_1 = withKeyword.getOffset();
               int _minus = (_endOffset - _offset_1);
-              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+              TargetPlatformValidator.this.acceptError("Options of all locations must be the same", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
             } else {
               final ICompositeNode node = NodeModelUtils.getNode(_);
               int _offset_2 = node.getOffset();
               int _length = node.getLength();
-              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset_2, _length, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+              TargetPlatformValidator.this.acceptError("Options of all locations must be the same", _, _offset_2, _length, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
             }
           }
         };
-        IterableExtensions.<Location>forEach(listOptions, _function_1);
+        listOptions.forEach(_function_1);
       }
     }
   }
@@ -375,8 +375,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     final Resource resource = targetPlatform.eResource();
     final LinkedHashMultimap<String, String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
     Set<String> _keySet = locationsByURI.keySet();
-    final Procedure1<String> _function = new Procedure1<String>() {
-      public void apply(final String it) {
+    final Consumer<String> _function = new Consumer<String>() {
+      public void accept(final String it) {
         List<Location> _get = locationsByURI.get(it);
         final Function1<Location, String> _function = new Function1<Location, String>() {
           public String apply(final Location it) {
@@ -388,7 +388,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         locationIDsByURI.putAll(it, _set);
       }
     };
-    IterableExtensions.<String>forEach(_keySet, _function);
+    _keySet.forEach(_function);
     Map<String, Collection<String>> _asMap = locationIDsByURI.asMap();
     final Function2<String, Collection<String>, Boolean> _function_1 = new Function2<String, Collection<String>, Boolean>() {
       public Boolean apply(final String key, final Collection<String> value) {
@@ -435,8 +435,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     Map<String, Collection<Location>> _filter_2 = MapExtensions.<String, Collection<Location>>filter(_asMap_1, _function_5);
     Collection<Collection<Location>> _values = _filter_2.values();
     final Iterable<Location> locationsWithDuplicateID = Iterables.<Location>concat(_values);
-    final Procedure1<Location> _function_6 = new Procedure1<Location>() {
-      public void apply(final Location location) {
+    final Consumer<Location> _function_6 = new Consumer<Location>() {
+      public void accept(final Location location) {
         Resource _eResource = location.eResource();
         boolean _equals = Objects.equal(_eResource, resource);
         if (_equals) {
@@ -475,8 +475,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           };
           Iterable<IncludeDeclaration> _filter = IterableExtensions.<IncludeDeclaration>filter(_includes, _function);
           final Set<IncludeDeclaration> conflictualInclude = IterableExtensions.<IncludeDeclaration>toSet(_filter);
-          final Procedure1<IncludeDeclaration> _function_1 = new Procedure1<IncludeDeclaration>() {
-            public void apply(final IncludeDeclaration it) {
+          final Consumer<IncludeDeclaration> _function_1 = new Consumer<IncludeDeclaration>() {
+            public void accept(final IncludeDeclaration it) {
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("ID \'");
               String _iD = location.getID();
@@ -487,11 +487,11 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
                 TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
             }
           };
-          IterableExtensions.<IncludeDeclaration>forEach(conflictualInclude, _function_1);
+          conflictualInclude.forEach(_function_1);
         }
       }
     };
-    IterableExtensions.<Location>forEach(locationsWithDuplicateID, _function_6);
+    locationsWithDuplicateID.forEach(_function_6);
   }
   
   @Check
@@ -638,14 +638,14 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           Iterable<Iterable<IncludeDeclaration>> _map_3 = IterableExtensions.<Location, Iterable<IncludeDeclaration>>map(externalLocationsWithConflictualID, _function_6);
           Iterable<IncludeDeclaration> _flatten = Iterables.<IncludeDeclaration>concat(_map_3);
           final Set<IncludeDeclaration> conflictualInclude = IterableExtensions.<IncludeDeclaration>toSet(_flatten);
-          final Procedure1<IncludeDeclaration> _function_7 = new Procedure1<IncludeDeclaration>() {
-            public void apply(final IncludeDeclaration it) {
+          final Consumer<IncludeDeclaration> _function_7 = new Consumer<IncludeDeclaration>() {
+            public void accept(final IncludeDeclaration it) {
               TargetPlatformValidator.this.error(msg, it, 
                 TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
                 TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION);
             }
           };
-          IterableExtensions.<IncludeDeclaration>forEach(conflictualInclude, _function_7);
+          conflictualInclude.forEach(_function_7);
         }
         int _size_1 = externalIDs.size();
         boolean _equals = (_size_1 == 1);
@@ -684,15 +684,15 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
               }
             };
             Iterable<Location> _filter = IterableExtensions.<Location>filter(internalLocations, _function_9);
-            final Procedure1<Location> _function_10 = new Procedure1<Location>() {
-              public void apply(final Location it) {
+            final Consumer<Location> _function_10 = new Consumer<Location>() {
+              public void accept(final Location it) {
                 String _head = IterableExtensions.<String>head(externalIDs);
                 Location _head_1 = IterableExtensions.<Location>head(externalLocations);
                 String _uri = _head_1.getUri();
                 TargetPlatformValidator.this.error(msg_1, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, _head, _uri);
               }
             };
-            IterableExtensions.<Location>forEach(_filter, _function_10);
+            _filter.forEach(_function_10);
           }
         }
         boolean _and = false;
@@ -714,12 +714,12 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _builder_2.append(_join_3, "");
           _builder_2.append("\'.");
           final String msg_2 = _builder_2.toString();
-          final Procedure1<Location> _function_11 = new Procedure1<Location>() {
-            public void apply(final Location it) {
+          final Consumer<Location> _function_11 = new Consumer<Location>() {
+            public void accept(final Location it) {
               TargetPlatformValidator.this.error(msg_2, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
             }
           };
-          IterableExtensions.<Location>forEach(internalLocations, _function_11);
+          internalLocations.forEach(_function_11);
         }
       }
     }
@@ -976,16 +976,16 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
       Iterable<Environment> _tail = IterableExtensions.<Environment>tail(envList);
-      final Procedure1<Environment> _function = new Procedure1<Environment>() {
-        public void apply(final Environment it) {
+      final Consumer<Environment> _function = new Consumer<Environment>() {
+        public void accept(final Environment it) {
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Environment definition should not be splitted accros the file.");
+          _builder.append("Environment definition should not be split across the file.");
           EList<TargetContent> _contents = tp.getContents();
           int _indexOf = _contents.indexOf(it);
           TargetPlatformValidator.this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, _indexOf, TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY);
         }
       };
-      IterableExtensions.<Environment>forEach(_tail, _function);
+      _tail.forEach(_function);
     }
   }
   
@@ -998,16 +998,16 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
       Iterable<Options> _tail = IterableExtensions.<Options>tail(envList);
-      final Procedure1<Options> _function = new Procedure1<Options>() {
-        public void apply(final Options it) {
+      final Consumer<Options> _function = new Consumer<Options>() {
+        public void accept(final Options it) {
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Options definition should not be splitted accros the file.");
+          _builder.append("Options definition should not be split across the file.");
           EList<TargetContent> _contents = tp.getContents();
           int _indexOf = _contents.indexOf(it);
           TargetPlatformValidator.this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, _indexOf, TargetPlatformValidator.CHECK__OPTIONS_UNICITY);
         }
       };
-      IterableExtensions.<Options>forEach(_tail, _function);
+      _tail.forEach(_function);
     }
   }
   
@@ -1135,11 +1135,11 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     };
     Iterable<String> _filter_8 = IterableExtensions.<String>filter(envList, _function_13);
     final LinkedHashMultiset<String> allEE = LinkedHashMultiset.<String>create(_filter_8);
-    this.reportDuplicatedEnvironmentOptions(tp, allOS, "Cannot define multiple operating system.");
-    this.reportDuplicatedEnvironmentOptions(tp, allWS, "Cannot define multiple windowing system.");
-    this.reportDuplicatedEnvironmentOptions(tp, allArch, "Cannot define multiple processor architecture.");
-    this.reportDuplicatedEnvironmentOptions(tp, allLocale, "Cannot define multiple localization.");
-    this.reportDuplicatedEnvironmentOptions(tp, allEE, "Cannot define multiple execution environment.");
+    this.reportDuplicatedEnvironmentOptions(tp, allOS, "Cannot define multiple operating systems.");
+    this.reportDuplicatedEnvironmentOptions(tp, allWS, "Cannot define multiple windowing systems.");
+    this.reportDuplicatedEnvironmentOptions(tp, allArch, "Cannot define multiple processor architectures.");
+    this.reportDuplicatedEnvironmentOptions(tp, allLocale, "Cannot define multiple localizations.");
+    this.reportDuplicatedEnvironmentOptions(tp, allEE, "Cannot define multiple execution environments.");
   }
   
   private void reportDuplicatedEnvironmentOptions(final TargetPlatform targetPlatform, final Multiset<String> valuesInFile, final String msg) {
@@ -1161,12 +1161,12 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     }
     if (_or) {
       Set<String> _elementSet = valuesInFile.elementSet();
-      final Procedure1<String> _function_1 = new Procedure1<String>() {
-        public void apply(final String e) {
+      final Consumer<String> _function_1 = new Consumer<String>() {
+        public void accept(final String e) {
           EList<TargetContent> _contents = targetPlatform.getContents();
           Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
-          final Procedure1<Environment> _function = new Procedure1<Environment>() {
-            public void apply(final Environment env) {
+          final Consumer<Environment> _function = new Consumer<Environment>() {
+            public void accept(final Environment env) {
               for (int i = 0; (i < env.getEnv().size()); i++) {
                 {
                   EList<String> _env = env.getEnv();
@@ -1179,10 +1179,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
               }
             }
           };
-          IterableExtensions.<Environment>forEach(_filter, _function);
+          _filter.forEach(_function);
         }
       };
-      IterableExtensions.<String>forEach(_elementSet, _function_1);
+      _elementSet.forEach(_function_1);
     }
   }
   
@@ -1324,8 +1324,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     Iterable<IU> _filter = IterableExtensions.<IU>filter(_flatten_3, _function_6);
-    final Procedure1<IU> _function_7 = new Procedure1<IU>() {
-      public void apply(final IU entry) {
+    final Consumer<IU> _function_7 = new Consumer<IU>() {
+      public void accept(final IU entry) {
         EList<Location> _locations = targetPlatform.getLocations();
         final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
           public Boolean apply(final Location it) {
@@ -1399,6 +1399,6 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         TargetPlatformValidator.this.warning(msg, _location, TargetPlatformPackage.Literals.LOCATION__IUS, _indexOf, TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
       }
     };
-    IterableExtensions.<IU>forEach(_filter, _function_7);
+    _filter.forEach(_function_7);
   }
 }
