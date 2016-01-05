@@ -15,12 +15,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
+import com.google.common.base.Splitter;
 import com.google.inject.Injector;
 
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
@@ -41,12 +43,12 @@ public class ConverterApplication implements IApplication {
 	public Object start(IApplicationContext context) throws Exception {
 		Map<?,?> arguments = context.getArguments();
 		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
-		String path;
+		String argument;
 		if (args.length <= 0) {
 			System.out.println("Must provide path to a target form file");
 			return -256;
 		} else {
-			path = args[0];
+			argument = args[0];
 		}
 		
 		TargetPlatformStandaloneSetup.doSetup();
@@ -54,15 +56,11 @@ public class ConverterApplication implements IApplication {
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 
-		URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
-		
-		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
-		
-		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
-			for (Diagnostic child : diagnostic.getChildren()) {
-				printDiagnostic(child, "");
-			}
-		}
+		BasicDiagnostic diagnostic = new BasicDiagnostic();
+		for (String filePath : Splitter.on(',').split(argument)) {
+		    Diagnostic d = convert(filePath.trim(), converter);
+		    diagnostic.merge(d);
+        }
 		
 		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
 			System.out.println("Problems occurred during generation of target platform definition file.");
@@ -75,6 +73,19 @@ public class ConverterApplication implements IApplication {
 			return 0;
 		}
 	}
+
+    private Diagnostic convert(String path, Converter converter) {
+        URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
+		
+		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
+		
+		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
+			for (Diagnostic child : diagnostic.getChildren()) {
+				printDiagnostic(child, "");
+			}
+		}
+        return diagnostic;
+    }
 
 	private static IProgressMonitor createPrintingMonitor() {
 		return BasicMonitor.toIProgressMonitor(new BasicMonitor.Printing(System.out));
