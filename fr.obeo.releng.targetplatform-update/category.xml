@@ -3,9 +3,9 @@
    <feature id="fr.obeo.releng.targetplatform-feature" version="0.0.0">
       <category name="releng"/>
    </feature>
-   <category-def name="releng" label="Obeo Releng Tools">
+   <category-def name="releng" label="Releng Tools">
       <description>
-         Release Engineering tools from Obeo
+         Release Engineering tools from
       </description>
    </category-def>
 </site>

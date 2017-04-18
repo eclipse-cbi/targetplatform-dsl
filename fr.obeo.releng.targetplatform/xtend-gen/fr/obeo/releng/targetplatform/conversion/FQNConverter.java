@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008,2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package fr.obeo.releng.targetplatform.conversion;
 
 import com.google.common.collect.ImmutableSet;
@@ -15,15 +23,15 @@ public class FQNConverter extends AbstractNullSafeConverter<String> {
   private final Set<String> allKeywords;
   
   public FQNConverter(final Grammar grammar) {
-    Set<String> _allKeywords = GrammarUtil.getAllKeywords(grammar);
-    ImmutableSet<String> _copyOf = ImmutableSet.<String>copyOf(_allKeywords);
-    this.allKeywords = _copyOf;
+    this.allKeywords = ImmutableSet.<String>copyOf(GrammarUtil.getAllKeywords(grammar));
   }
   
+  @Override
   public String internalToValue(final String string, final INode node) {
     return string.replaceAll("[\\^\\s]", "");
   }
   
+  @Override
   public String internalToString(final String value) {
     final String[] segments = value.split("\\.");
     int _length = value.length();

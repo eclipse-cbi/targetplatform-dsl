@@ -5,4 +5,4 @@ which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
 
 Contributors:
-   Obeo - initial API and implementation
+   Mikael Barbero (Obeo) - initial API and implementation

@@ -1,7 +1,16 @@
+/**
+ * Copyright (c) 2012-2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ */
 package fr.obeo.releng.targetplatform.util;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
@@ -15,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class LocationIndexBuilder {
@@ -32,33 +41,32 @@ public class LocationIndexBuilder {
   private ImportUriResolver resolver;
   
   public ListMultimap<String, Location> getLocationIndex(final TargetPlatform targetPlatform) {
-    LinkedHashSet<TargetPlatform> _newLinkedHashSet = CollectionLiterals.<TargetPlatform>newLinkedHashSet(targetPlatform);
-    LinkedList<TargetPlatform> _newLinkedList = CollectionLiterals.<TargetPlatform>newLinkedList(targetPlatform);
-    final List<Location> locationList = this.getLocations(_newLinkedHashSet, _newLinkedList);
+    final List<Location> locationList = this.getLocations(
+      CollectionLiterals.<TargetPlatform>newLinkedHashSet(targetPlatform), 
+      CollectionLiterals.<TargetPlatform>newLinkedList(targetPlatform));
     final Function<Location, String> _function = new Function<Location, String>() {
+      @Override
       public String apply(final Location it) {
         return it.getUri();
       }
     };
-    ImmutableListMultimap<String, Location> _index = Multimaps.<String, Location>index(locationList, _function);
-    return LinkedListMultimap.<String, Location>create(_index);
+    return LinkedListMultimap.<String, Location>create(Multimaps.<String, Location>index(locationList, _function));
   }
   
   private List<Location> getLocations(final Set<TargetPlatform> visited, final List<TargetPlatform> toBeVisited) {
     final ArrayList<Location> locations = CollectionLiterals.<Location>newArrayList();
-    final Procedure1<TargetPlatform> _function = new Procedure1<TargetPlatform>() {
-      public void apply(final TargetPlatform it) {
+    final Consumer<TargetPlatform> _function = new Consumer<TargetPlatform>() {
+      @Override
+      public void accept(final TargetPlatform it) {
         final LinkedList<IncludeDeclaration> includes = CollectionLiterals.<IncludeDeclaration>newLinkedList();
-        EList<TargetContent> _contents = it.getContents();
-        List<TargetContent> _reverseView = ListExtensions.<TargetContent>reverseView(_contents);
-        final Procedure1<TargetContent> _function = new Procedure1<TargetContent>() {
-          public void apply(final TargetContent content) {
+        final Consumer<TargetContent> _function = new Consumer<TargetContent>() {
+          @Override
+          public void accept(final TargetContent content) {
             if ((content instanceof Location)) {
               boolean _isEmpty = includes.isEmpty();
               boolean _not = (!_isEmpty);
               if (_not) {
-                List<Location> _locationFromVisitedIncludes = LocationIndexBuilder.this.getLocationFromVisitedIncludes(it, includes, visited);
-                locations.addAll(_locationFromVisitedIncludes);
+                locations.addAll(LocationIndexBuilder.this.getLocationFromVisitedIncludes(it, includes, visited));
                 includes.clear();
               }
               locations.add(((Location)content));
@@ -69,37 +77,34 @@ public class LocationIndexBuilder {
             }
           }
         };
-        IterableExtensions.<TargetContent>forEach(_reverseView, _function);
+        ListExtensions.<TargetContent>reverseView(it.getContents()).forEach(_function);
         boolean _isEmpty = includes.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          List<Location> _locationFromVisitedIncludes = LocationIndexBuilder.this.getLocationFromVisitedIncludes(it, includes, visited);
-          locations.addAll(_locationFromVisitedIncludes);
+          locations.addAll(LocationIndexBuilder.this.getLocationFromVisitedIncludes(it, includes, visited));
           includes.clear();
         }
       }
     };
-    IterableExtensions.<TargetPlatform>forEach(toBeVisited, _function);
+    toBeVisited.forEach(_function);
     return locations;
   }
   
   private List<Location> getLocationFromVisitedIncludes(final TargetPlatform parent, final List<IncludeDeclaration> includes, final Set<TargetPlatform> visited) {
     final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
+      @Override
       public TargetPlatform apply(final IncludeDeclaration it) {
-        Resource _eResource = parent.eResource();
-        return LocationIndexBuilder.this.getImportedTargetPlatform(_eResource, it);
+        return LocationIndexBuilder.this.getImportedTargetPlatform(parent.eResource(), it);
       }
     };
-    List<TargetPlatform> _map = ListExtensions.<IncludeDeclaration, TargetPlatform>map(includes, _function);
-    Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
     final Function1<TargetPlatform, Boolean> _function_1 = new Function1<TargetPlatform, Boolean>() {
+      @Override
       public Boolean apply(final TargetPlatform it) {
         boolean _contains = visited.contains(it);
         return Boolean.valueOf((!_contains));
       }
     };
-    Iterable<TargetPlatform> _filter = IterableExtensions.<TargetPlatform>filter(_filterNull, _function_1);
-    final List<TargetPlatform> importedLocation = IterableExtensions.<TargetPlatform>toList(_filter);
+    final List<TargetPlatform> importedLocation = IterableExtensions.<TargetPlatform>toList(IterableExtensions.<TargetPlatform>filter(IterableExtensions.<TargetPlatform>filterNull(ListExtensions.<IncludeDeclaration, TargetPlatform>map(includes, _function)), _function_1));
     visited.addAll(importedLocation);
     return this.getLocations(visited, importedLocation);
   }
@@ -125,15 +130,13 @@ public class LocationIndexBuilder {
       {
         final LinkedList<TargetPlatform> tr = CollectionLiterals.<TargetPlatform>newLinkedList();
         final TargetPlatform t = queue.removeLast();
-        EList<IncludeDeclaration> _includes = t.getIncludes();
         final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
+          @Override
           public TargetPlatform apply(final IncludeDeclaration it) {
-            Resource _eResource = t.eResource();
-            return LocationIndexBuilder.this.getImportedTargetPlatform(_eResource, it);
+            return LocationIndexBuilder.this.getImportedTargetPlatform(t.eResource(), it);
           }
         };
-        List<TargetPlatform> _map = ListExtensions.<IncludeDeclaration, TargetPlatform>map(_includes, _function);
-        Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
+        Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(ListExtensions.<IncludeDeclaration, TargetPlatform>map(t.getIncludes(), _function));
         for (final TargetPlatform unvisited : _filterNull) {
           boolean _contains = visited.contains(unvisited);
           boolean _not = (!_contains);
@@ -165,15 +168,13 @@ public class LocationIndexBuilder {
   private boolean checkIncludeCycle(final TargetPlatform targetPlatform, final Set<TargetPlatform> visited, final LinkedList<TargetPlatform> s) {
     s.addFirst(targetPlatform);
     final Resource context = targetPlatform.eResource();
-    EList<IncludeDeclaration> _includes = targetPlatform.getIncludes();
     final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
+      @Override
       public TargetPlatform apply(final IncludeDeclaration it) {
         return LocationIndexBuilder.this.getImportedTargetPlatform(context, it);
       }
     };
-    List<TargetPlatform> _map = ListExtensions.<IncludeDeclaration, TargetPlatform>map(_includes, _function);
-    Iterable<TargetPlatform> _filterNull = IterableExtensions.<TargetPlatform>filterNull(_map);
-    final Set<TargetPlatform> includedTPs = IterableExtensions.<TargetPlatform>toSet(_filterNull);
+    final Set<TargetPlatform> includedTPs = IterableExtensions.<TargetPlatform>toSet(IterableExtensions.<TargetPlatform>filterNull(ListExtensions.<IncludeDeclaration, TargetPlatform>map(targetPlatform.getIncludes(), _function)));
     for (final TargetPlatform includedTP : includedTPs) {
       {
         boolean _contains = s.contains(includedTP);
@@ -194,8 +195,7 @@ public class LocationIndexBuilder {
   
   public TargetPlatform getImportedTargetPlatform(final Resource context, final IncludeDeclaration include) {
     TargetPlatform ret = null;
-    String _resolve = this.resolver.resolve(include);
-    final Resource resource = EcoreUtil2.getResource(context, _resolve);
+    final Resource resource = EcoreUtil2.getResource(context, this.resolver.resolve(include));
     EList<EObject> _contents = null;
     if (resource!=null) {
       _contents=resource.getContents();

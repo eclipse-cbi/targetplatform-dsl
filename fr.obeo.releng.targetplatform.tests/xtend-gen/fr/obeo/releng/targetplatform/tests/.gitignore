@@ -10,3 +10,13 @@
 /.MockIU.java._trace
 /.TestTargetConversion.java._trace
 /.MockProvisioningAgent.java._trace
+/IQueryResultProvider.java
+/MockIU.java
+/MockMetadataRepository.java
+/MockMetadataRepositoryManager.java
+/MockProvisioningAgent.java
+/TestGrammar.java
+/TestTargetConversion.java
+/TestTargetGeneration.java
+/TestTargetPlatformIndexer.java
+/TestValidation.java

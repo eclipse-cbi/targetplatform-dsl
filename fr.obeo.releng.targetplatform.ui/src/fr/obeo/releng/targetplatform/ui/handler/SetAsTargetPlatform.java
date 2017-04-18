@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Cedric Brun (Obeo) - initial API and implementation
  *******************************************************************************/
 package fr.obeo.releng.targetplatform.ui.handler;
 

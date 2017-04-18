@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012-2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ */
 package fr.obeo.releng.targetplatform.tests;
 
 import com.google.common.collect.Iterables;
@@ -12,10 +22,7 @@ import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import java.util.List;
 import java.util.Locale;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -81,45 +88,22 @@ public class TestGrammar {
       _builder.newLine();
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      String _uri = fisrtLocation.getUri();
-      Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", _uri);
-      EList<IU> _ius = fisrtLocation.getIus();
-      int _size = _ius.size();
-      Assert.assertEquals(2, _size);
-      EList<IU> _ius_1 = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius_1);
-      String _iD = iu0.getID();
-      Assert.assertEquals("org.eclipse.emf.sdk.feature.group", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("[2.9.0,3.0.0)", _version);
-      EList<IU> _ius_2 = fisrtLocation.getIus();
-      final IU iu1 = IterableExtensions.<IU>last(_ius_2);
-      String _iD_1 = iu1.getID();
-      Assert.assertEquals("com.google.common.cache", _iD_1);
-      String _version_1 = iu1.getVersion();
-      Assert.assertEquals("10.0.1", _version_1);
-      EList<Location> _locations_1 = targetPlatform.getLocations();
-      final Location lastLocation = IterableExtensions.<Location>last(_locations_1);
-      String _uri_1 = lastLocation.getUri();
-      Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/", _uri_1);
-      EList<IU> _ius_3 = lastLocation.getIus();
-      int _size_1 = _ius_3.size();
-      Assert.assertEquals(1, _size_1);
-      EList<IU> _ius_4 = lastLocation.getIus();
-      final IU uml2iu = IterableExtensions.<IU>head(_ius_4);
-      String _iD_2 = uml2iu.getID();
-      Assert.assertEquals("org.eclipse.uml2.sdk.feature.group", _iD_2);
-      String _version_2 = uml2iu.getVersion();
-      Assert.assertEquals("10.1.1.20141228-2310-BUILD1", _version_2);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", fisrtLocation.getUri());
+      Assert.assertEquals(2, fisrtLocation.getIus().size());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("org.eclipse.emf.sdk.feature.group", iu0.getID());
+      Assert.assertEquals("[2.9.0,3.0.0)", iu0.getVersion());
+      final IU iu1 = IterableExtensions.<IU>last(fisrtLocation.getIus());
+      Assert.assertEquals("com.google.common.cache", iu1.getID());
+      Assert.assertEquals("10.0.1", iu1.getVersion());
+      final Location lastLocation = IterableExtensions.<Location>last(targetPlatform.getLocations());
+      Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/", lastLocation.getUri());
+      Assert.assertEquals(1, lastLocation.getIus().size());
+      final IU uml2iu = IterableExtensions.<IU>head(lastLocation.getIus());
+      Assert.assertEquals("org.eclipse.uml2.sdk.feature.group", uml2iu.getID());
+      Assert.assertEquals("10.1.1.20141228-2310-BUILD1", uml2iu.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -143,27 +127,12 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<Option> _options = fisrtLocation.getOptions();
-      boolean _contains = _options.contains(Option.INCLUDE_SOURCE);
-      Assert.assertTrue(_contains);
-      EList<Option> _options_1 = fisrtLocation.getOptions();
-      boolean _contains_1 = _options_1.contains(Option.INCLUDE_ALL_ENVIRONMENTS);
-      Assert.assertTrue(_contains_1);
-      EList<Option> _options_2 = fisrtLocation.getOptions();
-      boolean _contains_2 = _options_2.contains(Option.INCLUDE_REQUIRED);
-      Assert.assertTrue(_contains_2);
-      EList<Option> _options_3 = fisrtLocation.getOptions();
-      boolean _contains_3 = _options_3.contains(Option.INCLUDE_CONFIGURE_PHASE);
-      Assert.assertTrue(_contains_3);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      Assert.assertTrue(fisrtLocation.getOptions().contains(Option.INCLUDE_SOURCE));
+      Assert.assertTrue(fisrtLocation.getOptions().contains(Option.INCLUDE_ALL_ENVIRONMENTS));
+      Assert.assertTrue(fisrtLocation.getOptions().contains(Option.INCLUDE_REQUIRED));
+      Assert.assertTrue(fisrtLocation.getOptions().contains(Option.INCLUDE_CONFIGURE_PHASE));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -184,10 +153,7 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      boolean _isEmpty = _errors.isEmpty();
-      Assert.assertFalse(_isEmpty);
+      Assert.assertFalse(targetPlatform.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -208,10 +174,7 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      boolean _isEmpty = _errors.isEmpty();
-      Assert.assertFalse(_isEmpty);
+      Assert.assertFalse(targetPlatform.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -232,19 +195,10 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("my.iu.with-dash", _iD);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("my.iu.with-dash", iu0.getID());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -265,21 +219,11 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("my.iu", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("3.0.0", _version);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("my.iu", iu0.getID());
+      Assert.assertEquals("3.0.0", iu0.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -300,21 +244,11 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("myu", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("3.2.1", _version);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("myu", iu0.getID());
+      Assert.assertEquals("3.2.1", iu0.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -335,21 +269,11 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("myu", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("[3.2.1,10.0.0)", _version);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("myu", iu0.getID());
+      Assert.assertEquals("[3.2.1,10.0.0)", iu0.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -370,21 +294,11 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("myu", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("[3.0.0,5.0.0)", _version);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("myu", iu0.getID());
+      Assert.assertEquals("[3.0.0,5.0.0)", iu0.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -405,21 +319,11 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
-      final Location fisrtLocation = IterableExtensions.<Location>head(_locations);
-      EList<IU> _ius = fisrtLocation.getIus();
-      final IU iu0 = IterableExtensions.<IU>head(_ius);
-      String _iD = iu0.getID();
-      Assert.assertEquals("myu", _iD);
-      String _version = iu0.getVersion();
-      Assert.assertEquals("1.2.3.201404071200", _version);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
+      Assert.assertEquals("myu", iu0.getID());
+      Assert.assertEquals("1.2.3.201404071200", iu0.getVersion());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -442,38 +346,30 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
-      String _name = tp.getName();
-      Assert.assertEquals("TP1", _name);
-      EList<Location> _locations = tp.getLocations();
+      Assert.assertEquals("TP1", tp.getName());
       final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
+        @Override
         public EList<IU> apply(final Location it) {
           return it.getIus();
         }
       };
-      List<EList<IU>> _map = ListExtensions.<Location, EList<IU>>map(_locations, _function);
-      Iterable<IU> _flatten = Iterables.<IU>concat(_map);
-      int _size = IterableExtensions.size(_flatten);
-      Assert.assertEquals(2, _size);
-      EList<Location> _locations_1 = tp.getLocations();
+      Assert.assertEquals(2, IterableExtensions.size(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(tp.getLocations(), _function))));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> ids = Iterables.<String>concat(_map_1);
-      int _size_1 = IterableExtensions.size(ids);
-      Assert.assertEquals(2, _size_1);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
-      Assert.assertEquals("com.google.guava.source", _get);
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(tp.getLocations(), _function_1));
+      Assert.assertEquals(2, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("com.google.guava.source", ((Object[])Conversions.unwrapArray(ids, Object.class))[1]);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -496,38 +392,30 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
-      String _name = tp.getName();
-      Assert.assertEquals("TP1", _name);
-      EList<Location> _locations = tp.getLocations();
+      Assert.assertEquals("TP1", tp.getName());
       final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
+        @Override
         public EList<IU> apply(final Location it) {
           return it.getIus();
         }
       };
-      List<EList<IU>> _map = ListExtensions.<Location, EList<IU>>map(_locations, _function);
-      Iterable<IU> _flatten = Iterables.<IU>concat(_map);
-      int _size = IterableExtensions.size(_flatten);
-      Assert.assertEquals(2, _size);
-      EList<Location> _locations_1 = tp.getLocations();
+      Assert.assertEquals(2, IterableExtensions.size(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(tp.getLocations(), _function))));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> ids = Iterables.<String>concat(_map_1);
-      int _size_1 = IterableExtensions.size(ids);
-      Assert.assertEquals(2, _size_1);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
-      Assert.assertEquals("com.google.guava.source", _get);
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(tp.getLocations(), _function_1));
+      Assert.assertEquals(2, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("com.google.guava.source", ((Object[])Conversions.unwrapArray(ids, Object.class))[1]);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -543,29 +431,14 @@ public class TestGrammar {
       _builder.append("environment win32 x86_64 motif en_US JavaSE-1.7");
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
-      Resource _eResource = tp.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = tp.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<TargetContent> _contents = tp.getContents();
-      Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
-      final Environment env = IterableExtensions.<Environment>head(_filter);
-      String _operatingSystem = env.getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem);
-      String _architecture = env.getArchitecture();
-      Assert.assertEquals("x86_64", _architecture);
-      String _windowingSystem = env.getWindowingSystem();
-      Assert.assertEquals("motif", _windowingSystem);
+      Assert.assertTrue(IterableExtensions.join(tp.eResource().getErrors(), "\n"), tp.eResource().getErrors().isEmpty());
+      final Environment env = IterableExtensions.<Environment>head(Iterables.<Environment>filter(tp.getContents(), Environment.class));
+      Assert.assertEquals("win32", env.getOperatingSystem());
+      Assert.assertEquals("x86_64", env.getArchitecture());
+      Assert.assertEquals("motif", env.getWindowingSystem());
       Locale _locale = new Locale("en", "us");
-      Locale _localization = env.getLocalization();
-      Assert.assertEquals(_locale, _localization);
-      IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
-      IExecutionEnvironment _environment = _executionEnvironmentsManager.getEnvironment("JavaSE-1.7");
-      IExecutionEnvironment _executionEnvironment = env.getExecutionEnvironment();
-      Assert.assertEquals(_environment, _executionEnvironment);
+      Assert.assertEquals(_locale, env.getLocalization());
+      Assert.assertEquals(JavaRuntime.getExecutionEnvironmentsManager().getEnvironment("JavaSE-1.7"), env.getExecutionEnvironment());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -582,39 +455,18 @@ public class TestGrammar {
       _builder.append("environment win32");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      Resource _eResource_2 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
-      boolean _isEmpty_1 = _errors_2.isEmpty();
-      Assert.assertTrue(_isEmpty_1);
-      Environment _environment = targetPlatform.getEnvironment();
-      String _operatingSystem = _environment.getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem);
-      Environment _environment_1 = targetPlatform.getEnvironment();
-      String _windowingSystem = _environment_1.getWindowingSystem();
-      Assert.assertEquals("win32", _windowingSystem);
-      EList<TargetContent> _contents = targetPlatform.getContents();
-      TargetContent _get = _contents.get(0);
-      String _operatingSystem_1 = ((Environment) _get).getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem_1);
-      EList<TargetContent> _contents_1 = targetPlatform.getContents();
-      TargetContent _get_1 = _contents_1.get(0);
-      String _windowingSystem_1 = ((Environment) _get_1).getWindowingSystem();
-      Assert.assertEquals("win32", _windowingSystem_1);
-      EList<TargetContent> _contents_2 = targetPlatform.getContents();
-      TargetContent _get_2 = _contents_2.get(1);
-      String _windowingSystem_2 = ((Environment) _get_2).getWindowingSystem();
-      Assert.assertEquals("win32", _windowingSystem_2);
-      EList<TargetContent> _contents_3 = targetPlatform.getContents();
-      TargetContent _get_3 = _contents_3.get(1);
-      String _operatingSystem_2 = ((Environment) _get_3).getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem_2);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getOperatingSystem());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getWindowingSystem());
+      TargetContent _get = targetPlatform.getContents().get(0);
+      Assert.assertEquals("win32", ((Environment) _get).getOperatingSystem());
+      TargetContent _get_1 = targetPlatform.getContents().get(0);
+      Assert.assertEquals("win32", ((Environment) _get_1).getWindowingSystem());
+      TargetContent _get_2 = targetPlatform.getContents().get(1);
+      Assert.assertEquals("win32", ((Environment) _get_2).getWindowingSystem());
+      TargetContent _get_3 = targetPlatform.getContents().get(1);
+      Assert.assertEquals("win32", ((Environment) _get_3).getOperatingSystem());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -629,23 +481,10 @@ public class TestGrammar {
       _builder.append("environment win32 linux");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      Resource _eResource_2 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
-      boolean _isEmpty_1 = _errors_2.isEmpty();
-      Assert.assertTrue(_isEmpty_1);
-      Environment _environment = targetPlatform.getEnvironment();
-      String _operatingSystem = _environment.getOperatingSystem();
-      Assert.assertEquals("linux", _operatingSystem);
-      Environment _environment_1 = targetPlatform.getEnvironment();
-      String _windowingSystem = _environment_1.getWindowingSystem();
-      Assert.assertEquals("win32", _windowingSystem);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertEquals("linux", targetPlatform.getEnvironment().getOperatingSystem());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getWindowingSystem());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -660,23 +499,10 @@ public class TestGrammar {
       _builder.append("environment win32 cocoa");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      Resource _eResource_2 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
-      boolean _isEmpty_1 = _errors_2.isEmpty();
-      Assert.assertTrue(_isEmpty_1);
-      Environment _environment = targetPlatform.getEnvironment();
-      String _operatingSystem = _environment.getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem);
-      Environment _environment_1 = targetPlatform.getEnvironment();
-      String _windowingSystem = _environment_1.getWindowingSystem();
-      Assert.assertEquals("cocoa", _windowingSystem);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getOperatingSystem());
+      Assert.assertEquals("cocoa", targetPlatform.getEnvironment().getWindowingSystem());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -691,23 +517,10 @@ public class TestGrammar {
       _builder.append("environment linux win32");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      Resource _eResource_2 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
-      boolean _isEmpty_1 = _errors_2.isEmpty();
-      Assert.assertTrue(_isEmpty_1);
-      Environment _environment = targetPlatform.getEnvironment();
-      String _operatingSystem = _environment.getOperatingSystem();
-      Assert.assertEquals("linux", _operatingSystem);
-      Environment _environment_1 = targetPlatform.getEnvironment();
-      String _windowingSystem = _environment_1.getWindowingSystem();
-      Assert.assertEquals("win32", _windowingSystem);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertEquals("linux", targetPlatform.getEnvironment().getOperatingSystem());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getWindowingSystem());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -722,23 +535,10 @@ public class TestGrammar {
       _builder.append("environment cocoa win32");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      Resource _eResource_2 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_2 = _eResource_2.getErrors();
-      boolean _isEmpty_1 = _errors_2.isEmpty();
-      Assert.assertTrue(_isEmpty_1);
-      Environment _environment = targetPlatform.getEnvironment();
-      String _operatingSystem = _environment.getOperatingSystem();
-      Assert.assertEquals("win32", _operatingSystem);
-      Environment _environment_1 = targetPlatform.getEnvironment();
-      String _windowingSystem = _environment_1.getWindowingSystem();
-      Assert.assertEquals("cocoa", _windowingSystem);
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      Assert.assertEquals("win32", targetPlatform.getEnvironment().getOperatingSystem());
+      Assert.assertEquals("cocoa", targetPlatform.getEnvironment().getWindowingSystem());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -758,47 +558,36 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
       final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
-      final Iterable<String> ids = Iterables.<String>concat(_map);
-      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getVersion();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> versions = Iterables.<String>concat(_map_1);
-      int _size = IterableExtensions.size(ids);
-      Assert.assertEquals(1, _size);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      String _head_1 = IterableExtensions.<String>head(versions);
-      Assert.assertEquals("1.2.0", _head_1);
+      final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
+      Assert.assertEquals(1, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("1.2.0", IterableExtensions.<String>head(versions));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -818,47 +607,36 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
       final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
-      final Iterable<String> ids = Iterables.<String>concat(_map);
-      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getVersion();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> versions = Iterables.<String>concat(_map_1);
-      int _size = IterableExtensions.size(ids);
-      Assert.assertEquals(1, _size);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      String _head_1 = IterableExtensions.<String>head(versions);
-      Assert.assertEquals("[1.2.0,2.4.54)", _head_1);
+      final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
+      Assert.assertEquals(1, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("[1.2.0,2.4.54)", IterableExtensions.<String>head(versions));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -881,49 +659,37 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
       final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
-      final Iterable<String> ids = Iterables.<String>concat(_map);
-      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getVersion();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> versions = Iterables.<String>concat(_map_1);
-      int _size = IterableExtensions.size(ids);
-      Assert.assertEquals(2, _size);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
-      Assert.assertEquals("org.apacahe.commons", _get);
-      String _head_1 = IterableExtensions.<String>head(versions);
-      Assert.assertEquals("[1.2.0,2.4.54)", _head_1);
+      final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
+      Assert.assertEquals(2, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("org.apacahe.commons", ((Object[])Conversions.unwrapArray(ids, Object.class))[1]);
+      Assert.assertEquals("[1.2.0,2.4.54)", IterableExtensions.<String>head(versions));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -946,49 +712,37 @@ public class TestGrammar {
       _builder.append("}");
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
-      Resource _eResource = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = targetPlatform.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
-      EList<Location> _locations = targetPlatform.getLocations();
+      Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
       final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getID();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map = ListExtensions.<Location, List<String>>map(_locations, _function);
-      final Iterable<String> ids = Iterables.<String>concat(_map);
-      EList<Location> _locations_1 = targetPlatform.getLocations();
+      final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
       final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
+        @Override
         public List<String> apply(final Location it) {
-          EList<IU> _ius = it.getIus();
           final Function1<IU, String> _function = new Function1<IU, String>() {
+            @Override
             public String apply(final IU it) {
               return it.getVersion();
             }
           };
-          return ListExtensions.<IU, String>map(_ius, _function);
+          return ListExtensions.<IU, String>map(it.getIus(), _function);
         }
       };
-      List<List<String>> _map_1 = ListExtensions.<Location, List<String>>map(_locations_1, _function_1);
-      final Iterable<String> versions = Iterables.<String>concat(_map_1);
-      int _size = IterableExtensions.size(ids);
-      Assert.assertEquals(2, _size);
-      String _head = IterableExtensions.<String>head(ids);
-      Assert.assertEquals("com.google.guava", _head);
-      Object _get = ((Object[])Conversions.unwrapArray(ids, Object.class))[1];
-      Assert.assertEquals("org.apacahe.commons", _get);
-      String _head_1 = IterableExtensions.<String>head(versions);
-      Assert.assertEquals("1.2.0", _head_1);
+      final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
+      Assert.assertEquals(2, IterableExtensions.size(ids));
+      Assert.assertEquals("com.google.guava", IterableExtensions.<String>head(ids));
+      Assert.assertEquals("org.apacahe.commons", ((Object[])Conversions.unwrapArray(ids, Object.class))[1]);
+      Assert.assertEquals("1.2.0", IterableExtensions.<String>head(versions));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

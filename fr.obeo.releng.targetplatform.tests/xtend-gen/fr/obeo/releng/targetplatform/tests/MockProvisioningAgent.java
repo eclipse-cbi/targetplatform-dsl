@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012-2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ */
 package fr.obeo.releng.targetplatform.tests;
 
 import fr.obeo.releng.targetplatform.tests.IQueryResultProvider;
@@ -14,6 +24,7 @@ public class MockProvisioningAgent implements IProvisioningAgent {
     this.resultProvider = resultProvider;
   }
   
+  @Override
   public Object getService(final String serviceName) {
     boolean _equals = IMetadataRepositoryManager.SERVICE_NAME.equals(serviceName);
     if (_equals) {
@@ -22,12 +33,15 @@ public class MockProvisioningAgent implements IProvisioningAgent {
     return null;
   }
   
+  @Override
   public void registerService(final String serviceName, final Object service) {
   }
   
+  @Override
   public void stop() {
   }
   
+  @Override
   public void unregisterService(final String serviceName, final Object service) {
   }
 }

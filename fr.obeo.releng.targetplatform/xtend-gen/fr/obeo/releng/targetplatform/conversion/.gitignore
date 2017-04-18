@@ -5,3 +5,7 @@
 /.FQNConverter.java._trace
 /.ExecutionEnvironmentConverter.java._trace
 /.LocaleConverter.java._trace
+/FQNConverter.java
+/TargetPlatformConverter.java
+/TargetPlatformSTRINGValueConverter.java
+/VersionRangeConverter.java

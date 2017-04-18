@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012-2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ */
 package fr.obeo.releng.targetplatform.ui.contentassist;
 
 import com.google.common.base.Objects;
@@ -14,6 +24,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
     this.display = display;
   }
   
+  @Override
   public void internalWorked(final double work) {
     Thread _currentThread = Thread.currentThread();
     Thread _thread = this.display.getThread();
@@ -24,6 +35,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       this.display.readAndDispatch();
     } else {
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
           ReadAndDispatchProgressMonitorWrapper.super.internalWorked(work);
         }
@@ -32,6 +44,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
     }
   }
   
+  @Override
   public void subTask(final String name) {
     Thread _currentThread = Thread.currentThread();
     Thread _thread = this.display.getThread();
@@ -42,6 +55,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       this.display.readAndDispatch();
     } else {
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
           ReadAndDispatchProgressMonitorWrapper.super.subTask(name);
         }
@@ -50,6 +64,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
     }
   }
   
+  @Override
   public void worked(final int work) {
     Thread _currentThread = Thread.currentThread();
     Thread _thread = this.display.getThread();
@@ -60,6 +75,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       this.display.readAndDispatch();
     } else {
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
         }
       };
@@ -67,6 +83,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
     }
   }
   
+  @Override
   public void beginTask(final String name, final int totalWork) {
     Thread _currentThread = Thread.currentThread();
     Thread _thread = this.display.getThread();
@@ -77,6 +94,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       this.display.readAndDispatch();
     } else {
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
           ReadAndDispatchProgressMonitorWrapper.super.beginTask(name, totalWork);
         }
@@ -85,6 +103,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
     }
   }
   
+  @Override
   public void setTaskName(final String name) {
     Thread _currentThread = Thread.currentThread();
     Thread _thread = this.display.getThread();
@@ -95,6 +114,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       this.display.readAndDispatch();
     } else {
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
           ReadAndDispatchProgressMonitorWrapper.super.setTaskName(name);
         }
