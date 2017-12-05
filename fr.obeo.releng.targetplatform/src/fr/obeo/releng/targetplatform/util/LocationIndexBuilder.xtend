@@ -139,7 +139,7 @@ class LocationIndexBuilder {
 
 	def TargetPlatform getImportedTargetPlatform(Resource context, IncludeDeclaration include) {
 		var TargetPlatform ret = null;
-		val resource = EcoreUtil2.getResource(context, resolver.resolve(include));
+		val resource = ResourceUtil.getResource(context, resolver.resolve(include));
 		var root = resource?.getContents()?.head;
 		if (root instanceof TargetPlatform) {
 			ret = root as TargetPlatform;
