@@ -117,6 +117,33 @@ class Environment extends TargetContent {
 	}
 }
 
+class VarDefinition extends TargetContent {
+	String name
+	String value
+}
+
+class CompositeString {
+	contains CompositeStringPart[] stringPart opposite compositeString
+}
+
+interface CompositeStringPart {
+	container CompositeString compositeString opposite stringPart
+}
+
+class VarCall extends CompositeStringPart {
+	refers VarDefinition varName
+//	op String getValue(VarDefinition[] varDefs) {
+//		for (VarDefinition varDef : varDefs) {
+//			if (varName == varDef.name) return varDef.value
+//		}
+//		throw new RuntimeException(varName + " is not defined.");
+//	}
+}
+
+class StaticString extends CompositeStringPart {
+	String value
+}
+
 type Locale wraps java.util.Locale
 type ExecutionEnvironment wraps org.eclipse.jdt.launching.environments.IExecutionEnvironment
 
@@ -128,7 +155,7 @@ class Location extends TargetContent {
 }
 
 class IncludeDeclaration extends TargetContent {
-	String importURI
+	contains CompositeString importURI
 }
 
 class IU {

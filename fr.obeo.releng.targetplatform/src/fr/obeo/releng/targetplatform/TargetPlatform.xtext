@@ -11,7 +11,7 @@ TargetPlatform:
 ;
 
 TargetContent: 
-	Options | Environment | IncludeDeclaration | Location
+	Options | Environment | IncludeDeclaration | Location | VarDefinition
 ;
 
 Options: 
@@ -23,8 +23,29 @@ Environment:
 	'environment' env+=ID (','? env+=ID)*
 ;
 
+VarDefinition:
+	'define' name=ID '=' value=STRING
+;
+
+CompositeString:
+	{CompositeString}
+	stringPart+=CompositeStringPart*
+;
+
+CompositeStringPart:
+	VarCall | StaticString
+;
+
+VarCall:
+	"${" varName=[VarDefinition] "}"
+;
+
+StaticString:
+	value=STRING
+;
+
 IncludeDeclaration:
-	'include' importURI=STRING
+	'include' importURI=CompositeString
 ;
 
 Location:
