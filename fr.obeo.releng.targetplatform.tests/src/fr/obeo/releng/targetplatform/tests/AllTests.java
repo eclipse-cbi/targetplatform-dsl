@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import fr.obeo.releng.targetplatform.tests.composite_elements.TestCompositeLocation;
 import fr.obeo.releng.targetplatform.ui.tests.TestContentAssist;
 
 /**
@@ -28,6 +29,7 @@ import fr.obeo.releng.targetplatform.ui.tests.TestContentAssist;
 	TestTargetGeneration.class,
 	TestTargetPlatformIndexer.class,
 	TestValidation.class,
+	TestCompositeLocation.class
 })
 public class AllTests {
 	
