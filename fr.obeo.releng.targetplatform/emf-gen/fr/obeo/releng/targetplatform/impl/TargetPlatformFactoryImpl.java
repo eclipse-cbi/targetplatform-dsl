@@ -64,6 +64,10 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 			case TargetPlatformPackage.TARGET_PLATFORM: return createTargetPlatform();
 			case TargetPlatformPackage.OPTIONS: return createOptions();
 			case TargetPlatformPackage.ENVIRONMENT: return createEnvironment();
+			case TargetPlatformPackage.VAR_DEFINITION: return createVarDefinition();
+			case TargetPlatformPackage.COMPOSITE_STRING: return createCompositeString();
+			case TargetPlatformPackage.VAR_CALL: return createVarCall();
+			case TargetPlatformPackage.STATIC_STRING: return createStaticString();
 			case TargetPlatformPackage.LOCATION: return createLocation();
 			case TargetPlatformPackage.INCLUDE_DECLARATION: return createIncludeDeclaration();
 			case TargetPlatformPackage.IU: return createIU();
@@ -138,6 +142,46 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 	public Environment createEnvironment() {
 		EnvironmentImpl environment = new EnvironmentImpl();
 		return environment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarDefinition createVarDefinition() {
+		VarDefinitionImpl varDefinition = new VarDefinitionImpl();
+		return varDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeString createCompositeString() {
+		CompositeStringImpl compositeString = new CompositeStringImpl();
+		return compositeString;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarCall createVarCall() {
+		VarCallImpl varCall = new VarCallImpl();
+		return varCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticString createStaticString() {
+		StaticStringImpl staticString = new StaticStringImpl();
+		return staticString;
 	}
 
 	/**

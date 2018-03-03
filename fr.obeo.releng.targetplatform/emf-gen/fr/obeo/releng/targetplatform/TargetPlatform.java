@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getContents <em>Contents</em>}</li>
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getEnvironment <em>Environment</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform()
  * @model
@@ -84,7 +84,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Includes</em>' reference list.
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Includes()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%fr.obeo.releng.targetplatform.IncludeDeclaration%>> _filter = <%com.google.common.collect.Iterables%>.<<%fr.obeo.releng.targetplatform.IncludeDeclaration%>>filter(_contents, <%fr.obeo.releng.targetplatform.IncludeDeclaration%>.class);\n<%java.util.List%><<%fr.obeo.releng.targetplatform.IncludeDeclaration%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%fr.obeo.releng.targetplatform.IncludeDeclaration%>>toList(_filter);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%fr.obeo.releng.targetplatform.IncludeDeclaration%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='&lt;%java.util.List%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.IncludeDeclaration%&gt;&gt; _list = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.IncludeDeclaration%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.IncludeDeclaration%&gt;&gt;filter(this.getContents(), &lt;%fr.obeo.releng.targetplatform.IncludeDeclaration%&gt;.class));\nreturn new &lt;%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.IncludeDeclaration%&gt;&gt;(_list);'"
 	 * @generated
 	 */
 	EList<IncludeDeclaration> getIncludes();
@@ -103,7 +103,7 @@ public interface TargetPlatform extends EObject {
 	 * @see fr.obeo.releng.targetplatform.Option
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Options()
 	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%fr.obeo.releng.targetplatform.Options%>> _filter = <%com.google.common.collect.Iterables%>.<<%fr.obeo.releng.targetplatform.Options%>>filter(_contents, <%fr.obeo.releng.targetplatform.Options%>.class);\nfinal <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%fr.obeo.releng.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.Option%>>> _function = new <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%fr.obeo.releng.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.Option%>>>()\n{\n\tpublic <%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.Option%>> apply(final <%fr.obeo.releng.targetplatform.Options%> it)\n\t{\n\t\treturn it.getOptions();\n\t}\n};\n<%java.lang.Iterable%><<%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.Option%>>> _map = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%fr.obeo.releng.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.Option%>>>map(_filter, _function);\n<%java.lang.Iterable%><<%fr.obeo.releng.targetplatform.Option%>> _flatten = <%com.google.common.collect.Iterables%>.<<%fr.obeo.releng.targetplatform.Option%>>concat(_map);\n<%java.util.List%><<%fr.obeo.releng.targetplatform.Option%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%fr.obeo.releng.targetplatform.Option%>>toList(_flatten);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%fr.obeo.releng.targetplatform.Option%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='final &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Options%&gt;, &lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;&gt; _function = new &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Options%&gt;, &lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;&gt;()\n{\n\tpublic &lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt; apply(final &lt;%fr.obeo.releng.targetplatform.Options%&gt; it)\n\t{\n\t\treturn it.getOptions();\n\t}\n};\n&lt;%java.util.List%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt; _list = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;concat(&lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Options%&gt;, &lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;&gt;map(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Options%&gt;&gt;filter(this.getContents(), &lt;%fr.obeo.releng.targetplatform.Options%&gt;.class), _function)));\nreturn new &lt;%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Option%&gt;&gt;(_list);'"
 	 * @generated
 	 */
 	EList<Option> getOptions();
@@ -120,7 +120,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Locations</em>' reference list.
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Locations()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%fr.obeo.releng.targetplatform.Location%>> _filter = <%com.google.common.collect.Iterables%>.<<%fr.obeo.releng.targetplatform.Location%>>filter(_contents, <%fr.obeo.releng.targetplatform.Location%>.class);\n<%java.util.List%><<%fr.obeo.releng.targetplatform.Location%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%fr.obeo.releng.targetplatform.Location%>>toList(_filter);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%fr.obeo.releng.targetplatform.Location%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='&lt;%java.util.List%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Location%&gt;&gt; _list = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Location%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Location%&gt;&gt;filter(this.getContents(), &lt;%fr.obeo.releng.targetplatform.Location%&gt;.class));\nreturn new &lt;%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.Location%&gt;&gt;(_list);'"
 	 * @generated
 	 */
 	EList<Location> getLocations();
@@ -136,7 +136,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Environment</em>' reference.
 	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Environment()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%fr.obeo.releng.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%fr.obeo.releng.targetplatform.Environment%>> _filter = <%com.google.common.collect.Iterables%>.<<%fr.obeo.releng.targetplatform.Environment%>>filter(_contents, <%fr.obeo.releng.targetplatform.Environment%>.class);\nreturn <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%fr.obeo.releng.targetplatform.Environment%>>head(_filter);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='return &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Environment%&gt;&gt;head(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.Environment%&gt;&gt;filter(this.getContents(), &lt;%fr.obeo.releng.targetplatform.Environment%&gt;.class));'"
 	 * @generated
 	 */
 	Environment getEnvironment();

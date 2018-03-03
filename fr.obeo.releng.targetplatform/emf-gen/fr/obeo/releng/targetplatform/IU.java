@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getVersion <em>Version</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIU()
  * @model

@@ -49,6 +49,42 @@ public interface TargetPlatformFactory extends EFactory {
 	Environment createEnvironment();
 
 	/**
+	 * Returns a new object of class '<em>Var Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Var Definition</em>'.
+	 * @generated
+	 */
+	VarDefinition createVarDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Composite String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composite String</em>'.
+	 * @generated
+	 */
+	CompositeString createCompositeString();
+
+	/**
+	 * Returns a new object of class '<em>Var Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Var Call</em>'.
+	 * @generated
+	 */
+	VarCall createVarCall();
+
+	/**
+	 * Returns a new object of class '<em>Static String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Static String</em>'.
+	 * @generated
+	 */
+	StaticString createStaticString();
+
+	/**
 	 * Returns a new object of class '<em>Location</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

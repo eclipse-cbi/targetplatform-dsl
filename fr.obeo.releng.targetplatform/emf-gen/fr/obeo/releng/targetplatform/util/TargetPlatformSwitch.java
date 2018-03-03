@@ -47,7 +47,7 @@ public class TargetPlatformSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -89,6 +89,39 @@ public class TargetPlatformSwitch<T> extends Switch<T> {
 				Environment environment = (Environment)theEObject;
 				T result = caseEnvironment(environment);
 				if (result == null) result = caseTargetContent(environment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPlatformPackage.VAR_DEFINITION: {
+				VarDefinition varDefinition = (VarDefinition)theEObject;
+				T result = caseVarDefinition(varDefinition);
+				if (result == null) result = caseTargetContent(varDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPlatformPackage.COMPOSITE_STRING: {
+				CompositeString compositeString = (CompositeString)theEObject;
+				T result = caseCompositeString(compositeString);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPlatformPackage.COMPOSITE_STRING_PART: {
+				CompositeStringPart compositeStringPart = (CompositeStringPart)theEObject;
+				T result = caseCompositeStringPart(compositeStringPart);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPlatformPackage.VAR_CALL: {
+				VarCall varCall = (VarCall)theEObject;
+				T result = caseVarCall(varCall);
+				if (result == null) result = caseCompositeStringPart(varCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPlatformPackage.STATIC_STRING: {
+				StaticString staticString = (StaticString)theEObject;
+				T result = caseStaticString(staticString);
+				if (result == null) result = caseCompositeStringPart(staticString);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -173,6 +206,81 @@ public class TargetPlatformSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnvironment(Environment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Var Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Var Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVarDefinition(VarDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite String</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite String</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeString(CompositeString object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite String Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite String Part</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeStringPart(CompositeStringPart object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Var Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Var Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVarCall(VarCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Static String</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Static String</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStaticString(StaticString object) {
 		return null;
 	}
 

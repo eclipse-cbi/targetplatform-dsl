@@ -23,12 +23,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getLocation <em>Location</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

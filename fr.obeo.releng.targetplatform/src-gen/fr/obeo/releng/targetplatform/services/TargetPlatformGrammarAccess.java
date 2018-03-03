@@ -57,12 +57,13 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEnvironmentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cIncludeDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cLocationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cVarDefinitionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//TargetContent:
-		//	Options | Environment | IncludeDeclaration | Location;
+		//	Options | Environment | IncludeDeclaration | Location | VarDefinition;
 		public ParserRule getRule() { return rule; }
 
-		//Options | Environment | IncludeDeclaration | Location
+		//Options | Environment | IncludeDeclaration | Location | VarDefinition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Options
@@ -76,6 +77,9 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Location
 		public RuleCall getLocationParserRuleCall_3() { return cLocationParserRuleCall_3; }
+
+		//VarDefinition
+		public RuleCall getVarDefinitionParserRuleCall_4() { return cVarDefinitionParserRuleCall_4; }
 	}
 
 	public class OptionsElements extends AbstractParserRuleElementFinder {
@@ -162,28 +166,156 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getEnvIDTerminalRuleCall_3_1_0() { return cEnvIDTerminalRuleCall_3_1_0; }
 	}
 
+	public class VarDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDefineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueSTRINGTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		
+		//VarDefinition:
+		//	"define" name=ID "=" value=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//"define" name=ID "=" value=STRING
+		public Group getGroup() { return cGroup; }
+
+		//"define"
+		public Keyword getDefineKeyword_0() { return cDefineKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
+
+		//value=STRING
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_3_0() { return cValueSTRINGTerminalRuleCall_3_0; }
+	}
+
+	public class CompositeStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeString");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cCompositeStringAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cStringPartsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cStringPartsCompositeStringPartParserRuleCall_1_0 = (RuleCall)cStringPartsAssignment_1.eContents().get(0);
+		
+		//CompositeString:
+		//	{CompositeString} stringParts+=CompositeStringPart*;
+		public ParserRule getRule() { return rule; }
+
+		//{CompositeString} stringParts+=CompositeStringPart*
+		public Group getGroup() { return cGroup; }
+
+		//{CompositeString}
+		public Action getCompositeStringAction_0() { return cCompositeStringAction_0; }
+
+		//stringParts+=CompositeStringPart*
+		public Assignment getStringPartsAssignment_1() { return cStringPartsAssignment_1; }
+
+		//CompositeStringPart
+		public RuleCall getStringPartsCompositeStringPartParserRuleCall_1_0() { return cStringPartsCompositeStringPartParserRuleCall_1_0; }
+	}
+
+	public class CompositeStringPartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeStringPart");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVarCallParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cStaticStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//CompositeStringPart:
+		//	VarCall | StaticString;
+		public ParserRule getRule() { return rule; }
+
+		//VarCall | StaticString
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//VarCall
+		public RuleCall getVarCallParserRuleCall_0() { return cVarCallParserRuleCall_0; }
+
+		//StaticString
+		public RuleCall getStaticStringParserRuleCall_1() { return cStaticStringParserRuleCall_1; }
+	}
+
+	public class VarCallElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarCall");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDollarSignLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVarNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cVarNameVarDefinitionCrossReference_1_0 = (CrossReference)cVarNameAssignment_1.eContents().get(0);
+		private final RuleCall cVarNameVarDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cVarNameVarDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//VarCall:
+		//	"${" varName=[VarDefinition] "}";
+		public ParserRule getRule() { return rule; }
+
+		//"${" varName=[VarDefinition] "}"
+		public Group getGroup() { return cGroup; }
+
+		//"${"
+		public Keyword getDollarSignLeftCurlyBracketKeyword_0() { return cDollarSignLeftCurlyBracketKeyword_0; }
+
+		//varName=[VarDefinition]
+		public Assignment getVarNameAssignment_1() { return cVarNameAssignment_1; }
+
+		//[VarDefinition]
+		public CrossReference getVarNameVarDefinitionCrossReference_1_0() { return cVarNameVarDefinitionCrossReference_1_0; }
+
+		//ID
+		public RuleCall getVarNameVarDefinitionIDTerminalRuleCall_1_0_1() { return cVarNameVarDefinitionIDTerminalRuleCall_1_0_1; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+	}
+
+	public class StaticStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticString");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//StaticString:
+		//	value=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//value=STRING
+		public Assignment getValueAssignment() { return cValueAssignment; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_0() { return cValueSTRINGTerminalRuleCall_0; }
+	}
+
 	public class IncludeDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IncludeDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cIncludeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
+		private final Assignment cCompositeImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCompositeImportURICompositeStringParserRuleCall_1_0 = (RuleCall)cCompositeImportURIAssignment_1.eContents().get(0);
 		
 		//IncludeDeclaration:
-		//	"include" importURI=STRING;
+		//	"include" compositeImportURI=CompositeString;
 		public ParserRule getRule() { return rule; }
 
-		//"include" importURI=STRING
+		//"include" compositeImportURI=CompositeString
 		public Group getGroup() { return cGroup; }
 
 		//"include"
 		public Keyword getIncludeKeyword_0() { return cIncludeKeyword_0; }
 
-		//importURI=STRING
-		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
+		//compositeImportURI=CompositeString
+		public Assignment getCompositeImportURIAssignment_1() { return cCompositeImportURIAssignment_1; }
 
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
+		//CompositeString
+		public RuleCall getCompositeImportURICompositeStringParserRuleCall_1_0() { return cCompositeImportURICompositeStringParserRuleCall_1_0; }
 	}
 
 	public class LocationElements extends AbstractParserRuleElementFinder {
@@ -509,6 +641,11 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	private final TargetContentElements pTargetContent;
 	private final OptionsElements pOptions;
 	private final EnvironmentElements pEnvironment;
+	private final VarDefinitionElements pVarDefinition;
+	private final CompositeStringElements pCompositeString;
+	private final CompositeStringPartElements pCompositeStringPart;
+	private final VarCallElements pVarCall;
+	private final StaticStringElements pStaticString;
 	private final IncludeDeclarationElements pIncludeDeclaration;
 	private final LocationElements pLocation;
 	private final OptionElements unknownRuleOption;
@@ -532,6 +669,11 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTargetContent = new TargetContentElements();
 		this.pOptions = new OptionsElements();
 		this.pEnvironment = new EnvironmentElements();
+		this.pVarDefinition = new VarDefinitionElements();
+		this.pCompositeString = new CompositeStringElements();
+		this.pCompositeStringPart = new CompositeStringPartElements();
+		this.pVarCall = new VarCallElements();
+		this.pStaticString = new StaticStringElements();
 		this.pIncludeDeclaration = new IncludeDeclarationElements();
 		this.pLocation = new LocationElements();
 		this.unknownRuleOption = new OptionElements();
@@ -581,7 +723,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TargetContent:
-	//	Options | Environment | IncludeDeclaration | Location;
+	//	Options | Environment | IncludeDeclaration | Location | VarDefinition;
 	public TargetContentElements getTargetContentAccess() {
 		return pTargetContent;
 	}
@@ -610,8 +752,58 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnvironmentAccess().getRule();
 	}
 
+	//VarDefinition:
+	//	"define" name=ID "=" value=STRING;
+	public VarDefinitionElements getVarDefinitionAccess() {
+		return pVarDefinition;
+	}
+	
+	public ParserRule getVarDefinitionRule() {
+		return getVarDefinitionAccess().getRule();
+	}
+
+	//CompositeString:
+	//	{CompositeString} stringParts+=CompositeStringPart*;
+	public CompositeStringElements getCompositeStringAccess() {
+		return pCompositeString;
+	}
+	
+	public ParserRule getCompositeStringRule() {
+		return getCompositeStringAccess().getRule();
+	}
+
+	//CompositeStringPart:
+	//	VarCall | StaticString;
+	public CompositeStringPartElements getCompositeStringPartAccess() {
+		return pCompositeStringPart;
+	}
+	
+	public ParserRule getCompositeStringPartRule() {
+		return getCompositeStringPartAccess().getRule();
+	}
+
+	//VarCall:
+	//	"${" varName=[VarDefinition] "}";
+	public VarCallElements getVarCallAccess() {
+		return pVarCall;
+	}
+	
+	public ParserRule getVarCallRule() {
+		return getVarCallAccess().getRule();
+	}
+
+	//StaticString:
+	//	value=STRING;
+	public StaticStringElements getStaticStringAccess() {
+		return pStaticString;
+	}
+	
+	public ParserRule getStaticStringRule() {
+		return getStaticStringAccess().getRule();
+	}
+
 	//IncludeDeclaration:
-	//	"include" importURI=STRING;
+	//	"include" compositeImportURI=CompositeString;
 	public IncludeDeclarationElements getIncludeDeclarationAccess() {
 		return pIncludeDeclaration;
 	}

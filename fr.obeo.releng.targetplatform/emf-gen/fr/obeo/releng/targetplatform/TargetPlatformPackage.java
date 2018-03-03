@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -316,6 +317,272 @@ public interface TargetPlatformPackage extends EPackage {
 	int ENVIRONMENT_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl <em>Var Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.obeo.releng.targetplatform.impl.VarDefinitionImpl
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarDefinition()
+	 * @generated
+	 */
+	int VAR_DEFINITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__NAME = TARGET_CONTENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__VALUE = TARGET_CONTENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Var Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Var Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.obeo.releng.targetplatform.impl.CompositeStringImpl
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getCompositeString()
+	 * @generated
+	 */
+	int COMPOSITE_STRING = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>String Parts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING__STRING_PARTS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Composite String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_FEATURE_COUNT = 2;
+
+	/**
+	 * The operation id for the '<em>Compute Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING___COMPUTE_ACTUAL_STRING = 0;
+
+	/**
+	 * The number of operations of the '<em>Composite String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_OPERATION_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getCompositeStringPart()
+	 * @generated
+	 */
+	int COMPOSITE_STRING_PART = 6;
+
+	/**
+	 * The feature id for the '<em><b>Composite String</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART__COMPOSITE_STRING = 0;
+
+	/**
+	 * The number of structural features of the '<em>Composite String Part</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART_FEATURE_COUNT = 1;
+
+	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART___GET_ACTUAL_STRING = 0;
+
+	/**
+	 * The number of operations of the '<em>Composite String Part</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART_OPERATION_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.obeo.releng.targetplatform.impl.VarCallImpl
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarCall()
+	 * @generated
+	 */
+	int VAR_CALL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Composite String</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL__COMPOSITE_STRING = COMPOSITE_STRING_PART__COMPOSITE_STRING;
+
+	/**
+	 * The feature id for the '<em><b>Var Name</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL__VAR_NAME = COMPOSITE_STRING_PART_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Var Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL___GET_ACTUAL_STRING = COMPOSITE_STRING_PART_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Var Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.obeo.releng.targetplatform.impl.StaticStringImpl
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getStaticString()
+	 * @generated
+	 */
+	int STATIC_STRING = 8;
+
+	/**
+	 * The feature id for the '<em><b>Composite String</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING__COMPOSITE_STRING = COMPOSITE_STRING_PART__COMPOSITE_STRING;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING__VALUE = COMPOSITE_STRING_PART_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Static String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING___GET_ACTUAL_STRING = COMPOSITE_STRING_PART_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Static String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,7 +590,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getLocation()
 	 * @generated
 	 */
-	int LOCATION = 4;
+	int LOCATION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
@@ -396,7 +663,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getIncludeDeclaration()
 	 * @generated
 	 */
-	int INCLUDE_DECLARATION = 5;
+	int INCLUDE_DECLARATION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Target Platform</b></em>' container reference.
@@ -408,13 +675,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int INCLUDE_DECLARATION__TARGET_PLATFORM = TARGET_CONTENT__TARGET_PLATFORM;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_DECLARATION__NAME = TARGET_CONTENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Composite Import URI</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI = TARGET_CONTENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INCLUDE_DECLARATION__IMPORT_URI = TARGET_CONTENT_FEATURE_COUNT + 0;
+	int INCLUDE_DECLARATION__IMPORT_URI = TARGET_CONTENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Include Declaration</em>' class.
@@ -423,7 +708,16 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCLUDE_DECLARATION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 1;
+	int INCLUDE_DECLARATION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Generate Import URI</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_DECLARATION___GENERATE_IMPORT_URI = TARGET_CONTENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Include Declaration</em>' class.
@@ -432,7 +726,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCLUDE_DECLARATION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 0;
+	int INCLUDE_DECLARATION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.IUImpl <em>IU</em>}' class.
@@ -442,7 +736,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getIU()
 	 * @generated
 	 */
-	int IU = 6;
+	int IU = 11;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -497,7 +791,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getOption()
 	 * @generated
 	 */
-	int OPTION = 7;
+	int OPTION = 12;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -507,7 +801,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 8;
+	int LOCALE = 13;
 
 	/**
 	 * The meta object id for the '<em>Execution Environment</em>' data type.
@@ -517,7 +811,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getExecutionEnvironment()
 	 * @generated
 	 */
-	int EXECUTION_ENVIRONMENT = 9;
+	int EXECUTION_ENVIRONMENT = 14;
 
 
 	/**
@@ -715,6 +1009,173 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getEnvironment_ExecutionEnvironment();
 
 	/**
+	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.VarDefinition <em>Var Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Var Definition</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition
+	 * @generated
+	 */
+	EClass getVarDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getName()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getValue()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_Value();
+
+	/**
+	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeString <em>Composite String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite String</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeString
+	 * @generated
+	 */
+	EClass getCompositeString();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.CompositeString#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#getName()
+	 * @see #getCompositeString()
+	 * @generated
+	 */
+	EAttribute getCompositeString_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.CompositeString#getStringParts <em>String Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>String Parts</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#getStringParts()
+	 * @see #getCompositeString()
+	 * @generated
+	 */
+	EReference getCompositeString_StringParts();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeString#computeActualString() <em>Compute Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Compute Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#computeActualString()
+	 * @generated
+	 */
+	EOperation getCompositeString__ComputeActualString();
+
+	/**
+	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite String Part</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart
+	 * @generated
+	 */
+	EClass getCompositeStringPart();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.obeo.releng.targetplatform.CompositeStringPart#getCompositeString <em>Composite String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Composite String</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#getCompositeString()
+	 * @see #getCompositeStringPart()
+	 * @generated
+	 */
+	EReference getCompositeStringPart_CompositeString();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#getActualString() <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#getActualString()
+	 * @generated
+	 */
+	EOperation getCompositeStringPart__GetActualString();
+
+	/**
+	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.VarCall <em>Var Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Var Call</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarCall
+	 * @generated
+	 */
+	EClass getVarCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.obeo.releng.targetplatform.VarCall#getVarName <em>Var Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Var Name</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarCall#getVarName()
+	 * @see #getVarCall()
+	 * @generated
+	 */
+	EReference getVarCall_VarName();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarCall#getActualString() <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.VarCall#getActualString()
+	 * @generated
+	 */
+	EOperation getVarCall__GetActualString();
+
+	/**
+	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.StaticString <em>Static String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Static String</em>'.
+	 * @see fr.obeo.releng.targetplatform.StaticString
+	 * @generated
+	 */
+	EClass getStaticString();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.StaticString#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.obeo.releng.targetplatform.StaticString#getValue()
+	 * @see #getStaticString()
+	 * @generated
+	 */
+	EAttribute getStaticString_Value();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.StaticString#getActualString() <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.StaticString#getActualString()
+	 * @generated
+	 */
+	EOperation getStaticString__GetActualString();
+
+	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.Location <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -779,6 +1240,28 @@ public interface TargetPlatformPackage extends EPackage {
 	EClass getIncludeDeclaration();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.IncludeDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.obeo.releng.targetplatform.IncludeDeclaration#getName()
+	 * @see #getIncludeDeclaration()
+	 * @generated
+	 */
+	EAttribute getIncludeDeclaration_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link fr.obeo.releng.targetplatform.IncludeDeclaration#getCompositeImportURI <em>Composite Import URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Composite Import URI</em>'.
+	 * @see fr.obeo.releng.targetplatform.IncludeDeclaration#getCompositeImportURI()
+	 * @see #getIncludeDeclaration()
+	 * @generated
+	 */
+	EReference getIncludeDeclaration_CompositeImportURI();
+
+	/**
 	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -788,6 +1271,16 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIncludeDeclaration_ImportURI();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.IncludeDeclaration#generateImportURI() <em>Generate Import URI</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Generate Import URI</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.IncludeDeclaration#generateImportURI()
+	 * @generated
+	 */
+	EOperation getIncludeDeclaration__GenerateImportURI();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.IU <em>IU</em>}'.
@@ -1040,6 +1533,144 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute ENVIRONMENT__EXECUTION_ENVIRONMENT = eINSTANCE.getEnvironment_ExecutionEnvironment();
 
 		/**
+		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl <em>Var Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.obeo.releng.targetplatform.impl.VarDefinitionImpl
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarDefinition()
+		 * @generated
+		 */
+		EClass VAR_DEFINITION = eINSTANCE.getVarDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__NAME = eINSTANCE.getVarDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__VALUE = eINSTANCE.getVarDefinition_Value();
+
+		/**
+		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.obeo.releng.targetplatform.impl.CompositeStringImpl
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getCompositeString()
+		 * @generated
+		 */
+		EClass COMPOSITE_STRING = eINSTANCE.getCompositeString();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPOSITE_STRING__NAME = eINSTANCE.getCompositeString_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>String Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_STRING__STRING_PARTS = eINSTANCE.getCompositeString_StringParts();
+
+		/**
+		 * The meta object literal for the '<em><b>Compute Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING___COMPUTE_ACTUAL_STRING = eINSTANCE.getCompositeString__ComputeActualString();
+
+		/**
+		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.obeo.releng.targetplatform.CompositeStringPart
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getCompositeStringPart()
+		 * @generated
+		 */
+		EClass COMPOSITE_STRING_PART = eINSTANCE.getCompositeStringPart();
+
+		/**
+		 * The meta object literal for the '<em><b>Composite String</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_STRING_PART__COMPOSITE_STRING = eINSTANCE.getCompositeStringPart_CompositeString();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING_PART___GET_ACTUAL_STRING = eINSTANCE.getCompositeStringPart__GetActualString();
+
+		/**
+		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.obeo.releng.targetplatform.impl.VarCallImpl
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarCall()
+		 * @generated
+		 */
+		EClass VAR_CALL = eINSTANCE.getVarCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Name</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VAR_CALL__VAR_NAME = eINSTANCE.getVarCall_VarName();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VAR_CALL___GET_ACTUAL_STRING = eINSTANCE.getVarCall__GetActualString();
+
+		/**
+		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.obeo.releng.targetplatform.impl.StaticStringImpl
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getStaticString()
+		 * @generated
+		 */
+		EClass STATIC_STRING = eINSTANCE.getStaticString();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATIC_STRING__VALUE = eINSTANCE.getStaticString_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STATIC_STRING___GET_ACTUAL_STRING = eINSTANCE.getStaticString__GetActualString();
+
+		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1092,12 +1723,36 @@ public interface TargetPlatformPackage extends EPackage {
 		EClass INCLUDE_DECLARATION = eINSTANCE.getIncludeDeclaration();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INCLUDE_DECLARATION__NAME = eINSTANCE.getIncludeDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Composite Import URI</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI = eINSTANCE.getIncludeDeclaration_CompositeImportURI();
+
+		/**
 		 * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute INCLUDE_DECLARATION__IMPORT_URI = eINSTANCE.getIncludeDeclaration_ImportURI();
+
+		/**
+		 * The meta object literal for the '<em><b>Generate Import URI</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INCLUDE_DECLARATION___GENERATE_IMPORT_URI = eINSTANCE.getIncludeDeclaration__GenerateImportURI();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.IUImpl <em>IU</em>}' class.

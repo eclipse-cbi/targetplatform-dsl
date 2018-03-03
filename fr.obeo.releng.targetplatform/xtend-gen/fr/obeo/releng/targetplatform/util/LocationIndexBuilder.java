@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.util;
 
@@ -195,6 +195,7 @@ public class LocationIndexBuilder {
   
   public TargetPlatform getImportedTargetPlatform(final Resource context, final IncludeDeclaration include) {
     TargetPlatform ret = null;
+    include.generateImportURI();
     final Resource resource = EcoreUtil2.getResource(context, this.resolver.resolve(include));
     EList<EObject> _contents = null;
     if (resource!=null) {

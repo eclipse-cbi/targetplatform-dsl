@@ -11,13 +11,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getUri <em>Uri</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getIus <em>Ius</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getLocation()
  * @model

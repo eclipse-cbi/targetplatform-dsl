@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getID <em>ID</em>}</li>
@@ -39,7 +40,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.LocationImpl#getIus <em>Ius</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
