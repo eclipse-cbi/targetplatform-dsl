@@ -29,7 +29,7 @@ VarDefinition:
 
 CompositeString:
 	{CompositeString}
-	stringPart+=CompositeStringPart*
+	stringParts+=CompositeStringPart*
 ;
 
 CompositeStringPart:
@@ -45,7 +45,7 @@ StaticString:
 ;
 
 IncludeDeclaration:
-	'include' importURI=CompositeString
+	'include' compositeImportURI=CompositeString
 ;
 
 Location:

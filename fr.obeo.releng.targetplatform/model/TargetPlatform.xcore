@@ -123,11 +123,22 @@ class VarDefinition extends TargetContent {
 }
 
 class CompositeString {
-	contains CompositeStringPart[] stringPart opposite compositeString
+	String name = "composite string"
+	contains CompositeStringPart[] stringParts opposite compositeString
+	
+	op String computeActualString() {
+		var result = new String
+		for (CompositeStringPart stringPart : stringParts) {
+			result += stringPart.actualString
+		}
+		return result
+	}
 }
 
 interface CompositeStringPart {
-	container CompositeString compositeString opposite stringPart
+	container CompositeString compositeString opposite stringParts
+	
+	op String getActualString()
 }
 
 class VarCall extends CompositeStringPart {
@@ -138,10 +149,18 @@ class VarCall extends CompositeStringPart {
 //		}
 //		throw new RuntimeException(varName + " is not defined.");
 //	}
+
+	op String getActualString() {
+		return ""
+	}
 }
 
 class StaticString extends CompositeStringPart {
 	String value
+	
+	op String getActualString() {
+		return value
+	}
 }
 
 type Locale wraps java.util.Locale
@@ -155,7 +174,14 @@ class Location extends TargetContent {
 }
 
 class IncludeDeclaration extends TargetContent {
-	contains CompositeString importURI
+	String name = "include declaration"
+	contains CompositeString compositeImportURI
+	
+	String importURI
+	
+	op void generateImportURI() {
+		importURI = compositeImportURI.computeActualString
+	}
 }
 
 class IU {
