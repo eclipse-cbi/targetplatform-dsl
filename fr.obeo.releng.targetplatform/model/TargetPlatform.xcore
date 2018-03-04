@@ -143,15 +143,9 @@ interface CompositeStringPart {
 
 class VarCall extends CompositeStringPart {
 	refers VarDefinition varName
-//	op String getValue(VarDefinition[] varDefs) {
-//		for (VarDefinition varDef : varDefs) {
-//			if (varName == varDef.name) return varDef.value
-//		}
-//		throw new RuntimeException(varName + " is not defined.");
-//	}
 
 	op String getActualString() {
-		return ""
+		return varName.value
 	}
 }
 
