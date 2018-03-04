@@ -102,30 +102,33 @@ class TestCompositeLocation {
 		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
-//	@Test
-//	def testLocationWithVarCallFromSubTpd() {
-//		val resourceSet = resourceSetProvider.get
-//		val compositeIncludeTarget = parser.parse('''
-//			target "compositeIncludeTarget"
-//			include "subTpd.tpd"
-//			include ${subDirName} "/" "subInclude.tpd"
-//		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
-//		parser.parse('''
-//			target "subTpd"
-//			define subDirName="subdir"
-//		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
-//		parser.parse('''
-//			target "subInclude"
-//			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
-//				org.eclipse.emf.sdk.feature.group
-//			}
-//		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
-//		
-//		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
-//		assertEquals("subdir", compositeImportURI.stringParts.head.actualString)
-//		
-//		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
-//		val targetPlatform = importedTargetPlatforms.first
-//		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
-//	}
+	@Test
+	def testLocationWithVarCallFromSubTpd() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("subdir", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
+	}
 }

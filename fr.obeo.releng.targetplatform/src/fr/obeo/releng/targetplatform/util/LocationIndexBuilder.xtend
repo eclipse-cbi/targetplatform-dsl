@@ -17,6 +17,7 @@ import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.VarDefinition
 import java.util.LinkedList
 import java.util.List
 import java.util.Set
@@ -30,11 +31,42 @@ class LocationIndexBuilder {
 	ImportUriResolver resolver;
 	
 	def ListMultimap<String, Location> getLocationIndex(TargetPlatform targetPlatform) {
+		searchAndAppendDefineFromIncludedTpd(targetPlatform)
 		val locationList = getLocations(
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
 		)
 		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+	}
+	
+	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
+		val ImportedDefineFromSubTpd = newHashSet()
+		val processedTargetPlatform = newLinkedList()
+		
+		var importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
+		while(importedTargetPlatforms.size > processedTargetPlatform.size) {
+			importedTargetPlatforms
+				.filter[
+					!processedTargetPlatform.contains(it)
+				]
+				.forEach[
+					var notProcessedTargetPlatform = it
+					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform)
+					notProcessedTargetPlatform.contents.forEach[
+						if (it instanceof VarDefinition) {
+							ImportedDefineFromSubTpd.add(it)
+						}
+					]
+				]
+			val newlyProcessedTarget = importedTargetPlatforms
+							.filter[
+								!processedTargetPlatform.contains(it)
+							]
+							.toSet
+			processedTargetPlatform.addAll(newlyProcessedTarget)
+			targetPlatform.contents.addAll(ImportedDefineFromSubTpd)
+			importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
+		}
 	}
 	
 	private def List<Location> getLocations(Set<TargetPlatform> visited, List<TargetPlatform> toBeVisited) {
