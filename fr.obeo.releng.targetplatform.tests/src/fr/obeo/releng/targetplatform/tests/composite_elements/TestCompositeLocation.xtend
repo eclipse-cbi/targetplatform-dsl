@@ -129,6 +129,142 @@ class TestCompositeLocation {
 		
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
 		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
+	}
+	
+	@Test
+	def testLocationWithVarCallFromSubTpd2() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			define subTpdFile="subTpd.tpd"
+			include ${subTpdFile}
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("subdir", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
+	}
+	
+	@Test
+	def testLocationWithVarCallFromSubSubTpd() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subsubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subsubTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subsubTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("subdir", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
+		assertEquals(3, importedTargetPlatforms.size)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
+	}
+	
+	@Test
+	def testLocationWithVarDefintionOverride1() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subsubTpd.tpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subsubTpd"
+			define subDirName="wrongSubdir"
+		''', URI.createURI("tmp:/subsubTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("subdir", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
+	}
+	
+	@Test
+	def testLocationWithVarDefintionOverride2() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subsubTpd.tpd"
+			define subDirName="wrongSubdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subsubTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subsubTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(0, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("wrongSubdir", compositeImportURI.stringParts.head.actualString)
 	}
 }

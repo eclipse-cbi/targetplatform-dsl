@@ -43,9 +43,10 @@ class LocationIndexBuilder {
 		val ImportedDefineFromSubTpd = newHashSet()
 		val processedTargetPlatform = newLinkedList()
 		
-		var importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
-		while(importedTargetPlatforms.size > processedTargetPlatform.size) {
-			importedTargetPlatforms
+		var directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
+		
+		while(directlyImportedTargetPlatforms.size > processedTargetPlatform.size) {
+			directlyImportedTargetPlatforms
 				.filter[
 					!processedTargetPlatform.contains(it)
 				]
@@ -58,15 +59,51 @@ class LocationIndexBuilder {
 						}
 					]
 				]
-			val newlyProcessedTarget = importedTargetPlatforms
+			val newlyProcessedTarget = directlyImportedTargetPlatforms
 							.filter[
 								!processedTargetPlatform.contains(it)
 							]
 							.toSet
 			processedTargetPlatform.addAll(newlyProcessedTarget)
-			targetPlatform.contents.addAll(ImportedDefineFromSubTpd)
-			importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
+			mergeImportedDefine(targetPlatform, ImportedDefineFromSubTpd)
+			directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
 		}
+	}
+	
+	protected def List<TargetPlatform> searchDirectlyImportedTpd(TargetPlatform targetPlatform) {
+		targetPlatform.includes
+			.map[
+				getImportedTargetPlatform(targetPlatform.eResource, it)
+			]
+			.filter[
+				it !== null
+			]
+			.toList
+	}
+	
+	/*
+	 * "variable define" of deepest include are override by "define" of lowest level
+	 */
+	private def void mergeImportedDefine(TargetPlatform targetPlatform, Set<VarDefinition> ImportedDefineFromSubTpd) {
+		val toBeAddedDefine = newHashSet()
+		val targetContent = targetPlatform.contents
+		ImportedDefineFromSubTpd
+			.forEach[
+				val currentImportedDefine = it
+				var boolean toBeAdded = targetContent
+				.filter[
+					it instanceof VarDefinition
+				]
+				.forall[
+					val alreadyExistingDefine = it as VarDefinition
+					val varName = alreadyExistingDefine.name
+					!currentImportedDefine.name.equals(varName)
+				]
+				if (toBeAdded) {
+					toBeAddedDefine.add(currentImportedDefine)
+				}
+			]
+		targetContent.addAll(toBeAddedDefine)
 	}
 	
 	private def List<Location> getLocations(Set<TargetPlatform> visited, List<TargetPlatform> toBeVisited) {
