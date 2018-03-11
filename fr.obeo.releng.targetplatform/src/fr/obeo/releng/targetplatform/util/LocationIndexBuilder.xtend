@@ -40,19 +40,30 @@ class LocationIndexBuilder {
 	}
 	
 	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
+		val alreadyVisitedTarget = newHashSet()
+		searchAndAppendDefineFromIncludedTpd(targetPlatform, alreadyVisitedTarget)
+	}
+	
+	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform, Set<TargetPlatform> alreadyVisitedTarget) {
 		val ImportedDefineFromSubTpd = newHashSet()
 		val processedTargetPlatform = newLinkedList()
+		
+		alreadyVisitedTarget.add(targetPlatform)
 		
 		var directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
 		
 		while(directlyImportedTargetPlatforms.size > processedTargetPlatform.size) {
 			directlyImportedTargetPlatforms
 				.filter[
+					//Prevent of circular include
+					!alreadyVisitedTarget.contains(it)
+				]
+				.filter[
 					!processedTargetPlatform.contains(it)
 				]
 				.forEach[
 					var notProcessedTargetPlatform = it
-					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform)
+					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, newHashSet(alreadyVisitedTarget))
 					notProcessedTargetPlatform.contents.forEach[
 						if (it instanceof VarDefinition) {
 							ImportedDefineFromSubTpd.add(it)
@@ -177,6 +188,9 @@ class LocationIndexBuilder {
 	def checkIncludeCycle(TargetPlatform targetPlatform) {
 		val acc = newLinkedHashSet();
 		val s = newLinkedList();
+		
+		searchAndAppendDefineFromIncludedTpd(targetPlatform)
+		
 		return 
 			if (checkIncludeCycle(targetPlatform, acc, s)) {
 				s.reverse

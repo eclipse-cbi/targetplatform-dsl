@@ -34,7 +34,7 @@ class TestCompositeLocation {
 		val compositeIncludeTarget = parser.parse('''
 			target "compositeIncludeTarget"
 			include "subdir" "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subInclude"
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
@@ -61,7 +61,7 @@ class TestCompositeLocation {
 			target "compositeIncludeTarget"
 			define subDirName="subdir"
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subInclude"
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
@@ -85,7 +85,7 @@ class TestCompositeLocation {
 			define subDirName="subdir"
 			define tpdFilename="subInclude.tpd"
 			include ${subDirName} "/" ${tpdFilename}
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subInclude"
 			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
@@ -109,7 +109,7 @@ class TestCompositeLocation {
 			target "compositeIncludeTarget"
 			include "subTpd.tpd"
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"
 			define subDirName="subdir"
@@ -141,7 +141,7 @@ class TestCompositeLocation {
 			define subTpdFile="subTpd.tpd"
 			include ${subTpdFile}
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"
 			define subDirName="subdir"
@@ -172,7 +172,7 @@ class TestCompositeLocation {
 			target "compositeIncludeTarget"
 			include "subTpd.tpd"
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"
 			include "subsubTpd.tpd"
@@ -208,7 +208,7 @@ class TestCompositeLocation {
 			target "compositeIncludeTarget"
 			include "subTpd.tpd"
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"
 			include "subsubTpd.tpd"
@@ -244,7 +244,7 @@ class TestCompositeLocation {
 			target "compositeIncludeTarget"
 			include "subTpd.tpd"
 			include ${subDirName} "/" "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"
 			include "subsubTpd.tpd"
@@ -261,6 +261,38 @@ class TestCompositeLocation {
 			}
 		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
 		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(0, locationIndex.size)
+		
+		val compositeImportURI = compositeIncludeTarget.includes.last.compositeImportURI
+		assertEquals("wrongSubdir", compositeImportURI.stringParts.head.actualString)
+	}
+	
+	@Test
+	def testLocationGetLocationIndexCallmanyTimes() {
+		val resourceSet = resourceSetProvider.get
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subsubTpd.tpd"
+			define subDirName="wrongSubdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subsubTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subsubTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		indexBuilder.getLocationIndex(compositeIncludeTarget)
 		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
 		assertEquals(0, locationIndex.size)
 		

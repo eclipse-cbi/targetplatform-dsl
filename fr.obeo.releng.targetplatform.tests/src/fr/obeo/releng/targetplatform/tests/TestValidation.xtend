@@ -40,6 +40,7 @@ import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import org.junit.Ignore
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -1274,6 +1275,46 @@ class TestValidation {
 	}
 	
 	@Test
+	def checkImportCycleDueToVariableDefinition() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd.tpd"
+			include ${subDirName} "/" "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subsubTpd.tpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet);
+		val subIncludeCircular = parser.parse('''
+			target "subInclude"
+			include "../compositeIncludeTarget.tpd"
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		
+		assertTrue(compositeIncludeTarget.eResource.errors.empty)
+		tester.validator.checkImportCycle(compositeIncludeTarget)
+		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
+			assertEquals("subdir/subInclude.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
+		]
+		
+		assertTrue(subIncludeCircular.eResource.errors.empty)
+		tester.validator.checkImportCycle(subIncludeCircular)
+		diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(1, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
+		diagnotics.forEach[
+			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
+			assertEquals("../compositeIncludeTarget.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
+		]
+	}
+	
+	@Test
 	def checkIUIDAndRange1() {
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val targetPlatform = parser.parse('''
@@ -1797,7 +1838,7 @@ class TestValidation {
 			target "compositeIncludeTarget"
 			include "subTpd1.tpd"
 			include "subTpd2.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd1"
 			define twiceVar = "val1"
@@ -1827,7 +1868,7 @@ class TestValidation {
 			target "compositeIncludeTarget"
 			include "subTpd1.tpd"
 			define twiceVar = "val"
-		''', URI.createURI("tmp:/compositeIncludeTarget1.tpd"), resourceSet)
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd1"
 			define twiceVar = "val1"
