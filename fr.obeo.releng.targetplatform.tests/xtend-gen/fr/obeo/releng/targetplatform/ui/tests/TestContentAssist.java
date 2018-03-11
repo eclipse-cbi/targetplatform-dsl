@@ -943,4 +943,21 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testLocationVariableCallContentAssist() {
+    try {
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"compositeIncludeTarget1\"");
+      _builder.newLine();
+      _builder.append("define subDirName=\"subdir\"");
+      _builder.newLine();
+      _builder.append("include ${");
+      _builder.newLine();
+      _newBuilder.append(_builder.toString()).assertText("subDirName");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

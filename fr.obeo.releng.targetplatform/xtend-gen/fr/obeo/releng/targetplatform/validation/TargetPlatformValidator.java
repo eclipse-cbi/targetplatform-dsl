@@ -30,8 +30,10 @@ import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.Options;
+import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
@@ -134,6 +136,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS";
   
   public final static String CHECK__NO_DUPLICATED_IU = "CHECK__NO_DUPLICATED_IU";
+  
+  public final static String CHECK__NO_DUPLICATED_DEFINE = "CHECK__NO_DUPLICATED_DEFINE";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -1153,5 +1157,56 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     IterableExtensions.<IU>filter(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(targetPlatform.getLocations(), _function_5)), _function_6).forEach(_function_7);
+  }
+  
+  @Check
+  public void checkNoDuplicatedDefine(final TargetPlatform targetPlatform) {
+    final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+      @Override
+      public Boolean apply(final TargetContent it) {
+        return Boolean.valueOf((it instanceof VarDefinition));
+      }
+    };
+    final Function1<TargetContent, String> _function_1 = new Function1<TargetContent, String>() {
+      @Override
+      public String apply(final TargetContent it) {
+        String _xblockexpression = null;
+        {
+          final VarDefinition varDef = ((VarDefinition) it);
+          _xblockexpression = varDef.getName();
+        }
+        return _xblockexpression;
+      }
+    };
+    final List<String> varNameList = IterableExtensions.<String>toList(IterableExtensions.<String>sort(IterableExtensions.<TargetContent, String>map(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function), _function_1)));
+    for (int i = 1; (i < varNameList.size()); i++) {
+      int _compareTo = varNameList.get((i - 1)).compareTo(varNameList.get(i));
+      boolean _equals = (_compareTo == 0);
+      if (_equals) {
+        final String duplicatedVarName = varNameList.get((i - 1));
+        final String errString = (("\"" + duplicatedVarName) + "\" is defined many times (it may be imported through many includes)");
+        final Function1<TargetContent, Boolean> _function_2 = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            return Boolean.valueOf((it instanceof VarDefinition));
+          }
+        };
+        final Function1<TargetContent, Boolean> _function_3 = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            boolean _xblockexpression = false;
+            {
+              final VarDefinition varDef = ((VarDefinition) it);
+              int _compareTo = varDef.getName().compareTo(duplicatedVarName);
+              _xblockexpression = (_compareTo == 0);
+            }
+            return Boolean.valueOf(_xblockexpression);
+          }
+        };
+        final TargetContent findFirst = IterableExtensions.<TargetContent>findFirst(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function_2), _function_3);
+        final VarDefinition duplicatedVar = ((VarDefinition) findFirst);
+        this.warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(duplicatedVar), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
+      }
+    }
   }
 }

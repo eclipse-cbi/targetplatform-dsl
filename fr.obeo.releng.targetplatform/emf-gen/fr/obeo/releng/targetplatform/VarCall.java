@@ -50,7 +50,7 @@ public interface VarCall extends CompositeStringPart {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return \"\";'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return this.getVarName().getValue();'"
 	 * @generated
 	 */
 	String getActualString();

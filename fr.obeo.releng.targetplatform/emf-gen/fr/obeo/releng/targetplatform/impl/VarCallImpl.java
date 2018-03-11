@@ -161,7 +161,7 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 	 * @generated
 	 */
 	public String getActualString() {
-		return "";
+		return this.getVarName().getValue();
 	}
 
 	/**

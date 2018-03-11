@@ -19,7 +19,9 @@ import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.VarDefinition;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -41,6 +44,7 @@ public class LocationIndexBuilder {
   private ImportUriResolver resolver;
   
   public ListMultimap<String, Location> getLocationIndex(final TargetPlatform targetPlatform) {
+    this.searchAndAppendDefineFromIncludedTpd(targetPlatform);
     final List<Location> locationList = this.getLocations(
       CollectionLiterals.<TargetPlatform>newLinkedHashSet(targetPlatform), 
       CollectionLiterals.<TargetPlatform>newLinkedList(targetPlatform));
@@ -51,6 +55,119 @@ public class LocationIndexBuilder {
       }
     };
     return LinkedListMultimap.<String, Location>create(Multimaps.<String, Location>index(locationList, _function));
+  }
+  
+  private void searchAndAppendDefineFromIncludedTpd(final TargetPlatform targetPlatform) {
+    final HashSet<TargetPlatform> alreadyVisitedTarget = CollectionLiterals.<TargetPlatform>newHashSet();
+    this.searchAndAppendDefineFromIncludedTpd(targetPlatform, alreadyVisitedTarget);
+  }
+  
+  private void searchAndAppendDefineFromIncludedTpd(final TargetPlatform targetPlatform, final Set<TargetPlatform> alreadyVisitedTarget) {
+    final HashSet<VarDefinition> ImportedDefineFromSubTpd = CollectionLiterals.<VarDefinition>newHashSet();
+    final LinkedList<TargetPlatform> processedTargetPlatform = CollectionLiterals.<TargetPlatform>newLinkedList();
+    alreadyVisitedTarget.add(targetPlatform);
+    List<TargetPlatform> directlyImportedTargetPlatforms = this.searchDirectlyImportedTpd(targetPlatform);
+    while ((directlyImportedTargetPlatforms.size() > processedTargetPlatform.size())) {
+      {
+        final Function1<TargetPlatform, Boolean> _function = new Function1<TargetPlatform, Boolean>() {
+          @Override
+          public Boolean apply(final TargetPlatform it) {
+            boolean _contains = alreadyVisitedTarget.contains(it);
+            return Boolean.valueOf((!_contains));
+          }
+        };
+        final Function1<TargetPlatform, Boolean> _function_1 = new Function1<TargetPlatform, Boolean>() {
+          @Override
+          public Boolean apply(final TargetPlatform it) {
+            boolean _contains = processedTargetPlatform.contains(it);
+            return Boolean.valueOf((!_contains));
+          }
+        };
+        final Consumer<TargetPlatform> _function_2 = new Consumer<TargetPlatform>() {
+          @Override
+          public void accept(final TargetPlatform it) {
+            TargetPlatform notProcessedTargetPlatform = it;
+            LocationIndexBuilder.this.searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
+            final Consumer<TargetContent> _function = new Consumer<TargetContent>() {
+              @Override
+              public void accept(final TargetContent it) {
+                if ((it instanceof VarDefinition)) {
+                  ImportedDefineFromSubTpd.add(((VarDefinition)it));
+                }
+              }
+            };
+            notProcessedTargetPlatform.getContents().forEach(_function);
+          }
+        };
+        IterableExtensions.<TargetPlatform>filter(IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function), _function_1).forEach(_function_2);
+        final Function1<TargetPlatform, Boolean> _function_3 = new Function1<TargetPlatform, Boolean>() {
+          @Override
+          public Boolean apply(final TargetPlatform it) {
+            boolean _contains = processedTargetPlatform.contains(it);
+            return Boolean.valueOf((!_contains));
+          }
+        };
+        final Set<TargetPlatform> newlyProcessedTarget = IterableExtensions.<TargetPlatform>toSet(IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function_3));
+        processedTargetPlatform.addAll(newlyProcessedTarget);
+        this.mergeImportedDefine(targetPlatform, ImportedDefineFromSubTpd);
+        directlyImportedTargetPlatforms = this.searchDirectlyImportedTpd(targetPlatform);
+      }
+    }
+  }
+  
+  protected List<TargetPlatform> searchDirectlyImportedTpd(final TargetPlatform targetPlatform) {
+    final Function1<IncludeDeclaration, TargetPlatform> _function = new Function1<IncludeDeclaration, TargetPlatform>() {
+      @Override
+      public TargetPlatform apply(final IncludeDeclaration it) {
+        return LocationIndexBuilder.this.getImportedTargetPlatform(targetPlatform.eResource(), it);
+      }
+    };
+    final Function1<TargetPlatform, Boolean> _function_1 = new Function1<TargetPlatform, Boolean>() {
+      @Override
+      public Boolean apply(final TargetPlatform it) {
+        return Boolean.valueOf((it != null));
+      }
+    };
+    return IterableExtensions.<TargetPlatform>toList(IterableExtensions.<TargetPlatform>filter(ListExtensions.<IncludeDeclaration, TargetPlatform>map(targetPlatform.getIncludes(), _function), _function_1));
+  }
+  
+  /**
+   * "variable define" of deepest include are override by "define" of lowest level
+   */
+  private void mergeImportedDefine(final TargetPlatform targetPlatform, final Set<VarDefinition> ImportedDefineFromSubTpd) {
+    final HashSet<VarDefinition> toBeAddedDefine = CollectionLiterals.<VarDefinition>newHashSet();
+    final EList<TargetContent> targetContent = targetPlatform.getContents();
+    final Consumer<VarDefinition> _function = new Consumer<VarDefinition>() {
+      @Override
+      public void accept(final VarDefinition it) {
+        final VarDefinition currentImportedDefine = it;
+        final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            return Boolean.valueOf((it instanceof VarDefinition));
+          }
+        };
+        final Function1<TargetContent, Boolean> _function_1 = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            boolean _xblockexpression = false;
+            {
+              final VarDefinition alreadyExistingDefine = ((VarDefinition) it);
+              final String varName = alreadyExistingDefine.getName();
+              boolean _equals = currentImportedDefine.getName().equals(varName);
+              _xblockexpression = (!_equals);
+            }
+            return Boolean.valueOf(_xblockexpression);
+          }
+        };
+        boolean toBeAdded = IterableExtensions.<TargetContent>forall(IterableExtensions.<TargetContent>filter(targetContent, _function), _function_1);
+        if (toBeAdded) {
+          toBeAddedDefine.add(currentImportedDefine);
+        }
+      }
+    };
+    ImportedDefineFromSubTpd.forEach(_function);
+    targetContent.addAll(toBeAddedDefine);
   }
   
   private List<Location> getLocations(final Set<TargetPlatform> visited, final List<TargetPlatform> toBeVisited) {
@@ -155,6 +272,7 @@ public class LocationIndexBuilder {
   public List<TargetPlatform> checkIncludeCycle(final TargetPlatform targetPlatform) {
     final LinkedHashSet<TargetPlatform> acc = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
     final LinkedList<TargetPlatform> s = CollectionLiterals.<TargetPlatform>newLinkedList();
+    this.searchAndAppendDefineFromIncludedTpd(targetPlatform);
     List<TargetPlatform> _xifexpression = null;
     boolean _checkIncludeCycle = this.checkIncludeCycle(targetPlatform, acc, s);
     if (_checkIncludeCycle) {
