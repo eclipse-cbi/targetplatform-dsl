@@ -24,6 +24,7 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import fr.obeo.releng.targetplatform.TargetPlatformFactory
 
 class LocationIndexBuilder {
 	
@@ -36,7 +37,7 @@ class LocationIndexBuilder {
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
 		)
-		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+		return LinkedListMultimap.create(Multimaps.index(locationList, [compositeUri.computeActualString]))
 	}
 	
 	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
@@ -111,7 +112,10 @@ class LocationIndexBuilder {
 					!currentImportedDefine.name.equals(varName)
 				]
 				if (toBeAdded) {
-					toBeAddedDefine.add(currentImportedDefine)
+					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
+					currentImportedDefineCopy.name = currentImportedDefine.name
+					currentImportedDefineCopy.value = currentImportedDefine.value
+					toBeAddedDefine.add(currentImportedDefineCopy)
 				}
 			]
 		targetContent.addAll(toBeAddedDefine)

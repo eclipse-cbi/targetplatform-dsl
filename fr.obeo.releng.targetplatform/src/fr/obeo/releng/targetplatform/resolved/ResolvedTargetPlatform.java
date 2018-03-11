@@ -103,7 +103,7 @@ public class ResolvedTargetPlatform {
 				}
 			}
 			Location firstLocation = locationIndex.get(locationUri).get(0);
-			ResolvedLocation resolvedLocation = new ResolvedLocation(firstLocation.getID(), firstLocation.getUri(), ius, getOptionSet(firstLocation.getOptions()));
+			ResolvedLocation resolvedLocation = new ResolvedLocation(firstLocation.getID(), firstLocation.getCompositeUri().computeActualString(), ius, getOptionSet(firstLocation.getOptions()));
 			locations.addFirst(resolvedLocation);
 		}
 		

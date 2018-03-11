@@ -36,7 +36,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 
 	def text(Location object) {
 		val ss = new StyledString();
-		ss.append(object.getUri());
+		ss.append(object.compositeUri.computeActualString());
 		if (object.getID() != null) {
 			ss.append(" " + object.getID(), StyledString.DECORATIONS_STYLER);
 		}

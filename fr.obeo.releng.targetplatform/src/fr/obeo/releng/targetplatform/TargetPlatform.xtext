@@ -49,7 +49,7 @@ IncludeDeclaration:
 ;
 
 Location:
-	'location' ((ID=ID)? & uri=STRING) ('{'
+	'location' ((ID=ID)? & compositeUri=CompositeString) ('{'
 		('with' options+=Option (','? options+=Option)*)?
 		ius+=IU*
 	'}')?

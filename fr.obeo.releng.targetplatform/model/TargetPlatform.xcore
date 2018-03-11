@@ -162,7 +162,7 @@ type ExecutionEnvironment wraps org.eclipse.jdt.launching.environments.IExecutio
 
 class Location extends TargetContent {
 	String ID
-	String uri
+	contains CompositeString compositeUri
 	Option[] options
 	contains IU[] ius opposite location
 }

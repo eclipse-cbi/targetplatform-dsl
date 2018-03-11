@@ -40,7 +40,6 @@ import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
-import org.junit.Ignore
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -81,7 +80,7 @@ class TestValidation {
 		tester.validator.checkAllEnvAndRequiredAreSelfExluding(fisrtLocation)
 		for (diag: tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic))) {
 			assertTrue(diag.sourceEObject instanceof Location)
-			assertEquals("my location URI", (diag.sourceEObject as Location).uri)
+			assertEquals("my location URI", (diag.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, 
 				diag.issueCode
 			)
@@ -189,8 +188,8 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, issueCode)
 		]
-		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).uri)
-		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).uri)
+		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
+		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -210,8 +209,8 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, issueCode)
 		]
-		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).uri)
-		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).uri)
+		assertEquals("mylocationURI2", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
+		assertEquals("mylocationURI", (diagnotics.get(1).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -297,7 +296,7 @@ class TestValidation {
 		
 		assertTrue(diagnotics.get(0).sourceEObject instanceof Location)
 		assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, diagnotics.get(0).issueCode)
-		assertEquals("locationURI1", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("locationURI1", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
 		
 		assertTrue(diagnotics.get(1).sourceEObject instanceof IncludeDeclaration)
 		assertEquals(TargetPlatformValidator::CHECK__LOCATION_ID_UNIQNESS, diagnotics.get(1).issueCode)
@@ -363,7 +362,7 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, issueCode)
 		]
-		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -395,7 +394,7 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, issueCode)
 		]
-		assertEquals("mylocationURI1", (diagnotics.head.sourceEObject as Location).uri)
+		assertEquals("mylocationURI1", (diagnotics.head.sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -487,8 +486,8 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__OPTIONS_EQUALS_ALL_LOCATIONS, issueCode)
 		]
-		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).uri)
-		assertEquals("mylocationURI2", (diagnotics.get(1).sourceEObject as Location).uri)
+		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
+		assertEquals("mylocationURI2", (diagnotics.get(1).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -547,7 +546,7 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::DEPRECATE__OPTIONS_ON_LOCATIONS, issueCode)
 		]
-		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -565,7 +564,7 @@ class TestValidation {
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::DEPRECATE__OPTIONS_ON_LOCATIONS, issueCode)
 		]
-		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).uri)
+		assertEquals("mylocationURI1", (diagnotics.get(0).sourceEObject as Location).compositeUri.computeActualString)
 	}
 	
 	@Test
@@ -702,7 +701,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("mylocationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("mylocationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 		]
 	}
 	
@@ -721,7 +720,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("mylocationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("mylocationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 		]
 	}
 	
@@ -824,7 +823,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/a.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 	}
@@ -850,7 +849,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/a.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 	}
@@ -937,7 +936,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/b.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 		
@@ -984,7 +983,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/b.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 		
@@ -1031,7 +1030,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/b.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 		
@@ -1103,7 +1102,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/b.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 		
@@ -1150,7 +1149,7 @@ class TestValidation {
 		assertTrue(diagnotics.forall[sourceEObject instanceof Location])
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, issueCode)
-			assertEquals("locationURI1", (it.sourceEObject as Location).uri)
+			assertEquals("locationURI1", (it.sourceEObject as Location).compositeUri.computeActualString)
 			assertEquals("tmp:/b.tpd", (it.sourceEObject as Location).eResource.URI.toString)
 		]
 		
@@ -1449,7 +1448,7 @@ class TestValidation {
 		assertEquals(1, diagnotics.size)
 		diagnotics.forEach[
 			assertEquals(TargetPlatformValidator::CHECK__LOCATION_URI, issueCode)
-			assertEquals("badLocation", (it.sourceEObject as Location).uri)
+			assertEquals("badLocation", (it.sourceEObject as Location).compositeUri.computeActualString)
 		]
 	}
 	

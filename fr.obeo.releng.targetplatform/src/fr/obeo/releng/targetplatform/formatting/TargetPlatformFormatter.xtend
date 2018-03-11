@@ -42,7 +42,7 @@ class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
     	}
     	
     	c.setNoLinewrap.around(locationAccess.IDAssignment_1_0)
-    	c.setNoLinewrap.around(locationAccess.uriAssignment_1_1)
+    	c.setNoLinewrap.around(locationAccess.compositeUriAssignment_1_1)
 		
 		c.setLinewrap(1, 1, 2).before(includeDeclarationAccess.includeKeyword_0)
 		
