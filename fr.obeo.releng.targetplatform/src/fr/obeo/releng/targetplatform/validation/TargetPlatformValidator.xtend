@@ -104,6 +104,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
+		location.resolveUri()
 		val options = location.options
 		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
 			doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
@@ -145,6 +146,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkNoLocationOptionIfGlobalOptions(Location location) {
+		location.resolveUri()
 		if (!location.options.empty && !location.targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
@@ -157,6 +159,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check // TESTED
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
 		if (targetPlatform.options.empty) { // else do not check as it is another error.
+			indexBuilder.resolveCompositeElements(targetPlatform)
 			val listOptions = targetPlatform.locations
 			val first = listOptions.head
 			val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
@@ -180,6 +183,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateOptionsOnLocation(Location location) {
+		location.resolveUri()
 		val targetPlatform = location.targetPlatform
 		
 		if (targetPlatform.options.empty && !location.options.empty) {
@@ -218,7 +222,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val locationsWithoutConflictingID = locationsURIWithoutConflictingID.map[locationsByURI.get(it)].flatten
 		
 		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!=null], [ID])
-		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[compositeUri.computeActualString].toSet.size > 1].values.flatten
+		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[uri].toSet.size > 1].values.flatten
 		locationsWithDuplicateID.forEach[location|
 			if (location.eResource == resource) {
 				error('ID must be unique for each location', 
@@ -299,7 +303,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					''';
 					
 					internalLocations.filter[!externalIDs.contains(Strings.nullToEmpty(ID))].forEach[
-						error(msg, it, TargetPlatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.compositeUri.computeActualString)
+						error(msg, it, TargetPlatformPackage.Literals.LOCATION__ID, CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, externalIDs.head, externalLocations.head.uri)
 					]
 				}
 			} 
@@ -315,6 +319,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
+		location.resolveUri()
 		val monitor = 
 			if (context != null && context.get(typeof(IProgressMonitor)) != null) {
 				context.get(typeof(IProgressMonitor)) as IProgressMonitor
@@ -322,15 +327,15 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				new NullProgressMonitor
 			}
 		
-		if (!location.compositeUri.computeActualString.nullOrEmpty) {
+		if (!location.uri.nullOrEmpty) {
 			val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 			try {
-				repositoryManager.loadRepository(new URI(location.compositeUri.computeActualString), monitor)
+				repositoryManager.loadRepository(new URI(location.uri), monitor)
 			} catch (Exception e) {
 				if (e.message.nullOrEmpty) {
-					error('''Error occured while loading p2 repository at '«location.compositeUri.computeActualString»'.''', location, TargetPlatformPackage.Literals.LOCATION__COMPOSITE_URI, CHECK__LOCATION_URI)					
+					error('''Error occured while loading p2 repository at '«location.uri»'.''', location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)					
 				} else {
-					error(e.message, location, TargetPlatformPackage.Literals.LOCATION__COMPOSITE_URI, CHECK__LOCATION_URI)					
+					error(e.message, location, TargetPlatformPackage.Literals.LOCATION__URI, CHECK__LOCATION_URI)					
 				}
 			}
 		}
@@ -340,10 +345,10 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	def checkIUIDAndRangeInRepository(IU iu) {
 		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 		try {
-			val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.compositeUri.computeActualString), new NullProgressMonitor)
+			val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
 			val idResults = metadataRepository.query(QueryUtil.createIUQuery(iu.ID), new NullProgressMonitor).toUnmodifiableSet()
 			if (idResults.empty) {
-				error('''No installable unit with ID '«iu.ID»' can be found in '«iu.location.compositeUri.computeActualString»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
+				error('''No installable unit with ID '«iu.ID»' can be found in '«iu.location.uri»'.''', iu, TargetPlatformPackage.Literals.IU__ID, CHECK__IU_IN_LOCATION)
 			} else if (!iu.version.nullOrEmpty && !"lazy".equals(iu.version)) {
 				val versionResult = metadataRepository.query(QueryUtil.createQuery("latest(x | x.id == $0 && x.version ~= $1)", iu.ID, new VersionRange(iu.version)), new NullProgressMonitor)
 				if (versionResult.empty) {
@@ -486,7 +491,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		targetPlatform.locations.map[ius].flatten
 			.filter[importedIUsID.contains(ID) || localIUsID.count(ID) > 1].
 			forEach[entry|
-				val localLocationsWithDup = targetPlatform.locations.filter[ius.map[ID].contains(entry.ID)].map[compositeUri.computeActualString].toSet
+				val localLocationsWithDup = targetPlatform.locations.filter[ius.map[ID].contains(entry.ID)].map[uri].toSet
 				val importedTPsWithDup = importedIUs.filter[ID.equals(entry.ID)].map[eResource.URI].toSet
 				
 				val msg = if (importedIUsID.contains(entry.ID)) {

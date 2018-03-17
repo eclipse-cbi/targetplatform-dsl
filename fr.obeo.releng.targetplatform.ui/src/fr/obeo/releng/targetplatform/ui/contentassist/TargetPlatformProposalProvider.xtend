@@ -285,7 +285,8 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
-			val uri = location.compositeUri.computeActualString
+			location.resolveUri
+			val uri = location.uri
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val IRunnableWithProgress op = [monitor|
 				val wpm = SubMonitor.convert(new ReadAndDispatchProgressMonitorWrapper(monitor, window.shell.display), "Creating content assist for " + uri, 100)
@@ -332,13 +333,14 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
-			val uri = iu.location.compositeUri.computeActualString
+			val location = iu.location
+			location.resolveUri
+			val uri = location.uri
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)
 		}
 	}
-	
 	
 	override completeLocation_ID(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val docText = context.viewer.document.get

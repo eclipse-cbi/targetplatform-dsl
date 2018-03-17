@@ -112,11 +112,11 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    "Set other locations with the same URI to the same ID.", null) [
 	    	element, context | 
 	    		val id = (element as Location).ID;
-	    		val uri = (element as Location).compositeUri.computeActualString;
+	    		val uri = (element as Location).uri;
 	    		if (uri != null) {
 	    			val location = element as Location
 		    		location.targetPlatform.locations
-		    			.filter[uri != null && uri.equals(it.compositeUri.computeActualString)]
+		    			.filter[uri != null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    		}
 	    ]
@@ -132,7 +132,7 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    		val uri = issue.data.get(1);
 	    		val location = element as Location
 	    		location.targetPlatform.locations
-		    			.filter[uri != null && uri.equals(it.compositeUri.computeActualString)]
+		    			.filter[uri != null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    ]
 	}

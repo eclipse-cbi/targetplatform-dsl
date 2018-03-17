@@ -47,7 +47,7 @@ class TestCompositeLocation {
 		
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 		assertEquals("org.eclipse.emf.sdk.feature.group", targetPlatform.locations.last.ius.last.ID)
 		
 		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
@@ -74,7 +74,7 @@ class TestCompositeLocation {
 		
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -99,7 +99,7 @@ class TestCompositeLocation {
 		
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -130,7 +130,7 @@ class TestCompositeLocation {
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -162,7 +162,7 @@ class TestCompositeLocation {
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -198,7 +198,7 @@ class TestCompositeLocation {
 		assertEquals(3, importedTargetPlatforms.size)
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -234,7 +234,7 @@ class TestCompositeLocation {
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 	
 	@Test
@@ -315,7 +315,7 @@ class TestCompositeLocation {
 		val locationIndex = indexBuilder.getLocationIndex(compositeLocationTarget)
 		assertEquals(1, locationIndex.size)
 		
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", compositeLocationTarget.locations.head.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", compositeLocationTarget.locations.head.uri)
 	}
 	
 	@Test
@@ -334,7 +334,7 @@ class TestCompositeLocation {
 		val locationIndex = indexBuilder.getLocationIndex(compositeLocationTarget)
 		assertEquals(1, locationIndex.size)
 		
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", compositeLocationTarget.locations.head.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", compositeLocationTarget.locations.head.uri)
 	}
 	
 	@Test
@@ -363,6 +363,6 @@ class TestCompositeLocation {
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val targetPlatform = importedTargetPlatforms.first
 		assertEquals("subInclude", targetPlatform.name)
-		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.compositeUri.computeActualString)
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetPlatform.locations.last.uri)
 	}
 }

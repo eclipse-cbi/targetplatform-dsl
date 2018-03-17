@@ -17,6 +17,7 @@ import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.TargetPlatformFactory
 import fr.obeo.releng.targetplatform.VarDefinition
 import java.util.LinkedList
 import java.util.List
@@ -24,7 +25,6 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
-import fr.obeo.releng.targetplatform.TargetPlatformFactory
 
 class LocationIndexBuilder {
 	
@@ -32,12 +32,33 @@ class LocationIndexBuilder {
 	ImportUriResolver resolver;
 	
 	def ListMultimap<String, Location> getLocationIndex(TargetPlatform targetPlatform) {
-		searchAndAppendDefineFromIncludedTpd(targetPlatform)
+		resolveCompositeElements(targetPlatform)
+		
 		val locationList = getLocations(
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
 		)
-		return LinkedListMultimap.create(Multimaps.index(locationList, [compositeUri.computeActualString]))
+		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+	}
+	
+	def void resolveCompositeElements(TargetPlatform targetPlatform) {
+		if (targetPlatform.compositeElementsResolved == true) {
+			return
+		}
+		
+		searchAndAppendDefineFromIncludedTpd(targetPlatform)
+		resolveLocations(targetPlatform)
+		val importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
+		importedTargetPlatforms.forEach[
+			resolveLocations(it)
+		]
+	}
+	
+	private def void resolveLocations(TargetPlatform targetPlatform) {
+		targetPlatform.locations.forEach[
+			it.resolveUri
+		]
+		targetPlatform.compositeElementsResolved = true
 	}
 	
 	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
@@ -82,7 +103,7 @@ class LocationIndexBuilder {
 		}
 	}
 	
-	protected def List<TargetPlatform> searchDirectlyImportedTpd(TargetPlatform targetPlatform) {
+	private def List<TargetPlatform> searchDirectlyImportedTpd(TargetPlatform targetPlatform) {
 		targetPlatform.includes
 			.map[
 				getImportedTargetPlatform(targetPlatform.eResource, it)
@@ -169,6 +190,7 @@ class LocationIndexBuilder {
 	 * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E 
 	 */
 	def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
+		resolveCompositeElements(targetPlatform)
 		val visited = newLinkedHashSet();
 		val queue = newLinkedList();
 		val includeRet = newLinkedList();
@@ -190,6 +212,7 @@ class LocationIndexBuilder {
 	}
 
 	def checkIncludeCycle(TargetPlatform targetPlatform) {
+		resolveCompositeElements(targetPlatform)
 		val acc = newLinkedHashSet();
 		val s = newLinkedList();
 		

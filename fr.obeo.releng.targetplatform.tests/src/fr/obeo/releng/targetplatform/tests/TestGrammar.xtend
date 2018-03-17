@@ -59,7 +59,8 @@ class TestGrammar {
 		''')
 		assertTrue(targetPlatform.eResource.errors.join("\n"), targetPlatform.eResource.errors.empty)
 		val fisrtLocation = targetPlatform.locations.head
-		assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", fisrtLocation.compositeUri.computeActualString)
+		fisrtLocation.resolveUri
+		assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", fisrtLocation.uri)
 		assertEquals(2, fisrtLocation.ius.size)
 		val iu0 = fisrtLocation.ius.head
 		assertEquals("org.eclipse.emf.sdk.feature.group", iu0.ID)
@@ -70,7 +71,8 @@ class TestGrammar {
 		assertEquals("10.0.1", iu1.version)
 		
 		val lastLocation = targetPlatform.locations.last
-		assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/", lastLocation.compositeUri.computeActualString())
+		lastLocation.resolveUri
+		assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/", lastLocation.uri)
 		assertEquals(1, lastLocation.ius.size)
 		val uml2iu = lastLocation.ius.head
 		assertEquals("org.eclipse.uml2.sdk.feature.group", uml2iu.ID)

@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
 import org.eclipse.jdt.launching.JavaRuntime
 
 class TargetPlatform {
+	boolean compositeElementsResolved = "false"
 	String name
 	contains TargetContent[] contents opposite targetPlatform  
 	refers derived IncludeDeclaration[] includes get {
@@ -162,9 +163,17 @@ type ExecutionEnvironment wraps org.eclipse.jdt.launching.environments.IExecutio
 
 class Location extends TargetContent {
 	String ID
+	String uri
 	contains CompositeString compositeUri
 	Option[] options
 	contains IU[] ius opposite location
+	
+	op void resolveUri() {
+		if (uri !== null) {
+			return
+		}
+		uri = compositeUri.computeActualString
+	}
 }
 
 class IncludeDeclaration extends TargetContent {
