@@ -131,6 +131,11 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 
 	override completeTargetPlatform_Contents(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val lastNodeTxt = context.lastCompleteNode.text
+		if (lastNodeTxt == "location") {
+			// Discard TP contents if inside a location declaration
+			return
+		}
 		val text = 
 			if (context.currentNode.text.length >= currentNodeSizeToCursor) 
 				context.currentNode.text.substring(0, currentNodeSizeToCursor)
