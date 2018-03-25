@@ -1280,7 +1280,7 @@ class TestValidation {
 		val compositeIncludeTarget = parser.parse('''
 			target "compositeIncludeTarget"
 			include "subTpd.tpd"
-			include ${subDirName} "/" "subInclude.tpd"
+			include ${subDirName} + "/" + "subInclude.tpd"
 		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
 		parser.parse('''
 			target "subTpd"

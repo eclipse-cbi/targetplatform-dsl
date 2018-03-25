@@ -29,7 +29,7 @@ VarDefinition:
 
 CompositeString:
 	{CompositeString}
-	stringParts+=CompositeStringPart*
+	stringParts+=CompositeStringPart ('+' stringParts+=CompositeStringPart)*
 ;
 
 CompositeStringPart:
