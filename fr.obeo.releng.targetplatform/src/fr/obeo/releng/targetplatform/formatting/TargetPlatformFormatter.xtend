@@ -51,8 +51,9 @@ class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1, 1, 2).after(targetPlatformAccess.contentsAssignment_2)
 		
 		c.setLinewrap.before(IUAccess.IDAssignment_0)
-		c.setNoLinewrap.before(IUAccess.versionAssignment_1_1_0)
-		c.setNoLinewrap.before(IUAccess.versionAssignment_1_1_1)
+		c.setNoLinewrap.before(IUAccess.versionAssignment_1_1_0_0)
+		c.setNoLinewrap.before(IUAccess.versionAssignment_1_1_0_1)
+		c.setNoLinewrap.before(IUAccess.varVersionAssignment_1_1_1)
 		c.setNoSpace.around(IUAccess.semicolonKeyword_1_0_0)
 		c.setNoSpace.around(IUAccess.equalsSignKeyword_1_0_2)
 		

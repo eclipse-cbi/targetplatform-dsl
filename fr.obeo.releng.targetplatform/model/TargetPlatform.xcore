@@ -190,6 +190,7 @@ class IncludeDeclaration extends TargetContent {
 class IU {
 	String ID
 	String version
+	contains VarCall varVersion
 	container Location location opposite ius
 }
 
