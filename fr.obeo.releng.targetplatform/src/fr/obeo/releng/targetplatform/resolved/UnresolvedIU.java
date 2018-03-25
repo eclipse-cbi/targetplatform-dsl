@@ -26,7 +26,17 @@ public class UnresolvedIU {
 		if ("lazy".equalsIgnoreCase(versionRange)) {
 			this.versionRange = LAZY_RANGE;
 		} else {
-			this.versionRange = new VersionRange(versionRange);
+			VersionRange versionRangeTemp = null;
+			try {
+				versionRangeTemp = new VersionRange(versionRange);
+			} catch (IllegalArgumentException e) {
+				//Add information on error to help user to solve the problem
+				//Do not add throwable cause to exception otherwise,
+				//this is only the root cause (less expressive) that will be displayed to user
+				throw new IllegalArgumentException("Erroneous IU version range (possibly due to variable call): (id="
+						+ id + " ; version=" + versionRange + ")");
+			}
+			this.versionRange = versionRangeTemp;
 		}
 		this.id = id;
 		this.query = createQuery();
