@@ -4,6 +4,8 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
+import fr.obeo.releng.targetplatform.VarCall
+import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.InjectWith
@@ -14,8 +16,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import fr.obeo.releng.targetplatform.VarCall
-import fr.obeo.releng.targetplatform.VarDefinition
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -425,5 +425,35 @@ class TestCompositeLocation {
 		val sixthIU = location.ius.get(5)
 		assertEquals("org.eclipse.emf.codegen.ecore.xtext.source", sixthIU.ID);
 		assertEquals("erroneousVersion", sixthIU.version);
+	}
+	
+	@Test
+	def testIUVersionFromSubTpd() {
+		val resourceSet = resourceSetProvider.get
+		val uiVersionTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subInclude.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define locationUrlBase="http://download.eclipse.org/"
+			define emf.version="[2.10.0,3.0.0)"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			include "subTpd.tpd"
+			location ${locationUrlBase} + "modeling/emf/emf/updates/2.9.x/" {
+				org.eclipse.emf.sdk.feature.group ${emf.version}
+			}
+		''', URI.createURI("tmp:/subInclude.tpd"), resourceSet)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(uiVersionTarget)
+		val location = importedTargetPlatforms.head.locations.head
+		
+		assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/", location.uri)
+		
+		val iu = location.ius.get(0)
+		assertEquals("org.eclipse.emf.sdk.feature.group", iu.ID);
+		assertEquals("[2.10.0,3.0.0)", iu.version);
 	}
 }
