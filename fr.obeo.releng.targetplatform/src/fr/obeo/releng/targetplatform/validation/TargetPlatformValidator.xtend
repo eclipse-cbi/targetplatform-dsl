@@ -47,6 +47,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 
 /**
  * Custom validation rules. 
@@ -57,6 +58,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	@Inject
 	LocationIndexBuilder indexBuilder;
+	
+	@Inject
+	CompositeElementResolver compositeElementResolver;
 	
 	@Inject
 	IProvisioningAgent provisioningAgent;
@@ -159,7 +163,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check // TESTED
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
 		if (targetPlatform.options.empty) { // else do not check as it is another error.
-			indexBuilder.resolveCompositeElements(targetPlatform)
+			compositeElementResolver.resolveCompositeElements(targetPlatform)
 			val listOptions = targetPlatform.locations
 			val first = listOptions.head
 			val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]

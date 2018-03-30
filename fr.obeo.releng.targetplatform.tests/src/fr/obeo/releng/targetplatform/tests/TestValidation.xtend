@@ -40,6 +40,7 @@ import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -59,6 +60,9 @@ class TestValidation {
 	
 	@Inject
 	LocationIndexBuilder indexBuilder
+	
+	@Inject
+	CompositeElementResolver compositeElementResolver
 	
 	@Inject
 	@Named(Constants::LANGUAGE_NAME)
@@ -1323,7 +1327,7 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		indexBuilder.resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(0, diagnotics.size)
@@ -1339,7 +1343,7 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		indexBuilder.resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(1, diagnotics.size)
@@ -1364,7 +1368,7 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		indexBuilder.resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(3, diagnotics.size)
@@ -1384,7 +1388,7 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		indexBuilder.resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(0, diagnotics.size)
@@ -1400,7 +1404,7 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		indexBuilder.resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(1, diagnotics.size)

@@ -31,116 +31,17 @@ class LocationIndexBuilder {
 	@Inject
 	ImportUriResolver resolver;
 	
+	@Inject
+	CompositeElementResolver compositeElementResolver
+	
 	def ListMultimap<String, Location> getLocationIndex(TargetPlatform targetPlatform) {
-		resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		
 		val locationList = getLocations(
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
 		)
 		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
-	}
-	
-	def void resolveCompositeElements(TargetPlatform targetPlatform) {
-		if (targetPlatform.compositeElementsResolved == true) {
-			return
-		}
-		
-		searchAndAppendDefineFromIncludedTpd(targetPlatform)
-		resolveLocations(targetPlatform)
-		val importedTargetPlatforms = getImportedTargetPlatforms(targetPlatform)
-		importedTargetPlatforms.forEach[
-			resolveLocations(it)
-		]
-	}
-	
-	private def void resolveLocations(TargetPlatform targetPlatform) {
-		targetPlatform.locations.forEach[
-			it.resolveUri
-			it.resolveIUsVersion
-		]
-		targetPlatform.compositeElementsResolved = true
-	}
-	
-	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
-		val alreadyVisitedTarget = newHashSet()
-		searchAndAppendDefineFromIncludedTpd(targetPlatform, alreadyVisitedTarget)
-	}
-	
-	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform, Set<TargetPlatform> alreadyVisitedTarget) {
-		val ImportedDefineFromSubTpd = newHashSet()
-		val processedTargetPlatform = newLinkedList()
-		
-		alreadyVisitedTarget.add(targetPlatform)
-		
-		var directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
-		
-		while(directlyImportedTargetPlatforms.size > processedTargetPlatform.size) {
-			directlyImportedTargetPlatforms
-				.filter[
-					//Prevent of circular include
-					!alreadyVisitedTarget.contains(it)
-				]
-				.filter[
-					!processedTargetPlatform.contains(it)
-				]
-				.forEach[
-					var notProcessedTargetPlatform = it
-					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, newHashSet(alreadyVisitedTarget))
-					notProcessedTargetPlatform.contents.forEach[
-						if (it instanceof VarDefinition) {
-							ImportedDefineFromSubTpd.add(it)
-						}
-					]
-				]
-			val newlyProcessedTarget = directlyImportedTargetPlatforms
-							.filter[
-								!processedTargetPlatform.contains(it)
-							]
-							.toSet
-			processedTargetPlatform.addAll(newlyProcessedTarget)
-			mergeImportedDefine(targetPlatform, ImportedDefineFromSubTpd)
-			directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
-		}
-	}
-	
-	private def List<TargetPlatform> searchDirectlyImportedTpd(TargetPlatform targetPlatform) {
-		targetPlatform.includes
-			.map[
-				getImportedTargetPlatform(targetPlatform.eResource, it)
-			]
-			.filter[
-				it !== null
-			]
-			.toList
-	}
-	
-	/*
-	 * "variable define" of deepest include are override by "define" of lowest level
-	 */
-	private def void mergeImportedDefine(TargetPlatform targetPlatform, Set<VarDefinition> ImportedDefineFromSubTpd) {
-		val toBeAddedDefine = newHashSet()
-		val targetContent = targetPlatform.contents
-		ImportedDefineFromSubTpd
-			.forEach[
-				val currentImportedDefine = it
-				var boolean toBeAdded = targetContent
-				.filter[
-					it instanceof VarDefinition
-				]
-				.forall[
-					val alreadyExistingDefine = it as VarDefinition
-					val varName = alreadyExistingDefine.name
-					!currentImportedDefine.name.equals(varName)
-				]
-				if (toBeAdded) {
-					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
-					currentImportedDefineCopy.name = currentImportedDefine.name
-					currentImportedDefineCopy.value = currentImportedDefine.value
-					toBeAddedDefine.add(currentImportedDefineCopy)
-				}
-			]
-		targetContent.addAll(toBeAddedDefine)
 	}
 	
 	private def List<Location> getLocations(Set<TargetPlatform> visited, List<TargetPlatform> toBeVisited) {
@@ -191,7 +92,7 @@ class LocationIndexBuilder {
 	 * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E 
 	 */
 	def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
-		resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		val visited = newLinkedHashSet();
 		val queue = newLinkedList();
 		val includeRet = newLinkedList();
@@ -213,11 +114,11 @@ class LocationIndexBuilder {
 	}
 
 	def checkIncludeCycle(TargetPlatform targetPlatform) {
-		resolveCompositeElements(targetPlatform)
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		val acc = newLinkedHashSet();
 		val s = newLinkedList();
 		
-		searchAndAppendDefineFromIncludedTpd(targetPlatform)
+		compositeElementResolver.searchAndAppendDefineFromIncludedTpd(targetPlatform)
 		
 		return 
 			if (checkIncludeCycle(targetPlatform, acc, s)) {
