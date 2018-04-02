@@ -434,7 +434,29 @@ ruleCompositeString returns [EObject current=null]
 	    }
 
 )
-)*)
+)(	otherlv_2='+' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getCompositeStringAccess().getPlusSignKeyword_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCompositeStringAccess().getStringPartsCompositeStringPartParserRuleCall_2_1_0()); 
+	    }
+		lv_stringParts_3_0=ruleCompositeStringPart		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCompositeStringRule());
+	        }
+       		add(
+       			$current, 
+       			"stringParts",
+        		lv_stringParts_3_0, 
+        		"CompositeStringPart");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)
 ;
 
 
@@ -669,19 +691,19 @@ ruleLocation returns [EObject current=null]
 	 				}
 					({true}?=>(
 (
-		lv_uri_3_0=RULE_STRING
-		{
-			newLeafNode(lv_uri_3_0, grammarAccess.getLocationAccess().getUriSTRINGTerminalRuleCall_1_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getLocationAccess().getCompositeUriCompositeStringParserRuleCall_1_1_0()); 
+	    }
+		lv_compositeUri_3_0=ruleCompositeString		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getLocationRule());
+	            $current = createModelElementForParent(grammarAccess.getLocationRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
-       			"uri",
-        		lv_uri_3_0, 
-        		"STRING");
+       			"compositeUri",
+        		lv_compositeUri_3_0, 
+        		"CompositeString");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -821,10 +843,10 @@ ruleIU returns [EObject current=null]
     {
     	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2());
     }
-)?((
+)?(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0_0()); 
 	    }
 		lv_version_4_0=ruleVersionRange		{
 	        if ($current==null) {
@@ -844,7 +866,7 @@ ruleIU returns [EObject current=null]
 (
 		lv_version_5_0=RULE_STRING
 		{
-			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_1_0()); 
+			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -855,6 +877,25 @@ ruleIU returns [EObject current=null]
        			"version",
         		lv_version_5_0, 
         		"STRING");
+	    }
+
+)
+))
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIUAccess().getVarVersionVarCallParserRuleCall_1_1_1_0()); 
+	    }
+		lv_varVersion_6_0=ruleVarCall		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIURule());
+	        }
+       		set(
+       			$current, 
+       			"varVersion",
+        		lv_varVersion_6_0, 
+        		"VarCall");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

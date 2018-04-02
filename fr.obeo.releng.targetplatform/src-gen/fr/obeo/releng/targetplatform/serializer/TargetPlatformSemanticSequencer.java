@@ -104,7 +104,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (stringParts+=CompositeStringPart*)
+	 *     (stringParts+=CompositeStringPart stringParts+=CompositeStringPart*)
 	 */
 	protected void sequence_CompositeString(EObject context, CompositeString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -122,7 +122,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=ID (version=VersionRange | version=STRING)?)
+	 *     (ID=ID (version=VersionRange | version=STRING | varVersion=VarCall)?)
 	 */
 	protected void sequence_IU(EObject context, IU semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,7 +140,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=ID? uri=STRING ((options+=Option options+=Option*)? ius+=IU*)?)
+	 *     (ID=ID? compositeUri=CompositeString ((options+=Option options+=Option*)? ius+=IU*)?)
 	 */
 	protected void sequence_Location(EObject context, Location semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -35,6 +35,7 @@ import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.ArrayList;
@@ -90,6 +91,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Inject
   private LocationIndexBuilder indexBuilder;
+  
+  @Inject
+  private CompositeElementResolver compositeElementResolver;
   
   @Inject
   private IProvisioningAgent provisioningAgent;
@@ -161,6 +165,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
+    location.resolveUri();
     final EList<Option> options = location.getOptions();
     if ((options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED))) {
       this.doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
@@ -223,6 +228,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkNoLocationOptionIfGlobalOptions(final Location location) {
+    location.resolveUri();
     if (((!location.getOptions().isEmpty()) && (!location.getTargetPlatform().getOptions().isEmpty()))) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
       INode _head = IterableExtensions.<INode>head(nodes);
@@ -241,6 +247,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public void checkOptionsOnLocationAreIdentical(final TargetPlatform targetPlatform) {
     boolean _isEmpty = targetPlatform.getOptions().isEmpty();
     if (_isEmpty) {
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       final EList<Location> listOptions = targetPlatform.getLocations();
       final Location first = IterableExtensions.<Location>head(listOptions);
       final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
@@ -283,6 +290,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void deprecateOptionsOnLocation(final Location location) {
+    location.resolveUri();
     final TargetPlatform targetPlatform = location.getTargetPlatform();
     if ((targetPlatform.getOptions().isEmpty() && (!location.getOptions().isEmpty()))) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
@@ -620,6 +628,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public IMetadataRepository checkLocationURI(final Location location) {
     IMetadataRepository _xblockexpression = null;
     {
+      location.resolveUri();
       IProgressMonitor _xifexpression = null;
       if (((!Objects.equal(this.getContext(), null)) && (!Objects.equal(this.getContext().get(IProgressMonitor.class), null)))) {
         Object _get = this.getContext().get(IProgressMonitor.class);

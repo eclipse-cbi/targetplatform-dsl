@@ -40,6 +40,7 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTargetContentAccess().getAlternatives(), "rule__TargetContent__Alternatives");
 					put(grammarAccess.getCompositeStringPartAccess().getAlternatives(), "rule__CompositeStringPart__Alternatives");
 					put(grammarAccess.getIUAccess().getAlternatives_1_1(), "rule__IU__Alternatives_1_1");
+					put(grammarAccess.getIUAccess().getAlternatives_1_1_0(), "rule__IU__Alternatives_1_1_0");
 					put(grammarAccess.getVersionAccess().getAlternatives_1_2_2_1(), "rule__Version__Alternatives_1_2_2_1");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives(), "rule__VersionRange__Alternatives");
 					put(grammarAccess.getVersionRangeAccess().getAlternatives_0_0(), "rule__VersionRange__Alternatives_0_0");
@@ -52,6 +53,7 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnvironmentAccess().getGroup_3(), "rule__Environment__Group_3__0");
 					put(grammarAccess.getVarDefinitionAccess().getGroup(), "rule__VarDefinition__Group__0");
 					put(grammarAccess.getCompositeStringAccess().getGroup(), "rule__CompositeString__Group__0");
+					put(grammarAccess.getCompositeStringAccess().getGroup_2(), "rule__CompositeString__Group_2__0");
 					put(grammarAccess.getVarCallAccess().getGroup(), "rule__VarCall__Group__0");
 					put(grammarAccess.getIncludeDeclarationAccess().getGroup(), "rule__IncludeDeclaration__Group__0");
 					put(grammarAccess.getLocationAccess().getGroup(), "rule__Location__Group__0");
@@ -75,17 +77,19 @@ public class TargetPlatformParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVarDefinitionAccess().getNameAssignment_1(), "rule__VarDefinition__NameAssignment_1");
 					put(grammarAccess.getVarDefinitionAccess().getValueAssignment_3(), "rule__VarDefinition__ValueAssignment_3");
 					put(grammarAccess.getCompositeStringAccess().getStringPartsAssignment_1(), "rule__CompositeString__StringPartsAssignment_1");
+					put(grammarAccess.getCompositeStringAccess().getStringPartsAssignment_2_1(), "rule__CompositeString__StringPartsAssignment_2_1");
 					put(grammarAccess.getVarCallAccess().getVarNameAssignment_1(), "rule__VarCall__VarNameAssignment_1");
 					put(grammarAccess.getStaticStringAccess().getValueAssignment(), "rule__StaticString__ValueAssignment");
 					put(grammarAccess.getIncludeDeclarationAccess().getCompositeImportURIAssignment_1(), "rule__IncludeDeclaration__CompositeImportURIAssignment_1");
 					put(grammarAccess.getLocationAccess().getIDAssignment_1_0(), "rule__Location__IDAssignment_1_0");
-					put(grammarAccess.getLocationAccess().getUriAssignment_1_1(), "rule__Location__UriAssignment_1_1");
+					put(grammarAccess.getLocationAccess().getCompositeUriAssignment_1_1(), "rule__Location__CompositeUriAssignment_1_1");
 					put(grammarAccess.getLocationAccess().getOptionsAssignment_2_1_1(), "rule__Location__OptionsAssignment_2_1_1");
 					put(grammarAccess.getLocationAccess().getOptionsAssignment_2_1_2_1(), "rule__Location__OptionsAssignment_2_1_2_1");
 					put(grammarAccess.getLocationAccess().getIusAssignment_2_2(), "rule__Location__IusAssignment_2_2");
 					put(grammarAccess.getIUAccess().getIDAssignment_0(), "rule__IU__IDAssignment_0");
-					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_0(), "rule__IU__VersionAssignment_1_1_0");
-					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_1(), "rule__IU__VersionAssignment_1_1_1");
+					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_0_0(), "rule__IU__VersionAssignment_1_1_0_0");
+					put(grammarAccess.getIUAccess().getVersionAssignment_1_1_0_1(), "rule__IU__VersionAssignment_1_1_0_1");
+					put(grammarAccess.getIUAccess().getVarVersionAssignment_1_1_1(), "rule__IU__VarVersionAssignment_1_1_1");
 					put(grammarAccess.getLocationAccess().getUnorderedGroup_1(), "rule__Location__UnorderedGroup_1");
 				}
 			};

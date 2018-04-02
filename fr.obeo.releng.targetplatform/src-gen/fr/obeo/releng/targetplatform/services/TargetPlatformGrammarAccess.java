@@ -208,22 +208,38 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cCompositeStringAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cStringPartsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cStringPartsCompositeStringPartParserRuleCall_1_0 = (RuleCall)cStringPartsAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cPlusSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cStringPartsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cStringPartsCompositeStringPartParserRuleCall_2_1_0 = (RuleCall)cStringPartsAssignment_2_1.eContents().get(0);
 		
 		//CompositeString:
-		//	{CompositeString} stringParts+=CompositeStringPart*;
+		//	{CompositeString} stringParts+=CompositeStringPart ("+" stringParts+=CompositeStringPart)*;
 		public ParserRule getRule() { return rule; }
 
-		//{CompositeString} stringParts+=CompositeStringPart*
+		//{CompositeString} stringParts+=CompositeStringPart ("+" stringParts+=CompositeStringPart)*
 		public Group getGroup() { return cGroup; }
 
 		//{CompositeString}
 		public Action getCompositeStringAction_0() { return cCompositeStringAction_0; }
 
-		//stringParts+=CompositeStringPart*
+		//stringParts+=CompositeStringPart
 		public Assignment getStringPartsAssignment_1() { return cStringPartsAssignment_1; }
 
 		//CompositeStringPart
 		public RuleCall getStringPartsCompositeStringPartParserRuleCall_1_0() { return cStringPartsCompositeStringPartParserRuleCall_1_0; }
+
+		//("+" stringParts+=CompositeStringPart)*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_2_0() { return cPlusSignKeyword_2_0; }
+
+		//stringParts+=CompositeStringPart
+		public Assignment getStringPartsAssignment_2_1() { return cStringPartsAssignment_2_1; }
+
+		//CompositeStringPart
+		public RuleCall getStringPartsCompositeStringPartParserRuleCall_2_1_0() { return cStringPartsCompositeStringPartParserRuleCall_2_1_0; }
 	}
 
 	public class CompositeStringPartElements extends AbstractParserRuleElementFinder {
@@ -325,8 +341,8 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
 		private final Assignment cIDAssignment_1_0 = (Assignment)cUnorderedGroup_1.eContents().get(0);
 		private final RuleCall cIDIDTerminalRuleCall_1_0_0 = (RuleCall)cIDAssignment_1_0.eContents().get(0);
-		private final Assignment cUriAssignment_1_1 = (Assignment)cUnorderedGroup_1.eContents().get(1);
-		private final RuleCall cUriSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cUriAssignment_1_1.eContents().get(0);
+		private final Assignment cCompositeUriAssignment_1_1 = (Assignment)cUnorderedGroup_1.eContents().get(1);
+		private final RuleCall cCompositeUriCompositeStringParserRuleCall_1_1_0 = (RuleCall)cCompositeUriAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
@@ -342,16 +358,17 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//Location:
-		//	"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?;
+		//	"location" (ID=ID? & compositeUri=CompositeString) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU*
+		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?
+		//"location" (ID=ID? & compositeUri=CompositeString) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"location"
 		public Keyword getLocationKeyword_0() { return cLocationKeyword_0; }
 
-		//ID=ID? & uri=STRING
+		//ID=ID? & compositeUri=CompositeString
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
 		//ID=ID?
@@ -360,11 +377,11 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDIDTerminalRuleCall_1_0_0() { return cIDIDTerminalRuleCall_1_0_0; }
 
-		//uri=STRING
-		public Assignment getUriAssignment_1_1() { return cUriAssignment_1_1; }
+		//compositeUri=CompositeString
+		public Assignment getCompositeUriAssignment_1_1() { return cCompositeUriAssignment_1_1; }
 
-		//STRING
-		public RuleCall getUriSTRINGTerminalRuleCall_1_1_0() { return cUriSTRINGTerminalRuleCall_1_1_0; }
+		//CompositeString
+		public RuleCall getCompositeUriCompositeStringParserRuleCall_1_1_0() { return cCompositeUriCompositeStringParserRuleCall_1_1_0; }
 
 		//("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -417,16 +434,19 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cVersionKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_1_0_2 = (Keyword)cGroup_1_0.eContents().get(2);
 		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Assignment cVersionAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
-		private final RuleCall cVersionVersionRangeParserRuleCall_1_1_0_0 = (RuleCall)cVersionAssignment_1_1_0.eContents().get(0);
-		private final Assignment cVersionAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
-		private final RuleCall cVersionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cVersionAssignment_1_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1_0 = (Alternatives)cAlternatives_1_1.eContents().get(0);
+		private final Assignment cVersionAssignment_1_1_0_0 = (Assignment)cAlternatives_1_1_0.eContents().get(0);
+		private final RuleCall cVersionVersionRangeParserRuleCall_1_1_0_0_0 = (RuleCall)cVersionAssignment_1_1_0_0.eContents().get(0);
+		private final Assignment cVersionAssignment_1_1_0_1 = (Assignment)cAlternatives_1_1_0.eContents().get(1);
+		private final RuleCall cVersionSTRINGTerminalRuleCall_1_1_0_1_0 = (RuleCall)cVersionAssignment_1_1_0_1.eContents().get(0);
+		private final Assignment cVarVersionAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cVarVersionVarCallParserRuleCall_1_1_1_0 = (RuleCall)cVarVersionAssignment_1_1_1.eContents().get(0);
 		
 		//IU:
-		//	ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?;
+		//	ID=ID ((";" "version" "=")? ((version=VersionRange | version=STRING) | varVersion=VarCall))?;
 		public ParserRule getRule() { return rule; }
 
-		//ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?
+		//ID=ID ((";" "version" "=")? ((version=VersionRange | version=STRING) | varVersion=VarCall))?
 		public Group getGroup() { return cGroup; }
 
 		//ID=ID
@@ -435,7 +455,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDIDTerminalRuleCall_0_0() { return cIDIDTerminalRuleCall_0_0; }
 
-		//((";" "version" "=")? (version=VersionRange | version=STRING))?
+		//((";" "version" "=")? ((version=VersionRange | version=STRING) | varVersion=VarCall))?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//(";" "version" "=")?
@@ -450,20 +470,29 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_1_0_2() { return cEqualsSignKeyword_1_0_2; }
 
-		//version=VersionRange | version=STRING
+		//(version=VersionRange | version=STRING) | varVersion=VarCall
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
+		//version=VersionRange | version=STRING
+		public Alternatives getAlternatives_1_1_0() { return cAlternatives_1_1_0; }
+
 		//version=VersionRange
-		public Assignment getVersionAssignment_1_1_0() { return cVersionAssignment_1_1_0; }
+		public Assignment getVersionAssignment_1_1_0_0() { return cVersionAssignment_1_1_0_0; }
 
 		//VersionRange
-		public RuleCall getVersionVersionRangeParserRuleCall_1_1_0_0() { return cVersionVersionRangeParserRuleCall_1_1_0_0; }
+		public RuleCall getVersionVersionRangeParserRuleCall_1_1_0_0_0() { return cVersionVersionRangeParserRuleCall_1_1_0_0_0; }
 
 		//version=STRING
-		public Assignment getVersionAssignment_1_1_1() { return cVersionAssignment_1_1_1; }
+		public Assignment getVersionAssignment_1_1_0_1() { return cVersionAssignment_1_1_0_1; }
 
 		//STRING
-		public RuleCall getVersionSTRINGTerminalRuleCall_1_1_1_0() { return cVersionSTRINGTerminalRuleCall_1_1_1_0; }
+		public RuleCall getVersionSTRINGTerminalRuleCall_1_1_0_1_0() { return cVersionSTRINGTerminalRuleCall_1_1_0_1_0; }
+
+		//varVersion=VarCall
+		public Assignment getVarVersionAssignment_1_1_1() { return cVarVersionAssignment_1_1_1; }
+
+		//VarCall
+		public RuleCall getVarVersionVarCallParserRuleCall_1_1_1_0() { return cVarVersionVarCallParserRuleCall_1_1_1_0; }
 	}
 
 	public class VersionElements extends AbstractParserRuleElementFinder {
@@ -763,7 +792,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CompositeString:
-	//	{CompositeString} stringParts+=CompositeStringPart*;
+	//	{CompositeString} stringParts+=CompositeStringPart ("+" stringParts+=CompositeStringPart)*;
 	public CompositeStringElements getCompositeStringAccess() {
 		return pCompositeString;
 	}
@@ -813,7 +842,8 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Location:
-	//	"location" (ID=ID? & uri=STRING) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU* "}")?;
+	//	"location" (ID=ID? & compositeUri=CompositeString) ("{" ("with" options+=Option (","? options+=Option)*)? ius+=IU*
+	//	"}")?;
 	public LocationElements getLocationAccess() {
 		return pLocation;
 	}
@@ -834,7 +864,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IU:
-	//	ID=ID ((";" "version" "=")? (version=VersionRange | version=STRING))?;
+	//	ID=ID ((";" "version" "=")? ((version=VersionRange | version=STRING) | varVersion=VarCall))?;
 	public IUElements getIUAccess() {
 		return pIU;
 	}

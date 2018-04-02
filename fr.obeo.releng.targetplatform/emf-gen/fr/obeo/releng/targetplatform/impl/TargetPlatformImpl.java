@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getIncludes <em>Includes</em>}</li>
@@ -55,6 +56,26 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @generated
  */
 public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements TargetPlatform {
+	/**
+	 * The default value of the '{@link #isCompositeElementsResolved() <em>Composite Elements Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompositeElementsResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isCompositeElementsResolved() <em>Composite Elements Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompositeElementsResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean compositeElementsResolved = COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -102,6 +123,27 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	protected EClass eStaticClass() {
 		return TargetPlatformPackage.Literals.TARGET_PLATFORM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isCompositeElementsResolved() {
+		return compositeElementsResolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompositeElementsResolved(boolean newCompositeElementsResolved) {
+		boolean oldCompositeElementsResolved = compositeElementsResolved;
+		compositeElementsResolved = newCompositeElementsResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED, oldCompositeElementsResolved, compositeElementsResolved));
 	}
 
 	/**
@@ -228,6 +270,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return isCompositeElementsResolved();
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return getName();
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
@@ -254,6 +298,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				setCompositeElementsResolved((Boolean)newValue);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				setName((String)newValue);
 				return;
@@ -273,6 +320,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				setCompositeElementsResolved(COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -291,6 +341,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return compositeElementsResolved != COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
@@ -317,7 +369,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (compositeElementsResolved: ");
+		result.append(compositeElementsResolved);
+		result.append(", name: ");
 		result.append(name);
 		result.append(')');
 		return result.toString();

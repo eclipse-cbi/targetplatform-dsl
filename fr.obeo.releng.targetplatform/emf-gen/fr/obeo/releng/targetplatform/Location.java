@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getUri <em>Uri</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.Location#getCompositeUri <em>Composite Uri</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.Location#getIus <em>Ius</em>}</li>
  * </ul>
@@ -77,6 +78,32 @@ public interface Location extends TargetContent {
 	void setUri(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Composite Uri</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composite Uri</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composite Uri</em>' containment reference.
+	 * @see #setCompositeUri(CompositeString)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getLocation_CompositeUri()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CompositeString getCompositeUri();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.Location#getCompositeUri <em>Composite Uri</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Composite Uri</em>' containment reference.
+	 * @see #getCompositeUri()
+	 * @generated
+	 */
+	void setCompositeUri(CompositeString value);
+
+	/**
 	 * Returns the value of the '<em><b>Options</b></em>' attribute list.
 	 * The list contents are of type {@link fr.obeo.releng.targetplatform.Option}.
 	 * The literals are from the enumeration {@link fr.obeo.releng.targetplatform.Option}.
@@ -111,5 +138,21 @@ public interface Location extends TargetContent {
 	 * @generated
 	 */
 	EList<IU> getIus();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%java.lang.String%&gt; _uri = this.getUri();\nboolean _tripleNotEquals = (_uri != null);\nif (_tripleNotEquals)\n{\n\treturn;\n}\nthis.setUri(this.getCompositeUri().computeActualString());'"
+	 * @generated
+	 */
+	void resolveUri();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.IU%&gt;&gt; _ius = this.getIus();\nfor (final &lt;%fr.obeo.releng.targetplatform.IU%&gt; iu : _ius)\n{\n\t&lt;%java.lang.String%&gt; _version = iu.getVersion();\n\tboolean _tripleEquals = (_version == null);\n\tif (_tripleEquals)\n\t{\n\t\t&lt;%fr.obeo.releng.targetplatform.VarCall%&gt; _varVersion = iu.getVarVersion();\n\t\tboolean _tripleNotEquals = (_varVersion != null);\n\t\tif (_tripleNotEquals)\n\t\t{\n\t\t\tiu.setVersion(iu.getVarVersion().getActualString());\n\t\t}\n\t}\n}'"
+	 * @generated
+	 */
+	void resolveIUsVersion();
 
 } // Location

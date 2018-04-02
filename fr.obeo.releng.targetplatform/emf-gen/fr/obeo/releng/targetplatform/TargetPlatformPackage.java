@@ -71,13 +71,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int TARGET_PLATFORM = 0;
 
 	/**
+	 * The feature id for the '<em><b>Composite Elements Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__NAME = 0;
+	int TARGET_PLATFORM__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
@@ -86,7 +95,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__CONTENTS = 1;
+	int TARGET_PLATFORM__CONTENTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Includes</b></em>' reference list.
@@ -95,7 +104,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__INCLUDES = 2;
+	int TARGET_PLATFORM__INCLUDES = 3;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' attribute list.
@@ -104,7 +113,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__OPTIONS = 3;
+	int TARGET_PLATFORM__OPTIONS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Locations</b></em>' reference list.
@@ -113,7 +122,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__LOCATIONS = 4;
+	int TARGET_PLATFORM__LOCATIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -122,7 +131,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__ENVIRONMENT = 5;
+	int TARGET_PLATFORM__ENVIRONMENT = 6;
 
 	/**
 	 * The number of structural features of the '<em>Target Platform</em>' class.
@@ -131,7 +140,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM_FEATURE_COUNT = 6;
+	int TARGET_PLATFORM_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Target Platform</em>' class.
@@ -354,13 +363,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION__VALUE = TARGET_CONTENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Override Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__OVERRIDE_VALUE = TARGET_CONTENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Var Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 2;
+	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Var Definition</em>' class.
@@ -620,13 +638,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int LOCATION__URI = TARGET_CONTENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Composite Uri</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__COMPOSITE_URI = TARGET_CONTENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Options</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION__OPTIONS = TARGET_CONTENT_FEATURE_COUNT + 2;
+	int LOCATION__OPTIONS = TARGET_CONTENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Ius</b></em>' containment reference list.
@@ -635,7 +662,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION__IUS = TARGET_CONTENT_FEATURE_COUNT + 3;
+	int LOCATION__IUS = TARGET_CONTENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Location</em>' class.
@@ -644,7 +671,25 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 4;
+	int LOCATION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Resolve Uri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION___RESOLVE_URI = TARGET_CONTENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Resolve IUs Version</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION___RESOLVE_IUS_VERSION = TARGET_CONTENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Location</em>' class.
@@ -653,7 +698,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 0;
+	int LOCATION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl <em>Include Declaration</em>}' class.
@@ -757,13 +802,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int IU__VERSION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Var Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IU__VAR_VERSION = 2;
+
+	/**
 	 * The feature id for the '<em><b>Location</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IU__LOCATION = 2;
+	int IU__LOCATION = 3;
 
 	/**
 	 * The number of structural features of the '<em>IU</em>' class.
@@ -772,7 +826,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IU_FEATURE_COUNT = 3;
+	int IU_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>IU</em>' class.
@@ -823,6 +877,17 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTargetPlatform();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Composite Elements Resolved</em>'.
+	 * @see fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved()
+	 * @see #getTargetPlatform()
+	 * @generated
+	 */
+	EAttribute getTargetPlatform_CompositeElementsResolved();
 
 	/**
 	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}'.
@@ -1041,6 +1106,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getVarDefinition_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getOverrideValue <em>Override Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Override Value</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getOverrideValue()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_OverrideValue();
+
+	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeString <em>Composite String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1208,6 +1284,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getLocation_Uri();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link fr.obeo.releng.targetplatform.Location#getCompositeUri <em>Composite Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Composite Uri</em>'.
+	 * @see fr.obeo.releng.targetplatform.Location#getCompositeUri()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EReference getLocation_CompositeUri();
+
+	/**
 	 * Returns the meta object for the attribute list '{@link fr.obeo.releng.targetplatform.Location#getOptions <em>Options</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1228,6 +1315,26 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLocation_Ius();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.Location#resolveUri() <em>Resolve Uri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Resolve Uri</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.Location#resolveUri()
+	 * @generated
+	 */
+	EOperation getLocation__ResolveUri();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.Location#resolveIUsVersion() <em>Resolve IUs Version</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Resolve IUs Version</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.Location#resolveIUsVersion()
+	 * @generated
+	 */
+	EOperation getLocation__ResolveIUsVersion();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.IncludeDeclaration <em>Include Declaration</em>}'.
@@ -1315,6 +1422,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getIU_Version();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link fr.obeo.releng.targetplatform.IU#getVarVersion <em>Var Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Var Version</em>'.
+	 * @see fr.obeo.releng.targetplatform.IU#getVarVersion()
+	 * @see #getIU()
+	 * @generated
+	 */
+	EReference getIU_VarVersion();
+
+	/**
 	 * Returns the meta object for the container reference '{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1389,6 +1507,14 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TARGET_PLATFORM = eINSTANCE.getTargetPlatform();
+
+		/**
+		 * The meta object literal for the '<em><b>Composite Elements Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED = eINSTANCE.getTargetPlatform_CompositeElementsResolved();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1559,6 +1685,14 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute VAR_DEFINITION__VALUE = eINSTANCE.getVarDefinition_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Override Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__OVERRIDE_VALUE = eINSTANCE.getVarDefinition_OverrideValue();
+
+		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1697,6 +1831,14 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute LOCATION__URI = eINSTANCE.getLocation_Uri();
 
 		/**
+		 * The meta object literal for the '<em><b>Composite Uri</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION__COMPOSITE_URI = eINSTANCE.getLocation_CompositeUri();
+
+		/**
 		 * The meta object literal for the '<em><b>Options</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1711,6 +1853,22 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOCATION__IUS = eINSTANCE.getLocation_Ius();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolve Uri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LOCATION___RESOLVE_URI = eINSTANCE.getLocation__ResolveUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolve IUs Version</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LOCATION___RESOLVE_IUS_VERSION = eINSTANCE.getLocation__ResolveIUsVersion();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl <em>Include Declaration</em>}' class.
@@ -1779,6 +1937,14 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IU__VERSION = eINSTANCE.getIU_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Version</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IU__VAR_VERSION = eINSTANCE.getIU_VarVersion();
 
 		/**
 		 * The meta object literal for the '<em><b>Location</b></em>' container reference feature.

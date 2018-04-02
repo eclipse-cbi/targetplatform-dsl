@@ -190,6 +190,11 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     int _offset = context.getOffset();
     int _endOffset = context.getLastCompleteNode().getEndOffset();
     final int currentNodeSizeToCursor = (_offset - _endOffset);
+    final String lastNodeTxt = context.getLastCompleteNode().getText();
+    boolean _equals = Objects.equal(lastNodeTxt, "location");
+    if (_equals) {
+      return;
+    }
     String _xifexpression = null;
     int _length = context.getCurrentNode().getText().length();
     boolean _greaterEqualsThan = (_length >= currentNodeSizeToCursor);
@@ -206,8 +211,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         acceptor.accept(this.createCompletionProposal("with", "describe how the set of elements to add to this target is determined", TargetPlatformProposalProvider.OPTIONS, 520, context));
       }
       Environment _environment = tp.getEnvironment();
-      boolean _equals = Objects.equal(_environment, null);
-      if (_equals) {
+      boolean _equals_1 = Objects.equal(_environment, null);
+      if (_equals_1) {
         acceptor.accept(this.createCompletionProposal("environment", "describe the system that this target is built for", TargetPlatformProposalProvider.ENVIRONMENT, 510, context));
       }
       this.templateLocation(context, acceptor);
@@ -420,6 +425,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       final String text = _xifexpression;
       if ((text.contains("\n") || (context.getCurrentNode().getText().length() < currentNodeSizeToCursor))) {
         final Location location = ((Location) model);
+        location.resolveUri();
         final String uri = location.getUri();
         final IWorkbenchWindow window = TargetPlatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
         final IRunnableWithProgress _function = new IRunnableWithProgress() {
@@ -513,7 +519,9 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       final String text = _xifexpression_2;
       if (((!text.contains("\n")) || (context.getCurrentNode().getText().length() < currentNodeSizeToCursor))) {
         final IU iu = ((IU) model);
-        final String uri = iu.getLocation().getUri();
+        final Location location = iu.getLocation();
+        location.resolveUri();
+        final String uri = location.getUri();
         final IWorkbenchWindow window = TargetPlatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
         final IRunnableWithProgress op = this.versionProposalRunnable(uri, iu, prefix, window.getShell().getDisplay(), context, acceptor);
         window.run(false, true, op);
@@ -577,7 +585,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   }
   
   @Override
-  public void completeLocation_Uri(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeLocation_CompositeUri(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String docText = context.getViewer().getDocument().get();
     final int offset = context.getOffset();
     String _xifexpression = null;

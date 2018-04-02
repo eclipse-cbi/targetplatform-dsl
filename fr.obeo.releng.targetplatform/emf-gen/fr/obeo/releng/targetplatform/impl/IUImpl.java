@@ -5,6 +5,7 @@ package fr.obeo.releng.targetplatform.impl;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarCall;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getVarVersion <em>Var Version</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IUImpl#getLocation <em>Location</em>}</li>
  * </ul>
  *
@@ -72,6 +74,16 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 	 * @ordered
 	 */
 	protected String version = VERSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVarVersion() <em>Var Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVarVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected VarCall varVersion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,6 +144,49 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 		version = newVersion;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarCall getVarVersion() {
+		return varVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetVarVersion(VarCall newVarVersion, NotificationChain msgs) {
+		VarCall oldVarVersion = varVersion;
+		varVersion = newVarVersion;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__VAR_VERSION, oldVarVersion, newVarVersion);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVarVersion(VarCall newVarVersion) {
+		if (newVarVersion != varVersion) {
+			NotificationChain msgs = null;
+			if (varVersion != null)
+				msgs = ((InternalEObject)varVersion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.IU__VAR_VERSION, null, msgs);
+			if (newVarVersion != null)
+				msgs = ((InternalEObject)newVarVersion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.IU__VAR_VERSION, null, msgs);
+			msgs = basicSetVarVersion(newVarVersion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.IU__VAR_VERSION, newVarVersion, newVarVersion));
 	}
 
 	/**
@@ -209,6 +264,8 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case TargetPlatformPackage.IU__VAR_VERSION:
+				return basicSetVarVersion(null, msgs);
 			case TargetPlatformPackage.IU__LOCATION:
 				return basicSetLocation(null, msgs);
 		}
@@ -241,6 +298,8 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return getID();
 			case TargetPlatformPackage.IU__VERSION:
 				return getVersion();
+			case TargetPlatformPackage.IU__VAR_VERSION:
+				return getVarVersion();
 			case TargetPlatformPackage.IU__LOCATION:
 				if (resolve) return getLocation();
 				return basicGetLocation();
@@ -261,6 +320,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return;
 			case TargetPlatformPackage.IU__VERSION:
 				setVersion((String)newValue);
+				return;
+			case TargetPlatformPackage.IU__VAR_VERSION:
+				setVarVersion((VarCall)newValue);
 				return;
 			case TargetPlatformPackage.IU__LOCATION:
 				setLocation((Location)newValue);
@@ -283,6 +345,9 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 			case TargetPlatformPackage.IU__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
+			case TargetPlatformPackage.IU__VAR_VERSION:
+				setVarVersion((VarCall)null);
+				return;
 			case TargetPlatformPackage.IU__LOCATION:
 				setLocation((Location)null);
 				return;
@@ -302,6 +367,8 @@ public class IUImpl extends MinimalEObjectImpl.Container implements IU {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case TargetPlatformPackage.IU__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case TargetPlatformPackage.IU__VAR_VERSION:
+				return varVersion != null;
 			case TargetPlatformPackage.IU__LOCATION:
 				return basicGetLocation() != null;
 		}
