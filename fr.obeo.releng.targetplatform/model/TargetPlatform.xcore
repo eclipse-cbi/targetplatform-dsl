@@ -77,7 +77,7 @@ class Environment extends TargetContent {
 			envToUpper.contains(it.toUpperCase)
 		]
 		
-		if (locale != null) {
+		if (locale !== null) {
 			var String language = "";
 			var String country = "";
 			var String variant = "";
@@ -101,12 +101,12 @@ class Environment extends TargetContent {
 	
 	derived ExecutionEnvironment executionEnvironment get {
 		val eeManager = JavaRuntime.executionEnvironmentsManager
-		if (eeManager != null) {
+		if (eeManager !== null) {
 			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 			
 			for (env : envToUpper) {
 				val ee = eeManager.executionEnvironments.findFirst[it.id.toUpperCase.equals(env)]
-				if (ee != null) {
+				if (ee !== null) {
 					return ee
 				}
 			}
@@ -120,7 +120,7 @@ class Environment extends TargetContent {
 
 class VarDefinition extends TargetContent {
 	String name
-	String value
+	contains CompositeString value
 	String overrideValue = ""
 }
 
@@ -135,22 +135,42 @@ class CompositeString {
 		}
 		return result
 	}
+	
+	op CompositeString getCopy() {
+		var output = TargetPlatformFactory.eINSTANCE.createCompositeString
+		val stringPartsCopy = output.stringParts
+		stringParts.forEach[
+			stringPartsCopy.add(it.copy)
+		]
+		return output
+	}
 }
 
 interface CompositeStringPart {
 	container CompositeString compositeString opposite stringParts
 	
 	op String getActualString()
+	
+	op CompositeStringPart getCopy()
 }
 
 class VarCall extends CompositeStringPart {
 	refers VarDefinition varName
 	
 	op String getActualString() {
-		if (varName.overrideValue.isEmpty)
-			return varName.value
-		else
-			return varName.overrideValue
+		if (varName.overrideValue.isEmpty) {
+			if (varName.value !== null) {
+				return varName.value.computeActualString
+			}
+			return "";
+		}
+		return varName.overrideValue
+	}
+	
+	op VarCall getCopy() {
+		val output = TargetPlatformFactory.eINSTANCE.createVarCall
+		output.varName = varName
+		return output
 	}
 }
 
@@ -159,6 +179,12 @@ class StaticString extends CompositeStringPart {
 	
 	op String getActualString() {
 		return value
+	}
+	
+	op StaticString getCopy() {
+		val output = TargetPlatformFactory.eINSTANCE.createStaticString
+		output.value = value
+		return output
 	}
 }
 

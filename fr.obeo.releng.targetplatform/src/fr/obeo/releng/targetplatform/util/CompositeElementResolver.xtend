@@ -154,7 +154,7 @@ class CompositeElementResolver {
 				if (toBeAdded) {
 					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
 					currentImportedDefineCopy.name = currentImportedDefine.name
-					currentImportedDefineCopy.value = currentImportedDefine.value
+					currentImportedDefineCopy.value = currentImportedDefine.value.copy
 					currentImportedDefineCopy.overrideValue = currentImportedDefine.overrideValue
 					toBeAddedDefine.add(currentImportedDefineCopy)
 				}

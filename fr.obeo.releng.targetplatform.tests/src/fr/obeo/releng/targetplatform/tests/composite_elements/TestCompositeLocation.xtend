@@ -274,7 +274,7 @@ class TestCompositeLocation {
 		
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
 		val varDef = importedTargetPlatforms.last.contents.head as VarDefinition
-		assertEquals("subdir", varDef.value)
+		assertEquals("subdir", varDef.value.computeActualString)
 	}
 	
 	@Test
