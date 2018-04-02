@@ -222,7 +222,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTargetPlatform_Name() {
+	public EAttribute getTargetPlatform_CompositeElementsResolved() {
 		return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -231,8 +231,8 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTargetPlatform_Contents() {
-		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTargetPlatform_Name() {
+		return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -240,7 +240,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTargetPlatform_Includes() {
+	public EReference getTargetPlatform_Contents() {
 		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -249,8 +249,17 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTargetPlatform_Includes() {
+		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getTargetPlatform_Options() {
-		return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)targetPlatformEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -259,7 +268,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * @generated
 	 */
 	public EReference getTargetPlatform_Locations() {
-		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(4);
+		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -268,7 +277,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * @generated
 	 */
 	public EReference getTargetPlatform_Environment() {
-		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(5);
+		return (EReference)targetPlatformEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -395,6 +404,15 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 */
 	public EAttribute getVarDefinition_Value() {
 		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVarDefinition_OverrideValue() {
+		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -546,8 +564,17 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getLocation_CompositeUri() {
+		return (EReference)locationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getLocation_Options() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)locationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -556,7 +583,25 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * @generated
 	 */
 	public EReference getLocation_Ius() {
-		return (EReference)locationEClass.getEStructuralFeatures().get(3);
+		return (EReference)locationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getLocation__ResolveUri() {
+		return locationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getLocation__ResolveIUsVersion() {
+		return locationEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -636,8 +681,17 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIU_Location() {
+	public EReference getIU_VarVersion() {
 		return (EReference)iuEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIU_Location() {
+		return (EReference)iuEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -696,6 +750,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 
 		// Create classes and their features
 		targetPlatformEClass = createEClass(TARGET_PLATFORM);
+		createEAttribute(targetPlatformEClass, TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED);
 		createEAttribute(targetPlatformEClass, TARGET_PLATFORM__NAME);
 		createEReference(targetPlatformEClass, TARGET_PLATFORM__CONTENTS);
 		createEReference(targetPlatformEClass, TARGET_PLATFORM__INCLUDES);
@@ -720,6 +775,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		varDefinitionEClass = createEClass(VAR_DEFINITION);
 		createEAttribute(varDefinitionEClass, VAR_DEFINITION__NAME);
 		createEAttribute(varDefinitionEClass, VAR_DEFINITION__VALUE);
+		createEAttribute(varDefinitionEClass, VAR_DEFINITION__OVERRIDE_VALUE);
 
 		compositeStringEClass = createEClass(COMPOSITE_STRING);
 		createEAttribute(compositeStringEClass, COMPOSITE_STRING__NAME);
@@ -741,8 +797,11 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		locationEClass = createEClass(LOCATION);
 		createEAttribute(locationEClass, LOCATION__ID);
 		createEAttribute(locationEClass, LOCATION__URI);
+		createEReference(locationEClass, LOCATION__COMPOSITE_URI);
 		createEAttribute(locationEClass, LOCATION__OPTIONS);
 		createEReference(locationEClass, LOCATION__IUS);
+		createEOperation(locationEClass, LOCATION___RESOLVE_URI);
+		createEOperation(locationEClass, LOCATION___RESOLVE_IUS_VERSION);
 
 		includeDeclarationEClass = createEClass(INCLUDE_DECLARATION);
 		createEAttribute(includeDeclarationEClass, INCLUDE_DECLARATION__NAME);
@@ -753,6 +812,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		iuEClass = createEClass(IU);
 		createEAttribute(iuEClass, IU__ID);
 		createEAttribute(iuEClass, IU__VERSION);
+		createEReference(iuEClass, IU__VAR_VERSION);
 		createEReference(iuEClass, IU__LOCATION);
 
 		// Create enums
@@ -804,6 +864,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(targetPlatformEClass, TargetPlatform.class, "TargetPlatform", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTargetPlatform_CompositeElementsResolved(), theEcorePackage.getEBoolean(), "compositeElementsResolved", "false", 0, 1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTargetPlatform_Name(), theEcorePackage.getEString(), "name", null, 0, 1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTargetPlatform_Contents(), this.getTargetContent(), this.getTargetContent_TargetPlatform(), "contents", null, 0, -1, TargetPlatform.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTargetPlatform_Includes(), this.getIncludeDeclaration(), null, "includes", null, 0, -1, TargetPlatform.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -828,6 +889,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		initEClass(varDefinitionEClass, VarDefinition.class, "VarDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVarDefinition_Name(), theEcorePackage.getEString(), "name", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVarDefinition_Value(), theEcorePackage.getEString(), "value", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarDefinition_OverrideValue(), theEcorePackage.getEString(), "overrideValue", "", 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compositeStringEClass, CompositeString.class, "CompositeString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompositeString_Name(), theEcorePackage.getEString(), "name", "composite string", 0, 1, CompositeString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -853,8 +915,13 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLocation_ID(), theEcorePackage.getEString(), "ID", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocation_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocation_CompositeUri(), this.getCompositeString(), null, "compositeUri", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocation_Options(), this.getOption(), "options", null, 0, -1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLocation_Ius(), this.getIU(), this.getIU_Location(), "ius", null, 0, -1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getLocation__ResolveUri(), null, "resolveUri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getLocation__ResolveIUsVersion(), null, "resolveIUsVersion", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(includeDeclarationEClass, IncludeDeclaration.class, "IncludeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIncludeDeclaration_Name(), theEcorePackage.getEString(), "name", "include declaration", 0, 1, IncludeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -866,6 +933,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		initEClass(iuEClass, fr.obeo.releng.targetplatform.IU.class, "IU", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIU_ID(), theEcorePackage.getEString(), "ID", null, 0, 1, fr.obeo.releng.targetplatform.IU.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIU_Version(), theEcorePackage.getEString(), "version", null, 0, 1, fr.obeo.releng.targetplatform.IU.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIU_VarVersion(), this.getVarCall(), null, "varVersion", null, 0, 1, fr.obeo.releng.targetplatform.IU.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIU_Location(), this.getLocation(), this.getLocation_Ius(), "location", null, 0, 1, fr.obeo.releng.targetplatform.IU.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals

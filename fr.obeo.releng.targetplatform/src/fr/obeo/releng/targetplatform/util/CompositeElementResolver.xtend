@@ -1,21 +1,28 @@
 package fr.obeo.releng.targetplatform.util
 
-import fr.obeo.releng.targetplatform.TargetPlatform
-import java.util.List
-import fr.obeo.releng.targetplatform.VarDefinition
-import fr.obeo.releng.targetplatform.TargetPlatformFactory
-import java.util.Set
 import com.google.inject.Inject
+import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.TargetPlatformFactory
+import fr.obeo.releng.targetplatform.VarDefinition
+import java.util.List
+import java.util.Set
 
 class CompositeElementResolver {
 	
 	@Inject
 	LocationIndexBuilder locationIndexBuilder
 	
+	@Inject
+	ImportVariableManager importVariableManager;
+	
+	/* Composite elements are string defined by a concatenation of static string and variable call:
+	 * "string1" + ${var1} + "aaa" + ${var2} +... */ 
 	def void resolveCompositeElements(TargetPlatform targetPlatform) {
 		if (targetPlatform.compositeElementsResolved == true) {
 			return
 		}
+		
+		overrideVariableDefinition(targetPlatform)
 		
 		searchAndAppendDefineFromIncludedTpd(targetPlatform)
 		resolveLocations(targetPlatform)
@@ -25,6 +32,41 @@ class CompositeElementResolver {
 		]
 	}
 	
+	private def void overrideVariableDefinition(TargetPlatform targetPlatform) {
+		val alreadyVisitedTarget = newHashSet()
+		overrideVariableDefinition(targetPlatform, alreadyVisitedTarget)
+	}
+	
+	/* Override value of variable definition with command line or environment variable */
+	private def void overrideVariableDefinition(TargetPlatform targetPlatform, Set<TargetPlatform> alreadyVisitedTarget) {
+		
+		alreadyVisitedTarget.add(targetPlatform)
+		
+		targetPlatform.contents
+			.filter[
+				it instanceof VarDefinition
+			].forEach[
+				val varDef = it as VarDefinition
+				val varDefName = varDef.name
+				
+				val variableValue = importVariableManager.getVariableValue(varDefName)
+				if (variableValue !== null) {
+					varDef.overrideValue = variableValue
+				}
+			]
+
+		val directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
+		directlyImportedTargetPlatforms
+			.filter[
+				//Prevent from circular include
+				!alreadyVisitedTarget.contains(it)
+			]
+			.forEach[
+				overrideVariableDefinition(it, alreadyVisitedTarget)
+			]
+	}
+	
+	/* Resolve location ("location" directive) means resolve variable call used in location declaration */
 	private def void resolveLocations(TargetPlatform targetPlatform) {
 		targetPlatform.locations.forEach[
 			it.resolveUri
@@ -38,6 +80,8 @@ class CompositeElementResolver {
 		searchAndAppendDefineFromIncludedTpd(targetPlatform, alreadyVisitedTarget)
 	}
 	
+	/* Search and append to the list of "define": variable definition of the current tpd file (targetPlatform)
+	 * the list of "define" found in sub tpd: imported with "include" directive */
 	private def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform, Set<TargetPlatform> alreadyVisitedTarget) {
 		val ImportedDefineFromSubTpd = newHashSet()
 		val processedTargetPlatform = newLinkedList()
@@ -49,7 +93,7 @@ class CompositeElementResolver {
 		while(directlyImportedTargetPlatforms.size > processedTargetPlatform.size) {
 			directlyImportedTargetPlatforms
 				.filter[
-					//Prevent of circular include
+					//Prevent from circular include
 					!alreadyVisitedTarget.contains(it)
 				]
 				.filter[
@@ -57,6 +101,7 @@ class CompositeElementResolver {
 				]
 				.forEach[
 					var notProcessedTargetPlatform = it
+					overrideVariableDefinition(notProcessedTargetPlatform)
 					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, newHashSet(alreadyVisitedTarget))
 					notProcessedTargetPlatform.contents.forEach[
 						if (it instanceof VarDefinition) {
@@ -75,6 +120,8 @@ class CompositeElementResolver {
 		}
 	}
 	
+	/* Targets that are directly imported, with an "include" directive present in the current
+	 * target: "targetPlatform". Do not look for target imported through an imported target */
 	private def List<TargetPlatform> searchDirectlyImportedTpd(TargetPlatform targetPlatform) {
 		targetPlatform.includes
 			.map[
@@ -108,6 +155,7 @@ class CompositeElementResolver {
 					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
 					currentImportedDefineCopy.name = currentImportedDefine.name
 					currentImportedDefineCopy.value = currentImportedDefine.value
+					currentImportedDefineCopy.overrideValue = currentImportedDefine.overrideValue
 					toBeAddedDefine.add(currentImportedDefineCopy)
 				}
 			]

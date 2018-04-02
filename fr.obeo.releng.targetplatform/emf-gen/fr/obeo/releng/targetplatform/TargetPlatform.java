@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getContents <em>Contents</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getIncludes <em>Includes</em>}</li>
@@ -28,6 +29,33 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface TargetPlatform extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Composite Elements Resolved</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composite Elements Resolved</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composite Elements Resolved</em>' attribute.
+	 * @see #setCompositeElementsResolved(boolean)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_CompositeElementsResolved()
+	 * @model default="false" unique="false"
+	 * @generated
+	 */
+	boolean isCompositeElementsResolved();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Composite Elements Resolved</em>' attribute.
+	 * @see #isCompositeElementsResolved()
+	 * @generated
+	 */
+	void setCompositeElementsResolved(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

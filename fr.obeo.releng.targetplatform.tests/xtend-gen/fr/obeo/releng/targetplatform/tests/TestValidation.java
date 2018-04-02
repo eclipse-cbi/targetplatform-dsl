@@ -24,6 +24,8 @@ import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
+import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import java.util.List;
@@ -67,6 +69,12 @@ public class TestValidation {
   
   @Inject
   private LocationIndexBuilder indexBuilder;
+  
+  @Inject
+  private CompositeElementResolver compositeElementResolver;
+  
+  @Inject
+  private ImportVariableManager importVariableManager;
   
   @Inject
   @Named(Constants.LANGUAGE_NAME)
@@ -2090,7 +2098,7 @@ public class TestValidation {
       _builder.newLine();
       _builder.append("include \"subTpd.tpd\"");
       _builder.newLine();
-      _builder.append("include ${subDirName} \"/\" \"subInclude.tpd\"");
+      _builder.append("include ${subDirName} + \"/\" + \"subInclude.tpd\"");
       _builder.newLine();
       final TargetPlatform compositeIncludeTarget = this.parser.parse(_builder, URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -2155,6 +2163,85 @@ public class TestValidation {
   }
   
   @Test
+  public void checkImportCycleDueToVariableDefinitionOverride() {
+    try {
+      final String[] args = { "compositeIncludeTarget.tpd", "urlCyclicInclude=../compositeIncludeTarget.tpd" };
+      this.importVariableManager.processCommandLineArguments(args);
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"compositeIncludeTarget\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd.tpd\"");
+      _builder.newLine();
+      _builder.append("include ${subDirName} + \"/\" + \"subInclude.tpd\"");
+      _builder.newLine();
+      final TargetPlatform compositeIncludeTarget = this.parser.parse(_builder, URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"subTpd\"");
+      _builder_1.newLine();
+      _builder_1.append("include \"subsubTpd.tpd\"");
+      _builder_1.newLine();
+      _builder_1.append("define subDirName=\"subdir\"");
+      _builder_1.newLine();
+      this.parser.parse(_builder_1, URI.createURI("tmp:/subTpd.tpd"), resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"subInclude\"");
+      _builder_2.newLine();
+      _builder_2.append("define urlCyclicInclude = \"notACycle.tpd\"");
+      _builder_2.newLine();
+      _builder_2.append("include ${urlCyclicInclude}");
+      _builder_2.newLine();
+      final TargetPlatform subIncludeCircular = this.parser.parse(_builder_2, URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet);
+      Assert.assertTrue(compositeIncludeTarget.eResource().getErrors().isEmpty());
+      tester.validator().checkImportCycle(compositeIncludeTarget);
+      List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
+      Assert.assertEquals(1, diagnotics.size());
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
+        @Override
+        public Boolean apply(final AbstractValidationDiagnostic it) {
+          EObject _sourceEObject = it.getSourceEObject();
+          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
+        }
+      };
+      Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
+      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
+        @Override
+        public void accept(final AbstractValidationDiagnostic it) {
+          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+          EObject _sourceEObject = it.getSourceEObject();
+          Assert.assertEquals("subdir/subInclude.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        }
+      };
+      diagnotics.forEach(_function_1);
+      Assert.assertTrue(subIncludeCircular.eResource().getErrors().isEmpty());
+      tester.validator().checkImportCycle(subIncludeCircular);
+      diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
+      Assert.assertEquals(1, diagnotics.size());
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
+        @Override
+        public Boolean apply(final AbstractValidationDiagnostic it) {
+          EObject _sourceEObject = it.getSourceEObject();
+          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
+        }
+      };
+      Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
+      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
+        @Override
+        public void accept(final AbstractValidationDiagnostic it) {
+          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+          EObject _sourceEObject = it.getSourceEObject();
+          Assert.assertEquals("../compositeIncludeTarget.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        }
+      };
+      diagnotics.forEach(_function_3);
+      this.importVariableManager.clear();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void checkIUIDAndRange1() {
     try {
       final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
@@ -2170,6 +2257,7 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       tester.validator().checkIUIDAndRangeInRepository(IterableExtensions.<IU>head(IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(0, diagnotics.size());
@@ -2194,6 +2282,7 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       tester.validator().checkIUIDAndRangeInRepository(IterableExtensions.<IU>head(IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
@@ -2247,6 +2336,7 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       final Consumer<IU> _function = new Consumer<IU>() {
         @Override
         public void accept(final IU it) {
@@ -2292,6 +2382,7 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       final Consumer<IU> _function = new Consumer<IU>() {
         @Override
         public void accept(final IU it) {
@@ -2322,6 +2413,7 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       final Consumer<IU> _function = new Consumer<IU>() {
         @Override
         public void accept(final IU it) {

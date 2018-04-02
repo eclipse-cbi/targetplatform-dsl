@@ -50,7 +50,7 @@ public interface VarCall extends CompositeStringPart {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return this.getVarName().getValue();'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='boolean _isEmpty = this.getVarName().getOverrideValue().isEmpty();\nif (_isEmpty)\n{\n\treturn this.getVarName().getValue();\n}\nelse\n{\n\treturn this.getVarName().getOverrideValue();\n}'"
 	 * @generated
 	 */
 	String getActualString();

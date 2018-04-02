@@ -161,7 +161,13 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 	 * @generated
 	 */
 	public String getActualString() {
-		return this.getVarName().getValue();
+		boolean _isEmpty = this.getVarName().getOverrideValue().isEmpty();
+		if (_isEmpty) {
+			return this.getVarName().getValue();
+		}
+		else {
+			return this.getVarName().getOverrideValue();
+		}
 	}
 
 	/**

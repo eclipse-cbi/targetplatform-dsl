@@ -17,8 +17,6 @@ import com.google.inject.Inject
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformFactory
-import fr.obeo.releng.targetplatform.VarDefinition
 import java.util.LinkedList
 import java.util.List
 import java.util.Set

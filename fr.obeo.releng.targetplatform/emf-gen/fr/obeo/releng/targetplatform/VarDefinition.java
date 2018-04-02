@@ -14,6 +14,7 @@ package fr.obeo.releng.targetplatform;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.VarDefinition#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.VarDefinition#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.VarDefinition#getOverrideValue <em>Override Value</em>}</li>
  * </ul>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getVarDefinition()
@@ -72,5 +73,32 @@ public interface VarDefinition extends TargetContent {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Override Value</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Override Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Override Value</em>' attribute.
+	 * @see #setOverrideValue(String)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getVarDefinition_OverrideValue()
+	 * @model default="" unique="false"
+	 * @generated
+	 */
+	String getOverrideValue();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.VarDefinition#getOverrideValue <em>Override Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Override Value</em>' attribute.
+	 * @see #getOverrideValue()
+	 * @generated
+	 */
+	void setOverrideValue(String value);
 
 } // VarDefinition

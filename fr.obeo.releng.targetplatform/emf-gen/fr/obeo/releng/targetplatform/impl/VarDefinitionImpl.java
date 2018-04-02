@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getOverrideValue <em>Override Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,6 +73,26 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOverrideValue() <em>Override Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverrideValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OVERRIDE_VALUE_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getOverrideValue() <em>Override Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverrideValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String overrideValue = OVERRIDE_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +211,27 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getOverrideValue() {
+		return overrideValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverrideValue(String newOverrideValue) {
+		String oldOverrideValue = overrideValue;
+		overrideValue = newOverrideValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE, oldOverrideValue, overrideValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -244,6 +286,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return getName();
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
 				return getValue();
+			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
+				return getOverrideValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -264,6 +308,9 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return;
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
 				setValue((String)newValue);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
+				setOverrideValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -286,6 +333,9 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
+				setOverrideValue(OVERRIDE_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -304,6 +354,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
+				return OVERRIDE_VALUE_EDEFAULT == null ? overrideValue != null : !OVERRIDE_VALUE_EDEFAULT.equals(overrideValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -322,6 +374,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		result.append(name);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", overrideValue: ");
+		result.append(overrideValue);
 		result.append(')');
 		return result.toString();
 	}
