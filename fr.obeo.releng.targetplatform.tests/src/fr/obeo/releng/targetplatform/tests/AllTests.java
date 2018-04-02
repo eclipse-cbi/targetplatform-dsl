@@ -15,6 +15,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import fr.obeo.releng.targetplatform.tests.composite_elements.TestCompositeLocation;
+import fr.obeo.releng.targetplatform.tests.composite_elements.TestOverrideVariableDefinition;
+import fr.obeo.releng.targetplatform.tests.composite_elements.TestVariableVariableDefinition;
 import fr.obeo.releng.targetplatform.ui.tests.TestContentAssist;
 
 /**
@@ -29,7 +31,9 @@ import fr.obeo.releng.targetplatform.ui.tests.TestContentAssist;
 	TestTargetGeneration.class,
 	TestTargetPlatformIndexer.class,
 	TestValidation.class,
-	TestCompositeLocation.class
+	TestCompositeLocation.class,
+	TestOverrideVariableDefinition.class,
+	TestVariableVariableDefinition.class
 })
 public class AllTests {
 	
