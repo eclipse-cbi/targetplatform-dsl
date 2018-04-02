@@ -18,6 +18,7 @@ import com.google.inject.Provider;
 
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformIDValueConverter;
+import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 
 /**
@@ -36,6 +37,10 @@ public class TargetPlatformRuntimeModule extends fr.obeo.releng.targetplatform.A
 	
 	public Class<? extends LocationIndexBuilder> bindLocationIndexBuilder() {
 		return LocationIndexBuilder.class;
+	}
+	
+	public Class<? extends ImportVariableManager> bindImportVariableManager() {
+		return ImportVariableManager.class;
 	}
 	
 	public Provider<IProvisioningAgent> provideIProvisioningAgent() {

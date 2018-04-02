@@ -121,6 +121,7 @@ class Environment extends TargetContent {
 class VarDefinition extends TargetContent {
 	String name
 	String value
+	String overrideValue = ""
 }
 
 class CompositeString {
@@ -144,9 +145,12 @@ interface CompositeStringPart {
 
 class VarCall extends CompositeStringPart {
 	refers VarDefinition varName
-
+	
 	op String getActualString() {
-		return varName.value
+		if (varName.overrideValue.isEmpty)
+			return varName.value
+		else
+			return varName.overrideValue
 	}
 }
 

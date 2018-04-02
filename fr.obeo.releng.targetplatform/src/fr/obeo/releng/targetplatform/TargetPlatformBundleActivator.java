@@ -88,6 +88,17 @@ public class TargetPlatformBundleActivator extends Plugin {
 		}
 	}
 	
+	public void registerInjector(String language, Injector injector) {
+		synchronized (injectors) {
+			if (!injectors.containsKey(language)) {
+				injectors.put(language, injector);
+			}
+			else {
+				throw new RuntimeException("Error, try to register: " + language + " twice");
+			}
+		}
+	}
+	
 	protected Injector createInjector(String language) {
 		try {
 			Module runtimeModule = getRuntimeModule(language);

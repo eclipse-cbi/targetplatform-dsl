@@ -20,8 +20,8 @@ import com.google.inject.Injector;
  */
 public class TargetPlatformStandaloneSetup extends TargetPlatformStandaloneSetupGenerated{
 
-	public static void doSetup() {
-		new TargetPlatformStandaloneSetup().createInjectorAndDoEMFRegistration();
+	public static Injector doSetup() {
+		return new TargetPlatformStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 	
 	@Override
