@@ -87,4 +87,44 @@ class TestVariableVariableDefinition {
 		assertEquals("var3", varDef.name)
 		assertEquals("val1_str2__str3_val1", varDef.value.computeActualString)
 	}
+	
+	@Test
+	def testDefinitionFromNestedVariableCall() {
+		val resourceSet = resourceSetProvider.get
+		val varCallDefTarget = parser.parse('''
+			target "varCallDefTarget"
+			include "subTpd.tpd"
+			define subDirNameRef = ${subDirName} + "/"
+			include ${subDirNameRef} + "subInclude.tpd"
+		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define subDirName="subdir"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			include "subSubInclude.tpd"
+			define emfVer = "[" + ${emfVerStart} + "," + ${emfVerEnd} + ")"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group ${emfVer}
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubInclude"
+			define emfVerStart = "2.9.2"
+			define emfVerEnd = "3.0.0"
+		''', URI.createURI("tmp:/subdir/subSubInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = varCallDefTarget.includes.last.compositeImportURI
+		assertEquals("subdir/", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(varCallDefTarget)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
+		val location = targetPlatform.locations.last
+		assertEquals("[2.9.2,3.0.0)", location.ius.head.version)
+	}
 }
