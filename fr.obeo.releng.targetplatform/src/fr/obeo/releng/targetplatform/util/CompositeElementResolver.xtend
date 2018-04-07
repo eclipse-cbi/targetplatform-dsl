@@ -62,7 +62,7 @@ class CompositeElementResolver {
 				!alreadyVisitedTarget.contains(it)
 			]
 			.forEach[
-				overrideVariableDefinition(it, alreadyVisitedTarget)
+				overrideVariableDefinition(it, newHashSet(alreadyVisitedTarget))
 			]
 	}
 	
@@ -160,5 +160,10 @@ class CompositeElementResolver {
 				}
 			]
 		targetContent.addAll(toBeAddedDefine)
+	}
+	
+	def List<VarDefinition> checkVariableDefinitionCycle(VarDefinition varDef) {
+		varDef.checkVarCycle
+		return varDef.varDefCycle
 	}
 }

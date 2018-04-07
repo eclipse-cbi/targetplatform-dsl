@@ -17,8 +17,11 @@ import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 import java.util.List
 import org.eclipse.emf.common.util.Diagnostic
@@ -32,16 +35,11 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic
+import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.validation.RangeBasedDiagnostic
-import fr.obeo.releng.targetplatform.Options
-import fr.obeo.releng.targetplatform.Option
-import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
-import fr.obeo.releng.targetplatform.util.CompositeElementResolver
-import fr.obeo.releng.targetplatform.util.ImportVariableManager
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -60,13 +58,7 @@ class TestValidation {
 	Provider<XtextResourceSet> resourceSetProvider;
 	
 	@Inject
-	LocationIndexBuilder indexBuilder
-	
-	@Inject
 	CompositeElementResolver compositeElementResolver
-	
-	@Inject
-	ImportVariableManager importVariableManager;
 	
 	@Inject
 	@Named(Constants::LANGUAGE_NAME)
@@ -1282,93 +1274,6 @@ class TestValidation {
 	}
 	
 	@Test
-	def checkImportCycleDueToVariableDefinition() {
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val resourceSet = resourceSetProvider.get;
-		val compositeIncludeTarget = parser.parse('''
-			target "compositeIncludeTarget"
-			include "subTpd.tpd"
-			include ${subDirName} + "/" + "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
-		parser.parse('''
-			target "subTpd"
-			include "subsubTpd.tpd"
-			define subDirName="subdir"
-		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet);
-		val subIncludeCircular = parser.parse('''
-			target "subInclude"
-			include "../compositeIncludeTarget.tpd"
-		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
-		
-		assertTrue(compositeIncludeTarget.eResource.errors.empty)
-		tester.validator.checkImportCycle(compositeIncludeTarget)
-		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
-		assertEquals(1, diagnotics.size)
-		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
-		diagnotics.forEach[
-			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
-			assertEquals("subdir/subInclude.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
-		]
-		
-		assertTrue(subIncludeCircular.eResource.errors.empty)
-		tester.validator.checkImportCycle(subIncludeCircular)
-		diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
-		assertEquals(1, diagnotics.size)
-		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
-		diagnotics.forEach[
-			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
-			assertEquals("../compositeIncludeTarget.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
-		]
-	}
-	
-	@Test
-	def checkImportCycleDueToVariableDefinitionOverride() {
-		val String[] args = #["compositeIncludeTarget.tpd", "urlCyclicInclude=../compositeIncludeTarget.tpd"]
-		
-		importVariableManager.processCommandLineArguments(args)
-		
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val resourceSet = resourceSetProvider.get;
-		val compositeIncludeTarget = parser.parse('''
-			target "compositeIncludeTarget"
-			include "subTpd.tpd"
-			include ${subDirName} + "/" + "subInclude.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
-		parser.parse('''
-			target "subTpd"
-			include "subsubTpd.tpd"
-			define subDirName="subdir"
-		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet);
-		val subIncludeCircular = parser.parse('''
-			target "subInclude"
-			define urlCyclicInclude = "notACycle.tpd"
-			include ${urlCyclicInclude}
-		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
-		
-		assertTrue(compositeIncludeTarget.eResource.errors.empty)
-		tester.validator.checkImportCycle(compositeIncludeTarget)
-		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
-		assertEquals(1, diagnotics.size)
-		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
-		diagnotics.forEach[
-			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
-			assertEquals("subdir/subInclude.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
-		]
-		
-		assertTrue(subIncludeCircular.eResource.errors.empty)
-		tester.validator.checkImportCycle(subIncludeCircular)
-		diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
-		assertEquals(1, diagnotics.size)
-		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])
-		diagnotics.forEach[
-			assertEquals(TargetPlatformValidator::CHECK__INCLUDE_CYCLE, issueCode)
-			assertEquals("../compositeIncludeTarget.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
-		]
-		
-		importVariableManager.clear
-	}
-	
-	@Test
 	def checkIUIDAndRange1() {
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val targetPlatform = parser.parse('''
@@ -1869,77 +1774,6 @@ class TestValidation {
 		diagnostics = tester.diagnose.allDiagnostics.filter(typeof(RangeBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
 		assertEquals(TargetPlatformValidator::CHECK__VERSION_KEYWORDS, diagnostics.head.issueCode)
-	}
-	
-	@Test
-	def testNoDuplicatedVarDefinition() {
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val compositeIncludeTarget = parser.parse('''
-			target "compositeIncludeTarget"
-			define twiceVar = "val1"
-			define otherVar = "val"
-			define twiceVar = "val2"
-		''')
-		assertTrue(compositeIncludeTarget.eResource.errors.empty)
-		tester.validator.checkNoDuplicatedDefine(compositeIncludeTarget)
-		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
-		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
-		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_DEFINE, diagnostics.head.issueCode)
-		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
-		assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).message)
-	}
-	
-	@Test
-	def testNoDuplicatedVarDefinitionFromInclude() {
-		val resourceSet = resourceSetProvider.get
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val compositeIncludeTarget = parser.parse('''
-			target "compositeIncludeTarget"
-			include "subTpd1.tpd"
-			include "subTpd2.tpd"
-		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
-		parser.parse('''
-			target "subTpd1"
-			define twiceVar = "val1"
-		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
-		parser.parse('''
-			target "subTpd2"
-			define twiceVar = "val2"
-		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
-		
-		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
-		assertEquals(0, locationIndex.size)
-		
-		assertTrue(compositeIncludeTarget.eResource.errors.empty)
-		tester.validator.checkNoDuplicatedDefine(compositeIncludeTarget)
-		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
-		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
-		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_DEFINE, diagnostics.head.issueCode)
-		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
-		assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).message)
-	}
-	
-	@Test
-	def testNoDuplicatedVarDefinitionFromIncludeValueOverloaded() {
-		val resourceSet = resourceSetProvider.get
-		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
-		val compositeIncludeTarget = parser.parse('''
-			target "compositeIncludeTarget"
-			include "subTpd1.tpd"
-			define twiceVar = "val"
-		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
-		parser.parse('''
-			target "subTpd1"
-			define twiceVar = "val1"
-		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
-		
-		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
-		assertEquals(0, locationIndex.size)
-		
-		assertTrue(compositeIncludeTarget.eResource.errors.empty)
-		tester.validator.checkNoDuplicatedDefine(compositeIncludeTarget)
-		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
-		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
 	}
 	
 	@Test

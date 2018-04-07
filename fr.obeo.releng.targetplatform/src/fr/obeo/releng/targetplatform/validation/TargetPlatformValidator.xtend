@@ -28,6 +28,7 @@ import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformPackage
 import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.net.URI
 import java.util.List
@@ -47,7 +48,6 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
-import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 
 /**
  * Custom validation rules. 
@@ -82,6 +82,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	public static val CHECK__LOCATION_ID_UNIQNESS = "CHECK__LOCATION_ID_UNIQNESS"	
 	public static val CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE"
+	public static val CHECK__VARIABLE_CYCLE = "CHECK__VARIABLE_CYCLE"
 	public static val CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION"
 	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
 	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
@@ -201,7 +202,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateIUVersionRangeWihString(IU iu) {
-		if (iu.version != null) {
+		if (iu.version !== null) {
 			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION)
 			if ("STRING".equals((nodes.head.grammarElement as RuleCall).rule.name)) {
 				warning("Usage of strings is deprecated for version range. You should remove the quotes.",
@@ -225,7 +226,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val locationsURIWithoutConflictingID = locationIDsByURI.asMap.filter[key,value|value.size <= 1].keySet
 		val locationsWithoutConflictingID = locationsURIWithoutConflictingID.map[locationsByURI.get(it)].flatten
 		
-		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!=null], [ID])
+		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!==null], [ID])
 		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[uri].toSet.size > 1].values.flatten
 		locationsWithDuplicateID.forEach[location|
 			if (location.eResource == resource) {
@@ -257,7 +258,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val cycle = indexBuilder.checkIncludeCycle(targetPlatform)
 		if (!cycle.empty) {
 			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(indexBuilder.getImportedTargetPlatform(targetPlatform.eResource, it))]
-			if (cyclingImport != null) {
+			if (cyclingImport !== null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
 					TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
@@ -265,6 +266,27 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				)
 			}
 		}
+	}
+	
+	@Check // TESTED
+	def checkVarDefinitionCycle(TargetPlatform targetPlatform) {
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
+		
+		targetPlatform.contents
+			.filter [
+				it instanceof VarDefinition
+			]
+			.forEach[
+				val currentVariable = it as VarDefinition
+				val cycle = compositeElementResolver.checkVariableDefinitionCycle(currentVariable)
+				if (!cycle.empty) {
+					error("Cycle detected in the defined variables: " + cycle.map[name].join(" -> "),
+						currentVariable,
+						TargetPlatformPackage.Literals.VAR_DEFINITION__NAME,
+						CHECK__VARIABLE_CYCLE
+					)
+				}
+			]
 	}
 	
 	@Check // PARTIALLY TESTED
@@ -325,7 +347,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	def checkLocationURI(Location location) {
 		location.resolveUri()
 		val monitor = 
-			if (context != null && context.get(typeof(IProgressMonitor)) != null) {
+			if (context !== null && context.get(typeof(IProgressMonitor)) !== null) {
 				context.get(typeof(IProgressMonitor)) as IProgressMonitor
 			} else {
 				new NullProgressMonitor
@@ -480,7 +502,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val semicolonKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.semicolonKeyword_1_0_0]
 		val equalSignKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.equalsSignKeyword_1_0_2]
 		
-		if (semicolonKeywordRule != null) {
+		if (semicolonKeywordRule !== null) {
 			acceptWarning("Usage of keywords ';version=' are not required anymore and has been deprecated.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
 	}

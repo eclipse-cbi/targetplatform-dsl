@@ -3,6 +3,7 @@ package fr.obeo.releng.targetplatform
 
 import com.google.common.base.Splitter
 import java.util.Locale
+import java.util.List
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
 import org.eclipse.jdt.launching.JavaRuntime
@@ -122,16 +123,46 @@ class VarDefinition extends TargetContent {
 	String name
 	contains CompositeString value
 	String overrideValue = ""
+	
+	boolean variableDefinitionCycleDetected = "false"
+	VarDefList varDefCycle
+	
+	op void checkVarCycle() {
+		varDefCycle = newArrayList
+		varDefCycle.add(this)
+		value.computeActualString(varDefCycle)
+		
+		variableDefinitionCycleDetected = value.variableDefinitionCycleDetected
+		if (variableDefinitionCycleDetected) {
+			varDefCycle = newArrayList(value.varDefCycle)
+		}
+	}
 }
+
+type VarDefList wraps List<VarDefinition>
 
 class CompositeString {
 	String name = "composite string"
 	contains CompositeStringPart[] stringParts opposite compositeString
+	boolean variableDefinitionCycleDetected = "false"
+	VarDefList varDefCycle
 	
 	op String computeActualString() {
+		val List<VarDefinition> alreadyCalledVariable = newArrayList
+		return computeActualString(alreadyCalledVariable)
+	}
+	
+	op String computeActualString(VarDefList alreadyCalledVariable) {
+		variableDefinitionCycleDetected = false
 		var result = new String
 		for (CompositeStringPart stringPart : stringParts) {
-			result += stringPart.actualString
+			val List<VarDefinition> newAlreadyCalledVariable = newArrayList(alreadyCalledVariable)
+			result += stringPart.getActualString(newAlreadyCalledVariable)
+			if (stringPart.variableDefinitionCycleDetected) {
+				variableDefinitionCycleDetected = stringPart.variableDefinitionCycleDetected
+				varDefCycle = newArrayList(stringPart.varDefCycle)
+				return ""
+			}
 		}
 		return result
 	}
@@ -151,16 +182,50 @@ interface CompositeStringPart {
 	
 	op String getActualString()
 	
+	op String getActualString(VarDefList alreadyCalledVariable)
+	
+	op boolean isVariableDefinitionCycleDetected()
+	
+	op VarDefList getVarDefCycle()
+	
 	op CompositeStringPart getCopy()
 }
 
 class VarCall extends CompositeStringPart {
 	refers VarDefinition varName
+	boolean variableDefinitionCycleDetected = "false"
+	VarDefList varDefCycle
 	
 	op String getActualString() {
+		val alreadyCalledVariable = newArrayList
+		return getActualString(alreadyCalledVariable)
+	}
+	
+	op String getActualString(VarDefList alreadyCalledVariable) {
+		// Cycle detection at this stage
+		variableDefinitionCycleDetected = false;
+		if (varName.value !== null) {
+			if (alreadyCalledVariable.contains(varName)) {
+				variableDefinitionCycleDetected = true;
+			}
+			alreadyCalledVariable.add(varName)
+			if (variableDefinitionCycleDetected) {
+				varDefCycle = newArrayList(alreadyCalledVariable)
+				return ""
+			}
+		}
+		// Compute actual string
+		// Is variable override
 		if (varName.overrideValue.isEmpty) {
+			// Is the variable called exist
 			if (varName.value !== null) {
-				return varName.value.computeActualString
+				val stringOutput = varName.value.computeActualString(alreadyCalledVariable)
+				variableDefinitionCycleDetected = varName.value.variableDefinitionCycleDetected
+				if (variableDefinitionCycleDetected) {
+					varDefCycle = newArrayList(varName.value.varDefCycle)
+					return ""
+				}
+				return stringOutput
 			}
 			return "";
 		}
@@ -176,9 +241,16 @@ class VarCall extends CompositeStringPart {
 
 class StaticString extends CompositeStringPart {
 	String value
+	boolean variableDefinitionCycleDetected = "false"
+	VarDefList varDefCycle
 	
 	op String getActualString() {
+		varDefCycle = newArrayList
 		return value
+	}
+	
+	op String getActualString(VarDefList alreadyCalledVariable) {
+		return getActualString()
 	}
 	
 	op StaticString getCopy() {
