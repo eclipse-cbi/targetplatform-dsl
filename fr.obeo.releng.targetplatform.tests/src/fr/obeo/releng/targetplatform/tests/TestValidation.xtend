@@ -21,7 +21,6 @@ import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
-import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
 import java.util.List
 import org.eclipse.emf.common.util.Diagnostic
@@ -56,9 +55,6 @@ class TestValidation {
 	
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider;
-	
-	@Inject
-	CompositeElementResolver compositeElementResolver
 	
 	@Inject
 	@Named(Constants::LANGUAGE_NAME)
@@ -1283,7 +1279,6 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(0, diagnotics.size)
@@ -1299,7 +1294,6 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		tester.validator.checkIUIDAndRangeInRepository(targetPlatform.locations.head.ius.head)
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(1, diagnotics.size)
@@ -1324,7 +1318,6 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(3, diagnotics.size)
@@ -1344,7 +1337,6 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(0, diagnotics.size)
@@ -1360,7 +1352,6 @@ class TestValidation {
 			}
 		''')
 		assertTrue(targetPlatform.eResource.errors.empty)
-		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		targetPlatform.locations.head.ius.forEach[tester.validator.checkIUIDAndRangeInRepository(it)]
 		val diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(1, diagnotics.size)

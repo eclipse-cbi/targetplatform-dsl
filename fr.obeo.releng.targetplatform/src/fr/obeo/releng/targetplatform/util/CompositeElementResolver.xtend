@@ -1,11 +1,14 @@
 package fr.obeo.releng.targetplatform.util
 
 import com.google.inject.Inject
+import fr.obeo.releng.targetplatform.TargetContent
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformFactory
+import fr.obeo.releng.targetplatform.VarCall
 import fr.obeo.releng.targetplatform.VarDefinition
 import java.util.List
 import java.util.Set
+import org.eclipse.emf.common.util.EList
 
 class CompositeElementResolver {
 	
@@ -160,6 +163,52 @@ class CompositeElementResolver {
 				}
 			]
 		targetContent.addAll(toBeAddedDefine)
+		updateVariableDefinition(targetContent)
+	}
+	
+	/*
+	 * @param targetContent Elements contained in the target, we only processed variable definition.
+	 * 
+	 * This method "updateVariableDefinition" is called after we have imported each variable definition from subtarget
+	 * 
+	 * When a variable definition is copied into another target, if it contains some variable calls,
+	 * we eventually need to update them
+	 * 
+	 * target "mainTpd"
+	 * include "subTpd.tpd"
+	 * define var1 = ${var2}
+	 * define var2b = "value2"
+	 * 
+	 * target "subTpd"
+	 * define var2 = ${var2b}
+	 * define var2b = "value2Sub"
+	 * 
+	 * Only var2 is copied in "mainTpd" (var2b is overloaded in "mainTpd"). But (before import)
+	 * var2 refers to var2b of "subTpd", hence if we simply copy it into "mainTpd", var1 will take
+	 * the value "value2Sub" instead of "value2" => We have to update the newly created var2 in
+	 * "mainTpd" to make it refer to var2b of "mainTpd"
+	 */
+	private def void updateVariableDefinition(EList<TargetContent> targetContent) {
+		for (varDef : targetContent) {
+			if (varDef instanceof VarDefinition) {
+				for (stringPart : varDef.value.stringParts) {
+					if (stringPart instanceof VarCall) {
+						var varCall = stringPart as VarCall
+						updateVariableCall(varCall, targetContent)
+					}
+				}
+			}
+		}
+	}
+	
+	private def void updateVariableCall(VarCall varCall, EList<TargetContent> targetContent) {
+		for (varDef : targetContent) {
+			if (varDef instanceof VarDefinition) {
+				if (varCall.varName.name == varDef.name) {
+					varCall.varName = varDef
+				}
+			}
+		}
 	}
 	
 	def List<VarDefinition> checkVariableDefinitionCycle(VarDefinition varDef) {

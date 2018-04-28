@@ -206,7 +206,7 @@ class TestCompositeElementValidation {
 	}
 	
 	@Test
-	def checkVariableDefinitionCycle3() {
+	def checkVariableDefinitionCycle3() { // with composite elements
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val resourceSet = resourceSetProvider.get;
 		val varDefCycle = parser.parse('''
@@ -259,6 +259,125 @@ class TestCompositeElementValidation {
 		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag1.issueCode)
 		assertEquals("var1", (diag1.sourceEObject as VarDefinition).name)
 		assertEquals("Cycle detected in the defined variables: var1 -> var1", diag1.message)
+	}
+	
+	@Test
+	def checkVariableDefinitionCycleInterleave() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val varDefCycle = parser.parse('''
+			target "varDefCycle"
+			define var1 = ${var2}
+			define var2 = ${var3} + ${var4}
+			define var3 = ${var1}
+			define var4 = ${var5}
+			define var5 = ${var2}
+		''', URI.createURI("tmp:/varDefCycle.tpd"), resourceSet)
+		
+		assertTrue(varDefCycle.eResource.errors.empty)
+		tester.validator.checkVarDefinitionCycle(varDefCycle)
+		
+		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(5, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof VarDefinition])
+		
+		val diag1 = diagnotics.get(0)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag1.issueCode)
+		assertEquals("var1", (diag1.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var1 -> var2 -> var3 -> var1", diag1.message)
+		
+		val diag2 = diagnotics.get(1)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag2.issueCode)
+		assertEquals("var2", (diag2.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var2 -> var3 -> var1 -> var2", diag2.message)
+		
+		val diag3 = diagnotics.get(2)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag3.issueCode)
+		assertEquals("var3", (diag3.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var3 -> var1 -> var2 -> var3", diag3.message)
+		
+		val diag4 = diagnotics.get(3)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag4.issueCode)
+		assertEquals("var4", (diag4.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var4 -> var5 -> var2 -> var3 -> var1 -> var2", diag4.message)
+		
+		val diag5 = diagnotics.get(4)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag5.issueCode)
+		assertEquals("var5", (diag5.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var5 -> var2 -> var3 -> var1 -> var2", diag5.message)
+	}
+	
+	@Test
+	def checkVariableDefinitionCycleFromSubTpd() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val varDefCycle = parser.parse('''
+			target "varDefCycle"
+			include "subTpd.tpd"
+			define var1 = ${var2}
+		''', URI.createURI("tmp:/varDefCycle.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define var1 = "xyz"
+			define var2 = ${var1}
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		
+		assertTrue(varDefCycle.eResource.errors.empty)
+		tester.validator.checkVarDefinitionCycle(varDefCycle)
+		
+		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(2, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof VarDefinition])
+		
+		val diag1 = diagnotics.get(0)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag1.issueCode)
+		assertEquals("var1", (diag1.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var1 -> var2 -> var1", diag1.message)
+		
+		val diag2 = diagnotics.get(1)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag2.issueCode)
+		assertEquals("var2", (diag2.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var2 -> var1 -> var2", diag2.message)
+	}
+	
+	@Test
+	def checkVariableDefinitionCycleFromSubSubTpd() {
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val resourceSet = resourceSetProvider.get;
+		val varDefCycle = parser.parse('''
+			target "varDefCycle"
+			include "subTpd.tpd"
+			define var1 = ${var2}
+			define var4 = ${var1}
+		''', URI.createURI("tmp:/varDefCycle.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			include "subSubTpd.tpd"
+			define var2 = ${var3}
+			define var4 = "xyz"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define var3 = ${var4}
+			define var4 = "abc"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		assertTrue(varDefCycle.eResource.errors.empty)
+		tester.validator.checkVarDefinitionCycle(varDefCycle)
+		
+		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
+		assertEquals(4, diagnotics.size)
+		assertTrue(diagnotics.forall[sourceEObject instanceof VarDefinition])
+		
+		val diag1 = diagnotics.get(0)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag1.issueCode)
+		assertEquals("var1", (diag1.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var1 -> var2 -> var3 -> var4 -> var1", diag1.message)
+		
+		val diag2 = diagnotics.get(1)
+		assertEquals(TargetPlatformValidator::CHECK__VARIABLE_CYCLE, diag2.issueCode)
+		assertEquals("var4", (diag2.sourceEObject as VarDefinition).name)
+		assertEquals("Cycle detected in the defined variables: var4 -> var1 -> var2 -> var3 -> var4", diag2.message)
 	}
 	
 	@Test

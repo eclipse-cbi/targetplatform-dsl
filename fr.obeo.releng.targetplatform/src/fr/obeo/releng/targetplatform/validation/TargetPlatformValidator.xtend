@@ -109,7 +109,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
-		location.resolveUri()
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val options = location.options
 		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
 			doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
@@ -151,7 +151,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkNoLocationOptionIfGlobalOptions(Location location) {
-		location.resolveUri()
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		if (!location.options.empty && !location.targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
@@ -188,7 +188,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateOptionsOnLocation(Location location) {
-		location.resolveUri()
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val targetPlatform = location.targetPlatform
 		
 		if (targetPlatform.options.empty && !location.options.empty) {
@@ -345,7 +345,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
-		location.resolveUri()
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val monitor = 
 			if (context !== null && context.get(typeof(IProgressMonitor)) !== null) {
 				context.get(typeof(IProgressMonitor)) as IProgressMonitor
@@ -369,6 +369,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkIUIDAndRangeInRepository(IU iu) {
+		compositeElementResolver.resolveCompositeElements(iu.location.targetPlatform)
 		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 		try {
 			val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
