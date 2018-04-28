@@ -24,7 +24,7 @@ Environment:
 ;
 
 VarDefinition:
-	'define' name=ID '=' value=STRING
+	'define' name=ID '=' value=CompositeString
 ;
 
 CompositeString:

@@ -94,4 +94,53 @@ class TestOverrideVariableDefinition {
 		
 		importVariableManager.clear
 	}
+	
+	@Test
+	def testDefinitionFromVariableCallOverride() {
+		val String[] args = #["overrideDefTarget.tpd", "subDirName=subdir", "emfVerEnd=3.0.0)"]
+		
+		importVariableManager.processCommandLineArguments(args)
+		
+		val resourceSet = resourceSetProvider.get
+		val overrideDefTarget = parser.parse('''
+			target "overrideDefTarget"
+			include "subTpd.tpd"
+			define subDirNameRef = ${subDirName} + "/"
+			define subIncludeUrl = ${subDirNameRef} + "subInclude.tpd"
+			include ${subIncludeUrl}
+		''', URI.createURI("tmp:/overrideDefTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define subDirName="subdirNotOverride"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subInclude"
+			include "subSubInclude.tpd"
+			location "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/" {
+				org.eclipse.emf.sdk.feature.group ${emfVer}
+			}
+		''', URI.createURI("tmp:/subdir/subInclude.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubInclude"
+			define emfVer = ${emfVerStart} + "," + ${emfVerEnd}
+			define emfVerStart = "[" + ${emfVerStartNum}
+			define emfVerEnd = ${emfVerEndNum} + ")-normallyWrongButWillBeReplaced"
+			define emfVerStartNum = "2.9.2"
+			define emfVerEndNum = "4.0.0"
+		''', URI.createURI("tmp:/subdir/subSubInclude.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(overrideDefTarget)
+		assertEquals(1, locationIndex.size)
+		
+		val compositeImportURI = overrideDefTarget.includes.last.compositeImportURI
+		assertEquals("subdir/subInclude.tpd", compositeImportURI.stringParts.head.actualString)
+		
+		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(overrideDefTarget)
+		val targetPlatform = importedTargetPlatforms.first
+		assertEquals("subInclude", targetPlatform.name)
+		val location = targetPlatform.locations.last
+		assertEquals("[2.9.2,3.0.0)", location.ius.head.version)
+		
+		importVariableManager.clear
+	}
 }
