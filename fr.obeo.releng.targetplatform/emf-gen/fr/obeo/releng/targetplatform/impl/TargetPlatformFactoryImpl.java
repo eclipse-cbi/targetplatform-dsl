@@ -4,6 +4,7 @@ package fr.obeo.releng.targetplatform.impl;
 
 import fr.obeo.releng.targetplatform.*;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.ecore.EClass;
@@ -86,6 +87,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return createOptionFromString(eDataType, initialValue);
+			case TargetPlatformPackage.VAR_DEF_LIST:
+				return createVarDefListFromString(eDataType, initialValue);
 			case TargetPlatformPackage.LOCALE:
 				return createLocaleFromString(eDataType, initialValue);
 			case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
@@ -105,6 +108,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return convertOptionToString(eDataType, instanceValue);
+			case TargetPlatformPackage.VAR_DEF_LIST:
+				return convertVarDefListToString(eDataType, instanceValue);
 			case TargetPlatformPackage.LOCALE:
 				return convertLocaleToString(eDataType, instanceValue);
 			case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
@@ -232,6 +237,25 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 	 */
 	public String convertOptionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public List<VarDefinition> createVarDefListFromString(EDataType eDataType, String initialValue) {
+		return (List<VarDefinition>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVarDefListToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

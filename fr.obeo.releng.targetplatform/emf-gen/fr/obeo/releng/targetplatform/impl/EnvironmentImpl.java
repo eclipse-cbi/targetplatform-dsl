@@ -2,7 +2,6 @@
  */
 package fr.obeo.releng.targetplatform.impl;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 
 import com.google.common.collect.Iterables;
@@ -365,8 +364,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 			}
 		};
 		final String locale = IterableExtensions.<String>findFirst(ListExtensions.<Locale, String>map(((List<Locale>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Locale.getAvailableLocales())), _function_3), _function_4);
-		boolean _notEquals = (!Objects.equal(locale, null));
-		if (_notEquals) {
+		boolean _tripleNotEquals = (locale != null);
+		if (_tripleNotEquals) {
 			String language = "";
 			String country = "";
 			String variant = "";
@@ -397,8 +396,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 */
 	public IExecutionEnvironment getExecutionEnvironment() {
 		final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
-		boolean _notEquals = (!Objects.equal(eeManager, null));
-		if (_notEquals) {
+		boolean _tripleNotEquals = (eeManager != null);
+		if (_tripleNotEquals) {
 			final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 				public EList<String> apply(final Environment it) {
 					return it.getEnv();
@@ -424,8 +423,8 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 						}
 					};
 					final IExecutionEnvironment ee = IterableExtensions.<IExecutionEnvironment>findFirst(((Iterable<IExecutionEnvironment>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(eeManager.getExecutionEnvironments())), _function_3);
-					boolean _notEquals_1 = (!Objects.equal(ee, null));
-					if (_notEquals_1) {
+					boolean _tripleNotEquals_1 = (ee != null);
+					if (_tripleNotEquals_1) {
 						return ee;
 					}
 				}

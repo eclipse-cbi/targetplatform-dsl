@@ -2,12 +2,19 @@
  */
 package fr.obeo.releng.targetplatform.impl;
 
+import fr.obeo.releng.targetplatform.CompositeString;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.VarDefinition;
 
+import java.lang.reflect.InvocationTargetException;
+
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,6 +23,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +38,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getValue <em>Value</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getOverrideValue <em>Override Value</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getVarDefCycle <em>Var Def Cycle</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,24 +66,14 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected String value = VALUE_EDEFAULT;
+	protected CompositeString value;
 
 	/**
 	 * The default value of the '{@link #getOverrideValue() <em>Override Value</em>}' attribute.
@@ -93,6 +94,36 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * @ordered
 	 */
 	protected String overrideValue = OVERRIDE_VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVariableDefinitionCycleDetected() <em>Variable Definition Cycle Detected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVariableDefinitionCycleDetected()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVariableDefinitionCycleDetected() <em>Variable Definition Cycle Detected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVariableDefinitionCycleDetected()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean variableDefinitionCycleDetected = VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVarDefCycle() <em>Var Def Cycle</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVarDefCycle()
+	 * @generated
+	 * @ordered
+	 */
+	protected List<VarDefinition> varDefCycle;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,7 +221,7 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getValue() {
+	public CompositeString getValue() {
 		return value;
 	}
 
@@ -199,11 +230,33 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(String newValue) {
-		String oldValue = value;
+	public NotificationChain basicSetValue(CompositeString newValue, NotificationChain msgs) {
+		CompositeString oldValue = value;
 		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__VALUE, oldValue, value));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__VALUE, oldValue, newValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(CompositeString newValue) {
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.VAR_DEFINITION__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.VAR_DEFINITION__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -232,6 +285,68 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isVariableDefinitionCycleDetected() {
+		return variableDefinitionCycleDetected;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVariableDefinitionCycleDetected(boolean newVariableDefinitionCycleDetected) {
+		boolean oldVariableDefinitionCycleDetected = variableDefinitionCycleDetected;
+		variableDefinitionCycleDetected = newVariableDefinitionCycleDetected;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED, oldVariableDefinitionCycleDetected, variableDefinitionCycleDetected));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<VarDefinition> getVarDefCycle() {
+		return varDefCycle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVarDefCycle(List<VarDefinition> newVarDefCycle) {
+		List<VarDefinition> oldVarDefCycle = varDefCycle;
+		varDefCycle = newVarDefCycle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE, oldVarDefCycle, varDefCycle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void checkVarCycle() {
+		this.setVariableDefinitionCycleDetected(false);
+		this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
+		this.getVarDefCycle().add(this);
+		this.getValue().computeActualString(this.getVarDefCycle());
+		this.setVariableDefinitionCycleDetected(this.getValue().isVariableDefinitionCycleDetected());
+		boolean _isVariableDefinitionCycleDetected = this.isVariableDefinitionCycleDetected();
+		if (_isVariableDefinitionCycleDetected) {
+			this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList(((VarDefinition[])org.eclipse.xtext.xbase.lib.Conversions.unwrapArray(this.getValue().getVarDefCycle(), VarDefinition.class))));
+		}
+		else {
+			this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -253,6 +368,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		switch (featureID) {
 			case TargetPlatformPackage.VAR_DEFINITION__TARGET_PLATFORM:
 				return basicSetTargetPlatform(null, msgs);
+			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -288,6 +405,10 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return getValue();
 			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
 				return getOverrideValue();
+			case TargetPlatformPackage.VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				return isVariableDefinitionCycleDetected();
+			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
+				return getVarDefCycle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,6 +418,7 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -307,10 +429,16 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				setName((String)newValue);
 				return;
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
-				setValue((String)newValue);
+				setValue((CompositeString)newValue);
 				return;
 			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
 				setOverrideValue((String)newValue);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				setVariableDefinitionCycleDetected((Boolean)newValue);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
+				setVarDefCycle((List<VarDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,10 +459,16 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				setName(NAME_EDEFAULT);
 				return;
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
-				setValue(VALUE_EDEFAULT);
+				setValue((CompositeString)null);
 				return;
 			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
 				setOverrideValue(OVERRIDE_VALUE_EDEFAULT);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				setVariableDefinitionCycleDetected(VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
+				setVarDefCycle((List<VarDefinition>)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -353,11 +487,30 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TargetPlatformPackage.VAR_DEFINITION__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return value != null;
 			case TargetPlatformPackage.VAR_DEFINITION__OVERRIDE_VALUE:
 				return OVERRIDE_VALUE_EDEFAULT == null ? overrideValue != null : !OVERRIDE_VALUE_EDEFAULT.equals(overrideValue);
+			case TargetPlatformPackage.VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				return variableDefinitionCycleDetected != VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
+			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
+				return varDefCycle != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case TargetPlatformPackage.VAR_DEFINITION___CHECK_VAR_CYCLE:
+				checkVarCycle();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -372,10 +525,12 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", value: ");
-		result.append(value);
 		result.append(", overrideValue: ");
 		result.append(overrideValue);
+		result.append(", variableDefinitionCycleDetected: ");
+		result.append(variableDefinitionCycleDetected);
+		result.append(", varDefCycle: ");
+		result.append(varDefCycle);
 		result.append(')');
 		return result.toString();
 	}

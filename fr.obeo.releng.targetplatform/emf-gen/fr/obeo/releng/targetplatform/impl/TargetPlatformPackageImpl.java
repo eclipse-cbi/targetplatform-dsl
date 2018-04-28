@@ -17,6 +17,7 @@ import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.VarCall;
 import fr.obeo.releng.targetplatform.VarDefinition;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -129,6 +130,13 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * @generated
 	 */
 	private EEnum optionEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType varDefListEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -402,8 +410,8 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVarDefinition_Value() {
-		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(1);
+	public EReference getVarDefinition_Value() {
+		return (EReference)varDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -413,6 +421,33 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 */
 	public EAttribute getVarDefinition_OverrideValue() {
 		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVarDefinition_VariableDefinitionCycleDetected() {
+		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVarDefinition_VarDefCycle() {
+		return (EAttribute)varDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getVarDefinition__CheckVarCycle() {
+		return varDefinitionEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -447,8 +482,44 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCompositeString_VariableDefinitionCycleDetected() {
+		return (EAttribute)compositeStringEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCompositeString_VarDefCycle() {
+		return (EAttribute)compositeStringEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getCompositeString__ComputeActualString() {
 		return compositeStringEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCompositeString__ComputeActualString__List() {
+		return compositeStringEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCompositeString__GetCopy() {
+		return compositeStringEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -483,6 +554,42 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getCompositeStringPart__GetActualString__List() {
+		return compositeStringPartEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCompositeStringPart__IsVariableDefinitionCycleDetected() {
+		return compositeStringPartEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCompositeStringPart__GetVarDefCycle() {
+		return compositeStringPartEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCompositeStringPart__GetCopy() {
+		return compositeStringPartEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVarCall() {
 		return varCallEClass;
 	}
@@ -501,8 +608,44 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getVarCall_VariableDefinitionCycleDetected() {
+		return (EAttribute)varCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVarCall_VarDefCycle() {
+		return (EAttribute)varCallEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getVarCall__GetActualString() {
 		return varCallEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getVarCall__GetActualString__List() {
+		return varCallEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getVarCall__GetCopy() {
+		return varCallEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -528,8 +671,44 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getStaticString_VariableDefinitionCycleDetected() {
+		return (EAttribute)staticStringEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStaticString_VarDefCycle() {
+		return (EAttribute)staticStringEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getStaticString__GetActualString() {
 		return staticStringEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getStaticString__GetActualString__List() {
+		return staticStringEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getStaticString__GetCopy() {
+		return staticStringEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -708,6 +887,15 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getVarDefList() {
+		return varDefListEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getLocale() {
 		return localeEDataType;
 	}
@@ -774,25 +962,44 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 
 		varDefinitionEClass = createEClass(VAR_DEFINITION);
 		createEAttribute(varDefinitionEClass, VAR_DEFINITION__NAME);
-		createEAttribute(varDefinitionEClass, VAR_DEFINITION__VALUE);
+		createEReference(varDefinitionEClass, VAR_DEFINITION__VALUE);
 		createEAttribute(varDefinitionEClass, VAR_DEFINITION__OVERRIDE_VALUE);
+		createEAttribute(varDefinitionEClass, VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED);
+		createEAttribute(varDefinitionEClass, VAR_DEFINITION__VAR_DEF_CYCLE);
+		createEOperation(varDefinitionEClass, VAR_DEFINITION___CHECK_VAR_CYCLE);
 
 		compositeStringEClass = createEClass(COMPOSITE_STRING);
 		createEAttribute(compositeStringEClass, COMPOSITE_STRING__NAME);
 		createEReference(compositeStringEClass, COMPOSITE_STRING__STRING_PARTS);
+		createEAttribute(compositeStringEClass, COMPOSITE_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED);
+		createEAttribute(compositeStringEClass, COMPOSITE_STRING__VAR_DEF_CYCLE);
 		createEOperation(compositeStringEClass, COMPOSITE_STRING___COMPUTE_ACTUAL_STRING);
+		createEOperation(compositeStringEClass, COMPOSITE_STRING___COMPUTE_ACTUAL_STRING__LIST);
+		createEOperation(compositeStringEClass, COMPOSITE_STRING___GET_COPY);
 
 		compositeStringPartEClass = createEClass(COMPOSITE_STRING_PART);
 		createEReference(compositeStringPartEClass, COMPOSITE_STRING_PART__COMPOSITE_STRING);
 		createEOperation(compositeStringPartEClass, COMPOSITE_STRING_PART___GET_ACTUAL_STRING);
+		createEOperation(compositeStringPartEClass, COMPOSITE_STRING_PART___GET_ACTUAL_STRING__LIST);
+		createEOperation(compositeStringPartEClass, COMPOSITE_STRING_PART___IS_VARIABLE_DEFINITION_CYCLE_DETECTED);
+		createEOperation(compositeStringPartEClass, COMPOSITE_STRING_PART___GET_VAR_DEF_CYCLE);
+		createEOperation(compositeStringPartEClass, COMPOSITE_STRING_PART___GET_COPY);
 
 		varCallEClass = createEClass(VAR_CALL);
 		createEReference(varCallEClass, VAR_CALL__VAR_NAME);
+		createEAttribute(varCallEClass, VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED);
+		createEAttribute(varCallEClass, VAR_CALL__VAR_DEF_CYCLE);
 		createEOperation(varCallEClass, VAR_CALL___GET_ACTUAL_STRING);
+		createEOperation(varCallEClass, VAR_CALL___GET_ACTUAL_STRING__LIST);
+		createEOperation(varCallEClass, VAR_CALL___GET_COPY);
 
 		staticStringEClass = createEClass(STATIC_STRING);
 		createEAttribute(staticStringEClass, STATIC_STRING__VALUE);
+		createEAttribute(staticStringEClass, STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED);
+		createEAttribute(staticStringEClass, STATIC_STRING__VAR_DEF_CYCLE);
 		createEOperation(staticStringEClass, STATIC_STRING___GET_ACTUAL_STRING);
+		createEOperation(staticStringEClass, STATIC_STRING___GET_ACTUAL_STRING__LIST);
+		createEOperation(staticStringEClass, STATIC_STRING___GET_COPY);
 
 		locationEClass = createEClass(LOCATION);
 		createEAttribute(locationEClass, LOCATION__ID);
@@ -819,6 +1026,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		optionEEnum = createEEnum(OPTION);
 
 		// Create data types
+		varDefListEDataType = createEDataType(VAR_DEF_LIST);
 		localeEDataType = createEDataType(LOCALE);
 		executionEnvironmentEDataType = createEDataType(EXECUTION_ENVIRONMENT);
 	}
@@ -888,29 +1096,63 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 
 		initEClass(varDefinitionEClass, VarDefinition.class, "VarDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVarDefinition_Name(), theEcorePackage.getEString(), "name", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVarDefinition_Value(), theEcorePackage.getEString(), "value", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVarDefinition_Value(), this.getCompositeString(), null, "value", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVarDefinition_OverrideValue(), theEcorePackage.getEString(), "overrideValue", "", 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarDefinition_VariableDefinitionCycleDetected(), theEcorePackage.getEBoolean(), "variableDefinitionCycleDetected", "false", 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarDefinition_VarDefCycle(), this.getVarDefList(), "varDefCycle", null, 0, 1, VarDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getVarDefinition__CheckVarCycle(), null, "checkVarCycle", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(compositeStringEClass, CompositeString.class, "CompositeString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompositeString_Name(), theEcorePackage.getEString(), "name", "composite string", 0, 1, CompositeString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeString_StringParts(), this.getCompositeStringPart(), this.getCompositeStringPart_CompositeString(), "stringParts", null, 0, -1, CompositeString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCompositeString_VariableDefinitionCycleDetected(), theEcorePackage.getEBoolean(), "variableDefinitionCycleDetected", "false", 0, 1, CompositeString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCompositeString_VarDefCycle(), this.getVarDefList(), "varDefCycle", null, 0, 1, CompositeString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getCompositeString__ComputeActualString(), theEcorePackage.getEString(), "computeActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		EOperation op = initEOperation(getCompositeString__ComputeActualString__List(), theEcorePackage.getEString(), "computeActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVarDefList(), "alreadyCalledVariable", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getCompositeString__GetCopy(), this.getCompositeString(), "getCopy", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(compositeStringPartEClass, CompositeStringPart.class, "CompositeStringPart", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeStringPart_CompositeString(), this.getCompositeString(), this.getCompositeString_StringParts(), "compositeString", null, 0, 1, CompositeStringPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getCompositeStringPart__GetActualString(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getCompositeStringPart__GetActualString__List(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVarDefList(), "alreadyCalledVariable", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getCompositeStringPart__IsVariableDefinitionCycleDetected(), theEcorePackage.getEBoolean(), "isVariableDefinitionCycleDetected", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getCompositeStringPart__GetVarDefCycle(), this.getVarDefList(), "getVarDefCycle", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getCompositeStringPart__GetCopy(), this.getCompositeStringPart(), "getCopy", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(varCallEClass, VarCall.class, "VarCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarCall_VarName(), this.getVarDefinition(), null, "varName", null, 0, 1, VarCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarCall_VariableDefinitionCycleDetected(), theEcorePackage.getEBoolean(), "variableDefinitionCycleDetected", "false", 0, 1, VarCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarCall_VarDefCycle(), this.getVarDefList(), "varDefCycle", null, 0, 1, VarCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getVarCall__GetActualString(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getVarCall__GetActualString__List(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVarDefList(), "alreadyCalledVariable", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getVarCall__GetCopy(), this.getVarCall(), "getCopy", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(staticStringEClass, StaticString.class, "StaticString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStaticString_Value(), theEcorePackage.getEString(), "value", null, 0, 1, StaticString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStaticString_VariableDefinitionCycleDetected(), theEcorePackage.getEBoolean(), "variableDefinitionCycleDetected", "false", 0, 1, StaticString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStaticString_VarDefCycle(), this.getVarDefList(), "varDefCycle", null, 0, 1, StaticString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getStaticString__GetActualString(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getStaticString__GetActualString__List(), theEcorePackage.getEString(), "getActualString", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVarDefList(), "alreadyCalledVariable", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getStaticString__GetCopy(), this.getStaticString(), "getCopy", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLocation_ID(), theEcorePackage.getEString(), "ID", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -944,6 +1186,7 @@ public class TargetPlatformPackageImpl extends EPackageImpl implements TargetPla
 		addEEnumLiteral(optionEEnum, Option.INCLUDE_CONFIGURE_PHASE);
 
 		// Initialize data types
+		initEDataType(varDefListEDataType, List.class, "VarDefList", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS, "java.util.List<fr.obeo.releng.targetplatform.VarDefinition>");
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(executionEnvironmentEDataType, IExecutionEnvironment.class, "ExecutionEnvironment", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 

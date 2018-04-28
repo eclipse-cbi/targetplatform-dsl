@@ -2899,8 +2899,8 @@ rule__VarDefinition__ValueAssignment_3
     }
 :
 (
-{ before(grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); }
-	RULE_STRING{ after(grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); }
+{ before(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); }
+	ruleCompositeString{ after(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); }
 )
 
 ;

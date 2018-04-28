@@ -377,7 +377,7 @@ public class TestCompositeLocation {
       final LinkedList<TargetPlatform> importedTargetPlatforms = this.indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget);
       TargetContent _head_1 = IterableExtensions.<TargetContent>head(importedTargetPlatforms.getLast().getContents());
       final VarDefinition varDef = ((VarDefinition) _head_1);
-      Assert.assertEquals("subdir", varDef.getValue());
+      Assert.assertEquals("subdir", varDef.getValue().computeActualString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

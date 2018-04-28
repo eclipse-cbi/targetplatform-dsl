@@ -877,23 +877,24 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVarDefinition"
-    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:344:1: ruleVarDefinition returns [EObject current=null] : (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) ) ;
+    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:344:1: ruleVarDefinition returns [EObject current=null] : (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= ruleCompositeString ) ) ) ;
     public final EObject ruleVarDefinition() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_2=null;
-        Token lv_value_3_0=null;
+        EObject lv_value_3_0 = null;
+
 
          enterRule(); 
             
         try {
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:347:28: ( (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) ) )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:1: (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:347:28: ( (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= ruleCompositeString ) ) ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:1: (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= ruleCompositeString ) ) )
             {
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:1: (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) ) )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:3: otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= RULE_STRING ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:1: (otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= ruleCompositeString ) ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:348:3: otherlv_0= 'define' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_value_3_0= ruleCompositeString ) )
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleVarDefinition747); 
 
@@ -929,25 +930,30 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_2, grammarAccess.getVarDefinitionAccess().getEqualsSignKeyword_2());
                 
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:374:1: ( (lv_value_3_0= RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:375:1: (lv_value_3_0= RULE_STRING )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:374:1: ( (lv_value_3_0= ruleCompositeString ) )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:375:1: (lv_value_3_0= ruleCompositeString )
             {
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:375:1: (lv_value_3_0= RULE_STRING )
-            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:376:3: lv_value_3_0= RULE_STRING
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:375:1: (lv_value_3_0= ruleCompositeString )
+            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:376:3: lv_value_3_0= ruleCompositeString
             {
-            lv_value_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleVarDefinition798); 
+             
+            	        newCompositeNode(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); 
+            	    
+            pushFollow(FOLLOW_ruleCompositeString_in_ruleVarDefinition802);
+            lv_value_3_0=ruleCompositeString();
 
-            			newLeafNode(lv_value_3_0, grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); 
-            		
+            state._fsp--;
+
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getVarDefinitionRule());
+            	            current = createModelElementForParent(grammarAccess.getVarDefinitionRule());
             	        }
-                   		setWithLastConsumed(
+                   		set(
                    			current, 
                    			"value",
                     		lv_value_3_0, 
-                    		"STRING");
+                    		"CompositeString");
+            	        afterParserOrEnumRuleCall();
             	    
 
             }
@@ -988,13 +994,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:402:2: iv_ruleCompositeString= ruleCompositeString EOF
             {
              newCompositeNode(grammarAccess.getCompositeStringRule()); 
-            pushFollow(FOLLOW_ruleCompositeString_in_entryRuleCompositeString839);
+            pushFollow(FOLLOW_ruleCompositeString_in_entryRuleCompositeString838);
             iv_ruleCompositeString=ruleCompositeString();
 
             state._fsp--;
 
              current =iv_ruleCompositeString; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCompositeString849); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCompositeString848); 
 
             }
 
@@ -1051,7 +1057,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCompositeStringAccess().getStringPartsCompositeStringPartParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleCompositeStringPart_in_ruleCompositeString904);
+            pushFollow(FOLLOW_ruleCompositeStringPart_in_ruleCompositeString903);
             lv_stringParts_1_0=ruleCompositeStringPart();
 
             state._fsp--;
@@ -1088,7 +1094,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:437:4: otherlv_2= '+' ( (lv_stringParts_3_0= ruleCompositeStringPart ) )
             	    {
-            	    otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleCompositeString917); 
+            	    otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleCompositeString916); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getCompositeStringAccess().getPlusSignKeyword_2_0());
             	        
@@ -1101,7 +1107,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getCompositeStringAccess().getStringPartsCompositeStringPartParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCompositeStringPart_in_ruleCompositeString938);
+            	    pushFollow(FOLLOW_ruleCompositeStringPart_in_ruleCompositeString937);
             	    lv_stringParts_3_0=ruleCompositeStringPart();
 
             	    state._fsp--;
@@ -1165,13 +1171,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:469:2: iv_ruleCompositeStringPart= ruleCompositeStringPart EOF
             {
              newCompositeNode(grammarAccess.getCompositeStringPartRule()); 
-            pushFollow(FOLLOW_ruleCompositeStringPart_in_entryRuleCompositeStringPart976);
+            pushFollow(FOLLOW_ruleCompositeStringPart_in_entryRuleCompositeStringPart975);
             iv_ruleCompositeStringPart=ruleCompositeStringPart();
 
             state._fsp--;
 
              current =iv_ruleCompositeStringPart; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCompositeStringPart986); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCompositeStringPart985); 
 
             }
 
@@ -1227,7 +1233,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getCompositeStringPartAccess().getVarCallParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleVarCall_in_ruleCompositeStringPart1033);
+                    pushFollow(FOLLOW_ruleVarCall_in_ruleCompositeStringPart1032);
                     this_VarCall_0=ruleVarCall();
 
                     state._fsp--;
@@ -1245,7 +1251,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getCompositeStringPartAccess().getStaticStringParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleStaticString_in_ruleCompositeStringPart1060);
+                    pushFollow(FOLLOW_ruleStaticString_in_ruleCompositeStringPart1059);
                     this_StaticString_1=ruleStaticString();
 
                     state._fsp--;
@@ -1290,13 +1296,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:509:2: iv_ruleVarCall= ruleVarCall EOF
             {
              newCompositeNode(grammarAccess.getVarCallRule()); 
-            pushFollow(FOLLOW_ruleVarCall_in_entryRuleVarCall1095);
+            pushFollow(FOLLOW_ruleVarCall_in_entryRuleVarCall1094);
             iv_ruleVarCall=ruleVarCall();
 
             state._fsp--;
 
              current =iv_ruleVarCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVarCall1105); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVarCall1104); 
 
             }
 
@@ -1331,7 +1337,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:520:1: (otherlv_0= '${' ( (otherlv_1= RULE_ID ) ) otherlv_2= '}' )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:520:3: otherlv_0= '${' ( (otherlv_1= RULE_ID ) ) otherlv_2= '}'
             {
-            otherlv_0=(Token)match(input,19,FOLLOW_19_in_ruleVarCall1142); 
+            otherlv_0=(Token)match(input,19,FOLLOW_19_in_ruleVarCall1141); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getVarCallAccess().getDollarSignLeftCurlyBracketKeyword_0());
                 
@@ -1346,7 +1352,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getVarCallRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVarCall1162); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVarCall1161); 
 
             		newLeafNode(otherlv_1, grammarAccess.getVarCallAccess().getVarNameVarDefinitionCrossReference_1_0()); 
             	
@@ -1356,7 +1362,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleVarCall1174); 
+            otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleVarCall1173); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getVarCallAccess().getRightCurlyBracketKeyword_2());
                 
@@ -1393,13 +1399,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:551:2: iv_ruleStaticString= ruleStaticString EOF
             {
              newCompositeNode(grammarAccess.getStaticStringRule()); 
-            pushFollow(FOLLOW_ruleStaticString_in_entryRuleStaticString1210);
+            pushFollow(FOLLOW_ruleStaticString_in_entryRuleStaticString1209);
             iv_ruleStaticString=ruleStaticString();
 
             state._fsp--;
 
              current =iv_ruleStaticString; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStaticString1220); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStaticString1219); 
 
             }
 
@@ -1435,7 +1441,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:563:1: (lv_value_0_0= RULE_STRING )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:564:3: lv_value_0_0= RULE_STRING
             {
-            lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStaticString1261); 
+            lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStaticString1260); 
 
             			newLeafNode(lv_value_0_0, grammarAccess.getStaticStringAccess().getValueSTRINGTerminalRuleCall_0()); 
             		
@@ -1485,13 +1491,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:590:2: iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF
             {
              newCompositeNode(grammarAccess.getIncludeDeclarationRule()); 
-            pushFollow(FOLLOW_ruleIncludeDeclaration_in_entryRuleIncludeDeclaration1301);
+            pushFollow(FOLLOW_ruleIncludeDeclaration_in_entryRuleIncludeDeclaration1300);
             iv_ruleIncludeDeclaration=ruleIncludeDeclaration();
 
             state._fsp--;
 
              current =iv_ruleIncludeDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIncludeDeclaration1311); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIncludeDeclaration1310); 
 
             }
 
@@ -1526,7 +1532,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:601:1: (otherlv_0= 'include' ( (lv_compositeImportURI_1_0= ruleCompositeString ) ) )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:601:3: otherlv_0= 'include' ( (lv_compositeImportURI_1_0= ruleCompositeString ) )
             {
-            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleIncludeDeclaration1348); 
+            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleIncludeDeclaration1347); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0());
                 
@@ -1539,7 +1545,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getIncludeDeclarationAccess().getCompositeImportURICompositeStringParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleCompositeString_in_ruleIncludeDeclaration1369);
+            pushFollow(FOLLOW_ruleCompositeString_in_ruleIncludeDeclaration1368);
             lv_compositeImportURI_1_0=ruleCompositeString();
 
             state._fsp--;
@@ -1594,13 +1600,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:633:2: iv_ruleLocation= ruleLocation EOF
             {
              newCompositeNode(grammarAccess.getLocationRule()); 
-            pushFollow(FOLLOW_ruleLocation_in_entryRuleLocation1405);
+            pushFollow(FOLLOW_ruleLocation_in_entryRuleLocation1404);
             iv_ruleLocation=ruleLocation();
 
             state._fsp--;
 
              current =iv_ruleLocation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLocation1415); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLocation1414); 
 
             }
 
@@ -1646,7 +1652,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:644:1: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_compositeUri_3_0= ruleCompositeString ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:644:3: otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_compositeUri_3_0= ruleCompositeString ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,22,FOLLOW_22_in_ruleLocation1452); 
+            otherlv_0=(Token)match(input,22,FOLLOW_22_in_ruleLocation1451); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLocationAccess().getLocationKeyword_0());
                 
@@ -1705,7 +1711,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:663:1: (lv_ID_2_0= RULE_ID )
             	    // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:664:3: lv_ID_2_0= RULE_ID
             	    {
-            	    lv_ID_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLocation1514); 
+            	    lv_ID_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLocation1513); 
 
             	    			newLeafNode(lv_ID_2_0, grammarAccess.getLocationAccess().getIDIDTerminalRuleCall_1_0_0()); 
             	    		
@@ -1770,7 +1776,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLocationAccess().getCompositeUriCompositeStringParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCompositeString_in_ruleLocation1594);
+            	    pushFollow(FOLLOW_ruleCompositeString_in_ruleLocation1593);
             	    lv_compositeUri_3_0=ruleCompositeString();
 
             	    state._fsp--;
@@ -1843,7 +1849,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:725:4: otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}'
                     {
-                    otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleLocation1653); 
+                    otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleLocation1652); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getLocationAccess().getLeftCurlyBracketKeyword_2_0());
                         
@@ -1858,7 +1864,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:729:3: otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
                             {
-                            otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleLocation1666); 
+                            otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleLocation1665); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getLocationAccess().getWithKeyword_2_1_0());
                                 
@@ -1871,7 +1877,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleOption_in_ruleLocation1687);
+                            pushFollow(FOLLOW_ruleOption_in_ruleLocation1686);
                             lv_options_6_0=ruleOption();
 
                             state._fsp--;
@@ -1919,7 +1925,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             	        case 1 :
                             	            // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:751:5: otherlv_7= ','
                             	            {
-                            	            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleLocation1701); 
+                            	            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleLocation1700); 
 
                             	                	newLeafNode(otherlv_7, grammarAccess.getLocationAccess().getCommaKeyword_2_1_2_0());
                             	                
@@ -1938,7 +1944,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleOption_in_ruleLocation1724);
+                            	    pushFollow(FOLLOW_ruleOption_in_ruleLocation1723);
                             	    lv_options_8_0=ruleOption();
 
                             	    state._fsp--;
@@ -1996,7 +2002,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleIU_in_ruleLocation1749);
+                    	    pushFollow(FOLLOW_ruleIU_in_ruleLocation1748);
                     	    lv_ius_9_0=ruleIU();
 
                     	    state._fsp--;
@@ -2024,7 +2030,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_10=(Token)match(input,20,FOLLOW_20_in_ruleLocation1762); 
+                    otherlv_10=(Token)match(input,20,FOLLOW_20_in_ruleLocation1761); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getLocationAccess().getRightCurlyBracketKeyword_2_3());
                         
@@ -2067,13 +2073,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:805:2: iv_ruleIU= ruleIU EOF
             {
              newCompositeNode(grammarAccess.getIURule()); 
-            pushFollow(FOLLOW_ruleIU_in_entryRuleIU1800);
+            pushFollow(FOLLOW_ruleIU_in_entryRuleIU1799);
             iv_ruleIU=ruleIU();
 
             state._fsp--;
 
              current =iv_ruleIU; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIU1810); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIU1809); 
 
             }
 
@@ -2120,7 +2126,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:817:1: (lv_ID_0_0= RULE_ID )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:818:3: lv_ID_0_0= RULE_ID
             {
-            lv_ID_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIU1852); 
+            lv_ID_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIU1851); 
 
             			newLeafNode(lv_ID_0_0, grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0()); 
             		
@@ -2162,15 +2168,15 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:5: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '='
                             {
-                            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleIU1871); 
+                            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleIU1870); 
 
                                 	newLeafNode(otherlv_1, grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0());
                                 
-                            otherlv_2=(Token)match(input,25,FOLLOW_25_in_ruleIU1883); 
+                            otherlv_2=(Token)match(input,25,FOLLOW_25_in_ruleIU1882); 
 
                                 	newLeafNode(otherlv_2, grammarAccess.getIUAccess().getVersionKeyword_1_0_1());
                                 
-                            otherlv_3=(Token)match(input,17,FOLLOW_17_in_ruleIU1895); 
+                            otherlv_3=(Token)match(input,17,FOLLOW_17_in_ruleIU1894); 
 
                                 	newLeafNode(otherlv_3, grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2());
                                 
@@ -2229,7 +2235,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                      
                                     	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0_0()); 
                                     	    
-                                    pushFollow(FOLLOW_ruleVersionRange_in_ruleIU1920);
+                                    pushFollow(FOLLOW_ruleVersionRange_in_ruleIU1919);
                                     lv_version_4_0=ruleVersionRange();
 
                                     state._fsp--;
@@ -2263,7 +2269,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:866:1: (lv_version_5_0= RULE_STRING )
                                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:3: lv_version_5_0= RULE_STRING
                                     {
-                                    lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIU1943); 
+                                    lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIU1942); 
 
                                     			newLeafNode(lv_version_5_0, grammarAccess.getIUAccess().getVersionSTRINGTerminalRuleCall_1_1_0_1_0()); 
                                     		
@@ -2304,7 +2310,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getIUAccess().getVarVersionVarCallParserRuleCall_1_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleVarCall_in_ruleIU1976);
+                            pushFollow(FOLLOW_ruleVarCall_in_ruleIU1975);
                             lv_varVersion_6_0=ruleVarCall();
 
                             state._fsp--;
@@ -2374,13 +2380,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:915:2: iv_ruleVersion= ruleVersion EOF
             {
              newCompositeNode(grammarAccess.getVersionRule()); 
-            pushFollow(FOLLOW_ruleVersion_in_entryRuleVersion2022);
+            pushFollow(FOLLOW_ruleVersion_in_entryRuleVersion2021);
             iv_ruleVersion=ruleVersion();
 
             state._fsp--;
 
              current =iv_ruleVersion.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersion2033); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersion2032); 
 
             }
 
@@ -2423,7 +2429,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:930:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:930:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
             {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2077); 
+            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2076); 
 
             		current.merge(this_INT_0);
                 
@@ -2441,12 +2447,12 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:938:2: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
                     {
-                    kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2096); 
+                    kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2095); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_0()); 
                         
-                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2111); 
+                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2110); 
 
                     		current.merge(this_INT_2);
                         
@@ -2464,12 +2470,12 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:951:2: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
                             {
-                            kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2130); 
+                            kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2129); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_0()); 
                                 
-                            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2145); 
+                            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2144); 
 
                             		current.merge(this_INT_4);
                                 
@@ -2487,7 +2493,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                 case 1 :
                                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:964:2: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
                                     {
-                                    kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2164); 
+                                    kw=(Token)match(input,26,FOLLOW_26_in_ruleVersion2163); 
 
                                             current.merge(kw);
                                             newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0()); 
@@ -2521,7 +2527,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                         case 1 :
                                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:969:6: this_ID_6= RULE_ID
                                             {
-                                            this_ID_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVersion2180); 
+                                            this_ID_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVersion2179); 
 
                                             		current.merge(this_ID_6);
                                                 
@@ -2534,7 +2540,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                         case 2 :
                                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:977:10: this_INT_7= RULE_INT
                                             {
-                                            this_INT_7=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2206); 
+                                            this_INT_7=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion2205); 
 
                                             		current.merge(this_INT_7);
                                                 
@@ -2547,7 +2553,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                         case 3 :
                                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:985:10: this_QUALIFIER_8= RULE_QUALIFIER
                                             {
-                                            this_QUALIFIER_8=(Token)match(input,RULE_QUALIFIER,FOLLOW_RULE_QUALIFIER_in_ruleVersion2232); 
+                                            this_QUALIFIER_8=(Token)match(input,RULE_QUALIFIER,FOLLOW_RULE_QUALIFIER_in_ruleVersion2231); 
 
                                             		current.merge(this_QUALIFIER_8);
                                                 
@@ -2617,13 +2623,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1008:2: iv_ruleVersionRange= ruleVersionRange EOF
             {
              newCompositeNode(grammarAccess.getVersionRangeRule()); 
-            pushFollow(FOLLOW_ruleVersionRange_in_entryRuleVersionRange2295);
+            pushFollow(FOLLOW_ruleVersionRange_in_entryRuleVersionRange2294);
             iv_ruleVersionRange=ruleVersionRange();
 
             state._fsp--;
 
              current =iv_ruleVersionRange.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersionRange2306); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersionRange2305); 
 
             }
 
@@ -2716,7 +2722,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1024:2: kw= '('
                             {
-                            kw=(Token)match(input,27,FOLLOW_27_in_ruleVersionRange2350); 
+                            kw=(Token)match(input,27,FOLLOW_27_in_ruleVersionRange2349); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getVersionRangeAccess().getLeftParenthesisKeyword_0_0_0()); 
@@ -2727,7 +2733,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1031:2: kw= '['
                             {
-                            kw=(Token)match(input,28,FOLLOW_28_in_ruleVersionRange2369); 
+                            kw=(Token)match(input,28,FOLLOW_28_in_ruleVersionRange2368); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getVersionRangeAccess().getLeftSquareBracketKeyword_0_0_1()); 
@@ -2741,7 +2747,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_1()); 
                         
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2392);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2391);
                     this_Version_2=ruleVersion();
 
                     state._fsp--;
@@ -2752,7 +2758,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             afterParserOrEnumRuleCall();
                         
-                    kw=(Token)match(input,14,FOLLOW_14_in_ruleVersionRange2410); 
+                    kw=(Token)match(input,14,FOLLOW_14_in_ruleVersionRange2409); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getVersionRangeAccess().getCommaKeyword_0_2()); 
@@ -2760,7 +2766,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_0_3()); 
                         
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2432);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2431);
                     this_Version_4=ruleVersion();
 
                     state._fsp--;
@@ -2791,7 +2797,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1065:2: kw= ')'
                             {
-                            kw=(Token)match(input,29,FOLLOW_29_in_ruleVersionRange2451); 
+                            kw=(Token)match(input,29,FOLLOW_29_in_ruleVersionRange2450); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getVersionRangeAccess().getRightParenthesisKeyword_0_4_0()); 
@@ -2802,7 +2808,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1072:2: kw= ']'
                             {
-                            kw=(Token)match(input,30,FOLLOW_30_in_ruleVersionRange2470); 
+                            kw=(Token)match(input,30,FOLLOW_30_in_ruleVersionRange2469); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getVersionRangeAccess().getRightSquareBracketKeyword_0_4_1()); 
@@ -2825,7 +2831,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2500);
+                    pushFollow(FOLLOW_ruleVersion_in_ruleVersionRange2499);
                     this_Version_7=ruleVersion();
 
                     state._fsp--;
@@ -2842,7 +2848,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1091:2: kw= 'lazy'
                     {
-                    kw=(Token)match(input,31,FOLLOW_31_in_ruleVersionRange2524); 
+                    kw=(Token)match(input,31,FOLLOW_31_in_ruleVersionRange2523); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getVersionRangeAccess().getLazyKeyword_2()); 
@@ -2925,7 +2931,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1110:2: (enumLiteral_0= 'requirements' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1110:4: enumLiteral_0= 'requirements'
                     {
-                    enumLiteral_0=(Token)match(input,32,FOLLOW_32_in_ruleOption2582); 
+                    enumLiteral_0=(Token)match(input,32,FOLLOW_32_in_ruleOption2581); 
 
                             current = grammarAccess.getOptionAccess().getINCLUDE_REQUIREDEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getOptionAccess().getINCLUDE_REQUIREDEnumLiteralDeclaration_0()); 
@@ -2942,7 +2948,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1116:6: (enumLiteral_1= 'allEnvironments' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1116:8: enumLiteral_1= 'allEnvironments'
                     {
-                    enumLiteral_1=(Token)match(input,33,FOLLOW_33_in_ruleOption2599); 
+                    enumLiteral_1=(Token)match(input,33,FOLLOW_33_in_ruleOption2598); 
 
                             current = grammarAccess.getOptionAccess().getINCLUDE_ALL_ENVIRONMENTSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getOptionAccess().getINCLUDE_ALL_ENVIRONMENTSEnumLiteralDeclaration_1()); 
@@ -2959,7 +2965,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1122:6: (enumLiteral_2= 'source' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1122:8: enumLiteral_2= 'source'
                     {
-                    enumLiteral_2=(Token)match(input,34,FOLLOW_34_in_ruleOption2616); 
+                    enumLiteral_2=(Token)match(input,34,FOLLOW_34_in_ruleOption2615); 
 
                             current = grammarAccess.getOptionAccess().getINCLUDE_SOURCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getOptionAccess().getINCLUDE_SOURCEEnumLiteralDeclaration_2()); 
@@ -2976,7 +2982,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1128:6: (enumLiteral_3= 'configurePhase' )
                     // ../fr.obeo.releng.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1128:8: enumLiteral_3= 'configurePhase'
                     {
-                    enumLiteral_3=(Token)match(input,35,FOLLOW_35_in_ruleOption2633); 
+                    enumLiteral_3=(Token)match(input,35,FOLLOW_35_in_ruleOption2632); 
 
                             current = grammarAccess.getOptionAccess().getINCLUDE_CONFIGURE_PHASEEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getOptionAccess().getINCLUDE_CONFIGURE_PHASEEnumLiteralDeclaration_3()); 
@@ -3039,75 +3045,75 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleVarDefinition710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_ruleVarDefinition747 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleVarDefinition764 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleVarDefinition781 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleVarDefinition798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompositeString_in_entryRuleCompositeString839 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCompositeString849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompositeStringPart_in_ruleCompositeString904 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_18_in_ruleCompositeString917 = new BitSet(new long[]{0x0000000000080010L});
-    public static final BitSet FOLLOW_ruleCompositeStringPart_in_ruleCompositeString938 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_ruleCompositeStringPart_in_entryRuleCompositeStringPart976 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCompositeStringPart986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVarCall_in_ruleCompositeStringPart1033 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStaticString_in_ruleCompositeStringPart1060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVarCall_in_entryRuleVarCall1095 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVarCall1105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleVarCall1142 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleVarCall1162 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleVarCall1174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStaticString_in_entryRuleStaticString1210 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStaticString1220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleStaticString1261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIncludeDeclaration_in_entryRuleIncludeDeclaration1301 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIncludeDeclaration1311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleIncludeDeclaration1348 = new BitSet(new long[]{0x0000000000080010L});
-    public static final BitSet FOLLOW_ruleCompositeString_in_ruleIncludeDeclaration1369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLocation_in_entryRuleLocation1405 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLocation1415 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleLocation1452 = new BitSet(new long[]{0x0000000000080030L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLocation1514 = new BitSet(new long[]{0x0000000000880032L});
-    public static final BitSet FOLLOW_ruleCompositeString_in_ruleLocation1594 = new BitSet(new long[]{0x0000000000880032L});
-    public static final BitSet FOLLOW_23_in_ruleLocation1653 = new BitSet(new long[]{0x0000000000102020L});
-    public static final BitSet FOLLOW_13_in_ruleLocation1666 = new BitSet(new long[]{0x0000000F00000000L});
-    public static final BitSet FOLLOW_ruleOption_in_ruleLocation1687 = new BitSet(new long[]{0x0000000F00104020L});
-    public static final BitSet FOLLOW_14_in_ruleLocation1701 = new BitSet(new long[]{0x0000000F00000000L});
-    public static final BitSet FOLLOW_ruleOption_in_ruleLocation1724 = new BitSet(new long[]{0x0000000F00104020L});
-    public static final BitSet FOLLOW_ruleIU_in_ruleLocation1749 = new BitSet(new long[]{0x0000000000100020L});
-    public static final BitSet FOLLOW_20_in_ruleLocation1762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIU_in_entryRuleIU1800 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIU1810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleIU1852 = new BitSet(new long[]{0x0000000099080052L});
-    public static final BitSet FOLLOW_24_in_ruleIU1871 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleIU1883 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleIU1895 = new BitSet(new long[]{0x0000000098080050L});
-    public static final BitSet FOLLOW_ruleVersionRange_in_ruleIU1920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleIU1943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVarCall_in_ruleIU1976 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_entryRuleVersion2022 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersion2033 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2077 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_26_in_ruleVersion2096 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2111 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_26_in_ruleVersion2130 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2145 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_26_in_ruleVersion2164 = new BitSet(new long[]{0x00000000000000E0L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleVersion2180 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_QUALIFIER_in_ruleVersion2232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersionRange_in_entryRuleVersionRange2295 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersionRange2306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleVersionRange2350 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_28_in_ruleVersionRange2369 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2392 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleVersionRange2410 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2432 = new BitSet(new long[]{0x0000000060000000L});
-    public static final BitSet FOLLOW_29_in_ruleVersionRange2451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleVersionRange2470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleVersionRange2524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleOption2582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleOption2599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleOption2616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_ruleOption2633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleVarDefinition781 = new BitSet(new long[]{0x0000000000080010L});
+    public static final BitSet FOLLOW_ruleCompositeString_in_ruleVarDefinition802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompositeString_in_entryRuleCompositeString838 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCompositeString848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompositeStringPart_in_ruleCompositeString903 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_18_in_ruleCompositeString916 = new BitSet(new long[]{0x0000000000080010L});
+    public static final BitSet FOLLOW_ruleCompositeStringPart_in_ruleCompositeString937 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_ruleCompositeStringPart_in_entryRuleCompositeStringPart975 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCompositeStringPart985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVarCall_in_ruleCompositeStringPart1032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStaticString_in_ruleCompositeStringPart1059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVarCall_in_entryRuleVarCall1094 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVarCall1104 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleVarCall1141 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleVarCall1161 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleVarCall1173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStaticString_in_entryRuleStaticString1209 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStaticString1219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleStaticString1260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIncludeDeclaration_in_entryRuleIncludeDeclaration1300 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIncludeDeclaration1310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleIncludeDeclaration1347 = new BitSet(new long[]{0x0000000000080010L});
+    public static final BitSet FOLLOW_ruleCompositeString_in_ruleIncludeDeclaration1368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLocation_in_entryRuleLocation1404 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLocation1414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleLocation1451 = new BitSet(new long[]{0x0000000000080030L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLocation1513 = new BitSet(new long[]{0x0000000000880032L});
+    public static final BitSet FOLLOW_ruleCompositeString_in_ruleLocation1593 = new BitSet(new long[]{0x0000000000880032L});
+    public static final BitSet FOLLOW_23_in_ruleLocation1652 = new BitSet(new long[]{0x0000000000102020L});
+    public static final BitSet FOLLOW_13_in_ruleLocation1665 = new BitSet(new long[]{0x0000000F00000000L});
+    public static final BitSet FOLLOW_ruleOption_in_ruleLocation1686 = new BitSet(new long[]{0x0000000F00104020L});
+    public static final BitSet FOLLOW_14_in_ruleLocation1700 = new BitSet(new long[]{0x0000000F00000000L});
+    public static final BitSet FOLLOW_ruleOption_in_ruleLocation1723 = new BitSet(new long[]{0x0000000F00104020L});
+    public static final BitSet FOLLOW_ruleIU_in_ruleLocation1748 = new BitSet(new long[]{0x0000000000100020L});
+    public static final BitSet FOLLOW_20_in_ruleLocation1761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIU_in_entryRuleIU1799 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIU1809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleIU1851 = new BitSet(new long[]{0x0000000099080052L});
+    public static final BitSet FOLLOW_24_in_ruleIU1870 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleIU1882 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleIU1894 = new BitSet(new long[]{0x0000000098080050L});
+    public static final BitSet FOLLOW_ruleVersionRange_in_ruleIU1919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleIU1942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVarCall_in_ruleIU1975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_entryRuleVersion2021 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersion2032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2076 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_26_in_ruleVersion2095 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2110 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_26_in_ruleVersion2129 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2144 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_26_in_ruleVersion2163 = new BitSet(new long[]{0x00000000000000E0L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleVersion2179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVersion2205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_QUALIFIER_in_ruleVersion2231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersionRange_in_entryRuleVersionRange2294 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersionRange2305 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleVersionRange2349 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_28_in_ruleVersionRange2368 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2391 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleVersionRange2409 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2431 = new BitSet(new long[]{0x0000000060000000L});
+    public static final BitSet FOLLOW_29_in_ruleVersionRange2450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleVersionRange2469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersion_in_ruleVersionRange2499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleVersionRange2523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleOption2581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleOption2598 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleOption2615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_ruleOption2632 = new BitSet(new long[]{0x0000000000000002L});
 
 }

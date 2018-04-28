@@ -2,6 +2,8 @@
  */
 package fr.obeo.releng.targetplatform;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -56,5 +58,37 @@ public interface CompositeStringPart extends EObject {
 	 * @generated
 	 */
 	String getActualString();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model unique="false" alreadyCalledVariableDataType="fr.obeo.releng.targetplatform.VarDefList" alreadyCalledVariableUnique="false"
+	 * @generated
+	 */
+	String getActualString(List<VarDefinition> alreadyCalledVariable);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isVariableDefinitionCycleDetected();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="fr.obeo.releng.targetplatform.VarDefList" unique="false"
+	 * @generated
+	 */
+	List<VarDefinition> getVarDefCycle();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	CompositeStringPart getCopy();
 
 } // CompositeStringPart

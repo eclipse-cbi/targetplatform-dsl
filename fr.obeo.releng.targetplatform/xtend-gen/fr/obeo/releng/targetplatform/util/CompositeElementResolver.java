@@ -1,11 +1,14 @@
 package fr.obeo.releng.targetplatform.util;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import fr.obeo.releng.targetplatform.CompositeStringPart;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformFactory;
+import fr.obeo.releng.targetplatform.VarCall;
 import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
@@ -92,7 +95,7 @@ public class CompositeElementResolver {
     final Consumer<TargetPlatform> _function_3 = new Consumer<TargetPlatform>() {
       @Override
       public void accept(final TargetPlatform it) {
-        CompositeElementResolver.this.overrideVariableDefinition(it, alreadyVisitedTarget);
+        CompositeElementResolver.this.overrideVariableDefinition(it, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
       }
     };
     IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function_2).forEach(_function_3);
@@ -229,7 +232,7 @@ public class CompositeElementResolver {
         if (toBeAdded) {
           final VarDefinition currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition();
           currentImportedDefineCopy.setName(currentImportedDefine.getName());
-          currentImportedDefineCopy.setValue(currentImportedDefine.getValue());
+          currentImportedDefineCopy.setValue(currentImportedDefine.getValue().getCopy());
           currentImportedDefineCopy.setOverrideValue(currentImportedDefine.getOverrideValue());
           toBeAddedDefine.add(currentImportedDefineCopy);
         }
@@ -237,5 +240,60 @@ public class CompositeElementResolver {
     };
     ImportedDefineFromSubTpd.forEach(_function);
     targetContent.addAll(toBeAddedDefine);
+    this.updateVariableDefinition(targetContent);
+  }
+  
+  /**
+   * @param targetContent Elements contained in the target, we only processed variable definition.
+   * 
+   * This method "updateVariableDefinition" is called after we have imported each variable definition from subtarget
+   * 
+   * When a variable definition is copied into another target, if it contains some variable calls,
+   * we eventually need to update them
+   * 
+   * target "mainTpd"
+   * include "subTpd.tpd"
+   * define var1 = ${var2}
+   * define var2b = "value2"
+   * 
+   * target "subTpd"
+   * define var2 = ${var2b}
+   * define var2b = "value2Sub"
+   * 
+   * Only var2 is copied in "mainTpd" (var2b is overloaded in "mainTpd"). But (before import)
+   * var2 refers to var2b of "subTpd", hence if we simply copy it into "mainTpd", var1 will take
+   * the value "value2Sub" instead of "value2" => We have to update the newly created var2 in
+   * "mainTpd" to make it refer to var2b of "mainTpd"
+   */
+  private void updateVariableDefinition(final EList<TargetContent> targetContent) {
+    for (final TargetContent varDef : targetContent) {
+      if ((varDef instanceof VarDefinition)) {
+        EList<CompositeStringPart> _stringParts = ((VarDefinition)varDef).getValue().getStringParts();
+        for (final CompositeStringPart stringPart : _stringParts) {
+          if ((stringPart instanceof VarCall)) {
+            VarCall varCall = ((VarCall) stringPart);
+            this.updateVariableCall(varCall, targetContent);
+          }
+        }
+      }
+    }
+  }
+  
+  private void updateVariableCall(final VarCall varCall, final EList<TargetContent> targetContent) {
+    for (final TargetContent varDef : targetContent) {
+      if ((varDef instanceof VarDefinition)) {
+        String _name = varCall.getVarName().getName();
+        String _name_1 = ((VarDefinition)varDef).getName();
+        boolean _equals = Objects.equal(_name, _name_1);
+        if (_equals) {
+          varCall.setVarName(((VarDefinition)varDef));
+        }
+      }
+    }
+  }
+  
+  public List<VarDefinition> checkVariableDefinitionCycle(final VarDefinition varDef) {
+    varDef.checkVarCycle();
+    return varDef.getVarDefCycle();
   }
 }

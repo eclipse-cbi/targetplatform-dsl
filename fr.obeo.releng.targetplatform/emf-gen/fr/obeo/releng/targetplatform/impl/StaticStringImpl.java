@@ -4,9 +4,13 @@ package fr.obeo.releng.targetplatform.impl;
 
 import fr.obeo.releng.targetplatform.CompositeString;
 import fr.obeo.releng.targetplatform.StaticString;
+import fr.obeo.releng.targetplatform.TargetPlatformFactory;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarDefinition;
 
 import java.lang.reflect.InvocationTargetException;
+
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -21,6 +25,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Static String</b></em>'.
@@ -31,6 +37,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl#getCompositeString <em>Composite String</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl#getVarDefCycle <em>Var Def Cycle</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +63,36 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVariableDefinitionCycleDetected() <em>Variable Definition Cycle Detected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVariableDefinitionCycleDetected()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVariableDefinitionCycleDetected() <em>Variable Definition Cycle Detected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVariableDefinitionCycleDetected()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean variableDefinitionCycleDetected = VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVarDefCycle() <em>Var Def Cycle</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVarDefCycle()
+	 * @generated
+	 * @ordered
+	 */
+	protected List<VarDefinition> varDefCycle;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,8 +190,71 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isVariableDefinitionCycleDetected() {
+		return variableDefinitionCycleDetected;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVariableDefinitionCycleDetected(boolean newVariableDefinitionCycleDetected) {
+		boolean oldVariableDefinitionCycleDetected = variableDefinitionCycleDetected;
+		variableDefinitionCycleDetected = newVariableDefinitionCycleDetected;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED, oldVariableDefinitionCycleDetected, variableDefinitionCycleDetected));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<VarDefinition> getVarDefCycle() {
+		return varDefCycle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVarDefCycle(List<VarDefinition> newVarDefCycle) {
+		List<VarDefinition> oldVarDefCycle = varDefCycle;
+		varDefCycle = newVarDefCycle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.STATIC_STRING__VAR_DEF_CYCLE, oldVarDefCycle, varDefCycle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getActualString() {
+		this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
 		return this.getValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getActualString(final List<VarDefinition> alreadyCalledVariable) {
+		return this.getActualString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticString getCopy() {
+		final StaticString output = TargetPlatformFactory.eINSTANCE.createStaticString();
+		output.setValue(this.getValue());
+		return output;
 	}
 
 	/**
@@ -213,6 +314,10 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 				return basicGetCompositeString();
 			case TargetPlatformPackage.STATIC_STRING__VALUE:
 				return getValue();
+			case TargetPlatformPackage.STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				return isVariableDefinitionCycleDetected();
+			case TargetPlatformPackage.STATIC_STRING__VAR_DEF_CYCLE:
+				return getVarDefCycle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,6 +327,7 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -230,6 +336,12 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 				return;
 			case TargetPlatformPackage.STATIC_STRING__VALUE:
 				setValue((String)newValue);
+				return;
+			case TargetPlatformPackage.STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				setVariableDefinitionCycleDetected((Boolean)newValue);
+				return;
+			case TargetPlatformPackage.STATIC_STRING__VAR_DEF_CYCLE:
+				setVarDefCycle((List<VarDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -249,6 +361,12 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 			case TargetPlatformPackage.STATIC_STRING__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case TargetPlatformPackage.STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				setVariableDefinitionCycleDetected(VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT);
+				return;
+			case TargetPlatformPackage.STATIC_STRING__VAR_DEF_CYCLE:
+				setVarDefCycle((List<VarDefinition>)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -265,6 +383,10 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 				return basicGetCompositeString() != null;
 			case TargetPlatformPackage.STATIC_STRING__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case TargetPlatformPackage.STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED:
+				return variableDefinitionCycleDetected != VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
+			case TargetPlatformPackage.STATIC_STRING__VAR_DEF_CYCLE:
+				return varDefCycle != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -275,10 +397,15 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 	 * @generated
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case TargetPlatformPackage.STATIC_STRING___GET_ACTUAL_STRING:
 				return getActualString();
+			case TargetPlatformPackage.STATIC_STRING___GET_ACTUAL_STRING__LIST:
+				return getActualString((List<VarDefinition>)arguments.get(0));
+			case TargetPlatformPackage.STATIC_STRING___GET_COPY:
+				return getCopy();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
@@ -295,6 +422,10 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (value: ");
 		result.append(value);
+		result.append(", variableDefinitionCycleDetected: ");
+		result.append(variableDefinitionCycleDetected);
+		result.append(", varDefCycle: ");
+		result.append(varDefCycle);
 		result.append(')');
 		return result.toString();
 	}

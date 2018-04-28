@@ -174,13 +174,13 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cValueSTRINGTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		private final RuleCall cValueCompositeStringParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//VarDefinition:
-		//	"define" name=ID "=" value=STRING;
+		//	"define" name=ID "=" value=CompositeString;
 		public ParserRule getRule() { return rule; }
 
-		//"define" name=ID "=" value=STRING
+		//"define" name=ID "=" value=CompositeString
 		public Group getGroup() { return cGroup; }
 
 		//"define"
@@ -195,11 +195,11 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
 
-		//value=STRING
+		//value=CompositeString
 		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 
-		//STRING
-		public RuleCall getValueSTRINGTerminalRuleCall_3_0() { return cValueSTRINGTerminalRuleCall_3_0; }
+		//CompositeString
+		public RuleCall getValueCompositeStringParserRuleCall_3_0() { return cValueCompositeStringParserRuleCall_3_0; }
 	}
 
 	public class CompositeStringElements extends AbstractParserRuleElementFinder {
@@ -782,7 +782,7 @@ public class TargetPlatformGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VarDefinition:
-	//	"define" name=ID "=" value=STRING;
+	//	"define" name=ID "=" value=CompositeString;
 	public VarDefinitionElements getVarDefinitionAccess() {
 		return pVarDefinition;
 	}

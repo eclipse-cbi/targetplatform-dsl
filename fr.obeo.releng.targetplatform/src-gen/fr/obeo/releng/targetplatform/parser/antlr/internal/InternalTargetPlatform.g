@@ -373,19 +373,19 @@ ruleVarDefinition returns [EObject current=null]
     }
 (
 (
-		lv_value_3_0=RULE_STRING
-		{
-			newLeafNode(lv_value_3_0, grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); 
+	    }
+		lv_value_3_0=ruleCompositeString		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getVarDefinitionRule());
+	            $current = createModelElementForParent(grammarAccess.getVarDefinitionRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"value",
         		lv_value_3_0, 
-        		"STRING");
+        		"CompositeString");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

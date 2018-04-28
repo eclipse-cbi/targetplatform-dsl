@@ -354,7 +354,7 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION__NAME = TARGET_CONTENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -372,13 +372,40 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION__OVERRIDE_VALUE = TARGET_CONTENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED = TARGET_CONTENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Var Def Cycle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__VAR_DEF_CYCLE = TARGET_CONTENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Var Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 3;
+	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Check Var Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION___CHECK_VAR_CYCLE = TARGET_CONTENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Var Definition</em>' class.
@@ -387,7 +414,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 0;
+	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
@@ -418,13 +445,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int COMPOSITE_STRING__STRING_PARTS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED = 2;
+
+	/**
+	 * The feature id for the '<em><b>Var Def Cycle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING__VAR_DEF_CYCLE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Composite String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STRING_FEATURE_COUNT = 2;
+	int COMPOSITE_STRING_FEATURE_COUNT = 4;
 
 	/**
 	 * The operation id for the '<em>Compute Actual String</em>' operation.
@@ -436,13 +481,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int COMPOSITE_STRING___COMPUTE_ACTUAL_STRING = 0;
 
 	/**
+	 * The operation id for the '<em>Compute Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING___COMPUTE_ACTUAL_STRING__LIST = 1;
+
+	/**
+	 * The operation id for the '<em>Get Copy</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING___GET_COPY = 2;
+
+	/**
 	 * The number of operations of the '<em>Composite String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STRING_OPERATION_COUNT = 1;
+	int COMPOSITE_STRING_OPERATION_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
@@ -482,13 +545,49 @@ public interface TargetPlatformPackage extends EPackage {
 	int COMPOSITE_STRING_PART___GET_ACTUAL_STRING = 0;
 
 	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART___GET_ACTUAL_STRING__LIST = 1;
+
+	/**
+	 * The operation id for the '<em>Is Variable Definition Cycle Detected</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART___IS_VARIABLE_DEFINITION_CYCLE_DETECTED = 2;
+
+	/**
+	 * The operation id for the '<em>Get Var Def Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART___GET_VAR_DEF_CYCLE = 3;
+
+	/**
+	 * The operation id for the '<em>Get Copy</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STRING_PART___GET_COPY = 4;
+
+	/**
 	 * The number of operations of the '<em>Composite String Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STRING_PART_OPERATION_COUNT = 1;
+	int COMPOSITE_STRING_PART_OPERATION_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
@@ -519,13 +618,49 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_CALL__VAR_NAME = COMPOSITE_STRING_PART_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Var Def Cycle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL__VAR_DEF_CYCLE = COMPOSITE_STRING_PART_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Var Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+	int VAR_CALL_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Is Variable Definition Cycle Detected</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL___IS_VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART___IS_VARIABLE_DEFINITION_CYCLE_DETECTED;
+
+	/**
+	 * The operation id for the '<em>Get Var Def Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL___GET_VAR_DEF_CYCLE = COMPOSITE_STRING_PART___GET_VAR_DEF_CYCLE;
 
 	/**
 	 * The operation id for the '<em>Get Actual String</em>' operation.
@@ -537,13 +672,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_CALL___GET_ACTUAL_STRING = COMPOSITE_STRING_PART_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL___GET_ACTUAL_STRING__LIST = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Copy</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_CALL___GET_COPY = COMPOSITE_STRING_PART_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Var Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+	int VAR_CALL_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
@@ -574,13 +727,49 @@ public interface TargetPlatformPackage extends EPackage {
 	int STATIC_STRING__VALUE = COMPOSITE_STRING_PART_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Var Def Cycle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING__VAR_DEF_CYCLE = COMPOSITE_STRING_PART_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Static String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_STRING_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
+	int STATIC_STRING_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Is Variable Definition Cycle Detected</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING___IS_VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART___IS_VARIABLE_DEFINITION_CYCLE_DETECTED;
+
+	/**
+	 * The operation id for the '<em>Get Var Def Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING___GET_VAR_DEF_CYCLE = COMPOSITE_STRING_PART___GET_VAR_DEF_CYCLE;
 
 	/**
 	 * The operation id for the '<em>Get Actual String</em>' operation.
@@ -592,13 +781,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int STATIC_STRING___GET_ACTUAL_STRING = COMPOSITE_STRING_PART_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Actual String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING___GET_ACTUAL_STRING__LIST = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Copy</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_STRING___GET_COPY = COMPOSITE_STRING_PART_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Static String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_STRING_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 1;
+	int STATIC_STRING_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.
@@ -848,6 +1055,16 @@ public interface TargetPlatformPackage extends EPackage {
 	int OPTION = 12;
 
 	/**
+	 * The meta object id for the '<em>Var Def List</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.List
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarDefList()
+	 * @generated
+	 */
+	int VAR_DEF_LIST = 13;
+
+	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,7 +1072,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 13;
+	int LOCALE = 14;
 
 	/**
 	 * The meta object id for the '<em>Execution Environment</em>' data type.
@@ -865,7 +1082,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getExecutionEnvironment()
 	 * @generated
 	 */
-	int EXECUTION_ENVIRONMENT = 14;
+	int EXECUTION_ENVIRONMENT = 15;
 
 
 	/**
@@ -1095,15 +1312,15 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getVarDefinition_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link fr.obeo.releng.targetplatform.VarDefinition#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see fr.obeo.releng.targetplatform.VarDefinition#getValue()
 	 * @see #getVarDefinition()
 	 * @generated
 	 */
-	EAttribute getVarDefinition_Value();
+	EReference getVarDefinition_Value();
 
 	/**
 	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getOverrideValue <em>Override Value</em>}'.
@@ -1115,6 +1332,38 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getVarDefinition_OverrideValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable Definition Cycle Detected</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#isVariableDefinitionCycleDetected()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_VariableDefinitionCycleDetected();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#getVarDefCycle <em>Var Def Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Def Cycle</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getVarDefCycle()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_VarDefCycle();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#checkVarCycle() <em>Check Var Cycle</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Check Var Cycle</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#checkVarCycle()
+	 * @generated
+	 */
+	EOperation getVarDefinition__CheckVarCycle();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeString <em>Composite String</em>}'.
@@ -1149,6 +1398,28 @@ public interface TargetPlatformPackage extends EPackage {
 	EReference getCompositeString_StringParts();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.CompositeString#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable Definition Cycle Detected</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#isVariableDefinitionCycleDetected()
+	 * @see #getCompositeString()
+	 * @generated
+	 */
+	EAttribute getCompositeString_VariableDefinitionCycleDetected();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.CompositeString#getVarDefCycle <em>Var Def Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Def Cycle</em>'.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#getVarDefCycle()
+	 * @see #getCompositeString()
+	 * @generated
+	 */
+	EAttribute getCompositeString_VarDefCycle();
+
+	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeString#computeActualString() <em>Compute Actual String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1157,6 +1428,26 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getCompositeString__ComputeActualString();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeString#computeActualString(java.util.List) <em>Compute Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Compute Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#computeActualString(java.util.List)
+	 * @generated
+	 */
+	EOperation getCompositeString__ComputeActualString__List();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeString#getCopy() <em>Get Copy</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Copy</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeString#getCopy()
+	 * @generated
+	 */
+	EOperation getCompositeString__GetCopy();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}'.
@@ -1190,6 +1481,46 @@ public interface TargetPlatformPackage extends EPackage {
 	EOperation getCompositeStringPart__GetActualString();
 
 	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#getActualString(java.util.List) <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#getActualString(java.util.List)
+	 * @generated
+	 */
+	EOperation getCompositeStringPart__GetActualString__List();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#isVariableDefinitionCycleDetected() <em>Is Variable Definition Cycle Detected</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Variable Definition Cycle Detected</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#isVariableDefinitionCycleDetected()
+	 * @generated
+	 */
+	EOperation getCompositeStringPart__IsVariableDefinitionCycleDetected();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#getVarDefCycle() <em>Get Var Def Cycle</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Var Def Cycle</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#getVarDefCycle()
+	 * @generated
+	 */
+	EOperation getCompositeStringPart__GetVarDefCycle();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#getCopy() <em>Get Copy</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Copy</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#getCopy()
+	 * @generated
+	 */
+	EOperation getCompositeStringPart__GetCopy();
+
+	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.VarCall <em>Var Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1211,6 +1542,28 @@ public interface TargetPlatformPackage extends EPackage {
 	EReference getVarCall_VarName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarCall#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable Definition Cycle Detected</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarCall#isVariableDefinitionCycleDetected()
+	 * @see #getVarCall()
+	 * @generated
+	 */
+	EAttribute getVarCall_VariableDefinitionCycleDetected();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarCall#getVarDefCycle <em>Var Def Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Def Cycle</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarCall#getVarDefCycle()
+	 * @see #getVarCall()
+	 * @generated
+	 */
+	EAttribute getVarCall_VarDefCycle();
+
+	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarCall#getActualString() <em>Get Actual String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1219,6 +1572,26 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getVarCall__GetActualString();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarCall#getActualString(java.util.List) <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.VarCall#getActualString(java.util.List)
+	 * @generated
+	 */
+	EOperation getVarCall__GetActualString__List();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarCall#getCopy() <em>Get Copy</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Copy</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.VarCall#getCopy()
+	 * @generated
+	 */
+	EOperation getVarCall__GetCopy();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.StaticString <em>Static String</em>}'.
@@ -1242,6 +1615,28 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getStaticString_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.StaticString#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable Definition Cycle Detected</em>'.
+	 * @see fr.obeo.releng.targetplatform.StaticString#isVariableDefinitionCycleDetected()
+	 * @see #getStaticString()
+	 * @generated
+	 */
+	EAttribute getStaticString_VariableDefinitionCycleDetected();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.StaticString#getVarDefCycle <em>Var Def Cycle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Def Cycle</em>'.
+	 * @see fr.obeo.releng.targetplatform.StaticString#getVarDefCycle()
+	 * @see #getStaticString()
+	 * @generated
+	 */
+	EAttribute getStaticString_VarDefCycle();
+
+	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.StaticString#getActualString() <em>Get Actual String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1250,6 +1645,26 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getStaticString__GetActualString();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.StaticString#getActualString(java.util.List) <em>Get Actual String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Actual String</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.StaticString#getActualString(java.util.List)
+	 * @generated
+	 */
+	EOperation getStaticString__GetActualString__List();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.StaticString#getCopy() <em>Get Copy</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Copy</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.StaticString#getCopy()
+	 * @generated
+	 */
+	EOperation getStaticString__GetCopy();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.Location <em>Location</em>}'.
@@ -1452,6 +1867,17 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getOption();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.List <em>Var Def List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Var Def List</em>'.
+	 * @see java.util.List
+	 * @model instanceClass="java.util.List&lt;fr.obeo.releng.targetplatform.VarDefinition&gt;"
+	 * @generated
+	 */
+	EDataType getVarDefList();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale <em>Locale</em>}'.
@@ -1677,12 +2103,12 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute VAR_DEFINITION__NAME = eINSTANCE.getVarDefinition_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VAR_DEFINITION__VALUE = eINSTANCE.getVarDefinition_Value();
+		EReference VAR_DEFINITION__VALUE = eINSTANCE.getVarDefinition_Value();
 
 		/**
 		 * The meta object literal for the '<em><b>Override Value</b></em>' attribute feature.
@@ -1691,6 +2117,30 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VAR_DEFINITION__OVERRIDE_VALUE = eINSTANCE.getVarDefinition_OverrideValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__VARIABLE_DEFINITION_CYCLE_DETECTED = eINSTANCE.getVarDefinition_VariableDefinitionCycleDetected();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Def Cycle</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__VAR_DEF_CYCLE = eINSTANCE.getVarDefinition_VarDefCycle();
+
+		/**
+		 * The meta object literal for the '<em><b>Check Var Cycle</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VAR_DEFINITION___CHECK_VAR_CYCLE = eINSTANCE.getVarDefinition__CheckVarCycle();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
@@ -1719,12 +2169,44 @@ public interface TargetPlatformPackage extends EPackage {
 		EReference COMPOSITE_STRING__STRING_PARTS = eINSTANCE.getCompositeString_StringParts();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPOSITE_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED = eINSTANCE.getCompositeString_VariableDefinitionCycleDetected();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Def Cycle</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPOSITE_STRING__VAR_DEF_CYCLE = eINSTANCE.getCompositeString_VarDefCycle();
+
+		/**
 		 * The meta object literal for the '<em><b>Compute Actual String</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation COMPOSITE_STRING___COMPUTE_ACTUAL_STRING = eINSTANCE.getCompositeString__ComputeActualString();
+
+		/**
+		 * The meta object literal for the '<em><b>Compute Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING___COMPUTE_ACTUAL_STRING__LIST = eINSTANCE.getCompositeString__ComputeActualString__List();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Copy</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING___GET_COPY = eINSTANCE.getCompositeString__GetCopy();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
@@ -1753,6 +2235,38 @@ public interface TargetPlatformPackage extends EPackage {
 		EOperation COMPOSITE_STRING_PART___GET_ACTUAL_STRING = eINSTANCE.getCompositeStringPart__GetActualString();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING_PART___GET_ACTUAL_STRING__LIST = eINSTANCE.getCompositeStringPart__GetActualString__List();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Variable Definition Cycle Detected</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING_PART___IS_VARIABLE_DEFINITION_CYCLE_DETECTED = eINSTANCE.getCompositeStringPart__IsVariableDefinitionCycleDetected();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Var Def Cycle</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING_PART___GET_VAR_DEF_CYCLE = eINSTANCE.getCompositeStringPart__GetVarDefCycle();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Copy</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COMPOSITE_STRING_PART___GET_COPY = eINSTANCE.getCompositeStringPart__GetCopy();
+
+		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1771,12 +2285,44 @@ public interface TargetPlatformPackage extends EPackage {
 		EReference VAR_CALL__VAR_NAME = eINSTANCE.getVarCall_VarName();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED = eINSTANCE.getVarCall_VariableDefinitionCycleDetected();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Def Cycle</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_CALL__VAR_DEF_CYCLE = eINSTANCE.getVarCall_VarDefCycle();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation VAR_CALL___GET_ACTUAL_STRING = eINSTANCE.getVarCall__GetActualString();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VAR_CALL___GET_ACTUAL_STRING__LIST = eINSTANCE.getVarCall__GetActualString__List();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Copy</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VAR_CALL___GET_COPY = eINSTANCE.getVarCall__GetCopy();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
@@ -1797,12 +2343,44 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute STATIC_STRING__VALUE = eINSTANCE.getStaticString_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATIC_STRING__VARIABLE_DEFINITION_CYCLE_DETECTED = eINSTANCE.getStaticString_VariableDefinitionCycleDetected();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Def Cycle</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATIC_STRING__VAR_DEF_CYCLE = eINSTANCE.getStaticString_VarDefCycle();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation STATIC_STRING___GET_ACTUAL_STRING = eINSTANCE.getStaticString__GetActualString();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Actual String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STATIC_STRING___GET_ACTUAL_STRING__LIST = eINSTANCE.getStaticString__GetActualString__List();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Copy</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STATIC_STRING___GET_COPY = eINSTANCE.getStaticString__GetCopy();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.
@@ -1963,6 +2541,16 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum OPTION = eINSTANCE.getOption();
+
+		/**
+		 * The meta object literal for the '<em>Var Def List</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.List
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarDefList()
+		 * @generated
+		 */
+		EDataType VAR_DEF_LIST = eINSTANCE.getVarDefList();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type.

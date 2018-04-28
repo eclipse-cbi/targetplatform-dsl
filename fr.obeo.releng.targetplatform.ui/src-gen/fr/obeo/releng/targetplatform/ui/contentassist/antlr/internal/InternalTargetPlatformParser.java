@@ -7797,21 +7797,25 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VarDefinition__ValueAssignment_3"
-    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2896:1: rule__VarDefinition__ValueAssignment_3 : ( RULE_STRING ) ;
+    // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2896:1: rule__VarDefinition__ValueAssignment_3 : ( ruleCompositeString ) ;
     public final void rule__VarDefinition__ValueAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2900:1: ( ( RULE_STRING ) )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2901:1: ( RULE_STRING )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2900:1: ( ( ruleCompositeString ) )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2901:1: ( ruleCompositeString )
             {
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2901:1: ( RULE_STRING )
-            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2902:1: RULE_STRING
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2901:1: ( ruleCompositeString )
+            // ../fr.obeo.releng.targetplatform.ui/src-gen/fr/obeo/releng/targetplatform/ui/contentassist/antlr/internal/InternalTargetPlatform.g:2902:1: ruleCompositeString
             {
-             before(grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__VarDefinition__ValueAssignment_35919); 
-             after(grammarAccess.getVarDefinitionAccess().getValueSTRINGTerminalRuleCall_3_0()); 
+             before(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); 
+            pushFollow(FOLLOW_ruleCompositeString_in_rule__VarDefinition__ValueAssignment_35919);
+            ruleCompositeString();
+
+            state._fsp--;
+
+             after(grammarAccess.getVarDefinitionAccess().getValueCompositeStringParserRuleCall_3_0()); 
 
             }
 
@@ -8509,7 +8513,7 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
     public static final BitSet FOLLOW_rule__VarDefinition__Group__1__Impl_in_rule__VarDefinition__Group__12494 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_rule__VarDefinition__Group__2_in_rule__VarDefinition__Group__12497 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__VarDefinition__NameAssignment_1_in_rule__VarDefinition__Group__1__Impl2524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VarDefinition__Group__2__Impl_in_rule__VarDefinition__Group__22554 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__VarDefinition__Group__2__Impl_in_rule__VarDefinition__Group__22554 = new BitSet(new long[]{0x0000000010000080L});
     public static final BitSet FOLLOW_rule__VarDefinition__Group__3_in_rule__VarDefinition__Group__22557 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_26_in_rule__VarDefinition__Group__2__Impl2585 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__VarDefinition__Group__3__Impl_in_rule__VarDefinition__Group__32616 = new BitSet(new long[]{0x0000000000000002L});
@@ -8642,7 +8646,7 @@ public class InternalTargetPlatformParser extends AbstractInternalContentAssistP
     public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_25826 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__EnvAssignment_3_15857 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__VarDefinition__NameAssignment_15888 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__VarDefinition__ValueAssignment_35919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompositeString_in_rule__VarDefinition__ValueAssignment_35919 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCompositeStringPart_in_rule__CompositeString__StringPartsAssignment_15950 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCompositeStringPart_in_rule__CompositeString__StringPartsAssignment_2_15981 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__VarCall__VarNameAssignment_16016 = new BitSet(new long[]{0x0000000000000002L});
