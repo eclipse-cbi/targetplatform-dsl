@@ -29,7 +29,7 @@ class CompositeElementResolver {
 		
 		searchAndAppendDefineFromIncludedTpd(targetPlatform)
 		resolveLocations(targetPlatform)
-		val importedTargetPlatforms = locationIndexBuilder.getImportedTargetPlatforms(targetPlatform)
+		val importedTargetPlatforms = locationIndexBuilder.getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform)
 		importedTargetPlatforms.forEach[
 			resolveLocations(it)
 		]

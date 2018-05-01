@@ -91,6 +91,10 @@ class LocationIndexBuilder {
 	 */
 	def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
 		compositeElementResolver.resolveCompositeElements(targetPlatform)
+		return getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform)
+	}
+	
+	def getImportedTargetPlatformsDoNotResolveCompositeElement(TargetPlatform targetPlatform) {
 		val visited = newLinkedHashSet();
 		val queue = newLinkedList();
 		val includeRet = newLinkedList();
