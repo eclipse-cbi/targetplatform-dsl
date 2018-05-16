@@ -104,6 +104,7 @@ class CompositeElementResolver {
 				]
 				.forEach[
 					var notProcessedTargetPlatform = it
+					notProcessedTargetPlatform.reset
 					overrideVariableDefinition(notProcessedTargetPlatform)
 					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, newHashSet(alreadyVisitedTarget))
 					notProcessedTargetPlatform.contents.forEach[
@@ -159,6 +160,7 @@ class CompositeElementResolver {
 					currentImportedDefineCopy.name = currentImportedDefine.name
 					currentImportedDefineCopy.value = currentImportedDefine.value.copy
 					currentImportedDefineCopy.overrideValue = currentImportedDefine.overrideValue
+					currentImportedDefineCopy.imported = true
 					toBeAddedDefine.add(currentImportedDefineCopy)
 				}
 			]
@@ -205,7 +207,9 @@ class CompositeElementResolver {
 		for (varDef : targetContent) {
 			if (varDef instanceof VarDefinition) {
 				if (varCall.varName.name == varDef.name) {
+					varCall.originalVarName = varCall.varName
 					varCall.varName = varDef
+					varCall.updated = true
 				}
 			}
 		}

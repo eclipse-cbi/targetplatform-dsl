@@ -24,6 +24,46 @@ class TargetPlatform {
 	refers derived Environment environment get {
 		contents.filter(typeof(Environment)).head
 	}
+	refers derived VarDefinition[] varDefinition get {
+		new UnmodifiableEList(contents.filter(typeof(VarDefinition)).toList)
+	}
+	
+	/**
+	 * The new to reset the target platform comes from the following case under eclipse:
+	 * Let the 3 nested targets:
+	 * 
+	 * -------------------------------------------------------------------------------------
+	 * target "mainTarget"
+	 * include "subTpd.tpd"
+	 * -------------------------------------------------------------------------------------
+	 * target "subTpd"
+	 * include "subSubTpd.tpd"
+	 * -------------------------------------------------------------------------------------
+	 * target "subSubTpd"
+	 * define var1="val1"
+	 * -------------------------------------------------------------------------------------
+	 * 
+	 * var1 is defined in "subSubTpd", so it is imported inside "subTpd" and "mainTarget".
+	 * In the outline view of eclipse, we can visualize that.
+	 * 
+	 * If we remove var1 from "subSubTpd", it is removed from "subSubTpd". If we edit/modify
+	 * "mainTarget", XTEXT will launch the rebuild of "mainTarget". In this rebuild, it will
+	 * reimport "subTpd" from its cache and do not rebuild "subTpd". Since "subTpd" still has
+	 * a var1 variable, "mainTarget" will also import a var1 variable. So we need to reset
+	 * any imported target when we do a build.
+	 */
+	op void reset() {
+		val toBeRemoved = newArrayList
+		for (VarDefinition varDef : this.varDefinition) {
+			if (varDef.imported) {
+				toBeRemoved.add(varDef)
+			}
+		}
+		contents.removeAll(toBeRemoved)
+		for (VarDefinition varDef : this.varDefinition) {
+			varDef.reset
+		}
+	}
 }
 
 interface TargetContent {
@@ -127,6 +167,8 @@ class VarDefinition extends TargetContent {
 	boolean variableDefinitionCycleDetected = "false"
 	VarDefList varDefCycle
 	
+	boolean imported = "false" //true if the "variable definition" comes from an included tpd
+	
 	op void checkVarCycle() {
 		variableDefinitionCycleDetected = false
 		varDefCycle = newArrayList
@@ -139,6 +181,12 @@ class VarDefinition extends TargetContent {
 		}
 		else {
 			varDefCycle = newArrayList
+		}
+	}
+	
+	op void reset() {
+		if (!imported) {
+			value.reset
 		}
 	}
 	
@@ -206,6 +254,12 @@ class CompositeString {
 		]
 		return output
 	}
+	
+	op void reset() {
+		for (CompositeStringPart stringPart : stringParts) {
+			stringPart.reset
+		}
+	}
 }
 
 interface CompositeStringPart {
@@ -220,10 +274,14 @@ interface CompositeStringPart {
 	op VarDefList getVarDefCycle()
 	
 	op CompositeStringPart getCopy()
+	
+	op void reset()
 }
 
 class VarCall extends CompositeStringPart {
 	refers VarDefinition varName
+	refers VarDefinition originalVarName
+	boolean updated = "false" // true if "varName" has been changed by CompositeElementResolver.updateVariableCall
 	boolean variableDefinitionCycleDetected = "false"
 	VarDefList varDefCycle
 	
@@ -268,6 +326,13 @@ class VarCall extends CompositeStringPart {
 		output.varName = varName
 		return output
 	}
+	
+	op void reset() {
+		if (updated) {
+			varName = originalVarName
+			updated = false
+		}
+	}
 }
 
 class StaticString extends CompositeStringPart {
@@ -288,6 +353,9 @@ class StaticString extends CompositeStringPart {
 		val output = TargetPlatformFactory.eINSTANCE.createStaticString
 		output.value = value
 		return output
+	}
+	
+	op void reset() {
 	}
 }
 
