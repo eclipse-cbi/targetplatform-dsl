@@ -260,6 +260,18 @@ public class CompositeStringImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void reset() {
+		EList<CompositeStringPart> _stringParts = this.getStringParts();
+		for (final CompositeStringPart stringPart : _stringParts) {
+			stringPart.reset();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -389,6 +401,9 @@ public class CompositeStringImpl extends MinimalEObjectImpl.Container implements
 				return computeActualString((List<VarDefinition>)arguments.get(0));
 			case TargetPlatformPackage.COMPOSITE_STRING___GET_COPY:
 				return getCopy();
+			case TargetPlatformPackage.COMPOSITE_STRING___RESET:
+				reset();
+				return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -262,6 +262,15 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void reset() {
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -406,6 +415,9 @@ public class StaticStringImpl extends MinimalEObjectImpl.Container implements St
 				return getActualString((List<VarDefinition>)arguments.get(0));
 			case TargetPlatformPackage.STATIC_STRING___GET_COPY:
 				return getCopy();
+			case TargetPlatformPackage.STATIC_STRING___RESET:
+				reset();
+				return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -45,7 +45,7 @@ public class CompositeElementResolver {
     this.overrideVariableDefinition(targetPlatform);
     this.searchAndAppendDefineFromIncludedTpd(targetPlatform);
     this.resolveLocations(targetPlatform);
-    final LinkedList<TargetPlatform> importedTargetPlatforms = this.locationIndexBuilder.getImportedTargetPlatforms(targetPlatform);
+    final LinkedList<TargetPlatform> importedTargetPlatforms = this.locationIndexBuilder.getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform);
     final Consumer<TargetPlatform> _function = new Consumer<TargetPlatform>() {
       @Override
       public void accept(final TargetPlatform it) {
@@ -150,6 +150,7 @@ public class CompositeElementResolver {
           @Override
           public void accept(final TargetPlatform it) {
             TargetPlatform notProcessedTargetPlatform = it;
+            notProcessedTargetPlatform.reset();
             CompositeElementResolver.this.overrideVariableDefinition(notProcessedTargetPlatform);
             CompositeElementResolver.this.searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
             final Consumer<TargetContent> _function = new Consumer<TargetContent>() {
@@ -234,6 +235,7 @@ public class CompositeElementResolver {
           currentImportedDefineCopy.setName(currentImportedDefine.getName());
           currentImportedDefineCopy.setValue(currentImportedDefine.getValue().getCopy());
           currentImportedDefineCopy.setOverrideValue(currentImportedDefine.getOverrideValue());
+          currentImportedDefineCopy.setImported(true);
           toBeAddedDefine.add(currentImportedDefineCopy);
         }
       }
@@ -286,7 +288,9 @@ public class CompositeElementResolver {
         String _name_1 = ((VarDefinition)varDef).getName();
         boolean _equals = Objects.equal(_name, _name_1);
         if (_equals) {
+          varCall.setOriginalVarName(varCall.getVarName());
           varCall.setVarName(((VarDefinition)varDef));
+          varCall.setUpdated(true);
         }
       }
     }

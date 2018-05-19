@@ -153,4 +153,12 @@ public interface CompositeString extends EObject {
 	 */
 	CompositeString getCopy();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.CompositeStringPart%&gt;&gt; _stringParts = this.getStringParts();\nfor (final &lt;%fr.obeo.releng.targetplatform.CompositeStringPart%&gt; stringPart : _stringParts)\n{\n\tstringPart.reset();\n}'"
+	 * @generated
+	 */
+	void reset();
+
 } // CompositeString

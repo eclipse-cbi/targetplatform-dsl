@@ -91,4 +91,12 @@ public interface CompositeStringPart extends EObject {
 	 */
 	CompositeStringPart getCopy();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void reset();
+
 } // CompositeStringPart

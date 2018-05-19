@@ -127,6 +127,10 @@ public class LocationIndexBuilder {
    */
   public LinkedList<TargetPlatform> getImportedTargetPlatforms(final TargetPlatform targetPlatform) {
     this.compositeElementResolver.resolveCompositeElements(targetPlatform);
+    return this.getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform);
+  }
+  
+  public LinkedList<TargetPlatform> getImportedTargetPlatformsDoNotResolveCompositeElement(final TargetPlatform targetPlatform) {
     final LinkedHashSet<TargetPlatform> visited = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
     final LinkedList<TargetPlatform> queue = CollectionLiterals.<TargetPlatform>newLinkedList();
     final LinkedList<TargetPlatform> includeRet = CollectionLiterals.<TargetPlatform>newLinkedList();

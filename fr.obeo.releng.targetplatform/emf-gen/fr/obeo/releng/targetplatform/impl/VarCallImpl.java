@@ -38,6 +38,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#getCompositeString <em>Composite String</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#getVarName <em>Var Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#getOriginalVarName <em>Original Var Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#isUpdated <em>Updated</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarCallImpl#getVarDefCycle <em>Var Def Cycle</em>}</li>
  * </ul>
@@ -54,6 +56,36 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 	 * @ordered
 	 */
 	protected VarDefinition varName;
+
+	/**
+	 * The cached value of the '{@link #getOriginalVarName() <em>Original Var Name</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalVarName()
+	 * @generated
+	 * @ordered
+	 */
+	protected VarDefinition originalVarName;
+
+	/**
+	 * The default value of the '{@link #isUpdated() <em>Updated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUpdated()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UPDATED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUpdated() <em>Updated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUpdated()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean updated = UPDATED_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isVariableDefinitionCycleDetected() <em>Variable Definition Cycle Detected</em>}' attribute.
@@ -198,6 +230,65 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public VarDefinition getOriginalVarName() {
+		if (originalVarName != null && originalVarName.eIsProxy()) {
+			InternalEObject oldOriginalVarName = (InternalEObject)originalVarName;
+			originalVarName = (VarDefinition)eResolveProxy(oldOriginalVarName);
+			if (originalVarName != oldOriginalVarName) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME, oldOriginalVarName, originalVarName));
+			}
+		}
+		return originalVarName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarDefinition basicGetOriginalVarName() {
+		return originalVarName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOriginalVarName(VarDefinition newOriginalVarName) {
+		VarDefinition oldOriginalVarName = originalVarName;
+		originalVarName = newOriginalVarName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME, oldOriginalVarName, originalVarName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isUpdated() {
+		return updated;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUpdated(boolean newUpdated) {
+		boolean oldUpdated = updated;
+		updated = newUpdated;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_CALL__UPDATED, oldUpdated, updated));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isVariableDefinitionCycleDetected() {
 		return variableDefinitionCycleDetected;
 	}
@@ -301,6 +392,19 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void reset() {
+		boolean _isUpdated = this.isUpdated();
+		if (_isUpdated) {
+			this.setVarName(this.getOriginalVarName());
+			this.setUpdated(false);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -354,6 +458,11 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 			case TargetPlatformPackage.VAR_CALL__VAR_NAME:
 				if (resolve) return getVarName();
 				return basicGetVarName();
+			case TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME:
+				if (resolve) return getOriginalVarName();
+				return basicGetOriginalVarName();
+			case TargetPlatformPackage.VAR_CALL__UPDATED:
+				return isUpdated();
 			case TargetPlatformPackage.VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED:
 				return isVariableDefinitionCycleDetected();
 			case TargetPlatformPackage.VAR_CALL__VAR_DEF_CYCLE:
@@ -376,6 +485,12 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 				return;
 			case TargetPlatformPackage.VAR_CALL__VAR_NAME:
 				setVarName((VarDefinition)newValue);
+				return;
+			case TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME:
+				setOriginalVarName((VarDefinition)newValue);
+				return;
+			case TargetPlatformPackage.VAR_CALL__UPDATED:
+				setUpdated((Boolean)newValue);
 				return;
 			case TargetPlatformPackage.VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED:
 				setVariableDefinitionCycleDetected((Boolean)newValue);
@@ -401,6 +516,12 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 			case TargetPlatformPackage.VAR_CALL__VAR_NAME:
 				setVarName((VarDefinition)null);
 				return;
+			case TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME:
+				setOriginalVarName((VarDefinition)null);
+				return;
+			case TargetPlatformPackage.VAR_CALL__UPDATED:
+				setUpdated(UPDATED_EDEFAULT);
+				return;
 			case TargetPlatformPackage.VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED:
 				setVariableDefinitionCycleDetected(VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT);
 				return;
@@ -423,6 +544,10 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 				return basicGetCompositeString() != null;
 			case TargetPlatformPackage.VAR_CALL__VAR_NAME:
 				return varName != null;
+			case TargetPlatformPackage.VAR_CALL__ORIGINAL_VAR_NAME:
+				return originalVarName != null;
+			case TargetPlatformPackage.VAR_CALL__UPDATED:
+				return updated != UPDATED_EDEFAULT;
 			case TargetPlatformPackage.VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED:
 				return variableDefinitionCycleDetected != VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
 			case TargetPlatformPackage.VAR_CALL__VAR_DEF_CYCLE:
@@ -446,6 +571,9 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 				return getActualString((List<VarDefinition>)arguments.get(0));
 			case TargetPlatformPackage.VAR_CALL___GET_COPY:
 				return getCopy();
+			case TargetPlatformPackage.VAR_CALL___RESET:
+				reset();
+				return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}
@@ -460,7 +588,9 @@ public class VarCallImpl extends MinimalEObjectImpl.Container implements VarCall
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (variableDefinitionCycleDetected: ");
+		result.append(" (updated: ");
+		result.append(updated);
+		result.append(", variableDefinitionCycleDetected: ");
 		result.append(variableDefinitionCycleDetected);
 		result.append(", varDefCycle: ");
 		result.append(varDefCycle);

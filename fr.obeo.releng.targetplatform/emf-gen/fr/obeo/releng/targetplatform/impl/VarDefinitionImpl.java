@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getOverrideValue <em>Override Value</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getVarDefCycle <em>Var Def Cycle</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isImported <em>Imported</em>}</li>
  * </ul>
  *
  * @generated
@@ -124,6 +125,26 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * @ordered
 	 */
 	protected List<VarDefinition> varDefCycle;
+
+	/**
+	 * The default value of the '{@link #isImported() <em>Imported</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isImported()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IMPORTED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isImported() <em>Imported</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isImported()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean imported = IMPORTED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -327,6 +348,27 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isImported() {
+		return imported;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImported(boolean newImported) {
+		boolean oldImported = imported;
+		imported = newImported;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__IMPORTED, oldImported, imported));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void checkVarCycle() {
 		this.setVariableDefinitionCycleDetected(false);
 		this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
@@ -340,6 +382,47 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		else {
 			this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void reset() {
+		boolean _isImported = this.isImported();
+		boolean _not = (!_isImported);
+		if (_not) {
+			this.getValue().reset();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		this.checkVarCycle();
+		String _string = super.toString();
+		StringBuffer result = new StringBuffer(_string);
+		result.append(" (name: ");
+		result.append(this.getName());
+		result.append(", overrideValue: ");
+		result.append(this.getOverrideValue());
+		result.append(", variableDefinitionCycleDetected: ");
+		result.append(this.isVariableDefinitionCycleDetected());
+		result.append(", varDefCycle: ");
+		boolean _isVariableDefinitionCycleDetected = this.isVariableDefinitionCycleDetected();
+		boolean _not = (!_isVariableDefinitionCycleDetected);
+		if (_not) {
+			result.append(this.getVarDefCycle());
+		}
+		else {
+			result.append("erroneous cyclic definition");
+		}
+		result.append(")");
+		return result.toString();
 	}
 
 	/**
@@ -409,6 +492,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return isVariableDefinitionCycleDetected();
 			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
 				return getVarDefCycle();
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
+				return isImported();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -440,6 +525,9 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
 				setVarDefCycle((List<VarDefinition>)newValue);
 				return;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
+				setImported((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -470,6 +558,9 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
 				setVarDefCycle((List<VarDefinition>)null);
 				return;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
+				setImported(IMPORTED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -494,6 +585,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return variableDefinitionCycleDetected != VARIABLE_DEFINITION_CYCLE_DETECTED_EDEFAULT;
 			case TargetPlatformPackage.VAR_DEFINITION__VAR_DEF_CYCLE:
 				return varDefCycle != null;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
+				return imported != IMPORTED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -509,30 +602,13 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION___CHECK_VAR_CYCLE:
 				checkVarCycle();
 				return null;
+			case TargetPlatformPackage.VAR_DEFINITION___RESET:
+				reset();
+				return null;
+			case TargetPlatformPackage.VAR_DEFINITION___TO_STRING:
+				return toString();
 		}
 		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", overrideValue: ");
-		result.append(overrideValue);
-		result.append(", variableDefinitionCycleDetected: ");
-		result.append(variableDefinitionCycleDetected);
-		result.append(", varDefCycle: ");
-		result.append(varDefCycle);
-		result.append(')');
-		return result.toString();
 	}
 
 } //VarDefinitionImpl

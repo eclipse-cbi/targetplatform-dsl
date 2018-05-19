@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getEnvironment <em>Environment</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getVarDefinition <em>Var Definition</em>}</li>
  * </ul>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform()
@@ -168,5 +169,55 @@ public interface TargetPlatform extends EObject {
 	 * @generated
 	 */
 	Environment getEnvironment();
+
+	/**
+	 * Returns the value of the '<em><b>Var Definition</b></em>' reference list.
+	 * The list contents are of type {@link fr.obeo.releng.targetplatform.VarDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Definition</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Definition</em>' reference list.
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_VarDefinition()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='&lt;%java.util.List%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; _list = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt;filter(this.getContents(), &lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;.class));\nreturn new &lt;%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt;(_list);'"
+	 * @generated
+	 */
+	EList<VarDefinition> getVarDefinition();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The new to reset the target platform comes from the following case under eclipse:
+	 * Let the 3 nested targets:
+	 * 
+	 * -------------------------------------------------------------------------------------
+	 * target "mainTarget"
+	 * include "subTpd.tpd"
+	 * -------------------------------------------------------------------------------------
+	 * target "subTpd"
+	 * include "subSubTpd.tpd"
+	 * -------------------------------------------------------------------------------------
+	 * target "subSubTpd"
+	 * define var1="val1"
+	 * -------------------------------------------------------------------------------------
+	 * 
+	 * var1 is defined in "subSubTpd", so it is imported inside "subTpd" and "mainTarget".
+	 * In the outline view of eclipse, we can visualize that.
+	 * 
+	 * If we remove var1 from "subSubTpd", it is removed from "subSubTpd". If we edit/modify
+	 * "mainTarget", XTEXT will launch the rebuild of "mainTarget". In this rebuild, it will
+	 * reimport "subTpd" from its cache and do not rebuild "subTpd". Since "subTpd" still has
+	 * a var1 variable, "mainTarget" will also import a var1 variable. So we need to reset
+	 * any imported target when we do a build.
+	 * <!-- end-model-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='final &lt;%java.util.ArrayList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; toBeRemoved = &lt;%org.eclipse.xtext.xbase.lib.CollectionLiterals%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt;newArrayList();\n&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; _varDefinition = this.getVarDefinition();\nfor (final &lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt; varDef : _varDefinition)\n{\n\tboolean _isImported = varDef.isImported();\n\tif (_isImported)\n\t{\n\t\ttoBeRemoved.add(varDef);\n\t}\n}\nthis.getContents().removeAll(toBeRemoved);\n&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; _varDefinition_1 = this.getVarDefinition();\nfor (final &lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt; varDef_1 : _varDefinition_1)\n{\n\tvarDef_1.reset();\n}'"
+	 * @generated
+	 */
+	void reset();
 
 } // TargetPlatform

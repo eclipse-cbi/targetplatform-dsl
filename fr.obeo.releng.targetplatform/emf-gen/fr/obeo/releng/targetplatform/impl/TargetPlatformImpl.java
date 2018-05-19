@@ -12,7 +12,11 @@ import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarDefinition;
 
+import java.lang.reflect.InvocationTargetException;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +35,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
@@ -51,6 +57,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getEnvironment <em>Environment</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getVarDefinition <em>Var Definition</em>}</li>
  * </ul>
  *
  * @generated
@@ -238,6 +245,37 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<VarDefinition> getVarDefinition() {
+		List<VarDefinition> _list = IterableExtensions.<VarDefinition>toList(Iterables.<VarDefinition>filter(this.getContents(), VarDefinition.class));
+		return new UnmodifiableEList<VarDefinition>(_list);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void reset() {
+		final ArrayList<VarDefinition> toBeRemoved = CollectionLiterals.<VarDefinition>newArrayList();
+		EList<VarDefinition> _varDefinition = this.getVarDefinition();
+		for (final VarDefinition varDef : _varDefinition) {
+			boolean _isImported = varDef.isImported();
+			if (_isImported) {
+				toBeRemoved.add(varDef);
+			}
+		}
+		this.getContents().removeAll(toBeRemoved);
+		EList<VarDefinition> _varDefinition_1 = this.getVarDefinition();
+		for (final VarDefinition varDef_1 : _varDefinition_1) {
+			varDef_1.reset();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -285,6 +323,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 			case TargetPlatformPackage.TARGET_PLATFORM__ENVIRONMENT:
 				if (resolve) return getEnvironment();
 				return basicGetEnvironment();
+			case TargetPlatformPackage.TARGET_PLATFORM__VAR_DEFINITION:
+				return getVarDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -355,8 +395,25 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 				return !getLocations().isEmpty();
 			case TargetPlatformPackage.TARGET_PLATFORM__ENVIRONMENT:
 				return basicGetEnvironment() != null;
+			case TargetPlatformPackage.TARGET_PLATFORM__VAR_DEFINITION:
+				return !getVarDefinition().isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case TargetPlatformPackage.TARGET_PLATFORM___RESET:
+				reset();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

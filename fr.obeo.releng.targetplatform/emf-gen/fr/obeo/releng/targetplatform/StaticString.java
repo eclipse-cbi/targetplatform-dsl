@@ -129,4 +129,12 @@ public interface StaticString extends CompositeStringPart {
 	 */
 	StaticString getCopy();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body=''"
+	 * @generated
+	 */
+	void reset();
+
 } // StaticString
