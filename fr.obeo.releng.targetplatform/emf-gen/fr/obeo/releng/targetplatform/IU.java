@@ -11,12 +11,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getID <em>ID</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getVersion <em>Version</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.IU#getVarVersion <em>Var Version</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.IU#getLocation <em>Location</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIU()
  * @model
@@ -74,6 +75,32 @@ public interface IU extends EObject {
 	 * @generated
 	 */
 	void setVersion(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Var Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Version</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Version</em>' containment reference.
+	 * @see #setVarVersion(VarCall)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getIU_VarVersion()
+	 * @model containment="true"
+	 * @generated
+	 */
+	VarCall getVarVersion();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.IU#getVarVersion <em>Var Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Var Version</em>' containment reference.
+	 * @see #getVarVersion()
+	 * @generated
+	 */
+	void setVarVersion(VarCall value);
 
 	/**
 	 * Returns the value of the '<em><b>Location</b></em>' container reference.

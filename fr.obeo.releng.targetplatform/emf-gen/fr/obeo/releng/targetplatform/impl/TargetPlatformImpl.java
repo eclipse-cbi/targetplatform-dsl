@@ -12,9 +12,11 @@ import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarDefinition;
 
-import java.lang.Iterable;
+import java.lang.reflect.InvocationTargetException;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,6 +36,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -44,19 +48,41 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getEnvironment <em>Environment</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getVarDefinition <em>Var Definition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements TargetPlatform {
+	/**
+	 * The default value of the '{@link #isCompositeElementsResolved() <em>Composite Elements Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompositeElementsResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isCompositeElementsResolved() <em>Composite Elements Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompositeElementsResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean compositeElementsResolved = COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -111,6 +137,27 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isCompositeElementsResolved() {
+		return compositeElementsResolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompositeElementsResolved(boolean newCompositeElementsResolved) {
+		boolean oldCompositeElementsResolved = compositeElementsResolved;
+		compositeElementsResolved = newCompositeElementsResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED, oldCompositeElementsResolved, compositeElementsResolved));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -145,9 +192,7 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	public EList<IncludeDeclaration> getIncludes() {
-		EList<TargetContent> _contents = this.getContents();
-		Iterable<IncludeDeclaration> _filter = Iterables.<IncludeDeclaration>filter(_contents, IncludeDeclaration.class);
-		List<IncludeDeclaration> _list = IterableExtensions.<IncludeDeclaration>toList(_filter);
+		List<IncludeDeclaration> _list = IterableExtensions.<IncludeDeclaration>toList(Iterables.<IncludeDeclaration>filter(this.getContents(), IncludeDeclaration.class));
 		return new UnmodifiableEList<IncludeDeclaration>(_list);
 	}
 
@@ -157,16 +202,12 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	public EList<Option> getOptions() {
-		EList<TargetContent> _contents = this.getContents();
-		Iterable<Options> _filter = Iterables.<Options>filter(_contents, Options.class);
 		final Function1<Options, EList<Option>> _function = new Function1<Options, EList<Option>>() {
 			public EList<Option> apply(final Options it) {
 				return it.getOptions();
 			}
 		};
-		Iterable<EList<Option>> _map = IterableExtensions.<Options, EList<Option>>map(_filter, _function);
-		Iterable<Option> _flatten = Iterables.<Option>concat(_map);
-		List<Option> _list = IterableExtensions.<Option>toList(_flatten);
+		List<Option> _list = IterableExtensions.<Option>toList(Iterables.<Option>concat(IterableExtensions.<Options, EList<Option>>map(Iterables.<Options>filter(this.getContents(), Options.class), _function)));
 		return new UnmodifiableEList<Option>(_list);
 	}
 
@@ -176,9 +217,7 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	public EList<Location> getLocations() {
-		EList<TargetContent> _contents = this.getContents();
-		Iterable<Location> _filter = Iterables.<Location>filter(_contents, Location.class);
-		List<Location> _list = IterableExtensions.<Location>toList(_filter);
+		List<Location> _list = IterableExtensions.<Location>toList(Iterables.<Location>filter(this.getContents(), Location.class));
 		return new UnmodifiableEList<Location>(_list);
 	}
 
@@ -198,9 +237,38 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	public Environment basicGetEnvironment() {
-		EList<TargetContent> _contents = this.getContents();
-		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
-		return IterableExtensions.<Environment>head(_filter);
+		return IterableExtensions.<Environment>head(Iterables.<Environment>filter(this.getContents(), Environment.class));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<VarDefinition> getVarDefinition() {
+		List<VarDefinition> _list = IterableExtensions.<VarDefinition>toList(Iterables.<VarDefinition>filter(this.getContents(), VarDefinition.class));
+		return new UnmodifiableEList<VarDefinition>(_list);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void reset() {
+		final ArrayList<VarDefinition> toBeRemoved = CollectionLiterals.<VarDefinition>newArrayList();
+		EList<VarDefinition> _varDefinition = this.getVarDefinition();
+		for (final VarDefinition varDef : _varDefinition) {
+			boolean _isImported = varDef.isImported();
+			if (_isImported) {
+				toBeRemoved.add(varDef);
+			}
+		}
+		this.getContents().removeAll(toBeRemoved);
+		EList<VarDefinition> _varDefinition_1 = this.getVarDefinition();
+		for (final VarDefinition varDef_1 : _varDefinition_1) {
+			varDef_1.reset();
+		}
 	}
 
 	/**
@@ -240,6 +308,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return isCompositeElementsResolved();
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return getName();
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
@@ -253,6 +323,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 			case TargetPlatformPackage.TARGET_PLATFORM__ENVIRONMENT:
 				if (resolve) return getEnvironment();
 				return basicGetEnvironment();
+			case TargetPlatformPackage.TARGET_PLATFORM__VAR_DEFINITION:
+				return getVarDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -266,6 +338,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				setCompositeElementsResolved((Boolean)newValue);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				setName((String)newValue);
 				return;
@@ -285,6 +360,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				setCompositeElementsResolved(COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -303,6 +381,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return compositeElementsResolved != COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
@@ -315,8 +395,25 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 				return !getLocations().isEmpty();
 			case TargetPlatformPackage.TARGET_PLATFORM__ENVIRONMENT:
 				return basicGetEnvironment() != null;
+			case TargetPlatformPackage.TARGET_PLATFORM__VAR_DEFINITION:
+				return !getVarDefinition().isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case TargetPlatformPackage.TARGET_PLATFORM___RESET:
+				reset();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -329,7 +426,9 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (compositeElementsResolved: ");
+		result.append(compositeElementsResolved);
+		result.append(", name: ");
 		result.append(name);
 		result.append(')');
 		return result.toString();

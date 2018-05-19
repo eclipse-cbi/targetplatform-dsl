@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.util;
 
@@ -19,6 +19,7 @@ import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -40,7 +41,11 @@ public class LocationIndexBuilder {
   @Inject
   private ImportUriResolver resolver;
   
+  @Inject
+  private CompositeElementResolver compositeElementResolver;
+  
   public ListMultimap<String, Location> getLocationIndex(final TargetPlatform targetPlatform) {
+    this.compositeElementResolver.resolveCompositeElements(targetPlatform);
     final List<Location> locationList = this.getLocations(
       CollectionLiterals.<TargetPlatform>newLinkedHashSet(targetPlatform), 
       CollectionLiterals.<TargetPlatform>newLinkedList(targetPlatform));
@@ -121,6 +126,11 @@ public class LocationIndexBuilder {
    * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E
    */
   public LinkedList<TargetPlatform> getImportedTargetPlatforms(final TargetPlatform targetPlatform) {
+    this.compositeElementResolver.resolveCompositeElements(targetPlatform);
+    return this.getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform);
+  }
+  
+  public LinkedList<TargetPlatform> getImportedTargetPlatformsDoNotResolveCompositeElement(final TargetPlatform targetPlatform) {
     final LinkedHashSet<TargetPlatform> visited = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
     final LinkedList<TargetPlatform> queue = CollectionLiterals.<TargetPlatform>newLinkedList();
     final LinkedList<TargetPlatform> includeRet = CollectionLiterals.<TargetPlatform>newLinkedList();
@@ -153,8 +163,10 @@ public class LocationIndexBuilder {
   }
   
   public List<TargetPlatform> checkIncludeCycle(final TargetPlatform targetPlatform) {
+    this.compositeElementResolver.resolveCompositeElements(targetPlatform);
     final LinkedHashSet<TargetPlatform> acc = CollectionLiterals.<TargetPlatform>newLinkedHashSet();
     final LinkedList<TargetPlatform> s = CollectionLiterals.<TargetPlatform>newLinkedList();
+    this.compositeElementResolver.searchAndAppendDefineFromIncludedTpd(targetPlatform);
     List<TargetPlatform> _xifexpression = null;
     boolean _checkIncludeCycle = this.checkIncludeCycle(targetPlatform, acc, s);
     if (_checkIncludeCycle) {
@@ -195,6 +207,7 @@ public class LocationIndexBuilder {
   
   public TargetPlatform getImportedTargetPlatform(final Resource context, final IncludeDeclaration include) {
     TargetPlatform ret = null;
+    include.generateImportURI();
     final Resource resource = EcoreUtil2.getResource(context, this.resolver.resolve(include));
     EList<EObject> _contents = null;
     if (resource!=null) {

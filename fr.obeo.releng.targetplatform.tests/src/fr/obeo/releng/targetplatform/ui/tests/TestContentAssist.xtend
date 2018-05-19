@@ -33,8 +33,6 @@ import org.eclipse.xtext.ui.shared.SharedStateModule
 import org.eclipse.xtext.util.Modules2
 import org.junit.Test
 
-import static fr.obeo.releng.targetplatform.ui.tests.TestContentAssist.*
-
 class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	static val MOCK_RUNTIME_MODULE = new TargetPlatformRuntimeModule() {
@@ -592,5 +590,14 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 		''').cursorBack(6).assertText( // cursor: "|{
 			' locationID '
 		)
+	}
+	
+	@Test
+	def void testLocationVariableCallContentAssist() {
+		newBuilder.append('''
+			target "compositeIncludeTarget1"
+			define subDirName="subdir"
+			include ${
+		''').assertText("subDirName")
 	}
 }

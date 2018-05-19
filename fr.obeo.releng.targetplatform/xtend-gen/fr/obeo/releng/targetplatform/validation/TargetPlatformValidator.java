@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.validation;
 
@@ -30,9 +30,12 @@ import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.Options;
+import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.ArrayList;
@@ -90,6 +93,9 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   private LocationIndexBuilder indexBuilder;
   
   @Inject
+  private CompositeElementResolver compositeElementResolver;
+  
+  @Inject
   private IProvisioningAgent provisioningAgent;
   
   @Inject
@@ -115,6 +121,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   public final static String CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE";
   
+  public final static String CHECK__VARIABLE_CYCLE = "CHECK__VARIABLE_CYCLE";
+  
   public final static String CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION";
   
   public final static String CHECK__LOCATION_URI = "CHECK__LOCATION_URI";
@@ -134,6 +142,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public final static String CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS";
   
   public final static String CHECK__NO_DUPLICATED_IU = "CHECK__NO_DUPLICATED_IU";
+  
+  public final static String CHECK__NO_DUPLICATED_DEFINE = "CHECK__NO_DUPLICATED_DEFINE";
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
@@ -157,6 +167,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final Location location) {
+    this.compositeElementResolver.resolveCompositeElements(location.getTargetPlatform());
     final EList<Option> options = location.getOptions();
     if ((options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED))) {
       this.doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
@@ -219,6 +230,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkNoLocationOptionIfGlobalOptions(final Location location) {
+    this.compositeElementResolver.resolveCompositeElements(location.getTargetPlatform());
     if (((!location.getOptions().isEmpty()) && (!location.getTargetPlatform().getOptions().isEmpty()))) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
       INode _head = IterableExtensions.<INode>head(nodes);
@@ -237,6 +249,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public void checkOptionsOnLocationAreIdentical(final TargetPlatform targetPlatform) {
     boolean _isEmpty = targetPlatform.getOptions().isEmpty();
     if (_isEmpty) {
+      this.compositeElementResolver.resolveCompositeElements(targetPlatform);
       final EList<Location> listOptions = targetPlatform.getLocations();
       final Location first = IterableExtensions.<Location>head(listOptions);
       final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
@@ -279,6 +292,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void deprecateOptionsOnLocation(final Location location) {
+    this.compositeElementResolver.resolveCompositeElements(location.getTargetPlatform());
     final TargetPlatform targetPlatform = location.getTargetPlatform();
     if ((targetPlatform.getOptions().isEmpty() && (!location.getOptions().isEmpty()))) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
@@ -297,8 +311,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void deprecateIUVersionRangeWihString(final IU iu) {
     String _version = iu.getVersion();
-    boolean _notEquals = (!Objects.equal(_version, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_version != null);
+    if (_tripleNotEquals) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION);
       EObject _grammarElement = IterableExtensions.<INode>head(nodes).getGrammarElement();
       boolean _equals = "STRING".equals(((RuleCall) _grammarElement).getRule().getName());
@@ -347,7 +361,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       @Override
       public Boolean apply(final Location it) {
         String _iD = it.getID();
-        return Boolean.valueOf((!Objects.equal(_iD, null)));
+        return Boolean.valueOf((_iD != null));
       }
     };
     final Function<Location, String> _function_4 = new Function<Location, String>() {
@@ -432,8 +446,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         }
       };
       final IncludeDeclaration cyclingImport = IterableExtensions.<IncludeDeclaration>findFirst(targetPlatform.getIncludes(), _function);
-      boolean _notEquals = (!Objects.equal(cyclingImport, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (cyclingImport != null);
+      if (_tripleNotEquals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cycle detected in the included target platforms. Cycle is \'");
         final Function1<TargetPlatform, URI> _function_1 = new Function1<TargetPlatform, URI>() {
@@ -450,6 +464,40 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           TargetPlatformValidator.CHECK__INCLUDE_CYCLE);
       }
     }
+  }
+  
+  @Check
+  public void checkVarDefinitionCycle(final TargetPlatform targetPlatform) {
+    this.compositeElementResolver.resolveCompositeElements(targetPlatform);
+    final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+      @Override
+      public Boolean apply(final TargetContent it) {
+        return Boolean.valueOf((it instanceof VarDefinition));
+      }
+    };
+    final Consumer<TargetContent> _function_1 = new Consumer<TargetContent>() {
+      @Override
+      public void accept(final TargetContent it) {
+        final VarDefinition currentVariable = ((VarDefinition) it);
+        final List<VarDefinition> cycle = TargetPlatformValidator.this.compositeElementResolver.checkVariableDefinitionCycle(currentVariable);
+        boolean _isEmpty = cycle.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          final Function1<VarDefinition, String> _function = new Function1<VarDefinition, String>() {
+            @Override
+            public String apply(final VarDefinition it) {
+              return it.getName();
+            }
+          };
+          String _join = IterableExtensions.join(ListExtensions.<VarDefinition, String>map(cycle, _function), " -> ");
+          String _plus = ("Cycle detected in the defined variables: " + _join);
+          TargetPlatformValidator.this.error(_plus, currentVariable, 
+            TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, 
+            TargetPlatformValidator.CHECK__VARIABLE_CYCLE);
+        }
+      }
+    };
+    IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function).forEach(_function_1);
   }
   
   @Check
@@ -616,8 +664,9 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public IMetadataRepository checkLocationURI(final Location location) {
     IMetadataRepository _xblockexpression = null;
     {
+      this.compositeElementResolver.resolveCompositeElements(location.getTargetPlatform());
       IProgressMonitor _xifexpression = null;
-      if (((!Objects.equal(this.getContext(), null)) && (!Objects.equal(this.getContext().get(IProgressMonitor.class), null)))) {
+      if (((this.getContext() != null) && (this.getContext().get(IProgressMonitor.class) != null))) {
         Object _get = this.getContext().get(IProgressMonitor.class);
         _xifexpression = ((IProgressMonitor) _get);
       } else {
@@ -668,6 +717,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public Object checkIUIDAndRangeInRepository(final IU iu) {
     Object _xblockexpression = null;
     {
+      this.compositeElementResolver.resolveCompositeElements(iu.getLocation().getTargetPlatform());
       Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
       Object _xtrycatchfinallyexpression = null;
@@ -1029,8 +1079,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     final INode equalSignKeywordRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function_1);
-    boolean _notEquals = (!Objects.equal(semicolonKeywordRule, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (semicolonKeywordRule != null);
+    if (_tripleNotEquals) {
       int _offset = semicolonKeywordRule.getOffset();
       int _endOffset = equalSignKeywordRule.getEndOffset();
       int _offset_1 = semicolonKeywordRule.getOffset();
@@ -1153,5 +1203,56 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     IterableExtensions.<IU>filter(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(targetPlatform.getLocations(), _function_5)), _function_6).forEach(_function_7);
+  }
+  
+  @Check
+  public void checkNoDuplicatedDefine(final TargetPlatform targetPlatform) {
+    final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+      @Override
+      public Boolean apply(final TargetContent it) {
+        return Boolean.valueOf((it instanceof VarDefinition));
+      }
+    };
+    final Function1<TargetContent, String> _function_1 = new Function1<TargetContent, String>() {
+      @Override
+      public String apply(final TargetContent it) {
+        String _xblockexpression = null;
+        {
+          final VarDefinition varDef = ((VarDefinition) it);
+          _xblockexpression = varDef.getName();
+        }
+        return _xblockexpression;
+      }
+    };
+    final List<String> varNameList = IterableExtensions.<String>toList(IterableExtensions.<String>sort(IterableExtensions.<TargetContent, String>map(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function), _function_1)));
+    for (int i = 1; (i < varNameList.size()); i++) {
+      int _compareTo = varNameList.get((i - 1)).compareTo(varNameList.get(i));
+      boolean _equals = (_compareTo == 0);
+      if (_equals) {
+        final String duplicatedVarName = varNameList.get((i - 1));
+        final String errString = (("\"" + duplicatedVarName) + "\" is defined many times (it may be imported through many includes)");
+        final Function1<TargetContent, Boolean> _function_2 = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            return Boolean.valueOf((it instanceof VarDefinition));
+          }
+        };
+        final Function1<TargetContent, Boolean> _function_3 = new Function1<TargetContent, Boolean>() {
+          @Override
+          public Boolean apply(final TargetContent it) {
+            boolean _xblockexpression = false;
+            {
+              final VarDefinition varDef = ((VarDefinition) it);
+              int _compareTo = varDef.getName().compareTo(duplicatedVarName);
+              _xblockexpression = (_compareTo == 0);
+            }
+            return Boolean.valueOf(_xblockexpression);
+          }
+        };
+        final TargetContent findFirst = IterableExtensions.<TargetContent>findFirst(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function_2), _function_3);
+        final VarDefinition duplicatedVar = ((VarDefinition) findFirst);
+        this.warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(duplicatedVar), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
+      }
+    }
   }
 }

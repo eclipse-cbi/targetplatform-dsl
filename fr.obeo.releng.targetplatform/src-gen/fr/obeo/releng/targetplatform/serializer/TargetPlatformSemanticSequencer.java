@@ -2,13 +2,17 @@ package fr.obeo.releng.targetplatform.serializer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import fr.obeo.releng.targetplatform.CompositeString;
 import fr.obeo.releng.targetplatform.Environment;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Options;
+import fr.obeo.releng.targetplatform.StaticString;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
+import fr.obeo.releng.targetplatform.VarCall;
+import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -27,6 +31,12 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TargetPlatformPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case TargetPlatformPackage.COMPOSITE_STRING:
+				if(context == grammarAccess.getCompositeStringRule()) {
+					sequence_CompositeString(context, (CompositeString) semanticObject); 
+					return; 
+				}
+				else break;
 			case TargetPlatformPackage.ENVIRONMENT:
 				if(context == grammarAccess.getEnvironmentRule() ||
 				   context == grammarAccess.getTargetContentRule()) {
@@ -61,15 +71,45 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 					return; 
 				}
 				else break;
+			case TargetPlatformPackage.STATIC_STRING:
+				if(context == grammarAccess.getCompositeStringPartRule() ||
+				   context == grammarAccess.getStaticStringRule()) {
+					sequence_StaticString(context, (StaticString) semanticObject); 
+					return; 
+				}
+				else break;
 			case TargetPlatformPackage.TARGET_PLATFORM:
 				if(context == grammarAccess.getTargetPlatformRule()) {
 					sequence_TargetPlatform(context, (TargetPlatform) semanticObject); 
 					return; 
 				}
 				else break;
+			case TargetPlatformPackage.VAR_CALL:
+				if(context == grammarAccess.getCompositeStringPartRule() ||
+				   context == grammarAccess.getVarCallRule()) {
+					sequence_VarCall(context, (VarCall) semanticObject); 
+					return; 
+				}
+				else break;
+			case TargetPlatformPackage.VAR_DEFINITION:
+				if(context == grammarAccess.getTargetContentRule() ||
+				   context == grammarAccess.getVarDefinitionRule()) {
+					sequence_VarDefinition(context, (VarDefinition) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     (stringParts+=CompositeStringPart stringParts+=CompositeStringPart*)
+	 */
+	protected void sequence_CompositeString(EObject context, CompositeString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:
@@ -82,7 +122,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=ID (version=VersionRange | version=STRING)?)
+	 *     (ID=ID (version=VersionRange | version=STRING | varVersion=VarCall)?)
 	 */
 	protected void sequence_IU(EObject context, IU semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -91,7 +131,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     importURI=STRING
+	 *     compositeImportURI=CompositeString
 	 */
 	protected void sequence_IncludeDeclaration(EObject context, IncludeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -100,7 +140,7 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
-	 *     (ID=ID? uri=STRING ((options+=Option options+=Option*)? ius+=IU*)?)
+	 *     (ID=ID? compositeUri=CompositeString ((options+=Option options+=Option*)? ius+=IU*)?)
 	 */
 	protected void sequence_Location(EObject context, Location semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -118,9 +158,36 @@ public class TargetPlatformSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Constraint:
+	 *     value=STRING
+	 */
+	protected void sequence_StaticString(EObject context, StaticString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (name=STRING contents+=TargetContent*)?
 	 */
 	protected void sequence_TargetPlatform(EObject context, TargetPlatform semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     varName=[VarDefinition|ID]
+	 */
+	protected void sequence_VarCall(EObject context, VarCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID value=CompositeString)
+	 */
+	protected void sequence_VarDefinition(EObject context, VarDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

@@ -25,6 +25,7 @@ import com.google.inject.Injector;
 
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.TargetPlatformStandaloneSetup;
+import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 
 
 /**
@@ -39,21 +40,33 @@ public class ConverterApplication implements IApplication {
 	 */
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
-		Map<?,?> arguments = context.getArguments();
-		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
-		String path;
-		if (args.length <= 0) {
-			System.out.println("Must provide path to a target form file");
-			return -256;
-		} else {
-			path = args[0];
-		}
+		Injector injectorStandalone = TargetPlatformStandaloneSetup.doSetup();
 		
-		TargetPlatformStandaloneSetup.doSetup();
-		Injector injector = TargetPlatformBundleActivator.getInstance().getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
+		TargetPlatformBundleActivator tpdBundleActivator = TargetPlatformBundleActivator.getInstance();
+		/*
+		 * Register injector provided by "TargetPlatformStandaloneSetup" in bundle activator to avoid
+		 * having two injector instances. Otherwise we get two instances of "ImportVariableManager"
+		 * which has to be unique.
+		 */
+		tpdBundleActivator.registerInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME, injectorStandalone);
+		
+		Injector injector = tpdBundleActivator.getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
+		
+		ImportVariableManager importVariableManager = injector.getInstance(ImportVariableManager.class);
 
+		Map<?,?> arguments = context.getArguments();
+		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
+		
+		importVariableManager.processCommandLineArguments(args);
+		
+		String path = importVariableManager.getFileToProcess();
+		if (path == null) {
+			System.out.println("Must provide path to a target form file");
+			return -256;
+		}
+		
 		URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
 		
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());

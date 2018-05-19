@@ -131,6 +131,11 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 
 	override completeTargetPlatform_Contents(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val currentNodeSizeToCursor = context.offset - context.lastCompleteNode.endOffset;
+		val lastNodeTxt = context.lastCompleteNode.text
+		if (lastNodeTxt == "location") {
+			// Discard TP contents if inside a location declaration
+			return
+		}
 		val text = 
 			if (context.currentNode.text.length >= currentNodeSizeToCursor) 
 				context.currentNode.text.substring(0, currentNodeSizeToCursor)
@@ -285,7 +290,8 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
-			val uri = location.uri 
+			location.resolveUri
+			val uri = location.uri
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val IRunnableWithProgress op = [monitor|
 				val wpm = SubMonitor.convert(new ReadAndDispatchProgressMonitorWrapper(monitor, window.shell.display), "Creating content assist for " + uri, 100)
@@ -332,13 +338,14 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
-			val uri = iu.location.uri 
+			val location = iu.location
+			location.resolveUri
+			val uri = location.uri
 			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)
 		}
 	}
-	
 	
 	override completeLocation_ID(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val docText = context.viewer.document.get
@@ -388,7 +395,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 		acceptor.accept(p);
 	}
 	
-	override completeLocation_Uri(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override completeLocation_CompositeUri(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val docText = context.viewer.document.get
 		val offset = context.offset
 		

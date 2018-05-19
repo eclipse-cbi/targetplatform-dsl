@@ -4,6 +4,7 @@ package fr.obeo.releng.targetplatform.impl;
 
 import fr.obeo.releng.targetplatform.*;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.ecore.EClass;
@@ -64,6 +65,10 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 			case TargetPlatformPackage.TARGET_PLATFORM: return createTargetPlatform();
 			case TargetPlatformPackage.OPTIONS: return createOptions();
 			case TargetPlatformPackage.ENVIRONMENT: return createEnvironment();
+			case TargetPlatformPackage.VAR_DEFINITION: return createVarDefinition();
+			case TargetPlatformPackage.COMPOSITE_STRING: return createCompositeString();
+			case TargetPlatformPackage.VAR_CALL: return createVarCall();
+			case TargetPlatformPackage.STATIC_STRING: return createStaticString();
 			case TargetPlatformPackage.LOCATION: return createLocation();
 			case TargetPlatformPackage.INCLUDE_DECLARATION: return createIncludeDeclaration();
 			case TargetPlatformPackage.IU: return createIU();
@@ -82,6 +87,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return createOptionFromString(eDataType, initialValue);
+			case TargetPlatformPackage.VAR_DEF_LIST:
+				return createVarDefListFromString(eDataType, initialValue);
 			case TargetPlatformPackage.LOCALE:
 				return createLocaleFromString(eDataType, initialValue);
 			case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
@@ -101,6 +108,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return convertOptionToString(eDataType, instanceValue);
+			case TargetPlatformPackage.VAR_DEF_LIST:
+				return convertVarDefListToString(eDataType, instanceValue);
 			case TargetPlatformPackage.LOCALE:
 				return convertLocaleToString(eDataType, instanceValue);
 			case TargetPlatformPackage.EXECUTION_ENVIRONMENT:
@@ -138,6 +147,46 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 	public Environment createEnvironment() {
 		EnvironmentImpl environment = new EnvironmentImpl();
 		return environment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarDefinition createVarDefinition() {
+		VarDefinitionImpl varDefinition = new VarDefinitionImpl();
+		return varDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeString createCompositeString() {
+		CompositeStringImpl compositeString = new CompositeStringImpl();
+		return compositeString;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarCall createVarCall() {
+		VarCallImpl varCall = new VarCallImpl();
+		return varCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticString createStaticString() {
+		StaticStringImpl staticString = new StaticStringImpl();
+		return staticString;
 	}
 
 	/**
@@ -188,6 +237,25 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 	 */
 	public String convertOptionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public List<VarDefinition> createVarDefListFromString(EDataType eDataType, String initialValue) {
+		return (List<VarDefinition>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVarDefListToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

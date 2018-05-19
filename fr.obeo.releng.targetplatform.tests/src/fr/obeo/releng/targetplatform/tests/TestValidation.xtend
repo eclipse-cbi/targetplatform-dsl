@@ -17,6 +17,8 @@ import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
@@ -32,13 +34,11 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic
+import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.validation.RangeBasedDiagnostic
-import fr.obeo.releng.targetplatform.Options
-import fr.obeo.releng.targetplatform.Option
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

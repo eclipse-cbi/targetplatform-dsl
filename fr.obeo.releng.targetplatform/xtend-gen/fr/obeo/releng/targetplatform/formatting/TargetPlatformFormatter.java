@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.formatting;
 
@@ -53,14 +53,15 @@ public class TargetPlatformFormatter extends AbstractDeclarativeFormatter {
       }
     }
     c.setNoLinewrap().around(this._targetPlatformGrammarAccess.getLocationAccess().getIDAssignment_1_0());
-    c.setNoLinewrap().around(this._targetPlatformGrammarAccess.getLocationAccess().getUriAssignment_1_1());
+    c.setNoLinewrap().around(this._targetPlatformGrammarAccess.getLocationAccess().getCompositeUriAssignment_1_1());
     c.setLinewrap(1, 1, 2).before(this._targetPlatformGrammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0());
     c.setLinewrap(1, 2, 2).before(this._targetPlatformGrammarAccess.getLocationAccess().getLocationKeyword_0());
     c.setLinewrap(1, 1, 2).before(this._targetPlatformGrammarAccess.getLocationAccess().getWithKeyword_2_1_0());
     c.setLinewrap(1, 1, 2).after(this._targetPlatformGrammarAccess.getTargetPlatformAccess().getContentsAssignment_2());
     c.setLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getIDAssignment_0());
-    c.setNoLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getVersionAssignment_1_1_0());
-    c.setNoLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getVersionAssignment_1_1_1());
+    c.setNoLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getVersionAssignment_1_1_0_0());
+    c.setNoLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getVersionAssignment_1_1_0_1());
+    c.setNoLinewrap().before(this._targetPlatformGrammarAccess.getIUAccess().getVarVersionAssignment_1_1_1());
     c.setNoSpace().around(this._targetPlatformGrammarAccess.getIUAccess().getSemicolonKeyword_1_0_0());
     c.setNoSpace().around(this._targetPlatformGrammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2());
     c.setNoSpace().around(this._targetPlatformGrammarAccess.getVersionRangeAccess().getLeftParenthesisKeyword_0_0_0());

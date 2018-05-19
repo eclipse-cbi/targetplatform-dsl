@@ -11,7 +11,7 @@ TargetPlatform:
 ;
 
 TargetContent: 
-	Options | Environment | IncludeDeclaration | Location
+	Options | Environment | IncludeDeclaration | Location | VarDefinition
 ;
 
 Options: 
@@ -23,12 +23,33 @@ Environment:
 	'environment' env+=ID (','? env+=ID)*
 ;
 
+VarDefinition:
+	'define' name=ID '=' value=CompositeString
+;
+
+CompositeString:
+	{CompositeString}
+	stringParts+=CompositeStringPart ('+' stringParts+=CompositeStringPart)*
+;
+
+CompositeStringPart:
+	VarCall | StaticString
+;
+
+VarCall:
+	"${" varName=[VarDefinition] "}"
+;
+
+StaticString:
+	value=STRING
+;
+
 IncludeDeclaration:
-	'include' importURI=STRING
+	'include' compositeImportURI=CompositeString
 ;
 
 Location:
-	'location' ((ID=ID)? & uri=STRING) ('{'
+	'location' ((ID=ID)? & compositeUri=CompositeString) ('{'
 		('with' options+=Option (','? options+=Option)*)?
 		ius+=IU*
 	'}')?
@@ -42,7 +63,7 @@ enum Option:
 ;
 
 IU:
-	ID=ID ( (';' 'version' '=')? (version=VersionRange|version=STRING) )? 
+	ID=ID ( (';' 'version' '=')? ((version=VersionRange|version=STRING)|varVersion=VarCall) )? 
 ;
 
 Version hidden():

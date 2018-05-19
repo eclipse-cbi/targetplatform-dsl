@@ -2,12 +2,17 @@
  */
 package fr.obeo.releng.targetplatform.impl;
 
+import fr.obeo.releng.targetplatform.CompositeString;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -23,15 +28,47 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl#getTargetPlatform <em>Target Platform</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl#getCompositeImportURI <em>Composite Import URI</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.IncludeDeclarationImpl#getImportURI <em>Import URI</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container implements IncludeDeclaration {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = "include declaration";
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCompositeImportURI() <em>Composite Import URI</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompositeImportURI()
+	 * @generated
+	 * @ordered
+	 */
+	protected CompositeString compositeImportURI;
+
 	/**
 	 * The default value of the '{@link #getImportURI() <em>Import URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -127,6 +164,70 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.INCLUDE_DECLARATION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeString getCompositeImportURI() {
+		return compositeImportURI;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCompositeImportURI(CompositeString newCompositeImportURI, NotificationChain msgs) {
+		CompositeString oldCompositeImportURI = compositeImportURI;
+		compositeImportURI = newCompositeImportURI;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI, oldCompositeImportURI, newCompositeImportURI);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompositeImportURI(CompositeString newCompositeImportURI) {
+		if (newCompositeImportURI != compositeImportURI) {
+			NotificationChain msgs = null;
+			if (compositeImportURI != null)
+				msgs = ((InternalEObject)compositeImportURI).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI, null, msgs);
+			if (newCompositeImportURI != null)
+				msgs = ((InternalEObject)newCompositeImportURI).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI, null, msgs);
+			msgs = basicSetCompositeImportURI(newCompositeImportURI, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI, newCompositeImportURI, newCompositeImportURI));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getImportURI() {
 		return importURI;
 	}
@@ -141,6 +242,15 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 		importURI = newImportURI;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI, oldImportURI, importURI));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void generateImportURI() {
+		this.setImportURI(this.getCompositeImportURI().computeActualString());
 	}
 
 	/**
@@ -169,6 +279,8 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case TargetPlatformPackage.INCLUDE_DECLARATION__TARGET_PLATFORM:
 				return basicSetTargetPlatform(null, msgs);
+			case TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI:
+				return basicSetCompositeImportURI(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -198,6 +310,10 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 			case TargetPlatformPackage.INCLUDE_DECLARATION__TARGET_PLATFORM:
 				if (resolve) return getTargetPlatform();
 				return basicGetTargetPlatform();
+			case TargetPlatformPackage.INCLUDE_DECLARATION__NAME:
+				return getName();
+			case TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI:
+				return getCompositeImportURI();
 			case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
 				return getImportURI();
 		}
@@ -214,6 +330,12 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case TargetPlatformPackage.INCLUDE_DECLARATION__TARGET_PLATFORM:
 				setTargetPlatform((TargetPlatform)newValue);
+				return;
+			case TargetPlatformPackage.INCLUDE_DECLARATION__NAME:
+				setName((String)newValue);
+				return;
+			case TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI:
+				setCompositeImportURI((CompositeString)newValue);
 				return;
 			case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
 				setImportURI((String)newValue);
@@ -233,6 +355,12 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 			case TargetPlatformPackage.INCLUDE_DECLARATION__TARGET_PLATFORM:
 				setTargetPlatform((TargetPlatform)null);
 				return;
+			case TargetPlatformPackage.INCLUDE_DECLARATION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI:
+				setCompositeImportURI((CompositeString)null);
+				return;
 			case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
 				setImportURI(IMPORT_URI_EDEFAULT);
 				return;
@@ -250,6 +378,10 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case TargetPlatformPackage.INCLUDE_DECLARATION__TARGET_PLATFORM:
 				return basicGetTargetPlatform() != null;
+			case TargetPlatformPackage.INCLUDE_DECLARATION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TargetPlatformPackage.INCLUDE_DECLARATION__COMPOSITE_IMPORT_URI:
+				return compositeImportURI != null;
 			case TargetPlatformPackage.INCLUDE_DECLARATION__IMPORT_URI:
 				return IMPORT_URI_EDEFAULT == null ? importURI != null : !IMPORT_URI_EDEFAULT.equals(importURI);
 		}
@@ -262,11 +394,28 @@ public class IncludeDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case TargetPlatformPackage.INCLUDE_DECLARATION___GENERATE_IMPORT_URI:
+				generateImportURI();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (importURI: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", importURI: ");
 		result.append(importURI);
 		result.append(')');
 		return result.toString();

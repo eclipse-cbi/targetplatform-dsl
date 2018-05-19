@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.tests;
 
@@ -90,6 +90,7 @@ public class TestGrammar {
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
       final Location fisrtLocation = IterableExtensions.<Location>head(targetPlatform.getLocations());
+      fisrtLocation.resolveUri();
       Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/emf-core-head/lastSuccessfulBuild/artifact/EMF.p2.repository/", fisrtLocation.getUri());
       Assert.assertEquals(2, fisrtLocation.getIus().size());
       final IU iu0 = IterableExtensions.<IU>head(fisrtLocation.getIus());
@@ -99,6 +100,7 @@ public class TestGrammar {
       Assert.assertEquals("com.google.common.cache", iu1.getID());
       Assert.assertEquals("10.0.1", iu1.getVersion());
       final Location lastLocation = IterableExtensions.<Location>last(targetPlatform.getLocations());
+      lastLocation.resolveUri();
       Assert.assertEquals("https://hudson.eclipse.org/hudson/view/Modeling/job/mdt-uml2-master/lastSuccessfulBuild/artifact/UML2.p2.repository/", lastLocation.getUri());
       Assert.assertEquals(1, lastLocation.getIus().size());
       final IU uml2iu = IterableExtensions.<IU>head(lastLocation.getIus());

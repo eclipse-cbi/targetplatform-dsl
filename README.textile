@@ -125,9 +125,164 @@ Then, the most recent version of the given IU within this range will be selected
 
 bq. You can use the special keyword @lazy@ as version to state that you don't want the generator to select the version to put in the @.target@ file. Instead, it puts @0.0.0@ which is interpreted by PDE during the resolution of the @.target@.
 
+h3. TPD file with variables
+
+h4. Define a variable
+
+In a @tpd@ file, you can define a variable this way:
+
+<pre>
+define variableName="someString"
+</pre>
+
+A variable is always a string.
+
+h4. Variable importation
+
+When you include a @tpd@ file into another @tpd@ file, every variables are imported.
+
+let @mainTarget.tpd@ be:
+
+<pre>
+target "mainTarget"
+include "subTarget.tpd"
+</pre>
+
+and @subTarget.tpd@ be:
+
+<pre>
+target "subTarget"
+define varName="someValue"
+</pre>
+
+@varName@ is available for usage in @mainTarget@. Variable importation works recursively with many sub include targets.
+
+h5. Variable redefinition
+
+If now @mainTarget.tpd@ is:
+
+<pre>
+target "mainTarget"
+include "subTarget.tpd"
+define varName="someOtherValue"
+</pre>
+
+@varName@ value in @mainTarget@ is _someOtherValue_. A variable could be redefined in many nested target. Define the same variable twice in the same @tpd@ file is invalid.
+
+h4. Variable usage
+
+h5. Simple case (variable call)
+
+You can call a variable to get its value this way:
+
+<pre>
+${varName}
+</pre>
+
+h5. Composite string
+
+You can also concatenate static strings and variable calls, this way:
+
+<pre>
+"someStaticString" + ${var1} + "foo" + ${var2} + ${var3}
+or
+${var1} + ${var2}
+or even
+"foo" + "bar"
+</pre>
+
+h5. Other way to define variable
+
+A variable can not only be defined from a static string, but also with composite strings.
+
+<pre>
+define myVar=${var1} + "foo" + ${var2} + "bar"
+</pre>
+
+Cyclic definitions are forbidden and raise an error.
+
+h5. Places where composite strings could be used
+
+Every places where you can use composite strings are shown with some examples:
+
+* @include@
+
+<pre>
+include "myTpd.tpd"
+include ${basePath} + ${path} + "filename.tpd"
+include ${varURL}
+...
+</pre>
+
+* @location URL@
+
+<pre>
+location ${baseURL} + ${pathURL} + "something" {
+    ...
+}
+location "http://" + ${serverName} + "urlEnd" {
+    ...
+}
+</pre>
+
+* @IU version@
+
+Only simple variable call are usable for @IU version@ (but variables can be defined with composite string).
+
+<pre>
+location "someURLEventuallyCompositeString" {
+    org.eclipse.emf.sdk.feature.group ${varVersion}
+}
+</pre>
+
+* -IU-
+
+You can not use composite string for IU, the following example is not valid.
+
+<s><pre>
+location "somURL" {
+    ${myIU}
+}
+</pre></s>
+
 h3. Call the generator from the command line
 
 This project provide an Eclipse application that you can launch from the command line. The ID of the application is @fr.obeo.releng.targetplatform.pde.ConverterApplication@ and is provided by the plugin @fr.obeo.releng.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
+
+h4. Variable overriding from command line or environment
+
+When the generator is called from command line you can override variable value with command line arguments or environment variable (not possible from eclipse).
+In the _pom.xml_ example above, <targetPlatform.application.args> holds the command line arguments. You can define them in the following order:
+
+# tpd filename
+# useEnv //Optional, case incensitive
+# list of variable redefinition
+
+Variables are redefined in any target or nested target met.
+
+@useEnv@ is necessary to take into account environment variables. Command line variables have higher priority than environment variables.
+
+A variable redefinition is simply:
+
+<pre>
+varName=newValue
+or
+varName2="new value with space"
+</pre>
+
+Command line arguments example:
+
+<pre>
+myTpd.tpd useEnv var1=someValue var2=otherValue
+</pre>
+
+h5. Environment variable format
+
+The name is prefixed with @TPD_VAR_@ and whatever after. Their values are simply like command line redefinition, for instance @TPD_VAR_FOO@ could be:
+
+<pre>
+varFoo=newValue
+</pre>
 
 h2. Build
 
@@ -140,3 +295,4 @@ Clone this repository, import all projects in your Eclipse and set your target p
 h2. License
 
 Copyright (c) 2012-2014 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
+

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Obeo - initial API and implementation
+ *     Mikael Barbero (Obeo) - initial API and implementation
  */
 package fr.obeo.releng.targetplatform.ui.tests;
 
@@ -939,6 +939,23 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
       _builder.newLine();
       _newBuilder.append(_builder.toString()).cursorBack(6).assertText(
         " locationID ");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLocationVariableCallContentAssist() {
+    try {
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"compositeIncludeTarget1\"");
+      _builder.newLine();
+      _builder.append("define subDirName=\"subdir\"");
+      _builder.newLine();
+      _builder.append("include ${");
+      _builder.newLine();
+      _newBuilder.append(_builder.toString()).assertText("subDirName");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -13,6 +13,7 @@ package fr.obeo.releng.targetplatform.validation
 import com.google.common.base.Strings
 import com.google.common.collect.HashMultiset
 import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.LinkedHashMultiset
 import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Multiset
@@ -25,7 +26,9 @@ import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformPackage
+import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import java.net.URI
 import java.util.List
@@ -45,7 +48,6 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
-import com.google.common.collect.LinkedHashMultiset
 
 /**
  * Custom validation rules. 
@@ -56,6 +58,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 	@Inject
 	LocationIndexBuilder indexBuilder;
+	
+	@Inject
+	CompositeElementResolver compositeElementResolver;
 	
 	@Inject
 	IProvisioningAgent provisioningAgent;
@@ -77,6 +82,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	public static val CHECK__LOCATION_ID_UNIQNESS = "CHECK__LOCATION_ID_UNIQNESS"	
 	public static val CHECK__INCLUDE_CYCLE = "CHECK__INCLUDE_CYCLE"
+	public static val CHECK__VARIABLE_CYCLE = "CHECK__VARIABLE_CYCLE"
 	public static val CHECK__IU_IN_LOCATION = "CHECK__IU_IN_LOCATION"
 	public static val CHECK__LOCATION_URI = "CHECK__LOCATION_URI"
 	public static val CHECK__ENVIRONMENT_VALIDITY = "CHECK__ENVIRONMENT_VALIDITY"
@@ -89,6 +95,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	public static val CHECK__OPTIONS_UNICITY = "CHECK__OPTIONS_UNICITY"
 	public static val CHECK__NO_DUPLICATE_OPTIONS_OPTIONS = "CHECK__NO_DUPLICATE_OPTIONS_OPTIONS"
 	public static val CHECK__NO_DUPLICATED_IU = "CHECK__NO_DUPLICATED_IU"
+	public static val CHECK__NO_DUPLICATED_DEFINE = "CHECK__NO_DUPLICATED_DEFINE"
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(TargetPlatform targetPlatform) {
@@ -102,6 +109,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkAllEnvAndRequiredAreSelfExluding(Location location) {
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val options = location.options
 		if (options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && options.contains(Option.INCLUDE_REQUIRED)) {
 			doReportAllEnvAndRequiredAreSelfExluding(location, options, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
@@ -143,6 +151,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def checkNoLocationOptionIfGlobalOptions(Location location) {
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		if (!location.options.empty && !location.targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
@@ -155,6 +164,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check // TESTED
 	def checkOptionsOnLocationAreIdentical(TargetPlatform targetPlatform) {
 		if (targetPlatform.options.empty) { // else do not check as it is another error.
+			compositeElementResolver.resolveCompositeElements(targetPlatform)
 			val listOptions = targetPlatform.locations
 			val first = listOptions.head
 			val conflicts = listOptions.tail.filter[_| !Sets::symmetricDifference(_.options.toSet,first.options.toSet).empty]
@@ -178,6 +188,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateOptionsOnLocation(Location location) {
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val targetPlatform = location.targetPlatform
 		
 		if (targetPlatform.options.empty && !location.options.empty) {
@@ -191,7 +202,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateIUVersionRangeWihString(IU iu) {
-		if (iu.version != null) {
+		if (iu.version !== null) {
 			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION)
 			if ("STRING".equals((nodes.head.grammarElement as RuleCall).rule.name)) {
 				warning("Usage of strings is deprecated for version range. You should remove the quotes.",
@@ -215,7 +226,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val locationsURIWithoutConflictingID = locationIDsByURI.asMap.filter[key,value|value.size <= 1].keySet
 		val locationsWithoutConflictingID = locationsURIWithoutConflictingID.map[locationsByURI.get(it)].flatten
 		
-		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!=null], [ID])
+		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!==null], [ID])
 		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[uri].toSet.size > 1].values.flatten
 		locationsWithDuplicateID.forEach[location|
 			if (location.eResource == resource) {
@@ -247,7 +258,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val cycle = indexBuilder.checkIncludeCycle(targetPlatform)
 		if (!cycle.empty) {
 			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(indexBuilder.getImportedTargetPlatform(targetPlatform.eResource, it))]
-			if (cyclingImport != null) {
+			if (cyclingImport !== null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
 					TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
@@ -255,6 +266,27 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				)
 			}
 		}
+	}
+	
+	@Check // TESTED
+	def checkVarDefinitionCycle(TargetPlatform targetPlatform) {
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
+		
+		targetPlatform.contents
+			.filter [
+				it instanceof VarDefinition
+			]
+			.forEach[
+				val currentVariable = it as VarDefinition
+				val cycle = compositeElementResolver.checkVariableDefinitionCycle(currentVariable)
+				if (!cycle.empty) {
+					error("Cycle detected in the defined variables: " + cycle.map[name].join(" -> "),
+						currentVariable,
+						TargetPlatformPackage.Literals.VAR_DEFINITION__NAME,
+						CHECK__VARIABLE_CYCLE
+					)
+				}
+			]
 	}
 	
 	@Check // PARTIALLY TESTED
@@ -313,8 +345,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
+		compositeElementResolver.resolveCompositeElements(location.targetPlatform)
 		val monitor = 
-			if (context != null && context.get(typeof(IProgressMonitor)) != null) {
+			if (context !== null && context.get(typeof(IProgressMonitor)) !== null) {
 				context.get(typeof(IProgressMonitor)) as IProgressMonitor
 			} else {
 				new NullProgressMonitor
@@ -336,6 +369,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check(value=CheckType.EXPENSIVE)
 	def checkIUIDAndRangeInRepository(IU iu) {
+		compositeElementResolver.resolveCompositeElements(iu.location.targetPlatform)
 		val repositoryManager = provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager
 		try {
 			val metadataRepository = repositoryManager.loadRepository(new URI(iu.location.uri), new NullProgressMonitor)
@@ -469,7 +503,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val semicolonKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.semicolonKeyword_1_0_0]
 		val equalSignKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.equalsSignKeyword_1_0_2]
 		
-		if (semicolonKeywordRule != null) {
+		if (semicolonKeywordRule !== null) {
 			acceptWarning("Usage of keywords ';version=' are not required anymore and has been deprecated.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
 	}
@@ -495,5 +529,36 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 				
 				warning(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
 			]
+	}
+	
+	@Check
+	def checkNoDuplicatedDefine(TargetPlatform targetPlatform) {
+		val varNameList = targetPlatform.contents
+			.filter[
+				it instanceof VarDefinition
+			]
+			.map[
+				val varDef = it as VarDefinition
+				varDef.name
+			]
+			.sort
+			.toList
+			
+		for (var i = 1 ; i < varNameList.size ; i++) {
+			if (varNameList.get(i-1).compareTo(varNameList.get(i)) == 0) {
+				val duplicatedVarName = varNameList.get(i-1)
+				val errString = "\"" + duplicatedVarName + "\" is defined many times (it may be imported through many includes)"
+				val findFirst = targetPlatform.contents
+									.filter[
+										it instanceof VarDefinition
+									]
+									.findFirst[
+										val varDef = it as VarDefinition
+										varDef.name.compareTo(duplicatedVarName) == 0
+									]
+				val duplicatedVar = findFirst as VarDefinition
+				warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(duplicatedVar), CHECK__NO_DUPLICATED_DEFINE)
+			}
+		}
 	}
 }

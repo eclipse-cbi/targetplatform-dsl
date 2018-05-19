@@ -2,13 +2,11 @@
  */
 package fr.obeo.releng.targetplatform.impl;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 
 import com.google.common.collect.Iterables;
 
 import fr.obeo.releng.targetplatform.Environment;
-import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 
@@ -52,6 +50,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getEnv <em>Env</em>}</li>
@@ -61,7 +60,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getLocalization <em>Localization</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.EnvironmentImpl#getExecutionEnvironment <em>Execution Environment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -214,38 +212,29 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getOperatingSystem() {
-		TargetPlatform _targetPlatform = this.getTargetPlatform();
-		EList<TargetContent> _contents = _targetPlatform.getContents();
-		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
 				return it.getEnv();
 			}
 		};
-		Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function);
-		Iterable<String> _flatten = Iterables.<String>concat(_map);
 		final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
 				boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
 				return Boolean.valueOf((!_isNullOrEmpty));
 			}
 		};
-		Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_1);
 		final Function1<String, String> _function_2 = new Function1<String, String>() {
 			public String apply(final String it) {
 				return it.toUpperCase();
 			}
 		};
-		Iterable<String> _map_1 = IterableExtensions.<String, String>map(_filter_1, _function_2);
-		final List<String> envToUpper = IterableExtensions.<String>toList(_map_1);
-		String[] _knownOSValues = Platform.knownOSValues();
+		final List<String> envToUpper = IterableExtensions.<String>toList(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(this.getTargetPlatform().getContents(), Environment.class), _function)), _function_1), _function_2));
 		final Function1<String, Boolean> _function_3 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
-				String _upperCase = it.toUpperCase();
-				return Boolean.valueOf(envToUpper.contains(_upperCase));
+				return Boolean.valueOf(envToUpper.contains(it.toUpperCase()));
 			}
 		};
-		return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_knownOSValues)), _function_3);
+		return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Platform.knownOSValues())), _function_3);
 	}
 
 	/**
@@ -254,44 +243,35 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getWindowingSystem() {
-		TargetPlatform _targetPlatform = this.getTargetPlatform();
-		EList<TargetContent> _contents = _targetPlatform.getContents();
-		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
 				return it.getEnv();
 			}
 		};
-		Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function);
-		Iterable<String> _flatten = Iterables.<String>concat(_map);
 		final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
 				boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
 				return Boolean.valueOf((!_isNullOrEmpty));
 			}
 		};
-		Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_1);
 		final Function1<String, String> _function_2 = new Function1<String, String>() {
 			public String apply(final String it) {
 				return it.toUpperCase();
 			}
 		};
-		Iterable<String> _map_1 = IterableExtensions.<String, String>map(_filter_1, _function_2);
-		final List<String> envToUpper = IterableExtensions.<String>toList(_map_1);
-		String[] _knownWSValues = Platform.knownWSValues();
+		final List<String> envToUpper = IterableExtensions.<String>toList(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(this.getTargetPlatform().getContents(), Environment.class), _function)), _function_1), _function_2));
 		final Function1<String, String> _function_3 = new Function1<String, String>() {
 			public String apply(final String it) {
 				return it.toUpperCase();
 			}
 		};
-		final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_knownWSValues)), _function_3);
+		final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Platform.knownWSValues())), _function_3);
 		final Function1<String, Boolean> _function_4 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
 				return Boolean.valueOf(knownWSUpperValues.contains(it));
 			}
 		};
-		Iterable<String> _filter_2 = IterableExtensions.<String>filter(envToUpper, _function_4);
-		final List<String> allWS = IterableExtensions.<String>toList(_filter_2);
+		final List<String> allWS = IterableExtensions.<String>toList(IterableExtensions.<String>filter(envToUpper, _function_4));
 		boolean _and = false;
 		int _size = allWS.size();
 		boolean _lessEqualsThan = (_size <= 1);
@@ -310,14 +290,12 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 			return null;
 		}
 		else {
-			String[] _knownWSValues_1 = Platform.knownWSValues();
 			final Function1<String, Boolean> _function_5 = new Function1<String, Boolean>() {
 				public Boolean apply(final String it) {
-					String _upperCase = it.toUpperCase();
-					return Boolean.valueOf(envToUpper.contains(_upperCase));
+					return Boolean.valueOf(envToUpper.contains(it.toUpperCase()));
 				}
 			};
-			return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_knownWSValues_1)), _function_5);
+			return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Platform.knownWSValues())), _function_5);
 		}
 	}
 
@@ -327,38 +305,29 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public String getArchitecture() {
-		TargetPlatform _targetPlatform = this.getTargetPlatform();
-		EList<TargetContent> _contents = _targetPlatform.getContents();
-		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
 				return it.getEnv();
 			}
 		};
-		Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function);
-		Iterable<String> _flatten = Iterables.<String>concat(_map);
 		final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
 				boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
 				return Boolean.valueOf((!_isNullOrEmpty));
 			}
 		};
-		Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_1);
 		final Function1<String, String> _function_2 = new Function1<String, String>() {
 			public String apply(final String it) {
 				return it.toUpperCase();
 			}
 		};
-		Iterable<String> _map_1 = IterableExtensions.<String, String>map(_filter_1, _function_2);
-		final List<String> envToUpper = IterableExtensions.<String>toList(_map_1);
-		String[] _knownOSArchValues = Platform.knownOSArchValues();
+		final List<String> envToUpper = IterableExtensions.<String>toList(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(this.getTargetPlatform().getContents(), Environment.class), _function)), _function_1), _function_2));
 		final Function1<String, Boolean> _function_3 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
-				String _upperCase = it.toUpperCase();
-				return Boolean.valueOf(envToUpper.contains(_upperCase));
+				return Boolean.valueOf(envToUpper.contains(it.toUpperCase()));
 			}
 		};
-		return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_knownOSArchValues)), _function_3);
+		return IterableExtensions.<String>findFirst(((Iterable<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Platform.knownOSArchValues())), _function_3);
 	}
 
 	/**
@@ -367,67 +336,51 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	public Locale getLocalization() {
-		TargetPlatform _targetPlatform = this.getTargetPlatform();
-		EList<TargetContent> _contents = _targetPlatform.getContents();
-		Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
 		final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 			public EList<String> apply(final Environment it) {
 				return it.getEnv();
 			}
 		};
-		Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function);
-		Iterable<String> _flatten = Iterables.<String>concat(_map);
 		final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
 				boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
 				return Boolean.valueOf((!_isNullOrEmpty));
 			}
 		};
-		Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_1);
 		final Function1<String, String> _function_2 = new Function1<String, String>() {
 			public String apply(final String it) {
 				return it.toUpperCase();
 			}
 		};
-		Iterable<String> _map_1 = IterableExtensions.<String, String>map(_filter_1, _function_2);
-		final List<String> envToUpper = IterableExtensions.<String>toList(_map_1);
-		Locale[] _availableLocales = Locale.getAvailableLocales();
+		final List<String> envToUpper = IterableExtensions.<String>toList(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(this.getTargetPlatform().getContents(), Environment.class), _function)), _function_1), _function_2));
 		final Function1<Locale, String> _function_3 = new Function1<Locale, String>() {
 			public String apply(final Locale it) {
 				return it.toString();
 			}
 		};
-		List<String> _map_2 = ListExtensions.<Locale, String>map(((List<Locale>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_availableLocales)), _function_3);
 		final Function1<String, Boolean> _function_4 = new Function1<String, Boolean>() {
 			public Boolean apply(final String it) {
-				String _upperCase = it.toUpperCase();
-				return Boolean.valueOf(envToUpper.contains(_upperCase));
+				return Boolean.valueOf(envToUpper.contains(it.toUpperCase()));
 			}
 		};
-		final String locale = IterableExtensions.<String>findFirst(_map_2, _function_4);
-		boolean _notEquals = (!Objects.equal(locale, null));
-		if (_notEquals) {
+		final String locale = IterableExtensions.<String>findFirst(ListExtensions.<Locale, String>map(((List<Locale>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(Locale.getAvailableLocales())), _function_3), _function_4);
+		boolean _tripleNotEquals = (locale != null);
+		if (_tripleNotEquals) {
 			String language = "";
 			String country = "";
 			String variant = "";
-			Splitter _on = Splitter.on("_");
-			Splitter _trimResults = _on.trimResults();
-			Iterable<String> _split = _trimResults.split(locale);
-			final Iterator<String> tokens = _split.iterator();
+			final Iterator<String> tokens = Splitter.on("_").trimResults().split(locale).iterator();
 			boolean _hasNext = tokens.hasNext();
 			if (_hasNext) {
-				String _next = tokens.next();
-				language = _next;
+				language = tokens.next();
 			}
 			boolean _hasNext_1 = tokens.hasNext();
 			if (_hasNext_1) {
-				String _next_1 = tokens.next();
-				country = _next_1;
+				country = tokens.next();
 			}
 			boolean _hasNext_2 = tokens.hasNext();
 			if (_hasNext_2) {
-				String _next_2 = tokens.next();
-				variant = _next_2;
+				variant = tokens.next();
 			}
 			return new Locale(language, country, variant);
 		}
@@ -443,45 +396,35 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 */
 	public IExecutionEnvironment getExecutionEnvironment() {
 		final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
-		boolean _notEquals = (!Objects.equal(eeManager, null));
-		if (_notEquals) {
-			TargetPlatform _targetPlatform = this.getTargetPlatform();
-			EList<TargetContent> _contents = _targetPlatform.getContents();
-			Iterable<Environment> _filter = Iterables.<Environment>filter(_contents, Environment.class);
+		boolean _tripleNotEquals = (eeManager != null);
+		if (_tripleNotEquals) {
 			final Function1<Environment, EList<String>> _function = new Function1<Environment, EList<String>>() {
 				public EList<String> apply(final Environment it) {
 					return it.getEnv();
 				}
 			};
-			Iterable<EList<String>> _map = IterableExtensions.<Environment, EList<String>>map(_filter, _function);
-			Iterable<String> _flatten = Iterables.<String>concat(_map);
 			final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
 				public Boolean apply(final String it) {
 					boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
 					return Boolean.valueOf((!_isNullOrEmpty));
 				}
 			};
-			Iterable<String> _filter_1 = IterableExtensions.<String>filter(_flatten, _function_1);
 			final Function1<String, String> _function_2 = new Function1<String, String>() {
 				public String apply(final String it) {
 					return it.toUpperCase();
 				}
 			};
-			Iterable<String> _map_1 = IterableExtensions.<String, String>map(_filter_1, _function_2);
-			final List<String> envToUpper = IterableExtensions.<String>toList(_map_1);
+			final List<String> envToUpper = IterableExtensions.<String>toList(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(this.getTargetPlatform().getContents(), Environment.class), _function)), _function_1), _function_2));
 			for (final String env : envToUpper) {
 				{
-					IExecutionEnvironment[] _executionEnvironments = eeManager.getExecutionEnvironments();
 					final Function1<IExecutionEnvironment, Boolean> _function_3 = new Function1<IExecutionEnvironment, Boolean>() {
 						public Boolean apply(final IExecutionEnvironment it) {
-							String _id = it.getId();
-							String _upperCase = _id.toUpperCase();
-							return Boolean.valueOf(_upperCase.equals(env));
+							return Boolean.valueOf(it.getId().toUpperCase().equals(env));
 						}
 					};
-					final IExecutionEnvironment ee = IterableExtensions.<IExecutionEnvironment>findFirst(((Iterable<IExecutionEnvironment>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_executionEnvironments)), _function_3);
-					boolean _notEquals_1 = (!Objects.equal(ee, null));
-					if (_notEquals_1) {
+					final IExecutionEnvironment ee = IterableExtensions.<IExecutionEnvironment>findFirst(((Iterable<IExecutionEnvironment>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(eeManager.getExecutionEnvironments())), _function_3);
+					boolean _tripleNotEquals_1 = (ee != null);
+					if (_tripleNotEquals_1) {
 						return ee;
 					}
 				}

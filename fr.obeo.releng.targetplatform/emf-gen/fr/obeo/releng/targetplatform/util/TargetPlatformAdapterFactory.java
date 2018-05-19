@@ -84,6 +84,26 @@ public class TargetPlatformAdapterFactory extends AdapterFactoryImpl {
 				return createEnvironmentAdapter();
 			}
 			@Override
+			public Adapter caseVarDefinition(VarDefinition object) {
+				return createVarDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseCompositeString(CompositeString object) {
+				return createCompositeStringAdapter();
+			}
+			@Override
+			public Adapter caseCompositeStringPart(CompositeStringPart object) {
+				return createCompositeStringPartAdapter();
+			}
+			@Override
+			public Adapter caseVarCall(VarCall object) {
+				return createVarCallAdapter();
+			}
+			@Override
+			public Adapter caseStaticString(StaticString object) {
+				return createStaticStringAdapter();
+			}
+			@Override
 			public Adapter caseLocation(Location object) {
 				return createLocationAdapter();
 			}
@@ -168,6 +188,76 @@ public class TargetPlatformAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnvironmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.VarDefinition <em>Var Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition
+	 * @generated
+	 */
+	public Adapter createVarDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.CompositeString <em>Composite String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.obeo.releng.targetplatform.CompositeString
+	 * @generated
+	 */
+	public Adapter createCompositeStringAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.obeo.releng.targetplatform.CompositeStringPart
+	 * @generated
+	 */
+	public Adapter createCompositeStringPartAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.VarCall <em>Var Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.obeo.releng.targetplatform.VarCall
+	 * @generated
+	 */
+	public Adapter createVarCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.obeo.releng.targetplatform.StaticString <em>Static String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.obeo.releng.targetplatform.StaticString
+	 * @generated
+	 */
+	public Adapter createStaticStringAdapter() {
 		return null;
 	}
 

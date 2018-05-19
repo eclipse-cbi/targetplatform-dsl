@@ -29,7 +29,12 @@ class LocationIndexBuilder {
 	@Inject
 	ImportUriResolver resolver;
 	
+	@Inject
+	CompositeElementResolver compositeElementResolver
+	
 	def ListMultimap<String, Location> getLocationIndex(TargetPlatform targetPlatform) {
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
+		
 		val locationList = getLocations(
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
@@ -85,6 +90,11 @@ class LocationIndexBuilder {
 	 * The returned collection for A is : D, C, B, M, L, K, J, I, H, G, F, E 
 	 */
 	def getImportedTargetPlatforms(TargetPlatform targetPlatform) {
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
+		return getImportedTargetPlatformsDoNotResolveCompositeElement(targetPlatform)
+	}
+	
+	def getImportedTargetPlatformsDoNotResolveCompositeElement(TargetPlatform targetPlatform) {
 		val visited = newLinkedHashSet();
 		val queue = newLinkedList();
 		val includeRet = newLinkedList();
@@ -106,8 +116,12 @@ class LocationIndexBuilder {
 	}
 
 	def checkIncludeCycle(TargetPlatform targetPlatform) {
+		compositeElementResolver.resolveCompositeElements(targetPlatform)
 		val acc = newLinkedHashSet();
 		val s = newLinkedList();
+		
+		compositeElementResolver.searchAndAppendDefineFromIncludedTpd(targetPlatform)
+		
 		return 
 			if (checkIncludeCycle(targetPlatform, acc, s)) {
 				s.reverse
@@ -139,6 +153,7 @@ class LocationIndexBuilder {
 
 	def TargetPlatform getImportedTargetPlatform(Resource context, IncludeDeclaration include) {
 		var TargetPlatform ret = null;
+		include.generateImportURI
 		val resource = EcoreUtil2.getResource(context, resolver.resolve(include));
 		var root = resource?.getContents()?.head;
 		if (root instanceof TargetPlatform) {
