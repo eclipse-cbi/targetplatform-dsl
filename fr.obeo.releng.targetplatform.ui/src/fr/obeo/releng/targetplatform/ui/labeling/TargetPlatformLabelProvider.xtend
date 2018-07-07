@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import fr.obeo.releng.targetplatform.Option
 import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.Options
+import fr.obeo.releng.targetplatform.VarDefinition
 
 /**
  * Provides labels for a EObjects.
@@ -90,5 +91,9 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	
 	def image(Environment object) {
 		"obj16/env_obj.gif"
+	}
+	
+	def image(VarDefinition object) {
+		"obj16/option_obj.gif"
 	}
 }

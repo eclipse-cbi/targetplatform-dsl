@@ -14,12 +14,12 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.tests.IQueryResultProvider;
 import fr.obeo.releng.targetplatform.tests.MockIU;
 import fr.obeo.releng.targetplatform.tests.MockMetadataRepositoryManager;
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.net.URI;
 import java.util.List;
@@ -46,7 +46,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProviderTargetReloader.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetConversion {

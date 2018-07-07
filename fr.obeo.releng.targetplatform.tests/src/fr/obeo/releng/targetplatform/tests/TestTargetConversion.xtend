@@ -13,8 +13,8 @@ package fr.obeo.releng.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
 class TestTargetConversion {
 

@@ -6,6 +6,7 @@ import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.TargetPlatformFactory
 import fr.obeo.releng.targetplatform.VarCall
 import fr.obeo.releng.targetplatform.VarDefinition
+import java.util.HashSet
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.common.util.EList
@@ -17,6 +18,9 @@ class CompositeElementResolver {
 	
 	@Inject
 	ImportVariableManager importVariableManager;
+	
+	@Inject
+	TargetReloader targetReloader;
 	
 	/* Composite elements are string defined by a concatenation of static string and variable call:
 	 * "string1" + ${var1} + "aaa" + ${var2} +... */ 
@@ -45,17 +49,16 @@ class CompositeElementResolver {
 		
 		alreadyVisitedTarget.add(targetPlatform)
 		
-		targetPlatform.contents
-			.filter[
-				it instanceof VarDefinition
-			].forEach[
-				val varDef = it as VarDefinition
+		targetPlatform.varDefinition
+			.forEach[
+				val varDef = it
 				val varDefName = varDef.name
 				
 				val variableValue = importVariableManager.getVariableValue(varDefName)
 				if (variableValue !== null) {
 					varDef.overrideValue = variableValue
 				}
+				targetPlatform.modified = true
 			]
 
 		val directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
@@ -65,7 +68,12 @@ class CompositeElementResolver {
 				!alreadyVisitedTarget.contains(it)
 			]
 			.forEach[
-				overrideVariableDefinition(it, newHashSet(alreadyVisitedTarget))
+				val importedTarget = it
+				var reloadedImportTarget = it
+				if (importedTarget.modified) {
+					reloadedImportTarget = targetReloader.forceReloadTarget(targetPlatform, importedTarget)
+				}
+				overrideVariableDefinition(reloadedImportTarget, newHashSet(alreadyVisitedTarget))
 			]
 	}
 	
@@ -76,6 +84,7 @@ class CompositeElementResolver {
 			it.resolveIUsVersion
 		]
 		targetPlatform.compositeElementsResolved = true
+		targetPlatform.modified = true
 	}
 	
 	package def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
@@ -104,20 +113,17 @@ class CompositeElementResolver {
 				]
 				.forEach[
 					var notProcessedTargetPlatform = it
-					notProcessedTargetPlatform.reset
-					overrideVariableDefinition(notProcessedTargetPlatform)
+					overrideVariableDefinition(notProcessedTargetPlatform, alreadyVisitedTarget)
 					searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, newHashSet(alreadyVisitedTarget))
-					notProcessedTargetPlatform.contents.forEach[
-						if (it instanceof VarDefinition) {
-							ImportedDefineFromSubTpd.add(it)
-						}
+					notProcessedTargetPlatform.varDefinition.forEach[
+						ImportedDefineFromSubTpd.add(it)
 					]
 				]
 			val newlyProcessedTarget = directlyImportedTargetPlatforms
-							.filter[
-								!processedTargetPlatform.contains(it)
-							]
-							.toSet
+				.filter [
+					!processedTargetPlatform.contains(it)
+				]
+				.toSet
 			processedTargetPlatform.addAll(newlyProcessedTarget)
 			mergeImportedDefine(targetPlatform, ImportedDefineFromSubTpd)
 			directlyImportedTargetPlatforms = searchDirectlyImportedTpd(targetPlatform)
@@ -147,14 +153,14 @@ class CompositeElementResolver {
 			.forEach[
 				val currentImportedDefine = it
 				var boolean toBeAdded = targetContent
-				.filter[
-					it instanceof VarDefinition
-				]
-				.forall[
-					val alreadyExistingDefine = it as VarDefinition
-					val varName = alreadyExistingDefine.name
-					!currentImportedDefine.name.equals(varName)
-				]
+					.filter[
+						it instanceof VarDefinition
+					]
+					.forall[
+						val alreadyExistingDefine = it as VarDefinition
+						val varName = alreadyExistingDefine.name
+						!currentImportedDefine.name.equals(varName)
+					]
 				if (toBeAdded) {
 					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
 					currentImportedDefineCopy.name = currentImportedDefine.name
@@ -166,6 +172,7 @@ class CompositeElementResolver {
 			]
 		targetContent.addAll(toBeAddedDefine)
 		updateVariableDefinition(targetContent)
+		targetPlatform.modified = true
 	}
 	
 	/*
@@ -209,7 +216,6 @@ class CompositeElementResolver {
 				if (varCall.varName.name == varDef.name) {
 					varCall.originalVarName = varCall.varName
 					varCall.varName = varDef
-					varCall.updated = true
 				}
 			}
 		}

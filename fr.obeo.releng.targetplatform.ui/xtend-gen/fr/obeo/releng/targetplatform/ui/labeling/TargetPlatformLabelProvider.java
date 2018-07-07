@@ -19,6 +19,7 @@ import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetPlatform;
+import fr.obeo.releng.targetplatform.VarDefinition;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -107,5 +108,9 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   
   public String image(final Environment object) {
     return "obj16/env_obj.gif";
+  }
+  
+  public String image(final VarDefinition object) {
+    return "obj16/option_obj.gif";
   }
 }

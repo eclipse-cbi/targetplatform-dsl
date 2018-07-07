@@ -389,19 +389,6 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void reset() {
-		boolean _isImported = this.isImported();
-		boolean _not = (!_isImported);
-		if (_not) {
-			this.getValue().reset();
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String toString() {
 		this.checkVarCycle();
 		String _string = super.toString();
@@ -601,9 +588,6 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		switch (operationID) {
 			case TargetPlatformPackage.VAR_DEFINITION___CHECK_VAR_CYCLE:
 				checkVarCycle();
-				return null;
-			case TargetPlatformPackage.VAR_DEFINITION___RESET:
-				reset();
 				return null;
 			case TargetPlatformPackage.VAR_DEFINITION___TO_STRING:
 				return toString();

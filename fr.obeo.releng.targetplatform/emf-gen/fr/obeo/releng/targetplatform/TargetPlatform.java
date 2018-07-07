@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#isModified <em>Modified</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getContents <em>Contents</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getIncludes <em>Includes</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.TargetPlatform#getOptions <em>Options</em>}</li>
@@ -30,6 +31,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface TargetPlatform extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Name()
+	 * @model unique="false"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Composite Elements Resolved</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -58,30 +85,31 @@ public interface TargetPlatform extends EObject {
 	void setCompositeElementsResolved(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Modified</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Modified</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Name()
-	 * @model unique="false"
+	 * @return the value of the '<em>Modified</em>' attribute.
+	 * @see #setModified(boolean)
+	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getTargetPlatform_Modified()
+	 * @model default="false" unique="false"
 	 * @generated
 	 */
-	String getName();
+	boolean isModified();
 
 	/**
-	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.TargetPlatform#isModified <em>Modified</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Modified</em>' attribute.
+	 * @see #isModified()
 	 * @generated
 	 */
-	void setName(String value);
+	void setModified(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
@@ -186,38 +214,5 @@ public interface TargetPlatform extends EObject {
 	 * @generated
 	 */
 	EList<VarDefinition> getVarDefinition();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * *
-	 * The new to reset the target platform comes from the following case under eclipse:
-	 * Let the 3 nested targets:
-	 * 
-	 * -------------------------------------------------------------------------------------
-	 * target "mainTarget"
-	 * include "subTpd.tpd"
-	 * -------------------------------------------------------------------------------------
-	 * target "subTpd"
-	 * include "subSubTpd.tpd"
-	 * -------------------------------------------------------------------------------------
-	 * target "subSubTpd"
-	 * define var1="val1"
-	 * -------------------------------------------------------------------------------------
-	 * 
-	 * var1 is defined in "subSubTpd", so it is imported inside "subTpd" and "mainTarget".
-	 * In the outline view of eclipse, we can visualize that.
-	 * 
-	 * If we remove var1 from "subSubTpd", it is removed from "subSubTpd". If we edit/modify
-	 * "mainTarget", XTEXT will launch the rebuild of "mainTarget". In this rebuild, it will
-	 * reimport "subTpd" from its cache and do not rebuild "subTpd". Since "subTpd" still has
-	 * a var1 variable, "mainTarget" will also import a var1 variable. So we need to reset
-	 * any imported target when we do a build.
-	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='final &lt;%java.util.ArrayList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; toBeRemoved = &lt;%org.eclipse.xtext.xbase.lib.CollectionLiterals%&gt;.&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt;newArrayList();\n&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; _varDefinition = this.getVarDefinition();\nfor (final &lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt; varDef : _varDefinition)\n{\n\tboolean _isImported = varDef.isImported();\n\tif (_isImported)\n\t{\n\t\ttoBeRemoved.add(varDef);\n\t}\n}\nthis.getContents().removeAll(toBeRemoved);\n&lt;%org.eclipse.emf.common.util.EList%&gt;&lt;&lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt;&gt; _varDefinition_1 = this.getVarDefinition();\nfor (final &lt;%fr.obeo.releng.targetplatform.VarDefinition%&gt; varDef_1 : _varDefinition_1)\n{\n\tvarDef_1.reset();\n}'"
-	 * @generated
-	 */
-	void reset();
 
 } // TargetPlatform

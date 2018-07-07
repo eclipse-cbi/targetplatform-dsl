@@ -8,3 +8,8 @@
 /IncludeDeclaration.java
 /Location.java
 /Option.java
+/CompositeString.java
+/CompositeStringPart.java
+/StaticString.java
+/VarCall.java
+/VarDefinition.java

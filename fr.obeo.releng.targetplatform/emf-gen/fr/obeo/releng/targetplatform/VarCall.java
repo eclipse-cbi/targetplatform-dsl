@@ -15,7 +15,6 @@ import java.util.List;
  * <ul>
  *   <li>{@link fr.obeo.releng.targetplatform.VarCall#getVarName <em>Var Name</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.VarCall#getOriginalVarName <em>Original Var Name</em>}</li>
- *   <li>{@link fr.obeo.releng.targetplatform.VarCall#isUpdated <em>Updated</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.VarCall#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.VarCall#getVarDefCycle <em>Var Def Cycle</em>}</li>
  * </ul>
@@ -76,33 +75,6 @@ public interface VarCall extends CompositeStringPart {
 	 * @generated
 	 */
 	void setOriginalVarName(VarDefinition value);
-
-	/**
-	 * Returns the value of the '<em><b>Updated</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Updated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Updated</em>' attribute.
-	 * @see #setUpdated(boolean)
-	 * @see fr.obeo.releng.targetplatform.TargetPlatformPackage#getVarCall_Updated()
-	 * @model default="false" unique="false"
-	 * @generated
-	 */
-	boolean isUpdated();
-
-	/**
-	 * Sets the value of the '{@link fr.obeo.releng.targetplatform.VarCall#isUpdated <em>Updated</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Updated</em>' attribute.
-	 * @see #isUpdated()
-	 * @generated
-	 */
-	void setUpdated(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
@@ -183,13 +155,5 @@ public interface VarCall extends CompositeStringPart {
 	 * @generated
 	 */
 	VarCall getCopy();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='boolean _isUpdated = this.isUpdated();\nif (_isUpdated)\n{\n\tthis.setVarName(this.getOriginalVarName());\n\tthis.setUpdated(false);\n}'"
-	 * @generated
-	 */
-	void reset();
 
 } // VarCall

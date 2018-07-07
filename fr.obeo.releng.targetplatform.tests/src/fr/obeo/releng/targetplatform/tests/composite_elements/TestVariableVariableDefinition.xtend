@@ -3,8 +3,8 @@ package fr.obeo.releng.targetplatform.tests.composite_elements
 import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.VarDefinition
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.InjectWith
@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
 class TestVariableVariableDefinition {
 	
@@ -233,5 +233,78 @@ class TestVariableVariableDefinition {
 		val varDef = varCallDefTarget.contents.get(1) as VarDefinition
 		assertEquals("var1", varDef.name)
 		assertEquals("value4_value4_value6", varDef.value.computeActualString)
+	}
+	
+	@Test
+	def testSameVariableImportedFrom2SubTpd1() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.contents.get(2) as VarDefinition
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		
+		val varDef2 = mainTpd.contents.get(3) as VarDefinition
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		
+		val varDef3 = mainTpd.contents.get(4) as VarDefinition
+		assertEquals("twiceInheritedVar", varDef3.name)
+		assertEquals("value", varDef3.value.computeActualString)
+		
+		assertEquals(5, mainTpd.contents.size)
+	}
+	
+	@Test
+	def testSameVariableImportedFrom2SubTpd2() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceInheritedVar = "value1"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceInheritedVar = "value2"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.contents.get(2) as VarDefinition
+		assertEquals("var", varDef.name)
+		val varDefVal = varDef.value.computeActualString
+		assertTrue(varDefVal.equals("value1") || varDefVal.equals("value2")) // Do not expect specially value1 or value2
+		
+//		val varDef2 = mainTpd.contents.get(3) as VarDefinition
+//		assertEquals("twiceInheritedVar", varDef2.name)
+//		assertEquals("value1", varDef2.value.computeActualString)
+//		
+//		val varDef3 = mainTpd.contents.get(4) as VarDefinition
+//		assertEquals("twiceInheritedVar", varDef3.name)
+//		assertEquals("value2", varDef3.value.computeActualString)
+		
+		assertEquals(5, mainTpd.contents.size)
 	}
 }

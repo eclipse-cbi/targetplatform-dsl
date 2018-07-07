@@ -35,13 +35,13 @@ import fr.obeo.releng.targetplatform.ui.tests.TestContentAssist;
 	TestCompositeLocation.class,
 	TestOverrideVariableDefinition.class,
 	TestVariableVariableDefinition.class,
-	TestCompositeElementValidation.class
+	TestCompositeElementValidation.class,
+	TestContentAssist.class
 })
 public class AllTests {
 	
 	@RunWith(Suite.class)
 	@SuiteClasses({
-		TestContentAssist.class,
 	})
 	public static class UI {
 	}

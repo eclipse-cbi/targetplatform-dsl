@@ -20,3 +20,10 @@
 /TestTargetGeneration.java
 /TestTargetPlatformIndexer.java
 /TestValidation.java
+/.MockMetatadataRepositoryManager.xtendbin
+/.MockProvisioningAgent.xtendbin
+/.TestGrammar.xtendbin
+/.TestTargetConversion.xtendbin
+/.TestTargetGeneration.xtendbin
+/.TestTargetPlatformIndexer.xtendbin
+/.TestValidation.xtendbin

@@ -10,8 +10,8 @@ import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.VarDefinition;
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.util.LinkedList;
 import org.eclipse.emf.common.util.URI;
@@ -26,7 +26,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProviderTargetReloader.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestVariableVariableDefinition {
@@ -336,6 +336,91 @@ public class TestVariableVariableDefinition {
       final VarDefinition varDef = ((VarDefinition) _get);
       Assert.assertEquals("var1", varDef.getName());
       Assert.assertEquals("value4_value4_value6", varDef.getValue().computeActualString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSameVariableImportedFrom2SubTpd1() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"mainTpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd1.tpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd2.tpd\"");
+      _builder.newLine();
+      _builder.append("define var = ${twiceInheritedVar}");
+      _builder.newLine();
+      final TargetPlatform mainTpd = this.parser.parse(_builder, URI.createURI("tmp:/mainTpd.tpd"), resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"subTpd1\"");
+      _builder_1.newLine();
+      _builder_1.append("define twiceInheritedVar = \"value\"");
+      _builder_1.newLine();
+      this.parser.parse(_builder_1, URI.createURI("tmp:/subTpd1.tpd"), resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"subTpd2\"");
+      _builder_2.newLine();
+      _builder_2.append("define twiceInheritedVar = \"value\"");
+      _builder_2.newLine();
+      this.parser.parse(_builder_2, URI.createURI("tmp:/subTpd2.tpd"), resourceSet);
+      final ListMultimap<String, Location> locationIndex = this.indexBuilder.getLocationIndex(mainTpd);
+      Assert.assertEquals(0, locationIndex.size());
+      TargetContent _get = mainTpd.getContents().get(2);
+      final VarDefinition varDef = ((VarDefinition) _get);
+      Assert.assertEquals("var", varDef.getName());
+      Assert.assertEquals("value", varDef.getValue().computeActualString());
+      TargetContent _get_1 = mainTpd.getContents().get(3);
+      final VarDefinition varDef2 = ((VarDefinition) _get_1);
+      Assert.assertEquals("twiceInheritedVar", varDef2.getName());
+      Assert.assertEquals("value", varDef2.getValue().computeActualString());
+      TargetContent _get_2 = mainTpd.getContents().get(4);
+      final VarDefinition varDef3 = ((VarDefinition) _get_2);
+      Assert.assertEquals("twiceInheritedVar", varDef3.getName());
+      Assert.assertEquals("value", varDef3.getValue().computeActualString());
+      Assert.assertEquals(5, mainTpd.getContents().size());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSameVariableImportedFrom2SubTpd2() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"mainTpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd1.tpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd2.tpd\"");
+      _builder.newLine();
+      _builder.append("define var = ${twiceInheritedVar}");
+      _builder.newLine();
+      final TargetPlatform mainTpd = this.parser.parse(_builder, URI.createURI("tmp:/mainTpd.tpd"), resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"subTpd1\"");
+      _builder_1.newLine();
+      _builder_1.append("define twiceInheritedVar = \"value1\"");
+      _builder_1.newLine();
+      this.parser.parse(_builder_1, URI.createURI("tmp:/subTpd1.tpd"), resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"subTpd2\"");
+      _builder_2.newLine();
+      _builder_2.append("define twiceInheritedVar = \"value2\"");
+      _builder_2.newLine();
+      this.parser.parse(_builder_2, URI.createURI("tmp:/subTpd2.tpd"), resourceSet);
+      final ListMultimap<String, Location> locationIndex = this.indexBuilder.getLocationIndex(mainTpd);
+      Assert.assertEquals(0, locationIndex.size());
+      TargetContent _get = mainTpd.getContents().get(2);
+      final VarDefinition varDef = ((VarDefinition) _get);
+      Assert.assertEquals("var", varDef.getName());
+      final String varDefVal = varDef.getValue().computeActualString();
+      Assert.assertTrue((varDefVal.equals("value1") || varDefVal.equals("value2")));
+      Assert.assertEquals(5, mainTpd.getContents().size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

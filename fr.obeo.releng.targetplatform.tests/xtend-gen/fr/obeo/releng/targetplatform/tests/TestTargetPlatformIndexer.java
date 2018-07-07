@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import fr.obeo.releng.targetplatform.Location;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.util.Collections;
 import org.eclipse.emf.common.util.URI;
@@ -33,7 +33,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProviderTargetReloader.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetPlatformIndexer {

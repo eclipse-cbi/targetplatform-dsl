@@ -13,12 +13,12 @@ package fr.obeo.releng.targetplatform.tests;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.TargetPlatform;
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider;
 import fr.obeo.releng.targetplatform.pde.TargetDefinitionGenerator;
 import fr.obeo.releng.targetplatform.resolved.ResolvedTargetPlatform;
 import fr.obeo.releng.targetplatform.tests.IQueryResultProvider;
 import fr.obeo.releng.targetplatform.tests.MockIU;
 import fr.obeo.releng.targetplatform.tests.MockMetadataRepositoryManager;
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
 import java.io.File;
 import java.net.URI;
@@ -37,7 +37,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProviderTargetReloader.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetGeneration {
