@@ -71,22 +71,31 @@ public interface TargetPlatformPackage extends EPackage {
 	int TARGET_PLATFORM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Composite Elements Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED = 0;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__NAME = 1;
+	int TARGET_PLATFORM__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Composite Elements Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Modified</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_PLATFORM__MODIFIED = 2;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
@@ -95,7 +104,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__CONTENTS = 2;
+	int TARGET_PLATFORM__CONTENTS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Includes</b></em>' reference list.
@@ -104,7 +113,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__INCLUDES = 3;
+	int TARGET_PLATFORM__INCLUDES = 4;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' attribute list.
@@ -113,7 +122,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__OPTIONS = 4;
+	int TARGET_PLATFORM__OPTIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Locations</b></em>' reference list.
@@ -122,7 +131,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__LOCATIONS = 5;
+	int TARGET_PLATFORM__LOCATIONS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -131,7 +140,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__ENVIRONMENT = 6;
+	int TARGET_PLATFORM__ENVIRONMENT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Var Definition</b></em>' reference list.
@@ -140,7 +149,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__VAR_DEFINITION = 7;
+	int TARGET_PLATFORM__VAR_DEFINITION = 8;
 
 	/**
 	 * The number of structural features of the '<em>Target Platform</em>' class.
@@ -149,16 +158,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM_FEATURE_COUNT = 8;
-
-	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TARGET_PLATFORM___RESET = 0;
+	int TARGET_PLATFORM_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Target Platform</em>' class.
@@ -167,7 +167,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM_OPERATION_COUNT = 1;
+	int TARGET_PLATFORM_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.TargetContent <em>Target Content</em>}' class.
@@ -435,22 +435,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION___CHECK_VAR_CYCLE = TARGET_CONTENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_DEFINITION___RESET = TARGET_CONTENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The operation id for the '<em>To String</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION___TO_STRING = TARGET_CONTENT_OPERATION_COUNT + 2;
+	int VAR_DEFINITION___TO_STRING = TARGET_CONTENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Var Definition</em>' class.
@@ -459,7 +450,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 3;
+	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
@@ -544,22 +535,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int COMPOSITE_STRING___GET_COPY = 2;
 
 	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_STRING___RESET = 3;
-
-	/**
 	 * The number of operations of the '<em>Composite String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STRING_OPERATION_COUNT = 4;
+	int COMPOSITE_STRING_OPERATION_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
@@ -635,22 +617,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int COMPOSITE_STRING_PART___GET_COPY = 4;
 
 	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_STRING_PART___RESET = 5;
-
-	/**
 	 * The number of operations of the '<em>Composite String Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STRING_PART_OPERATION_COUNT = 6;
+	int COMPOSITE_STRING_PART_OPERATION_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
@@ -690,22 +663,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_CALL__ORIGINAL_VAR_NAME = COMPOSITE_STRING_PART_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Updated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_CALL__UPDATED = COMPOSITE_STRING_PART_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART_FEATURE_COUNT + 3;
+	int VAR_CALL__VARIABLE_DEFINITION_CYCLE_DETECTED = COMPOSITE_STRING_PART_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Var Def Cycle</b></em>' attribute.
@@ -714,7 +678,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL__VAR_DEF_CYCLE = COMPOSITE_STRING_PART_FEATURE_COUNT + 4;
+	int VAR_CALL__VAR_DEF_CYCLE = COMPOSITE_STRING_PART_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Var Call</em>' class.
@@ -723,7 +687,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 5;
+	int VAR_CALL_FEATURE_COUNT = COMPOSITE_STRING_PART_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Is Variable Definition Cycle Detected</em>' operation.
@@ -771,22 +735,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_CALL___GET_COPY = COMPOSITE_STRING_PART_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_CALL___RESET = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
-
-	/**
 	 * The number of operations of the '<em>Var Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_CALL_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 4;
+	int VAR_CALL_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
@@ -889,22 +844,13 @@ public interface TargetPlatformPackage extends EPackage {
 	int STATIC_STRING___GET_COPY = COMPOSITE_STRING_PART_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Reset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATIC_STRING___RESET = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
-
-	/**
 	 * The number of operations of the '<em>Static String</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_STRING_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 4;
+	int STATIC_STRING_OPERATION_COUNT = COMPOSITE_STRING_PART_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.
@@ -1195,6 +1141,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EClass getTargetPlatform();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.obeo.releng.targetplatform.TargetPlatform#getName()
+	 * @see #getTargetPlatform()
+	 * @generated
+	 */
+	EAttribute getTargetPlatform_Name();
+
+	/**
 	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#isCompositeElementsResolved <em>Composite Elements Resolved</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1206,15 +1163,15 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getTargetPlatform_CompositeElementsResolved();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#isModified <em>Modified</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see fr.obeo.releng.targetplatform.TargetPlatform#getName()
+	 * @return the meta object for the attribute '<em>Modified</em>'.
+	 * @see fr.obeo.releng.targetplatform.TargetPlatform#isModified()
 	 * @see #getTargetPlatform()
 	 * @generated
 	 */
-	EAttribute getTargetPlatform_Name();
+	EAttribute getTargetPlatform_Modified();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.TargetPlatform#getContents <em>Contents</em>}'.
@@ -1281,16 +1238,6 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTargetPlatform_VarDefinition();
-
-	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.TargetPlatform#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.TargetPlatform#reset()
-	 * @generated
-	 */
-	EOperation getTargetPlatform__Reset();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.TargetContent <em>Target Content</em>}'.
@@ -1497,16 +1444,6 @@ public interface TargetPlatformPackage extends EPackage {
 	EOperation getVarDefinition__CheckVarCycle();
 
 	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.VarDefinition#reset()
-	 * @generated
-	 */
-	EOperation getVarDefinition__Reset();
-
-	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#toString() <em>To String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1601,16 +1538,6 @@ public interface TargetPlatformPackage extends EPackage {
 	EOperation getCompositeString__GetCopy();
 
 	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeString#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.CompositeString#reset()
-	 * @generated
-	 */
-	EOperation getCompositeString__Reset();
-
-	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1682,16 +1609,6 @@ public interface TargetPlatformPackage extends EPackage {
 	EOperation getCompositeStringPart__GetCopy();
 
 	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.CompositeStringPart#reset()
-	 * @generated
-	 */
-	EOperation getCompositeStringPart__Reset();
-
-	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.VarCall <em>Var Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1722,17 +1639,6 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVarCall_OriginalVarName();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarCall#isUpdated <em>Updated</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Updated</em>'.
-	 * @see fr.obeo.releng.targetplatform.VarCall#isUpdated()
-	 * @see #getVarCall()
-	 * @generated
-	 */
-	EAttribute getVarCall_Updated();
 
 	/**
 	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarCall#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}'.
@@ -1785,16 +1691,6 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getVarCall__GetCopy();
-
-	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarCall#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.VarCall#reset()
-	 * @generated
-	 */
-	EOperation getVarCall__Reset();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.StaticString <em>Static String</em>}'.
@@ -1868,16 +1764,6 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getStaticString__GetCopy();
-
-	/**
-	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.StaticString#reset() <em>Reset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Reset</em>' operation.
-	 * @see fr.obeo.releng.targetplatform.StaticString#reset()
-	 * @generated
-	 */
-	EOperation getStaticString__Reset();
 
 	/**
 	 * Returns the meta object for class '{@link fr.obeo.releng.targetplatform.Location <em>Location</em>}'.
@@ -2148,6 +2034,14 @@ public interface TargetPlatformPackage extends EPackage {
 		EClass TARGET_PLATFORM = eINSTANCE.getTargetPlatform();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TARGET_PLATFORM__NAME = eINSTANCE.getTargetPlatform_Name();
+
+		/**
 		 * The meta object literal for the '<em><b>Composite Elements Resolved</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2156,12 +2050,12 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED = eINSTANCE.getTargetPlatform_CompositeElementsResolved();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Modified</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TARGET_PLATFORM__NAME = eINSTANCE.getTargetPlatform_Name();
+		EAttribute TARGET_PLATFORM__MODIFIED = eINSTANCE.getTargetPlatform_Modified();
 
 		/**
 		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
@@ -2210,14 +2104,6 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TARGET_PLATFORM__VAR_DEFINITION = eINSTANCE.getTargetPlatform_VarDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TARGET_PLATFORM___RESET = eINSTANCE.getTargetPlatform__Reset();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.TargetContent <em>Target Content</em>}' class.
@@ -2380,14 +2266,6 @@ public interface TargetPlatformPackage extends EPackage {
 		EOperation VAR_DEFINITION___CHECK_VAR_CYCLE = eINSTANCE.getVarDefinition__CheckVarCycle();
 
 		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VAR_DEFINITION___RESET = eINSTANCE.getVarDefinition__Reset();
-
-		/**
 		 * The meta object literal for the '<em><b>To String</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2462,14 +2340,6 @@ public interface TargetPlatformPackage extends EPackage {
 		EOperation COMPOSITE_STRING___GET_COPY = eINSTANCE.getCompositeString__GetCopy();
 
 		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COMPOSITE_STRING___RESET = eINSTANCE.getCompositeString__Reset();
-
-		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.CompositeStringPart <em>Composite String Part</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2528,14 +2398,6 @@ public interface TargetPlatformPackage extends EPackage {
 		EOperation COMPOSITE_STRING_PART___GET_COPY = eINSTANCE.getCompositeStringPart__GetCopy();
 
 		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COMPOSITE_STRING_PART___RESET = eINSTANCE.getCompositeStringPart__Reset();
-
-		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.VarCallImpl <em>Var Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2560,14 +2422,6 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VAR_CALL__ORIGINAL_VAR_NAME = eINSTANCE.getVarCall_OriginalVarName();
-
-		/**
-		 * The meta object literal for the '<em><b>Updated</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VAR_CALL__UPDATED = eINSTANCE.getVarCall_Updated();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable Definition Cycle Detected</b></em>' attribute feature.
@@ -2608,14 +2462,6 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation VAR_CALL___GET_COPY = eINSTANCE.getVarCall__GetCopy();
-
-		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VAR_CALL___RESET = eINSTANCE.getVarCall__Reset();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.StaticStringImpl <em>Static String</em>}' class.
@@ -2674,14 +2520,6 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation STATIC_STRING___GET_COPY = eINSTANCE.getStaticString__GetCopy();
-
-		/**
-		 * The meta object literal for the '<em><b>Reset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation STATIC_STRING___RESET = eINSTANCE.getStaticString__Reset();
 
 		/**
 		 * The meta object literal for the '{@link fr.obeo.releng.targetplatform.impl.LocationImpl <em>Location</em>}' class.

@@ -6,3 +6,7 @@
 /IUImpl.java
 /IncludeDeclarationImpl.java
 /LocationImpl.java
+/CompositeStringImpl.java
+/StaticStringImpl.java
+/VarCallImpl.java
+/VarDefinitionImpl.java

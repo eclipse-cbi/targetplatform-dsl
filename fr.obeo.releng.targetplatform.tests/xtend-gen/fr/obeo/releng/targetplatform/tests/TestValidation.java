@@ -29,6 +29,7 @@ import java.util.function.Consumer;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -2007,6 +2008,7 @@ public class TestValidation {
       _builder_2.append("include \"a.tpd\"");
       _builder_2.newLine();
       final TargetPlatform tpc = this.parser.parse(_builder_2, URI.createURI("tmp:/c.tpd"), resourceSet);
+      final Resource tpcResource = tpc.eResource();
       Assert.assertTrue(tpa.eResource().getErrors().isEmpty());
       tester.validator().checkImportCycle(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
@@ -2049,8 +2051,10 @@ public class TestValidation {
         }
       };
       diagnotics.forEach(_function_3);
-      Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
-      tester.validator().checkImportCycle(tpc);
+      EObject _head = IterableExtensions.<EObject>head(tpcResource.getContents());
+      final TargetPlatform tpcUpdated = ((TargetPlatform) _head);
+      Assert.assertTrue(tpcUpdated.eResource().getErrors().isEmpty());
+      tester.validator().checkImportCycle(tpcUpdated);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
       final Function1<AbstractValidationDiagnostic, Boolean> _function_4 = new Function1<AbstractValidationDiagnostic, Boolean>() {

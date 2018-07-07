@@ -12,6 +12,7 @@ import fr.obeo.releng.targetplatform.VarCall;
 import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
+import fr.obeo.releng.targetplatform.util.TargetReloader;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class CompositeElementResolver {
   
   @Inject
   private ImportVariableManager importVariableManager;
+  
+  @Inject
+  private TargetReloader targetReloader;
   
   /**
    * Composite elements are string defined by a concatenation of static string and variable call:
@@ -65,40 +69,41 @@ public class CompositeElementResolver {
    */
   private void overrideVariableDefinition(final TargetPlatform targetPlatform, final Set<TargetPlatform> alreadyVisitedTarget) {
     alreadyVisitedTarget.add(targetPlatform);
-    final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+    final Consumer<VarDefinition> _function = new Consumer<VarDefinition>() {
       @Override
-      public Boolean apply(final TargetContent it) {
-        return Boolean.valueOf((it instanceof VarDefinition));
-      }
-    };
-    final Consumer<TargetContent> _function_1 = new Consumer<TargetContent>() {
-      @Override
-      public void accept(final TargetContent it) {
-        final VarDefinition varDef = ((VarDefinition) it);
+      public void accept(final VarDefinition it) {
+        final VarDefinition varDef = it;
         final String varDefName = varDef.getName();
         final String variableValue = CompositeElementResolver.this.importVariableManager.getVariableValue(varDefName);
         boolean _tripleNotEquals = (variableValue != null);
         if (_tripleNotEquals) {
           varDef.setOverrideValue(variableValue);
         }
+        targetPlatform.setModified(true);
       }
     };
-    IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function).forEach(_function_1);
+    targetPlatform.getVarDefinition().forEach(_function);
     final List<TargetPlatform> directlyImportedTargetPlatforms = this.searchDirectlyImportedTpd(targetPlatform);
-    final Function1<TargetPlatform, Boolean> _function_2 = new Function1<TargetPlatform, Boolean>() {
+    final Function1<TargetPlatform, Boolean> _function_1 = new Function1<TargetPlatform, Boolean>() {
       @Override
       public Boolean apply(final TargetPlatform it) {
         boolean _contains = alreadyVisitedTarget.contains(it);
         return Boolean.valueOf((!_contains));
       }
     };
-    final Consumer<TargetPlatform> _function_3 = new Consumer<TargetPlatform>() {
+    final Consumer<TargetPlatform> _function_2 = new Consumer<TargetPlatform>() {
       @Override
       public void accept(final TargetPlatform it) {
-        CompositeElementResolver.this.overrideVariableDefinition(it, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
+        final TargetPlatform importedTarget = it;
+        TargetPlatform reloadedImportTarget = it;
+        boolean _isModified = importedTarget.isModified();
+        if (_isModified) {
+          reloadedImportTarget = CompositeElementResolver.this.targetReloader.forceReloadTarget(targetPlatform, importedTarget);
+        }
+        CompositeElementResolver.this.overrideVariableDefinition(reloadedImportTarget, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
       }
     };
-    IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function_2).forEach(_function_3);
+    IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function_1).forEach(_function_2);
   }
   
   /**
@@ -114,6 +119,7 @@ public class CompositeElementResolver {
     };
     targetPlatform.getLocations().forEach(_function);
     targetPlatform.setCompositeElementsResolved(true);
+    targetPlatform.setModified(true);
   }
   
   void searchAndAppendDefineFromIncludedTpd(final TargetPlatform targetPlatform) {
@@ -150,18 +156,15 @@ public class CompositeElementResolver {
           @Override
           public void accept(final TargetPlatform it) {
             TargetPlatform notProcessedTargetPlatform = it;
-            notProcessedTargetPlatform.reset();
-            CompositeElementResolver.this.overrideVariableDefinition(notProcessedTargetPlatform);
+            CompositeElementResolver.this.overrideVariableDefinition(notProcessedTargetPlatform, alreadyVisitedTarget);
             CompositeElementResolver.this.searchAndAppendDefineFromIncludedTpd(notProcessedTargetPlatform, CollectionLiterals.<TargetPlatform>newHashSet(((TargetPlatform[])Conversions.unwrapArray(alreadyVisitedTarget, TargetPlatform.class))));
-            final Consumer<TargetContent> _function = new Consumer<TargetContent>() {
+            final Consumer<VarDefinition> _function = new Consumer<VarDefinition>() {
               @Override
-              public void accept(final TargetContent it) {
-                if ((it instanceof VarDefinition)) {
-                  ImportedDefineFromSubTpd.add(((VarDefinition)it));
-                }
+              public void accept(final VarDefinition it) {
+                ImportedDefineFromSubTpd.add(it);
               }
             };
-            notProcessedTargetPlatform.getContents().forEach(_function);
+            notProcessedTargetPlatform.getVarDefinition().forEach(_function);
           }
         };
         IterableExtensions.<TargetPlatform>filter(IterableExtensions.<TargetPlatform>filter(directlyImportedTargetPlatforms, _function), _function_1).forEach(_function_2);
@@ -243,6 +246,7 @@ public class CompositeElementResolver {
     ImportedDefineFromSubTpd.forEach(_function);
     targetContent.addAll(toBeAddedDefine);
     this.updateVariableDefinition(targetContent);
+    targetPlatform.setModified(true);
   }
   
   /**
@@ -290,7 +294,6 @@ public class CompositeElementResolver {
         if (_equals) {
           varCall.setOriginalVarName(varCall.getVarName());
           varCall.setVarName(((VarDefinition)varDef));
-          varCall.setUpdated(true);
         }
       }
     }

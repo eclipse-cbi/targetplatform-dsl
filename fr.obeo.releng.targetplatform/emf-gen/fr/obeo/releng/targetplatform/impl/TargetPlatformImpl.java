@@ -14,9 +14,6 @@ import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.TargetPlatformPackage;
 import fr.obeo.releng.targetplatform.VarDefinition;
 
-import java.lang.reflect.InvocationTargetException;
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,8 +33,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -50,8 +45,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#isCompositeElementsResolved <em>Composite Elements Resolved</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#isModified <em>Modified</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.TargetPlatformImpl#getOptions <em>Options</em>}</li>
@@ -63,6 +59,26 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @generated
  */
 public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements TargetPlatform {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isCompositeElementsResolved() <em>Composite Elements Resolved</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -84,24 +100,24 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	protected boolean compositeElementsResolved = COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #isModified() <em>Modified</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #isModified()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final boolean MODIFIED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #isModified() <em>Modified</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #isModified()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected boolean modified = MODIFIED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
@@ -137,6 +153,27 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.TARGET_PLATFORM__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isCompositeElementsResolved() {
 		return compositeElementsResolved;
 	}
@@ -158,8 +195,8 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public boolean isModified() {
+		return modified;
 	}
 
 	/**
@@ -167,11 +204,11 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setModified(boolean newModified) {
+		boolean oldModified = modified;
+		modified = newModified;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.TARGET_PLATFORM__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.TARGET_PLATFORM__MODIFIED, oldModified, modified));
 	}
 
 	/**
@@ -255,27 +292,6 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void reset() {
-		final ArrayList<VarDefinition> toBeRemoved = CollectionLiterals.<VarDefinition>newArrayList();
-		EList<VarDefinition> _varDefinition = this.getVarDefinition();
-		for (final VarDefinition varDef : _varDefinition) {
-			boolean _isImported = varDef.isImported();
-			if (_isImported) {
-				toBeRemoved.add(varDef);
-			}
-		}
-		this.getContents().removeAll(toBeRemoved);
-		EList<VarDefinition> _varDefinition_1 = this.getVarDefinition();
-		for (final VarDefinition varDef_1 : _varDefinition_1) {
-			varDef_1.reset();
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -308,10 +324,12 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
-				return isCompositeElementsResolved();
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return getName();
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return isCompositeElementsResolved();
+			case TargetPlatformPackage.TARGET_PLATFORM__MODIFIED:
+				return isModified();
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
 				return getContents();
 			case TargetPlatformPackage.TARGET_PLATFORM__INCLUDES:
@@ -338,11 +356,14 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
+				setName((String)newValue);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
 				setCompositeElementsResolved((Boolean)newValue);
 				return;
-			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
-				setName((String)newValue);
+			case TargetPlatformPackage.TARGET_PLATFORM__MODIFIED:
+				setModified((Boolean)newValue);
 				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
 				getContents().clear();
@@ -360,11 +381,14 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
 				setCompositeElementsResolved(COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT);
 				return;
-			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
-				setName(NAME_EDEFAULT);
+			case TargetPlatformPackage.TARGET_PLATFORM__MODIFIED:
+				setModified(MODIFIED_EDEFAULT);
 				return;
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
 				getContents().clear();
@@ -381,10 +405,12 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
-				return compositeElementsResolved != COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
 			case TargetPlatformPackage.TARGET_PLATFORM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TargetPlatformPackage.TARGET_PLATFORM__COMPOSITE_ELEMENTS_RESOLVED:
+				return compositeElementsResolved != COMPOSITE_ELEMENTS_RESOLVED_EDEFAULT;
+			case TargetPlatformPackage.TARGET_PLATFORM__MODIFIED:
+				return modified != MODIFIED_EDEFAULT;
 			case TargetPlatformPackage.TARGET_PLATFORM__CONTENTS:
 				return contents != null && !contents.isEmpty();
 			case TargetPlatformPackage.TARGET_PLATFORM__INCLUDES:
@@ -407,29 +433,16 @@ public class TargetPlatformImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case TargetPlatformPackage.TARGET_PLATFORM___RESET:
-				reset();
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (compositeElementsResolved: ");
-		result.append(compositeElementsResolved);
-		result.append(", name: ");
+		result.append(" (name: ");
 		result.append(name);
+		result.append(", compositeElementsResolved: ");
+		result.append(compositeElementsResolved);
+		result.append(", modified: ");
+		result.append(modified);
 		result.append(')');
 		return result.toString();
 	}
