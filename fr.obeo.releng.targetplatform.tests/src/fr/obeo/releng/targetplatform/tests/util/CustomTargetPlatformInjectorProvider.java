@@ -27,6 +27,7 @@ import fr.obeo.releng.targetplatform.TargetPlatformStandaloneSetup;
 import fr.obeo.releng.targetplatform.tests.IQueryResultProvider;
 import fr.obeo.releng.targetplatform.tests.MockIU;
 import fr.obeo.releng.targetplatform.tests.MockProvisioningAgent;
+import fr.obeo.releng.targetplatform.util.TargetReloader;
 
 public class CustomTargetPlatformInjectorProvider extends TargetPlatformInjectorProvider {
 	
@@ -34,6 +35,10 @@ public class CustomTargetPlatformInjectorProvider extends TargetPlatformInjector
 	    return new TargetPlatformStandaloneSetup() {
 	    	public Injector createInjector() {
 	    		return Guice.createInjector(new fr.obeo.releng.targetplatform.TargetPlatformRuntimeModule() {
+	    			public Class<? extends TargetReloader> bindTargetReloader() {
+	    				return TargetReloaderTestImpl.class;
+	    			}
+	    			
 	    			public Provider<org.eclipse.equinox.p2.core.IProvisioningAgent> provideIProvisioningAgent() {
 	    				return new Provider<IProvisioningAgent>() {
 	    					public IProvisioningAgent get() {

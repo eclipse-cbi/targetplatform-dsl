@@ -3,9 +3,9 @@ package fr.obeo.releng.targetplatform.tests.composite_elements
 import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.VarCall
 import fr.obeo.releng.targetplatform.VarDefinition
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.InjectWith
@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
 class TestCompositeLocation {
 	

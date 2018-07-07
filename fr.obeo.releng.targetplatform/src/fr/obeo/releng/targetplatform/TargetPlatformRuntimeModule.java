@@ -20,6 +20,8 @@ import fr.obeo.releng.targetplatform.conversion.TargetPlatformConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformIDValueConverter;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
+import fr.obeo.releng.targetplatform.util.TargetReloader;
+import fr.obeo.releng.targetplatform.util.TargetReloaderImpl;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -41,6 +43,10 @@ public class TargetPlatformRuntimeModule extends fr.obeo.releng.targetplatform.A
 	
 	public Class<? extends ImportVariableManager> bindImportVariableManager() {
 		return ImportVariableManager.class;
+	}
+	
+	public Class<? extends TargetReloader> bindTargetReloader() {
+		return TargetReloaderImpl.class;
 	}
 	
 	public Provider<IProvisioningAgent> provideIProvisioningAgent() {

@@ -1238,6 +1238,8 @@ class TestValidation {
 			include "a.tpd"
 		''', URI.createURI("tmp:/c.tpd"), resourceSet);
 		
+		val tpcResource = tpc.eResource
+		
 		assertTrue(tpa.eResource.errors.empty)
 		tester.validator.checkImportCycle(tpa)
 		var diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
@@ -1258,8 +1260,14 @@ class TestValidation {
 			assertEquals("c.tpd", (it.sourceEObject as IncludeDeclaration).importURI)
 		]
 		
-		assertTrue(tpb.eResource.errors.empty)
-		tester.validator.checkImportCycle(tpc)
+		// During processing of tpa and tpb the targetPlatform contained in resourceSet may be updated
+		// see TargetReloader. So the reference to a target here tpc may be outdated. Hence we keep the
+		// the updated version directly inside the resource
+		// In normal operation under eclipse or in command line, the update version of a targetPaltform
+		// is always provided
+		val tpcUpdated = tpcResource.contents.head as TargetPlatform
+		assertTrue(tpcUpdated.eResource.errors.empty)
+		tester.validator.checkImportCycle(tpcUpdated)
 		diagnotics = tester.diagnose.allDiagnostics.filter(typeof(AbstractValidationDiagnostic)).toList
 		assertEquals(1, diagnotics.size)
 		assertTrue(diagnotics.forall[sourceEObject instanceof IncludeDeclaration])

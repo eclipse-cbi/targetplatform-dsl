@@ -5,11 +5,12 @@ import com.google.inject.Provider
 import com.google.inject.name.Named
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
 import fr.obeo.releng.targetplatform.VarDefinition
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.ImportVariableManager
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator
+import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.junit4.InjectWith
@@ -24,9 +25,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.emf.common.util.Diagnostic
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
 class TestCompositeElementValidation {
 	

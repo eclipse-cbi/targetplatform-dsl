@@ -11,9 +11,12 @@
 package fr.obeo.releng.targetplatform.tests
 
 import com.google.inject.Inject
-import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.Option
-import fr.obeo.releng.targetplatform.TargetPlatformInjectorProvider
+import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
+import java.util.Locale
+import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -21,11 +24,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import fr.obeo.releng.targetplatform.Environment
-import org.eclipse.jdt.launching.JavaRuntime
-import java.util.Locale
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
 class TestGrammar {
 	
