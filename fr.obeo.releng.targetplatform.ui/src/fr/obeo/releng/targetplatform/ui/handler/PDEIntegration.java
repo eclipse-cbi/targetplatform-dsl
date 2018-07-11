@@ -39,7 +39,7 @@ public class PDEIntegration {
 
 	public PDEIntegration() {
 		service = Optional.fromNullable(
-			(ITargetPlatformService) PDECore.getDefault().acquireService(ITargetPlatformService.class.getName())
+			(ITargetPlatformService) PDECore.getDefault().acquireService(ITargetPlatformService.class)
 		);
 	}
 
