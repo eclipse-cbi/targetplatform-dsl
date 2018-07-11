@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Target Platform DSL 2.1.1" sequenceNumber="1418721514">
+<target name="Target Platform DSL 2.1.1" sequenceNumber="1531398657">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20120913-155553-9N89H_oGMMn84_uucqpkwz0bBdLL"/>
-      <unit id="org.eclipse.sdk.feature.group" version="3.8.2.v20130116-114247-7Q85DVDQQ3JLtb_hNUm3_MTesRM5RqdjCSfXEI7waiJ_N"/>
-      <unit id="org.eclipse.pde.core" version="3.8.1.v20130115-200504"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
+      <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.11.0.v20180515-1348"/>
+      <unit id="org.eclipse.sdk.feature.group" version="4.8.0.v20180611-0826"/>
+      <unit id="org.eclipse.pde.core" version="3.12.0.v20180516-1159"/>
+      <repository location="http://download.eclipse.org/eclipse/updates/4.8"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.2.v20141013-0308"/>
-      <unit id="org.eclipse.emf.sdk.source.feature.group" version="2.10.2.v20141013-0308"/>
-      <unit id="org.eclipse.emf.ecore.xcore.feature.group" version="1.2.1.v20141013-0331"/>
-      <unit id="org.eclipse.emf.ecore.xcore.source.feature.group" version="1.2.1.v20141013-0331"/>
+      <unit id="org.eclipse.emf.ecore.xcore.feature.group" version="1.2.2.v20150202-0452"/>
+      <unit id="org.eclipse.emf.ecore.xcore.source.feature.group" version="1.2.2.v20150202-0452"/>
       <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
