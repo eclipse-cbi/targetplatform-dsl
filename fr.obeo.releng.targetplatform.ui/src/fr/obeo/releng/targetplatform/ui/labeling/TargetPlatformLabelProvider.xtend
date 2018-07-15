@@ -38,7 +38,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(Location object) {
 		val ss = new StyledString();
 		ss.append(object.uri);
-		if (object.getID() != null) {
+		if (object.getID() !== null) {
 			ss.append(" " + object.getID(), StyledString.DECORATIONS_STYLER);
 		}
 		ss;
@@ -51,7 +51,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(IU object) {
 		val ss = new StyledString();
 		ss.append(object.getID());
-		if (object.getVersion() != null) {
+		if (object.getVersion() !== null) {
 			ss.append(" " + object.getVersion(), StyledString.COUNTER_STYLER);
 		}
 		ss;
@@ -94,6 +94,16 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	def image(VarDefinition object) {
-		"obj16/option_obj.gif"
+		if (object.imported) {
+			if (object.diamondInherit) {
+				"obj16/varImportDiamond_obj.gif"
+			}
+			else {
+				"obj16/varImport_obj.gif"
+			}
+		}
+		else {
+			"obj16/var_obj.gif"
+		}
 	}
 }
