@@ -162,17 +162,53 @@ class CompositeElementResolver {
 						!currentImportedDefine.name.equals(varName)
 					]
 				if (toBeAdded) {
-					val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
-					currentImportedDefineCopy.name = currentImportedDefine.name
-					currentImportedDefineCopy.value = currentImportedDefine.value.copy
-					currentImportedDefineCopy.overrideValue = currentImportedDefine.overrideValue
-					currentImportedDefineCopy.imported = true
-					toBeAddedDefine.add(currentImportedDefineCopy)
+					if (varDefNeverInclude(currentImportedDefine, toBeAddedDefine)) {
+						val currentImportedDefineCopy = createImportedCopy(currentImportedDefine)
+						toBeAddedDefine.add(currentImportedDefineCopy)
+					}
+					else {
+						val alreadyAddedVarDef = searchAlreadyIncludeVarDef(currentImportedDefine, toBeAddedDefine)
+						val diamondlyInherited = currentImportedDefine.sourceUUID.equals(alreadyAddedVarDef.sourceUUID)
+						if (diamondlyInherited) {
+							alreadyAddedVarDef.diamondInherit = true
+						}
+						else {
+							alreadyAddedVarDef.importedValues.add(currentImportedDefine.value.computeActualString)
+						}
+					}
 				}
 			]
 		targetContent.addAll(toBeAddedDefine)
 		updateVariableDefinition(targetContent)
 		targetPlatform.modified = true
+	}
+	
+	protected def VarDefinition searchAlreadyIncludeVarDef(VarDefinition varDef2Find, HashSet<VarDefinition> alreadyAddedVarDefs) {
+		val varDefNameToFind = varDef2Find.name
+		val alreadyAddedVarDef = alreadyAddedVarDefs.findFirst[
+			val currentVarDef = it
+			varDefNameToFind.compareTo(currentVarDef.name) == 0
+		]
+		alreadyAddedVarDef
+	}
+	
+	private def VarDefinition createImportedCopy(VarDefinition currentImportedDefine) {
+		val currentImportedDefineCopy = TargetPlatformFactory.eINSTANCE.createVarDefinition
+		currentImportedDefineCopy.name = currentImportedDefine.name
+		currentImportedDefineCopy.value = currentImportedDefine.value.copy
+		currentImportedDefineCopy.overrideValue = currentImportedDefine.overrideValue
+		currentImportedDefineCopy.imported = true
+		currentImportedDefineCopy.importedValues.add(currentImportedDefine.value.computeActualString)
+		currentImportedDefineCopy._sourceUUID = currentImportedDefine.sourceUUID
+		currentImportedDefineCopy
+	}
+	
+	private def boolean varDefNeverInclude(VarDefinition varDefToCheck, HashSet<VarDefinition> alreadyAddedVarDef) {
+		val varDefToCheckName = varDefToCheck.name
+		alreadyAddedVarDef.forall[
+			val currentVarDef = it
+			!(varDefToCheckName.compareTo(currentVarDef.name) == 0)
+		]
 	}
 	
 	/*

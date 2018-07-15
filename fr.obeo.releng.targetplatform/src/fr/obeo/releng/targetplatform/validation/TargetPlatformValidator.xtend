@@ -533,13 +533,37 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check
 	def checkNoDuplicatedDefine(TargetPlatform targetPlatform) {
-		val varNameList = targetPlatform.contents
+		checkDuplicationDirectlyInsideTarget(targetPlatform)
+		checkDuplicationFromImportedTarget(targetPlatform)
+	}
+	
+	private def void checkDuplicationFromImportedTarget(TargetPlatform targetPlatform) {
+		targetPlatform.varDefinition
 			.filter[
-				it instanceof VarDefinition
+				it.imported
 			]
+			.forEach[
+				if (it.importedValues.size > 1) {
+					val firstElem = it.importedValues.head
+					val varDefAlawaysImportedWithSameValue = it.importedValues.forall[
+						firstElem.compareTo(it) == 0
+					]
+					if (varDefAlawaysImportedWithSameValue) {
+						val errString = "\"" + it.name + "\" is imported many time"
+						info(errString, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(it), CHECK__NO_DUPLICATED_DEFINE)
+					}
+					else {
+						val errString = "\"" + it.name + "\" is imported many time with different values: " + it.importedValues
+						error(errString, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(it), CHECK__NO_DUPLICATED_DEFINE)
+					}
+				}
+			]
+	}
+	
+	private def void checkDuplicationDirectlyInsideTarget(TargetPlatform targetPlatform) {
+		val varNameList = targetPlatform.varDefinition
 			.map[
-				val varDef = it as VarDefinition
-				varDef.name
+				it.name
 			]
 			.sort
 			.toList
@@ -547,17 +571,12 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		for (var i = 1 ; i < varNameList.size ; i++) {
 			if (varNameList.get(i-1).compareTo(varNameList.get(i)) == 0) {
 				val duplicatedVarName = varNameList.get(i-1)
-				val errString = "\"" + duplicatedVarName + "\" is defined many times (it may be imported through many includes)"
-				val findFirst = targetPlatform.contents
-									.filter[
-										it instanceof VarDefinition
-									]
-									.findFirst[
-										val varDef = it as VarDefinition
-										varDef.name.compareTo(duplicatedVarName) == 0
-									]
-				val duplicatedVar = findFirst as VarDefinition
-				warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(duplicatedVar), CHECK__NO_DUPLICATED_DEFINE)
+				val errString = "\"" + duplicatedVarName + "\" is defined many times"
+				val duplicatedVar = targetPlatform.varDefinition
+					.findFirst[
+						it.name.compareTo(duplicatedVarName) == 0
+					]
+				error(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(duplicatedVar), CHECK__NO_DUPLICATED_DEFINE)
 			}
 		}
 	}
