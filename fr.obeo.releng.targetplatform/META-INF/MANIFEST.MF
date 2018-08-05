@@ -29,7 +29,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.jdt.launching,
  org.objectweb.asm;bundle-version="5.0.1",
- org.eclipse.equinox.p2.metadata.repository
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.ide
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib,
  org.osgi.framework;version="[1.5.0,2.0.0)"

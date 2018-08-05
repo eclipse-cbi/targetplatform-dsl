@@ -10,6 +10,7 @@ import java.util.HashSet
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.common.util.EList
+import org.eclipse.swt.widgets.Display
 
 class CompositeElementResolver {
 	
@@ -24,7 +25,7 @@ class CompositeElementResolver {
 	
 	/* Composite elements are string defined by a concatenation of static string and variable call:
 	 * "string1" + ${var1} + "aaa" + ${var2} +... */ 
-	def void resolveCompositeElements(TargetPlatform targetPlatform) {
+	def resolveCompositeElements(TargetPlatform targetPlatform) {
 		if (targetPlatform.compositeElementsResolved == true) {
 			return
 		}
@@ -37,9 +38,17 @@ class CompositeElementResolver {
 		importedTargetPlatforms.forEach[
 			resolveLocations(it)
 		]
+		
+		cleanReferenceResolvingError(targetPlatform)
 	}
 	
-	private def void overrideVariableDefinition(TargetPlatform targetPlatform) {
+	private def cleanReferenceResolvingError(TargetPlatform targetPlatform) {
+		val referenceResolvingErrorClearer = new ReferenceResolvingErrorClearer(targetPlatform.eResource.URI.toString,
+																				targetPlatform.varCallFromOnlyImportedVariable)
+		Display.^default.asyncExec(referenceResolvingErrorClearer)
+	}
+	
+	private def overrideVariableDefinition(TargetPlatform targetPlatform) {
 		val alreadyVisitedTarget = newHashSet()
 		overrideVariableDefinition(targetPlatform, alreadyVisitedTarget)
 	}
@@ -78,7 +87,7 @@ class CompositeElementResolver {
 	}
 	
 	/* Resolve location ("location" directive) means resolve variable call used in location declaration */
-	private def void resolveLocations(TargetPlatform targetPlatform) {
+	private def resolveLocations(TargetPlatform targetPlatform) {
 		targetPlatform.locations.forEach[
 			it.resolveUri
 			it.resolveIUsVersion
@@ -87,7 +96,7 @@ class CompositeElementResolver {
 		targetPlatform.modified = true
 	}
 	
-	package def void searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
+	package def searchAndAppendDefineFromIncludedTpd(TargetPlatform targetPlatform) {
 		val alreadyVisitedTarget = newHashSet()
 		searchAndAppendDefineFromIncludedTpd(targetPlatform, alreadyVisitedTarget)
 	}
@@ -146,7 +155,7 @@ class CompositeElementResolver {
 	/*
 	 * "variable define" of deepest include are override by "define" of lowest level
 	 */
-	private def void mergeImportedDefine(TargetPlatform targetPlatform, Set<VarDefinition> ImportedDefineFromSubTpd) {
+	private def mergeImportedDefine(TargetPlatform targetPlatform, Set<VarDefinition> ImportedDefineFromSubTpd) {
 		val toBeAddedDefine = newHashSet()
 		val targetContent = targetPlatform.contents
 		ImportedDefineFromSubTpd
@@ -179,8 +188,34 @@ class CompositeElementResolver {
 				}
 			]
 		targetContent.addAll(toBeAddedDefine)
-		updateVariableDefinition(targetContent)
+		val varCallFromImpVar = updateVariableDefinition(targetContent)
+		updateVarCallFromImportedVar(targetPlatform, varCallFromImpVar)
 		targetPlatform.modified = true
+	}
+	
+	/* Purpose of updateVarCallFromImportedVar
+	 * see TestVariableVariableDefinition.testExtractVarCallFromOnlyImportedVariable
+	 * 
+	 * Consider the following case:
+	 * 
+	 * maintTpd.tpd
+	 * ============
+	 * target "mainTpd"
+	 * include "subTpd.tpd"
+	 * define var = ${impVar}
+	 * 
+	 * subTpd.tpd
+	 * ==========
+	 * target "subTpd"
+	 * define impVar = "value"
+	 * 
+	 * Inside mainTpd, we have the varCall ${impVar}, XTExt does not know how to manage variable call from imported target.
+	 * So it raises an error in eclipse editor. It is just a displayed warning and it does not disturb the generation of target.
+	 * 
+	 * To make a clearer editor display, we list all this case to clean them with method:
+	 */
+	private def updateVarCallFromImportedVar(TargetPlatform targetPlatform, Set<String> varCallFromImpVar) {
+		targetPlatform.varCallFromOnlyImportedVariable = varCallFromImpVar.toString.substring(1, varCallFromImpVar.toString.length - 1)
 	}
 	
 	protected def VarDefinition searchAlreadyIncludeVarDef(VarDefinition varDef2Find, HashSet<VarDefinition> alreadyAddedVarDefs) {
@@ -233,28 +268,36 @@ class CompositeElementResolver {
 	 * the value "value2Sub" instead of "value2" => We have to update the newly created var2 in
 	 * "mainTpd" to make it refer to var2b of "mainTpd"
 	 */
-	private def void updateVariableDefinition(EList<TargetContent> targetContent) {
+	private def Set<String> updateVariableDefinition(EList<TargetContent> targetContent) {
+		val varCallFromImpVar = newHashSet()
 		for (varDef : targetContent) {
 			if (varDef instanceof VarDefinition) {
 				for (stringPart : varDef.value.stringParts) {
 					if (stringPart instanceof VarCall) {
 						var varCall = stringPart as VarCall
-						updateVariableCall(varCall, targetContent)
+						val tmpVarCallFromImpVar = updateVariableCall(varCall, targetContent)
+						varCallFromImpVar.addAll(tmpVarCallFromImpVar)
 					}
 				}
 			}
 		}
+		varCallFromImpVar
 	}
 	
-	private def void updateVariableCall(VarCall varCall, EList<TargetContent> targetContent) {
+	private def Set<String> updateVariableCall(VarCall varCall, EList<TargetContent> targetContent) {
+		val varCallFromImpVar = newHashSet()
 		for (varDef : targetContent) {
 			if (varDef instanceof VarDefinition) {
 				if (varCall.varName.name == varDef.name) {
 					varCall.originalVarName = varCall.varName
 					varCall.varName = varDef
+					if (varDef.imported) {
+						varCallFromImpVar.add(varDef.name)
+					}
 				}
 			}
 		}
+		varCallFromImpVar
 	}
 	
 	def List<VarDefinition> checkVariableDefinitionCycle(VarDefinition varDef) {

@@ -3,7 +3,6 @@ package fr.obeo.releng.targetplatform.tests.composite_elements
 import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
@@ -669,5 +668,59 @@ class TestVariableVariableDefinition {
 		assertTrue(varDef2.diamondInherit)
 		
 		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	/** see {@link CompositeElementResolver#updateVarCallFromImportedVar} */
+	def testExtractVarCallFromOnlyImportedVariable() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			define localVar = "myVar"
+			define overrideVar = "overrideVarVal"
+			define var1 = ${impVar}
+			define var2 = ${impVar1} + ${impVar2}
+			define var3 = ${localVar}
+			define var4 = ${overrideVar}
+			define var5 = ${undefinedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+			define impVar = "value"
+			define impVar1 = "value1"
+			define overrideVar = "overrideVarValOrig"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define impVar2 = "value2"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		assertEquals(3, mainTpd.varCallFromOnlyImportedVariable.split(", ").size)
+		
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar"))
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar1"))
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar2"))
+	}
+	
+	@Test
+	/** see {@link CompositeElementResolver#updateVarCallFromImportedVar} */
+	def testExtractVarCallFromOnlyImportedVariable_WithoutImport() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			define localVar = "myVar"
+			define var1 = ${impVar}
+			define var2 = ${localVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		assertEquals("", mainTpd.varCallFromOnlyImportedVariable)
 	}
 }

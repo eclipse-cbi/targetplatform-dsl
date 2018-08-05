@@ -19,6 +19,8 @@ class TargetPlatform {
 	// Used to determine if weather or not we have to force reload the target
 	boolean modified = "false"
 	
+	String varCallFromOnlyImportedVariable = ""
+	
 	contains TargetContent[] contents opposite targetPlatform
 	  
 	refers derived IncludeDeclaration[] includes get {
