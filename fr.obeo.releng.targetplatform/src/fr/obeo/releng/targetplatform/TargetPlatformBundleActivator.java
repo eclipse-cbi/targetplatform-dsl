@@ -28,6 +28,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
+import fr.obeo.releng.targetplatform.util.PreferenceSettings;
+
 
 /**
  * @author <a href="mailto:mikael.barbero@obeo.fr">Mikael Barbero</a>
@@ -49,6 +51,8 @@ public class TargetPlatformBundleActivator extends Plugin {
 	
 	private IProvisioningAgent agent;
 	
+	PreferenceSettings preferenceSettings;
+
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -56,6 +60,9 @@ public class TargetPlatformBundleActivator extends Plugin {
 		INSTANCE = this;
 		this.context = context;
 		injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
+		
+		Injector injector = getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
+		preferenceSettings = injector.getInstance(PreferenceSettings.class);
 	}
 	
 	@Override
@@ -76,6 +83,10 @@ public class TargetPlatformBundleActivator extends Plugin {
 	
 	public static TargetPlatformBundleActivator getInstance() {
 		return INSTANCE;
+	}
+	
+	public PreferenceSettings getPreferenceSettings() {
+		return preferenceSettings;
 	}
 
 	public Injector getInjector(String language) {
