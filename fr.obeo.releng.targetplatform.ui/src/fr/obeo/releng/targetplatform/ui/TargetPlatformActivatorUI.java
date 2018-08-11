@@ -21,5 +21,8 @@ public class TargetPlatformActivatorUI extends TargetPlatformActivator {
 		
 		String duplicatedIUWarnPreference = this.getPreferenceStore().getString(TPDPreferenceConstants.P_CHOICE_DUPLICATED_IU_WARNING);
 		preferenceSettings.setDuplicatedIUWarnPreference(duplicatedIUWarnPreference);
+		
+		boolean useEnvSetting = this.getPreferenceStore().getBoolean(TPDPreferenceConstants.P_CHOICE_USE_ENV);
+		preferenceSettings.setUseEnv(useEnvSetting);
 	}
 }

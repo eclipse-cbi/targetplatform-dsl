@@ -3,6 +3,7 @@ package fr.obeo.releng.targetplatform.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -10,7 +11,12 @@ public class ImportVariableManager {
 
 	private String fileToProcess;
 	private Map<String, String> overrideVarDefMap = new HashMap<String, String>();
+
+	@Inject
+	private PreferenceSettings preferenceSettings;
 	
+	private boolean isLoaded = false;
+
 	/**
 	 * @param args - tpd filename to process must be first
 	 * 			   - optional "useenv" (case incensitive), if present look in environment for
@@ -23,16 +29,20 @@ public class ImportVariableManager {
 			fileToProcess = args[0];
 		}
 		
-		boolean useEnv = false;
+		boolean scanEnv = false;
 		int firstOverrideIndex = 1;
 		if (args.length >= 2) {
 			if ("useenv".compareToIgnoreCase(args[1]) == 0) {
-				useEnv = true;
+				scanEnv = true;
 				firstOverrideIndex = 2;
 			}
 		}
 		
-		if (useEnv) {
+		if (scanEnv) {
+			// We scan environment variables to extract those for TPD
+			//
+			// Remark: if unit tests are launched with environment variables for TPD defined
+			// it may leads to error
 			Map<String, String> env = System.getenv();
 			for (String envName : env.keySet()) {
 				if (envName.startsWith("TPD_VAR_")) {
@@ -46,6 +56,8 @@ public class ImportVariableManager {
 			String curImport = args[i];
 			importOverridingVariable(curImport, "command line");
 		}
+		
+		isLoaded = true;
 	}
 
 	private void importOverridingVariable(String curImport, String source) {
@@ -67,6 +79,10 @@ public class ImportVariableManager {
 	 * @return Variable value or null if variable does not exist in imported variable
 	 */
 	public String getVariableValue(String variableName) {
+		checkLoad();
+		if (!preferenceSettings.isUseEnv()) {
+			return null;
+		}
 		return overrideVarDefMap.get(variableName);
 	}
 
@@ -74,7 +90,25 @@ public class ImportVariableManager {
 	 * @return tpd filename passed in argument
 	 */
 	public String getFileToProcess() {
+		checkLoad();
 		return fileToProcess;
+	}
+	
+	private void checkLoad() {
+		if (isLoaded) {
+			return;
+		}
+		//If not already loaded => we are under eclipse otherwise if launched from
+		//command line/maven, command line arguments are already processed at startup
+		String[] args = {null, "useenv"};
+		processCommandLineArguments(args);
+	}
+	
+	public Map<String, String> getOverrideVarDefMap() {
+		checkLoad();
+		HashMap<String, String> out = new HashMap<String, String>();
+		out.putAll(overrideVarDefMap);
+		return out;
 	}
 	
 	//Only for test: cleanup. Same instance is used across tests

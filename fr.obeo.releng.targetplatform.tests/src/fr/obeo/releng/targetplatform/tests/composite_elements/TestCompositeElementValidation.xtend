@@ -25,6 +25,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.util.PreferenceSettings
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
@@ -47,6 +48,9 @@ class TestCompositeElementValidation {
 	
 	@Inject
 	ImportVariableManager importVariableManager;
+	
+	@Inject
+	PreferenceSettings preferenceSettings;
 	
 	@Inject
 	@Named(Constants::LANGUAGE_NAME)
@@ -96,6 +100,7 @@ class TestCompositeElementValidation {
 	def checkImportCycleDueToVariableDefinitionOverride() {
 		val String[] args = #["compositeIncludeTarget.tpd", "urlCyclicInclude=../compositeIncludeTarget.tpd"]
 		
+		preferenceSettings.useEnv = true
 		importVariableManager.processCommandLineArguments(args)
 		
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
@@ -137,6 +142,7 @@ class TestCompositeElementValidation {
 		]
 		
 		importVariableManager.clear
+		preferenceSettings.useEnv = false
 	}
 	
 	@Test

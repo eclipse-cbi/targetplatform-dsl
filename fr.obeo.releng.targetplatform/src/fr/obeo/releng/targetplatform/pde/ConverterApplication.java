@@ -26,6 +26,7 @@ import com.google.inject.Injector;
 import fr.obeo.releng.targetplatform.TargetPlatformBundleActivator;
 import fr.obeo.releng.targetplatform.TargetPlatformStandaloneSetup;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
+import fr.obeo.releng.targetplatform.util.PreferenceSettings;
 
 
 /**
@@ -53,6 +54,11 @@ public class ConverterApplication implements IApplication {
 		Injector injector = tpdBundleActivator.getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
+		
+		PreferenceSettings prefSettings = tpdBundleActivator.getPreferenceSettings();
+		// If launched through command line or maven always try to use environment variables
+		// (if some are defined) to override target variable.
+		prefSettings.setUseEnv(true);
 		
 		ImportVariableManager importVariableManager = injector.getInstance(ImportVariableManager.class);
 
