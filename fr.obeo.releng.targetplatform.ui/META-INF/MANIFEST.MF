@@ -27,7 +27,7 @@ Require-Bundle: fr.obeo.releng.targetplatform;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Activator: fr.obeo.releng.targetplatform.ui.internal.TargetPlatformActivator
+Bundle-Activator: fr.obeo.releng.targetplatform.ui.TargetPlatformActivatorUI
 Export-Package: fr.obeo.releng.targetplatform.ui,
  fr.obeo.releng.targetplatform.ui.contentassist,
  fr.obeo.releng.targetplatform.ui.contentassist.antlr,
