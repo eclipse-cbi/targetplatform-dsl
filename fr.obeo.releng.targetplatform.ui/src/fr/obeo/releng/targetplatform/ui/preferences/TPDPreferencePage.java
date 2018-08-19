@@ -34,14 +34,14 @@ import fr.obeo.releng.targetplatform.util.PreferenceSettings;
  * be accessed directly via the preference store.
  */
 
-public class TPDSamplePreferencePage
+public class TPDPreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 	
 	private String duplicatedIUWarnPreference2BeSet;
 	private boolean useEnvSetting2BeSet;
 	
-	public TPDSamplePreferencePage() {
+	public TPDPreferencePage() {
 		super(GRID);
 		setPreferenceStore(TargetPlatformActivator.getInstance().getPreferenceStore());
 		setDescription("TPD options preference page");

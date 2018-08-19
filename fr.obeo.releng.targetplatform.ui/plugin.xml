@@ -102,7 +102,7 @@
         </page>
         <page
               category="fr.obeo.releng.targetplatform.TargetPlatform"
-              class="fr.obeo.releng.targetplatform.ui.preferences.TPDSamplePreferencePage"
+              class="fr.obeo.releng.targetplatform.ui.preferences.TPDPreferencePage"
               id="fr.obeo.releng.targetplatform.ui.preferences.TPDSamplePreferencePage"
               name="TPD Options">
         </page>
