@@ -170,13 +170,13 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
       public void apply(final EObject element, final IModificationContext context) throws Exception {
         final String id = ((Location) element).getID();
         final String uri = ((Location) element).getUri();
-        boolean _notEquals = (!Objects.equal(uri, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (uri != null);
+        if (_tripleNotEquals) {
           final Location location = ((Location) element);
           final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
             @Override
             public Boolean apply(final Location it) {
-              return Boolean.valueOf(((!Objects.equal(uri, null)) && uri.equals(it.getUri())));
+              return Boolean.valueOf(((uri != null) && uri.equals(it.getUri())));
             }
           };
           final Consumer<Location> _function_1 = new Consumer<Location>() {
@@ -205,7 +205,7 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
         final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
           @Override
           public Boolean apply(final Location it) {
-            return Boolean.valueOf(((!Objects.equal(uri, null)) && uri.equals(it.getUri())));
+            return Boolean.valueOf(((uri != null) && uri.equals(it.getUri())));
           }
         };
         final Consumer<Location> _function_1 = new Consumer<Location>() {

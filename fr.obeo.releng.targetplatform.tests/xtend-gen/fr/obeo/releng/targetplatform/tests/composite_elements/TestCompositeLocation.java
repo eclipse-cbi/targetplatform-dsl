@@ -8,7 +8,6 @@ import fr.obeo.releng.targetplatform.CompositeStringPart;
 import fr.obeo.releng.targetplatform.IU;
 import fr.obeo.releng.targetplatform.IncludeDeclaration;
 import fr.obeo.releng.targetplatform.Location;
-import fr.obeo.releng.targetplatform.TargetContent;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.VarCall;
 import fr.obeo.releng.targetplatform.VarDefinition;
@@ -375,8 +374,7 @@ public class TestCompositeLocation {
       final VarCall varCall = ((VarCall) _head);
       Assert.assertEquals("subDirName", varCall.getVarName().getName());
       final LinkedList<TargetPlatform> importedTargetPlatforms = this.indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget);
-      TargetContent _head_1 = IterableExtensions.<TargetContent>head(importedTargetPlatforms.getLast().getContents());
-      final VarDefinition varDef = ((VarDefinition) _head_1);
+      final VarDefinition varDef = IterableExtensions.<VarDefinition>head(importedTargetPlatforms.getLast().getVarDefinition());
       Assert.assertEquals("subdir", varDef.getValue().computeActualString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

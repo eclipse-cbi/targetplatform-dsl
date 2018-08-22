@@ -74,6 +74,8 @@ VersionRange hidden (WS):
 	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
 ;
 
+@Override 
 terminal INT returns ecore::EInt: ('0'..'9')+;
+@Override 
 terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
 terminal QUALIFIER: ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;

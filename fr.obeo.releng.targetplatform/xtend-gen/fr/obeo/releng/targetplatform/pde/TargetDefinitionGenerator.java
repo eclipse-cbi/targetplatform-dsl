@@ -10,7 +10,6 @@
  */
 package fr.obeo.releng.targetplatform.pde;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.resolved.ResolvedLocation;
@@ -44,7 +43,7 @@ public class TargetDefinitionGenerator {
       _builder.append("\">");
       _builder.newLineIfNotEmpty();
       {
-        if (((!Objects.equal(targetPlatform.getLocations(), null)) && (!targetPlatform.getLocations().isEmpty()))) {
+        if (((targetPlatform.getLocations() != null) && (!targetPlatform.getLocations().isEmpty()))) {
           _builder.append("  ");
           _builder.append("<locations>");
           _builder.newLine();
@@ -64,7 +63,7 @@ public class TargetDefinitionGenerator {
         }
       }
       {
-        if (((!Objects.equal(targetPlatform.getEnvironment(), null)) && ((((!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getOs())) || 
+        if (((targetPlatform.getEnvironment() != null) && ((((!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getOs())) || 
           (!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getWs()))) || 
           (!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getArch()))) || 
           (!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getNl()))))) {
@@ -129,7 +128,7 @@ public class TargetDefinitionGenerator {
         }
       }
       {
-        if (((!Objects.equal(targetPlatform.getEnvironment(), null)) && (!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getTargetJRE())))) {
+        if (((targetPlatform.getEnvironment() != null) && (!StringExtensions.isNullOrEmpty(targetPlatform.getEnvironment().getTargetJRE())))) {
           _builder.append("  ");
           _builder.append("<targetJRE path=\"");
           String _targetJRE = targetPlatform.getEnvironment().getTargetJRE();

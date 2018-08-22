@@ -25,6 +25,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.util.PreferenceSettings
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
@@ -47,6 +48,9 @@ class TestCompositeElementValidation {
 	
 	@Inject
 	ImportVariableManager importVariableManager;
+	
+	@Inject
+	PreferenceSettings preferenceSettings;
 	
 	@Inject
 	@Named(Constants::LANGUAGE_NAME)
@@ -96,6 +100,7 @@ class TestCompositeElementValidation {
 	def checkImportCycleDueToVariableDefinitionOverride() {
 		val String[] args = #["compositeIncludeTarget.tpd", "urlCyclicInclude=../compositeIncludeTarget.tpd"]
 		
+		preferenceSettings.useEnv = true
 		importVariableManager.processCommandLineArguments(args)
 		
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
@@ -137,6 +142,7 @@ class TestCompositeElementValidation {
 		]
 		
 		importVariableManager.clear
+		preferenceSettings.useEnv = false
 	}
 	
 	@Test
@@ -394,12 +400,12 @@ class TestCompositeElementValidation {
 		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
 		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_DEFINE, diagnostics.head.issueCode)
-		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
-		assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).message)
+		assertEquals(Diagnostic.ERROR, diagnostics.get(0).severity)
+		assertEquals("\"twiceVar\" is defined many times", diagnostics.get(0).message)
 	}
 	
 	@Test
-	def testNoDuplicatedVarDefinitionFromInclude() {
+	def testNoDuplicatedVarDefinitionFromIncludeDifferentValues() {
 		val resourceSet = resourceSetProvider.get
 		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
 		val compositeIncludeTarget = parser.parse('''
@@ -424,8 +430,69 @@ class TestCompositeElementValidation {
 		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
 		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
 		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_DEFINE, diagnostics.head.issueCode)
-		assertEquals(Diagnostic.WARNING, diagnostics.get(0).severity)
-		assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).message)
+		assertEquals(Diagnostic.ERROR, diagnostics.get(0).severity)
+		val messageErr = diagnostics.get(0).message
+		assertTrue("\"twiceVar\" is imported many time with different values: [val1, val2]".equals(messageErr) ||
+			"\"twiceVar\" is imported many time with different values: [val2, val1]".equals(messageErr)
+		)
+	}
+	
+	@Test
+	def testNoDuplicatedVarDefinitionFromIncludeSameValues() {
+		val resourceSet = resourceSetProvider.get
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceVar = "val"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceVar = "val"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(0, locationIndex.size)
+		
+		assertTrue(compositeIncludeTarget.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedDefine(compositeIncludeTarget)
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 1, diagnostics.size)
+		assertEquals(TargetPlatformValidator::CHECK__NO_DUPLICATED_DEFINE, diagnostics.head.issueCode)
+		assertEquals(Diagnostic.INFO, diagnostics.get(0).severity)
+		assertEquals("\"twiceVar\" is imported many time", diagnostics.get(0).message)
+	}
+	
+	@Test
+	def testDuplicatedVarDefinitionFromIncludeButOverride() {
+		val resourceSet = resourceSetProvider.get
+		val tester = new ValidatorTester(validator, validatorRegistrar, languageName)
+		val compositeIncludeTarget = parser.parse('''
+			target "compositeIncludeTarget"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define twiceVar = "newVal"
+		''', URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceVar = "val1"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceVar = "val2"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(compositeIncludeTarget)
+		assertEquals(0, locationIndex.size)
+		
+		assertTrue(compositeIncludeTarget.eResource.errors.empty)
+		tester.validator.checkNoDuplicatedDefine(compositeIncludeTarget)
+		var diagnostics = tester.diagnose.allDiagnostics.filter(typeof(FeatureBasedDiagnostic)).toList
+		assertEquals(diagnostics.join(', '), 0, diagnostics.size)
 	}
 	
 	@Test

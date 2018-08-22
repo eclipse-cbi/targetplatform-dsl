@@ -63,7 +63,7 @@ class TargetPlatformConverter extends DefaultTerminalConverters {
 	
 	@ValueConverter(rule = "QualifiedName")
 	def IValueConverter<String> getQualifiedNameConverter() {
-		if (qualifiedNameValueConverter == null) {
+		if (qualifiedNameValueConverter === null) {
 			qualifiedNameValueConverter = new FQNConverter(grammar)
 		}
 		return qualifiedNameValueConverter
@@ -84,13 +84,13 @@ class VersionRangeConverter extends AbstractNullSafeConverter<String> {
 class TargetPlatformSTRINGValueConverter extends STRINGValueConverter {
 	
 	override toValue(String string, INode node) {
-		if (string == null) {
+		if (string === null) {
 			return null;
 		}
 		val ge = node.grammarElement as RuleCall
 		val container = ge.eContainer as Assignment
 		val value = Strings.convertFromJavaString(string.substring(1, string.length() - 1), true)
-		if (value != null && container != null && "version".equals(container.feature)) {
+		if (value !== null && container !== null && "version".equals(container.feature)) {
 			return TargetPlatformConverter::parseVersionRange(value, node)
 		} else {
 			return value

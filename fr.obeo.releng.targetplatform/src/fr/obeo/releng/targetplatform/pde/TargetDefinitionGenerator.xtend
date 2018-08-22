@@ -27,14 +27,14 @@ class TargetDefinitionGenerator {
 		<?pde?>
 		<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
 		<target name="«targetPlatform.name»" sequenceNumber="«sequenceNumber»">
-		  «IF targetPlatform.locations != null && !targetPlatform.locations.empty»
+		  «IF targetPlatform.locations !== null && !targetPlatform.locations.empty»
 		  <locations>
 		    «FOR location : targetPlatform.locations»
 		    «generateLocation(targetPlatform, location)»
 		    «ENDFOR»
 		  </locations>
 		  «ENDIF»
-		  «IF (targetPlatform.environment != null && 
+		  «IF (targetPlatform.environment !== null && 
 			  	(!targetPlatform.environment.os.nullOrEmpty || 
 			  	 !targetPlatform.environment.ws.nullOrEmpty || 
 			  	 !targetPlatform.environment.arch.nullOrEmpty || 
@@ -55,7 +55,7 @@ class TargetDefinitionGenerator {
 		    «ENDIF»
 		  </environment>
 		  «ENDIF»
-		  «IF (targetPlatform.environment != null && !targetPlatform.environment.targetJRE.nullOrEmpty)»
+		  «IF (targetPlatform.environment !== null && !targetPlatform.environment.targetJRE.nullOrEmpty)»
 		  <targetJRE path="«targetPlatform.environment.targetJRE»"/>
 		  «ENDIF»
 		</target>

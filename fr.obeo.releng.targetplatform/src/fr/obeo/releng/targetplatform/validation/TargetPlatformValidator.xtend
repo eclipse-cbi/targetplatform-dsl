@@ -30,6 +30,7 @@ import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess
 import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
+import fr.obeo.releng.targetplatform.util.PreferenceSettings
 import java.net.URI
 import java.util.List
 import java.util.Locale
@@ -67,6 +68,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Inject 
 	TargetPlatformGrammarAccess grammarAccess;
+	
+	@Inject
+	PreferenceSettings preferenceSettings;
 	
 	public static val CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED"
 	
@@ -515,11 +519,18 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val localIUsID = HashMultiset.create(targetPlatform.locations.map[ius].flatten.map[ID])
 		val importedIUsID = importedIUs.map[ID].toSet
 		
+		val duplicatedIUWarnPreference = preferenceSettings.duplicatedIUWarnPreference
+		
 		targetPlatform.locations.map[ius].flatten
 			.filter[importedIUsID.contains(ID) || localIUsID.count(ID) > 1].
 			forEach[entry|
 				val localLocationsWithDup = targetPlatform.locations.filter[ius.map[ID].contains(entry.ID)].map[uri].toSet
 				val importedTPsWithDup = importedIUs.filter[ID.equals(entry.ID)].map[eResource.URI].toSet
+				
+				var typeMsg = PreferenceSettings.DUPLICATED_IU_IMPORT_DEFAULT;
+				if (importedIUsID.contains(entry.ID)) {
+					typeMsg = duplicatedIUWarnPreference
+				}
 				
 				val msg = if (importedIUsID.contains(entry.ID)) {
 					'''Duplicated IU '«entry.ID»' for locations '«localLocationsWithDup.join("', '")»'. It is included from target platforms '«importedTPsWithDup.join("', '")»'.'''
@@ -527,19 +538,48 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					'''Duplicated IU '«entry.ID»' for locations '«localLocationsWithDup.join("', '")»'.''' 
 				}
 				
-				warning(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
+				if (typeMsg.equals(PreferenceSettings.DUPLICATED_IU_IMPORT_WARN)) {
+					warning(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
+				}
+				else if (typeMsg.equals(PreferenceSettings.DUPLICATED_IU_IMPORT_INFO)) {
+					info(msg, entry.location, TargetPlatformPackage.Literals.LOCATION__IUS, entry.location.ius.indexOf(entry), CHECK__NO_DUPLICATED_IU)
+				}
 			]
 	}
 	
 	@Check
 	def checkNoDuplicatedDefine(TargetPlatform targetPlatform) {
-		val varNameList = targetPlatform.contents
+		checkDuplicationDirectlyInsideTarget(targetPlatform)
+		checkDuplicationFromImportedTarget(targetPlatform)
+	}
+	
+	private def void checkDuplicationFromImportedTarget(TargetPlatform targetPlatform) {
+		targetPlatform.varDefinition
 			.filter[
-				it instanceof VarDefinition
+				it.imported
 			]
+			.forEach[
+				if (it.importedValues.size > 1) {
+					val firstElem = it.importedValues.head
+					val varDefAlawaysImportedWithSameValue = it.importedValues.forall[
+						firstElem.compareTo(it) == 0
+					]
+					if (varDefAlawaysImportedWithSameValue) {
+						val errString = "\"" + it.name + "\" is imported many time"
+						info(errString, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(it), CHECK__NO_DUPLICATED_DEFINE)
+					}
+					else {
+						val errString = "\"" + it.name + "\" is imported many time with different values: " + it.importedValues
+						error(errString, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(it), CHECK__NO_DUPLICATED_DEFINE)
+					}
+				}
+			]
+	}
+	
+	private def void checkDuplicationDirectlyInsideTarget(TargetPlatform targetPlatform) {
+		val varNameList = targetPlatform.varDefinition
 			.map[
-				val varDef = it as VarDefinition
-				varDef.name
+				it.name
 			]
 			.sort
 			.toList
@@ -547,17 +587,12 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		for (var i = 1 ; i < varNameList.size ; i++) {
 			if (varNameList.get(i-1).compareTo(varNameList.get(i)) == 0) {
 				val duplicatedVarName = varNameList.get(i-1)
-				val errString = "\"" + duplicatedVarName + "\" is defined many times (it may be imported through many includes)"
-				val findFirst = targetPlatform.contents
-									.filter[
-										it instanceof VarDefinition
-									]
-									.findFirst[
-										val varDef = it as VarDefinition
-										varDef.name.compareTo(duplicatedVarName) == 0
-									]
-				val duplicatedVar = findFirst as VarDefinition
-				warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(duplicatedVar), CHECK__NO_DUPLICATED_DEFINE)
+				val errString = "\"" + duplicatedVarName + "\" is defined many times"
+				val duplicatedVar = targetPlatform.varDefinition
+					.findFirst[
+						it.name.compareTo(duplicatedVarName) == 0
+					]
+				error(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.contents.indexOf(duplicatedVar), CHECK__NO_DUPLICATED_DEFINE)
 			}
 		}
 	}

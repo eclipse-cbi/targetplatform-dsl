@@ -15,6 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import fr.obeo.releng.targetplatform.util.PreferenceSettings
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProviderTargetReloader))
 @RunWith(typeof(XtextRunner))
@@ -32,10 +33,14 @@ class TestOverrideVariableDefinition {
 	@Inject
 	ImportVariableManager importVariableManager;
 	
+	@Inject
+	PreferenceSettings preferenceSettings;
+	
 	@Test
 	def testVarDefinitionOverride1() {
 		val String[] args = #["overrideDefTarget.tpd", "var1=overrideVal1", "var3=override val 3"]
-		
+	
+		preferenceSettings.useEnv = true	
 		importVariableManager.processCommandLineArguments(args)
 		
 		val resourceSet = resourceSetProvider.get
@@ -54,12 +59,14 @@ class TestOverrideVariableDefinition {
 		assertEquals("overrideVal1val2override val 3", include.importURI)
 		
 		importVariableManager.clear
+		preferenceSettings.useEnv = false
 	}
 	
 	@Test
 	def testVarDefinitionOverride2() {
 		val String[] args = #["overrideDefTarget.tpd", "subDirName=subdir", "emfVer=[2.9.2,3.0.0)"]
 		
+		preferenceSettings.useEnv = true
 		importVariableManager.processCommandLineArguments(args)
 		
 		val resourceSet = resourceSetProvider.get
@@ -93,12 +100,14 @@ class TestOverrideVariableDefinition {
 		assertEquals("[2.9.2,3.0.0)", location.ius.head.version)
 		
 		importVariableManager.clear
+		preferenceSettings.useEnv = false
 	}
 	
 	@Test
 	def testDefinitionFromVariableCallOverride() {
 		val String[] args = #["overrideDefTarget.tpd", "subDirName=subdir", "emfVerEnd=3.0.0)"]
 		
+		preferenceSettings.useEnv = true
 		importVariableManager.processCommandLineArguments(args)
 		
 		val resourceSet = resourceSetProvider.get
@@ -142,5 +151,6 @@ class TestOverrideVariableDefinition {
 		assertEquals("[2.9.2,3.0.0)", location.ius.head.version)
 		
 		importVariableManager.clear
+		preferenceSettings.useEnv = false
 	}
 }

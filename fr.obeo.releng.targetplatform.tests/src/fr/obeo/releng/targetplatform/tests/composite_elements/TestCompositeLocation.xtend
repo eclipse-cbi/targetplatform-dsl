@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
 import fr.obeo.releng.targetplatform.VarCall
-import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
@@ -273,7 +272,7 @@ class TestCompositeLocation {
 		assertEquals("subDirName", varCall.varName.name)
 		
 		val importedTargetPlatforms = indexBuilder.getImportedTargetPlatforms(compositeIncludeTarget)
-		val varDef = importedTargetPlatforms.last.contents.head as VarDefinition
+		val varDef = importedTargetPlatforms.last.varDefinition.head
 		assertEquals("subdir", varDef.value.computeActualString)
 	}
 	

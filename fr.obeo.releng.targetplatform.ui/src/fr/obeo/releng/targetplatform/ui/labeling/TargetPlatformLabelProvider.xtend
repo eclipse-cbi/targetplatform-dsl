@@ -11,17 +11,18 @@
 package fr.obeo.releng.targetplatform.ui.labeling
 
 import com.google.inject.Inject
+import fr.obeo.releng.targetplatform.Environment
 import fr.obeo.releng.targetplatform.IU
 import fr.obeo.releng.targetplatform.IncludeDeclaration
 import fr.obeo.releng.targetplatform.Location
+import fr.obeo.releng.targetplatform.Option
+import fr.obeo.releng.targetplatform.Options
 import fr.obeo.releng.targetplatform.TargetPlatform
+import fr.obeo.releng.targetplatform.VarDefinition
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import fr.obeo.releng.targetplatform.Option
-import fr.obeo.releng.targetplatform.Environment
-import fr.obeo.releng.targetplatform.Options
-import fr.obeo.releng.targetplatform.VarDefinition
 
 /**
  * Provides labels for a EObjects.
@@ -29,6 +30,9 @@ import fr.obeo.releng.targetplatform.VarDefinition
  * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
  */
 class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
+	
+	@Inject
+	CompositeElementResolver compositeElementResolver
 
 	@Inject
 	new(AdapterFactoryLabelProvider delegate) {
@@ -37,8 +41,11 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 
 	def text(Location object) {
 		val ss = new StyledString();
+		if (object.uri === null) {
+			compositeElementResolver.resolveCompositeElements(object.eContainer as TargetPlatform)
+		}
 		ss.append(object.uri);
-		if (object.getID() != null) {
+		if (object.getID() !== null) {
 			ss.append(" " + object.getID(), StyledString.DECORATIONS_STYLER);
 		}
 		ss;
@@ -51,7 +58,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(IU object) {
 		val ss = new StyledString();
 		ss.append(object.getID());
-		if (object.getVersion() != null) {
+		if (object.getVersion() !== null) {
 			ss.append(" " + object.getVersion(), StyledString.COUNTER_STYLER);
 		}
 		ss;
@@ -62,11 +69,23 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	def text(TargetPlatform object) {
+		if (!object.compositeElementsResolved) {
+			compositeElementResolver.resolveCompositeElements(object)
+		}
 		object.getName();
 	}
 	
 	def image(TargetPlatform object) {
 		"obj16/target_obj.gif";
+	}
+	
+	def text(IncludeDeclaration object) {
+		val ss = new StyledString()
+		if (object.importURI === null) {
+			compositeElementResolver.resolveCompositeElements(object.eContainer as TargetPlatform)
+		}
+		ss.append(object.importURI)
+		ss
 	}
 	
 	def image(IncludeDeclaration object) {
@@ -94,6 +113,16 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	def image(VarDefinition object) {
-		"obj16/option_obj.gif"
+		if (object.imported) {
+			if (object.diamondInherit) {
+				"obj16/varImportDiamond_obj.gif"
+			}
+			else {
+				"obj16/varImport_obj.gif"
+			}
+		}
+		else {
+			"obj16/var_obj.gif"
+		}
 	}
 }

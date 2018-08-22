@@ -6,6 +6,7 @@ import fr.obeo.releng.targetplatform.*;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -87,6 +88,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return createOptionFromString(eDataType, initialValue);
+			case TargetPlatformPackage.UUID:
+				return createUUIDFromString(eDataType, initialValue);
 			case TargetPlatformPackage.VAR_DEF_LIST:
 				return createVarDefListFromString(eDataType, initialValue);
 			case TargetPlatformPackage.LOCALE:
@@ -108,6 +111,8 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 		switch (eDataType.getClassifierID()) {
 			case TargetPlatformPackage.OPTION:
 				return convertOptionToString(eDataType, instanceValue);
+			case TargetPlatformPackage.UUID:
+				return convertUUIDToString(eDataType, instanceValue);
 			case TargetPlatformPackage.VAR_DEF_LIST:
 				return convertVarDefListToString(eDataType, instanceValue);
 			case TargetPlatformPackage.LOCALE:
@@ -237,6 +242,24 @@ public class TargetPlatformFactoryImpl extends EFactoryImpl implements TargetPla
 	 */
 	public String convertOptionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
+		return (UUID)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

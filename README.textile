@@ -245,14 +245,28 @@ location "somURL" {
 }
 </pre></s>
 
+h4. Outline view with variables
+
+Variables are shown in outline view with dedicated icons according to their origin (local, imported or diamondly imported).
+
+!http://jldelarbre.github.io/fr.obeo.releng.targetplatform/screenshots/outline_view_with_variables.png(Outline view with variables)!
+
+h3. TPD preferences page
+
+!http://jldelarbre.github.io/fr.obeo.releng.targetplatform/screenshots/tpd_preferences.png(TPD preferences page)!
+
+@TPD preferences page@ allows to:
+* Active overriding of @tpd@ variables with environment variables (it also shows the list of environment variables usable by @TPD@), see also "this section":#envVar
+* Modify warning behavior of duplicated IU (when you have defined the same IU than in an imported tpd)
+
 h3. Call the generator from the command line
 
-This project provide an Eclipse application that you can launch from the command line. The ID of the application is @fr.obeo.releng.targetplatform.pde.ConverterApplication@ and is provided by the plugin @fr.obeo.releng.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
+This project provides an Eclipse application that you can launch from the command line. The ID of the application is @fr.obeo.releng.targetplatform.pde.ConverterApplication@ and is provided by the plugin @fr.obeo.releng.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
 
-h4. Variable overriding from command line or environment
+h4(#envVar). Variable overriding from command line or environment
 
-When the generator is called from command line you can override variable value with command line arguments or environment variable (not possible from eclipse).
-In the _pom.xml_ example above, <targetPlatform.application.args> holds the command line arguments. You can define them in the following order:
+When the generator is called from command line you can override variable value with command line arguments or environment variables.
+In the example _pom.xml_ above, the _maven_ property @targetPlatform.application.args@ holds the command line arguments. You can define them in the following order:
 
 # tpd filename
 # useEnv //Optional, case incensitive
@@ -295,4 +309,3 @@ Clone this repository, import all projects in your Eclipse and set your target p
 h2. License
 
 Copyright (c) 2012-2014 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
-

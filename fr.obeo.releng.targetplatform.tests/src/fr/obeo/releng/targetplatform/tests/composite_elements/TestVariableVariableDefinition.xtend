@@ -3,7 +3,6 @@ package fr.obeo.releng.targetplatform.tests.composite_elements
 import com.google.inject.Inject
 import com.google.inject.Provider
 import fr.obeo.releng.targetplatform.TargetPlatform
-import fr.obeo.releng.targetplatform.VarDefinition
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI
@@ -38,7 +37,7 @@ class TestVariableVariableDefinition {
 			define var2=${var1}
 		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
 		
-		val varDef = varCallDefTarget.contents.last as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.last
 		assertEquals("var2", varDef.name)
 		assertEquals("val1", varDef.value.computeActualString)
 	}
@@ -53,7 +52,7 @@ class TestVariableVariableDefinition {
 			define var3=${var2}
 		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
 		
-		val varDef = varCallDefTarget.contents.last as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.last
 		assertEquals("var3", varDef.name)
 		assertEquals("val1", varDef.value.computeActualString)
 	}
@@ -68,7 +67,7 @@ class TestVariableVariableDefinition {
 			define var1="val1"
 		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
 		
-		val varDef = varCallDefTarget.contents.head as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.head
 		assertEquals("var3", varDef.name)
 		assertEquals("val1", varDef.value.computeActualString)
 	}
@@ -83,7 +82,7 @@ class TestVariableVariableDefinition {
 			define var3=${var2} + "_str3_" + ${var1}
 		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
 		
-		val varDef = varCallDefTarget.contents.last as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.last
 		assertEquals("var3", varDef.name)
 		assertEquals("val1_str2__str3_val1", varDef.value.computeActualString)
 	}
@@ -149,9 +148,56 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = varCallDefTarget.contents.get(1) as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.head
 		assertEquals("var1", varDef.name)
 		assertEquals("value2", varDef.value.computeActualString)
+	}
+	
+	@Test
+	def testDefinitionFromNestedVariableCallOverload1b() {
+		val resourceSet = resourceSetProvider.get
+		val varCallDefTarget = parser.parse('''
+			target "varCallDefTarget"
+			include "subTpd.tpd"
+			define var1 = ${var2}
+			define var2 = ${var2b}
+			define var2b = "value2"
+		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define var2 = ${var2b}
+			define var2b = "value2Sub"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = varCallDefTarget.varDefinition.head
+		assertEquals("var1", varDef.name)
+		assertEquals("value2", varDef.value.computeActualString)
+	}
+	
+	@Test
+	def testDefinitionFromNestedVariableCallOverload1c() {
+		val resourceSet = resourceSetProvider.get
+		val varCallDefTarget = parser.parse('''
+			target "varCallDefTarget"
+			include "subTpd.tpd"
+			define var1 = ${var2}
+			define var2 = ${var2b} + "_suffix"
+		''', URI.createURI("tmp:/varCallDefTarget.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd"
+			define var2 = ${var2b}
+			define var2b = "value2Sub"
+		''', URI.createURI("tmp:/subTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = varCallDefTarget.varDefinition.head
+		assertEquals("var1", varDef.name)
+		assertEquals("value2Sub_suffix", varDef.value.computeActualString)
 	}
 	
 	@Test
@@ -177,7 +223,7 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = varCallDefTarget.contents.get(1) as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.head
 		assertEquals("var1", varDef.name)
 		assertEquals("sub", varDef.value.computeActualString)
 	}
@@ -202,7 +248,7 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = varCallDefTarget.contents.get(1) as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.head
 		assertEquals("var1", varDef.name)
 		assertEquals("value4", varDef.value.computeActualString)
 	}
@@ -230,7 +276,7 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(varCallDefTarget)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = varCallDefTarget.contents.get(1) as VarDefinition
+		val varDef = varCallDefTarget.varDefinition.head
 		assertEquals("var1", varDef.name)
 		assertEquals("value4_value4_value6", varDef.value.computeActualString)
 	}
@@ -256,19 +302,18 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = mainTpd.contents.get(2) as VarDefinition
+		val varDef = mainTpd.varDefinition.get(0)
 		assertEquals("var", varDef.name)
 		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
 		
-		val varDef2 = mainTpd.contents.get(3) as VarDefinition
+		val varDef2 = mainTpd.varDefinition.get(1)
 		assertEquals("twiceInheritedVar", varDef2.name)
 		assertEquals("value", varDef2.value.computeActualString)
+		assertTrue(varDef2.imported)
+		assertFalse(varDef.diamondInherit)
 		
-		val varDef3 = mainTpd.contents.get(4) as VarDefinition
-		assertEquals("twiceInheritedVar", varDef3.name)
-		assertEquals("value", varDef3.value.computeActualString)
-		
-		assertEquals(5, mainTpd.contents.size)
+		assertEquals(2, mainTpd.varDefinition.size)
 	}
 	
 	@Test
@@ -292,19 +337,390 @@ class TestVariableVariableDefinition {
 		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
 		assertEquals(0, locationIndex.size)
 		
-		val varDef = mainTpd.contents.get(2) as VarDefinition
+		val varDef = mainTpd.varDefinition.get(0)
 		assertEquals("var", varDef.name)
 		val varDefVal = varDef.value.computeActualString
 		assertTrue(varDefVal.equals("value1") || varDefVal.equals("value2")) // Do not expect specially value1 or value2
+		assertFalse(varDef.imported)
 		
-//		val varDef2 = mainTpd.contents.get(3) as VarDefinition
-//		assertEquals("twiceInheritedVar", varDef2.name)
-//		assertEquals("value1", varDef2.value.computeActualString)
-//		
-//		val varDef3 = mainTpd.contents.get(4) as VarDefinition
-//		assertEquals("twiceInheritedVar", varDef3.name)
-//		assertEquals("value2", varDef3.value.computeActualString)
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		val varDefVal2 = varDef2.value.computeActualString
+		assertTrue(varDefVal2.equals("value1") || varDefVal2.equals("value2")) // Do not expect specially value1 or value2
+		assertTrue(varDef2.imported)
+		assertFalse(varDef.diamondInherit)
+		assertEquals(2, varDef2.importedValues.size)
+		assertTrue(varDef2.importedValues.contains("value1"))
+		assertTrue(varDef2.importedValues.contains("value2"))
 		
-		assertEquals(5, mainTpd.contents.size)
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedFrom3SubTpd1() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			include "subTpd3.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd3"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd3.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertTrue(varDef2.imported)
+		assertFalse(varDef.diamondInherit)
+		assertEquals(3, varDef2.importedValues.size)
+		assertEquals("value", varDef2.importedValues.get(0))
+		assertEquals("value", varDef2.importedValues.get(1))
+		assertEquals("value", varDef2.importedValues.get(2))
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedFrom3SubTpdAndSubSub() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			include "subTpd3.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd3"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd3.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertTrue(varDef2.imported)
+		assertFalse(varDef.diamondInherit)
+		assertEquals(3, varDef2.importedValues.size)
+		assertEquals("value", varDef2.importedValues.get(0))
+		assertEquals("value", varDef2.importedValues.get(1))
+		assertEquals("value", varDef2.importedValues.get(2))
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedDiamond() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		assertFalse(varDef.diamondInherit)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertEquals(1, varDef2.importedValues.size)
+		assertTrue(varDef2.imported)
+		assertTrue(varDef2.diamondInherit)
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedDiamondOverride() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			include "subSubTpd.tpd"
+			define twiceInheritedVar = "valueSub2" //Override => error in mainTpd
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		val varDefVal = varDef.value.computeActualString
+		assertTrue("value".equals(varDefVal) || "valueSub2".equals(varDefVal))
+		assertFalse(varDef.imported)
+		assertFalse(varDef.diamondInherit)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		val varDef2Val = varDef2.value.computeActualString
+		assertTrue(varDef2Val.equals("value") || varDef2Val.equals("valueSub2")) // Do not expect specially value or valueSub2
+		assertEquals(2, varDef2.importedValues.size)
+		assertTrue(varDef2.importedValues.contains("value"))
+		assertTrue(varDef2.importedValues.contains("valueSub2"))
+		assertTrue(varDef2.imported)
+		assertFalse(varDef2.diamondInherit)
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedDiamondOverride2() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			include "subSubTpd.tpd"
+			define twiceInheritedVar = "value"//Override => warning in mainTpd
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		assertFalse(varDef.diamondInherit)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertEquals(2, varDef2.importedValues.size)
+		assertEquals("value", varDef2.importedValues.get(0))
+		assertEquals("value", varDef2.importedValues.get(1))
+		assertTrue(varDef2.imported)
+		assertFalse(varDef2.diamondInherit)
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedDiamond3ways() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			include "subTpd3.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd3"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd3.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		assertFalse(varDef.diamondInherit)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertEquals(1, varDef2.importedValues.size)
+		assertTrue(varDef2.imported)
+		assertTrue(varDef2.diamondInherit)
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	def testSameVariableImportedDiamond2waysWithSubSub() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			include "subTpd2.tpd"
+			define var = ${twiceInheritedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd2"
+			include "subSubTpd2.tpd"
+		''', URI.createURI("tmp:/subTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd2"
+			include "subSubTpd.tpd"
+		''', URI.createURI("tmp:/subSubTpd2.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define twiceInheritedVar = "value"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		val varDef = mainTpd.varDefinition.get(0)
+		assertEquals("var", varDef.name)
+		assertEquals("value", varDef.value.computeActualString)
+		assertFalse(varDef.imported)
+		assertFalse(varDef.diamondInherit)
+		
+		val varDef2 = mainTpd.varDefinition.get(1)
+		assertEquals("twiceInheritedVar", varDef2.name)
+		assertEquals("value", varDef2.value.computeActualString)
+		assertEquals(1, varDef2.importedValues.size)
+		assertTrue(varDef2.imported)
+		assertTrue(varDef2.diamondInherit)
+		
+		assertEquals(2, mainTpd.varDefinition.size)
+	}
+	
+	@Test
+	/** see {@link CompositeElementResolver#updateVarCallFromImportedVar} */
+	def testExtractVarCallFromOnlyImportedVariable() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			include "subTpd1.tpd"
+			define localVar = "myVar"
+			define overrideVar = "overrideVarVal"
+			define var1 = ${impVar}
+			define var2 = ${impVar1} + ${impVar2}
+			define var3 = ${localVar}
+			define var4 = ${overrideVar}
+			define var5 = ${undefinedVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		parser.parse('''
+			target "subTpd1"
+			include "subSubTpd.tpd"
+			define impVar = "value"
+			define impVar1 = "value1"
+			define overrideVar = "overrideVarValOrig"
+		''', URI.createURI("tmp:/subTpd1.tpd"), resourceSet)
+		parser.parse('''
+			target "subSubTpd"
+			define impVar2 = "value2"
+		''', URI.createURI("tmp:/subSubTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		assertEquals(3, mainTpd.varCallFromOnlyImportedVariable.split(", ").size)
+		
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar"))
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar1"))
+		assertTrue(mainTpd.varCallFromOnlyImportedVariable.contains("impVar2"))
+	}
+	
+	@Test
+	/** see {@link CompositeElementResolver#updateVarCallFromImportedVar} */
+	def testExtractVarCallFromOnlyImportedVariable_WithoutImport() {
+		val resourceSet = resourceSetProvider.get
+		val mainTpd = parser.parse('''
+			target "mainTpd"
+			define localVar = "myVar"
+			define var1 = ${impVar}
+			define var2 = ${localVar}
+		''', URI.createURI("tmp:/mainTpd.tpd"), resourceSet)
+		
+		val locationIndex = indexBuilder.getLocationIndex(mainTpd)
+		assertEquals(0, locationIndex.size)
+		
+		assertEquals("", mainTpd.varCallFromOnlyImportedVariable)
 	}
 }

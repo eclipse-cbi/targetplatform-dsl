@@ -1,4 +1,4 @@
-target "Target Platform DSL 2.2.0"
+target "Target Platform DSL 2.3.0"
 
 with source requirements
 

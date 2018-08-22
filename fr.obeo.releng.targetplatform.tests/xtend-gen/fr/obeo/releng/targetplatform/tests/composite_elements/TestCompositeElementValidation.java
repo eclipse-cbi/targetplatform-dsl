@@ -12,6 +12,7 @@ import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
+import fr.obeo.releng.targetplatform.util.PreferenceSettings;
 import fr.obeo.releng.targetplatform.validation.TargetPlatformValidator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -56,6 +57,9 @@ public class TestCompositeElementValidation {
   
   @Inject
   private ImportVariableManager importVariableManager;
+  
+  @Inject
+  private PreferenceSettings preferenceSettings;
   
   @Inject
   @Named(Constants.LANGUAGE_NAME)
@@ -139,6 +143,7 @@ public class TestCompositeElementValidation {
   public void checkImportCycleDueToVariableDefinitionOverride() {
     try {
       final String[] args = { "compositeIncludeTarget.tpd", "urlCyclicInclude=../compositeIncludeTarget.tpd" };
+      this.preferenceSettings.setUseEnv(true);
       this.importVariableManager.processCommandLineArguments(args);
       final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
@@ -209,6 +214,7 @@ public class TestCompositeElementValidation {
       };
       diagnotics.forEach(_function_3);
       this.importVariableManager.clear();
+      this.preferenceSettings.setUseEnv(false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -578,15 +584,15 @@ public class TestCompositeElementValidation {
       List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
       Assert.assertEquals(IterableExtensions.join(diagnostics, ", "), 1, diagnostics.size());
       Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE, IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics).getIssueCode());
-      Assert.assertEquals(Diagnostic.WARNING, diagnostics.get(0).getSeverity());
-      Assert.assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).getMessage());
+      Assert.assertEquals(Diagnostic.ERROR, diagnostics.get(0).getSeverity());
+      Assert.assertEquals("\"twiceVar\" is defined many times", diagnostics.get(0).getMessage());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
-  public void testNoDuplicatedVarDefinitionFromInclude() {
+  public void testNoDuplicatedVarDefinitionFromIncludeDifferentValues() {
     try {
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
@@ -617,8 +623,87 @@ public class TestCompositeElementValidation {
       List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
       Assert.assertEquals(IterableExtensions.join(diagnostics, ", "), 1, diagnostics.size());
       Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE, IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics).getIssueCode());
-      Assert.assertEquals(Diagnostic.WARNING, diagnostics.get(0).getSeverity());
-      Assert.assertEquals("\"twiceVar\" is defined many times (it may be imported through many includes)", diagnostics.get(0).getMessage());
+      Assert.assertEquals(Diagnostic.ERROR, diagnostics.get(0).getSeverity());
+      final String messageErr = diagnostics.get(0).getMessage();
+      Assert.assertTrue(("\"twiceVar\" is imported many time with different values: [val1, val2]".equals(messageErr) || 
+        "\"twiceVar\" is imported many time with different values: [val2, val1]".equals(messageErr)));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoDuplicatedVarDefinitionFromIncludeSameValues() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"compositeIncludeTarget\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd1.tpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd2.tpd\"");
+      _builder.newLine();
+      final TargetPlatform compositeIncludeTarget = this.parser.parse(_builder, URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"subTpd1\"");
+      _builder_1.newLine();
+      _builder_1.append("define twiceVar = \"val\"");
+      _builder_1.newLine();
+      this.parser.parse(_builder_1, URI.createURI("tmp:/subTpd1.tpd"), resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"subTpd2\"");
+      _builder_2.newLine();
+      _builder_2.append("define twiceVar = \"val\"");
+      _builder_2.newLine();
+      this.parser.parse(_builder_2, URI.createURI("tmp:/subTpd2.tpd"), resourceSet);
+      final ListMultimap<String, Location> locationIndex = this.indexBuilder.getLocationIndex(compositeIncludeTarget);
+      Assert.assertEquals(0, locationIndex.size());
+      Assert.assertTrue(compositeIncludeTarget.eResource().getErrors().isEmpty());
+      tester.validator().checkNoDuplicatedDefine(compositeIncludeTarget);
+      List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
+      Assert.assertEquals(IterableExtensions.join(diagnostics, ", "), 1, diagnostics.size());
+      Assert.assertEquals(TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE, IterableExtensions.<FeatureBasedDiagnostic>head(diagnostics).getIssueCode());
+      Assert.assertEquals(Diagnostic.INFO, diagnostics.get(0).getSeverity());
+      Assert.assertEquals("\"twiceVar\" is imported many time", diagnostics.get(0).getMessage());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicatedVarDefinitionFromIncludeButOverride() {
+    try {
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      final ValidatorTester<TargetPlatformValidator> tester = new ValidatorTester<TargetPlatformValidator>(this.validator, this.validatorRegistrar, this.languageName);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("target \"compositeIncludeTarget\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd1.tpd\"");
+      _builder.newLine();
+      _builder.append("include \"subTpd2.tpd\"");
+      _builder.newLine();
+      _builder.append("define twiceVar = \"newVal\"");
+      _builder.newLine();
+      final TargetPlatform compositeIncludeTarget = this.parser.parse(_builder, URI.createURI("tmp:/compositeIncludeTarget.tpd"), resourceSet);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("target \"subTpd1\"");
+      _builder_1.newLine();
+      _builder_1.append("define twiceVar = \"val1\"");
+      _builder_1.newLine();
+      this.parser.parse(_builder_1, URI.createURI("tmp:/subTpd1.tpd"), resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("target \"subTpd2\"");
+      _builder_2.newLine();
+      _builder_2.append("define twiceVar = \"val2\"");
+      _builder_2.newLine();
+      this.parser.parse(_builder_2, URI.createURI("tmp:/subTpd2.tpd"), resourceSet);
+      final ListMultimap<String, Location> locationIndex = this.indexBuilder.getLocationIndex(compositeIncludeTarget);
+      Assert.assertEquals(0, locationIndex.size());
+      Assert.assertTrue(compositeIncludeTarget.eResource().getErrors().isEmpty());
+      tester.validator().checkNoDuplicatedDefine(compositeIncludeTarget);
+      List<FeatureBasedDiagnostic> diagnostics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
+      Assert.assertEquals(IterableExtensions.join(diagnostics, ", "), 0, diagnostics.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
