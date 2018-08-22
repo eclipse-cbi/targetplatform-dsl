@@ -10,7 +10,6 @@
  */
 package fr.obeo.releng.targetplatform.ui.labeling;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import fr.obeo.releng.targetplatform.Environment;
 import fr.obeo.releng.targetplatform.IU;
@@ -20,6 +19,8 @@ import fr.obeo.releng.targetplatform.Option;
 import fr.obeo.releng.targetplatform.Options;
 import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.VarDefinition;
+import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -32,6 +33,9 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 @SuppressWarnings("all")
 public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   @Inject
+  private CompositeElementResolver compositeElementResolver;
+  
+  @Inject
   public TargetPlatformLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
   }
@@ -40,10 +44,16 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
     StyledString _xblockexpression = null;
     {
       final StyledString ss = new StyledString();
+      String _uri = object.getUri();
+      boolean _tripleEquals = (_uri == null);
+      if (_tripleEquals) {
+        EObject _eContainer = object.eContainer();
+        this.compositeElementResolver.resolveCompositeElements(((TargetPlatform) _eContainer));
+      }
       ss.append(object.getUri());
       String _iD = object.getID();
-      boolean _notEquals = (!Objects.equal(_iD, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_iD != null);
+      if (_tripleNotEquals) {
         String _iD_1 = object.getID();
         String _plus = (" " + _iD_1);
         ss.append(_plus, StyledString.DECORATIONS_STYLER);
@@ -63,8 +73,8 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
       final StyledString ss = new StyledString();
       ss.append(object.getID());
       String _version = object.getVersion();
-      boolean _notEquals = (!Objects.equal(_version, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_version != null);
+      if (_tripleNotEquals) {
         String _version_1 = object.getVersion();
         String _plus = (" " + _version_1);
         ss.append(_plus, StyledString.COUNTER_STYLER);
@@ -79,11 +89,36 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   public String text(final TargetPlatform object) {
-    return object.getName();
+    String _xblockexpression = null;
+    {
+      boolean _isCompositeElementsResolved = object.isCompositeElementsResolved();
+      boolean _not = (!_isCompositeElementsResolved);
+      if (_not) {
+        this.compositeElementResolver.resolveCompositeElements(object);
+      }
+      _xblockexpression = object.getName();
+    }
+    return _xblockexpression;
   }
   
   public String image(final TargetPlatform object) {
     return "obj16/target_obj.gif";
+  }
+  
+  public StyledString text(final IncludeDeclaration object) {
+    StyledString _xblockexpression = null;
+    {
+      final StyledString ss = new StyledString();
+      String _importURI = object.getImportURI();
+      boolean _tripleEquals = (_importURI == null);
+      if (_tripleEquals) {
+        EObject _eContainer = object.eContainer();
+        this.compositeElementResolver.resolveCompositeElements(((TargetPlatform) _eContainer));
+      }
+      ss.append(object.getImportURI());
+      _xblockexpression = ss;
+    }
+    return _xblockexpression;
   }
   
   public String image(final IncludeDeclaration object) {
@@ -111,6 +146,20 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   public String image(final VarDefinition object) {
-    return "obj16/option_obj.gif";
+    String _xifexpression = null;
+    boolean _isImported = object.isImported();
+    if (_isImported) {
+      String _xifexpression_1 = null;
+      boolean _isDiamondInherit = object.isDiamondInherit();
+      if (_isDiamondInherit) {
+        _xifexpression_1 = "obj16/varImportDiamond_obj.gif";
+      } else {
+        _xifexpression_1 = "obj16/varImport_obj.gif";
+      }
+      _xifexpression = _xifexpression_1;
+    } else {
+      _xifexpression = "obj16/var_obj.gif";
+    }
+    return _xifexpression;
   }
 }

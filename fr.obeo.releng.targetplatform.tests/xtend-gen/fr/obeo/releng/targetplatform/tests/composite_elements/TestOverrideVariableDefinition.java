@@ -12,6 +12,7 @@ import fr.obeo.releng.targetplatform.TargetPlatform;
 import fr.obeo.releng.targetplatform.tests.util.CustomTargetPlatformInjectorProviderTargetReloader;
 import fr.obeo.releng.targetplatform.util.ImportVariableManager;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
+import fr.obeo.releng.targetplatform.util.PreferenceSettings;
 import java.util.LinkedList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -41,10 +42,14 @@ public class TestOverrideVariableDefinition {
   @Inject
   private ImportVariableManager importVariableManager;
   
+  @Inject
+  private PreferenceSettings preferenceSettings;
+  
   @Test
   public void testVarDefinitionOverride1() {
     try {
       final String[] args = { "overrideDefTarget.tpd", "var1=overrideVal1", "var3=override val 3" };
+      this.preferenceSettings.setUseEnv(true);
       this.importVariableManager.processCommandLineArguments(args);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       StringConcatenation _builder = new StringConcatenation();
@@ -64,6 +69,7 @@ public class TestOverrideVariableDefinition {
       final IncludeDeclaration include = IterableExtensions.<IncludeDeclaration>head(overrideDefTarget.getIncludes());
       Assert.assertEquals("overrideVal1val2override val 3", include.getImportURI());
       this.importVariableManager.clear();
+      this.preferenceSettings.setUseEnv(false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -73,6 +79,7 @@ public class TestOverrideVariableDefinition {
   public void testVarDefinitionOverride2() {
     try {
       final String[] args = { "overrideDefTarget.tpd", "subDirName=subdir", "emfVer=[2.9.2,3.0.0)" };
+      this.preferenceSettings.setUseEnv(true);
       this.importVariableManager.processCommandLineArguments(args);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       StringConcatenation _builder = new StringConcatenation();
@@ -112,6 +119,7 @@ public class TestOverrideVariableDefinition {
       final Location location = IterableExtensions.<Location>last(targetPlatform.getLocations());
       Assert.assertEquals("[2.9.2,3.0.0)", IterableExtensions.<IU>head(location.getIus()).getVersion());
       this.importVariableManager.clear();
+      this.preferenceSettings.setUseEnv(false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -121,6 +129,7 @@ public class TestOverrideVariableDefinition {
   public void testDefinitionFromVariableCallOverride() {
     try {
       final String[] args = { "overrideDefTarget.tpd", "subDirName=subdir", "emfVerEnd=3.0.0)" };
+      this.preferenceSettings.setUseEnv(true);
       this.importVariableManager.processCommandLineArguments(args);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       StringConcatenation _builder = new StringConcatenation();
@@ -178,6 +187,7 @@ public class TestOverrideVariableDefinition {
       final Location location = IterableExtensions.<Location>last(targetPlatform.getLocations());
       Assert.assertEquals("[2.9.2,3.0.0)", IterableExtensions.<IU>head(location.getIus()).getVersion());
       this.importVariableManager.clear();
+      this.preferenceSettings.setUseEnv(false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

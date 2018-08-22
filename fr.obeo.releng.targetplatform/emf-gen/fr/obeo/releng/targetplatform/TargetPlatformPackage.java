@@ -98,13 +98,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int TARGET_PLATFORM__MODIFIED = 2;
 
 	/**
+	 * The feature id for the '<em><b>Var Call From Only Imported Variable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_PLATFORM__VAR_CALL_FROM_ONLY_IMPORTED_VARIABLE = 3;
+
+	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__CONTENTS = 3;
+	int TARGET_PLATFORM__CONTENTS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Includes</b></em>' reference list.
@@ -113,7 +122,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__INCLUDES = 4;
+	int TARGET_PLATFORM__INCLUDES = 5;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' attribute list.
@@ -122,7 +131,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__OPTIONS = 5;
+	int TARGET_PLATFORM__OPTIONS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Locations</b></em>' reference list.
@@ -131,7 +140,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__LOCATIONS = 6;
+	int TARGET_PLATFORM__LOCATIONS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -140,7 +149,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__ENVIRONMENT = 7;
+	int TARGET_PLATFORM__ENVIRONMENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Var Definition</b></em>' reference list.
@@ -149,7 +158,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM__VAR_DEFINITION = 8;
+	int TARGET_PLATFORM__VAR_DEFINITION = 9;
 
 	/**
 	 * The number of structural features of the '<em>Target Platform</em>' class.
@@ -158,7 +167,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_PLATFORM_FEATURE_COUNT = 9;
+	int TARGET_PLATFORM_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Target Platform</em>' class.
@@ -417,13 +426,40 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION__IMPORTED = TARGET_CONTENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Imported Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__IMPORTED_VALUES = TARGET_CONTENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>source UUID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__SOURCE_UUID = TARGET_CONTENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Diamond Inherit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION__DIAMOND_INHERIT = TARGET_CONTENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Var Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 6;
+	int VAR_DEFINITION_FEATURE_COUNT = TARGET_CONTENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Check Var Cycle</em>' operation.
@@ -435,13 +471,22 @@ public interface TargetPlatformPackage extends EPackage {
 	int VAR_DEFINITION___CHECK_VAR_CYCLE = TARGET_CONTENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Source UUID</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DEFINITION___GET_SOURCE_UUID = TARGET_CONTENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>To String</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION___TO_STRING = TARGET_CONTENT_OPERATION_COUNT + 1;
+	int VAR_DEFINITION___TO_STRING = TARGET_CONTENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Var Definition</em>' class.
@@ -450,7 +495,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 2;
+	int VAR_DEFINITION_OPERATION_COUNT = TARGET_CONTENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.obeo.releng.targetplatform.impl.CompositeStringImpl <em>Composite String</em>}' class.
@@ -1100,6 +1145,16 @@ public interface TargetPlatformPackage extends EPackage {
 	int OPTION = 12;
 
 	/**
+	 * The meta object id for the '<em>UUID</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.UUID
+	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getUUID()
+	 * @generated
+	 */
+	int UUID = 13;
+
+	/**
 	 * The meta object id for the '<em>Var Def List</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1107,7 +1162,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getVarDefList()
 	 * @generated
 	 */
-	int VAR_DEF_LIST = 13;
+	int VAR_DEF_LIST = 14;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -1117,7 +1172,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 14;
+	int LOCALE = 15;
 
 	/**
 	 * The meta object id for the '<em>Execution Environment</em>' data type.
@@ -1127,7 +1182,7 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getExecutionEnvironment()
 	 * @generated
 	 */
-	int EXECUTION_ENVIRONMENT = 15;
+	int EXECUTION_ENVIRONMENT = 16;
 
 
 	/**
@@ -1172,6 +1227,17 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTargetPlatform_Modified();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.TargetPlatform#getVarCallFromOnlyImportedVariable <em>Var Call From Only Imported Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Call From Only Imported Variable</em>'.
+	 * @see fr.obeo.releng.targetplatform.TargetPlatform#getVarCallFromOnlyImportedVariable()
+	 * @see #getTargetPlatform()
+	 * @generated
+	 */
+	EAttribute getTargetPlatform_VarCallFromOnlyImportedVariable();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link fr.obeo.releng.targetplatform.TargetPlatform#getContents <em>Contents</em>}'.
@@ -1434,6 +1500,39 @@ public interface TargetPlatformPackage extends EPackage {
 	EAttribute getVarDefinition_Imported();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link fr.obeo.releng.targetplatform.VarDefinition#getImportedValues <em>Imported Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Imported Values</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getImportedValues()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_ImportedValues();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#get_sourceUUID <em>source UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>source UUID</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#get_sourceUUID()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition__sourceUUID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.obeo.releng.targetplatform.VarDefinition#isDiamondInherit <em>Diamond Inherit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Diamond Inherit</em>'.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#isDiamondInherit()
+	 * @see #getVarDefinition()
+	 * @generated
+	 */
+	EAttribute getVarDefinition_DiamondInherit();
+
+	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#checkVarCycle() <em>Check Var Cycle</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1442,6 +1541,16 @@ public interface TargetPlatformPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getVarDefinition__CheckVarCycle();
+
+	/**
+	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#getSourceUUID() <em>Get Source UUID</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Source UUID</em>' operation.
+	 * @see fr.obeo.releng.targetplatform.VarDefinition#getSourceUUID()
+	 * @generated
+	 */
+	EOperation getVarDefinition__GetSourceUUID();
 
 	/**
 	 * Returns the meta object for the '{@link fr.obeo.releng.targetplatform.VarDefinition#toString() <em>To String</em>}' operation.
@@ -1968,6 +2077,17 @@ public interface TargetPlatformPackage extends EPackage {
 	EEnum getOption();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.UUID <em>UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>UUID</em>'.
+	 * @see java.util.UUID
+	 * @model instanceClass="java.util.UUID"
+	 * @generated
+	 */
+	EDataType getUUID();
+
+	/**
 	 * Returns the meta object for data type '{@link java.util.List <em>Var Def List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2056,6 +2176,14 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TARGET_PLATFORM__MODIFIED = eINSTANCE.getTargetPlatform_Modified();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Call From Only Imported Variable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TARGET_PLATFORM__VAR_CALL_FROM_ONLY_IMPORTED_VARIABLE = eINSTANCE.getTargetPlatform_VarCallFromOnlyImportedVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
@@ -2258,12 +2386,44 @@ public interface TargetPlatformPackage extends EPackage {
 		EAttribute VAR_DEFINITION__IMPORTED = eINSTANCE.getVarDefinition_Imported();
 
 		/**
+		 * The meta object literal for the '<em><b>Imported Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__IMPORTED_VALUES = eINSTANCE.getVarDefinition_ImportedValues();
+
+		/**
+		 * The meta object literal for the '<em><b>source UUID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__SOURCE_UUID = eINSTANCE.getVarDefinition__sourceUUID();
+
+		/**
+		 * The meta object literal for the '<em><b>Diamond Inherit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VAR_DEFINITION__DIAMOND_INHERIT = eINSTANCE.getVarDefinition_DiamondInherit();
+
+		/**
 		 * The meta object literal for the '<em><b>Check Var Cycle</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation VAR_DEFINITION___CHECK_VAR_CYCLE = eINSTANCE.getVarDefinition__CheckVarCycle();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Source UUID</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VAR_DEFINITION___GET_SOURCE_UUID = eINSTANCE.getVarDefinition__GetSourceUUID();
 
 		/**
 		 * The meta object literal for the '<em><b>To String</b></em>' operation.
@@ -2680,6 +2840,16 @@ public interface TargetPlatformPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum OPTION = eINSTANCE.getOption();
+
+		/**
+		 * The meta object literal for the '<em>UUID</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.UUID
+		 * @see fr.obeo.releng.targetplatform.impl.TargetPlatformPackageImpl#getUUID()
+		 * @generated
+		 */
+		EDataType UUID = eINSTANCE.getUUID();
 
 		/**
 		 * The meta object literal for the '<em>Var Def List</em>' data type.

@@ -10,7 +10,6 @@
  */
 package fr.obeo.releng.targetplatform.conversion;
 
-import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 import fr.obeo.releng.targetplatform.conversion.FQNConverter;
 import fr.obeo.releng.targetplatform.conversion.TargetPlatformSTRINGValueConverter;
@@ -70,8 +69,8 @@ public class TargetPlatformConverter extends DefaultTerminalConverters {
   
   @ValueConverter(rule = "QualifiedName")
   public IValueConverter<String> getQualifiedNameConverter() {
-    boolean _equals = Objects.equal(this.qualifiedNameValueConverter, null);
-    if (_equals) {
+    boolean _tripleEquals = (this.qualifiedNameValueConverter == null);
+    if (_tripleEquals) {
       Grammar _grammar = this.getGrammar();
       FQNConverter _fQNConverter = new FQNConverter(_grammar);
       this.qualifiedNameValueConverter = _fQNConverter;

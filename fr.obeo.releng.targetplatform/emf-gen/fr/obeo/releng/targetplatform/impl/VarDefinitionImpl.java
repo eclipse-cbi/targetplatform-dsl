@@ -9,22 +9,31 @@ import fr.obeo.releng.targetplatform.VarDefinition;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.xtext.nodemodel.impl.RootNode;
+
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,6 +50,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isVariableDefinitionCycleDetected <em>Variable Definition Cycle Detected</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getVarDefCycle <em>Var Def Cycle</em>}</li>
  *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isImported <em>Imported</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#getImportedValues <em>Imported Values</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#get_sourceUUID <em>source UUID</em>}</li>
+ *   <li>{@link fr.obeo.releng.targetplatform.impl.VarDefinitionImpl#isDiamondInherit <em>Diamond Inherit</em>}</li>
  * </ul>
  *
  * @generated
@@ -145,6 +157,56 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * @ordered
 	 */
 	protected boolean imported = IMPORTED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImportedValues() <em>Imported Values</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> importedValues;
+
+	/**
+	 * The default value of the '{@link #get_sourceUUID() <em>source UUID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_sourceUUID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final UUID _SOURCE_UUID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_sourceUUID() <em>source UUID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_sourceUUID()
+	 * @generated
+	 * @ordered
+	 */
+	protected UUID _sourceUUID = _SOURCE_UUID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDiamondInherit() <em>Diamond Inherit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDiamondInherit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DIAMOND_INHERIT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDiamondInherit() <em>Diamond Inherit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDiamondInherit()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean diamondInherit = DIAMOND_INHERIT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -369,6 +431,60 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getImportedValues() {
+		if (importedValues == null) {
+			importedValues = new EDataTypeEList<String>(String.class, this, TargetPlatformPackage.VAR_DEFINITION__IMPORTED_VALUES);
+		}
+		return importedValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UUID get_sourceUUID() {
+		return _sourceUUID;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_sourceUUID(UUID new_sourceUUID) {
+		UUID old_sourceUUID = _sourceUUID;
+		_sourceUUID = new_sourceUUID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__SOURCE_UUID, old_sourceUUID, _sourceUUID));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDiamondInherit() {
+		return diamondInherit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDiamondInherit(boolean newDiamondInherit) {
+		boolean oldDiamondInherit = diamondInherit;
+		diamondInherit = newDiamondInherit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TargetPlatformPackage.VAR_DEFINITION__DIAMOND_INHERIT, oldDiamondInherit, diamondInherit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void checkVarCycle() {
 		this.setVariableDefinitionCycleDetected(false);
 		this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
@@ -382,6 +498,38 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 		else {
 			this.setVarDefCycle(CollectionLiterals.<VarDefinition>newArrayList());
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UUID getSourceUUID() {
+		UUID _xblockexpression = null;
+		{
+			UUID __sourceUUID = this.get_sourceUUID();
+			boolean _tripleEquals = (__sourceUUID == null);
+			if (_tripleEquals) {
+				EObject _eContainer = this.eContainer();
+				final TargetPlatform parentTargetPlatform = ((TargetPlatform) _eContainer);
+				String targetContent = "";
+				Adapter _head = IterableExtensions.<Adapter>head(parentTargetPlatform.eAdapters());
+				if ((_head instanceof RootNode)) {
+					Adapter _head_1 = IterableExtensions.<Adapter>head(parentTargetPlatform.eAdapters());
+					targetContent = ((RootNode) _head_1).getCompleteContent();
+				}
+				String _name = this.getName();
+				String _plus = (_name + "___");
+				URI _uRI = parentTargetPlatform.eResource().getURI();
+				String _plus_1 = (_plus + _uRI);
+				String _plus_2 = (_plus_1 + "___");
+				final String stringId = (_plus_2 + targetContent);
+				this.set_sourceUUID(UUID.nameUUIDFromBytes(stringId.getBytes()));
+			}
+			_xblockexpression = this.get_sourceUUID();
+		}
+		return _xblockexpression;
 	}
 
 	/**
@@ -481,6 +629,12 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return getVarDefCycle();
 			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
 				return isImported();
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED_VALUES:
+				return getImportedValues();
+			case TargetPlatformPackage.VAR_DEFINITION__SOURCE_UUID:
+				return get_sourceUUID();
+			case TargetPlatformPackage.VAR_DEFINITION__DIAMOND_INHERIT:
+				return isDiamondInherit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -515,6 +669,16 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
 				setImported((Boolean)newValue);
 				return;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED_VALUES:
+				getImportedValues().clear();
+				getImportedValues().addAll((Collection<? extends String>)newValue);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__SOURCE_UUID:
+				set_sourceUUID((UUID)newValue);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__DIAMOND_INHERIT:
+				setDiamondInherit((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -548,6 +712,15 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
 				setImported(IMPORTED_EDEFAULT);
 				return;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED_VALUES:
+				getImportedValues().clear();
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__SOURCE_UUID:
+				set_sourceUUID(_SOURCE_UUID_EDEFAULT);
+				return;
+			case TargetPlatformPackage.VAR_DEFINITION__DIAMOND_INHERIT:
+				setDiamondInherit(DIAMOND_INHERIT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -574,6 +747,12 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 				return varDefCycle != null;
 			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED:
 				return imported != IMPORTED_EDEFAULT;
+			case TargetPlatformPackage.VAR_DEFINITION__IMPORTED_VALUES:
+				return importedValues != null && !importedValues.isEmpty();
+			case TargetPlatformPackage.VAR_DEFINITION__SOURCE_UUID:
+				return _SOURCE_UUID_EDEFAULT == null ? _sourceUUID != null : !_SOURCE_UUID_EDEFAULT.equals(_sourceUUID);
+			case TargetPlatformPackage.VAR_DEFINITION__DIAMOND_INHERIT:
+				return diamondInherit != DIAMOND_INHERIT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -589,6 +768,8 @@ public class VarDefinitionImpl extends MinimalEObjectImpl.Container implements V
 			case TargetPlatformPackage.VAR_DEFINITION___CHECK_VAR_CYCLE:
 				checkVarCycle();
 				return null;
+			case TargetPlatformPackage.VAR_DEFINITION___GET_SOURCE_UUID:
+				return getSourceUUID();
 			case TargetPlatformPackage.VAR_DEFINITION___TO_STRING:
 				return toString();
 		}

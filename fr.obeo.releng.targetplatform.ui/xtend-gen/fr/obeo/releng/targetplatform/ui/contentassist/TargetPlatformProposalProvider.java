@@ -133,8 +133,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   }
   
   private IQuery<IInstallableUnit> getIUAssistQuery() {
-    boolean _equals = Objects.equal(this.iuAssistQuery, null);
-    if (_equals) {
+    boolean _tripleEquals = (this.iuAssistQuery == null);
+    if (_tripleEquals) {
       this.iuAssistQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
         TargetPlatformProposalProvider.PROP_TYPE_CATEGORY, TargetPlatformProposalProvider.PROP_TYPE_PRODUCT);
     }
@@ -211,8 +211,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         acceptor.accept(this.createCompletionProposal("with", "describe how the set of elements to add to this target is determined", TargetPlatformProposalProvider.OPTIONS, 520, context));
       }
       Environment _environment = tp.getEnvironment();
-      boolean _equals_1 = Objects.equal(_environment, null);
-      if (_equals_1) {
+      boolean _tripleEquals = (_environment == null);
+      if (_tripleEquals) {
         acceptor.accept(this.createCompletionProposal("environment", "describe the system that this target is built for", TargetPlatformProposalProvider.ENVIRONMENT, 510, context));
       }
       this.templateLocation(context, acceptor);
@@ -347,8 +347,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
     if (((!text.contains("\n")) || (context.getCurrentNode().getText().length() < currentNodeSizeToCursor))) {
       final Environment env = ((Environment) model);
       String _operatingSystem = env.getOperatingSystem();
-      boolean _equals = Objects.equal(_operatingSystem, null);
-      if (_equals) {
+      boolean _tripleEquals = (_operatingSystem == null);
+      if (_tripleEquals) {
         final Consumer<String> _function = new Consumer<String>() {
           @Override
           public void accept(final String it) {
@@ -358,8 +358,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         ((List<String>)Conversions.doWrapArray(Platform.knownOSValues())).forEach(_function);
       }
       String _windowingSystem = env.getWindowingSystem();
-      boolean _equals_1 = Objects.equal(_windowingSystem, null);
-      if (_equals_1) {
+      boolean _tripleEquals_1 = (_windowingSystem == null);
+      if (_tripleEquals_1) {
         final Consumer<String> _function_1 = new Consumer<String>() {
           @Override
           public void accept(final String it) {
@@ -369,8 +369,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         ((List<String>)Conversions.doWrapArray(Platform.knownWSValues())).forEach(_function_1);
       }
       String _architecture = env.getArchitecture();
-      boolean _equals_2 = Objects.equal(_architecture, null);
-      if (_equals_2) {
+      boolean _tripleEquals_2 = (_architecture == null);
+      if (_tripleEquals_2) {
         final Consumer<String> _function_2 = new Consumer<String>() {
           @Override
           public void accept(final String it) {
@@ -380,11 +380,11 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         ((List<String>)Conversions.doWrapArray(Platform.knownOSArchValues())).forEach(_function_2);
       }
       IExecutionEnvironment _executionEnvironment = env.getExecutionEnvironment();
-      boolean _equals_3 = Objects.equal(_executionEnvironment, null);
-      if (_equals_3) {
+      boolean _tripleEquals_3 = (_executionEnvironment == null);
+      if (_tripleEquals_3) {
         final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
-        boolean _notEquals = (!Objects.equal(eeManager, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (eeManager != null);
+        if (_tripleNotEquals) {
           final Consumer<IExecutionEnvironment> _function_3 = new Consumer<IExecutionEnvironment>() {
             @Override
             public void accept(final IExecutionEnvironment it) {
@@ -395,8 +395,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         }
       }
       Locale _localization = env.getLocalization();
-      boolean _equals_4 = Objects.equal(_localization, null);
-      if (_equals_4) {
+      boolean _tripleEquals_4 = (_localization == null);
+      if (_tripleEquals_4) {
         final Consumer<Locale> _function_4 = new Consumer<Locale>() {
           @Override
           public void accept(final Locale it) {

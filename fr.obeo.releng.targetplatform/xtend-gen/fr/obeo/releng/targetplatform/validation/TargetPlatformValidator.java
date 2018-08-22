@@ -37,6 +37,7 @@ import fr.obeo.releng.targetplatform.VarDefinition;
 import fr.obeo.releng.targetplatform.services.TargetPlatformGrammarAccess;
 import fr.obeo.releng.targetplatform.util.CompositeElementResolver;
 import fr.obeo.releng.targetplatform.util.LocationIndexBuilder;
+import fr.obeo.releng.targetplatform.util.PreferenceSettings;
 import fr.obeo.releng.targetplatform.validation.AbstractTargetPlatformValidator;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -100,6 +101,9 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Inject
   private TargetPlatformGrammarAccess grammarAccess;
+  
+  @Inject
+  private PreferenceSettings preferenceSettings;
   
   public final static String CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED = "CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED";
   
@@ -1125,6 +1129,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     final Set<String> importedIUsID = IterableExtensions.<String>toSet(IterableExtensions.<IU, String>map(importedIUs, _function_4));
+    final String duplicatedIUWarnPreference = this.preferenceSettings.getDuplicatedIUWarnPreference();
     final Function1<Location, EList<IU>> _function_5 = new Function1<Location, EList<IU>>() {
       @Override
       public EList<IU> apply(final Location it) {
@@ -1172,9 +1177,14 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           }
         };
         final Set<URI> importedTPsWithDup = IterableExtensions.<URI>toSet(IterableExtensions.<IU, URI>map(IterableExtensions.<IU>filter(importedIUs, _function_2), _function_3));
-        String _xifexpression = null;
+        String typeMsg = PreferenceSettings.DUPLICATED_IU_IMPORT_DEFAULT;
         boolean _contains = importedIUsID.contains(entry.getID());
         if (_contains) {
+          typeMsg = duplicatedIUWarnPreference;
+        }
+        String _xifexpression = null;
+        boolean _contains_1 = importedIUsID.contains(entry.getID());
+        if (_contains_1) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Duplicated IU \'");
           String _iD = entry.getID();
@@ -1199,7 +1209,15 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _xifexpression = _builder_1.toString();
         }
         final String msg = _xifexpression;
-        TargetPlatformValidator.this.warning(msg, entry.getLocation(), TargetPlatformPackage.Literals.LOCATION__IUS, entry.getLocation().getIus().indexOf(entry), TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+        boolean _equals = typeMsg.equals(PreferenceSettings.DUPLICATED_IU_IMPORT_WARN);
+        if (_equals) {
+          TargetPlatformValidator.this.warning(msg, entry.getLocation(), TargetPlatformPackage.Literals.LOCATION__IUS, entry.getLocation().getIus().indexOf(entry), TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+        } else {
+          boolean _equals_1 = typeMsg.equals(PreferenceSettings.DUPLICATED_IU_IMPORT_INFO);
+          if (_equals_1) {
+            TargetPlatformValidator.this.info(msg, entry.getLocation(), TargetPlatformPackage.Literals.LOCATION__IUS, entry.getLocation().getIus().indexOf(entry), TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+          }
+        }
       }
     };
     IterableExtensions.<IU>filter(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(targetPlatform.getLocations(), _function_5)), _function_6).forEach(_function_7);
@@ -1207,51 +1225,74 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkNoDuplicatedDefine(final TargetPlatform targetPlatform) {
-    final Function1<TargetContent, Boolean> _function = new Function1<TargetContent, Boolean>() {
+    this.checkDuplicationDirectlyInsideTarget(targetPlatform);
+    this.checkDuplicationFromImportedTarget(targetPlatform);
+  }
+  
+  private void checkDuplicationFromImportedTarget(final TargetPlatform targetPlatform) {
+    final Function1<VarDefinition, Boolean> _function = new Function1<VarDefinition, Boolean>() {
       @Override
-      public Boolean apply(final TargetContent it) {
-        return Boolean.valueOf((it instanceof VarDefinition));
+      public Boolean apply(final VarDefinition it) {
+        return Boolean.valueOf(it.isImported());
       }
     };
-    final Function1<TargetContent, String> _function_1 = new Function1<TargetContent, String>() {
+    final Consumer<VarDefinition> _function_1 = new Consumer<VarDefinition>() {
       @Override
-      public String apply(final TargetContent it) {
-        String _xblockexpression = null;
-        {
-          final VarDefinition varDef = ((VarDefinition) it);
-          _xblockexpression = varDef.getName();
+      public void accept(final VarDefinition it) {
+        int _size = it.getImportedValues().size();
+        boolean _greaterThan = (_size > 1);
+        if (_greaterThan) {
+          final String firstElem = IterableExtensions.<String>head(it.getImportedValues());
+          final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+            @Override
+            public Boolean apply(final String it) {
+              int _compareTo = firstElem.compareTo(it);
+              return Boolean.valueOf((_compareTo == 0));
+            }
+          };
+          final boolean varDefAlawaysImportedWithSameValue = IterableExtensions.<String>forall(it.getImportedValues(), _function);
+          if (varDefAlawaysImportedWithSameValue) {
+            String _name = it.getName();
+            String _plus = ("\"" + _name);
+            final String errString = (_plus + "\" is imported many time");
+            TargetPlatformValidator.this.info(errString, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(it), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
+          } else {
+            String _name_1 = it.getName();
+            String _plus_1 = ("\"" + _name_1);
+            String _plus_2 = (_plus_1 + "\" is imported many time with different values: ");
+            EList<String> _importedValues = it.getImportedValues();
+            final String errString_1 = (_plus_2 + _importedValues);
+            TargetPlatformValidator.this.error(errString_1, it, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(it), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
+          }
         }
-        return _xblockexpression;
       }
     };
-    final List<String> varNameList = IterableExtensions.<String>toList(IterableExtensions.<String>sort(IterableExtensions.<TargetContent, String>map(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function), _function_1)));
+    IterableExtensions.<VarDefinition>filter(targetPlatform.getVarDefinition(), _function).forEach(_function_1);
+  }
+  
+  private void checkDuplicationDirectlyInsideTarget(final TargetPlatform targetPlatform) {
+    final Function1<VarDefinition, String> _function = new Function1<VarDefinition, String>() {
+      @Override
+      public String apply(final VarDefinition it) {
+        return it.getName();
+      }
+    };
+    final List<String> varNameList = IterableExtensions.<String>toList(IterableExtensions.<String>sort(ListExtensions.<VarDefinition, String>map(targetPlatform.getVarDefinition(), _function)));
     for (int i = 1; (i < varNameList.size()); i++) {
       int _compareTo = varNameList.get((i - 1)).compareTo(varNameList.get(i));
       boolean _equals = (_compareTo == 0);
       if (_equals) {
         final String duplicatedVarName = varNameList.get((i - 1));
-        final String errString = (("\"" + duplicatedVarName) + "\" is defined many times (it may be imported through many includes)");
-        final Function1<TargetContent, Boolean> _function_2 = new Function1<TargetContent, Boolean>() {
+        final String errString = (("\"" + duplicatedVarName) + "\" is defined many times");
+        final Function1<VarDefinition, Boolean> _function_1 = new Function1<VarDefinition, Boolean>() {
           @Override
-          public Boolean apply(final TargetContent it) {
-            return Boolean.valueOf((it instanceof VarDefinition));
+          public Boolean apply(final VarDefinition it) {
+            int _compareTo = it.getName().compareTo(duplicatedVarName);
+            return Boolean.valueOf((_compareTo == 0));
           }
         };
-        final Function1<TargetContent, Boolean> _function_3 = new Function1<TargetContent, Boolean>() {
-          @Override
-          public Boolean apply(final TargetContent it) {
-            boolean _xblockexpression = false;
-            {
-              final VarDefinition varDef = ((VarDefinition) it);
-              int _compareTo = varDef.getName().compareTo(duplicatedVarName);
-              _xblockexpression = (_compareTo == 0);
-            }
-            return Boolean.valueOf(_xblockexpression);
-          }
-        };
-        final TargetContent findFirst = IterableExtensions.<TargetContent>findFirst(IterableExtensions.<TargetContent>filter(targetPlatform.getContents(), _function_2), _function_3);
-        final VarDefinition duplicatedVar = ((VarDefinition) findFirst);
-        this.warning(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(duplicatedVar), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
+        final VarDefinition duplicatedVar = IterableExtensions.<VarDefinition>findFirst(targetPlatform.getVarDefinition(), _function_1);
+        this.error(errString, duplicatedVar, TargetPlatformPackage.Literals.VAR_DEFINITION__NAME, targetPlatform.getContents().indexOf(duplicatedVar), TargetPlatformValidator.CHECK__NO_DUPLICATED_DEFINE);
       }
     }
   }
