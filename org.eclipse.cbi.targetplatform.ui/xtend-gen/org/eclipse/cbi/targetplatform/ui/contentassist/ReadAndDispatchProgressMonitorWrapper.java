@@ -34,11 +34,8 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       super.internalWorked(work);
       this.display.readAndDispatch();
     } else {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          ReadAndDispatchProgressMonitorWrapper.super.internalWorked(work);
-        }
+      final Runnable _function = () -> {
+        super.internalWorked(work);
       };
       this.display.asyncExec(_function);
     }
@@ -54,11 +51,8 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       super.subTask(name);
       this.display.readAndDispatch();
     } else {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          ReadAndDispatchProgressMonitorWrapper.super.subTask(name);
-        }
+      final Runnable _function = () -> {
+        super.subTask(name);
       };
       this.display.asyncExec(_function);
     }
@@ -74,10 +68,7 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       super.worked(work);
       this.display.readAndDispatch();
     } else {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-        }
+      final Runnable _function = () -> {
       };
       this.display.asyncExec(_function);
     }
@@ -93,11 +84,8 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       super.beginTask(name, totalWork);
       this.display.readAndDispatch();
     } else {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          ReadAndDispatchProgressMonitorWrapper.super.beginTask(name, totalWork);
-        }
+      final Runnable _function = () -> {
+        super.beginTask(name, totalWork);
       };
       this.display.asyncExec(_function);
     }
@@ -113,11 +101,8 @@ public class ReadAndDispatchProgressMonitorWrapper extends ProgressMonitorWrappe
       super.setTaskName(name);
       this.display.readAndDispatch();
     } else {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          ReadAndDispatchProgressMonitorWrapper.super.setTaskName(name);
-        }
+      final Runnable _function = () -> {
+        super.setTaskName(name);
       };
       this.display.asyncExec(_function);
     }

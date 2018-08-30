@@ -145,19 +145,13 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkAllEnvAndRequiredAreSelfExluding(final TargetPlatform targetPlatform) {
-    final Function1<Options, EList<Option>> _function = new Function1<Options, EList<Option>>() {
-      @Override
-      public EList<Option> apply(final Options it) {
-        return it.getOptions();
-      }
+    final Function1<Options, EList<Option>> _function = (Options it) -> {
+      return it.getOptions();
     };
     final Set<Option> allOptions = IterableExtensions.<Option>toSet(Iterables.<Option>concat(IterableExtensions.<Options, EList<Option>>map(Iterables.<Options>filter(targetPlatform.getContents(), Options.class), _function)));
     if ((allOptions.contains(Option.INCLUDE_ALL_ENVIRONMENTS) && allOptions.contains(Option.INCLUDE_REQUIRED))) {
-      final Consumer<Options> _function_1 = new Consumer<Options>() {
-        @Override
-        public void accept(final Options it) {
-          TargetPlatformValidator.this.doReportAllEnvAndRequiredAreSelfExluding(it, it.getOptions(), TargetPlatformPackage.Literals.OPTIONS__OPTIONS);
-        }
+      final Consumer<Options> _function_1 = (Options it) -> {
+        this.doReportAllEnvAndRequiredAreSelfExluding(it, it.getOptions(), TargetPlatformPackage.Literals.OPTIONS__OPTIONS);
       };
       Iterables.<Options>filter(targetPlatform.getContents(), Options.class).forEach(_function_1);
     }
@@ -186,40 +180,31 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Check
   public void checkNoDuplicateOptions(final TargetPlatform targetPlatform) {
-    final Function1<Options, EList<Option>> _function = new Function1<Options, EList<Option>>() {
-      @Override
-      public EList<Option> apply(final Options it) {
-        return it.getOptions();
-      }
+    final Function1<Options, EList<Option>> _function = (Options it) -> {
+      return it.getOptions();
     };
     final HashMultiset<Option> allOptions = HashMultiset.<Option>create(Iterables.<Option>concat(IterableExtensions.<Options, EList<Option>>map(Iterables.<Options>filter(targetPlatform.getContents(), Options.class), _function)));
-    final Consumer<Multiset.Entry<Option>> _function_1 = new Consumer<Multiset.Entry<Option>>() {
-      @Override
-      public void accept(final Multiset.Entry<Option> e) {
-        int _count = e.getCount();
-        boolean _greaterThan = (_count > 1);
-        if (_greaterThan) {
-          final Consumer<Options> _function = new Consumer<Options>() {
-            @Override
-            public void accept(final Options o) {
-              for (int i = 0; (i < o.getOptions().size()); i++) {
-                {
-                  final Option it = o.getOptions().get(i);
-                  Option _element = e.getElement();
-                  boolean _equals = Objects.equal(_element, it);
-                  if (_equals) {
-                    StringConcatenation _builder = new StringConcatenation();
-                    _builder.append("Cannot define multiple option \'");
-                    _builder.append(it);
-                    _builder.append("\'.");
-                    TargetPlatformValidator.this.error(_builder.toString(), o, TargetPlatformPackage.Literals.OPTIONS__OPTIONS, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_OPTIONS_OPTIONS);
-                  }
-                }
+    final Consumer<Multiset.Entry<Option>> _function_1 = (Multiset.Entry<Option> e) -> {
+      int _count = e.getCount();
+      boolean _greaterThan = (_count > 1);
+      if (_greaterThan) {
+        final Consumer<Options> _function_2 = (Options o) -> {
+          for (int i = 0; (i < o.getOptions().size()); i++) {
+            {
+              final Option it = o.getOptions().get(i);
+              Option _element = e.getElement();
+              boolean _equals = Objects.equal(_element, it);
+              if (_equals) {
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("Cannot define multiple option \'");
+                _builder.append(it);
+                _builder.append("\'.");
+                this.error(_builder.toString(), o, TargetPlatformPackage.Literals.OPTIONS__OPTIONS, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_OPTIONS_OPTIONS);
               }
             }
-          };
-          Iterables.<Options>filter(targetPlatform.getContents(), Options.class).forEach(_function);
-        }
+          }
+        };
+        Iterables.<Options>filter(targetPlatform.getContents(), Options.class).forEach(_function_2);
       }
     };
     allOptions.entrySet().forEach(_function_1);
@@ -247,37 +232,31 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     if (_isEmpty) {
       final EList<Location> listOptions = targetPlatform.getLocations();
       final Location first = IterableExtensions.<Location>head(listOptions);
-      final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
-        @Override
-        public Boolean apply(final Location _) {
-          boolean _isEmpty = Sets.<Option>symmetricDifference(IterableExtensions.<Option>toSet(_.getOptions()), IterableExtensions.<Option>toSet(first.getOptions())).isEmpty();
-          return Boolean.valueOf((!_isEmpty));
-        }
+      final Function1<Location, Boolean> _function = (Location l) -> {
+        boolean _isEmpty_1 = Sets.<Option>symmetricDifference(IterableExtensions.<Option>toSet(l.getOptions()), IterableExtensions.<Option>toSet(first.getOptions())).isEmpty();
+        return Boolean.valueOf((!_isEmpty_1));
       };
       final Iterable<Location> conflicts = IterableExtensions.<Location>filter(IterableExtensions.<Location>tail(listOptions), _function);
       boolean _isEmpty_1 = IterableExtensions.isEmpty(conflicts);
       boolean _not = (!_isEmpty_1);
       if (_not) {
-        final Consumer<Location> _function_1 = new Consumer<Location>() {
-          @Override
-          public void accept(final Location _) {
-            final List<INode> nodes = NodeModelUtils.findNodesForFeature(_, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
-            boolean _isEmpty = nodes.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              INode _head = IterableExtensions.<INode>head(nodes);
-              final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
-              INode _last = IterableExtensions.<INode>last(nodes);
-              final CompositeNode lastOption = ((CompositeNode) _last);
-              int _offset = withKeyword.getOffset();
-              int _endOffset = lastOption.getEndOffset();
-              int _offset_1 = withKeyword.getOffset();
-              int _minus = (_endOffset - _offset_1);
-              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
-            } else {
-              final ICompositeNode node = NodeModelUtils.getNode(_);
-              TargetPlatformValidator.this.acceptError("Options of every locations must be the same", _, node.getOffset(), node.getLength(), TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
-            }
+        final Consumer<Location> _function_1 = (Location l) -> {
+          final List<INode> nodes = NodeModelUtils.findNodesForFeature(l, TargetPlatformPackage.Literals.LOCATION__OPTIONS);
+          boolean _isEmpty_2 = nodes.isEmpty();
+          boolean _not_1 = (!_isEmpty_2);
+          if (_not_1) {
+            INode _head = IterableExtensions.<INode>head(nodes);
+            final INode withKeyword = ((CompositeNode) _head).getPreviousSibling();
+            INode _last = IterableExtensions.<INode>last(nodes);
+            final CompositeNode lastOption = ((CompositeNode) _last);
+            int _offset = withKeyword.getOffset();
+            int _endOffset = lastOption.getEndOffset();
+            int _offset_1 = withKeyword.getOffset();
+            int _minus = (_endOffset - _offset_1);
+            this.acceptError("Options of every locations must be the same", l, _offset, _minus, TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
+          } else {
+            final ICompositeNode node = NodeModelUtils.getNode(l);
+            this.acceptError("Options of every locations must be the same", l, node.getOffset(), node.getLength(), TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS);
           }
         };
         listOptions.forEach(_function_1);
@@ -323,105 +302,69 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     final ListMultimap<String, Location> locationsByURI = this.indexBuilder.getLocationIndex(targetPlatform);
     final Resource resource = targetPlatform.eResource();
     final LinkedHashMultimap<String, String> locationIDsByURI = LinkedHashMultimap.<String, String>create();
-    final Consumer<String> _function = new Consumer<String>() {
-      @Override
-      public void accept(final String it) {
-        final Function1<Location, String> _function = new Function1<Location, String>() {
-          @Override
-          public String apply(final Location it) {
-            return it.getID();
-          }
-        };
-        locationIDsByURI.putAll(it, IterableExtensions.<String>toSet(ListExtensions.<Location, String>map(locationsByURI.get(it), _function)));
-      }
+    final Consumer<String> _function = (String it) -> {
+      final Function1<Location, String> _function_1 = (Location it_1) -> {
+        return it_1.getID();
+      };
+      locationIDsByURI.putAll(it, IterableExtensions.<String>toSet(ListExtensions.<Location, String>map(locationsByURI.get(it), _function_1)));
     };
     locationsByURI.keySet().forEach(_function);
-    final Function2<String, Collection<String>, Boolean> _function_1 = new Function2<String, Collection<String>, Boolean>() {
-      @Override
-      public Boolean apply(final String key, final Collection<String> value) {
-        int _size = value.size();
-        return Boolean.valueOf((_size <= 1));
-      }
+    final Function2<String, Collection<String>, Boolean> _function_1 = (String key, Collection<String> value) -> {
+      int _size = value.size();
+      return Boolean.valueOf((_size <= 1));
     };
     final Set<String> locationsURIWithoutConflictingID = MapExtensions.<String, Collection<String>>filter(locationIDsByURI.asMap(), _function_1).keySet();
-    final Function1<String, List<Location>> _function_2 = new Function1<String, List<Location>>() {
-      @Override
-      public List<Location> apply(final String it) {
-        return locationsByURI.get(it);
-      }
+    final Function1<String, List<Location>> _function_2 = (String it) -> {
+      return locationsByURI.get(it);
     };
     final Iterable<Location> locationsWithoutConflictingID = Iterables.<Location>concat(IterableExtensions.<String, List<Location>>map(locationsURIWithoutConflictingID, _function_2));
-    final Function1<Location, Boolean> _function_3 = new Function1<Location, Boolean>() {
-      @Override
-      public Boolean apply(final Location it) {
-        String _iD = it.getID();
-        return Boolean.valueOf((_iD != null));
-      }
+    final Function1<Location, Boolean> _function_3 = (Location it) -> {
+      String _iD = it.getID();
+      return Boolean.valueOf((_iD != null));
     };
-    final Function<Location, String> _function_4 = new Function<Location, String>() {
-      @Override
-      public String apply(final Location it) {
-        return it.getID();
-      }
+    final Function<Location, String> _function_4 = (Location it) -> {
+      return it.getID();
     };
     final ImmutableListMultimap<String, Location> locationsWithoutConflictingIDByID = Multimaps.<String, Location>index(IterableExtensions.<Location>filter(locationsWithoutConflictingID, _function_3), _function_4);
-    final Function2<String, Collection<Location>, Boolean> _function_5 = new Function2<String, Collection<Location>, Boolean>() {
-      @Override
-      public Boolean apply(final String key, final Collection<Location> value) {
-        final Function1<Location, String> _function = new Function1<Location, String>() {
-          @Override
-          public String apply(final Location it) {
-            return it.getUri();
-          }
-        };
-        int _size = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(value, _function)).size();
-        return Boolean.valueOf((_size > 1));
-      }
+    final Function2<String, Collection<Location>, Boolean> _function_5 = (String key, Collection<Location> value) -> {
+      final Function1<Location, String> _function_6 = (Location it) -> {
+        return it.getUri();
+      };
+      int _size = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(value, _function_6)).size();
+      return Boolean.valueOf((_size > 1));
     };
     final Iterable<Location> locationsWithDuplicateID = Iterables.<Location>concat(MapExtensions.<String, Collection<Location>>filter(locationsWithoutConflictingIDByID.asMap(), _function_5).values());
-    final Consumer<Location> _function_6 = new Consumer<Location>() {
-      @Override
-      public void accept(final Location location) {
-        Resource _eResource = location.eResource();
-        boolean _equals = Objects.equal(_eResource, resource);
-        if (_equals) {
-          TargetPlatformValidator.this.error("ID must be unique for each location", location, 
-            TargetPlatformPackage.Literals.LOCATION__ID, 
+    final Consumer<Location> _function_6 = (Location location) -> {
+      Resource _eResource = location.eResource();
+      boolean _equals = Objects.equal(_eResource, resource);
+      if (_equals) {
+        this.error("ID must be unique for each location", location, 
+          TargetPlatformPackage.Literals.LOCATION__ID, 
+          TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
+      } else {
+        final Function1<IncludeDeclaration, Boolean> _function_7 = (IncludeDeclaration it) -> {
+          boolean _xblockexpression = false;
+          {
+            final TargetPlatform direct = this.indexBuilder.getImportedTargetPlatform(resource, it);
+            _xblockexpression = (direct.getLocations().contains(location) || 
+              IterableExtensions.<Location>toSet(Iterables.<Location>concat(ListExtensions.<TargetPlatform, EList<Location>>map(this.indexBuilder.getImportedTargetPlatforms(direct), ((Function1<TargetPlatform, EList<Location>>) (TargetPlatform it_1) -> {
+                return it_1.getLocations();
+              })))).contains(location));
+          }
+          return Boolean.valueOf(_xblockexpression);
+        };
+        final Set<IncludeDeclaration> conflictualInclude = IterableExtensions.<IncludeDeclaration>toSet(IterableExtensions.<IncludeDeclaration>filter(targetPlatform.getIncludes(), _function_7));
+        final Consumer<IncludeDeclaration> _function_8 = (IncludeDeclaration it) -> {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("ID \'");
+          String _iD = location.getID();
+          _builder.append(_iD);
+          _builder.append("\' is duplicated in the included target platform");
+          this.error(_builder.toString(), it, 
+            TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
             TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
-        } else {
-          final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
-            @Override
-            public Boolean apply(final IncludeDeclaration it) {
-              boolean _xblockexpression = false;
-              {
-                final TargetPlatform direct = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatform(resource, it);
-                _xblockexpression = (direct.getLocations().contains(location) || 
-                  IterableExtensions.<Location>toSet(Iterables.<Location>concat(ListExtensions.<TargetPlatform, EList<Location>>map(TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct), new Function1<TargetPlatform, EList<Location>>() {
-                    @Override
-                    public EList<Location> apply(final TargetPlatform it) {
-                      return it.getLocations();
-                    }
-                  }))).contains(location));
-              }
-              return Boolean.valueOf(_xblockexpression);
-            }
-          };
-          final Set<IncludeDeclaration> conflictualInclude = IterableExtensions.<IncludeDeclaration>toSet(IterableExtensions.<IncludeDeclaration>filter(targetPlatform.getIncludes(), _function));
-          final Consumer<IncludeDeclaration> _function_1 = new Consumer<IncludeDeclaration>() {
-            @Override
-            public void accept(final IncludeDeclaration it) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append("ID \'");
-              String _iD = location.getID();
-              _builder.append(_iD);
-              _builder.append("\' is duplicated in the included target platform");
-              TargetPlatformValidator.this.error(_builder.toString(), it, 
-                TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
-                TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS);
-            }
-          };
-          conflictualInclude.forEach(_function_1);
-        }
+        };
+        conflictualInclude.forEach(_function_8);
       }
     };
     locationsWithDuplicateID.forEach(_function_6);
@@ -433,22 +376,16 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     boolean _isEmpty = cycle.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final IncludeDeclaration it) {
-          return Boolean.valueOf(cycle.get(1).equals(TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatform(targetPlatform.eResource(), it)));
-        }
+      final Function1<IncludeDeclaration, Boolean> _function = (IncludeDeclaration it) -> {
+        return Boolean.valueOf(cycle.get(1).equals(this.indexBuilder.getImportedTargetPlatform(targetPlatform.eResource(), it)));
       };
       final IncludeDeclaration cyclingImport = IterableExtensions.<IncludeDeclaration>findFirst(targetPlatform.getIncludes(), _function);
       boolean _tripleNotEquals = (cyclingImport != null);
       if (_tripleNotEquals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cycle detected in the included target platforms. Cycle is \'");
-        final Function1<TargetPlatform, URI> _function_1 = new Function1<TargetPlatform, URI>() {
-          @Override
-          public URI apply(final TargetPlatform it) {
-            return it.eResource().getURI();
-          }
+        final Function1<TargetPlatform, URI> _function_1 = (TargetPlatform it) -> {
+          return it.eResource().getURI();
         };
         String _join = IterableExtensions.join(IterableExtensions.<TargetPlatform, URI>map(IterableExtensions.<TargetPlatform>drop(cycle, 1), _function_1), "\'\' -> \'");
         _builder.append(_join);
@@ -467,44 +404,29 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     Set<String> _keySet = locationsByURI.keySet();
     for (final String locationURI : _keySet) {
       {
-        final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
-          @Override
-          public Boolean apply(final Location it) {
-            Resource _eResource = it.eResource();
-            return Boolean.valueOf((!Objects.equal(_eResource, resource)));
-          }
+        final Function1<Location, Boolean> _function = (Location it) -> {
+          Resource _eResource = it.eResource();
+          return Boolean.valueOf((!Objects.equal(_eResource, resource)));
         };
         final Iterable<Location> externalLocations = IterableExtensions.<Location>filter(locationsByURI.get(locationURI), _function);
-        final Function1<Location, String> _function_1 = new Function1<Location, String>() {
-          @Override
-          public String apply(final Location it) {
-            return Strings.nullToEmpty(it.getID());
-          }
+        final Function1<Location, String> _function_1 = (Location it) -> {
+          return Strings.nullToEmpty(it.getID());
         };
         final Set<String> externalIDs = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(externalLocations, _function_1));
-        final Function1<Location, Boolean> _function_2 = new Function1<Location, Boolean>() {
-          @Override
-          public Boolean apply(final Location it) {
-            Resource _eResource = it.eResource();
-            return Boolean.valueOf(Objects.equal(_eResource, resource));
-          }
+        final Function1<Location, Boolean> _function_2 = (Location it) -> {
+          Resource _eResource = it.eResource();
+          return Boolean.valueOf(Objects.equal(_eResource, resource));
         };
         final Iterable<Location> internalLocations = IterableExtensions.<Location>filter(locationsByURI.get(locationURI), _function_2);
-        final Function1<Location, String> _function_3 = new Function1<Location, String>() {
-          @Override
-          public String apply(final Location it) {
-            return Strings.nullToEmpty(it.getID());
-          }
+        final Function1<Location, String> _function_3 = (Location it) -> {
+          return Strings.nullToEmpty(it.getID());
         };
         final Set<String> internalIDs = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(internalLocations, _function_3));
         int _size = externalIDs.size();
         boolean _greaterThan = (_size > 1);
         if (_greaterThan) {
-          final Function1<Location, Boolean> _function_4 = new Function1<Location, Boolean>() {
-            @Override
-            public Boolean apply(final Location it) {
-              return Boolean.valueOf(externalIDs.contains(it.getID()));
-            }
+          final Function1<Location, Boolean> _function_4 = (Location it) -> {
+            return Boolean.valueOf(externalIDs.contains(it.getID()));
           };
           final Iterable<Location> externalLocationsWithConflictualID = IterableExtensions.<Location>filter(externalLocations, _function_4);
           StringConcatenation _builder = new StringConcatenation();
@@ -514,47 +436,32 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           String _join = IterableExtensions.join(externalIDs, "\', \'");
           _builder.append(_join);
           _builder.append("\'  in \'");
-          final Function1<Location, String> _function_5 = new Function1<Location, String>() {
-            @Override
-            public String apply(final Location it) {
-              return it.eResource().getURI().toString();
-            }
+          final Function1<Location, String> _function_5 = (Location it) -> {
+            return it.eResource().getURI().toString();
           };
           String _join_1 = IterableExtensions.join(IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(externalLocationsWithConflictualID, _function_5)), "\', \'");
           _builder.append(_join_1);
           _builder.append("\'.");
           final String msg = _builder.toString();
-          final Function1<Location, Iterable<IncludeDeclaration>> _function_6 = new Function1<Location, Iterable<IncludeDeclaration>>() {
-            @Override
-            public Iterable<IncludeDeclaration> apply(final Location location) {
-              final Function1<IncludeDeclaration, Boolean> _function = new Function1<IncludeDeclaration, Boolean>() {
-                @Override
-                public Boolean apply(final IncludeDeclaration it) {
-                  boolean _xblockexpression = false;
-                  {
-                    final TargetPlatform direct = TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatform(resource, it);
-                    _xblockexpression = (direct.getLocations().contains(location) || 
-                      IterableExtensions.<Location>toSet(Iterables.<Location>concat(ListExtensions.<TargetPlatform, EList<Location>>map(TargetPlatformValidator.this.indexBuilder.getImportedTargetPlatforms(direct), new Function1<TargetPlatform, EList<Location>>() {
-                        @Override
-                        public EList<Location> apply(final TargetPlatform it) {
-                          return it.getLocations();
-                        }
-                      }))).contains(location));
-                  }
-                  return Boolean.valueOf(_xblockexpression);
-                }
-              };
-              return IterableExtensions.<IncludeDeclaration>filter(targetPlatform.getIncludes(), _function);
-            }
+          final Function1<Location, Iterable<IncludeDeclaration>> _function_6 = (Location location) -> {
+            final Function1<IncludeDeclaration, Boolean> _function_7 = (IncludeDeclaration it) -> {
+              boolean _xblockexpression = false;
+              {
+                final TargetPlatform direct = this.indexBuilder.getImportedTargetPlatform(resource, it);
+                _xblockexpression = (direct.getLocations().contains(location) || 
+                  IterableExtensions.<Location>toSet(Iterables.<Location>concat(ListExtensions.<TargetPlatform, EList<Location>>map(this.indexBuilder.getImportedTargetPlatforms(direct), ((Function1<TargetPlatform, EList<Location>>) (TargetPlatform it_1) -> {
+                    return it_1.getLocations();
+                  })))).contains(location));
+              }
+              return Boolean.valueOf(_xblockexpression);
+            };
+            return IterableExtensions.<IncludeDeclaration>filter(targetPlatform.getIncludes(), _function_7);
           };
           final Set<IncludeDeclaration> conflictualInclude = IterableExtensions.<IncludeDeclaration>toSet(Iterables.<IncludeDeclaration>concat(IterableExtensions.<Location, Iterable<IncludeDeclaration>>map(externalLocationsWithConflictualID, _function_6)));
-          final Consumer<IncludeDeclaration> _function_7 = new Consumer<IncludeDeclaration>() {
-            @Override
-            public void accept(final IncludeDeclaration it) {
-              TargetPlatformValidator.this.error(msg, it, 
-                TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
-                TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION);
-            }
+          final Consumer<IncludeDeclaration> _function_7 = (IncludeDeclaration it) -> {
+            this.error(msg, it, 
+              TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI, 
+              TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION);
           };
           conflictualInclude.forEach(_function_7);
         }
@@ -572,29 +479,20 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
             String _head = IterableExtensions.<String>head(externalIDs);
             _builder_1.append(_head);
             _builder_1.append("\'  in \'");
-            final Function1<Location, String> _function_8 = new Function1<Location, String>() {
-              @Override
-              public String apply(final Location it) {
-                return it.eResource().getURI().toString();
-              }
+            final Function1<Location, String> _function_8 = (Location it) -> {
+              return it.eResource().getURI().toString();
             };
             String _join_2 = IterableExtensions.join(IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(externalLocations, _function_8)), "\', \'");
             _builder_1.append(_join_2);
             _builder_1.append("\'.");
             _builder_1.newLineIfNotEmpty();
             final String msg_1 = _builder_1.toString();
-            final Function1<Location, Boolean> _function_9 = new Function1<Location, Boolean>() {
-              @Override
-              public Boolean apply(final Location it) {
-                boolean _contains = externalIDs.contains(Strings.nullToEmpty(it.getID()));
-                return Boolean.valueOf((!_contains));
-              }
+            final Function1<Location, Boolean> _function_9 = (Location it) -> {
+              boolean _contains = externalIDs.contains(Strings.nullToEmpty(it.getID()));
+              return Boolean.valueOf((!_contains));
             };
-            final Consumer<Location> _function_10 = new Consumer<Location>() {
-              @Override
-              public void accept(final Location it) {
-                TargetPlatformValidator.this.error(msg_1, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, IterableExtensions.<String>head(externalIDs), IterableExtensions.<Location>head(externalLocations).getUri());
-              }
+            final Consumer<Location> _function_10 = (Location it) -> {
+              this.error(msg_1, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, IterableExtensions.<String>head(externalIDs), IterableExtensions.<Location>head(externalLocations).getUri());
             };
             IterableExtensions.<Location>filter(internalLocations, _function_9).forEach(_function_10);
           }
@@ -608,11 +506,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
           _builder_2.append(_join_3);
           _builder_2.append("\'.");
           final String msg_2 = _builder_2.toString();
-          final Consumer<Location> _function_11 = new Consumer<Location>() {
-            @Override
-            public void accept(final Location it) {
-              TargetPlatformValidator.this.error(msg_2, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
-            }
+          final Consumer<Location> _function_11 = (Location it) -> {
+            this.error(msg_2, it, TargetPlatformPackage.Literals.LOCATION__ID, TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID);
           };
           internalLocations.forEach(_function_11);
         }
@@ -737,45 +632,27 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   public void checkEnvironment(final Environment env) {
     final ArrayList<String> dupEnv = Lists.<String>newArrayList(env.getEnv());
     final Iterator<String> dupEnvIt = dupEnv.iterator();
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownOSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownOSValues())), _function);
-    final Function1<String, String> _function_1 = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function_1 = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownWSValues())), _function_1);
-    final Function1<String, String> _function_2 = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function_2 = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownArchUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownOSArchValues())), _function_2);
-    final Function1<Locale, String> _function_3 = new Function1<Locale, String>() {
-      @Override
-      public String apply(final Locale it) {
-        return it.toString();
-      }
+    final Function1<Locale, String> _function_3 = (Locale it) -> {
+      return it.toString();
     };
-    final Function1<String, String> _function_4 = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function_4 = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownLocale = ListExtensions.<String, String>map(ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())), _function_3), _function_4);
-    final Function1<IExecutionEnvironment, String> _function_5 = new Function1<IExecutionEnvironment, String>() {
-      @Override
-      public String apply(final IExecutionEnvironment it) {
-        return it.getId().toUpperCase();
-      }
+    final Function1<IExecutionEnvironment, String> _function_5 = (IExecutionEnvironment it) -> {
+      return it.getId().toUpperCase();
     };
     final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function_5);
     while (dupEnvIt.hasNext()) {
@@ -807,13 +684,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     int _size = envList.size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
-      final Consumer<Environment> _function = new Consumer<Environment>() {
-        @Override
-        public void accept(final Environment it) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Environment definition should not be splitted accros the file.");
-          TargetPlatformValidator.this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.getContents().indexOf(it), TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY);
-        }
+      final Consumer<Environment> _function = (Environment it) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Environment definition should not be splitted accros the file.");
+        this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.getContents().indexOf(it), TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY);
       };
       IterableExtensions.<Environment>tail(envList).forEach(_function);
     }
@@ -825,13 +699,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     int _size = envList.size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
-      final Consumer<Options> _function = new Consumer<Options>() {
-        @Override
-        public void accept(final Options it) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Options definition should not be splitted accros the file.");
-          TargetPlatformValidator.this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.getContents().indexOf(it), TargetPlatformValidator.CHECK__OPTIONS_UNICITY);
-        }
+      final Consumer<Options> _function = (Options it) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Options definition should not be splitted accros the file.");
+        this.warning(_builder.toString(), tp, TargetPlatformPackage.Literals.TARGET_PLATFORM__CONTENTS, tp.getContents().indexOf(it), TargetPlatformValidator.CHECK__OPTIONS_UNICITY);
       };
       IterableExtensions.<Options>tail(envList).forEach(_function);
     }
@@ -840,114 +711,72 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void checkNoDuplicateEnvironmentOptions(final TargetPlatform tp) {
     final Environment tpEnv = tp.getEnvironment();
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownOSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownOSValues())), _function);
-    final Function1<String, String> _function_1 = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function_1 = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownWSUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownWSValues())), _function_1);
-    final Function1<String, String> _function_2 = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function_2 = (String it) -> {
+      return it.toUpperCase();
     };
     final List<String> knownArchUpperValues = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(Platform.knownOSArchValues())), _function_2);
-    final Function1<Locale, String> _function_3 = new Function1<Locale, String>() {
-      @Override
-      public String apply(final Locale it) {
-        return it.toString().toUpperCase();
-      }
+    final Function1<Locale, String> _function_3 = (Locale it) -> {
+      return it.toString().toUpperCase();
     };
     final List<String> knownLocale = ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())), _function_3);
-    final Function1<IExecutionEnvironment, String> _function_4 = new Function1<IExecutionEnvironment, String>() {
-      @Override
-      public String apply(final IExecutionEnvironment it) {
-        return it.getId().toUpperCase();
-      }
+    final Function1<IExecutionEnvironment, String> _function_4 = (IExecutionEnvironment it) -> {
+      return it.getId().toUpperCase();
     };
     final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function_4);
-    final Function1<Environment, EList<String>> _function_5 = new Function1<Environment, EList<String>>() {
-      @Override
-      public EList<String> apply(final Environment it) {
-        return it.getEnv();
-      }
+    final Function1<Environment, EList<String>> _function_5 = (Environment it) -> {
+      return it.getEnv();
     };
-    final Function1<String, Boolean> _function_6 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
-        return Boolean.valueOf((!_isNullOrEmpty));
-      }
+    final Function1<String, Boolean> _function_6 = (String it) -> {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
+      return Boolean.valueOf((!_isNullOrEmpty));
     };
     final List<String> envList = IterableExtensions.<String>toList(IterableExtensions.<String>filter(Iterables.<String>concat(IterableExtensions.<Environment, EList<String>>map(Iterables.<Environment>filter(tp.getContents(), Environment.class), _function_5)), _function_6));
-    final Function1<String, Boolean> _function_7 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        String _upperCase = it.toUpperCase();
-        String _windowingSystem = tpEnv.getWindowingSystem();
-        String _upperCase_1 = null;
-        if (_windowingSystem!=null) {
-          _upperCase_1=_windowingSystem.toUpperCase();
-        }
-        boolean _equals = _upperCase.equals(_upperCase_1);
-        return Boolean.valueOf((!_equals));
+    final Function1<String, Boolean> _function_7 = (String it) -> {
+      String _upperCase = it.toUpperCase();
+      String _windowingSystem = tpEnv.getWindowingSystem();
+      String _upperCase_1 = null;
+      if (_windowingSystem!=null) {
+        _upperCase_1=_windowingSystem.toUpperCase();
       }
+      boolean _equals = _upperCase.equals(_upperCase_1);
+      return Boolean.valueOf((!_equals));
     };
-    final Function1<String, Boolean> _function_8 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(knownOSUpperValues.contains(it.toUpperCase()));
-      }
+    final Function1<String, Boolean> _function_8 = (String it) -> {
+      return Boolean.valueOf(knownOSUpperValues.contains(it.toUpperCase()));
     };
     final LinkedHashMultiset<String> allOS = LinkedHashMultiset.<String>create(IterableExtensions.<String>filter(IterableExtensions.<String>filter(envList, _function_7), _function_8));
-    final Function1<String, Boolean> _function_9 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        String _upperCase = it.toUpperCase();
-        String _operatingSystem = tpEnv.getOperatingSystem();
-        String _upperCase_1 = null;
-        if (_operatingSystem!=null) {
-          _upperCase_1=_operatingSystem.toUpperCase();
-        }
-        boolean _equals = _upperCase.equals(_upperCase_1);
-        return Boolean.valueOf((!_equals));
+    final Function1<String, Boolean> _function_9 = (String it) -> {
+      String _upperCase = it.toUpperCase();
+      String _operatingSystem = tpEnv.getOperatingSystem();
+      String _upperCase_1 = null;
+      if (_operatingSystem!=null) {
+        _upperCase_1=_operatingSystem.toUpperCase();
       }
+      boolean _equals = _upperCase.equals(_upperCase_1);
+      return Boolean.valueOf((!_equals));
     };
-    final Function1<String, Boolean> _function_10 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(knownWSUpperValues.contains(it.toUpperCase()));
-      }
+    final Function1<String, Boolean> _function_10 = (String it) -> {
+      return Boolean.valueOf(knownWSUpperValues.contains(it.toUpperCase()));
     };
     final LinkedHashMultiset<String> allWS = LinkedHashMultiset.<String>create(IterableExtensions.<String>filter(IterableExtensions.<String>filter(envList, _function_9), _function_10));
-    final Function1<String, Boolean> _function_11 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(knownArchUpperValues.contains(it.toUpperCase()));
-      }
+    final Function1<String, Boolean> _function_11 = (String it) -> {
+      return Boolean.valueOf(knownArchUpperValues.contains(it.toUpperCase()));
     };
     final LinkedHashMultiset<String> allArch = LinkedHashMultiset.<String>create(IterableExtensions.<String>filter(envList, _function_11));
-    final Function1<String, Boolean> _function_12 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(knownLocale.contains(it.toUpperCase()));
-      }
+    final Function1<String, Boolean> _function_12 = (String it) -> {
+      return Boolean.valueOf(knownLocale.contains(it.toUpperCase()));
     };
     final LinkedHashMultiset<String> allLocale = LinkedHashMultiset.<String>create(IterableExtensions.<String>filter(envList, _function_12));
-    final Function1<String, Boolean> _function_13 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(knownEE.contains(it.toUpperCase()));
-      }
+    final Function1<String, Boolean> _function_13 = (String it) -> {
+      return Boolean.valueOf(knownEE.contains(it.toUpperCase()));
     };
     final LinkedHashMultiset<String> allEE = LinkedHashMultiset.<String>create(IterableExtensions.<String>filter(envList, _function_13));
     this.reportDuplicatedEnvironmentOptions(tp, allOS, "Cannot define multiple operating system.");
@@ -958,32 +787,23 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   }
   
   private void reportDuplicatedEnvironmentOptions(final TargetPlatform targetPlatform, final Multiset<String> valuesInFile, final String msg) {
-    if (((valuesInFile.size() > 1) || IterableExtensions.<Multiset.Entry<String>>exists(valuesInFile.entrySet(), new Function1<Multiset.Entry<String>, Boolean>() {
-      @Override
-      public Boolean apply(final Multiset.Entry<String> it) {
-        int _count = it.getCount();
-        return Boolean.valueOf((_count > 1));
-      }
-    }))) {
-      final Consumer<String> _function = new Consumer<String>() {
-        @Override
-        public void accept(final String e) {
-          final Consumer<Environment> _function = new Consumer<Environment>() {
-            @Override
-            public void accept(final Environment env) {
-              for (int i = 0; (i < env.getEnv().size()); i++) {
-                {
-                  final String it = env.getEnv().get(i);
-                  boolean _equals = e.equals(it);
-                  if (_equals) {
-                    TargetPlatformValidator.this.error(msg, env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS);
-                  }
-                }
+    if (((valuesInFile.size() > 1) || IterableExtensions.<Multiset.Entry<String>>exists(valuesInFile.entrySet(), ((Function1<Multiset.Entry<String>, Boolean>) (Multiset.Entry<String> it) -> {
+      int _count = it.getCount();
+      return Boolean.valueOf((_count > 1));
+    })))) {
+      final Consumer<String> _function = (String e) -> {
+        final Consumer<Environment> _function_1 = (Environment env) -> {
+          for (int i = 0; (i < env.getEnv().size()); i++) {
+            {
+              final String it = env.getEnv().get(i);
+              boolean _equals = e.equals(it);
+              if (_equals) {
+                this.error(msg, env, TargetPlatformPackage.Literals.ENVIRONMENT__ENV, i, TargetPlatformValidator.CHECK__NO_DUPLICATE_ENVIRONMENT_OPTIONS);
               }
             }
-          };
-          Iterables.<Environment>filter(targetPlatform.getContents(), Environment.class).forEach(_function);
-        }
+          }
+        };
+        Iterables.<Environment>filter(targetPlatform.getContents(), Environment.class).forEach(_function_1);
       };
       valuesInFile.elementSet().forEach(_function);
     }
@@ -992,13 +812,10 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void checkNoEscapeCharacterInIUID(final IU iu) {
     final ICompositeNode node = NodeModelUtils.getNode(iu);
-    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
-      @Override
-      public Boolean apply(final INode it) {
-        EObject _grammarElement = it.getGrammarElement();
-        RuleCall _iDIDTerminalRuleCall_0_0 = TargetPlatformValidator.this.grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0();
-        return Boolean.valueOf(Objects.equal(_grammarElement, _iDIDTerminalRuleCall_0_0));
-      }
+    final Function1<INode, Boolean> _function = (INode it) -> {
+      EObject _grammarElement = it.getGrammarElement();
+      RuleCall _iDIDTerminalRuleCall_0_0 = this.grammarAccess.getIUAccess().getIDIDTerminalRuleCall_0_0();
+      return Boolean.valueOf(Objects.equal(_grammarElement, _iDIDTerminalRuleCall_0_0));
     };
     final INode idRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function);
     String _xifexpression = null;
@@ -1019,22 +836,16 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void checkVersionKeywords(final IU iu) {
     final ICompositeNode node = NodeModelUtils.getNode(iu);
-    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
-      @Override
-      public Boolean apply(final INode it) {
-        EObject _grammarElement = it.getGrammarElement();
-        Keyword _semicolonKeyword_1_0_0 = TargetPlatformValidator.this.grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0();
-        return Boolean.valueOf(Objects.equal(_grammarElement, _semicolonKeyword_1_0_0));
-      }
+    final Function1<INode, Boolean> _function = (INode it) -> {
+      EObject _grammarElement = it.getGrammarElement();
+      Keyword _semicolonKeyword_1_0_0 = this.grammarAccess.getIUAccess().getSemicolonKeyword_1_0_0();
+      return Boolean.valueOf(Objects.equal(_grammarElement, _semicolonKeyword_1_0_0));
     };
     final INode semicolonKeywordRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function);
-    final Function1<INode, Boolean> _function_1 = new Function1<INode, Boolean>() {
-      @Override
-      public Boolean apply(final INode it) {
-        EObject _grammarElement = it.getGrammarElement();
-        Keyword _equalsSignKeyword_1_0_2 = TargetPlatformValidator.this.grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2();
-        return Boolean.valueOf(Objects.equal(_grammarElement, _equalsSignKeyword_1_0_2));
-      }
+    final Function1<INode, Boolean> _function_1 = (INode it) -> {
+      EObject _grammarElement = it.getGrammarElement();
+      Keyword _equalsSignKeyword_1_0_2 = this.grammarAccess.getIUAccess().getEqualsSignKeyword_1_0_2();
+      return Boolean.valueOf(Objects.equal(_grammarElement, _equalsSignKeyword_1_0_2));
     };
     final INode equalSignKeywordRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function_1);
     boolean _tripleNotEquals = (semicolonKeywordRule != null);
@@ -1050,115 +861,76 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void checkNoDuplicatedIU(final TargetPlatform targetPlatform) {
     final LinkedList<TargetPlatform> importedTPs = this.indexBuilder.getImportedTargetPlatforms(targetPlatform);
-    final Function1<TargetPlatform, EList<Location>> _function = new Function1<TargetPlatform, EList<Location>>() {
-      @Override
-      public EList<Location> apply(final TargetPlatform it) {
-        return it.getLocations();
-      }
+    final Function1<TargetPlatform, EList<Location>> _function = (TargetPlatform it) -> {
+      return it.getLocations();
     };
-    final Function1<Location, EList<IU>> _function_1 = new Function1<Location, EList<IU>>() {
-      @Override
-      public EList<IU> apply(final Location it) {
-        return it.getIus();
-      }
+    final Function1<Location, EList<IU>> _function_1 = (Location it) -> {
+      return it.getIus();
     };
     final Set<IU> importedIUs = IterableExtensions.<IU>toSet(Iterables.<IU>concat(IterableExtensions.<Location, EList<IU>>map(Iterables.<Location>concat(ListExtensions.<TargetPlatform, EList<Location>>map(importedTPs, _function)), _function_1)));
-    final Function1<Location, EList<IU>> _function_2 = new Function1<Location, EList<IU>>() {
-      @Override
-      public EList<IU> apply(final Location it) {
-        return it.getIus();
-      }
+    final Function1<Location, EList<IU>> _function_2 = (Location it) -> {
+      return it.getIus();
     };
-    final Function1<IU, String> _function_3 = new Function1<IU, String>() {
-      @Override
-      public String apply(final IU it) {
-        return it.getID();
-      }
+    final Function1<IU, String> _function_3 = (IU it) -> {
+      return it.getID();
     };
     final HashMultiset<String> localIUsID = HashMultiset.<String>create(IterableExtensions.<IU, String>map(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(targetPlatform.getLocations(), _function_2)), _function_3));
-    final Function1<IU, String> _function_4 = new Function1<IU, String>() {
-      @Override
-      public String apply(final IU it) {
-        return it.getID();
-      }
+    final Function1<IU, String> _function_4 = (IU it) -> {
+      return it.getID();
     };
     final Set<String> importedIUsID = IterableExtensions.<String>toSet(IterableExtensions.<IU, String>map(importedIUs, _function_4));
-    final Function1<Location, EList<IU>> _function_5 = new Function1<Location, EList<IU>>() {
-      @Override
-      public EList<IU> apply(final Location it) {
-        return it.getIus();
-      }
+    final Function1<Location, EList<IU>> _function_5 = (Location it) -> {
+      return it.getIus();
     };
-    final Function1<IU, Boolean> _function_6 = new Function1<IU, Boolean>() {
-      @Override
-      public Boolean apply(final IU it) {
-        return Boolean.valueOf((importedIUsID.contains(it.getID()) || (localIUsID.count(it.getID()) > 1)));
-      }
+    final Function1<IU, Boolean> _function_6 = (IU it) -> {
+      return Boolean.valueOf((importedIUsID.contains(it.getID()) || (localIUsID.count(it.getID()) > 1)));
     };
-    final Consumer<IU> _function_7 = new Consumer<IU>() {
-      @Override
-      public void accept(final IU entry) {
-        final Function1<Location, Boolean> _function = new Function1<Location, Boolean>() {
-          @Override
-          public Boolean apply(final Location it) {
-            final Function1<IU, String> _function = new Function1<IU, String>() {
-              @Override
-              public String apply(final IU it) {
-                return it.getID();
-              }
-            };
-            return Boolean.valueOf(ListExtensions.<IU, String>map(it.getIus(), _function).contains(entry.getID()));
-          }
+    final Consumer<IU> _function_7 = (IU entry) -> {
+      final Function1<Location, Boolean> _function_8 = (Location it) -> {
+        final Function1<IU, String> _function_9 = (IU it_1) -> {
+          return it_1.getID();
         };
-        final Function1<Location, String> _function_1 = new Function1<Location, String>() {
-          @Override
-          public String apply(final Location it) {
-            return it.getUri();
-          }
-        };
-        final Set<String> localLocationsWithDup = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(IterableExtensions.<Location>filter(targetPlatform.getLocations(), _function), _function_1));
-        final Function1<IU, Boolean> _function_2 = new Function1<IU, Boolean>() {
-          @Override
-          public Boolean apply(final IU it) {
-            return Boolean.valueOf(it.getID().equals(entry.getID()));
-          }
-        };
-        final Function1<IU, URI> _function_3 = new Function1<IU, URI>() {
-          @Override
-          public URI apply(final IU it) {
-            return it.eResource().getURI();
-          }
-        };
-        final Set<URI> importedTPsWithDup = IterableExtensions.<URI>toSet(IterableExtensions.<IU, URI>map(IterableExtensions.<IU>filter(importedIUs, _function_2), _function_3));
-        String _xifexpression = null;
-        boolean _contains = importedIUsID.contains(entry.getID());
-        if (_contains) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Duplicated IU \'");
-          String _iD = entry.getID();
-          _builder.append(_iD);
-          _builder.append("\' for locations \'");
-          String _join = IterableExtensions.join(localLocationsWithDup, "\', \'");
-          _builder.append(_join);
-          _builder.append("\'. It is included from target platforms \'");
-          String _join_1 = IterableExtensions.join(importedTPsWithDup, "\', \'");
-          _builder.append(_join_1);
-          _builder.append("\'.");
-          _xifexpression = _builder.toString();
-        } else {
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("Duplicated IU \'");
-          String _iD_1 = entry.getID();
-          _builder_1.append(_iD_1);
-          _builder_1.append("\' for locations \'");
-          String _join_2 = IterableExtensions.join(localLocationsWithDup, "\', \'");
-          _builder_1.append(_join_2);
-          _builder_1.append("\'.");
-          _xifexpression = _builder_1.toString();
-        }
-        final String msg = _xifexpression;
-        TargetPlatformValidator.this.warning(msg, entry.getLocation(), TargetPlatformPackage.Literals.LOCATION__IUS, entry.getLocation().getIus().indexOf(entry), TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
+        return Boolean.valueOf(ListExtensions.<IU, String>map(it.getIus(), _function_9).contains(entry.getID()));
+      };
+      final Function1<Location, String> _function_9 = (Location it) -> {
+        return it.getUri();
+      };
+      final Set<String> localLocationsWithDup = IterableExtensions.<String>toSet(IterableExtensions.<Location, String>map(IterableExtensions.<Location>filter(targetPlatform.getLocations(), _function_8), _function_9));
+      final Function1<IU, Boolean> _function_10 = (IU it) -> {
+        return Boolean.valueOf(it.getID().equals(entry.getID()));
+      };
+      final Function1<IU, URI> _function_11 = (IU it) -> {
+        return it.eResource().getURI();
+      };
+      final Set<URI> importedTPsWithDup = IterableExtensions.<URI>toSet(IterableExtensions.<IU, URI>map(IterableExtensions.<IU>filter(importedIUs, _function_10), _function_11));
+      String _xifexpression = null;
+      boolean _contains = importedIUsID.contains(entry.getID());
+      if (_contains) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Duplicated IU \'");
+        String _iD = entry.getID();
+        _builder.append(_iD);
+        _builder.append("\' for locations \'");
+        String _join = IterableExtensions.join(localLocationsWithDup, "\', \'");
+        _builder.append(_join);
+        _builder.append("\'. It is included from target platforms \'");
+        String _join_1 = IterableExtensions.join(importedTPsWithDup, "\', \'");
+        _builder.append(_join_1);
+        _builder.append("\'.");
+        _xifexpression = _builder.toString();
+      } else {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Duplicated IU \'");
+        String _iD_1 = entry.getID();
+        _builder_1.append(_iD_1);
+        _builder_1.append("\' for locations \'");
+        String _join_2 = IterableExtensions.join(localLocationsWithDup, "\', \'");
+        _builder_1.append(_join_2);
+        _builder_1.append("\'.");
+        _xifexpression = _builder_1.toString();
       }
+      final String msg = _xifexpression;
+      this.warning(msg, entry.getLocation(), TargetPlatformPackage.Literals.LOCATION__IUS, entry.getLocation().getIus().indexOf(entry), TargetPlatformValidator.CHECK__NO_DUPLICATED_IU);
     };
     IterableExtensions.<IU>filter(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(targetPlatform.getLocations(), _function_5)), _function_6).forEach(_function_7);
   }

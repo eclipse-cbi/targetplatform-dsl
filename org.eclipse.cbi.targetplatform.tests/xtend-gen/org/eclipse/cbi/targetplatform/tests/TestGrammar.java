@@ -347,24 +347,15 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
       Assert.assertEquals("TP1", tp.getName());
-      final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
-        @Override
-        public EList<IU> apply(final Location it) {
-          return it.getIus();
-        }
+      final Function1<Location, EList<IU>> _function = (Location it) -> {
+        return it.getIus();
       };
       Assert.assertEquals(2, IterableExtensions.size(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(tp.getLocations(), _function))));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(tp.getLocations(), _function_1));
       Assert.assertEquals(2, IterableExtensions.size(ids));
@@ -393,24 +384,15 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
       Assert.assertEquals("TP1", tp.getName());
-      final Function1<Location, EList<IU>> _function = new Function1<Location, EList<IU>>() {
-        @Override
-        public EList<IU> apply(final Location it) {
-          return it.getIus();
-        }
+      final Function1<Location, EList<IU>> _function = (Location it) -> {
+        return it.getIus();
       };
       Assert.assertEquals(2, IterableExtensions.size(Iterables.<IU>concat(ListExtensions.<Location, EList<IU>>map(tp.getLocations(), _function))));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(tp.getLocations(), _function_1));
       Assert.assertEquals(2, IterableExtensions.size(ids));
@@ -559,30 +541,18 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
-      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function = (Location it) -> {
+        final Function1<IU, String> _function_1 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_1);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
       Assert.assertEquals(1, IterableExtensions.size(ids));
@@ -608,30 +578,18 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
-      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function = (Location it) -> {
+        final Function1<IU, String> _function_1 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_1);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
       Assert.assertEquals(1, IterableExtensions.size(ids));
@@ -660,30 +618,18 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
-      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function = (Location it) -> {
+        final Function1<IU, String> _function_1 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_1);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
       Assert.assertEquals(2, IterableExtensions.size(ids));
@@ -713,30 +659,18 @@ public class TestGrammar {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(IterableExtensions.join(targetPlatform.eResource().getErrors(), "\n"), targetPlatform.eResource().getErrors().isEmpty());
-      final Function1<Location, List<String>> _function = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getID();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function = (Location it) -> {
+        final Function1<IU, String> _function_1 = (IU it_1) -> {
+          return it_1.getID();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_1);
       };
       final Iterable<String> ids = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function));
-      final Function1<Location, List<String>> _function_1 = new Function1<Location, List<String>>() {
-        @Override
-        public List<String> apply(final Location it) {
-          final Function1<IU, String> _function = new Function1<IU, String>() {
-            @Override
-            public String apply(final IU it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IU, String>map(it.getIus(), _function);
-        }
+      final Function1<Location, List<String>> _function_1 = (Location it) -> {
+        final Function1<IU, String> _function_2 = (IU it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IU, String>map(it.getIus(), _function_2);
       };
       final Iterable<String> versions = Iterables.<String>concat(ListExtensions.<Location, List<String>>map(targetPlatform.getLocations(), _function_1));
       Assert.assertEquals(2, IterableExtensions.size(ids));

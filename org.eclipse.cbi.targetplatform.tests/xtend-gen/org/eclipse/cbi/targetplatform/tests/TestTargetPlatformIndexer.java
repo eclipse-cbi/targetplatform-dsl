@@ -78,11 +78,8 @@ public class TestTargetPlatformIndexer {
         this.parser.parse(_builder_4, 
           URI.createURI(_builder_5.toString()), resourceSet);
       }
-      final Function1<TargetPlatform, String> _function = new Function1<TargetPlatform, String>() {
-        @Override
-        public String apply(final TargetPlatform it) {
-          return it.getName();
-        }
+      final Function1<TargetPlatform, String> _function = (TargetPlatform it) -> {
+        return it.getName();
       };
       Assert.assertEquals(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("c", "b", "a", "l", "k", "j", "i", "h", "g", "f", "e", "d")), 

@@ -290,17 +290,11 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
   @Test
   public void testTargetContentEnv0() {
     try {
-      final Function1<IExecutionEnvironment, String> _function = new Function1<IExecutionEnvironment, String>() {
-        @Override
-        public String apply(final IExecutionEnvironment it) {
-          return it.getId();
-        }
+      final Function1<IExecutionEnvironment, String> _function = (IExecutionEnvironment it) -> {
+        return it.getId();
       };
-      final Function1<Locale, String> _function_1 = new Function1<Locale, String>() {
-        @Override
-        public String apply(final Locale it) {
-          return it.toString();
-        }
+      final Function1<Locale, String> _function_1 = (Locale it) -> {
+        return it.toString();
       };
       final ImmutableList<String> p = ImmutableList.<String>builder().addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownOSValues()))).addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownWSValues()))).addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownOSArchValues()))).addAll(ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function)).addAll(ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())), _function_1)).build();
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -343,17 +337,11 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
   @Test
   public void testTargetContentEnv2() {
     try {
-      final Function1<IExecutionEnvironment, String> _function = new Function1<IExecutionEnvironment, String>() {
-        @Override
-        public String apply(final IExecutionEnvironment it) {
-          return it.getId();
-        }
+      final Function1<IExecutionEnvironment, String> _function = (IExecutionEnvironment it) -> {
+        return it.getId();
       };
-      final Function1<Locale, String> _function_1 = new Function1<Locale, String>() {
-        @Override
-        public String apply(final Locale it) {
-          return it.toString();
-        }
+      final Function1<Locale, String> _function_1 = (Locale it) -> {
+        return it.toString();
       };
       final ImmutableList<String> p = ImmutableList.<String>builder().addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownWSValues()))).addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownOSArchValues()))).addAll(ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function)).addAll(ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())), _function_1)).build();
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -370,17 +358,11 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
   @Test
   public void testTargetContentEnv3() {
     try {
-      final Function1<IExecutionEnvironment, String> _function = new Function1<IExecutionEnvironment, String>() {
-        @Override
-        public String apply(final IExecutionEnvironment it) {
-          return it.getId();
-        }
+      final Function1<IExecutionEnvironment, String> _function = (IExecutionEnvironment it) -> {
+        return it.getId();
       };
-      final Function1<Locale, String> _function_1 = new Function1<Locale, String>() {
-        @Override
-        public String apply(final Locale it) {
-          return it.toString();
-        }
+      final Function1<Locale, String> _function_1 = (Locale it) -> {
+        return it.toString();
       };
       final ImmutableList<String> p = ImmutableList.<String>builder().addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownOSValues()))).addAll(((Iterable<? extends String>)Conversions.doWrapArray(Platform.knownOSArchValues()))).addAll(ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function)).addAll(ListExtensions.<Locale, String>map(((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())), _function_1)).build();
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

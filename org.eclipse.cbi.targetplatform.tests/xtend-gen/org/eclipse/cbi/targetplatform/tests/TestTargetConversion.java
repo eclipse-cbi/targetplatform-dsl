@@ -102,18 +102,12 @@ public class TestTargetConversion {
       Assert.assertEquals(1, targetDef.getLocations().size());
       final ResolvedLocation loc = IterableExtensions.<ResolvedLocation>head(targetDef.getLocations());
       Assert.assertEquals(2, loc.getResolvedIUs().size());
-      final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-        @Override
-        public String apply(final IInstallableUnit it) {
-          return it.getId();
-        }
+      final Function1<IInstallableUnit, String> _function = (IInstallableUnit it) -> {
+        return it.getId();
       };
       final String[] ids = ((String[])Conversions.unwrapArray(ListExtensions.<IInstallableUnit, String>map(loc.getResolvedIUs(), _function), String.class));
-      final Function1<IInstallableUnit, Version> _function_1 = new Function1<IInstallableUnit, Version>() {
-        @Override
-        public Version apply(final IInstallableUnit it) {
-          return it.getVersion();
-        }
+      final Function1<IInstallableUnit, Version> _function_1 = (IInstallableUnit it) -> {
+        return it.getVersion();
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(ListExtensions.<IInstallableUnit, Version>map(loc.getResolvedIUs(), _function_1), Version.class));
       Assert.assertEquals("com.google.guava", IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ids))));
@@ -211,17 +205,11 @@ public class TestTargetConversion {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -293,17 +281,11 @@ public class TestTargetConversion {
       Assert.assertEquals(2, targetDef.getLocations().size());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", IterableExtensions.<ResolvedLocation>head(targetDef.getLocations()).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.getLocations().get(1).getURI().toString());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -364,17 +346,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -435,17 +411,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -501,17 +471,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -573,30 +537,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -665,30 +617,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -757,30 +697,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -849,30 +777,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -941,30 +857,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1023,30 +927,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1105,30 +997,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1183,30 +1063,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1261,30 +1129,18 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
-      final Function1<ResolvedLocation, List<Version>> _function_1 = new Function1<ResolvedLocation, List<Version>>() {
-        @Override
-        public List<Version> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, Version> _function = new Function1<IInstallableUnit, Version>() {
-            @Override
-            public Version apply(final IInstallableUnit it) {
-              return it.getVersion();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<Version>> _function_1 = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, Version> _function_2 = (IInstallableUnit it_1) -> {
+          return it_1.getVersion();
+        };
+        return ListExtensions.<IInstallableUnit, Version>map(it.getResolvedIUs(), _function_2);
       };
       final Version[] versions = ((Version[])Conversions.unwrapArray(Iterables.<Version>concat(ListExtensions.<ResolvedLocation, List<Version>>map(targetDef.getLocations(), _function_1)), Version.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1333,17 +1189,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1394,17 +1244,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1451,17 +1295,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(1, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1510,17 +1348,11 @@ public class TestTargetConversion {
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
-      final Function1<ResolvedLocation, List<String>> _function = new Function1<ResolvedLocation, List<String>>() {
-        @Override
-        public List<String> apply(final ResolvedLocation it) {
-          final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-            @Override
-            public String apply(final IInstallableUnit it) {
-              return it.getId();
-            }
-          };
-          return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function);
-        }
+      final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
+        final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
+          return it_1.getId();
+        };
+        return ListExtensions.<IInstallableUnit, String>map(it.getResolvedIUs(), _function_1);
       };
       final String[] ids = ((String[])Conversions.unwrapArray(Iterables.<String>concat(ListExtensions.<ResolvedLocation, List<String>>map(targetDef.getLocations(), _function)), String.class));
       Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(ids)).size());
@@ -1785,12 +1617,9 @@ public class TestTargetConversion {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final Diagnostic d = resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
       Assert.assertEquals(Diagnostic.ERROR, d.getSeverity());
-      final Function1<Diagnostic, Boolean> _function = new Function1<Diagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final Diagnostic it) {
-          int _severity = it.getSeverity();
-          return Boolean.valueOf((_severity >= Diagnostic.WARNING));
-        }
+      final Function1<Diagnostic, Boolean> _function = (Diagnostic it) -> {
+        int _severity = it.getSeverity();
+        return Boolean.valueOf((_severity >= Diagnostic.WARNING));
       };
       Assert.assertEquals(IterableExtensions.join(d.getChildren(), ", "), 1, IterableExtensions.size(IterableExtensions.<Diagnostic>filter(d.getChildren(), _function)));
     } catch (Throwable _e) {

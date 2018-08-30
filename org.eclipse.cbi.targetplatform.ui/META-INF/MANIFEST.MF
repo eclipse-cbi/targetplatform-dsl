@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.cbi.targetplatform;visibility:=reexport,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
 Export-Package: org.eclipse.cbi.targetplatform.ui,
  org.eclipse.cbi.targetplatform.ui.contentassist,

@@ -2,29 +2,31 @@ target "Target Platform DSL 2.1.1"
 
 with source requirements
 
-location "http://download.eclipse.org/eclipse/updates/3.8" {
+location "http://download.eclipse.org/eclipse/updates/4.4" {
 	org.eclipse.equinox.p2.sdk.feature.group
 	org.eclipse.sdk.feature.group
 	org.eclipse.pde.core 3.8.0
 }
 
-location "http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/" {
-	org.eclipse.emf.sdk.feature.group [2.10.0,3.0.0)
-	org.eclipse.emf.sdk.source.feature.group [2.10.0,3.0.0)
-	
-	org.eclipse.emf.ecore.xcore.feature.group [1.2.0,2.0.0)
-	org.eclipse.emf.ecore.xcore.source.feature.group [1.2.0,2.0.0)
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452" {
+	org.eclipse.emf.sdk.feature.group [2.10.2,3.0.0)
+	org.eclipse.emf.sdk.source.feature.group [2.10.2,3.0.0)
 }
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201409160908/" {
-	org.eclipse.xtext.ui.feature.group [2.7.2,3.0.0)
-	org.eclipse.xtext.ui.source.feature.group [2.7.2,3.0.0)
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/xcore/R201502020452" {
+	org.eclipse.emf.ecore.xcore.feature.group [1.2.2,2.0.0)
+	org.eclipse.emf.ecore.xcore.source.feature.group [1.2.2,2.0.0)
+}
+
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/" {
+	org.eclipse.xtext.ui.feature.group [2.7.3,3.0.0)
+	org.eclipse.xtext.ui.source.feature.group [2.7.3,3.0.0)
 	
-	org.eclipse.xtext.runtime.feature.group [2.7.2,3.0.0)
-	org.eclipse.xtext.runtime.source.feature.group [2.7.2,3.0.0)
+	org.eclipse.xtext.runtime.feature.group [2.7.3,3.0.0)
+	org.eclipse.xtext.runtime.source.feature.group [2.7.3,3.0.0)
 	
-	org.eclipse.xtext.junit4 [2.7.2,3.0.0)
-	org.eclipse.xtext.junit4.source [2.7.2,3.0.0)
+	org.eclipse.xtext.junit4 [2.7.3,3.0.0)
+	org.eclipse.xtext.junit4.source [2.7.3,3.0.0)
 	
 	org.objectweb.asm 
 	org.objectweb.asm.source

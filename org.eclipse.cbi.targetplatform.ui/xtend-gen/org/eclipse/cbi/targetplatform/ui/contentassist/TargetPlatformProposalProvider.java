@@ -12,7 +12,6 @@ package org.eclipse.cbi.targetplatform.ui.contentassist;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
@@ -350,33 +349,24 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       String _operatingSystem = env.getOperatingSystem();
       boolean _tripleEquals = (_operatingSystem == null);
       if (_tripleEquals) {
-        final Consumer<String> _function = new Consumer<String>() {
-          @Override
-          public void accept(final String it) {
-            acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it, "operating system", env, 340, context));
-          }
+        final Consumer<String> _function = (String it) -> {
+          acceptor.accept(this.createCompletionProposal(it, "operating system", env, 340, context));
         };
         ((List<String>)Conversions.doWrapArray(Platform.knownOSValues())).forEach(_function);
       }
       String _windowingSystem = env.getWindowingSystem();
       boolean _tripleEquals_1 = (_windowingSystem == null);
       if (_tripleEquals_1) {
-        final Consumer<String> _function_1 = new Consumer<String>() {
-          @Override
-          public void accept(final String it) {
-            acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it, "windowing system", env, 330, context));
-          }
+        final Consumer<String> _function_1 = (String it) -> {
+          acceptor.accept(this.createCompletionProposal(it, "windowing system", env, 330, context));
         };
         ((List<String>)Conversions.doWrapArray(Platform.knownWSValues())).forEach(_function_1);
       }
       String _architecture = env.getArchitecture();
       boolean _tripleEquals_2 = (_architecture == null);
       if (_tripleEquals_2) {
-        final Consumer<String> _function_2 = new Consumer<String>() {
-          @Override
-          public void accept(final String it) {
-            acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it, "architecture", env, 320, context));
-          }
+        final Consumer<String> _function_2 = (String it) -> {
+          acceptor.accept(this.createCompletionProposal(it, "architecture", env, 320, context));
         };
         ((List<String>)Conversions.doWrapArray(Platform.knownOSArchValues())).forEach(_function_2);
       }
@@ -386,11 +376,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
         boolean _tripleNotEquals = (eeManager != null);
         if (_tripleNotEquals) {
-          final Consumer<IExecutionEnvironment> _function_3 = new Consumer<IExecutionEnvironment>() {
-            @Override
-            public void accept(final IExecutionEnvironment it) {
-              acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it.getId(), it.getDescription(), env, 310, context));
-            }
+          final Consumer<IExecutionEnvironment> _function_3 = (IExecutionEnvironment it) -> {
+            acceptor.accept(this.createCompletionProposal(it.getId(), it.getDescription(), env, 310, context));
           };
           ((List<IExecutionEnvironment>)Conversions.doWrapArray(eeManager.getExecutionEnvironments())).forEach(_function_3);
         }
@@ -398,11 +385,8 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       Locale _localization = env.getLocalization();
       boolean _tripleEquals_4 = (_localization == null);
       if (_tripleEquals_4) {
-        final Consumer<Locale> _function_4 = new Consumer<Locale>() {
-          @Override
-          public void accept(final Locale it) {
-            acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it.toString(), it.getDisplayName(), env, 300, context));
-          }
+        final Consumer<Locale> _function_4 = (Locale it) -> {
+          acceptor.accept(this.createCompletionProposal(it.toString(), it.getDisplayName(), env, 300, context));
         };
         ((List<Locale>)Conversions.doWrapArray(Locale.getAvailableLocales())).forEach(_function_4);
       }
@@ -428,51 +412,36 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
         final Location location = ((Location) model);
         final String uri = location.getUri();
         final IWorkbenchWindow window = TargetPlatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
-        final IRunnableWithProgress _function = new IRunnableWithProgress() {
-          @Override
-          public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-            Display _display = window.getShell().getDisplay();
-            ReadAndDispatchProgressMonitorWrapper _readAndDispatchProgressMonitorWrapper = new ReadAndDispatchProgressMonitorWrapper(monitor, _display);
-            final SubMonitor wpm = SubMonitor.convert(_readAndDispatchProgressMonitorWrapper, ("Creating content assist for " + uri), 100);
-            try {
-              Object _service = TargetPlatformProposalProvider.this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-              final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
-              URI _uRI = new URI(uri);
-              final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, wpm.newChild(90));
-              final Set<IInstallableUnit> results = metadataRepository.query(TargetPlatformProposalProvider.this.getIUAssistQuery(), wpm.newChild(5)).toUnmodifiableSet();
-              final Function1<IInstallableUnit, Boolean> _function = new Function1<IInstallableUnit, Boolean>() {
-                @Override
-                public Boolean apply(final IInstallableUnit it) {
-                  final Function1<IU, String> _function = new Function1<IU, String>() {
-                    @Override
-                    public String apply(final IU it) {
-                      return it.getID();
-                    }
-                  };
-                  boolean _contains = ListExtensions.<IU, String>map(location.getIus(), _function).contains(it.getId());
-                  return Boolean.valueOf((!_contains));
-                }
+        final IRunnableWithProgress _function = (IProgressMonitor monitor) -> {
+          Display _display = window.getShell().getDisplay();
+          ReadAndDispatchProgressMonitorWrapper _readAndDispatchProgressMonitorWrapper = new ReadAndDispatchProgressMonitorWrapper(monitor, _display);
+          final SubMonitor wpm = SubMonitor.convert(_readAndDispatchProgressMonitorWrapper, ("Creating content assist for " + uri), 100);
+          try {
+            Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+            final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+            URI _uRI = new URI(uri);
+            final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, wpm.newChild(90));
+            final Set<IInstallableUnit> results = metadataRepository.query(this.getIUAssistQuery(), wpm.newChild(5)).toUnmodifiableSet();
+            final Function1<IInstallableUnit, Boolean> _function_1 = (IInstallableUnit it) -> {
+              final Function1<IU, String> _function_2 = (IU it_1) -> {
+                return it_1.getID();
               };
-              final Consumer<IInstallableUnit> _function_1 = new Consumer<IInstallableUnit>() {
-                @Override
-                public void accept(final IInstallableUnit it) {
-                  final IQueryResult<IInstallableUnit> allVersions = metadataRepository.query(QueryUtil.createIUQuery(it.getId()), wpm.newChild(5));
-                  final Function1<IInstallableUnit, String> _function = new Function1<IInstallableUnit, String>() {
-                    @Override
-                    public String apply(final IInstallableUnit it) {
-                      return it.getVersion().toString();
-                    }
-                  };
-                  acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(it.getId(), IteratorExtensions.join(IteratorExtensions.<IInstallableUnit, String>map(allVersions.iterator(), _function), ", "), TargetPlatformProposalProvider.IU, 0, context));
-                }
+              boolean _contains = ListExtensions.<IU, String>map(location.getIus(), _function_2).contains(it.getId());
+              return Boolean.valueOf((!_contains));
+            };
+            final Consumer<IInstallableUnit> _function_2 = (IInstallableUnit it) -> {
+              final IQueryResult<IInstallableUnit> allVersions = metadataRepository.query(QueryUtil.createIUQuery(it.getId()), wpm.newChild(5));
+              final Function1<IInstallableUnit, String> _function_3 = (IInstallableUnit it_1) -> {
+                return it_1.getVersion().toString();
               };
-              IterableExtensions.<IInstallableUnit>filter(results, _function).forEach(_function_1);
-            } catch (final Throwable _t) {
-              if (_t instanceof Exception) {
-                final Exception e = (Exception)_t;
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
+              acceptor.accept(this.createCompletionProposal(it.getId(), IteratorExtensions.join(IteratorExtensions.<IInstallableUnit, String>map(allVersions.iterator(), _function_3), ", "), TargetPlatformProposalProvider.IU, 0, context));
+            };
+            IterableExtensions.<IInstallableUnit>filter(results, _function_1).forEach(_function_2);
+          } catch (final Throwable _t) {
+            if (_t instanceof Exception) {
+              final Exception e = (Exception)_t;
+            } else {
+              throw Exceptions.sneakyThrow(_t);
             }
           }
         };
@@ -644,150 +613,144 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   }
   
   private IRunnableWithProgress versionProposalRunnable(final String uri, final IU iu, final String prefix, final Display display, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final IRunnableWithProgress _function = new IRunnableWithProgress() {
-      @Override
-      public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+    final IRunnableWithProgress _function = (IProgressMonitor monitor) -> {
+      try {
+        ReadAndDispatchProgressMonitorWrapper _readAndDispatchProgressMonitorWrapper = new ReadAndDispatchProgressMonitorWrapper(monitor, display);
+        final SubMonitor wpm = SubMonitor.convert(_readAndDispatchProgressMonitorWrapper, ("Creating content assist for " + uri), 100);
         try {
-          ReadAndDispatchProgressMonitorWrapper _readAndDispatchProgressMonitorWrapper = new ReadAndDispatchProgressMonitorWrapper(monitor, display);
-          final SubMonitor wpm = SubMonitor.convert(_readAndDispatchProgressMonitorWrapper, ("Creating content assist for " + uri), 100);
-          try {
-            Object _service = TargetPlatformProposalProvider.this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-            final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
-            URI _uRI = new URI(uri);
-            final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, wpm.newChild(95));
-            final Set<IInstallableUnit> results = metadataRepository.query(QueryUtil.createIUQuery(iu.getID()), wpm.newChild(5)).toUnmodifiableSet();
-            final Consumer<IInstallableUnit> _function = new Consumer<IInstallableUnit>() {
-              @Override
-              public void accept(final IInstallableUnit it) {
-                Comparable<?> _segment = it.getVersion().getSegment(0);
-                final Integer major = ((Integer) _segment);
-                Comparable<?> _segment_1 = it.getVersion().getSegment(1);
-                final Integer minor = ((Integer) _segment_1);
-                Comparable<?> _segment_2 = it.getVersion().getSegment(2);
-                final Integer micro = ((Integer) _segment_2);
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append(prefix);
-                _builder.append("[");
-                _builder.append(major);
-                _builder.append(".");
-                _builder.append(minor);
-                _builder.append(".");
-                _builder.append(micro);
-                _builder.append(",");
-                _builder.append(((major).intValue() + 1));
-                _builder.append(".0.0)");
-                StringConcatenation _builder_1 = new StringConcatenation();
-                _builder_1.append("[");
-                _builder_1.append(major);
-                _builder_1.append(".");
-                _builder_1.append(minor);
-                _builder_1.append(".");
-                _builder_1.append(micro);
-                _builder_1.append(",");
-                _builder_1.append(((major).intValue() + 1));
-                _builder_1.append(".0.0)");
-                acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(_builder.toString(), _builder_1.toString(), TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU), context));
-                StringConcatenation _builder_2 = new StringConcatenation();
-                _builder_2.append(prefix);
-                _builder_2.append("[");
-                _builder_2.append(major);
-                _builder_2.append(".");
-                _builder_2.append(minor);
-                _builder_2.append(".");
-                _builder_2.append(micro);
-                _builder_2.append(",");
-                _builder_2.append(major);
-                _builder_2.append(".");
-                _builder_2.append(((minor).intValue() + 1));
-                _builder_2.append(".0)");
-                StringConcatenation _builder_3 = new StringConcatenation();
-                _builder_3.append("[");
-                _builder_3.append(major);
-                _builder_3.append(".");
-                _builder_3.append(minor);
-                _builder_3.append(".");
-                _builder_3.append(micro);
-                _builder_3.append(",");
-                _builder_3.append(major);
-                _builder_3.append(".");
-                _builder_3.append(((minor).intValue() + 1));
-                _builder_3.append(".0)");
-                acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(_builder_2.toString(), _builder_3.toString(), TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU), context));
-                StringConcatenation _builder_4 = new StringConcatenation();
-                _builder_4.append(prefix);
-                _builder_4.append("[");
-                _builder_4.append(major);
-                _builder_4.append(".");
-                _builder_4.append(minor);
-                _builder_4.append(".");
-                _builder_4.append(micro);
-                _builder_4.append(",");
-                _builder_4.append(major);
-                _builder_4.append(".");
-                _builder_4.append(minor);
-                _builder_4.append(".");
-                _builder_4.append(((micro).intValue() + 1));
-                _builder_4.append(")");
-                StringConcatenation _builder_5 = new StringConcatenation();
-                _builder_5.append("[");
-                _builder_5.append(major);
-                _builder_5.append(".");
-                _builder_5.append(minor);
-                _builder_5.append(".");
-                _builder_5.append(micro);
-                _builder_5.append(",");
-                _builder_5.append(major);
-                _builder_5.append(".");
-                _builder_5.append(minor);
-                _builder_5.append(".");
-                _builder_5.append(((micro).intValue() + 1));
-                _builder_5.append(")");
-                acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(_builder_4.toString(), _builder_5.toString(), TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU), context));
-                StringConcatenation _builder_6 = new StringConcatenation();
-                _builder_6.append(prefix);
-                _builder_6.append("[");
-                Version _version = it.getVersion();
-                _builder_6.append(_version);
-                _builder_6.append(",");
-                Version _version_1 = it.getVersion();
-                _builder_6.append(_version_1);
-                _builder_6.append("]");
-                StringConcatenation _builder_7 = new StringConcatenation();
-                _builder_7.append("[");
-                Version _version_2 = it.getVersion();
-                _builder_7.append(_version_2);
-                _builder_7.append(",");
-                Version _version_3 = it.getVersion();
-                _builder_7.append(_version_3);
-                _builder_7.append("]");
-                acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(_builder_6.toString(), _builder_7.toString(), TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU), context));
-              }
-            };
-            results.forEach(_function);
-            boolean _isEmpty = results.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append(prefix);
-              _builder.append("lazy");
-              StringConcatenation _builder_1 = new StringConcatenation();
-              _builder_1.append("lazy");
-              acceptor.accept(TargetPlatformProposalProvider.this.createCompletionProposal(_builder.toString(), _builder_1.toString(), TargetPlatformProposalProvider.this.getImage(TargetPlatformProposalProvider.IU), context));
-            }
-          } catch (final Throwable _t) {
-            if (_t instanceof IllegalStateException) {
-              final IllegalStateException e = (IllegalStateException)_t;
-            } else if (_t instanceof ProvisionException) {
-              final ProvisionException e_1 = (ProvisionException)_t;
-            } else if (_t instanceof OperationCanceledException) {
-              final OperationCanceledException e_2 = (OperationCanceledException)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+          Object _service = this.provisioningAgent.getService(IMetadataRepositoryManager.SERVICE_NAME);
+          final IMetadataRepositoryManager repositoryManager = ((IMetadataRepositoryManager) _service);
+          URI _uRI = new URI(uri);
+          final IMetadataRepository metadataRepository = repositoryManager.loadRepository(_uRI, wpm.newChild(95));
+          final Set<IInstallableUnit> results = metadataRepository.query(QueryUtil.createIUQuery(iu.getID()), wpm.newChild(5)).toUnmodifiableSet();
+          final Consumer<IInstallableUnit> _function_1 = (IInstallableUnit it) -> {
+            Comparable<?> _segment = it.getVersion().getSegment(0);
+            final Integer major = ((Integer) _segment);
+            Comparable<?> _segment_1 = it.getVersion().getSegment(1);
+            final Integer minor = ((Integer) _segment_1);
+            Comparable<?> _segment_2 = it.getVersion().getSegment(2);
+            final Integer micro = ((Integer) _segment_2);
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(prefix);
+            _builder.append("[");
+            _builder.append(major);
+            _builder.append(".");
+            _builder.append(minor);
+            _builder.append(".");
+            _builder.append(micro);
+            _builder.append(",");
+            _builder.append(((major).intValue() + 1));
+            _builder.append(".0.0)");
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("[");
+            _builder_1.append(major);
+            _builder_1.append(".");
+            _builder_1.append(minor);
+            _builder_1.append(".");
+            _builder_1.append(micro);
+            _builder_1.append(",");
+            _builder_1.append(((major).intValue() + 1));
+            _builder_1.append(".0.0)");
+            acceptor.accept(this.createCompletionProposal(_builder.toString(), _builder_1.toString(), this.getImage(TargetPlatformProposalProvider.IU), context));
+            StringConcatenation _builder_2 = new StringConcatenation();
+            _builder_2.append(prefix);
+            _builder_2.append("[");
+            _builder_2.append(major);
+            _builder_2.append(".");
+            _builder_2.append(minor);
+            _builder_2.append(".");
+            _builder_2.append(micro);
+            _builder_2.append(",");
+            _builder_2.append(major);
+            _builder_2.append(".");
+            _builder_2.append(((minor).intValue() + 1));
+            _builder_2.append(".0)");
+            StringConcatenation _builder_3 = new StringConcatenation();
+            _builder_3.append("[");
+            _builder_3.append(major);
+            _builder_3.append(".");
+            _builder_3.append(minor);
+            _builder_3.append(".");
+            _builder_3.append(micro);
+            _builder_3.append(",");
+            _builder_3.append(major);
+            _builder_3.append(".");
+            _builder_3.append(((minor).intValue() + 1));
+            _builder_3.append(".0)");
+            acceptor.accept(this.createCompletionProposal(_builder_2.toString(), _builder_3.toString(), this.getImage(TargetPlatformProposalProvider.IU), context));
+            StringConcatenation _builder_4 = new StringConcatenation();
+            _builder_4.append(prefix);
+            _builder_4.append("[");
+            _builder_4.append(major);
+            _builder_4.append(".");
+            _builder_4.append(minor);
+            _builder_4.append(".");
+            _builder_4.append(micro);
+            _builder_4.append(",");
+            _builder_4.append(major);
+            _builder_4.append(".");
+            _builder_4.append(minor);
+            _builder_4.append(".");
+            _builder_4.append(((micro).intValue() + 1));
+            _builder_4.append(")");
+            StringConcatenation _builder_5 = new StringConcatenation();
+            _builder_5.append("[");
+            _builder_5.append(major);
+            _builder_5.append(".");
+            _builder_5.append(minor);
+            _builder_5.append(".");
+            _builder_5.append(micro);
+            _builder_5.append(",");
+            _builder_5.append(major);
+            _builder_5.append(".");
+            _builder_5.append(minor);
+            _builder_5.append(".");
+            _builder_5.append(((micro).intValue() + 1));
+            _builder_5.append(")");
+            acceptor.accept(this.createCompletionProposal(_builder_4.toString(), _builder_5.toString(), this.getImage(TargetPlatformProposalProvider.IU), context));
+            StringConcatenation _builder_6 = new StringConcatenation();
+            _builder_6.append(prefix);
+            _builder_6.append("[");
+            Version _version = it.getVersion();
+            _builder_6.append(_version);
+            _builder_6.append(",");
+            Version _version_1 = it.getVersion();
+            _builder_6.append(_version_1);
+            _builder_6.append("]");
+            StringConcatenation _builder_7 = new StringConcatenation();
+            _builder_7.append("[");
+            Version _version_2 = it.getVersion();
+            _builder_7.append(_version_2);
+            _builder_7.append(",");
+            Version _version_3 = it.getVersion();
+            _builder_7.append(_version_3);
+            _builder_7.append("]");
+            acceptor.accept(this.createCompletionProposal(_builder_6.toString(), _builder_7.toString(), this.getImage(TargetPlatformProposalProvider.IU), context));
+          };
+          results.forEach(_function_1);
+          boolean _isEmpty = results.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(prefix);
+            _builder.append("lazy");
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("lazy");
+            acceptor.accept(this.createCompletionProposal(_builder.toString(), _builder_1.toString(), this.getImage(TargetPlatformProposalProvider.IU), context));
           }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+        } catch (final Throwable _t) {
+          if (_t instanceof IllegalStateException) {
+            final IllegalStateException e = (IllegalStateException)_t;
+          } else if (_t instanceof ProvisionException) {
+            final ProvisionException e_1 = (ProvisionException)_t;
+          } else if (_t instanceof OperationCanceledException) {
+            final OperationCanceledException e_2 = (OperationCanceledException)_t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     return _function;

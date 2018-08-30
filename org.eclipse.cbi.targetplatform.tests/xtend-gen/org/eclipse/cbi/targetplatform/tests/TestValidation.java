@@ -155,13 +155,10 @@ public class TestValidation {
       tester.validator().checkAllEnvAndRequiredAreSelfExluding(targetPlatform);
       final Iterable<Diagnostic> diag = tester.diagnose().getAllDiagnostics();
       Assert.assertEquals(2, IterableExtensions.size(diag));
-      final Consumer<AbstractValidationDiagnostic> _function = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertTrue((_sourceEObject instanceof Options));
-          Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertTrue((_sourceEObject instanceof Options));
+        Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_SELF_EXCLUDING_ALL_ENV_REQUIRED, it.getIssueCode());
       };
       Iterables.<AbstractValidationDiagnostic>filter(diag, AbstractValidationDiagnostic.class).forEach(_function);
     } catch (Throwable _e) {
@@ -255,19 +252,13 @@ public class TestValidation {
       tester.validator().checkIDUniqueOnAllLocations(targetPlatform);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(2, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -297,19 +288,13 @@ public class TestValidation {
       tester.validator().checkIDUniqueOnAllLocations(targetPlatform);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(2, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_ID_UNIQNESS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -522,19 +507,13 @@ public class TestValidation {
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
       tester.validator().checkNoLocationOptionIfGlobalOptions(IterableExtensions.<Location>head(targetPlatform.getLocations()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -580,19 +559,13 @@ public class TestValidation {
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
       tester.validator().checkNoLocationOptionIfGlobalOptions(IterableExtensions.<Location>head(targetPlatform.getLocations()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = IterableExtensions.<AbstractValidationDiagnostic>head(diagnotics).getSourceEObject();
@@ -729,19 +702,13 @@ public class TestValidation {
       tester.validator().checkOptionsOnLocationAreIdentical(targetPlatform);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(2, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_EQUALS_ALL_LOCATIONS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -828,19 +795,13 @@ public class TestValidation {
       tester.validator().deprecateOptionsOnLocation(IterableExtensions.<Location>head(targetPlatform.getLocations()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -864,19 +825,13 @@ public class TestValidation {
       tester.validator().deprecateOptionsOnLocation(IterableExtensions.<Location>head(targetPlatform.getLocations()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.DEPRECATE__OPTIONS_ON_LOCATIONS, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -905,19 +860,13 @@ public class TestValidation {
       tester.validator().deprecateIUVersionRangeWihString(IterableExtensions.<IU>head(IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IU));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IU));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.DEPRECATE__STRINGS_ON_IU_VERSION, it.getIssueCode());
       };
       diagnotics.forEach(_function_1);
       EObject _sourceEObject = diagnotics.get(0).getSourceEObject();
@@ -1094,21 +1043,15 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(targetPlatform);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(2, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("mylocationURI1", ((Location) _sourceEObject).getUri());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("mylocationURI1", ((Location) _sourceEObject).getUri());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -1132,21 +1075,15 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(targetPlatform);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(2, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("mylocationURI1", ((Location) _sourceEObject).getUri());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("mylocationURI1", ((Location) _sourceEObject).getUri());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -1284,23 +1221,17 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -1331,23 +1262,17 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -1450,46 +1375,34 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkSameIDForAllLocationWithSameURI(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpc.eResource().getErrors().isEmpty());
@@ -1532,46 +1445,34 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkSameIDForAllLocationWithSameURI(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpc.eResource().getErrors().isEmpty());
@@ -1614,46 +1515,34 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkSameIDForAllLocationWithSameURI(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpc.eResource().getErrors().isEmpty());
@@ -1732,46 +1621,34 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkSameIDForAllLocationWithSameURI(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpc.eResource().getErrors().isEmpty());
@@ -1814,46 +1691,34 @@ public class TestValidation {
       tester.validator().checkSameIDForAllLocationWithSameURI(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__CONFLICTUAL_ID__BETWEEN_INCLUDED_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/a.tpd", ((IncludeDeclaration) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkSameIDForAllLocationWithSameURI(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof Location));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof Location));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
-          EObject _sourceEObject_1 = it.getSourceEObject();
-          Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDED_LOCATION_CONFLICTUAL_ID, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("locationURI1", ((Location) _sourceEObject).getUri());
+        EObject _sourceEObject_1 = it.getSourceEObject();
+        Assert.assertEquals("tmp:/b.tpd", ((Location) _sourceEObject_1).eResource().getURI().toString());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpc.eResource().getErrors().isEmpty());
@@ -1898,21 +1763,15 @@ public class TestValidation {
       tester.validator().checkImportCycle(tpa);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -1941,42 +1800,30 @@ public class TestValidation {
       tester.validator().checkImportCycle(tpa);
       final List<AbstractValidationDiagnostic> diagnoticsa = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnoticsa.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnoticsa, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnoticsa.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkImportCycle(tpb);
       final List<AbstractValidationDiagnostic> diagnoticsb = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnoticsb.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnoticsb, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnoticsb.forEach(_function_3);
     } catch (Throwable _e) {
@@ -2011,63 +1858,45 @@ public class TestValidation {
       tester.validator().checkImportCycle(tpa);
       List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("b.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnotics.forEach(_function_1);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkImportCycle(tpb);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_2 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_2));
-      final Consumer<AbstractValidationDiagnostic> _function_3 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("c.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_3 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("c.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnotics.forEach(_function_3);
       Assert.assertTrue(tpb.eResource().getErrors().isEmpty());
       tester.validator().checkImportCycle(tpc);
       diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_4 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_4 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IncludeDeclaration));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_4));
-      final Consumer<AbstractValidationDiagnostic> _function_5 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_5 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__INCLUDE_CYCLE, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("a.tpd", ((IncludeDeclaration) _sourceEObject).getImportURI());
       };
       diagnotics.forEach(_function_5);
     } catch (Throwable _e) {
@@ -2118,21 +1947,15 @@ public class TestValidation {
       tester.validator().checkIUIDAndRangeInRepository(IterableExtensions.<IU>head(IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus()));
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IU));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IU));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function));
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("org.iu2", ((IU) _sourceEObject).getID());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("org.iu2", ((IU) _sourceEObject).getID());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -2168,28 +1991,19 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<IU> _function = new Consumer<IU>() {
-        @Override
-        public void accept(final IU it) {
-          tester.validator().checkIUIDAndRangeInRepository(it);
-        }
+      final Consumer<IU> _function = (IU it) -> {
+        tester.validator().checkIUIDAndRangeInRepository(it);
       };
       IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(3, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IU));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IU));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_1));
-      final Consumer<AbstractValidationDiagnostic> _function_2 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_2 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
       };
       diagnotics.forEach(_function_2);
     } catch (Throwable _e) {
@@ -2213,11 +2027,8 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<IU> _function = new Consumer<IU>() {
-        @Override
-        public void accept(final IU it) {
-          tester.validator().checkIUIDAndRangeInRepository(it);
-        }
+      final Consumer<IU> _function = (IU it) -> {
+        tester.validator().checkIUIDAndRangeInRepository(it);
       };
       IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
@@ -2243,30 +2054,21 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<IU> _function = new Consumer<IU>() {
-        @Override
-        public void accept(final IU it) {
-          tester.validator().checkIUIDAndRangeInRepository(it);
-        }
+      final Consumer<IU> _function = (IU it) -> {
+        tester.validator().checkIUIDAndRangeInRepository(it);
       };
       IterableExtensions.<Location>head(targetPlatform.getLocations()).getIus().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = new Function1<AbstractValidationDiagnostic, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractValidationDiagnostic it) {
-          EObject _sourceEObject = it.getSourceEObject();
-          return Boolean.valueOf((_sourceEObject instanceof IU));
-        }
+      final Function1<AbstractValidationDiagnostic, Boolean> _function_1 = (AbstractValidationDiagnostic it) -> {
+        EObject _sourceEObject = it.getSourceEObject();
+        return Boolean.valueOf((_sourceEObject instanceof IU));
       };
       Assert.assertTrue(IterableExtensions.<AbstractValidationDiagnostic>forall(diagnotics, _function_1));
-      final Consumer<AbstractValidationDiagnostic> _function_2 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("org.iu1", ((IU) _sourceEObject).getID());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_2 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__IU_IN_LOCATION, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("org.iu1", ((IU) _sourceEObject).getID());
       };
       diagnotics.forEach(_function_2);
     } catch (Throwable _e) {
@@ -2287,11 +2089,8 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<Location> _function = new Consumer<Location>() {
-        @Override
-        public void accept(final Location it) {
-          tester.validator().checkLocationURI(it);
-        }
+      final Consumer<Location> _function = (Location it) -> {
+        tester.validator().checkLocationURI(it);
       };
       targetPlatform.getLocations().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
@@ -2314,11 +2113,8 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<Location> _function = new Consumer<Location>() {
-        @Override
-        public void accept(final Location it) {
-          tester.validator().checkLocationURI(it);
-        }
+      final Consumer<Location> _function = (Location it) -> {
+        tester.validator().checkLocationURI(it);
       };
       targetPlatform.getLocations().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
@@ -2341,22 +2137,16 @@ public class TestValidation {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       Assert.assertTrue(targetPlatform.eResource().getErrors().isEmpty());
-      final Consumer<Location> _function = new Consumer<Location>() {
-        @Override
-        public void accept(final Location it) {
-          tester.validator().checkLocationURI(it);
-        }
+      final Consumer<Location> _function = (Location it) -> {
+        tester.validator().checkLocationURI(it);
       };
       targetPlatform.getLocations().forEach(_function);
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Consumer<AbstractValidationDiagnostic> _function_1 = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_URI, it.getIssueCode());
-          EObject _sourceEObject = it.getSourceEObject();
-          Assert.assertEquals("badLocation", ((Location) _sourceEObject).getUri());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function_1 = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__LOCATION_URI, it.getIssueCode());
+        EObject _sourceEObject = it.getSourceEObject();
+        Assert.assertEquals("badLocation", ((Location) _sourceEObject).getUri());
       };
       diagnotics.forEach(_function_1);
     } catch (Throwable _e) {
@@ -2397,11 +2187,8 @@ public class TestValidation {
       tester.validator().checkEnvironment(targetPlatform.getEnvironment());
       final List<AbstractValidationDiagnostic> diagnotics = IterableExtensions.<AbstractValidationDiagnostic>toList(Iterables.<AbstractValidationDiagnostic>filter(tester.diagnose().getAllDiagnostics(), AbstractValidationDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Consumer<AbstractValidationDiagnostic> _function = new Consumer<AbstractValidationDiagnostic>() {
-        @Override
-        public void accept(final AbstractValidationDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_VALIDITY, it.getIssueCode());
-        }
+      final Consumer<AbstractValidationDiagnostic> _function = (AbstractValidationDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_VALIDITY, it.getIssueCode());
       };
       diagnotics.forEach(_function);
     } catch (Throwable _e) {
@@ -2497,14 +2284,11 @@ public class TestValidation {
       tester.validator().checkOneEnvironment(targetPlatform);
       final List<FeatureBasedDiagnostic> diagnotics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Consumer<FeatureBasedDiagnostic> _function = new Consumer<FeatureBasedDiagnostic>() {
-        @Override
-        public void accept(final FeatureBasedDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY, it.getIssueCode());
-          Assert.assertEquals(Diagnostic.WARNING, it.getSeverity());
-          Object _eGet = it.getSourceEObject().eGet(it.getFeature());
-          Assert.assertEquals(targetPlatform.getContents().get(1), ((List<?>) _eGet).get(it.getIndex()));
-        }
+      final Consumer<FeatureBasedDiagnostic> _function = (FeatureBasedDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__ENVIRONMENT_UNICITY, it.getIssueCode());
+        Assert.assertEquals(Diagnostic.WARNING, it.getSeverity());
+        Object _eGet = it.getSourceEObject().eGet(it.getFeature());
+        Assert.assertEquals(targetPlatform.getContents().get(1), ((List<?>) _eGet).get(it.getIndex()));
       };
       diagnotics.forEach(_function);
     } catch (Throwable _e) {
@@ -2604,14 +2388,11 @@ public class TestValidation {
       tester.validator().checkOneOptions(targetPlatform);
       final List<FeatureBasedDiagnostic> diagnotics = IterableExtensions.<FeatureBasedDiagnostic>toList(Iterables.<FeatureBasedDiagnostic>filter(tester.diagnose().getAllDiagnostics(), FeatureBasedDiagnostic.class));
       Assert.assertEquals(1, diagnotics.size());
-      final Consumer<FeatureBasedDiagnostic> _function = new Consumer<FeatureBasedDiagnostic>() {
-        @Override
-        public void accept(final FeatureBasedDiagnostic it) {
-          Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_UNICITY, it.getIssueCode());
-          Assert.assertEquals(Diagnostic.WARNING, it.getSeverity());
-          Object _eGet = it.getSourceEObject().eGet(it.getFeature());
-          Assert.assertEquals(targetPlatform.getContents().get(1), ((List<?>) _eGet).get(it.getIndex()));
-        }
+      final Consumer<FeatureBasedDiagnostic> _function = (FeatureBasedDiagnostic it) -> {
+        Assert.assertEquals(TargetPlatformValidator.CHECK__OPTIONS_UNICITY, it.getIssueCode());
+        Assert.assertEquals(Diagnostic.WARNING, it.getSeverity());
+        Object _eGet = it.getSourceEObject().eGet(it.getFeature());
+        Assert.assertEquals(targetPlatform.getContents().get(1), ((List<?>) _eGet).get(it.getIndex()));
       };
       diagnotics.forEach(_function);
     } catch (Throwable _e) {

@@ -13,7 +13,6 @@
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-p2-repository-plugin</artifactId>
-        <version>${tycho-version}</version>
         <configuration>
           <repositoryName>Target Platform Definition DSL and Generator</repositoryName>
           <finalName>${project.groupId}-${unqualifiedVersion}.${buildQualifier}</finalName>
