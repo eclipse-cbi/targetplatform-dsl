@@ -22,8 +22,7 @@ import org.eclipse.xtext.util.Strings;
 public class TargetPlatformSTRINGValueConverter extends STRINGValueConverter {
   @Override
   public String toValue(final String string, final INode node) {
-    boolean _tripleEquals = (string == null);
-    if (_tripleEquals) {
+    if ((string == null)) {
       return null;
     }
     EObject _grammarElement = node.getGrammarElement();

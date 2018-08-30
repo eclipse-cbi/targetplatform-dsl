@@ -23,15 +23,16 @@ Require-Bundle: org.eclipse.cbi.targetplatform;visibility:=reexport,
  org.eclipse.equinox.p2.metadata,
  org.eclipse.pde.core;bundle-version="3.8.0",
  org.eclipse.xtext.xbase.lib,
- org.eclipse.cbi.targetplatform.model
+ org.eclipse.cbi.targetplatform.model,
+ org.eclipse.xtend.lib;resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-Activator: org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
+Bundle-Activator: org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator
 Export-Package: org.eclipse.cbi.targetplatform.ui,
  org.eclipse.cbi.targetplatform.ui.contentassist,
- org.eclipse.cbi.targetplatform.ui.contentassist.antlr,
- org.eclipse.cbi.targetplatform.ui.contentassist.antlr.internal,
  org.eclipse.cbi.targetplatform.ui.handler,
  org.eclipse.cbi.targetplatform.ui.internal,
- org.eclipse.cbi.targetplatform.ui.quickfix
+ org.eclipse.cbi.targetplatform.ui.quickfix,
+ org.eclipse.cbi.targetplatform.ide.contentassist.antlr,
+ org.eclipse.cbi.targetplatform.ide.contentassist.antlr.internal

@@ -138,8 +138,7 @@ public class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
     final ISemanticModification _function = (EObject element, IModificationContext context) -> {
       final String id = ((Location) element).getID();
       final String uri = ((Location) element).getUri();
-      boolean _tripleNotEquals = (uri != null);
-      if (_tripleNotEquals) {
+      if ((uri != null)) {
         final Location location = ((Location) element);
         final Function1<Location, Boolean> _function_1 = (Location it) -> {
           return Boolean.valueOf(((uri != null) && uri.equals(it.getUri())));

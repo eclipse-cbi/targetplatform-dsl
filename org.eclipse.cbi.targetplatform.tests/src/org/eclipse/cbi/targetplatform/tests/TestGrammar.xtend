@@ -11,19 +11,18 @@
 package org.eclipse.cbi.targetplatform.tests
 
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.model.TargetPlatform
+import java.util.Locale
+import org.eclipse.cbi.targetplatform.model.Environment
 import org.eclipse.cbi.targetplatform.model.Option
-import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
+import org.eclipse.jdt.launching.JavaRuntime
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.cbi.targetplatform.model.Environment
-import org.eclipse.jdt.launching.JavaRuntime
-import java.util.Locale
 
 @InjectWith(typeof(TargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

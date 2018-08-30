@@ -23,7 +23,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 
-import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider;
 import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.cbi.targetplatform.tests.MockIU;
 import org.eclipse.cbi.targetplatform.tests.MockProvisioningAgent;

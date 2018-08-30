@@ -13,32 +13,32 @@ package org.eclipse.cbi.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.name.Named
+import java.util.List
 import org.eclipse.cbi.targetplatform.model.Environment
 import org.eclipse.cbi.targetplatform.model.IU
 import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
 import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.Option
+import org.eclipse.cbi.targetplatform.model.Options
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.validation.TargetPlatformValidator
-import java.util.List
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Constants
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidatorTester
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic
+import org.eclipse.xtext.validation.RangeBasedDiagnostic
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.validation.RangeBasedDiagnostic
-import org.eclipse.cbi.targetplatform.model.Options
-import org.eclipse.cbi.targetplatform.model.Option
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

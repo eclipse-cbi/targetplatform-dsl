@@ -28,13 +28,7 @@ import org.eclipse.cbi.targetplatform.model.TargetPlatformFactory;
 import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess;
 import org.eclipse.cbi.targetplatform.ui.contentassist.AbstractTargetPlatformProposalProvider;
 import org.eclipse.cbi.targetplatform.ui.contentassist.ReadAndDispatchProgressMonitorWrapper;
-import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.function.Consumer;
+import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
@@ -138,8 +132,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   }
   
   private IQuery<IInstallableUnit> getIUAssistQuery() {
-    boolean _tripleEquals = (this.iuAssistQuery == null);
-    if (_tripleEquals) {
+    if ((this.iuAssistQuery == null)) {
       this.iuAssistQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
         TargetPlatformProposalProvider.PROP_TYPE_CATEGORY, TargetPlatformProposalProvider.PROP_TYPE_PRODUCT);
     }
@@ -374,8 +367,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       boolean _tripleEquals_3 = (_executionEnvironment == null);
       if (_tripleEquals_3) {
         final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
-        boolean _tripleNotEquals = (eeManager != null);
-        if (_tripleNotEquals) {
+        if ((eeManager != null)) {
           final Consumer<IExecutionEnvironment> _function_3 = (IExecutionEnvironment it) -> {
             acceptor.accept(this.createCompletionProposal(it.getId(), it.getDescription(), env, 310, context));
           };
@@ -411,7 +403,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       if ((text.contains("\n") || (context.getCurrentNode().getText().length() < currentNodeSizeToCursor))) {
         final Location location = ((Location) model);
         final String uri = location.getUri();
-        final IWorkbenchWindow window = TargetPlatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
+        final IWorkbenchWindow window = TargetplatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
         final IRunnableWithProgress _function = (IProgressMonitor monitor) -> {
           Display _display = window.getShell().getDisplay();
           ReadAndDispatchProgressMonitorWrapper _readAndDispatchProgressMonitorWrapper = new ReadAndDispatchProgressMonitorWrapper(monitor, _display);
@@ -489,7 +481,7 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       if (((!text.contains("\n")) || (context.getCurrentNode().getText().length() < currentNodeSizeToCursor))) {
         final IU iu = ((IU) model);
         final String uri = iu.getLocation().getUri();
-        final IWorkbenchWindow window = TargetPlatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
+        final IWorkbenchWindow window = TargetplatformActivator.getInstance().getWorkbench().getActiveWorkbenchWindow();
         final IRunnableWithProgress op = this.versionProposalRunnable(uri, iu, prefix, window.getShell().getDisplay(), context, acceptor);
         window.run(false, true, op);
       }

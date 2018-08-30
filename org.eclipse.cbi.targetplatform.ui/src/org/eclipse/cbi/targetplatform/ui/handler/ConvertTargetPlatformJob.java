@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.Injector;
 
-import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator;
+import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator;
 
 /**
  * @author <a href="mailto:cedric.brun@obeo.fr">Cedric Brun</a>
@@ -47,10 +47,10 @@ public class ConvertTargetPlatformJob extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		IStatus ret = Status.OK_STATUS;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		Injector injector = TargetPlatformActivator
+		Injector injector = TargetplatformActivator
 				.getInstance()
 				.getInjector(
-						TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM);
+						TargetplatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM);
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 		Diagnostic diagnostic = null;
@@ -62,12 +62,12 @@ public class ConvertTargetPlatformJob extends Job {
 		} catch (OperationCanceledException cancel) {
 			ret = new Status(
 					IStatus.CANCEL,
-					TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
+					TargetplatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 					cancel.getMessage(), cancel);
 		} catch (Exception e) {
 			ret = new Status(
 					IStatus.ERROR,
-					TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
+					TargetplatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 					e.getMessage(), e);
 		}
 		IContainer container = selectedElement.getParent();
@@ -75,7 +75,7 @@ public class ConvertTargetPlatformJob extends Job {
 			try {
 				container.refreshLocal(IResource.DEPTH_ONE, subMonitor.newChild(5));
 			} catch (CoreException e) {
-				return new Status(IStatus.ERROR, TargetPlatformActivator
+				return new Status(IStatus.ERROR, TargetplatformActivator
 						.getInstance().getBundle().getSymbolicName(),
 						e.getMessage(), e);
 			}
@@ -90,7 +90,7 @@ public class ConvertTargetPlatformJob extends Job {
 			} catch (CoreException e) {
 				ret = new Status(
 						IStatus.ERROR,
-						TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
+						TargetplatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 						e.getMessage(), e);
 			}
 		}

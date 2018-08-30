@@ -24,7 +24,7 @@ import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.cbi.targetplatform.tests.MockIU;
 import org.eclipse.cbi.targetplatform.tests.MockProvisioningAgent;
 import org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule;
-import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator;
+import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
@@ -121,7 +121,7 @@ public class TestContentAssist extends AbstractContentAssistProcessorTest {
       @Override
       public Injector createInjector() {
         SharedStateModule _sharedStateModule = new SharedStateModule();
-        TargetPlatformActivator _instance = TargetPlatformActivator.getInstance();
+        TargetplatformActivator _instance = TargetplatformActivator.getInstance();
         TargetPlatformUiModule _targetPlatformUiModule = new TargetPlatformUiModule(_instance);
         return Guice.createInjector(
           Modules2.mixin(

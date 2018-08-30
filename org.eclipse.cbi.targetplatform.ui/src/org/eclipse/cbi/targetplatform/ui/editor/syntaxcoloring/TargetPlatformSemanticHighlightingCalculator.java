@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 
 import org.eclipse.cbi.targetplatform.model.Environment;
 import org.eclipse.cbi.targetplatform.model.IU;
@@ -26,7 +27,7 @@ import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 public class TargetPlatformSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
 
 	@Override
-	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		if (object instanceof IU) {
 			highlightFeature(acceptor, object, TargetPlatformPackage.Literals.IU__VERSION, TargetPlatformHighlightingConfiguration.VERSION_RANGE_ID);
 		} else if (object instanceof Environment) {

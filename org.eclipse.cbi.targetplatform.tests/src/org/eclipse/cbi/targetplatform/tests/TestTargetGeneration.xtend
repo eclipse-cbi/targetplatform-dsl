@@ -12,20 +12,19 @@ package org.eclipse.cbi.targetplatform.tests
 
 import com.google.common.io.Files
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.model.TargetPlatform
-import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider
-import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator
-import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
-import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import java.io.File
 import java.net.URI
 import java.util.List
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
+import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator
+import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
+import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.metadata.Version
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith

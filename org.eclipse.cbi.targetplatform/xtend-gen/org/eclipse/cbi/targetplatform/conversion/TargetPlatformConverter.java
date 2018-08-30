@@ -69,8 +69,7 @@ public class TargetPlatformConverter extends DefaultTerminalConverters {
   
   @ValueConverter(rule = "QualifiedName")
   public IValueConverter<String> getQualifiedNameConverter() {
-    boolean _tripleEquals = (this.qualifiedNameValueConverter == null);
-    if (_tripleEquals) {
+    if ((this.qualifiedNameValueConverter == null)) {
       Grammar _grammar = this.getGrammar();
       FQNConverter _fQNConverter = new FQNConverter(_grammar);
       this.qualifiedNameValueConverter = _fQNConverter;

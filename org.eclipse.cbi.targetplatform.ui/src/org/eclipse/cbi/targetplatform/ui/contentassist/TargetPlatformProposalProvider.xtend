@@ -19,7 +19,7 @@ import org.eclipse.cbi.targetplatform.model.Options
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.model.TargetPlatformFactory
 import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess
-import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
+import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator
 import java.net.URI
 import java.util.Locale
 import org.eclipse.core.runtime.IProgressMonitor
@@ -286,7 +286,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
 			val uri = location.uri 
-			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
+			val window = TargetplatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val IRunnableWithProgress op = [monitor|
 				val wpm = SubMonitor.convert(new ReadAndDispatchProgressMonitorWrapper(monitor, window.shell.display), "Creating content assist for " + uri, 100)
 				try {
@@ -333,7 +333,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
 			val uri = iu.location.uri 
-			val window = TargetPlatformActivator.getInstance.workbench.activeWorkbenchWindow
+			val window = TargetplatformActivator.getInstance.workbench.activeWorkbenchWindow
 			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)
 		}

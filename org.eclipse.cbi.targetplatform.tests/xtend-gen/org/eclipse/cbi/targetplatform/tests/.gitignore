@@ -8,3 +8,5 @@
 /.TestTargetGeneration.java._trace
 /.TestTargetPlatformIndexer.java._trace
 /.TestValidation.java._trace
+/.TargetPlatformParsingTest.java._trace
+/TestTargetConversion.java

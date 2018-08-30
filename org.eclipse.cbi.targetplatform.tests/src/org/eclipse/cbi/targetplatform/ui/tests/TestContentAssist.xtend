@@ -22,7 +22,7 @@ import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider
 import org.eclipse.cbi.targetplatform.tests.MockIU
 import org.eclipse.cbi.targetplatform.tests.MockProvisioningAgent
 import org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule
-import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
+import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator
 import org.eclipse.core.runtime.Platform
 import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
@@ -87,7 +87,7 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 				return Guice.createInjector(Modules2.mixin(
 						MOCK_RUNTIME_MODULE,
 						new SharedStateModule(),
-						new TargetPlatformUiModule(TargetPlatformActivator.getInstance) as Module));
+						new TargetPlatformUiModule(TargetplatformActivator.getInstance) as Module));
 			}
 		};
 	}

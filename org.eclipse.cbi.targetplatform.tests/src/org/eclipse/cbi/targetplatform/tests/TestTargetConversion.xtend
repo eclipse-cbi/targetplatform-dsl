@@ -13,7 +13,7 @@ package org.eclipse.cbi.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
-import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider
+import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import org.eclipse.core.runtime.IProgressMonitor
@@ -24,9 +24,9 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.equinox.p2.core.ProvisionException
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.metadata.Version
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -14,7 +14,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 import org.eclipse.cbi.targetplatform.ui.editor.autoedit.TargetPlatformAutoEditStrategyProvider;
 import org.eclipse.cbi.targetplatform.ui.editor.syntaxcoloring.TargetPlatformHighlightingConfiguration;

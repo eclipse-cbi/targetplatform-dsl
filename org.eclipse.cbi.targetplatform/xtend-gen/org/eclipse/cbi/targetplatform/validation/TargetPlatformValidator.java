@@ -380,8 +380,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         return Boolean.valueOf(cycle.get(1).equals(this.indexBuilder.getImportedTargetPlatform(targetPlatform.eResource(), it)));
       };
       final IncludeDeclaration cyclingImport = IterableExtensions.<IncludeDeclaration>findFirst(targetPlatform.getIncludes(), _function);
-      boolean _tripleNotEquals = (cyclingImport != null);
-      if (_tripleNotEquals) {
+      if ((cyclingImport != null)) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cycle detected in the included target platforms. Cycle is \'");
         final Function1<TargetPlatform, URI> _function_1 = (TargetPlatform it) -> {
@@ -848,8 +847,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       return Boolean.valueOf(Objects.equal(_grammarElement, _equalsSignKeyword_1_0_2));
     };
     final INode equalSignKeywordRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function_1);
-    boolean _tripleNotEquals = (semicolonKeywordRule != null);
-    if (_tripleNotEquals) {
+    if ((semicolonKeywordRule != null)) {
       int _offset = semicolonKeywordRule.getOffset();
       int _endOffset = equalSignKeywordRule.getEndOffset();
       int _offset_1 = semicolonKeywordRule.getOffset();
