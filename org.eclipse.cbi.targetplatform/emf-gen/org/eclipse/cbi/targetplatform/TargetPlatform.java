@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.cbi.targetplatform.TargetPlatform#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.cbi.targetplatform.TargetPlatform#getContents <em>Contents</em>}</li>
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.cbi.targetplatform.TargetPlatform#getLocations <em>Locations</em>}</li>
  *   <li>{@link org.eclipse.cbi.targetplatform.TargetPlatform#getEnvironment <em>Environment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getTargetPlatform()
  * @model
@@ -84,7 +84,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Includes</em>' reference list.
 	 * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getTargetPlatform_Includes()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>> _filter = <%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>filter(_contents, <%org.eclipse.cbi.targetplatform.IncludeDeclaration%>.class);\n<%java.util.List%><<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>toList(_filter);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%java.util.List%><<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>toList(<%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>filter(this.getContents(), <%org.eclipse.cbi.targetplatform.IncludeDeclaration%>.class));\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.IncludeDeclaration%>>(_list);'"
 	 * @generated
 	 */
 	EList<IncludeDeclaration> getIncludes();
@@ -103,7 +103,7 @@ public interface TargetPlatform extends EObject {
 	 * @see org.eclipse.cbi.targetplatform.Option
 	 * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getTargetPlatform_Options()
 	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%org.eclipse.cbi.targetplatform.Options%>> _filter = <%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Options%>>filter(_contents, <%org.eclipse.cbi.targetplatform.Options%>.class);\nfinal <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>> _function = new <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>>()\n{\n\tpublic <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>> apply(final <%org.eclipse.cbi.targetplatform.Options%> it)\n\t{\n\t\treturn it.getOptions();\n\t}\n};\n<%java.lang.Iterable%><<%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>> _map = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>>map(_filter, _function);\n<%java.lang.Iterable%><<%org.eclipse.cbi.targetplatform.Option%>> _flatten = <%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Option%>>concat(_map);\n<%java.util.List%><<%org.eclipse.cbi.targetplatform.Option%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Option%>>toList(_flatten);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.Option%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='final <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>> _function = new <%org.eclipse.xtext.xbase.lib.Functions.Function1%><<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>>()\n{\n\tpublic <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>> apply(final <%org.eclipse.cbi.targetplatform.Options%> it)\n\t{\n\t\treturn it.getOptions();\n\t}\n};\n<%java.util.List%><<%org.eclipse.cbi.targetplatform.Option%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Option%>>toList(<%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Option%>>concat(<%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Options%>, <%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.Option%>>>map(<%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Options%>>filter(this.getContents(), <%org.eclipse.cbi.targetplatform.Options%>.class), _function)));\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.Option%>>(_list);'"
 	 * @generated
 	 */
 	EList<Option> getOptions();
@@ -120,7 +120,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Locations</em>' reference list.
 	 * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getTargetPlatform_Locations()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%org.eclipse.cbi.targetplatform.Location%>> _filter = <%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Location%>>filter(_contents, <%org.eclipse.cbi.targetplatform.Location%>.class);\n<%java.util.List%><<%org.eclipse.cbi.targetplatform.Location%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Location%>>toList(_filter);\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.Location%>>(_list);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%java.util.List%><<%org.eclipse.cbi.targetplatform.Location%>> _list = <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Location%>>toList(<%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Location%>>filter(this.getContents(), <%org.eclipse.cbi.targetplatform.Location%>.class));\nreturn new <%org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList%><<%org.eclipse.cbi.targetplatform.Location%>>(_list);'"
 	 * @generated
 	 */
 	EList<Location> getLocations();
@@ -136,7 +136,7 @@ public interface TargetPlatform extends EObject {
 	 * @return the value of the '<em>Environment</em>' reference.
 	 * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getTargetPlatform_Environment()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='<%org.eclipse.emf.common.util.EList%><<%org.eclipse.cbi.targetplatform.TargetContent%>> _contents = this.getContents();\n<%java.lang.Iterable%><<%org.eclipse.cbi.targetplatform.Environment%>> _filter = <%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Environment%>>filter(_contents, <%org.eclipse.cbi.targetplatform.Environment%>.class);\nreturn <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Environment%>>head(_filter);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='return <%org.eclipse.xtext.xbase.lib.IterableExtensions%>.<<%org.eclipse.cbi.targetplatform.Environment%>>head(<%com.google.common.collect.Iterables%>.<<%org.eclipse.cbi.targetplatform.Environment%>>filter(this.getContents(), <%org.eclipse.cbi.targetplatform.Environment%>.class));'"
 	 * @generated
 	 */
 	Environment getEnvironment();

@@ -2,12 +2,12 @@
  */
 package org.eclipse.cbi.targetplatform.impl;
 
+import java.util.Collection;
+
 import org.eclipse.cbi.targetplatform.Option;
 import org.eclipse.cbi.targetplatform.Options;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
-
-import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -29,11 +29,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.cbi.targetplatform.impl.OptionsImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link org.eclipse.cbi.targetplatform.impl.OptionsImpl#getOptions <em>Options</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

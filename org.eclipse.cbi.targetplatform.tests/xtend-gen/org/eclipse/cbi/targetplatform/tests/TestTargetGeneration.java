@@ -12,18 +12,17 @@ package org.eclipse.cbi.targetplatform.tests;
 
 import com.google.common.io.Files;
 import com.google.inject.Inject;
+import java.io.File;
+import java.net.URI;
+import java.util.List;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider;
 import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator;
+import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.cbi.targetplatform.tests.MockIU;
 import org.eclipse.cbi.targetplatform.tests.MockMetadataRepositoryManager;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
-import java.io.File;
-import java.net.URI;
-import java.util.List;
-
-import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.metadata.Version;

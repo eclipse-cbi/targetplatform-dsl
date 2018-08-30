@@ -13,17 +13,16 @@ package org.eclipse.cbi.targetplatform.tests;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.net.URI;
+import java.util.List;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation;
+import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.cbi.targetplatform.tests.MockIU;
 import org.eclipse.cbi.targetplatform.tests.MockMetadataRepositoryManager;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
-import java.net.URI;
-import java.util.List;
-
-import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation;
-import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -1600,45 +1599,12 @@ public class TestTargetConversion {
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
-<<<<<<< HEAD:fr.obeo.releng.targetplatform.tests/xtend-gen/fr/obeo/releng/targetplatform/tests/TestTargetConversion.java
       Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(2).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.getLocations().get(3).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.getLocations().get(4).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.getLocations().get(5).getURI().toString());
-=======
-      List<ResolvedLocation> _locations = targetDef.getLocations();
-      ResolvedLocation _get = _locations.get(0);
-      URI _uRI = _get.getURI();
-      String _string = _uRI.toString();
-      Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", _string);
-      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      ResolvedLocation _get_1 = _locations_1.get(1);
-      URI _uRI_1 = _get_1.getURI();
-      String _string_1 = _uRI_1.toString();
-      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_1);
-      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      ResolvedLocation _get_2 = _locations_2.get(2);
-      URI _uRI_2 = _get_2.getURI();
-      String _string_2 = _uRI_2.toString();
-      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_2);
-      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
-      ResolvedLocation _get_3 = _locations_3.get(3);
-      URI _uRI_3 = _get_3.getURI();
-      String _string_3 = _uRI_3.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_3);
-      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
-      ResolvedLocation _get_4 = _locations_4.get(4);
-      URI _uRI_4 = _get_4.getURI();
-      String _string_4 = _uRI_4.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_4);
-      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
-      ResolvedLocation _get_5 = _locations_5.get(5);
-      URI _uRI_5 = _get_5.getURI();
-      String _string_5 = _uRI_5.toString();
-      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string_5);
->>>>>>> rename fr.obeo.releng -> org.eclipse.cbi:org.eclipse.cbi.targetplatform.tests/xtend-gen/org/eclipse/cbi/targetplatform/tests/TestTargetConversion.java
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1685,45 +1651,12 @@ public class TestTargetConversion {
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
-<<<<<<< HEAD:fr.obeo.releng.targetplatform.tests/xtend-gen/fr/obeo/releng/targetplatform/tests/TestTargetConversion.java
       Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", targetDef.getLocations().get(2).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", targetDef.getLocations().get(3).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.getLocations().get(4).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.getLocations().get(5).getURI().toString());
-=======
-      List<ResolvedLocation> _locations = targetDef.getLocations();
-      ResolvedLocation _get = _locations.get(0);
-      URI _uRI = _get.getURI();
-      String _string = _uRI.toString();
-      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string);
-      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      ResolvedLocation _get_1 = _locations_1.get(1);
-      URI _uRI_1 = _get_1.getURI();
-      String _string_1 = _uRI_1.toString();
-      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_1);
-      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      ResolvedLocation _get_2 = _locations_2.get(2);
-      URI _uRI_2 = _get_2.getURI();
-      String _string_2 = _uRI_2.toString();
-      Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", _string_2);
-      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
-      ResolvedLocation _get_3 = _locations_3.get(3);
-      URI _uRI_3 = _get_3.getURI();
-      String _string_3 = _uRI_3.toString();
-      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_3);
-      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
-      ResolvedLocation _get_4 = _locations_4.get(4);
-      URI _uRI_4 = _get_4.getURI();
-      String _string_4 = _uRI_4.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_4);
-      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
-      ResolvedLocation _get_5 = _locations_5.get(5);
-      URI _uRI_5 = _get_5.getURI();
-      String _string_5 = _uRI_5.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_5);
->>>>>>> rename fr.obeo.releng -> org.eclipse.cbi:org.eclipse.cbi.targetplatform.tests/xtend-gen/org/eclipse/cbi/targetplatform/tests/TestTargetConversion.java
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1770,45 +1703,12 @@ public class TestTargetConversion {
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
-<<<<<<< HEAD:fr.obeo.releng.targetplatform.tests/xtend-gen/fr/obeo/releng/targetplatform/tests/TestTargetConversion.java
       Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(1).getURI().toString());
-      Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", targetDef.getLocations().get(2).getURI().toString());
+      Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", targetDef.getLocations().get(2).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", targetDef.getLocations().get(3).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.getLocations().get(4).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.getLocations().get(5).getURI().toString());
-=======
-      List<ResolvedLocation> _locations = targetDef.getLocations();
-      ResolvedLocation _get = _locations.get(0);
-      URI _uRI = _get.getURI();
-      String _string = _uRI.toString();
-      Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", _string);
-      List<ResolvedLocation> _locations_1 = targetDef.getLocations();
-      ResolvedLocation _get_1 = _locations_1.get(1);
-      URI _uRI_1 = _get_1.getURI();
-      String _string_1 = _uRI_1.toString();
-      Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", _string_1);
-      List<ResolvedLocation> _locations_2 = targetDef.getLocations();
-      ResolvedLocation _get_2 = _locations_2.get(2);
-      URI _uRI_2 = _get_2.getURI();
-      String _string_2 = _uRI_2.toString();
-      Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", _string_2);
-      List<ResolvedLocation> _locations_3 = targetDef.getLocations();
-      ResolvedLocation _get_3 = _locations_3.get(3);
-      URI _uRI_3 = _get_3.getURI();
-      String _string_3 = _uRI_3.toString();
-      Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", _string_3);
-      List<ResolvedLocation> _locations_4 = targetDef.getLocations();
-      ResolvedLocation _get_4 = _locations_4.get(4);
-      URI _uRI_4 = _get_4.getURI();
-      String _string_4 = _uRI_4.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", _string_4);
-      List<ResolvedLocation> _locations_5 = targetDef.getLocations();
-      ResolvedLocation _get_5 = _locations_5.get(5);
-      URI _uRI_5 = _get_5.getURI();
-      String _string_5 = _uRI_5.toString();
-      Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", _string_5);
->>>>>>> rename fr.obeo.releng -> org.eclipse.cbi:org.eclipse.cbi.targetplatform.tests/xtend-gen/org/eclipse/cbi/targetplatform/tests/TestTargetConversion.java
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

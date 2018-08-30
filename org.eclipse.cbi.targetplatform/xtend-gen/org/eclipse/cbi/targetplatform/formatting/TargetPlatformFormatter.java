@@ -11,8 +11,8 @@
 package org.eclipse.cbi.targetplatform.formatting;
 
 import com.google.inject.Inject;
-import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess;
 import java.util.List;
+import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;

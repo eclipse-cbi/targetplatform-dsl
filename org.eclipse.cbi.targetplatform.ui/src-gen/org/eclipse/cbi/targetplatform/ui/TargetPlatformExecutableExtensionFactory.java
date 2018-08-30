@@ -23,7 +23,7 @@ public class TargetPlatformExecutableExtensionFactory extends AbstractGuiceAware
 	
 	@Override
 	protected Injector getInjector() {
-		return TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM);
+		return TargetPlatformActivator.getInstance().getInjector(TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM);
 	}
 	
 }

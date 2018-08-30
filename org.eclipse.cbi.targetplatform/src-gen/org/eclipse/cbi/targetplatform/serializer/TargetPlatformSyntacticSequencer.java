@@ -1,8 +1,8 @@
 package org.eclipse.cbi.targetplatform.serializer;
 
 import com.google.inject.Inject;
-import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess;
 import java.util.List;
+import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;

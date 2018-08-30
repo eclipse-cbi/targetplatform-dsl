@@ -12,12 +12,10 @@ package org.eclipse.cbi.targetplatform.pde;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import org.eclipse.cbi.targetplatform.Option;
-
 import java.net.URI;
 import java.util.EnumSet;
 import java.util.List;
-
+import org.eclipse.cbi.targetplatform.Option;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;

@@ -12,36 +12,36 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalTargetPlatformLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int EOF=-1;
+    public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=9;
-    public static final int RULE_ML_COMMENT=8;
     public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int RULE_STRING=4;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__18=18;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=10;
+    public static final int RULE_ID=5;
     public static final int RULE_QUALIFIER=7;
+    public static final int RULE_WS=10;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__20=20;
+    public static final int T__21=21;
 
     // delegates
     // delegators
@@ -54,15 +54,15 @@ public class InternalTargetPlatformLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:11:7: ( 'target' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:11:9: 'target'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:11:7: ( 'target' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:11:9: 'target'
             {
             match("target"); 
 
@@ -82,8 +82,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:12:7: ( 'with' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:12:9: 'with'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:12:7: ( 'with' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:12:9: 'with'
             {
             match("with"); 
 
@@ -103,8 +103,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:13:7: ( ',' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:13:9: ','
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:13:7: ( ',' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:13:9: ','
             {
             match(','); 
 
@@ -123,8 +123,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:14:7: ( 'environment' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:14:9: 'environment'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:14:7: ( 'environment' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:14:9: 'environment'
             {
             match("environment"); 
 
@@ -144,8 +144,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:15:7: ( 'include' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:15:9: 'include'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:15:7: ( 'include' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:15:9: 'include'
             {
             match("include"); 
 
@@ -165,8 +165,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:16:7: ( 'location' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:16:9: 'location'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:16:7: ( 'location' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:16:9: 'location'
             {
             match("location"); 
 
@@ -186,8 +186,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:17:7: ( '{' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:17:9: '{'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:17:7: ( '{' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:17:9: '{'
             {
             match('{'); 
 
@@ -206,8 +206,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:18:7: ( '}' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:18:9: '}'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:18:7: ( '}' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:18:9: '}'
             {
             match('}'); 
 
@@ -226,8 +226,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:19:7: ( ';' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:19:9: ';'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:19:7: ( ';' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:19:9: ';'
             {
             match(';'); 
 
@@ -246,8 +246,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:20:7: ( 'version' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:20:9: 'version'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:20:7: ( 'version' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:20:9: 'version'
             {
             match("version"); 
 
@@ -267,8 +267,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:21:7: ( '=' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:21:9: '='
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:21:7: ( '=' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:21:9: '='
             {
             match('='); 
 
@@ -287,8 +287,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:22:7: ( '.' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:22:9: '.'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:22:7: ( '.' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:22:9: '.'
             {
             match('.'); 
 
@@ -307,8 +307,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:23:7: ( '(' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:23:9: '('
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:23:7: ( '(' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:23:9: '('
             {
             match('('); 
 
@@ -327,8 +327,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:24:7: ( '[' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:24:9: '['
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:24:7: ( '[' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:24:9: '['
             {
             match('['); 
 
@@ -347,8 +347,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:25:7: ( ')' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:25:9: ')'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:25:7: ( ')' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:25:9: ')'
             {
             match(')'); 
 
@@ -367,8 +367,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:26:7: ( ']' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:26:9: ']'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:26:7: ( ']' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:26:9: ']'
             {
             match(']'); 
 
@@ -387,8 +387,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:27:7: ( 'lazy' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:27:9: 'lazy'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:27:7: ( 'lazy' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:27:9: 'lazy'
             {
             match("lazy"); 
 
@@ -408,8 +408,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:28:7: ( 'requirements' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:28:9: 'requirements'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:28:7: ( 'requirements' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:28:9: 'requirements'
             {
             match("requirements"); 
 
@@ -429,8 +429,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:29:7: ( 'allEnvironments' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:29:9: 'allEnvironments'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:29:7: ( 'allEnvironments' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:29:9: 'allEnvironments'
             {
             match("allEnvironments"); 
 
@@ -450,8 +450,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:30:7: ( 'source' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:30:9: 'source'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:30:7: ( 'source' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:30:9: 'source'
             {
             match("source"); 
 
@@ -471,8 +471,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:31:7: ( 'configurePhase' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:31:9: 'configurePhase'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:31:7: ( 'configurePhase' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:31:9: 'configurePhase'
             {
             match("configurePhase"); 
 
@@ -492,10 +492,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:12: ( '0' .. '9' )+
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:12: ( '0' .. '9' )+
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:12: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -509,7 +509,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:13: '0' .. '9'
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:855:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -541,10 +541,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )* )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: ( '^' )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -553,7 +553,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: '^'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:11: '^'
                     {
                     match('^'); 
 
@@ -571,7 +571,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:40: ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:40: ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -584,9 +584,9 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: ( '.' )?
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: ( '.' )?
             	    int alt3=2;
             	    int LA3_0 = input.LA(1);
 
@@ -595,7 +595,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             	    }
             	    switch (alt3) {
             	        case 1 :
-            	            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: '.'
+            	            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:857:41: '.'
             	            {
             	            match('.'); 
 
@@ -638,10 +638,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_QUALIFIER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:16: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:16: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:859:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -654,7 +654,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:
             	    {
             	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -690,10 +690,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -711,10 +711,10 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -730,7 +730,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:21: '\\\\' .
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -738,7 +738,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -763,10 +763,10 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -782,7 +782,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:54: '\\\\' .
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -790,7 +790,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:861:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -833,12 +833,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -863,7 +863,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:52: .
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:863:52: .
             	    {
             	    matchAny(); 
 
@@ -893,12 +893,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -911,7 +911,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -931,7 +931,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -940,9 +940,9 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: ( '\\r' )?
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -951,7 +951,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: '\\r'
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:865:41: '\\r'
                             {
                             match('\r'); 
 
@@ -983,10 +983,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:867:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1000,7 +1000,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1040,8 +1040,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:869:16: ( . )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:869:18: .
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:869:16: ( . )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:869:18: .
             {
             matchAny(); 
 
@@ -1056,208 +1056,208 @@ public class InternalTargetPlatformLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_INT | RULE_ID | RULE_QUALIFIER | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_INT | RULE_ID | RULE_QUALIFIER | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=29;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:10: T__12
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:10: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:16: T__13
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:16: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:22: T__14
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:22: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:28: T__15
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:28: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:34: T__16
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:34: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:40: T__17
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:40: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:46: T__18
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:46: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:52: T__19
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:52: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:58: T__20
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:58: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:64: T__21
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:64: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:70: T__22
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:70: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:76: T__23
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:76: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:82: T__24
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:82: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:88: T__25
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:88: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:94: T__26
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:94: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:100: T__27
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:100: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:106: T__28
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:106: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:112: T__29
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:112: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:118: T__30
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:118: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:124: T__31
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:124: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:130: T__32
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:130: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:136: RULE_INT
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:136: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:145: RULE_ID
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:145: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:153: RULE_QUALIFIER
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:153: RULE_QUALIFIER
                 {
                 mRULE_QUALIFIER(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:168: RULE_STRING
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:168: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:180: RULE_ML_COMMENT
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:180: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:196: RULE_SL_COMMENT
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:196: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:212: RULE_WS
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:212: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:220: RULE_ANY_OTHER
+                // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:1:220: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1281,7 +1281,7 @@ public class InternalTargetPlatformLexer extends Lexer {
     static final String DFA14_acceptS =
         "\3\uffff\1\3\3\uffff\1\7\1\10\1\11\1\uffff\1\13\1\14\1\15\1\16\1\17\1\20\7\uffff\2\30\3\uffff\1\34\1\35\1\uffff\1\27\2\uffff\1\3\4\uffff\1\7\1\10\1\11\1\uffff\1\13\1\14\1\15\1\16\1\17\1\20\4\uffff\1\26\1\uffff\1\31\1\32\1\33\1\34\27\uffff\1\2\3\uffff\1\21\16\uffff\1\1\6\uffff\1\24\2\uffff\1\5\1\uffff\1\12\4\uffff\1\6\13\uffff\1\4\3\uffff\1\22\5\uffff\1\25\1\23";
     static final String DFA14_specialS =
-        "\1\1\31\uffff\1\0\1\2\163\uffff}>";
+        "\1\0\31\uffff\1\2\1\1\163\uffff}>";
     static final String[] DFA14_transitionS = {
             "\11\36\2\35\2\36\1\35\22\36\1\35\1\36\1\32\4\36\1\33\1\15\1\17\2\36\1\3\1\30\1\14\1\34\12\25\1\36\1\11\1\36\1\13\3\36\32\27\1\16\1\36\1\20\1\26\1\27\1\36\1\22\1\27\1\24\1\27\1\4\3\27\1\5\2\27\1\6\5\27\1\21\1\23\1\1\1\27\1\12\1\2\3\27\1\7\1\36\1\10\uff82\36",
             "\1\41\2\uffff\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\1\37\31\41",
@@ -1465,16 +1465,6 @@ public class InternalTargetPlatformLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA14_26 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA14_26>='\u0000' && LA14_26<='\uFFFF')) ) {s = 56;}
-
-                        else s = 30;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -1540,11 +1530,21 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA14_27 = input.LA(1);
 
                         s = -1;
                         if ( ((LA14_27>='\u0000' && LA14_27<='\uFFFF')) ) {s = 56;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA14_26 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA14_26>='\u0000' && LA14_26<='\uFFFF')) ) {s = 56;}
 
                         else s = 30;
 

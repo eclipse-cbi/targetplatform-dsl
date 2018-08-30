@@ -23,7 +23,7 @@ import com.google.inject.Module;
  */
 public class TargetPlatformActivator extends AbstractUIPlugin {
 	
-	public static final String FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM = "org.eclipse.cbi.targetplatform.TargetPlatform";
+	public static final String ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM = "org.eclipse.cbi.targetplatform.TargetPlatform";
 	
 	private static final Logger logger = Logger.getLogger(TargetPlatformActivator.class);
 	
@@ -73,7 +73,7 @@ public class TargetPlatformActivator extends AbstractUIPlugin {
 	}
 
 	protected Module getRuntimeModule(String grammar) {
-		if (FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM.equals(grammar)) {
+		if (ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM.equals(grammar)) {
 			return new org.eclipse.cbi.targetplatform.TargetPlatformRuntimeModule();
 		}
 		
@@ -81,7 +81,7 @@ public class TargetPlatformActivator extends AbstractUIPlugin {
 	}
 	
 	protected Module getUiModule(String grammar) {
-		if (FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM.equals(grammar)) {
+		if (ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM.equals(grammar)) {
 			return new org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule(this);
 		}
 		

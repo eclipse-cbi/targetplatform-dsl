@@ -24,36 +24,36 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUALIFIER", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'target'", "'with'", "','", "'environment'", "'include'", "'location'", "'{'", "'}'", "';'", "'version'", "'='", "'.'", "'('", "'['", "')'", "']'", "'lazy'", "'requirements'", "'allEnvironments'", "'source'", "'configurePhase'"
     };
-    public static final int RULE_ID=5;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__30=30;
-    public static final int T__19=19;
-    public static final int T__31=31;
     public static final int RULE_STRING=4;
-    public static final int T__32=32;
-    public static final int T__16=16;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int T__19=19;
     public static final int T__15=15;
-    public static final int T__18=18;
+    public static final int T__16=16;
     public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__12=12;
-    public static final int T__14=14;
     public static final int T__13=13;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=10;
+    public static final int T__14=14;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_ID=5;
     public static final int RULE_QUALIFIER=7;
+    public static final int RULE_WS=10;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__20=20;
+    public static final int T__21=21;
 
     // delegates
     // delegators
@@ -69,7 +69,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return InternalTargetPlatformParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g"; }
 
 
 
@@ -94,7 +94,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTargetPlatform"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:68:1: entryRuleTargetPlatform returns [EObject current=null] : iv_ruleTargetPlatform= ruleTargetPlatform EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:68:1: entryRuleTargetPlatform returns [EObject current=null] : iv_ruleTargetPlatform= ruleTargetPlatform EOF ;
     public final EObject entryRuleTargetPlatform() throws RecognitionException {
         EObject current = null;
 
@@ -102,8 +102,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:69:2: (iv_ruleTargetPlatform= ruleTargetPlatform EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:70:2: iv_ruleTargetPlatform= ruleTargetPlatform EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:69:2: (iv_ruleTargetPlatform= ruleTargetPlatform EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:70:2: iv_ruleTargetPlatform= ruleTargetPlatform EOF
             {
              newCompositeNode(grammarAccess.getTargetPlatformRule()); 
             pushFollow(FOLLOW_ruleTargetPlatform_in_entryRuleTargetPlatform75);
@@ -130,7 +130,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTargetPlatform"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:77:1: ruleTargetPlatform returns [EObject current=null] : (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:77:1: ruleTargetPlatform returns [EObject current=null] : (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? ;
     public final EObject ruleTargetPlatform() throws RecognitionException {
         EObject current = null;
 
@@ -142,10 +142,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:80:28: ( (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:1: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:80:28: ( (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:1: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:1: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:1: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -154,17 +154,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:3: otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )*
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:81:3: otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )*
                     {
                     otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleTargetPlatform122); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getTargetPlatformAccess().getTargetKeyword_0());
                         
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:85:1: ( (lv_name_1_0= RULE_STRING ) )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:86:1: (lv_name_1_0= RULE_STRING )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:85:1: ( (lv_name_1_0= RULE_STRING ) )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:86:1: (lv_name_1_0= RULE_STRING )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:86:1: (lv_name_1_0= RULE_STRING )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:87:3: lv_name_1_0= RULE_STRING
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:86:1: (lv_name_1_0= RULE_STRING )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:87:3: lv_name_1_0= RULE_STRING
                     {
                     lv_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleTargetPlatform139); 
 
@@ -186,7 +186,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:103:2: ( (lv_contents_2_0= ruleTargetContent ) )*
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:103:2: ( (lv_contents_2_0= ruleTargetContent ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -199,10 +199,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:104:1: (lv_contents_2_0= ruleTargetContent )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:104:1: (lv_contents_2_0= ruleTargetContent )
                     	    {
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:104:1: (lv_contents_2_0= ruleTargetContent )
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:105:3: lv_contents_2_0= ruleTargetContent
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:104:1: (lv_contents_2_0= ruleTargetContent )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:105:3: lv_contents_2_0= ruleTargetContent
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTargetPlatformAccess().getContentsTargetContentParserRuleCall_2_0()); 
@@ -259,7 +259,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTargetContent"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:129:1: entryRuleTargetContent returns [EObject current=null] : iv_ruleTargetContent= ruleTargetContent EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:129:1: entryRuleTargetContent returns [EObject current=null] : iv_ruleTargetContent= ruleTargetContent EOF ;
     public final EObject entryRuleTargetContent() throws RecognitionException {
         EObject current = null;
 
@@ -267,8 +267,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:130:2: (iv_ruleTargetContent= ruleTargetContent EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:131:2: iv_ruleTargetContent= ruleTargetContent EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:130:2: (iv_ruleTargetContent= ruleTargetContent EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:131:2: iv_ruleTargetContent= ruleTargetContent EOF
             {
              newCompositeNode(grammarAccess.getTargetContentRule()); 
             pushFollow(FOLLOW_ruleTargetContent_in_entryRuleTargetContent203);
@@ -295,7 +295,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTargetContent"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:138:1: ruleTargetContent returns [EObject current=null] : (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:138:1: ruleTargetContent returns [EObject current=null] : (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) ;
     public final EObject ruleTargetContent() throws RecognitionException {
         EObject current = null;
 
@@ -311,10 +311,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:141:28: ( (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:142:1: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:141:28: ( (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:142:1: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:142:1: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:142:1: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
             int alt3=4;
             switch ( input.LA(1) ) {
             case 13:
@@ -346,7 +346,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:143:5: this_Options_0= ruleOptions
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:143:5: this_Options_0= ruleOptions
                     {
                      
                             newCompositeNode(grammarAccess.getTargetContentAccess().getOptionsParserRuleCall_0()); 
@@ -364,7 +364,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:153:5: this_Environment_1= ruleEnvironment
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:153:5: this_Environment_1= ruleEnvironment
                     {
                      
                             newCompositeNode(grammarAccess.getTargetContentAccess().getEnvironmentParserRuleCall_1()); 
@@ -382,7 +382,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:163:5: this_IncludeDeclaration_2= ruleIncludeDeclaration
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:163:5: this_IncludeDeclaration_2= ruleIncludeDeclaration
                     {
                      
                             newCompositeNode(grammarAccess.getTargetContentAccess().getIncludeDeclarationParserRuleCall_2()); 
@@ -400,7 +400,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:173:5: this_Location_3= ruleLocation
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:173:5: this_Location_3= ruleLocation
                     {
                      
                             newCompositeNode(grammarAccess.getTargetContentAccess().getLocationParserRuleCall_3()); 
@@ -438,7 +438,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleOptions"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:189:1: entryRuleOptions returns [EObject current=null] : iv_ruleOptions= ruleOptions EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:189:1: entryRuleOptions returns [EObject current=null] : iv_ruleOptions= ruleOptions EOF ;
     public final EObject entryRuleOptions() throws RecognitionException {
         EObject current = null;
 
@@ -446,8 +446,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:190:2: (iv_ruleOptions= ruleOptions EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:191:2: iv_ruleOptions= ruleOptions EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:190:2: (iv_ruleOptions= ruleOptions EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:191:2: iv_ruleOptions= ruleOptions EOF
             {
              newCompositeNode(grammarAccess.getOptionsRule()); 
             pushFollow(FOLLOW_ruleOptions_in_entryRuleOptions376);
@@ -474,7 +474,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOptions"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:198:1: ruleOptions returns [EObject current=null] : (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:198:1: ruleOptions returns [EObject current=null] : (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) ;
     public final EObject ruleOptions() throws RecognitionException {
         EObject current = null;
 
@@ -488,21 +488,21 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:201:28: ( (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:1: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:201:28: ( (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:1: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:1: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:3: otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:1: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:202:3: otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
             {
             otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleOptions423); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getOptionsAccess().getWithKeyword_0());
                 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:206:1: ( (lv_options_1_0= ruleOption ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:207:1: (lv_options_1_0= ruleOption )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:206:1: ( (lv_options_1_0= ruleOption ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:207:1: (lv_options_1_0= ruleOption )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:207:1: (lv_options_1_0= ruleOption )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:208:3: lv_options_1_0= ruleOption
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:207:1: (lv_options_1_0= ruleOption )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:208:3: lv_options_1_0= ruleOption
             {
              
             	        newCompositeNode(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_1_0()); 
@@ -529,7 +529,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:2: ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:2: ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
             loop5:
             do {
                 int alt5=2;
@@ -542,9 +542,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:3: (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:3: (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:3: (otherlv_2= ',' )?
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:3: (otherlv_2= ',' )?
             	    int alt4=2;
             	    int LA4_0 = input.LA(1);
 
@@ -553,7 +553,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt4) {
             	        case 1 :
-            	            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:5: otherlv_2= ','
+            	            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:224:5: otherlv_2= ','
             	            {
             	            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleOptions458); 
 
@@ -565,11 +565,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:228:3: ( (lv_options_3_0= ruleOption ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:229:1: (lv_options_3_0= ruleOption )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:228:3: ( (lv_options_3_0= ruleOption ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:229:1: (lv_options_3_0= ruleOption )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:229:1: (lv_options_3_0= ruleOption )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:230:3: lv_options_3_0= ruleOption
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:229:1: (lv_options_3_0= ruleOption )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:230:3: lv_options_3_0= ruleOption
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_2_1_0()); 
@@ -626,7 +626,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEnvironment"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:254:1: entryRuleEnvironment returns [EObject current=null] : iv_ruleEnvironment= ruleEnvironment EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:254:1: entryRuleEnvironment returns [EObject current=null] : iv_ruleEnvironment= ruleEnvironment EOF ;
     public final EObject entryRuleEnvironment() throws RecognitionException {
         EObject current = null;
 
@@ -634,8 +634,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:255:2: (iv_ruleEnvironment= ruleEnvironment EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:256:2: iv_ruleEnvironment= ruleEnvironment EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:255:2: (iv_ruleEnvironment= ruleEnvironment EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:256:2: iv_ruleEnvironment= ruleEnvironment EOF
             {
              newCompositeNode(grammarAccess.getEnvironmentRule()); 
             pushFollow(FOLLOW_ruleEnvironment_in_entryRuleEnvironment519);
@@ -662,7 +662,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEnvironment"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:263:1: ruleEnvironment returns [EObject current=null] : ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:263:1: ruleEnvironment returns [EObject current=null] : ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) ;
     public final EObject ruleEnvironment() throws RecognitionException {
         EObject current = null;
 
@@ -674,14 +674,14 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:266:28: ( ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:1: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:266:28: ( ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:1: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:1: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:2: () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:1: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:2: () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:2: ()
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:268:5: 
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:267:2: ()
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:268:5: 
             {
 
                     current = forceCreateModelElement(
@@ -695,11 +695,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_1());
                 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:277:1: ( (lv_env_2_0= RULE_ID ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:278:1: (lv_env_2_0= RULE_ID )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:277:1: ( (lv_env_2_0= RULE_ID ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:278:1: (lv_env_2_0= RULE_ID )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:278:1: (lv_env_2_0= RULE_ID )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:279:3: lv_env_2_0= RULE_ID
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:278:1: (lv_env_2_0= RULE_ID )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:279:3: lv_env_2_0= RULE_ID
             {
             lv_env_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnvironment592); 
 
@@ -721,7 +721,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:2: ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:2: ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -734,9 +734,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:3: (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:3: (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:3: (otherlv_3= ',' )?
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:3: (otherlv_3= ',' )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -745,7 +745,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:5: otherlv_3= ','
+            	            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:295:5: otherlv_3= ','
             	            {
             	            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleEnvironment611); 
 
@@ -757,11 +757,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:299:3: ( (lv_env_4_0= RULE_ID ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:300:1: (lv_env_4_0= RULE_ID )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:299:3: ( (lv_env_4_0= RULE_ID ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:300:1: (lv_env_4_0= RULE_ID )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:300:1: (lv_env_4_0= RULE_ID )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:301:3: lv_env_4_0= RULE_ID
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:300:1: (lv_env_4_0= RULE_ID )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:301:3: lv_env_4_0= RULE_ID
             	    {
             	    lv_env_4_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnvironment630); 
 
@@ -813,7 +813,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIncludeDeclaration"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:325:1: entryRuleIncludeDeclaration returns [EObject current=null] : iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:325:1: entryRuleIncludeDeclaration returns [EObject current=null] : iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF ;
     public final EObject entryRuleIncludeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -821,8 +821,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:326:2: (iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:327:2: iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:326:2: (iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:327:2: iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF
             {
              newCompositeNode(grammarAccess.getIncludeDeclarationRule()); 
             pushFollow(FOLLOW_ruleIncludeDeclaration_in_entryRuleIncludeDeclaration673);
@@ -849,7 +849,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIncludeDeclaration"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:334:1: ruleIncludeDeclaration returns [EObject current=null] : (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:334:1: ruleIncludeDeclaration returns [EObject current=null] : (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleIncludeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -859,21 +859,21 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:337:28: ( (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:1: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:337:28: ( (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:1: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:1: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:3: otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:1: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:338:3: otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleIncludeDeclaration720); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0());
                 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:342:1: ( (lv_importURI_1_0= RULE_STRING ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:343:1: (lv_importURI_1_0= RULE_STRING )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:342:1: ( (lv_importURI_1_0= RULE_STRING ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:343:1: (lv_importURI_1_0= RULE_STRING )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:343:1: (lv_importURI_1_0= RULE_STRING )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:344:3: lv_importURI_1_0= RULE_STRING
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:343:1: (lv_importURI_1_0= RULE_STRING )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:344:3: lv_importURI_1_0= RULE_STRING
             {
             lv_importURI_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIncludeDeclaration737); 
 
@@ -916,7 +916,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLocation"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:368:1: entryRuleLocation returns [EObject current=null] : iv_ruleLocation= ruleLocation EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:368:1: entryRuleLocation returns [EObject current=null] : iv_ruleLocation= ruleLocation EOF ;
     public final EObject entryRuleLocation() throws RecognitionException {
         EObject current = null;
 
@@ -924,8 +924,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:369:2: (iv_ruleLocation= ruleLocation EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:370:2: iv_ruleLocation= ruleLocation EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:369:2: (iv_ruleLocation= ruleLocation EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:370:2: iv_ruleLocation= ruleLocation EOF
             {
              newCompositeNode(grammarAccess.getLocationRule()); 
             pushFollow(FOLLOW_ruleLocation_in_entryRuleLocation778);
@@ -952,7 +952,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLocation"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:377:1: ruleLocation returns [EObject current=null] : (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:377:1: ruleLocation returns [EObject current=null] : (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) ;
     public final EObject ruleLocation() throws RecognitionException {
         EObject current = null;
 
@@ -973,29 +973,29 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:380:28: ( (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:1: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:380:28: ( (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:1: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:1: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:3: otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:1: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:381:3: otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
             {
             otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleLocation825); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLocationAccess().getLocationKeyword_0());
                 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:385:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:387:1: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:385:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:387:1: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:387:1: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:388:2: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:387:1: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:388:2: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
             {
              
             	  getUnorderedGroupHelper().enter(grammarAccess.getLocationAccess().getUnorderedGroup_1());
             	
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:391:2: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:392:3: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:391:2: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:392:3: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:392:3: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:392:3: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+
             int cnt8=0;
             loop8:
             do {
@@ -1012,31 +1012,31 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:394:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:394:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:394:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:395:5: {...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:394:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:395:5: {...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:395:105: ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:396:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:395:105: ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:396:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0);
             	    	 				
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:7: {...}? => ( (lv_ID_2_0= RULE_ID ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:7: {...}? => ( (lv_ID_2_0= RULE_ID ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "true");
             	    }
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:16: ( (lv_ID_2_0= RULE_ID ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:400:1: (lv_ID_2_0= RULE_ID )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:399:16: ( (lv_ID_2_0= RULE_ID ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:400:1: (lv_ID_2_0= RULE_ID )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:400:1: (lv_ID_2_0= RULE_ID )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:401:3: lv_ID_2_0= RULE_ID
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:400:1: (lv_ID_2_0= RULE_ID )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:401:3: lv_ID_2_0= RULE_ID
             	    {
             	    lv_ID_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLocation887); 
 
@@ -1074,31 +1074,31 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:424:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:424:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:424:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:425:5: {...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:424:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:425:5: {...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:425:105: ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:426:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:425:105: ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:426:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1);
             	    	 				
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:7: {...}? => ( (lv_uri_3_0= RULE_STRING ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:7: {...}? => ( (lv_uri_3_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "true");
             	    }
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:16: ( (lv_uri_3_0= RULE_STRING ) )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:430:1: (lv_uri_3_0= RULE_STRING )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:429:16: ( (lv_uri_3_0= RULE_STRING ) )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:430:1: (lv_uri_3_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:430:1: (lv_uri_3_0= RULE_STRING )
-            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:431:3: lv_uri_3_0= RULE_STRING
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:430:1: (lv_uri_3_0= RULE_STRING )
+            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:431:3: lv_uri_3_0= RULE_STRING
             	    {
             	    lv_uri_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLocation963); 
 
@@ -1160,7 +1160,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:462:2: (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:462:2: (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1169,13 +1169,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:462:4: otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:462:4: otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}'
                     {
                     otherlv_4=(Token)match(input,18,FOLLOW_18_in_ruleLocation1027); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getLocationAccess().getLeftCurlyBracketKeyword_2_0());
                         
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:466:1: (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )?
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:466:1: (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1184,17 +1184,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:466:3: otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:466:3: otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
                             {
                             otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleLocation1040); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getLocationAccess().getWithKeyword_2_1_0());
                                 
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:470:1: ( (lv_options_6_0= ruleOption ) )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:471:1: (lv_options_6_0= ruleOption )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:470:1: ( (lv_options_6_0= ruleOption ) )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:471:1: (lv_options_6_0= ruleOption )
                             {
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:471:1: (lv_options_6_0= ruleOption )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:472:3: lv_options_6_0= ruleOption
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:471:1: (lv_options_6_0= ruleOption )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:472:3: lv_options_6_0= ruleOption
                             {
                              
                             	        newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_1_0()); 
@@ -1221,7 +1221,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:2: ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:2: ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
                             loop10:
                             do {
                                 int alt10=2;
@@ -1234,9 +1234,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                                 switch (alt10) {
                             	case 1 :
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:3: (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) )
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:3: (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) )
                             	    {
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:3: (otherlv_7= ',' )?
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:3: (otherlv_7= ',' )?
                             	    int alt9=2;
                             	    int LA9_0 = input.LA(1);
 
@@ -1245,7 +1245,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             	    }
                             	    switch (alt9) {
                             	        case 1 :
-                            	            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:5: otherlv_7= ','
+                            	            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:488:5: otherlv_7= ','
                             	            {
                             	            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleLocation1075); 
 
@@ -1257,11 +1257,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                             	    }
 
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:492:3: ( (lv_options_8_0= ruleOption ) )
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:493:1: (lv_options_8_0= ruleOption )
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:492:3: ( (lv_options_8_0= ruleOption ) )
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:493:1: (lv_options_8_0= ruleOption )
                             	    {
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:493:1: (lv_options_8_0= ruleOption )
-                            	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:494:3: lv_options_8_0= ruleOption
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:493:1: (lv_options_8_0= ruleOption )
+                            	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:494:3: lv_options_8_0= ruleOption
                             	    {
                             	     
                             	    	        newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0()); 
@@ -1303,7 +1303,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:510:6: ( (lv_ius_9_0= ruleIU ) )*
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:510:6: ( (lv_ius_9_0= ruleIU ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -1316,10 +1316,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:511:1: (lv_ius_9_0= ruleIU )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:511:1: (lv_ius_9_0= ruleIU )
                     	    {
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:511:1: (lv_ius_9_0= ruleIU )
-                    	    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:512:3: lv_ius_9_0= ruleIU
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:511:1: (lv_ius_9_0= ruleIU )
+                    	    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:512:3: lv_ius_9_0= ruleIU
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0()); 
@@ -1383,7 +1383,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIU"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:540:1: entryRuleIU returns [EObject current=null] : iv_ruleIU= ruleIU EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:540:1: entryRuleIU returns [EObject current=null] : iv_ruleIU= ruleIU EOF ;
     public final EObject entryRuleIU() throws RecognitionException {
         EObject current = null;
 
@@ -1391,8 +1391,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:541:2: (iv_ruleIU= ruleIU EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:542:2: iv_ruleIU= ruleIU EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:541:2: (iv_ruleIU= ruleIU EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:542:2: iv_ruleIU= ruleIU EOF
             {
              newCompositeNode(grammarAccess.getIURule()); 
             pushFollow(FOLLOW_ruleIU_in_entryRuleIU1174);
@@ -1419,7 +1419,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIU"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:549:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:549:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
     public final EObject ruleIU() throws RecognitionException {
         EObject current = null;
 
@@ -1434,17 +1434,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:552:28: ( ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:1: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:552:28: ( ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:1: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:1: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:2: ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:1: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:2: ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:2: ( (lv_ID_0_0= RULE_ID ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:554:1: (lv_ID_0_0= RULE_ID )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:553:2: ( (lv_ID_0_0= RULE_ID ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:554:1: (lv_ID_0_0= RULE_ID )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:554:1: (lv_ID_0_0= RULE_ID )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:555:3: lv_ID_0_0= RULE_ID
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:554:1: (lv_ID_0_0= RULE_ID )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:555:3: lv_ID_0_0= RULE_ID
             {
             lv_ID_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIU1226); 
 
@@ -1466,7 +1466,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:2: ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:2: ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1475,9 +1475,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:3: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:3: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:3: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )?
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:3: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1486,7 +1486,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:5: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '='
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:571:5: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '='
                             {
                             otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleIU1245); 
 
@@ -1506,7 +1506,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:3: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:3: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1524,13 +1524,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt15) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:4: ( (lv_version_4_0= ruleVersionRange ) )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:4: ( (lv_version_4_0= ruleVersionRange ) )
                             {
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:4: ( (lv_version_4_0= ruleVersionRange ) )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:584:1: (lv_version_4_0= ruleVersionRange )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:583:4: ( (lv_version_4_0= ruleVersionRange ) )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:584:1: (lv_version_4_0= ruleVersionRange )
                             {
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:584:1: (lv_version_4_0= ruleVersionRange )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:585:3: lv_version_4_0= ruleVersionRange
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:584:1: (lv_version_4_0= ruleVersionRange )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:585:3: lv_version_4_0= ruleVersionRange
                             {
                              
                             	        newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0()); 
@@ -1561,13 +1561,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:602:6: ( (lv_version_5_0= RULE_STRING ) )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:602:6: ( (lv_version_5_0= RULE_STRING ) )
                             {
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:602:6: ( (lv_version_5_0= RULE_STRING ) )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:603:1: (lv_version_5_0= RULE_STRING )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:602:6: ( (lv_version_5_0= RULE_STRING ) )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:603:1: (lv_version_5_0= RULE_STRING )
                             {
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:603:1: (lv_version_5_0= RULE_STRING )
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:604:3: lv_version_5_0= RULE_STRING
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:603:1: (lv_version_5_0= RULE_STRING )
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:604:3: lv_version_5_0= RULE_STRING
                             {
                             lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleIU1316); 
 
@@ -1622,7 +1622,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersion"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:628:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:628:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
     public final String entryRuleVersion() throws RecognitionException {
         String current = null;
 
@@ -1633,8 +1633,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:632:2: (iv_ruleVersion= ruleVersion EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:633:2: iv_ruleVersion= ruleVersion EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:632:2: (iv_ruleVersion= ruleVersion EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:633:2: iv_ruleVersion= ruleVersion EOF
             {
              newCompositeNode(grammarAccess.getVersionRule()); 
             pushFollow(FOLLOW_ruleVersion_in_entryRuleVersion1367);
@@ -1664,7 +1664,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersion"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:643:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:643:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) ;
     public final AntlrDatatypeRuleToken ruleVersion() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1680,11 +1680,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:647:28: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:647:28: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:648:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
             {
             this_INT_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1422); 
 
@@ -1693,7 +1693,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
              
                 newLeafNode(this_INT_0, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:655:1: (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:655:1: (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1702,7 +1702,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:656:2: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:656:2: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
                     {
                     kw=(Token)match(input,23,FOLLOW_23_in_ruleVersion1441); 
 
@@ -1716,7 +1716,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                         newLeafNode(this_INT_2, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_1()); 
                         
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:668:1: (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:668:1: (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -1725,7 +1725,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt19) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:669:2: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:669:2: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
                             {
                             kw=(Token)match(input,23,FOLLOW_23_in_ruleVersion1475); 
 
@@ -1739,7 +1739,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                              
                                 newLeafNode(this_INT_4, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_1()); 
                                 
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:681:1: (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:681:1: (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
                             int alt18=2;
                             int LA18_0 = input.LA(1);
 
@@ -1748,14 +1748,14 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             switch (alt18) {
                                 case 1 :
-                                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:682:2: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
+                                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:682:2: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
                                     {
                                     kw=(Token)match(input,23,FOLLOW_23_in_ruleVersion1509); 
 
                                             current.merge(kw);
                                             newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0()); 
                                         
-                                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:687:1: (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
+                                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:687:1: (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
                                     int alt17=3;
                                     switch ( input.LA(1) ) {
                                     case RULE_ID:
@@ -1782,7 +1782,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                                     switch (alt17) {
                                         case 1 :
-                                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:687:6: this_ID_6= RULE_ID
+                                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:687:6: this_ID_6= RULE_ID
                                             {
                                             this_ID_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVersion1525); 
 
@@ -1795,7 +1795,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 2 :
-                                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:695:10: this_INT_7= RULE_INT
+                                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:695:10: this_INT_7= RULE_INT
                                             {
                                             this_INT_7=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVersion1551); 
 
@@ -1808,7 +1808,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 3 :
-                                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:703:10: this_QUALIFIER_8= RULE_QUALIFIER
+                                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:703:10: this_QUALIFIER_8= RULE_QUALIFIER
                                             {
                                             this_QUALIFIER_8=(Token)match(input,RULE_QUALIFIER,FOLLOW_RULE_QUALIFIER_in_ruleVersion1577); 
 
@@ -1865,7 +1865,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersionRange"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:721:1: entryRuleVersionRange returns [String current=null] : iv_ruleVersionRange= ruleVersionRange EOF ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:721:1: entryRuleVersionRange returns [String current=null] : iv_ruleVersionRange= ruleVersionRange EOF ;
     public final String entryRuleVersionRange() throws RecognitionException {
         String current = null;
 
@@ -1876,8 +1876,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
         	
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:725:2: (iv_ruleVersionRange= ruleVersionRange EOF )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:726:2: iv_ruleVersionRange= ruleVersionRange EOF
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:725:2: (iv_ruleVersionRange= ruleVersionRange EOF )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:726:2: iv_ruleVersionRange= ruleVersionRange EOF
             {
              newCompositeNode(grammarAccess.getVersionRangeRule()); 
             pushFollow(FOLLOW_ruleVersionRange_in_entryRuleVersionRange1640);
@@ -1907,7 +1907,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersionRange"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:736:1: ruleVersionRange returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:736:1: ruleVersionRange returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) ;
     public final AntlrDatatypeRuleToken ruleVersionRange() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1923,10 +1923,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
             
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:740:28: ( ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:740:28: ( ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:1: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
             int alt23=3;
             switch ( input.LA(1) ) {
             case 24:
@@ -1954,12 +1954,12 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt23) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:2: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:2: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:2: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:3: (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:2: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:3: (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:3: (kw= '(' | kw= '[' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:741:3: (kw= '(' | kw= '[' )
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
@@ -1977,7 +1977,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt21) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:742:2: kw= '('
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:742:2: kw= '('
                             {
                             kw=(Token)match(input,24,FOLLOW_24_in_ruleVersionRange1695); 
 
@@ -1988,7 +1988,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:749:2: kw= '['
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:749:2: kw= '['
                             {
                             kw=(Token)match(input,25,FOLLOW_25_in_ruleVersionRange1714); 
 
@@ -2034,7 +2034,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                      
                             afterParserOrEnumRuleCall();
                         
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:782:1: (kw= ')' | kw= ']' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:782:1: (kw= ')' | kw= ']' )
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -2052,7 +2052,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt22) {
                         case 1 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:783:2: kw= ')'
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:783:2: kw= ')'
                             {
                             kw=(Token)match(input,26,FOLLOW_26_in_ruleVersionRange1796); 
 
@@ -2063,7 +2063,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:790:2: kw= ']'
+                            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:790:2: kw= ']'
                             {
                             kw=(Token)match(input,27,FOLLOW_27_in_ruleVersionRange1815); 
 
@@ -2083,7 +2083,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:797:5: this_Version_7= ruleVersion
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:797:5: this_Version_7= ruleVersion
                     {
                      
                             newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_1()); 
@@ -2103,7 +2103,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:809:2: kw= 'lazy'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:809:2: kw= 'lazy'
                     {
                     kw=(Token)match(input,28,FOLLOW_28_in_ruleVersionRange1869); 
 
@@ -2137,7 +2137,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOption"
-    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:825:1: ruleOption returns [Enumerator current=null] : ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) ;
+    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:825:1: ruleOption returns [Enumerator current=null] : ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) ;
     public final Enumerator ruleOption() throws RecognitionException {
         Enumerator current = null;
 
@@ -2148,10 +2148,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:827:28: ( ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) )
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:827:28: ( ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
             {
-            // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
+            // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:1: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
             int alt24=4;
             switch ( input.LA(1) ) {
             case 29:
@@ -2183,10 +2183,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:2: (enumLiteral_0= 'requirements' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:2: (enumLiteral_0= 'requirements' )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:2: (enumLiteral_0= 'requirements' )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:4: enumLiteral_0= 'requirements'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:2: (enumLiteral_0= 'requirements' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:828:4: enumLiteral_0= 'requirements'
                     {
                     enumLiteral_0=(Token)match(input,29,FOLLOW_29_in_ruleOption1927); 
 
@@ -2200,10 +2200,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:6: (enumLiteral_1= 'allEnvironments' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:6: (enumLiteral_1= 'allEnvironments' )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:6: (enumLiteral_1= 'allEnvironments' )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:8: enumLiteral_1= 'allEnvironments'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:6: (enumLiteral_1= 'allEnvironments' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:834:8: enumLiteral_1= 'allEnvironments'
                     {
                     enumLiteral_1=(Token)match(input,30,FOLLOW_30_in_ruleOption1944); 
 
@@ -2217,10 +2217,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:6: (enumLiteral_2= 'source' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:6: (enumLiteral_2= 'source' )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:6: (enumLiteral_2= 'source' )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:8: enumLiteral_2= 'source'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:6: (enumLiteral_2= 'source' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:840:8: enumLiteral_2= 'source'
                     {
                     enumLiteral_2=(Token)match(input,31,FOLLOW_31_in_ruleOption1961); 
 
@@ -2234,10 +2234,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:6: (enumLiteral_3= 'configurePhase' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:6: (enumLiteral_3= 'configurePhase' )
                     {
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:6: (enumLiteral_3= 'configurePhase' )
-                    // ../org.eclipse.cbi.targetplatform/src-gen/fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:8: enumLiteral_3= 'configurePhase'
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:6: (enumLiteral_3= 'configurePhase' )
+                    // ../org.eclipse.cbi.targetplatform/src-gen/org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.g:846:8: enumLiteral_3= 'configurePhase'
                     {
                     enumLiteral_3=(Token)match(input,32,FOLLOW_32_in_ruleOption1978); 
 

@@ -12,6 +12,8 @@ package org.eclipse.cbi.targetplatform.tests;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.List;
+import java.util.Locale;
 import org.eclipse.cbi.targetplatform.Environment;
 import org.eclipse.cbi.targetplatform.IU;
 import org.eclipse.cbi.targetplatform.Location;
@@ -19,8 +21,6 @@ import org.eclipse.cbi.targetplatform.Option;
 import org.eclipse.cbi.targetplatform.TargetContent;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider;
-import java.util.List;
-import java.util.Locale;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtend2.lib.StringConcatenation;

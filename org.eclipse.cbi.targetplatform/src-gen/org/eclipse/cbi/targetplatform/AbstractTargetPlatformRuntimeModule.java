@@ -21,7 +21,7 @@ public abstract class AbstractTargetPlatformRuntimeModule extends DefaultRuntime
 
 	@Override
 	public void configure(Binder binder) {
-		properties = tryBindProperties(binder, "fr/obeo/releng/targetplatform/TargetPlatform.properties");
+		properties = tryBindProperties(binder, "org/eclipse/cbi/targetplatform/TargetPlatform.properties");
 		super.configure(binder);
 	}
 	

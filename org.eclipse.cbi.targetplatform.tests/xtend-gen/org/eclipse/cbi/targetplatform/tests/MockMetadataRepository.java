@@ -10,10 +10,10 @@
  */
 package org.eclipse.cbi.targetplatform.tests;
 
-import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Map;
+import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.equinox.p2.core.IPool;

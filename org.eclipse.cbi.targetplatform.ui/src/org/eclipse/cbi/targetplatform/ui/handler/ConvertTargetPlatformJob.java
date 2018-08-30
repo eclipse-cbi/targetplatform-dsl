@@ -50,7 +50,7 @@ public class ConvertTargetPlatformJob extends Job {
 		Injector injector = TargetPlatformActivator
 				.getInstance()
 				.getInjector(
-						TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM);
+						TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM);
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 		Diagnostic diagnostic = null;
@@ -62,12 +62,12 @@ public class ConvertTargetPlatformJob extends Job {
 		} catch (OperationCanceledException cancel) {
 			ret = new Status(
 					IStatus.CANCEL,
-					TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM,
+					TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 					cancel.getMessage(), cancel);
 		} catch (Exception e) {
 			ret = new Status(
 					IStatus.ERROR,
-					TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM,
+					TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 					e.getMessage(), e);
 		}
 		IContainer container = selectedElement.getParent();
@@ -90,7 +90,7 @@ public class ConvertTargetPlatformJob extends Job {
 			} catch (CoreException e) {
 				ret = new Status(
 						IStatus.ERROR,
-						TargetPlatformActivator.FR_OBEO_RELENG_TARGETPLATFORM_TARGETPLATFORM,
+						TargetPlatformActivator.ORG_ECLIPSE_CBI_TARGETPLATFORM_TARGETPLATFORM,
 						e.getMessage(), e);
 			}
 		}

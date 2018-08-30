@@ -2,6 +2,8 @@
  */
 package org.eclipse.cbi.targetplatform.impl;
 
+import java.util.Locale;
+
 import org.eclipse.cbi.targetplatform.Environment;
 import org.eclipse.cbi.targetplatform.IncludeDeclaration;
 import org.eclipse.cbi.targetplatform.Location;
@@ -11,8 +13,6 @@ import org.eclipse.cbi.targetplatform.TargetContent;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.TargetPlatformFactory;
 import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
-
-import java.util.Locale;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;

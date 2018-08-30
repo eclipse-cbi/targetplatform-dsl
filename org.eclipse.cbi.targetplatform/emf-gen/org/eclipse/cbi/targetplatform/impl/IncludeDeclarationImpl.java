@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.cbi.targetplatform.impl.IncludeDeclarationImpl#getTargetPlatform <em>Target Platform</em>}</li>
  *   <li>{@link org.eclipse.cbi.targetplatform.impl.IncludeDeclarationImpl#getImportURI <em>Import URI</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

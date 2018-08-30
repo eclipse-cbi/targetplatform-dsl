@@ -10,6 +10,6 @@ public class TargetPlatformAntlrTokenFileProvider implements IAntlrTokenFileProv
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("fr/obeo/releng/targetplatform/parser/antlr/internal/InternalTargetPlatform.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/cbi/targetplatform/parser/antlr/internal/InternalTargetPlatform.tokens");
 	}
 }

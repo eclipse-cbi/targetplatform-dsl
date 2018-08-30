@@ -10,10 +10,10 @@ package org.eclipse.cbi.targetplatform;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.cbi.targetplatform.IncludeDeclaration#getImportURI <em>Import URI</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.cbi.targetplatform.TargetPlatformPackage#getIncludeDeclaration()
  * @model

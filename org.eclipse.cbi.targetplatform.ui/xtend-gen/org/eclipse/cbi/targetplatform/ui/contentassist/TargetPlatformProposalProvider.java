@@ -12,6 +12,12 @@ package org.eclipse.cbi.targetplatform.ui.contentassist;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.cbi.targetplatform.Environment;
 import org.eclipse.cbi.targetplatform.IU;
 import org.eclipse.cbi.targetplatform.IncludeDeclaration;

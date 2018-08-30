@@ -12,11 +12,11 @@ package org.eclipse.cbi.targetplatform.ui.quickfix;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
+import java.util.function.Consumer;
 import org.eclipse.cbi.targetplatform.Location;
 import org.eclipse.cbi.targetplatform.Option;
 import org.eclipse.cbi.targetplatform.TargetPlatform;
 import org.eclipse.cbi.targetplatform.validation.TargetPlatformValidator;
-import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;

@@ -5,6 +5,7 @@ package org.eclipse.cbi.targetplatform.impl;
 import java.util.Locale;
 
 import org.eclipse.cbi.targetplatform.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -15,16 +16,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
-
-import org.eclipse.cbi.targetplatform.Environment;
-import org.eclipse.cbi.targetplatform.IU;
-import org.eclipse.cbi.targetplatform.IncludeDeclaration;
-import org.eclipse.cbi.targetplatform.Location;
-import org.eclipse.cbi.targetplatform.Option;
-import org.eclipse.cbi.targetplatform.Options;
-import org.eclipse.cbi.targetplatform.TargetPlatform;
-import org.eclipse.cbi.targetplatform.TargetPlatformFactory;
-import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
 
 /**
  * <!-- begin-user-doc -->

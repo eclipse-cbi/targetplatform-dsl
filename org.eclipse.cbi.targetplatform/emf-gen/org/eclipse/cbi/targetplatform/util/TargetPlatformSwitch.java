@@ -3,19 +3,11 @@
 package org.eclipse.cbi.targetplatform.util;
 
 import org.eclipse.cbi.targetplatform.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.cbi.targetplatform.Environment;
-import org.eclipse.cbi.targetplatform.IU;
-import org.eclipse.cbi.targetplatform.IncludeDeclaration;
-import org.eclipse.cbi.targetplatform.Location;
-import org.eclipse.cbi.targetplatform.Options;
-import org.eclipse.cbi.targetplatform.TargetContent;
-import org.eclipse.cbi.targetplatform.TargetPlatform;
-import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +47,7 @@ public class TargetPlatformSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */

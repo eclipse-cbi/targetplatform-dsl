@@ -3,7 +3,6 @@
 */
 package org.eclipse.cbi.targetplatform;
 
-import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;

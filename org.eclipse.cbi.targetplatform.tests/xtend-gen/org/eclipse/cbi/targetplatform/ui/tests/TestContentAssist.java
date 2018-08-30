@@ -15,18 +15,16 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
-
+import java.net.URI;
+import java.util.List;
+import java.util.Locale;
+import org.eclipse.cbi.targetplatform.TargetPlatformRuntimeModule;
+import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup;
 import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
 import org.eclipse.cbi.targetplatform.tests.MockIU;
 import org.eclipse.cbi.targetplatform.tests.MockProvisioningAgent;
 import org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule;
 import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator;
-import java.net.URI;
-import java.util.List;
-import java.util.Locale;
-
-import org.eclipse.cbi.targetplatform.TargetPlatformRuntimeModule;
-import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
