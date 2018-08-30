@@ -127,7 +127,7 @@ bq. You can use the special keyword @lazy@ as version to state that you don't wa
 
 h3. Call the generator from the command line
 
-This project provide an Eclipse application that you can launch from the command line. The ID of the application is @fr.obeo.releng.targetplatform.pde.ConverterApplication@ and is provided by the plugin @fr.obeo.releng.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
+This project provide an Eclipse application that you can launch from the command line. The ID of the application is @org.eclipse.cbi.targetplatform.tpd.converter@ and is provided by the plugin @org.eclipse.cbi.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
 
 h2. Build
 
@@ -139,4 +139,4 @@ Clone this repository, import all projects in your Eclipse and set your target p
 
 h2. License
 
-Copyright (c) 2012-2014 Obeo. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 

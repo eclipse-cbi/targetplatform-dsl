@@ -1,0 +1,58 @@
+grammar org.eclipse.cbi.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
+
+import "org.eclipse.cbi.targetplatform"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+											
+TargetPlatform:
+	(
+		'target' name=STRING
+		contents+=TargetContent*
+	)?
+;
+
+TargetContent: 
+	Options | Environment | IncludeDeclaration | Location
+;
+
+Options: 
+	'with' options+=Option (','? options+=Option)*
+;
+
+Environment:
+	{Environment}
+	'environment' env+=ID (','? env+=ID)*
+;
+
+IncludeDeclaration:
+	'include' importURI=STRING
+;
+
+Location:
+	'location' ((ID=ID)? & uri=STRING) ('{'
+		('with' options+=Option (','? options+=Option)*)?
+		ius+=IU*
+	'}')?
+;
+
+enum Option:
+	INCLUDE_REQUIRED |
+	INCLUDE_ALL_ENVIRONMENTS |
+	INCLUDE_SOURCE |
+	INCLUDE_CONFIGURE_PHASE
+;
+
+IU:
+	ID=ID ( (';' 'version' '=')? (version=VersionRange|version=STRING) )? 
+;
+
+Version hidden():
+	INT ('.' INT ('.' INT ('.' (ID|INT|QUALIFIER))?)?)?
+;
+
+VersionRange hidden (WS):
+	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
+;
+
+terminal INT returns ecore::EInt: ('0'..'9')+;
+terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
+terminal QUALIFIER: ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
