@@ -4,12 +4,14 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <prerequisites>
-    <maven>3.0</maven>
+    <maven>3.3</maven>
   </prerequisites>
+  
   <groupId>org.eclipse.cbi.targetplatform</groupId>
   <artifactId>releng.targetplatform-parent</artifactId>
   <version>2.1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  
   <licenses>
     <license>
       <name>Eclipse Public License v1.0</name>
@@ -23,10 +25,12 @@
       </comments>
     </license>
   </licenses>
+  
   <properties>
-    <tycho-version>0.20.0</tycho-version>
+    <tycho-version>1.0.0</tycho-version>
     <os-jvm-flags/>
   </properties>
+  
   <modules>
     <module>../org.eclipse.cbi.targetplatform</module>
     <module>../org.eclipse.cbi.targetplatform.ui</module>
@@ -34,25 +38,84 @@
     <module>../org.eclipse.cbi.targetplatform-feature</module>
     <module>../org.eclipse.cbi.targetplatform-update</module>
   </modules>
+  
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-maven-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-publisher-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
         <configuration>
           <target>
             <artifact>
               <groupId>org.eclipse.cbi.targetplatform</groupId>
               <artifactId>releng.targetplatform-parent</artifactId>
               <version>2.1.1-SNAPSHOT</version>
-              <classifier>default</classifier>
+              <classifier>default</classifier>              
             </artifact>
           </target>
           <resolver>p2</resolver>
@@ -87,6 +150,7 @@
       </plugin>
     </plugins>
   </build>
+  
   <profiles>
     <profile>
       <id>macosx-jvm-flags</id>
@@ -98,4 +162,5 @@
       </properties>
     </profile>
   </profiles>
+  
 </project>
