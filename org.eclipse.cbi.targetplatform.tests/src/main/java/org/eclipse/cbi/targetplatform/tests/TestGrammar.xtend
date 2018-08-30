@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Denis Golovin - Fix version qualifier parsing problems
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform.tests
 

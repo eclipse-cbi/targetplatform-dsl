@@ -10,7 +10,7 @@
       %description
    </description>
 
-   <copyright url="%copyrightURL">
+   <copyright>
       %copyright
    </copyright>
 
@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <update label="Target Platform Definition DSL and Generator update site" url="http://mbarbero.github.com/org.eclipse.cbi.targetplatform/p2/"/>
+      <update label="Target Platform Definition DSL and Generator update site" url="http://download.eclipse.org/cbi/updates/targetplatformdsl"/>
    </url>
 
    <requires>
@@ -28,7 +28,21 @@
    </requires>
 
    <plugin
+         id="org.eclipse.cbi.targetplatform.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.cbi.targetplatform"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.cbi.targetplatform.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"

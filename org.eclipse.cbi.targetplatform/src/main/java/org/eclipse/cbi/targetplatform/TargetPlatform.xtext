@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2012-2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Denis Golovin - Fix version qualifier parsing problems
+ *******************************************************************************/
 grammar org.eclipse.cbi.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
 
 import "org.eclipse.cbi.targetplatform.model"
@@ -53,6 +64,8 @@ VersionRange hidden (WS):
 	( ('('|'[') Version ',' Version (')'|']') ) | Version | 'lazy'
 ;
 
+@Override 
 terminal INT returns ecore::EInt: ('0'..'9')+;
+@Override 
 terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('.'? ('a'..'z'|'A'..'Z'|'^'|'_'|'-'|'0'..'9'))*;
 terminal QUALIFIER: ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
