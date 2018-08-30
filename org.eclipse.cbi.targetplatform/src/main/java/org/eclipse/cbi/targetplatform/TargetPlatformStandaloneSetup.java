@@ -27,4 +27,3 @@ public class TargetPlatformStandaloneSetup extends TargetPlatformStandaloneSetup
 	}
 	
 }
-

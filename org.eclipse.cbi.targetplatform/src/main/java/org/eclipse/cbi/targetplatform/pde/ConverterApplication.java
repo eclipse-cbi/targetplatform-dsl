@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.cbi.targetplatform.TargetPlatformBundleActivator;
 import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -48,8 +47,7 @@ public class ConverterApplication implements IApplication {
 			path = args[0];
 		}
 		
-		TargetPlatformStandaloneSetup.doSetup();
-		Injector injector = TargetPlatformBundleActivator.getInstance().getInjector(TargetPlatformBundleActivator.TARGET_PLATFORM_LANGUAGE_NAME);
+		Injector injector = new TargetPlatformStandaloneSetup().createInjector();
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 

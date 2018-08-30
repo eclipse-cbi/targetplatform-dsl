@@ -10,10 +10,6 @@
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
@@ -22,11 +18,6 @@ import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-
-import com.google.common.collect.Maps;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
 
 
 /**
@@ -39,13 +30,11 @@ public class TargetPlatformBundleActivator extends Plugin {
 	
 	public static final String TARGET_PLATFORM_LANGUAGE_NAME = "org.eclipse.cbi.TargetPlatform";
 	
-	private static final Logger logger = Logger.getLogger(TargetPlatformBundleActivator.class);
-	
 	private static TargetPlatformBundleActivator INSTANCE;
 	
-	private Map<String, Injector> injectors;
-
 	private BundleContext context;
+	
+	private ServiceReference<IProvisioningAgentProvider> agentProviderRef;
 	
 	private IProvisioningAgent agent;
 	
@@ -55,7 +44,6 @@ public class TargetPlatformBundleActivator extends Plugin {
 		
 		INSTANCE = this;
 		this.context = context;
-		injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 	}
 	
 	@Override
@@ -66,7 +54,10 @@ public class TargetPlatformBundleActivator extends Plugin {
 			oldAgent.stop();
 		}
 		
-		injectors.clear();
+		if (agentProviderRef != null) {
+			context.ungetService(agentProviderRef);
+		}
+		agentProviderRef = null;
 		
 		context = null;
 		INSTANCE = null;
@@ -78,32 +69,11 @@ public class TargetPlatformBundleActivator extends Plugin {
 		return INSTANCE;
 	}
 
-	public Injector getInjector(String language) {
-		synchronized (injectors) {
-			Injector injector = injectors.get(language);
-			if (injector == null) {
-				injectors.put(language, injector = createInjector(language));
-			}
-			return injector;
-		}
-	}
-	
-	protected Injector createInjector(String language) {
-		try {
-			Module runtimeModule = getRuntimeModule(language);
-			return Guice.createInjector(runtimeModule);
-		} catch (Exception e) {
-			logger.error("Failed to create injector for " + language);
-			logger.error(e.getMessage(), e);
-			throw new RuntimeException("Failed to create injector for " + language, e);
-		}
-	}
-	
 	public IProvisioningAgent getProvisioningAgent() {
 		if (agent == null) {
-			ServiceReference<?> serviceReference = context.getServiceReference(IProvisioningAgentProvider.class.getName());
-			if (serviceReference != null) {
-				IProvisioningAgentProvider agentProvider = (IProvisioningAgentProvider) context.getService(serviceReference);
+			agentProviderRef = context.getServiceReference(IProvisioningAgentProvider.class);
+			if (agentProviderRef != null) {
+				IProvisioningAgentProvider agentProvider = context.getService(agentProviderRef);
 				if (agentProvider != null) {
 					try {
 						agent = agentProvider.createAgent(getStateLocation().toFile().toURI());
@@ -113,18 +83,11 @@ public class TargetPlatformBundleActivator extends Plugin {
 						getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
 					}
 				}
-				context.ungetService(serviceReference);
+			} else {
+				getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "Cannot find a service reference to " + IProvisioningAgentProvider.class.getName()));
 			}
 		}
 		return agent;
-	}
-	
-	protected Module getRuntimeModule(String grammar) {
-		if (TARGET_PLATFORM_LANGUAGE_NAME.equals(grammar)) {
-			return new TargetPlatformRuntimeModule();
-		}
-		
-		throw new IllegalArgumentException(grammar);
 	}
 	
 }

@@ -4,12 +4,10 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-Version: 2.1.1.qualifier
-Bundle-ClassPath: .
 Bundle-SymbolicName: org.eclipse.cbi.targetplatform;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.cbi.targetplatform.model,
  org.eclipse.xtext,
- org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.xtext.xbase.lib,
  org.antlr.runtime,
@@ -35,4 +33,3 @@ Export-Package: org.eclipse.cbi.targetplatform,
  org.eclipse.cbi.targetplatform.util,
  org.eclipse.cbi.targetplatform.validation
 Bundle-Activator: org.eclipse.cbi.targetplatform.TargetPlatformBundleActivator
-Eclipse-ExtensibleAPI: true
