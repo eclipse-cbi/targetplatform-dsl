@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform.pde
 
-import org.eclipse.cbi.targetplatform.Option
+import org.eclipse.cbi.targetplatform.model.Option
 import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
 

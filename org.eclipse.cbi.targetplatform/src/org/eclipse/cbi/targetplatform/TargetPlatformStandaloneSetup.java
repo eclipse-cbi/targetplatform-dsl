@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import com.google.inject.Injector;
 
-import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
+import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetupGenerated;
 
 /**

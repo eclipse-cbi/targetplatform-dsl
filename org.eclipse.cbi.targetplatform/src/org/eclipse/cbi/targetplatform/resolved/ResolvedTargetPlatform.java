@@ -30,10 +30,10 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import org.eclipse.cbi.targetplatform.IU;
-import org.eclipse.cbi.targetplatform.Location;
-import org.eclipse.cbi.targetplatform.Option;
-import org.eclipse.cbi.targetplatform.TargetPlatform;
+import org.eclipse.cbi.targetplatform.model.IU;
+import org.eclipse.cbi.targetplatform.model.Location;
+import org.eclipse.cbi.targetplatform.model.Option;
+import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 
 
@@ -138,7 +138,7 @@ public class ResolvedTargetPlatform {
 		}
 		
 		public static Environment create(TargetPlatform targetPlatform) {
-			final org.eclipse.cbi.targetplatform.Environment env = targetPlatform.getEnvironment();
+			final org.eclipse.cbi.targetplatform.model.Environment env = targetPlatform.getEnvironment();
 			if (env != null) {
 				final String os = Strings.emptyToNull(env.getOperatingSystem());
 				final String ws = Strings.emptyToNull(env.getWindowingSystem());

@@ -11,13 +11,13 @@
 package org.eclipse.cbi.targetplatform.ui.labeling;
 
 import com.google.inject.Inject;
-import org.eclipse.cbi.targetplatform.Environment;
-import org.eclipse.cbi.targetplatform.IU;
-import org.eclipse.cbi.targetplatform.IncludeDeclaration;
-import org.eclipse.cbi.targetplatform.Location;
-import org.eclipse.cbi.targetplatform.Option;
-import org.eclipse.cbi.targetplatform.Options;
-import org.eclipse.cbi.targetplatform.TargetPlatform;
+import org.eclipse.cbi.targetplatform.model.Environment;
+import org.eclipse.cbi.targetplatform.model.IU;
+import org.eclipse.cbi.targetplatform.model.IncludeDeclaration;
+import org.eclipse.cbi.targetplatform.model.Location;
+import org.eclipse.cbi.targetplatform.model.Option;
+import org.eclipse.cbi.targetplatform.model.Options;
+import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;

@@ -3,14 +3,6 @@
 
 <plugin>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Targetplatform -->
-      <package
-            uri="org.eclipse.cbi.targetplatform"
-            class="org.eclipse.cbi.targetplatform.TargetPlatformPackage"
-            genModel="model/TargetPlatform.xcore"/>
-   </extension>
-
   <extension
         id="tpd.converter"
         point="org.eclipse.core.runtime.applications">

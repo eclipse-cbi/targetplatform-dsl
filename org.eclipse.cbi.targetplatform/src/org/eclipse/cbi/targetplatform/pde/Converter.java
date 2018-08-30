@@ -45,8 +45,8 @@ import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import org.eclipse.cbi.targetplatform.TargetPlatform;
-import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
+import org.eclipse.cbi.targetplatform.model.TargetPlatform;
+import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 

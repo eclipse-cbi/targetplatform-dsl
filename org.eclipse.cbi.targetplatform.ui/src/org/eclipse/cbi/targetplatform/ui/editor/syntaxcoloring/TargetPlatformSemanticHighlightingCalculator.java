@@ -19,9 +19,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 
-import org.eclipse.cbi.targetplatform.Environment;
-import org.eclipse.cbi.targetplatform.IU;
-import org.eclipse.cbi.targetplatform.TargetPlatformPackage;
+import org.eclipse.cbi.targetplatform.model.Environment;
+import org.eclipse.cbi.targetplatform.model.IU;
+import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 
 public class TargetPlatformSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
 

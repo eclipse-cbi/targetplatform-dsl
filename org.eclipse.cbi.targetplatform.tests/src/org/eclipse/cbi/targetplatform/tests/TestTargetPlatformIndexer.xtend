@@ -12,7 +12,7 @@ package org.eclipse.cbi.targetplatform.tests
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.cbi.targetplatform.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import org.eclipse.emf.common.util.URI

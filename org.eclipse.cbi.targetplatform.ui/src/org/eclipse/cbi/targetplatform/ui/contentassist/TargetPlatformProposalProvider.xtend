@@ -11,13 +11,13 @@
 package org.eclipse.cbi.targetplatform.ui.contentassist
 
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.Environment
-import org.eclipse.cbi.targetplatform.IU
-import org.eclipse.cbi.targetplatform.Location
-import org.eclipse.cbi.targetplatform.Option
-import org.eclipse.cbi.targetplatform.Options
-import org.eclipse.cbi.targetplatform.TargetPlatform
-import org.eclipse.cbi.targetplatform.TargetPlatformFactory
+import org.eclipse.cbi.targetplatform.model.Environment
+import org.eclipse.cbi.targetplatform.model.IU
+import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.Option
+import org.eclipse.cbi.targetplatform.model.Options
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.TargetPlatformFactory
 import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess
 import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
 import java.net.URI

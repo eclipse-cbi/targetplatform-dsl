@@ -14,9 +14,9 @@ import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.ListMultimap
 import com.google.common.collect.Multimaps
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.IncludeDeclaration
-import org.eclipse.cbi.targetplatform.Location
-import org.eclipse.cbi.targetplatform.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
+import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import java.util.LinkedList
 import java.util.List
 import java.util.Set

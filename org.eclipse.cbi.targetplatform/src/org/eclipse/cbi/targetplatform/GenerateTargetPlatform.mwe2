@@ -38,7 +38,7 @@ Workflow {
     	encoding = encoding
     	language = auto-inject {
     		loadedResource = "platform:/resource/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore"
-    		loadedResource = "platform:/resource/${projectName}/model/TargetPlatform.xcore"
+    		loadedResource = "platform:/resource/${projectName}.model/src/main/resources/TargetPlatform.xcore"
 
     		uri = grammarURI
     

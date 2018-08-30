@@ -11,14 +11,14 @@
 package org.eclipse.cbi.targetplatform.ui.quickfix
 
 import com.google.common.collect.Sets
-import org.eclipse.cbi.targetplatform.Location
-import org.eclipse.cbi.targetplatform.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.validation.TargetPlatformValidator
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.cbi.targetplatform.Option
+import org.eclipse.cbi.targetplatform.model.Option
 
 /**
  * Custom quickfixes.

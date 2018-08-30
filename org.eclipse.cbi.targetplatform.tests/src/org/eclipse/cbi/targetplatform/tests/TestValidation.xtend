@@ -13,11 +13,11 @@ package org.eclipse.cbi.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.name.Named
-import org.eclipse.cbi.targetplatform.Environment
-import org.eclipse.cbi.targetplatform.IU
-import org.eclipse.cbi.targetplatform.IncludeDeclaration
-import org.eclipse.cbi.targetplatform.Location
-import org.eclipse.cbi.targetplatform.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.Environment
+import org.eclipse.cbi.targetplatform.model.IU
+import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
+import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.validation.TargetPlatformValidator
 import java.util.List
@@ -37,8 +37,8 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.validation.RangeBasedDiagnostic
-import org.eclipse.cbi.targetplatform.Options
-import org.eclipse.cbi.targetplatform.Option
+import org.eclipse.cbi.targetplatform.model.Options
+import org.eclipse.cbi.targetplatform.model.Option
 
 @InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))

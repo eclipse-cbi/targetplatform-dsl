@@ -29,7 +29,7 @@ import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 
 import com.google.common.collect.Lists;
 
-import org.eclipse.cbi.targetplatform.Option;
+import org.eclipse.cbi.targetplatform.model.Option;
 
 
 @SuppressWarnings("restriction")

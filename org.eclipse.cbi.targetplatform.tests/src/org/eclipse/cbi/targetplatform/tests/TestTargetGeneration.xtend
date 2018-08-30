@@ -12,7 +12,7 @@ package org.eclipse.cbi.targetplatform.tests
 
 import com.google.common.io.Files
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.TargetPlatform
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.TargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform

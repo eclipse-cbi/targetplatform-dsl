@@ -31,11 +31,13 @@
   	<maven.compiler.target>1.8</maven.compiler.target>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tycho-version>1.0.0</tycho-version>
+    <xtext-version>2.11.0</xtext-version>
     <os-jvm-flags/>
   </properties>
   
   <modules>
     <module>org.eclipse.cbi.targetplatform</module>
+    <module>org.eclipse.cbi.targetplatform.model</module>
     <module>org.eclipse.cbi.targetplatform.ui</module>
     <module>org.eclipse.cbi.targetplatform.tests</module>
     <module>org.eclipse.cbi.targetplatform-feature</module>
@@ -109,6 +111,11 @@
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-p2-repository-plugin</artifactId>
           <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.xtext</groupId>
+          <artifactId>xtext-maven-plugin</artifactId>
+          <version>${xtext-version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -23,7 +23,8 @@ Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.jdt.launching,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.ui.shared,
- org.eclipse.xtext.ui
+ org.eclipse.xtext.ui,
+ org.eclipse.cbi.targetplatform.model
 Import-Package: org.apache.log4j,
  org.hamcrest.core,
  org.junit;version="4.5.0",
