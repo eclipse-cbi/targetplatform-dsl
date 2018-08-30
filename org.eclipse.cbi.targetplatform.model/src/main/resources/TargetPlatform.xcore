@@ -6,6 +6,7 @@ import java.util.Locale
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
 import org.eclipse.jdt.launching.JavaRuntime
+import org.eclipse.core.runtime.RegistryFactory
 
 class TargetPlatform {
 	String name
@@ -99,6 +100,10 @@ class Environment extends TargetContent {
 	}
 	
 	derived ExecutionEnvironment executionEnvironment get {
+		if (RegistryFactory.registry === null) {
+			// we won't be able to find EE list without the extensions registry
+			return null
+		}
 		val eeManager = JavaRuntime.executionEnvironmentsManager
 		if (eeManager !== null) {
 			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList

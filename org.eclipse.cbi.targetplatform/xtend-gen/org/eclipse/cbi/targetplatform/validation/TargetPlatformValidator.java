@@ -67,8 +67,8 @@ import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -99,6 +99,9 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   
   @Inject
   private IProvisioningAgent provisioningAgent;
+  
+  @Inject
+  private IExecutionEnvironmentsManager eeManager;
   
   @Inject
   private TargetPlatformGrammarAccess grammarAccess;
@@ -653,7 +656,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     final Function1<IExecutionEnvironment, String> _function_5 = (IExecutionEnvironment it) -> {
       return it.getId().toUpperCase();
     };
-    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function_5);
+    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(this.eeManager.getExecutionEnvironments())), _function_5);
     while (dupEnvIt.hasNext()) {
       {
         final String envValue = dupEnvIt.next().toUpperCase();
@@ -729,7 +732,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     final Function1<IExecutionEnvironment, String> _function_4 = (IExecutionEnvironment it) -> {
       return it.getId().toUpperCase();
     };
-    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments())), _function_4);
+    final List<String> knownEE = ListExtensions.<IExecutionEnvironment, String>map(((List<IExecutionEnvironment>)Conversions.doWrapArray(this.eeManager.getExecutionEnvironments())), _function_4);
     final Function1<Environment, EList<String>> _function_5 = (Environment it) -> {
       return it.getEnv();
     };

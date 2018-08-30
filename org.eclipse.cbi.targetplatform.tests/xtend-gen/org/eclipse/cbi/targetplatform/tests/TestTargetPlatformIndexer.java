@@ -16,7 +16,7 @@ import com.google.inject.Provider;
 import java.util.Collections;
 import org.eclipse.cbi.targetplatform.model.Location;
 import org.eclipse.cbi.targetplatform.model.TargetPlatform;
-import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -33,7 +33,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetPlatformIndexer {

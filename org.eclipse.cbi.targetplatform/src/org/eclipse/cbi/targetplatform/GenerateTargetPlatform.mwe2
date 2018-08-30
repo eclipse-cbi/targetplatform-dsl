@@ -17,12 +17,8 @@ Workflow {
 				eclipsePlugin = {
 					enabled = true
 				}
-				genericIde = {
-					name = "org.eclipse.cbi.targetplatform.ui"
-				}
 				eclipsePluginTest = {
 					enabled = true
-					name = "org.eclipse.cbi.targetplatform.tests"
 				}
 				createEclipseMetaData = true
 			}

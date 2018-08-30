@@ -34,7 +34,6 @@ import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.query.IQuery
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
-import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.jface.operation.IRunnableWithProgress
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.widgets.Display
@@ -44,6 +43,7 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
 
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
@@ -67,6 +67,9 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	
 	@Inject
 	private TargetPlatformGrammarAccess grammarAccess;
+	
+	@Inject
+	private IExecutionEnvironmentsManager eeManager;
 	
 	@Inject
 	private IProvisioningAgent provisioningAgent
@@ -260,12 +263,9 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			}
 			
 			if (env.executionEnvironment === null) {
-				val eeManager = JavaRuntime.executionEnvironmentsManager
-				if (eeManager !== null) {
-					eeManager.executionEnvironments.forEach[
-						acceptor.accept(createCompletionProposal(it.id, it.description, env, 310, context))
-					]
-				}
+				eeManager.executionEnvironments.forEach[
+					acceptor.accept(createCompletionProposal(it.id, it.description, env, 310, context))
+				]
 			}
 			
 			if (env.localization === null) {

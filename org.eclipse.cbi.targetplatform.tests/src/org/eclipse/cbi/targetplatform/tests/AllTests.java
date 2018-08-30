@@ -13,12 +13,6 @@ package org.eclipse.cbi.targetplatform.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.eclipse.cbi.targetplatform.tests.TestGrammar;
-import org.eclipse.cbi.targetplatform.tests.TestTargetConversion;
-import org.eclipse.cbi.targetplatform.tests.TestTargetGeneration;
-import org.eclipse.cbi.targetplatform.tests.TestTargetPlatformIndexer;
-import org.eclipse.cbi.targetplatform.tests.TestValidation;
-import org.eclipse.cbi.targetplatform.ui.tests.TestContentAssist;
 
 /**
  * @author <a href="mailto:mikael.barbero@gmail.com">Mikael Barbero</a>
@@ -35,10 +29,4 @@ import org.eclipse.cbi.targetplatform.ui.tests.TestContentAssist;
 })
 public class AllTests {
 	
-	@RunWith(Suite.class)
-	@SuiteClasses({
-		TestContentAssist.class,
-	})
-	public static class UI {
-	}
 }

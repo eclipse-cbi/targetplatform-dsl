@@ -13,8 +13,11 @@ package org.eclipse.cbi.targetplatform.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
-import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
@@ -24,16 +27,16 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.equinox.p2.core.ProvisionException
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.metadata.Version
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class TestTargetConversion {
 
@@ -58,12 +61,12 @@ class TestTargetConversion {
 			''')
 		
 		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2, "v201303041551")),
-						new MockIU("org.junit", Version.createOSGi(4,10,0, "v4_10_0_v20130308-0414"))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2, "v201303041551")),
+						IUStub.createBundle("org.junit", Version.createOSGi(4,10,0, "v4_10_0_v20130308-0414"))
 					)
 				} else {
 					return emptyList
@@ -97,7 +100,7 @@ class TestTargetConversion {
 			''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		val d = resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(null) {
+		val d = resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(null) {
 			override loadRepository(java.net.URI location, IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
 				if ("unknownHost".equals(location.toString)) {
 					throw new ProvisionException("Unknown Host")
@@ -109,7 +112,7 @@ class TestTargetConversion {
 		}, new NullProgressMonitor());
 		
 		assertEquals(Diagnostic.ERROR, d.severity)
-		assertTrue("Message is "+d.children.head.message,d.children.head.message.startsWith("Unknown Host"))
+		assertTrue("Message is '"+d.children.head.message+"'",d.children.head.message.contains("Unknown Host"))
 	}
 	
 	@Test
@@ -125,12 +128,12 @@ class TestTargetConversion {
 		''')
 
 		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
-						new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
+						IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else {
 					return emptyList
@@ -165,16 +168,16 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
-						new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
+						IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else if ("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.sdk.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.sdk.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else {
 					return emptyList
@@ -212,12 +215,12 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
-						new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
+						IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else {
 					return emptyList
@@ -254,12 +257,12 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
-						new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
+						IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else {
 					return emptyList
@@ -292,12 +295,12 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
-						new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
+						IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1,0,0)),
+						IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1,0,0))
 					)
 				} else {
 					return emptyList
@@ -333,13 +336,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -379,13 +382,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -425,13 +428,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -471,13 +474,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -517,13 +520,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -556,13 +559,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -595,13 +598,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -632,13 +635,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -669,13 +672,13 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava", Version.createOSGi(11,0,2)),
-						new MockIU("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub.createBundle("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else {
 					return emptyList
@@ -704,12 +707,12 @@ class TestTargetConversion {
 		''')
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava.source", Version.createOSGi(10,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava.source", Version.createOSGi(10,0,0))
 					)
 				} else {
 					return emptyList
@@ -737,12 +740,12 @@ class TestTargetConversion {
 		''')
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("com.google.guava", Version.createOSGi(10,0,0)),
-						new MockIU("com.google.guava.source", Version.createOSGi(10,0,0))
+						IUStub.createBundle("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub.createBundle("com.google.guava.source", Version.createOSGi(10,0,0))
 					)
 				} else {
 					return emptyList
@@ -770,12 +773,12 @@ class TestTargetConversion {
 		''')
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						MockIU::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10,0,0)),
-						MockIU::createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10,0,0))
+						IUStub::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10,0,0)),
+						IUStub::createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10,0,0))
 					)
 				} else {
 					return emptyList
@@ -803,12 +806,12 @@ class TestTargetConversion {
 		''')
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						MockIU::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10,0,0)),
-						MockIU::createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10,0,0))
+						IUStub::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10,0,0)),
+						IUStub::createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10,0,0))
 					)
 				} else {
 					return emptyList
@@ -836,7 +839,7 @@ class TestTargetConversion {
 		''')
 		
 		val targetDef = ResolvedTargetPlatform.create(o, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
 			}
@@ -866,7 +869,7 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
 			}
@@ -902,7 +905,7 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
 			}
@@ -938,7 +941,7 @@ class TestTargetConversion {
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
 		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		targetDef.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
 			}
@@ -972,22 +975,22 @@ class TestTargetConversion {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, indexBuilder);
-		val d = resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		val d = resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/egit/updates-3.3".equals(location.toString)) {
 					newImmutableList(
-						MockIU::createFeature("org.eclipse.egit.feature.group", Version.createOSGi(3,3,2)),
-						MockIU::createFeature("org.eclipse.egit.mylyn.feature.group", Version.createOSGi(3,3,2))
+						IUStub::createFeature("org.eclipse.egit.feature.group", Version.createOSGi(3,3,2)),
+						IUStub::createFeature("org.eclipse.egit.mylyn.feature.group", Version.createOSGi(3,3,2))
 					)
 				} else if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
 					newImmutableList(
-						MockIU::createFeature("com.google.guava", Version.createOSGi(10,0,0)),
-						MockIU::createFeature("com.google.guava", Version.createOSGi(11,0,2)),
-						MockIU::createFeature("com.google.guava", Version.createOSGi(12,0,0))
+						IUStub::createFeature("com.google.guava", Version.createOSGi(10,0,0)),
+						IUStub::createFeature("com.google.guava", Version.createOSGi(11,0,2)),
+						IUStub::createFeature("com.google.guava", Version.createOSGi(12,0,0))
 					)
 				} else if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
 					newImmutableList(
-						MockIU::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(5,0,0))
+						IUStub::createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(5,0,0))
 					)
 				} else {
 					return emptyList

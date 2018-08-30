@@ -15,7 +15,8 @@ import java.util.Locale
 import org.eclipse.cbi.targetplatform.model.Environment
 import org.eclipse.cbi.targetplatform.model.Option
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
-import org.eclipse.jdt.launching.JavaRuntime
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -24,12 +25,15 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
-@RunWith(typeof(XtextRunner))
+@RunWith(XtextRunner)
+@InjectWith(CustomTargetPlatformInjectorProvider)
 class TestGrammar {
 	
 	@Inject
 	ParseHelper<TargetPlatform> parser
+	
+	@Inject
+	IExecutionEnvironmentsManager eeManager;
 	
 	@Test
 	def testEmpty() {
@@ -264,7 +268,7 @@ class TestGrammar {
 		assertEquals("x86_64", env.architecture)
 		assertEquals("motif", env.windowingSystem)
 		assertEquals(new Locale("en", "us"), env.localization)
-		assertEquals(JavaRuntime::executionEnvironmentsManager.getEnvironment("JavaSE-1.7"), env.executionEnvironment)
+		assertEquals(eeManager.getEnvironment("JavaSE-1.7"), env.executionEnvironment)
 	}
 	
 	@Test

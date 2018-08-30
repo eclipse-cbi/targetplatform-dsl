@@ -10,12 +10,8 @@
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform;
 
-import org.eclipse.emf.ecore.EPackage;
-
-import com.google.inject.Injector;
-
 import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
-import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetupGenerated;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
  * Initialization support for running Xtext languages 
@@ -24,15 +20,11 @@ import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetupGenerated;
 public class TargetPlatformStandaloneSetup extends TargetPlatformStandaloneSetupGenerated{
 
 	public static void doSetup() {
-		new TargetPlatformStandaloneSetup().createInjectorAndDoEMFRegistration();
-	}
-	
-	@Override
-	public void register(Injector injector) {
 		if (!EPackage.Registry.INSTANCE.containsKey(TargetPlatformPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(TargetPlatformPackage.eNS_URI, TargetPlatformPackage.eINSTANCE);
 		}
-		super.register(injector);
+		new TargetPlatformStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
+	
 }
 

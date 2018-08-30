@@ -10,14 +10,16 @@
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform.tests
 
-import com.google.common.io.Files
 import com.google.inject.Inject
-import java.io.File
 import java.net.URI
 import java.util.List
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
@@ -25,13 +27,12 @@ import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@InjectWith(typeof(TargetPlatformInjectorProvider))
+@InjectWith(typeof(CustomTargetPlatformInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class TestTargetGeneration {
 	
@@ -41,13 +42,6 @@ class TestTargetGeneration {
 	
 	@Inject
 	LocationIndexBuilder indexBuilder;
-	
-	static File tmpDir
-	
-	@BeforeClass
-	def static void beforeClass() {
-		tmpDir = Files::createTempDir()
-	}
 	
 	@Test(expected=typeof(IllegalArgumentException))
 	def void testEmptyTP() {
@@ -85,11 +79,11 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				if ("http://location.org/p2".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
+						IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
 					)
 				} else {
 					return emptyList
@@ -126,13 +120,13 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				var List<IInstallableUnit> ret
 				if ("http://location.org/p2".equals(location.toString)) {
 						ret = newImmutableList(
-							new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier")), 
-							new MockIU("an.iu2", Version.createOSGi(1,3,74, null))
+							IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier")), 
+							IUStub.createBundle("an.iu2", Version.createOSGi(1,3,74, null))
 						)
 				} else {
 					ret = emptyList
@@ -175,16 +169,16 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				var List<IInstallableUnit> ret
 				if ("http://location.org/p2".equals(location.toString)) {
 						ret = newImmutableList(
-							new MockIU("an.iu", Version.createOSGi(1,0,0)) 
+							IUStub.createBundle("an.iu", Version.createOSGi(1,0,0)) 
 						)
 				} else if ("http://location2.org/p2".equals(location.toString)) {
 						ret = newImmutableList(
-							new MockIU("an.iu2", Version.createOSGi(1,3,74, null))
+							IUStub.createBundle("an.iu2", Version.createOSGi(1,3,74, null))
 						)
 				} else {
 					ret = emptyList
@@ -228,11 +222,11 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				if ("http://location.org/p2".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
+						IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
 					)
 				} else {
 					return emptyList
@@ -270,11 +264,11 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				if ("http://location.org/p2".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
+						IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
 					)
 				} else {
 					return emptyList
@@ -312,11 +306,11 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				if ("http://location.org/p2".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
+						IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
 					)
 				} else {
 					return emptyList
@@ -354,11 +348,11 @@ class TestTargetGeneration {
 		''')
 		
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder);
-		resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(URI location) {
 				if ("http://location.org/p2".equals(location.toString)) {
 					newImmutableList(
-						new MockIU("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
+						IUStub.createBundle("an.iu", Version.createOSGi(1,0,0, "thequalifier"))
 					)
 				} else {
 					return emptyList

@@ -18,10 +18,10 @@ import java.util.List;
 import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
-import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
-import org.eclipse.cbi.targetplatform.tests.MockIU;
-import org.eclipse.cbi.targetplatform.tests.MockMetadataRepositoryManager;
-import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub;
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -46,7 +46,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetConversion {
@@ -80,17 +80,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(11, 0, 2, "v201303041551");
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(4, 10, 0, "v4_10_0_v20130308-0414");
-            MockIU _mockIU_1 = new MockIU("org.junit", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2, "v201303041551")), 
+              IUStub.createBundle("org.junit", Version.createOSGi(4, 10, 0, "v4_10_0_v20130308-0414")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -98,7 +96,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals(1, targetDef.getLocations().size());
       final ResolvedLocation loc = IterableExtensions.<ResolvedLocation>head(targetDef.getLocations());
       Assert.assertEquals(2, loc.getResolvedIUs().size());
@@ -141,7 +139,7 @@ public class TestTargetConversion {
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      final Diagnostic d = resolvedTargetPlatform.resolve(new MockMetadataRepositoryManager(null) {
+      final Diagnostic d = resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(null) {
         @Override
         public IMetadataRepository loadRepository(final URI location, final IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
           IMetadataRepository _xifexpression = null;
@@ -156,8 +154,9 @@ public class TestTargetConversion {
       }, _nullProgressMonitor);
       Assert.assertEquals(Diagnostic.ERROR, d.getSeverity());
       String _message = IterableExtensions.<Diagnostic>head(d.getChildren()).getMessage();
-      String _plus = ("Message is " + _message);
-      Assert.assertTrue(_plus, IterableExtensions.<Diagnostic>head(d.getChildren()).getMessage().startsWith("Unknown Host"));
+      String _plus = ("Message is \'" + _message);
+      String _plus_1 = (_plus + "\'");
+      Assert.assertTrue(_plus_1, IterableExtensions.<Diagnostic>head(d.getChildren()).getMessage().contains("Unknown Host"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -185,17 +184,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform targetPlatform = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(targetPlatform, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU_1 = new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1, 0, 0)), 
+              IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -203,7 +200,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
         final Function1<IInstallableUnit, String> _function_1 = (IInstallableUnit it_1) -> {
@@ -249,24 +246,21 @@ public class TestTargetConversion {
       _builder_1.newLine();
       this.parser.parse(_builder_1, org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU_1 = new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1, 0, 0)), 
+              IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1, 0, 0)));
           } else {
             List<IInstallableUnit> _xifexpression_1 = null;
             boolean _equals_1 = "http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/".equals(location.toString());
             if (_equals_1) {
-              Version _createOSGi_2 = Version.createOSGi(1, 0, 0);
-              MockIU _mockIU_2 = new MockIU("org.eclipse.emf.sdk.feature.group", _createOSGi_2);
-              _xifexpression_1 = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU_2);
+              _xifexpression_1 = CollectionLiterals.<IInstallableUnit>newImmutableList(
+                IUStub.createBundle("org.eclipse.emf.sdk.feature.group", Version.createOSGi(1, 0, 0)));
             } else {
               return CollectionLiterals.<IInstallableUnit>emptyList();
             }
@@ -276,7 +270,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(2, targetDef.getLocations().size());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", IterableExtensions.<ResolvedLocation>head(targetDef.getLocations()).getURI().toString());
@@ -325,17 +319,15 @@ public class TestTargetConversion {
       _builder_1.newLine();
       this.parser.parse(_builder_1, org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU_1 = new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1, 0, 0)), 
+              IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -343,7 +335,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -390,17 +382,15 @@ public class TestTargetConversion {
       _builder_1.newLine();
       this.parser.parse(_builder_1, org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU_1 = new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1, 0, 0)), 
+              IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -408,7 +398,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -450,17 +440,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder, org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("org.eclipse.emf.compare.rcp.ui.feature.group", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU_1 = new MockIU("org.eclipse.emf.compare.ide.ui.feature.group", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(1, 0, 0)), 
+              IUStub.createBundle("org.eclipse.emf.compare.ide.ui.feature.group", Version.createOSGi(1, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -468,7 +456,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -514,19 +502,16 @@ public class TestTargetConversion {
       _builder_1.newLine();
       this.parser.parse(_builder_1, org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -534,7 +519,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -594,19 +579,16 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -614,7 +596,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -674,19 +656,16 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -694,7 +673,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -754,19 +733,16 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -774,7 +750,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -834,19 +810,16 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -854,7 +827,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -904,19 +877,16 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder, org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -924,7 +894,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -974,19 +944,16 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder, org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -994,7 +961,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1040,19 +1007,16 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder, org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1060,7 +1024,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1106,19 +1070,16 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder, org.eclipse.emf.common.util.URI.createURI("tmp:/tp1.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(11, 0, 2);
-            MockIU _mockIU_1 = new MockIU("com.google.guava", _createOSGi_1);
-            Version _createOSGi_2 = Version.createOSGi(12, 0, 0);
-            MockIU _mockIU_2 = new MockIU("com.google.guava", _createOSGi_2);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1, _mockIU_2);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(11, 0, 2)), 
+              IUStub.createBundle("com.google.guava", Version.createOSGi(12, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1126,7 +1087,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1168,17 +1129,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU_1 = new MockIU("com.google.guava.source", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava.source", Version.createOSGi(10, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1186,7 +1145,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1223,17 +1182,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU = new MockIU("com.google.guava", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(10, 0, 0);
-            MockIU _mockIU_1 = new MockIU("com.google.guava.source", _createOSGi_1);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("com.google.guava", Version.createOSGi(10, 0, 0)), 
+              IUStub.createBundle("com.google.guava.source", Version.createOSGi(10, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1241,7 +1198,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1276,15 +1233,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
             _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
-              MockIU.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10, 0, 0)), 
-              MockIU.createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10, 0, 0)));
+              IUStub.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10, 0, 0)), 
+              IUStub.createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1292,7 +1249,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1329,15 +1286,15 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
           if (_equals) {
             _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
-              MockIU.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10, 0, 0)), 
-              MockIU.createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10, 0, 0)));
+              IUStub.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(10, 0, 0)), 
+              IUStub.createFeature("org.eclipse.emf.compare.rcp.ui.source.feature.group", Version.createOSGi(10, 0, 0)));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -1345,7 +1302,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("TP1", targetDef.getName());
       Assert.assertEquals(1, targetDef.getLocations().size());
       final Function1<ResolvedLocation, List<String>> _function = (ResolvedLocation it) -> {
@@ -1379,14 +1336,14 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform o = this.parser.parse(_builder);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(o, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           return CollectionLiterals.<IInstallableUnit>emptyList();
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/", targetDef.getLocations().get(2).getURI().toString());
@@ -1423,15 +1380,15 @@ public class TestTargetConversion {
       _builder_1.newLine();
       this.parser.parse(_builder_1, org.eclipse.emf.common.util.URI.createURI("tmp:/tp2.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           return CollectionLiterals.<IInstallableUnit>emptyList();
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
-      Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", targetDef.getLocations().get(0).getURI().toString());
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
+      Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/egit/updates-3.3", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(2).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/core/R201402030812/", targetDef.getLocations().get(3).getURI().toString());
@@ -1475,14 +1432,14 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           return CollectionLiterals.<IInstallableUnit>emptyList();
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/", targetDef.getLocations().get(2).getURI().toString());
@@ -1527,14 +1484,14 @@ public class TestTargetConversion {
       _builder_2.newLine();
       this.parser.parse(_builder_2, org.eclipse.emf.common.util.URI.createURI("tmp:/tp3.tpd"), resourceSet);
       final ResolvedTargetPlatform targetDef = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           return CollectionLiterals.<IInstallableUnit>emptyList();
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      targetDef.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      targetDef.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/", targetDef.getLocations().get(0).getURI().toString());
       Assert.assertEquals("http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler", targetDef.getLocations().get(1).getURI().toString());
       Assert.assertEquals("http://mbarbero.github.io/org.eclipse.cbi.targetplatform/p2/latest/", targetDef.getLocations().get(2).getURI().toString());
@@ -1581,29 +1538,29 @@ public class TestTargetConversion {
       _builder.newLine();
       final TargetPlatform tp = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://download.eclipse.org/egit/updates-3.3".equals(location.toString());
           if (_equals) {
             _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
-              MockIU.createFeature("org.eclipse.egit.feature.group", Version.createOSGi(3, 3, 2)), 
-              MockIU.createFeature("org.eclipse.egit.mylyn.feature.group", Version.createOSGi(3, 3, 2)));
+              IUStub.createFeature("org.eclipse.egit.feature.group", Version.createOSGi(3, 3, 2)), 
+              IUStub.createFeature("org.eclipse.egit.mylyn.feature.group", Version.createOSGi(3, 3, 2)));
           } else {
             List<IInstallableUnit> _xifexpression_1 = null;
             boolean _equals_1 = "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString());
             if (_equals_1) {
               _xifexpression_1 = CollectionLiterals.<IInstallableUnit>newImmutableList(
-                MockIU.createFeature("com.google.guava", Version.createOSGi(10, 0, 0)), 
-                MockIU.createFeature("com.google.guava", Version.createOSGi(11, 0, 2)), 
-                MockIU.createFeature("com.google.guava", Version.createOSGi(12, 0, 0)));
+                IUStub.createFeature("com.google.guava", Version.createOSGi(10, 0, 0)), 
+                IUStub.createFeature("com.google.guava", Version.createOSGi(11, 0, 2)), 
+                IUStub.createFeature("com.google.guava", Version.createOSGi(12, 0, 0)));
             } else {
               List<IInstallableUnit> _xifexpression_2 = null;
               boolean _equals_2 = "http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString());
               if (_equals_2) {
                 _xifexpression_2 = CollectionLiterals.<IInstallableUnit>newImmutableList(
-                  MockIU.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(5, 0, 0)));
+                  IUStub.createFeature("org.eclipse.emf.compare.rcp.ui.feature.group", Version.createOSGi(5, 0, 0)));
               } else {
                 return CollectionLiterals.<IInstallableUnit>emptyList();
               }
@@ -1615,7 +1572,7 @@ public class TestTargetConversion {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      final Diagnostic d = resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      final Diagnostic d = resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       Assert.assertEquals(Diagnostic.ERROR, d.getSeverity());
       final Function1<Diagnostic, Boolean> _function = (Diagnostic it) -> {
         int _severity = it.getSeverity();

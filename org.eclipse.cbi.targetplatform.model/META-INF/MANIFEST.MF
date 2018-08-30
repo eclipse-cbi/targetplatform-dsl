@@ -6,11 +6,11 @@ Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.cbi.targetplatform.model;singleton:=true
 Bundle-Version: 2.1.1.qualifier
 Bundle-ClassPath: .
-Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xcore.lib,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.core.runtime,
- org.eclipse.jdt.launching
+ org.eclipse.emf.ecore.xcore.lib,
+ org.eclipse.jdt.launching;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.cbi.targetplatform.model,

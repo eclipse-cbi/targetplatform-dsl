@@ -36,12 +36,8 @@
   </properties>
   
   <modules>
-    <module>org.eclipse.cbi.targetplatform</module>
-    <module>org.eclipse.cbi.targetplatform.model</module>
-    <module>org.eclipse.cbi.targetplatform.ui</module>
     <module>org.eclipse.cbi.targetplatform.tests</module>
-    <module>org.eclipse.cbi.targetplatform-feature</module>
-    <module>org.eclipse.cbi.targetplatform-update</module>
+    <module>org.eclipse.cbi.targetplatform.ui.tests</module>
   </modules>
   
   <build>
@@ -144,6 +140,14 @@
       <activation>
       	<activeByDefault>true</activeByDefault>
       </activation>
+      <modules>
+        <module>org.eclipse.cbi.targetplatform</module>
+        <module>org.eclipse.cbi.targetplatform.model</module>
+        <module>org.eclipse.cbi.targetplatform.ide</module>
+        <module>org.eclipse.cbi.targetplatform.ui</module>
+        <module>org.eclipse.cbi.targetplatform-feature</module>
+        <module>org.eclipse.cbi.targetplatform-update</module>
+      </modules>
       <build>
         <plugins>
           <plugin>
@@ -155,7 +159,59 @@
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
                   <version>2.1.1-SNAPSHOT</version>
-                  <classifier>default</classifier>              
+                  <classifier>target-platforms/default</classifier>              
+                </artifact>
+              </target>
+              <resolver>p2</resolver>
+              <environments>
+                <environment>
+                  <os>linux</os>
+                  <ws>gtk</ws>
+                  <arch>x86</arch>
+                </environment>
+                <environment>
+                  <os>linux</os>
+                  <ws>gtk</ws>
+                  <arch>x86_64</arch>
+                </environment>
+                <environment>
+                  <os>win32</os>
+                  <ws>win32</ws>
+                  <arch>x86</arch>
+                </environment>
+                <environment>
+                  <os>win32</os>
+                  <ws>win32</ws>
+                  <arch>x86_64</arch>
+                </environment>
+                <environment>
+                  <os>macosx</os>
+                  <ws>cocoa</ws>
+                  <arch>x86_64</arch>
+                </environment>
+              </environments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>target-4_7-canary-oxygen</id>
+      <activation>
+      	<activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.cbi.targetplatform</groupId>
+                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
+                  <version>2.1.1-SNAPSHOT</version>
+                  <classifier>target-platforms/testing/4.7-canary-oxygen</classifier>              
                 </artifact>
               </target>
               <resolver>p2</resolver>
@@ -207,7 +263,7 @@
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
                   <version>2.1.1-SNAPSHOT</version>
-                  <classifier>4.6-neon</classifier>              
+                  <classifier>target-platforms/testing/4.6-neon</classifier>              
                 </artifact>
               </target>
               <resolver>p2</resolver>
@@ -259,7 +315,7 @@
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
                   <version>2.1.1-SNAPSHOT</version>
-                  <classifier>4.5-mars</classifier>              
+                  <classifier>target-platforms/testing/4.5-mars</classifier>              
                 </artifact>
               </target>
               <resolver>p2</resolver>
@@ -311,59 +367,7 @@
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
                   <version>2.1.1-SNAPSHOT</version>
-                  <classifier>4.4-luna</classifier>              
-                </artifact>
-              </target>
-              <resolver>p2</resolver>
-              <environments>
-                <environment>
-                  <os>linux</os>
-                  <ws>gtk</ws>
-                  <arch>x86</arch>
-                </environment>
-                <environment>
-                  <os>linux</os>
-                  <ws>gtk</ws>
-                  <arch>x86_64</arch>
-                </environment>
-                <environment>
-                  <os>win32</os>
-                  <ws>win32</ws>
-                  <arch>x86</arch>
-                </environment>
-                <environment>
-                  <os>win32</os>
-                  <ws>win32</ws>
-                  <arch>x86_64</arch>
-                </environment>
-                <environment>
-                  <os>macosx</os>
-                  <ws>cocoa</ws>
-                  <arch>x86_64</arch>
-                </environment>
-              </environments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_3-kepler</id>
-      <activation>
-      	<activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
-                  <classifier>4.3-kepler</classifier>              
+                  <classifier>target-platforms/testing/4.4-luna</classifier>              
                 </artifact>
               </target>
               <resolver>p2</resolver>

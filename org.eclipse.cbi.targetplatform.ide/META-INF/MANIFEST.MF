@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.eclipse.cbi.targetplatform.ide;singleton:=true
+Bundle-Version: 2.1.1.qualifier
+Require-Bundle: org.eclipse.cbi.targetplatform.model,
+ org.eclipse.cbi.targetplatform,
+ org.eclipse.xtext.ide,
+ org.antlr.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.cbi.targetplatform.ide.contentassist.antlr,
+ org.eclipse.cbi.targetplatform.ide.contentassist.antlr.internal
+

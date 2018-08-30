@@ -9,7 +9,6 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.cbi.targetplatform.ui,
  org.eclipse.core.runtime,
- org.eclipse.ui.workbench;resolution:=optional,
  org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
@@ -19,7 +18,6 @@ Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.equinox.p2.repository,
  org.eclipse.equinox.p2.metadata.repository,
  org.eclipse.equinox.p2.metadata,
- org.eclipse.jdt.launching,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui,
@@ -38,6 +36,6 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.cbi.targetplatform.tests;x-internal=true,
- org.eclipse.cbi.targetplatform.tests.util,
- org.eclipse.cbi.targetplatform.ui.tests;x-internal=true
-Bundle-Activator: org.eclipse.cbi.targetplatform.ui.tests.Activator
+ org.eclipse.cbi.targetplatform.tests.stubs.p2,
+ org.eclipse.cbi.targetplatform.tests.stubs.registry,
+ org.eclipse.cbi.targetplatform.tests.util

@@ -14,9 +14,9 @@
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-Xmx1024m ${os-jvm-flags}</argLine>
-          <useUIHarness>true</useUIHarness>
-          <useUIThread>true</useUIThread>
+          <argLine>-Xmx1024m</argLine>
+          <useUIHarness>false</useUIHarness>
+          <useUIThread>false</useUIThread>
           <dependencies>
             <dependency>
               <type>p2-installable-unit</type>

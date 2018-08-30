@@ -1,0 +1,26 @@
+target "Default (clean build) Target Platform"
+
+include "testing/4.4-luna.tpd"
+
+with source requirements
+environment JavaSE-1.8
+
+location "http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700" {
+	// required to start UI tests in workbench - not a dependency per se
+	org.eclipse.pde.junit.runtime
+}
+
+// Required for xcore source generation
+location "http://download.eclipse.org/modeling/emf/emf/updates/2.12/xcore/R201605260606" {
+	org.eclipse.emf.ecore.xcore
+}
+
+// Required for launching mwe2 workflow (main class org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher)
+location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/" {
+	org.eclipse.emf.mwe2.launch
+}
+
+// Required for grammar generation (during mwe2 run)
+location "http://download.itemis.de/updates/releases/2.1.1" {
+	de.itemis.xtext.antlr.sdk.feature.group
+}

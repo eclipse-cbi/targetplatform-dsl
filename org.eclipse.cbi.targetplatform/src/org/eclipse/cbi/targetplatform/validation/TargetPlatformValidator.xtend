@@ -13,11 +13,15 @@ package org.eclipse.cbi.targetplatform.validation
 import com.google.common.base.Strings
 import com.google.common.collect.HashMultiset
 import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.LinkedHashMultiset
 import com.google.common.collect.Lists
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Multiset
 import com.google.common.collect.Sets
 import com.google.inject.Inject
+import java.net.URI
+import java.util.List
+import java.util.Locale
 import org.eclipse.cbi.targetplatform.model.Environment
 import org.eclipse.cbi.targetplatform.model.IU
 import org.eclipse.cbi.targetplatform.model.Location
@@ -27,9 +31,6 @@ import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage
 import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
-import java.net.URI
-import java.util.List
-import java.util.Locale
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.Platform
@@ -39,13 +40,12 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.metadata.VersionRange
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
-import org.eclipse.jdt.launching.JavaRuntime
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
-import com.google.common.collect.LinkedHashMultiset
 
 /**
  * Custom validation rules. 
@@ -59,6 +59,9 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Inject
 	IProvisioningAgent provisioningAgent;
+	
+	@Inject
+	IExecutionEnvironmentsManager eeManager;
 	
 	@Inject 
 	TargetPlatformGrammarAccess grammarAccess;
@@ -362,7 +365,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
 		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
 		val knownLocale = Locale.availableLocales.map[toString].map[toUpperCase]
-		val knownEE = JavaRuntime.executionEnvironmentsManager.executionEnvironments.map[id.toUpperCase]
+		val knownEE = eeManager.executionEnvironments.map[id.toUpperCase]
 		
 		while(dupEnvIt.hasNext) {
 			val envValue = dupEnvIt.next.toUpperCase
@@ -411,7 +414,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
 		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
 		val knownLocale = Locale.availableLocales.map[toString.toUpperCase]
-		val knownEE = JavaRuntime.executionEnvironmentsManager.executionEnvironments.map[id.toUpperCase]
+		val knownEE = eeManager.executionEnvironments.map[id.toUpperCase]
 		
 		val envList = tp.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].toList
 		

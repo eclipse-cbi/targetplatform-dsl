@@ -43,7 +43,6 @@ import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -96,6 +95,9 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
   
   @Inject
   private TargetPlatformGrammarAccess grammarAccess;
+  
+  @Inject
+  private IExecutionEnvironmentsManager eeManager;
   
   @Inject
   private IProvisioningAgent provisioningAgent;
@@ -366,13 +368,10 @@ public class TargetPlatformProposalProvider extends AbstractTargetPlatformPropos
       IExecutionEnvironment _executionEnvironment = env.getExecutionEnvironment();
       boolean _tripleEquals_3 = (_executionEnvironment == null);
       if (_tripleEquals_3) {
-        final IExecutionEnvironmentsManager eeManager = JavaRuntime.getExecutionEnvironmentsManager();
-        if ((eeManager != null)) {
-          final Consumer<IExecutionEnvironment> _function_3 = (IExecutionEnvironment it) -> {
-            acceptor.accept(this.createCompletionProposal(it.getId(), it.getDescription(), env, 310, context));
-          };
-          ((List<IExecutionEnvironment>)Conversions.doWrapArray(eeManager.getExecutionEnvironments())).forEach(_function_3);
-        }
+        final Consumer<IExecutionEnvironment> _function_3 = (IExecutionEnvironment it) -> {
+          acceptor.accept(this.createCompletionProposal(it.getId(), it.getDescription(), env, 310, context));
+        };
+        ((List<IExecutionEnvironment>)Conversions.doWrapArray(this.eeManager.getExecutionEnvironments())).forEach(_function_3);
       }
       Locale _localization = env.getLocalization();
       boolean _tripleEquals_4 = (_localization == null);

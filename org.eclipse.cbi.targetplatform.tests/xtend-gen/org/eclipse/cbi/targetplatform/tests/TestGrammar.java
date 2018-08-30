@@ -20,9 +20,9 @@ import org.eclipse.cbi.targetplatform.model.Location;
 import org.eclipse.cbi.targetplatform.model.Option;
 import org.eclipse.cbi.targetplatform.model.TargetContent;
 import org.eclipse.cbi.targetplatform.model.TargetPlatform;
-import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -36,12 +36,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
 @RunWith(XtextRunner.class)
+@InjectWith(CustomTargetPlatformInjectorProvider.class)
 @SuppressWarnings("all")
 public class TestGrammar {
   @Inject
   private ParseHelper<TargetPlatform> parser;
+  
+  @Inject
+  private IExecutionEnvironmentsManager eeManager;
   
   @Test
   public void testEmpty() {
@@ -420,7 +423,7 @@ public class TestGrammar {
       Assert.assertEquals("motif", env.getWindowingSystem());
       Locale _locale = new Locale("en", "us");
       Assert.assertEquals(_locale, env.getLocalization());
-      Assert.assertEquals(JavaRuntime.getExecutionEnvironmentsManager().getEnvironment("JavaSE-1.7"), env.getExecutionEnvironment());
+      Assert.assertEquals(this.eeManager.getEnvironment("JavaSE-1.7"), env.getExecutionEnvironment());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

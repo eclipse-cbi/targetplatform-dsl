@@ -10,18 +10,16 @@
  */
 package org.eclipse.cbi.targetplatform.tests;
 
-import com.google.common.io.Files;
 import com.google.inject.Inject;
-import java.io.File;
 import java.net.URI;
 import java.util.List;
 import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
-import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider;
-import org.eclipse.cbi.targetplatform.tests.MockIU;
-import org.eclipse.cbi.targetplatform.tests.MockMetadataRepositoryManager;
-import org.eclipse.cbi.targetplatform.tests.TargetPlatformInjectorProvider;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub;
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub;
+import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
@@ -33,11 +31,10 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(TargetPlatformInjectorProvider.class)
+@InjectWith(CustomTargetPlatformInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class TestTargetGeneration {
@@ -46,13 +43,6 @@ public class TestTargetGeneration {
   
   @Inject
   private LocationIndexBuilder indexBuilder;
-  
-  private static File tmpDir;
-  
-  @BeforeClass
-  public static void beforeClass() {
-    TestTargetGeneration.tmpDir = Files.createTempDir();
-  }
   
   @Test(expected = IllegalArgumentException.class)
   public void testEmptyTP() {
@@ -108,15 +98,14 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -124,7 +113,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -181,17 +170,15 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> ret = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            Version _createOSGi_1 = Version.createOSGi(1, 3, 74, null);
-            MockIU _mockIU_1 = new MockIU("an.iu2", _createOSGi_1);
-            ret = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU, _mockIU_1);
+            ret = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")), 
+              IUStub.createBundle("an.iu2", Version.createOSGi(1, 3, 74, null)));
           } else {
             ret = CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -199,7 +186,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -264,21 +251,19 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> ret = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0);
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            ret = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            ret = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0)));
           } else {
             boolean _equals_1 = "http://location2.org/p2".equals(location.toString());
             if (_equals_1) {
-              Version _createOSGi_1 = Version.createOSGi(1, 3, 74, null);
-              MockIU _mockIU_1 = new MockIU("an.iu2", _createOSGi_1);
-              ret = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU_1);
+              ret = CollectionLiterals.<IInstallableUnit>newImmutableList(
+                IUStub.createBundle("an.iu2", Version.createOSGi(1, 3, 74, null)));
             } else {
               ret = CollectionLiterals.<IInstallableUnit>emptyList();
             }
@@ -287,7 +272,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -356,15 +341,14 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -372,7 +356,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -429,15 +413,14 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -445,7 +428,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -502,15 +485,14 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -518,7 +500,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -575,15 +557,14 @@ public class TestTargetGeneration {
       _builder.newLine();
       final TargetPlatform tp1 = this.parser.parse(_builder);
       final ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, this.indexBuilder);
-      MockMetadataRepositoryManager _mockMetadataRepositoryManager = new MockMetadataRepositoryManager(new IQueryResultProvider<IInstallableUnit>() {
+      MetadataRepositoryManagerStub _metadataRepositoryManagerStub = new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
         @Override
         public List<IInstallableUnit> listIUs(final URI location) {
           List<IInstallableUnit> _xifexpression = null;
           boolean _equals = "http://location.org/p2".equals(location.toString());
           if (_equals) {
-            Version _createOSGi = Version.createOSGi(1, 0, 0, "thequalifier");
-            MockIU _mockIU = new MockIU("an.iu", _createOSGi);
-            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(_mockIU);
+            _xifexpression = CollectionLiterals.<IInstallableUnit>newImmutableList(
+              IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")));
           } else {
             return CollectionLiterals.<IInstallableUnit>emptyList();
           }
@@ -591,7 +572,7 @@ public class TestTargetGeneration {
         }
       });
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      resolvedTargetPlatform.resolve(_mockMetadataRepositoryManager, _nullProgressMonitor);
+      resolvedTargetPlatform.resolve(_metadataRepositoryManagerStub, _nullProgressMonitor);
       final TargetDefinitionGenerator gen = new TargetDefinitionGenerator();
       final String content = gen.generate(resolvedTargetPlatform, 1);
       StringConcatenation _builder_1 = new StringConcatenation();
