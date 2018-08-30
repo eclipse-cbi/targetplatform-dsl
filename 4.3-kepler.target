@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde?>
+<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
+<target name="Target Platform DSL 2.1.1 - Kepler Target" sequenceNumber="1491229591">
+  <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.equinox.sdk.feature.group" version="3.9.0.v20140221-1852"/>
+      <unit id="org.eclipse.sdk.feature.group" version="4.3.2.v20140221-1852"/>
+      <unit id="org.eclipse.pde.core" version="3.9.1.v20130628-1111"/>
+      <repository location="http://download.eclipse.org/releases/kepler/201402280900"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.2.v20150123-0452"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.7.3.v201411190455"/>
+      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.ecore.xcore.feature.group" version="1.2.2.v20150202-0452"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/xcore/R201502020452"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021027/mwe/"/>
+    </location>
+  </locations>
+  <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+</target>

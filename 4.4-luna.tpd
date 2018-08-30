@@ -1,0 +1,14 @@
+target "Target Platform DSL 2.1.1 - Luna Target"
+
+with source requirements
+environment JavaSE-1.8
+
+location "http://download.eclipse.org/releases/luna/201502271000" {
+	org.eclipse.equinox.sdk.feature.group [3.10.2,4.0.0)
+	org.eclipse.sdk.feature.group [4.4.2,5.0.0)
+	org.eclipse.pde.core [3.10.2,4.0.0)
+	
+	org.eclipse.emf.sdk.feature.group [2.10.2,3.0.0)
+	org.eclipse.xtext.sdk.feature.group [2.7.3,3.0.0)
+	org.eclipse.emf.ecore.xcore.sdk.feature.group [1.2.2,2.0.0)
+}

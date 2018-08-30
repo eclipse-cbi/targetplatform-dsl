@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Target Platform DSL 2.1.1" sequenceNumber="1491052015">
+<target name="Target Platform DSL 2.1.1" sequenceNumber="1491229563">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.9.1.v20150129-0838"/>
@@ -11,23 +11,17 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.2.v20150123-0452"/>
-      <unit id="org.eclipse.emf.sdk.source.feature.group" version="2.10.2.v20150123-0452"/>
       <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.ecore.xcore.feature.group" version="1.2.2.v20150202-0452"/>
-      <unit id="org.eclipse.emf.ecore.xcore.source.feature.group" version="1.2.2.v20150202-0452"/>
       <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/xcore/R201502020452"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.ui.feature.group" version="2.7.3.v201411190455"/>
-      <unit id="org.eclipse.xtext.ui.source.feature.group" version="2.7.3.v201411190455"/>
       <unit id="org.eclipse.xtext.runtime.feature.group" version="2.7.3.v201411190455"/>
-      <unit id="org.eclipse.xtext.runtime.source.feature.group" version="2.7.3.v201411190455"/>
       <unit id="org.eclipse.xtext.junit4" version="2.7.3.v201411190455"/>
-      <unit id="org.eclipse.xtext.junit4.source" version="2.7.3.v201411190455"/>
       <unit id="org.objectweb.asm" version="5.0.1.v201404251740"/>
-      <unit id="org.objectweb.asm.source" version="5.0.1.v201404251740"/>
       <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
@@ -44,4 +38,5 @@
       <repository location="http://download.itemis.de/updates/releases/2.1.1"/>
     </location>
   </locations>
+  <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 </target>
