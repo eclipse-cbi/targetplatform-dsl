@@ -191,7 +191,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	
 	@Check // TESTED
 	def deprecateIUVersionRangeWihString(IU iu) {
-		if (iu.version != null) {
+		if (iu.version !== null) {
 			val nodes = NodeModelUtils::findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION)
 			if ("STRING".equals((nodes.head.grammarElement as RuleCall).rule.name)) {
 				warning("Usage of strings is deprecated for version range. You should remove the quotes.",
@@ -215,7 +215,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val locationsURIWithoutConflictingID = locationIDsByURI.asMap.filter[key,value|value.size <= 1].keySet
 		val locationsWithoutConflictingID = locationsURIWithoutConflictingID.map[locationsByURI.get(it)].flatten
 		
-		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!=null], [ID])
+		val locationsWithoutConflictingIDByID = Multimaps.index(locationsWithoutConflictingID.filter[ID!==null], [ID])
 		val locationsWithDuplicateID = locationsWithoutConflictingIDByID.asMap.filter[key,value|value.map[uri].toSet.size > 1].values.flatten
 		locationsWithDuplicateID.forEach[location|
 			if (location.eResource == resource) {
@@ -247,7 +247,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val cycle = indexBuilder.checkIncludeCycle(targetPlatform)
 		if (!cycle.empty) {
 			val cyclingImport = targetPlatform.includes.findFirst[cycle.get(1).equals(indexBuilder.getImportedTargetPlatform(targetPlatform.eResource, it))]
-			if (cyclingImport != null) {
+			if (cyclingImport !== null) {
 				error('''Cycle detected in the included target platforms. Cycle is '«cycle.drop(1).map[eResource.URI].join("'' -> '")»'.''', 
 					cyclingImport, 
 					TargetPlatformPackage.Literals.INCLUDE_DECLARATION__IMPORT_URI,
@@ -314,7 +314,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 	@Check(value=CheckType.EXPENSIVE)
 	def checkLocationURI(Location location) {
 		val monitor = 
-			if (context != null && context.get(typeof(IProgressMonitor)) != null) {
+			if (context !== null && context.get(typeof(IProgressMonitor)) !== null) {
 				context.get(typeof(IProgressMonitor)) as IProgressMonitor
 			} else {
 				new NullProgressMonitor
@@ -469,7 +469,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val semicolonKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.semicolonKeyword_1_0_0]
 		val equalSignKeywordRule = node.asTreeIterable.findFirst[grammarElement == grammarAccess.IUAccess.equalsSignKeyword_1_0_2]
 		
-		if (semicolonKeywordRule != null) {
+		if (semicolonKeywordRule !== null) {
 			acceptWarning("Usage of keywords ';version=' are not required anymore and has been deprecated.", iu, semicolonKeywordRule.offset, equalSignKeywordRule.endOffset-semicolonKeywordRule.offset, CHECK__VERSION_KEYWORDS)
 		}
 	}

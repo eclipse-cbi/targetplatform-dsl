@@ -97,7 +97,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	private def getIUAssistQuery() {
-		if (iuAssistQuery == null) {
+		if (iuAssistQuery === null) {
 		  iuAssistQuery = QueryUtil.createQuery("latest(x | x.properties[$0] != true && x.properties[$1] != true)", 
 							PROP_TYPE_CATEGORY, PROP_TYPE_PRODUCT)
 		}
@@ -143,7 +143,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			if (tp.options.empty) {
 				acceptor.accept(createCompletionProposal("with", "describe how the set of elements to add to this target is determined", OPTIONS, 520, context));
 			}
-			if (tp.environment == null) {
+			if (tp.environment === null) {
 				acceptor.accept(createCompletionProposal("environment", "describe the system that this target is built for", ENVIRONMENT, 510, context));
 			}
 			
@@ -241,34 +241,34 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				''
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val env = model as Environment
-			if (env.operatingSystem == null) {
+			if (env.operatingSystem === null) {
 				Platform.knownOSValues.forEach[
 					acceptor.accept(createCompletionProposal(it, 'operating system', env, 340, context))
 				]
 			}
 			
-			if (env.windowingSystem == null) {
+			if (env.windowingSystem === null) {
 				Platform.knownWSValues.forEach[
 					acceptor.accept(createCompletionProposal(it, 'windowing system', env, 330, context))
 				]
 			}
 			
-			if (env.architecture == null) {
+			if (env.architecture === null) {
 				Platform.knownOSArchValues.forEach[
 					acceptor.accept(createCompletionProposal(it, 'architecture', env, 320, context))
 				]
 			}
 			
-			if (env.executionEnvironment == null) {
+			if (env.executionEnvironment === null) {
 				val eeManager = JavaRuntime.executionEnvironmentsManager
-				if (eeManager != null) {
+				if (eeManager !== null) {
 					eeManager.executionEnvironments.forEach[
 						acceptor.accept(createCompletionProposal(it.id, it.description, env, 310, context))
 					]
 				}
 			}
 			
-			if (env.localization == null) {
+			if (env.localization === null) {
 				Locale.getAvailableLocales.forEach[
 					acceptor.accept(createCompletionProposal(it.toString, it.displayName, env, 300, context))
 				]

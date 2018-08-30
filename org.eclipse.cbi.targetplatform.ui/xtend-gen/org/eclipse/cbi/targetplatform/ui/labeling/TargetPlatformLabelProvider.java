@@ -10,7 +10,6 @@
  */
 package org.eclipse.cbi.targetplatform.ui.labeling;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.cbi.targetplatform.Environment;
 import org.eclipse.cbi.targetplatform.IU;
@@ -41,8 +40,8 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
       final StyledString ss = new StyledString();
       ss.append(object.getUri());
       String _iD = object.getID();
-      boolean _notEquals = (!Objects.equal(_iD, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_iD != null);
+      if (_tripleNotEquals) {
         String _iD_1 = object.getID();
         String _plus = (" " + _iD_1);
         ss.append(_plus, StyledString.DECORATIONS_STYLER);
@@ -62,8 +61,8 @@ public class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
       final StyledString ss = new StyledString();
       ss.append(object.getID());
       String _version = object.getVersion();
-      boolean _notEquals = (!Objects.equal(_version, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_version != null);
+      if (_tripleNotEquals) {
         String _version_1 = object.getVersion();
         String _plus = (" " + _version_1);
         ss.append(_plus, StyledString.COUNTER_STYLER);

@@ -3,10 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>releng.targetplatform-parent</artifactId>
+    <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
     <groupId>org.eclipse.cbi.targetplatform</groupId>
     <version>2.1.1-SNAPSHOT</version>
-    <relativePath>../org.eclipse.cbi.targetplatform-parent</relativePath>
   </parent>
   <groupId>org.eclipse.cbi.targetplatform</groupId>
   <artifactId>org.eclipse.cbi.targetplatform.ui</artifactId>

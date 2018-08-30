@@ -76,7 +76,7 @@ class Environment extends TargetContent {
 			envToUpper.contains(it.toUpperCase)
 		]
 		
-		if (locale != null) {
+		if (locale !== null) {
 			var String language = "";
 			var String country = "";
 			var String variant = "";
@@ -100,12 +100,12 @@ class Environment extends TargetContent {
 	
 	derived ExecutionEnvironment executionEnvironment get {
 		val eeManager = JavaRuntime.executionEnvironmentsManager
-		if (eeManager != null) {
+		if (eeManager !== null) {
 			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 			
 			for (env : envToUpper) {
 				val ee = eeManager.executionEnvironments.findFirst[it.id.toUpperCase.equals(env)]
-				if (ee != null) {
+				if (ee !== null) {
 					return ee
 				}
 			}

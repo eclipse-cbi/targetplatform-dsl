@@ -113,10 +113,10 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    	element, context | 
 	    		val id = (element as Location).ID;
 	    		val uri = (element as Location).uri;
-	    		if (uri != null) {
+	    		if (uri !== null) {
 	    			val location = element as Location
 		    		location.targetPlatform.locations
-		    			.filter[uri != null && uri.equals(it.uri)]
+		    			.filter[uri !== null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    		}
 	    ]
@@ -132,7 +132,7 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    		val uri = issue.data.get(1);
 	    		val location = element as Location
 	    		location.targetPlatform.locations
-		    			.filter[uri != null && uri.equals(it.uri)]
+		    			.filter[uri !== null && uri.equals(it.uri)]
 		    			.forEach[setID(id)];
 	    ]
 	}

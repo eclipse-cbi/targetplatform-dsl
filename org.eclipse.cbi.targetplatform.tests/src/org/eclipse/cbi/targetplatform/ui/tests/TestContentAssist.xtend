@@ -14,6 +14,8 @@ import com.google.common.collect.ImmutableList
 import com.google.inject.Guice
 import com.google.inject.Module
 import com.google.inject.Provider
+import java.net.URI
+import java.util.Locale
 import org.eclipse.cbi.targetplatform.TargetPlatformRuntimeModule
 import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup
 import org.eclipse.cbi.targetplatform.tests.IQueryResultProvider
@@ -21,8 +23,6 @@ import org.eclipse.cbi.targetplatform.tests.MockIU
 import org.eclipse.cbi.targetplatform.tests.MockProvisioningAgent
 import org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule
 import org.eclipse.cbi.targetplatform.ui.internal.TargetPlatformActivator
-import java.net.URI
-import java.util.Locale
 import org.eclipse.core.runtime.Platform
 import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
@@ -32,8 +32,6 @@ import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest
 import org.eclipse.xtext.ui.shared.SharedStateModule
 import org.eclipse.xtext.util.Modules2
 import org.junit.Test
-
-import static org.eclipse.cbi.targetplatform.ui.tests.TestContentAssist.*
 
 class TestContentAssist extends AbstractContentAssistProcessorTest {
 	

@@ -8,7 +8,7 @@
   </prerequisites>
   
   <groupId>org.eclipse.cbi.targetplatform</groupId>
-  <artifactId>releng.targetplatform-parent</artifactId>
+  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
   <version>2.1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
@@ -27,16 +27,18 @@
   </licenses>
   
   <properties>
+  	<!--maven.compiler.source>1.8</maven.compiler.source>
+  	<maven.compiler.target>1.8</maven.compiler.target-->
     <tycho-version>1.0.0</tycho-version>
     <os-jvm-flags/>
   </properties>
   
   <modules>
-    <module>../org.eclipse.cbi.targetplatform</module>
-    <module>../org.eclipse.cbi.targetplatform.ui</module>
-    <module>../org.eclipse.cbi.targetplatform.tests</module>
-    <module>../org.eclipse.cbi.targetplatform-feature</module>
-    <module>../org.eclipse.cbi.targetplatform-update</module>
+    <module>org.eclipse.cbi.targetplatform</module>
+    <module>org.eclipse.cbi.targetplatform.ui</module>
+    <module>org.eclipse.cbi.targetplatform.tests</module>
+    <module>org.eclipse.cbi.targetplatform-feature</module>
+    <module>org.eclipse.cbi.targetplatform-update</module>
   </modules>
   
   <build>
@@ -113,7 +115,7 @@
           <target>
             <artifact>
               <groupId>org.eclipse.cbi.targetplatform</groupId>
-              <artifactId>releng.targetplatform-parent</artifactId>
+              <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
               <version>2.1.1-SNAPSHOT</version>
               <classifier>default</classifier>              
             </artifact>

@@ -305,8 +305,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
   @Check
   public void deprecateIUVersionRangeWihString(final IU iu) {
     String _version = iu.getVersion();
-    boolean _notEquals = (!Objects.equal(_version, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_version != null);
+    if (_tripleNotEquals) {
       final List<INode> nodes = NodeModelUtils.findNodesForFeature(iu, TargetPlatformPackage.Literals.IU__VERSION);
       EObject _grammarElement = IterableExtensions.<INode>head(nodes).getGrammarElement();
       boolean _equals = "STRING".equals(((RuleCall) _grammarElement).getRule().getName());
@@ -355,7 +355,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       @Override
       public Boolean apply(final Location it) {
         String _iD = it.getID();
-        return Boolean.valueOf((!Objects.equal(_iD, null)));
+        return Boolean.valueOf((_iD != null));
       }
     };
     final Function<Location, String> _function_4 = new Function<Location, String>() {
@@ -440,8 +440,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
         }
       };
       final IncludeDeclaration cyclingImport = IterableExtensions.<IncludeDeclaration>findFirst(targetPlatform.getIncludes(), _function);
-      boolean _notEquals = (!Objects.equal(cyclingImport, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (cyclingImport != null);
+      if (_tripleNotEquals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cycle detected in the included target platforms. Cycle is \'");
         final Function1<TargetPlatform, URI> _function_1 = new Function1<TargetPlatform, URI>() {
@@ -625,7 +625,7 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
     IMetadataRepository _xblockexpression = null;
     {
       IProgressMonitor _xifexpression = null;
-      if (((!Objects.equal(this.getContext(), null)) && (!Objects.equal(this.getContext().get(IProgressMonitor.class), null)))) {
+      if (((this.getContext() != null) && (this.getContext().get(IProgressMonitor.class) != null))) {
         Object _get = this.getContext().get(IProgressMonitor.class);
         _xifexpression = ((IProgressMonitor) _get);
       } else {
@@ -1037,8 +1037,8 @@ public class TargetPlatformValidator extends AbstractTargetPlatformValidator {
       }
     };
     final INode equalSignKeywordRule = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function_1);
-    boolean _notEquals = (!Objects.equal(semicolonKeywordRule, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (semicolonKeywordRule != null);
+    if (_tripleNotEquals) {
       int _offset = semicolonKeywordRule.getOffset();
       int _endOffset = equalSignKeywordRule.getEndOffset();
       int _offset_1 = semicolonKeywordRule.getOffset();

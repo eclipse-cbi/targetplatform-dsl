@@ -37,7 +37,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(Location object) {
 		val ss = new StyledString();
 		ss.append(object.getUri());
-		if (object.getID() != null) {
+		if (object.getID() !== null) {
 			ss.append(" " + object.getID(), StyledString.DECORATIONS_STYLER);
 		}
 		ss;
@@ -50,7 +50,7 @@ class TargetPlatformLabelProvider extends DefaultEObjectLabelProvider {
 	def text(IU object) {
 		val ss = new StyledString();
 		ss.append(object.getID());
-		if (object.getVersion() != null) {
+		if (object.getVersion() !== null) {
 			ss.append(" " + object.getVersion(), StyledString.COUNTER_STYLER);
 		}
 		ss;

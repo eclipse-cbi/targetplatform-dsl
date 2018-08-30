@@ -10,7 +10,6 @@
  */
 package org.eclipse.cbi.targetplatform.conversion;
 
-import com.google.common.base.Objects;
 import org.eclipse.cbi.targetplatform.conversion.TargetPlatformConverter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
@@ -23,8 +22,8 @@ import org.eclipse.xtext.util.Strings;
 public class TargetPlatformSTRINGValueConverter extends STRINGValueConverter {
   @Override
   public String toValue(final String string, final INode node) {
-    boolean _equals = Objects.equal(string, null);
-    if (_equals) {
+    boolean _tripleEquals = (string == null);
+    if (_tripleEquals) {
       return null;
     }
     EObject _grammarElement = node.getGrammarElement();
@@ -34,7 +33,7 @@ public class TargetPlatformSTRINGValueConverter extends STRINGValueConverter {
     int _length = string.length();
     int _minus = (_length - 1);
     final String value = Strings.convertFromJavaString(string.substring(1, _minus), true);
-    if ((((!Objects.equal(value, null)) && (!Objects.equal(container, null))) && "version".equals(container.getFeature()))) {
+    if ((((value != null) && (container != null)) && "version".equals(container.getFeature()))) {
       return TargetPlatformConverter.parseVersionRange(value, node);
     } else {
       return value;

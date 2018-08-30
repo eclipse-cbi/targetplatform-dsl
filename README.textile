@@ -131,11 +131,11 @@ This project provide an Eclipse application that you can launch from the command
 
 h2. Build
 
-Go to @fr.obeo.releng.targetplatform-parent@ and do a @mvn clean package@ or @mvn clean verify@.
+Do a @mvn clean package@ or @mvn clean verify@.
 
 h2. Contribute
 
-Clone this repository, import all projects in your Eclipse and set your target platform to the one in @fr.obeo.releng.targetplatform-parent/default.target@.
+Clone this repository, import all projects in your Eclipse and set your target platform to the one in @org.eclipse.cbi.targetplatform-parent/default.target@.
 
 h2. License
 

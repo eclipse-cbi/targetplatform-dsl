@@ -1,5 +1,5 @@
 language: java
-script: "mvn clean verify -f fr.obeo.releng.targetplatform-parent/pom.xml"
+script: "mvn clean verify"
 install: true
 before_install:
   - "export DISPLAY=:99.0"
