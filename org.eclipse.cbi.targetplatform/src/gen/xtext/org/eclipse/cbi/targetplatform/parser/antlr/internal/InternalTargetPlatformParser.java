@@ -19,6 +19,16 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2012-2017 Obeo and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Mikael Barbero (Obeo) - initial API and implementation
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -95,7 +105,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTargetPlatform"
-    // InternalTargetPlatform.g:65:1: entryRuleTargetPlatform returns [EObject current=null] : iv_ruleTargetPlatform= ruleTargetPlatform EOF ;
+    // InternalTargetPlatform.g:72:1: entryRuleTargetPlatform returns [EObject current=null] : iv_ruleTargetPlatform= ruleTargetPlatform EOF ;
     public final EObject entryRuleTargetPlatform() throws RecognitionException {
         EObject current = null;
 
@@ -103,8 +113,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:65:55: (iv_ruleTargetPlatform= ruleTargetPlatform EOF )
-            // InternalTargetPlatform.g:66:2: iv_ruleTargetPlatform= ruleTargetPlatform EOF
+            // InternalTargetPlatform.g:72:55: (iv_ruleTargetPlatform= ruleTargetPlatform EOF )
+            // InternalTargetPlatform.g:73:2: iv_ruleTargetPlatform= ruleTargetPlatform EOF
             {
              newCompositeNode(grammarAccess.getTargetPlatformRule()); 
             pushFollow(FOLLOW_1);
@@ -131,7 +141,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTargetPlatform"
-    // InternalTargetPlatform.g:72:1: ruleTargetPlatform returns [EObject current=null] : (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? ;
+    // InternalTargetPlatform.g:79:1: ruleTargetPlatform returns [EObject current=null] : (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? ;
     public final EObject ruleTargetPlatform() throws RecognitionException {
         EObject current = null;
 
@@ -144,10 +154,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:78:2: ( (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? )
-            // InternalTargetPlatform.g:79:2: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
+            // InternalTargetPlatform.g:85:2: ( (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )? )
+            // InternalTargetPlatform.g:86:2: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
             {
-            // InternalTargetPlatform.g:79:2: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
+            // InternalTargetPlatform.g:86:2: (otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )* )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -156,17 +166,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalTargetPlatform.g:80:3: otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )*
+                    // InternalTargetPlatform.g:87:3: otherlv_0= 'target' ( (lv_name_1_0= RULE_STRING ) ) ( (lv_contents_2_0= ruleTargetContent ) )*
                     {
                     otherlv_0=(Token)match(input,12,FOLLOW_3); 
 
                     			newLeafNode(otherlv_0, grammarAccess.getTargetPlatformAccess().getTargetKeyword_0());
                     		
-                    // InternalTargetPlatform.g:84:3: ( (lv_name_1_0= RULE_STRING ) )
-                    // InternalTargetPlatform.g:85:4: (lv_name_1_0= RULE_STRING )
+                    // InternalTargetPlatform.g:91:3: ( (lv_name_1_0= RULE_STRING ) )
+                    // InternalTargetPlatform.g:92:4: (lv_name_1_0= RULE_STRING )
                     {
-                    // InternalTargetPlatform.g:85:4: (lv_name_1_0= RULE_STRING )
-                    // InternalTargetPlatform.g:86:5: lv_name_1_0= RULE_STRING
+                    // InternalTargetPlatform.g:92:4: (lv_name_1_0= RULE_STRING )
+                    // InternalTargetPlatform.g:93:5: lv_name_1_0= RULE_STRING
                     {
                     lv_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_4); 
 
@@ -188,7 +198,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTargetPlatform.g:102:3: ( (lv_contents_2_0= ruleTargetContent ) )*
+                    // InternalTargetPlatform.g:109:3: ( (lv_contents_2_0= ruleTargetContent ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -201,10 +211,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // InternalTargetPlatform.g:103:4: (lv_contents_2_0= ruleTargetContent )
+                    	    // InternalTargetPlatform.g:110:4: (lv_contents_2_0= ruleTargetContent )
                     	    {
-                    	    // InternalTargetPlatform.g:103:4: (lv_contents_2_0= ruleTargetContent )
-                    	    // InternalTargetPlatform.g:104:5: lv_contents_2_0= ruleTargetContent
+                    	    // InternalTargetPlatform.g:110:4: (lv_contents_2_0= ruleTargetContent )
+                    	    // InternalTargetPlatform.g:111:5: lv_contents_2_0= ruleTargetContent
                     	    {
 
                     	    					newCompositeNode(grammarAccess.getTargetPlatformAccess().getContentsTargetContentParserRuleCall_2_0());
@@ -263,7 +273,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTargetContent"
-    // InternalTargetPlatform.g:125:1: entryRuleTargetContent returns [EObject current=null] : iv_ruleTargetContent= ruleTargetContent EOF ;
+    // InternalTargetPlatform.g:132:1: entryRuleTargetContent returns [EObject current=null] : iv_ruleTargetContent= ruleTargetContent EOF ;
     public final EObject entryRuleTargetContent() throws RecognitionException {
         EObject current = null;
 
@@ -271,8 +281,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:125:54: (iv_ruleTargetContent= ruleTargetContent EOF )
-            // InternalTargetPlatform.g:126:2: iv_ruleTargetContent= ruleTargetContent EOF
+            // InternalTargetPlatform.g:132:54: (iv_ruleTargetContent= ruleTargetContent EOF )
+            // InternalTargetPlatform.g:133:2: iv_ruleTargetContent= ruleTargetContent EOF
             {
              newCompositeNode(grammarAccess.getTargetContentRule()); 
             pushFollow(FOLLOW_1);
@@ -299,7 +309,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTargetContent"
-    // InternalTargetPlatform.g:132:1: ruleTargetContent returns [EObject current=null] : (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) ;
+    // InternalTargetPlatform.g:139:1: ruleTargetContent returns [EObject current=null] : (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) ;
     public final EObject ruleTargetContent() throws RecognitionException {
         EObject current = null;
 
@@ -316,10 +326,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:138:2: ( (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) )
-            // InternalTargetPlatform.g:139:2: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
+            // InternalTargetPlatform.g:145:2: ( (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation ) )
+            // InternalTargetPlatform.g:146:2: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
             {
-            // InternalTargetPlatform.g:139:2: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
+            // InternalTargetPlatform.g:146:2: (this_Options_0= ruleOptions | this_Environment_1= ruleEnvironment | this_IncludeDeclaration_2= ruleIncludeDeclaration | this_Location_3= ruleLocation )
             int alt3=4;
             switch ( input.LA(1) ) {
             case 13:
@@ -351,7 +361,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt3) {
                 case 1 :
-                    // InternalTargetPlatform.g:140:3: this_Options_0= ruleOptions
+                    // InternalTargetPlatform.g:147:3: this_Options_0= ruleOptions
                     {
 
                     			newCompositeNode(grammarAccess.getTargetContentAccess().getOptionsParserRuleCall_0());
@@ -369,7 +379,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTargetPlatform.g:149:3: this_Environment_1= ruleEnvironment
+                    // InternalTargetPlatform.g:156:3: this_Environment_1= ruleEnvironment
                     {
 
                     			newCompositeNode(grammarAccess.getTargetContentAccess().getEnvironmentParserRuleCall_1());
@@ -387,7 +397,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTargetPlatform.g:158:3: this_IncludeDeclaration_2= ruleIncludeDeclaration
+                    // InternalTargetPlatform.g:165:3: this_IncludeDeclaration_2= ruleIncludeDeclaration
                     {
 
                     			newCompositeNode(grammarAccess.getTargetContentAccess().getIncludeDeclarationParserRuleCall_2());
@@ -405,7 +415,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTargetPlatform.g:167:3: this_Location_3= ruleLocation
+                    // InternalTargetPlatform.g:174:3: this_Location_3= ruleLocation
                     {
 
                     			newCompositeNode(grammarAccess.getTargetContentAccess().getLocationParserRuleCall_3());
@@ -445,7 +455,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleOptions"
-    // InternalTargetPlatform.g:179:1: entryRuleOptions returns [EObject current=null] : iv_ruleOptions= ruleOptions EOF ;
+    // InternalTargetPlatform.g:186:1: entryRuleOptions returns [EObject current=null] : iv_ruleOptions= ruleOptions EOF ;
     public final EObject entryRuleOptions() throws RecognitionException {
         EObject current = null;
 
@@ -453,8 +463,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:179:48: (iv_ruleOptions= ruleOptions EOF )
-            // InternalTargetPlatform.g:180:2: iv_ruleOptions= ruleOptions EOF
+            // InternalTargetPlatform.g:186:48: (iv_ruleOptions= ruleOptions EOF )
+            // InternalTargetPlatform.g:187:2: iv_ruleOptions= ruleOptions EOF
             {
              newCompositeNode(grammarAccess.getOptionsRule()); 
             pushFollow(FOLLOW_1);
@@ -481,7 +491,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOptions"
-    // InternalTargetPlatform.g:186:1: ruleOptions returns [EObject current=null] : (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) ;
+    // InternalTargetPlatform.g:193:1: ruleOptions returns [EObject current=null] : (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) ;
     public final EObject ruleOptions() throws RecognitionException {
         EObject current = null;
 
@@ -496,21 +506,21 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:192:2: ( (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) )
-            // InternalTargetPlatform.g:193:2: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
+            // InternalTargetPlatform.g:199:2: ( (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* ) )
+            // InternalTargetPlatform.g:200:2: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
             {
-            // InternalTargetPlatform.g:193:2: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
-            // InternalTargetPlatform.g:194:3: otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
+            // InternalTargetPlatform.g:200:2: (otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )* )
+            // InternalTargetPlatform.g:201:3: otherlv_0= 'with' ( (lv_options_1_0= ruleOption ) ) ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
             {
             otherlv_0=(Token)match(input,13,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getOptionsAccess().getWithKeyword_0());
             		
-            // InternalTargetPlatform.g:198:3: ( (lv_options_1_0= ruleOption ) )
-            // InternalTargetPlatform.g:199:4: (lv_options_1_0= ruleOption )
+            // InternalTargetPlatform.g:205:3: ( (lv_options_1_0= ruleOption ) )
+            // InternalTargetPlatform.g:206:4: (lv_options_1_0= ruleOption )
             {
-            // InternalTargetPlatform.g:199:4: (lv_options_1_0= ruleOption )
-            // InternalTargetPlatform.g:200:5: lv_options_1_0= ruleOption
+            // InternalTargetPlatform.g:206:4: (lv_options_1_0= ruleOption )
+            // InternalTargetPlatform.g:207:5: lv_options_1_0= ruleOption
             {
 
             					newCompositeNode(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_1_0());
@@ -537,7 +547,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTargetPlatform.g:217:3: ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
+            // InternalTargetPlatform.g:224:3: ( (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) ) )*
             loop5:
             do {
                 int alt5=2;
@@ -550,9 +560,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalTargetPlatform.g:218:4: (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) )
+            	    // InternalTargetPlatform.g:225:4: (otherlv_2= ',' )? ( (lv_options_3_0= ruleOption ) )
             	    {
-            	    // InternalTargetPlatform.g:218:4: (otherlv_2= ',' )?
+            	    // InternalTargetPlatform.g:225:4: (otherlv_2= ',' )?
             	    int alt4=2;
             	    int LA4_0 = input.LA(1);
 
@@ -561,7 +571,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt4) {
             	        case 1 :
-            	            // InternalTargetPlatform.g:219:5: otherlv_2= ','
+            	            // InternalTargetPlatform.g:226:5: otherlv_2= ','
             	            {
             	            otherlv_2=(Token)match(input,14,FOLLOW_5); 
 
@@ -573,11 +583,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalTargetPlatform.g:224:4: ( (lv_options_3_0= ruleOption ) )
-            	    // InternalTargetPlatform.g:225:5: (lv_options_3_0= ruleOption )
+            	    // InternalTargetPlatform.g:231:4: ( (lv_options_3_0= ruleOption ) )
+            	    // InternalTargetPlatform.g:232:5: (lv_options_3_0= ruleOption )
             	    {
-            	    // InternalTargetPlatform.g:225:5: (lv_options_3_0= ruleOption )
-            	    // InternalTargetPlatform.g:226:6: lv_options_3_0= ruleOption
+            	    // InternalTargetPlatform.g:232:5: (lv_options_3_0= ruleOption )
+            	    // InternalTargetPlatform.g:233:6: lv_options_3_0= ruleOption
             	    {
 
             	    						newCompositeNode(grammarAccess.getOptionsAccess().getOptionsOptionEnumRuleCall_2_1_0());
@@ -636,7 +646,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEnvironment"
-    // InternalTargetPlatform.g:248:1: entryRuleEnvironment returns [EObject current=null] : iv_ruleEnvironment= ruleEnvironment EOF ;
+    // InternalTargetPlatform.g:255:1: entryRuleEnvironment returns [EObject current=null] : iv_ruleEnvironment= ruleEnvironment EOF ;
     public final EObject entryRuleEnvironment() throws RecognitionException {
         EObject current = null;
 
@@ -644,8 +654,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:248:52: (iv_ruleEnvironment= ruleEnvironment EOF )
-            // InternalTargetPlatform.g:249:2: iv_ruleEnvironment= ruleEnvironment EOF
+            // InternalTargetPlatform.g:255:52: (iv_ruleEnvironment= ruleEnvironment EOF )
+            // InternalTargetPlatform.g:256:2: iv_ruleEnvironment= ruleEnvironment EOF
             {
              newCompositeNode(grammarAccess.getEnvironmentRule()); 
             pushFollow(FOLLOW_1);
@@ -672,7 +682,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEnvironment"
-    // InternalTargetPlatform.g:255:1: ruleEnvironment returns [EObject current=null] : ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) ;
+    // InternalTargetPlatform.g:262:1: ruleEnvironment returns [EObject current=null] : ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) ;
     public final EObject ruleEnvironment() throws RecognitionException {
         EObject current = null;
 
@@ -685,14 +695,14 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:261:2: ( ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) )
-            // InternalTargetPlatform.g:262:2: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
+            // InternalTargetPlatform.g:268:2: ( ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* ) )
+            // InternalTargetPlatform.g:269:2: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
             {
-            // InternalTargetPlatform.g:262:2: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
-            // InternalTargetPlatform.g:263:3: () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
+            // InternalTargetPlatform.g:269:2: ( () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )* )
+            // InternalTargetPlatform.g:270:3: () otherlv_1= 'environment' ( (lv_env_2_0= RULE_ID ) ) ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
             {
-            // InternalTargetPlatform.g:263:3: ()
-            // InternalTargetPlatform.g:264:4: 
+            // InternalTargetPlatform.g:270:3: ()
+            // InternalTargetPlatform.g:271:4: 
             {
 
             				current = forceCreateModelElement(
@@ -706,11 +716,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEnvironmentAccess().getEnvironmentKeyword_1());
             		
-            // InternalTargetPlatform.g:274:3: ( (lv_env_2_0= RULE_ID ) )
-            // InternalTargetPlatform.g:275:4: (lv_env_2_0= RULE_ID )
+            // InternalTargetPlatform.g:281:3: ( (lv_env_2_0= RULE_ID ) )
+            // InternalTargetPlatform.g:282:4: (lv_env_2_0= RULE_ID )
             {
-            // InternalTargetPlatform.g:275:4: (lv_env_2_0= RULE_ID )
-            // InternalTargetPlatform.g:276:5: lv_env_2_0= RULE_ID
+            // InternalTargetPlatform.g:282:4: (lv_env_2_0= RULE_ID )
+            // InternalTargetPlatform.g:283:5: lv_env_2_0= RULE_ID
             {
             lv_env_2_0=(Token)match(input,RULE_ID,FOLLOW_8); 
 
@@ -732,7 +742,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTargetPlatform.g:292:3: ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
+            // InternalTargetPlatform.g:299:3: ( (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -745,9 +755,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalTargetPlatform.g:293:4: (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) )
+            	    // InternalTargetPlatform.g:300:4: (otherlv_3= ',' )? ( (lv_env_4_0= RULE_ID ) )
             	    {
-            	    // InternalTargetPlatform.g:293:4: (otherlv_3= ',' )?
+            	    // InternalTargetPlatform.g:300:4: (otherlv_3= ',' )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -756,7 +766,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // InternalTargetPlatform.g:294:5: otherlv_3= ','
+            	            // InternalTargetPlatform.g:301:5: otherlv_3= ','
             	            {
             	            otherlv_3=(Token)match(input,14,FOLLOW_7); 
 
@@ -768,11 +778,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalTargetPlatform.g:299:4: ( (lv_env_4_0= RULE_ID ) )
-            	    // InternalTargetPlatform.g:300:5: (lv_env_4_0= RULE_ID )
+            	    // InternalTargetPlatform.g:306:4: ( (lv_env_4_0= RULE_ID ) )
+            	    // InternalTargetPlatform.g:307:5: (lv_env_4_0= RULE_ID )
             	    {
-            	    // InternalTargetPlatform.g:300:5: (lv_env_4_0= RULE_ID )
-            	    // InternalTargetPlatform.g:301:6: lv_env_4_0= RULE_ID
+            	    // InternalTargetPlatform.g:307:5: (lv_env_4_0= RULE_ID )
+            	    // InternalTargetPlatform.g:308:6: lv_env_4_0= RULE_ID
             	    {
             	    lv_env_4_0=(Token)match(input,RULE_ID,FOLLOW_8); 
 
@@ -826,7 +836,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIncludeDeclaration"
-    // InternalTargetPlatform.g:322:1: entryRuleIncludeDeclaration returns [EObject current=null] : iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF ;
+    // InternalTargetPlatform.g:329:1: entryRuleIncludeDeclaration returns [EObject current=null] : iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF ;
     public final EObject entryRuleIncludeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -834,8 +844,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:322:59: (iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF )
-            // InternalTargetPlatform.g:323:2: iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF
+            // InternalTargetPlatform.g:329:59: (iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF )
+            // InternalTargetPlatform.g:330:2: iv_ruleIncludeDeclaration= ruleIncludeDeclaration EOF
             {
              newCompositeNode(grammarAccess.getIncludeDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -862,7 +872,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIncludeDeclaration"
-    // InternalTargetPlatform.g:329:1: ruleIncludeDeclaration returns [EObject current=null] : (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
+    // InternalTargetPlatform.g:336:1: ruleIncludeDeclaration returns [EObject current=null] : (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleIncludeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -873,21 +883,21 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:335:2: ( (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
-            // InternalTargetPlatform.g:336:2: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalTargetPlatform.g:342:2: ( (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
+            // InternalTargetPlatform.g:343:2: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
             {
-            // InternalTargetPlatform.g:336:2: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
-            // InternalTargetPlatform.g:337:3: otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalTargetPlatform.g:343:2: (otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalTargetPlatform.g:344:3: otherlv_0= 'include' ( (lv_importURI_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,16,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getIncludeDeclarationAccess().getIncludeKeyword_0());
             		
-            // InternalTargetPlatform.g:341:3: ( (lv_importURI_1_0= RULE_STRING ) )
-            // InternalTargetPlatform.g:342:4: (lv_importURI_1_0= RULE_STRING )
+            // InternalTargetPlatform.g:348:3: ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalTargetPlatform.g:349:4: (lv_importURI_1_0= RULE_STRING )
             {
-            // InternalTargetPlatform.g:342:4: (lv_importURI_1_0= RULE_STRING )
-            // InternalTargetPlatform.g:343:5: lv_importURI_1_0= RULE_STRING
+            // InternalTargetPlatform.g:349:4: (lv_importURI_1_0= RULE_STRING )
+            // InternalTargetPlatform.g:350:5: lv_importURI_1_0= RULE_STRING
             {
             lv_importURI_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -932,7 +942,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLocation"
-    // InternalTargetPlatform.g:363:1: entryRuleLocation returns [EObject current=null] : iv_ruleLocation= ruleLocation EOF ;
+    // InternalTargetPlatform.g:370:1: entryRuleLocation returns [EObject current=null] : iv_ruleLocation= ruleLocation EOF ;
     public final EObject entryRuleLocation() throws RecognitionException {
         EObject current = null;
 
@@ -940,8 +950,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:363:49: (iv_ruleLocation= ruleLocation EOF )
-            // InternalTargetPlatform.g:364:2: iv_ruleLocation= ruleLocation EOF
+            // InternalTargetPlatform.g:370:49: (iv_ruleLocation= ruleLocation EOF )
+            // InternalTargetPlatform.g:371:2: iv_ruleLocation= ruleLocation EOF
             {
              newCompositeNode(grammarAccess.getLocationRule()); 
             pushFollow(FOLLOW_1);
@@ -968,7 +978,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLocation"
-    // InternalTargetPlatform.g:370:1: ruleLocation returns [EObject current=null] : (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) ;
+    // InternalTargetPlatform.g:377:1: ruleLocation returns [EObject current=null] : (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) ;
     public final EObject ruleLocation() throws RecognitionException {
         EObject current = null;
 
@@ -990,29 +1000,29 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:376:2: ( (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) )
-            // InternalTargetPlatform.g:377:2: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
+            // InternalTargetPlatform.g:383:2: ( (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? ) )
+            // InternalTargetPlatform.g:384:2: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
             {
-            // InternalTargetPlatform.g:377:2: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
-            // InternalTargetPlatform.g:378:3: otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
+            // InternalTargetPlatform.g:384:2: (otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )? )
+            // InternalTargetPlatform.g:385:3: otherlv_0= 'location' ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) ) (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
             {
             otherlv_0=(Token)match(input,17,FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getLocationAccess().getLocationKeyword_0());
             		
-            // InternalTargetPlatform.g:382:3: ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) )
-            // InternalTargetPlatform.g:383:4: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
+            // InternalTargetPlatform.g:389:3: ( ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) ) )
+            // InternalTargetPlatform.g:390:4: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
             {
-            // InternalTargetPlatform.g:383:4: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
-            // InternalTargetPlatform.g:384:5: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
+            // InternalTargetPlatform.g:390:4: ( ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?) )
+            // InternalTargetPlatform.g:391:5: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getLocationAccess().getUnorderedGroup_1());
             				
-            // InternalTargetPlatform.g:387:5: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
-            // InternalTargetPlatform.g:388:6: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?
+            // InternalTargetPlatform.g:394:5: ( ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?)
+            // InternalTargetPlatform.g:395:6: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+ {...}?
             {
-            // InternalTargetPlatform.g:388:6: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+
+            // InternalTargetPlatform.g:395:6: ( ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) ) )+
             int cnt8=0;
             loop8:
             do {
@@ -1029,31 +1039,31 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalTargetPlatform.g:389:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
+            	    // InternalTargetPlatform.g:396:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
             	    {
-            	    // InternalTargetPlatform.g:389:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
-            	    // InternalTargetPlatform.g:390:5: {...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
+            	    // InternalTargetPlatform.g:396:4: ({...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) ) )
+            	    // InternalTargetPlatform.g:397:5: {...}? => ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalTargetPlatform.g:390:105: ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
-            	    // InternalTargetPlatform.g:391:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
+            	    // InternalTargetPlatform.g:397:105: ( ({...}? => ( (lv_ID_2_0= RULE_ID ) ) ) )
+            	    // InternalTargetPlatform.g:398:6: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 0);
             	    					
-            	    // InternalTargetPlatform.g:394:9: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
-            	    // InternalTargetPlatform.g:394:10: {...}? => ( (lv_ID_2_0= RULE_ID ) )
+            	    // InternalTargetPlatform.g:401:9: ({...}? => ( (lv_ID_2_0= RULE_ID ) ) )
+            	    // InternalTargetPlatform.g:401:10: {...}? => ( (lv_ID_2_0= RULE_ID ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "true");
             	    }
-            	    // InternalTargetPlatform.g:394:19: ( (lv_ID_2_0= RULE_ID ) )
-            	    // InternalTargetPlatform.g:394:20: (lv_ID_2_0= RULE_ID )
+            	    // InternalTargetPlatform.g:401:19: ( (lv_ID_2_0= RULE_ID ) )
+            	    // InternalTargetPlatform.g:401:20: (lv_ID_2_0= RULE_ID )
             	    {
-            	    // InternalTargetPlatform.g:394:20: (lv_ID_2_0= RULE_ID )
-            	    // InternalTargetPlatform.g:395:10: lv_ID_2_0= RULE_ID
+            	    // InternalTargetPlatform.g:401:20: (lv_ID_2_0= RULE_ID )
+            	    // InternalTargetPlatform.g:402:10: lv_ID_2_0= RULE_ID
             	    {
             	    lv_ID_2_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -1091,31 +1101,31 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalTargetPlatform.g:416:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalTargetPlatform.g:423:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // InternalTargetPlatform.g:416:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
-            	    // InternalTargetPlatform.g:417:5: {...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
+            	    // InternalTargetPlatform.g:423:4: ({...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalTargetPlatform.g:424:5: {...}? => ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "getUnorderedGroupHelper().canSelect(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalTargetPlatform.g:417:105: ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
-            	    // InternalTargetPlatform.g:418:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
+            	    // InternalTargetPlatform.g:424:105: ( ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) ) )
+            	    // InternalTargetPlatform.g:425:6: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getLocationAccess().getUnorderedGroup_1(), 1);
             	    					
-            	    // InternalTargetPlatform.g:421:9: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
-            	    // InternalTargetPlatform.g:421:10: {...}? => ( (lv_uri_3_0= RULE_STRING ) )
+            	    // InternalTargetPlatform.g:428:9: ({...}? => ( (lv_uri_3_0= RULE_STRING ) ) )
+            	    // InternalTargetPlatform.g:428:10: {...}? => ( (lv_uri_3_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleLocation", "true");
             	    }
-            	    // InternalTargetPlatform.g:421:19: ( (lv_uri_3_0= RULE_STRING ) )
-            	    // InternalTargetPlatform.g:421:20: (lv_uri_3_0= RULE_STRING )
+            	    // InternalTargetPlatform.g:428:19: ( (lv_uri_3_0= RULE_STRING ) )
+            	    // InternalTargetPlatform.g:428:20: (lv_uri_3_0= RULE_STRING )
             	    {
-            	    // InternalTargetPlatform.g:421:20: (lv_uri_3_0= RULE_STRING )
-            	    // InternalTargetPlatform.g:422:10: lv_uri_3_0= RULE_STRING
+            	    // InternalTargetPlatform.g:428:20: (lv_uri_3_0= RULE_STRING )
+            	    // InternalTargetPlatform.g:429:10: lv_uri_3_0= RULE_STRING
             	    {
             	    lv_uri_3_0=(Token)match(input,RULE_STRING,FOLLOW_10); 
 
@@ -1177,7 +1187,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTargetPlatform.g:451:3: (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
+            // InternalTargetPlatform.g:458:3: (otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1186,13 +1196,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt13) {
                 case 1 :
-                    // InternalTargetPlatform.g:452:4: otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}'
+                    // InternalTargetPlatform.g:459:4: otherlv_4= '{' (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )? ( (lv_ius_9_0= ruleIU ) )* otherlv_10= '}'
                     {
                     otherlv_4=(Token)match(input,18,FOLLOW_11); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getLocationAccess().getLeftCurlyBracketKeyword_2_0());
                     			
-                    // InternalTargetPlatform.g:456:4: (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )?
+                    // InternalTargetPlatform.g:463:4: (otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )* )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1201,17 +1211,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalTargetPlatform.g:457:5: otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
+                            // InternalTargetPlatform.g:464:5: otherlv_5= 'with' ( (lv_options_6_0= ruleOption ) ) ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
                             {
                             otherlv_5=(Token)match(input,13,FOLLOW_5); 
 
                             					newLeafNode(otherlv_5, grammarAccess.getLocationAccess().getWithKeyword_2_1_0());
                             				
-                            // InternalTargetPlatform.g:461:5: ( (lv_options_6_0= ruleOption ) )
-                            // InternalTargetPlatform.g:462:6: (lv_options_6_0= ruleOption )
+                            // InternalTargetPlatform.g:468:5: ( (lv_options_6_0= ruleOption ) )
+                            // InternalTargetPlatform.g:469:6: (lv_options_6_0= ruleOption )
                             {
-                            // InternalTargetPlatform.g:462:6: (lv_options_6_0= ruleOption )
-                            // InternalTargetPlatform.g:463:7: lv_options_6_0= ruleOption
+                            // InternalTargetPlatform.g:469:6: (lv_options_6_0= ruleOption )
+                            // InternalTargetPlatform.g:470:7: lv_options_6_0= ruleOption
                             {
 
                             							newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_1_0());
@@ -1238,7 +1248,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // InternalTargetPlatform.g:480:5: ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
+                            // InternalTargetPlatform.g:487:5: ( (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) ) )*
                             loop10:
                             do {
                                 int alt10=2;
@@ -1251,9 +1261,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                                 switch (alt10) {
                             	case 1 :
-                            	    // InternalTargetPlatform.g:481:6: (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) )
+                            	    // InternalTargetPlatform.g:488:6: (otherlv_7= ',' )? ( (lv_options_8_0= ruleOption ) )
                             	    {
-                            	    // InternalTargetPlatform.g:481:6: (otherlv_7= ',' )?
+                            	    // InternalTargetPlatform.g:488:6: (otherlv_7= ',' )?
                             	    int alt9=2;
                             	    int LA9_0 = input.LA(1);
 
@@ -1262,7 +1272,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             	    }
                             	    switch (alt9) {
                             	        case 1 :
-                            	            // InternalTargetPlatform.g:482:7: otherlv_7= ','
+                            	            // InternalTargetPlatform.g:489:7: otherlv_7= ','
                             	            {
                             	            otherlv_7=(Token)match(input,14,FOLLOW_5); 
 
@@ -1274,11 +1284,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                             	    }
 
-                            	    // InternalTargetPlatform.g:487:6: ( (lv_options_8_0= ruleOption ) )
-                            	    // InternalTargetPlatform.g:488:7: (lv_options_8_0= ruleOption )
+                            	    // InternalTargetPlatform.g:494:6: ( (lv_options_8_0= ruleOption ) )
+                            	    // InternalTargetPlatform.g:495:7: (lv_options_8_0= ruleOption )
                             	    {
-                            	    // InternalTargetPlatform.g:488:7: (lv_options_8_0= ruleOption )
-                            	    // InternalTargetPlatform.g:489:8: lv_options_8_0= ruleOption
+                            	    // InternalTargetPlatform.g:495:7: (lv_options_8_0= ruleOption )
+                            	    // InternalTargetPlatform.g:496:8: lv_options_8_0= ruleOption
                             	    {
 
                             	    								newCompositeNode(grammarAccess.getLocationAccess().getOptionsOptionEnumRuleCall_2_1_2_1_0());
@@ -1320,7 +1330,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTargetPlatform.g:508:4: ( (lv_ius_9_0= ruleIU ) )*
+                    // InternalTargetPlatform.g:515:4: ( (lv_ius_9_0= ruleIU ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -1333,10 +1343,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // InternalTargetPlatform.g:509:5: (lv_ius_9_0= ruleIU )
+                    	    // InternalTargetPlatform.g:516:5: (lv_ius_9_0= ruleIU )
                     	    {
-                    	    // InternalTargetPlatform.g:509:5: (lv_ius_9_0= ruleIU )
-                    	    // InternalTargetPlatform.g:510:6: lv_ius_9_0= ruleIU
+                    	    // InternalTargetPlatform.g:516:5: (lv_ius_9_0= ruleIU )
+                    	    // InternalTargetPlatform.g:517:6: lv_ius_9_0= ruleIU
                     	    {
 
                     	    						newCompositeNode(grammarAccess.getLocationAccess().getIusIUParserRuleCall_2_2_0());
@@ -1402,7 +1412,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIU"
-    // InternalTargetPlatform.g:536:1: entryRuleIU returns [EObject current=null] : iv_ruleIU= ruleIU EOF ;
+    // InternalTargetPlatform.g:543:1: entryRuleIU returns [EObject current=null] : iv_ruleIU= ruleIU EOF ;
     public final EObject entryRuleIU() throws RecognitionException {
         EObject current = null;
 
@@ -1410,8 +1420,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTargetPlatform.g:536:43: (iv_ruleIU= ruleIU EOF )
-            // InternalTargetPlatform.g:537:2: iv_ruleIU= ruleIU EOF
+            // InternalTargetPlatform.g:543:43: (iv_ruleIU= ruleIU EOF )
+            // InternalTargetPlatform.g:544:2: iv_ruleIU= ruleIU EOF
             {
              newCompositeNode(grammarAccess.getIURule()); 
             pushFollow(FOLLOW_1);
@@ -1438,7 +1448,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIU"
-    // InternalTargetPlatform.g:543:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
+    // InternalTargetPlatform.g:550:1: ruleIU returns [EObject current=null] : ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) ;
     public final EObject ruleIU() throws RecognitionException {
         EObject current = null;
 
@@ -1454,17 +1464,17 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:549:2: ( ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
-            // InternalTargetPlatform.g:550:2: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // InternalTargetPlatform.g:556:2: ( ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? ) )
+            // InternalTargetPlatform.g:557:2: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
             {
-            // InternalTargetPlatform.g:550:2: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
-            // InternalTargetPlatform.g:551:3: ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            // InternalTargetPlatform.g:557:2: ( ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )? )
+            // InternalTargetPlatform.g:558:3: ( (lv_ID_0_0= RULE_ID ) ) ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
             {
-            // InternalTargetPlatform.g:551:3: ( (lv_ID_0_0= RULE_ID ) )
-            // InternalTargetPlatform.g:552:4: (lv_ID_0_0= RULE_ID )
+            // InternalTargetPlatform.g:558:3: ( (lv_ID_0_0= RULE_ID ) )
+            // InternalTargetPlatform.g:559:4: (lv_ID_0_0= RULE_ID )
             {
-            // InternalTargetPlatform.g:552:4: (lv_ID_0_0= RULE_ID )
-            // InternalTargetPlatform.g:553:5: lv_ID_0_0= RULE_ID
+            // InternalTargetPlatform.g:559:4: (lv_ID_0_0= RULE_ID )
+            // InternalTargetPlatform.g:560:5: lv_ID_0_0= RULE_ID
             {
             lv_ID_0_0=(Token)match(input,RULE_ID,FOLLOW_14); 
 
@@ -1486,7 +1496,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTargetPlatform.g:569:3: ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
+            // InternalTargetPlatform.g:576:3: ( (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1495,9 +1505,9 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt16) {
                 case 1 :
-                    // InternalTargetPlatform.g:570:4: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // InternalTargetPlatform.g:577:4: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )? ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
                     {
-                    // InternalTargetPlatform.g:570:4: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )?
+                    // InternalTargetPlatform.g:577:4: (otherlv_1= ';' otherlv_2= 'version' otherlv_3= '=' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1506,7 +1516,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalTargetPlatform.g:571:5: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '='
+                            // InternalTargetPlatform.g:578:5: otherlv_1= ';' otherlv_2= 'version' otherlv_3= '='
                             {
                             otherlv_1=(Token)match(input,20,FOLLOW_15); 
 
@@ -1526,7 +1536,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTargetPlatform.g:584:4: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
+                    // InternalTargetPlatform.g:591:4: ( ( (lv_version_4_0= ruleVersionRange ) ) | ( (lv_version_5_0= RULE_STRING ) ) )
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1544,13 +1554,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt15) {
                         case 1 :
-                            // InternalTargetPlatform.g:585:5: ( (lv_version_4_0= ruleVersionRange ) )
+                            // InternalTargetPlatform.g:592:5: ( (lv_version_4_0= ruleVersionRange ) )
                             {
-                            // InternalTargetPlatform.g:585:5: ( (lv_version_4_0= ruleVersionRange ) )
-                            // InternalTargetPlatform.g:586:6: (lv_version_4_0= ruleVersionRange )
+                            // InternalTargetPlatform.g:592:5: ( (lv_version_4_0= ruleVersionRange ) )
+                            // InternalTargetPlatform.g:593:6: (lv_version_4_0= ruleVersionRange )
                             {
-                            // InternalTargetPlatform.g:586:6: (lv_version_4_0= ruleVersionRange )
-                            // InternalTargetPlatform.g:587:7: lv_version_4_0= ruleVersionRange
+                            // InternalTargetPlatform.g:593:6: (lv_version_4_0= ruleVersionRange )
+                            // InternalTargetPlatform.g:594:7: lv_version_4_0= ruleVersionRange
                             {
 
                             							newCompositeNode(grammarAccess.getIUAccess().getVersionVersionRangeParserRuleCall_1_1_0_0());
@@ -1581,13 +1591,13 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTargetPlatform.g:605:5: ( (lv_version_5_0= RULE_STRING ) )
+                            // InternalTargetPlatform.g:612:5: ( (lv_version_5_0= RULE_STRING ) )
                             {
-                            // InternalTargetPlatform.g:605:5: ( (lv_version_5_0= RULE_STRING ) )
-                            // InternalTargetPlatform.g:606:6: (lv_version_5_0= RULE_STRING )
+                            // InternalTargetPlatform.g:612:5: ( (lv_version_5_0= RULE_STRING ) )
+                            // InternalTargetPlatform.g:613:6: (lv_version_5_0= RULE_STRING )
                             {
-                            // InternalTargetPlatform.g:606:6: (lv_version_5_0= RULE_STRING )
-                            // InternalTargetPlatform.g:607:7: lv_version_5_0= RULE_STRING
+                            // InternalTargetPlatform.g:613:6: (lv_version_5_0= RULE_STRING )
+                            // InternalTargetPlatform.g:614:7: lv_version_5_0= RULE_STRING
                             {
                             lv_version_5_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -1644,7 +1654,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersion"
-    // InternalTargetPlatform.g:629:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
+    // InternalTargetPlatform.g:636:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
     public final String entryRuleVersion() throws RecognitionException {
         String current = null;
 
@@ -1655,8 +1665,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalTargetPlatform.g:631:2: (iv_ruleVersion= ruleVersion EOF )
-            // InternalTargetPlatform.g:632:2: iv_ruleVersion= ruleVersion EOF
+            // InternalTargetPlatform.g:638:2: (iv_ruleVersion= ruleVersion EOF )
+            // InternalTargetPlatform.g:639:2: iv_ruleVersion= ruleVersion EOF
             {
              newCompositeNode(grammarAccess.getVersionRule()); 
             pushFollow(FOLLOW_1);
@@ -1686,7 +1696,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersion"
-    // InternalTargetPlatform.g:641:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) ;
+    // InternalTargetPlatform.g:648:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) ;
     public final AntlrDatatypeRuleToken ruleVersion() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1703,11 +1713,11 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalTargetPlatform.g:648:2: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) )
-            // InternalTargetPlatform.g:649:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
+            // InternalTargetPlatform.g:655:2: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? ) )
+            // InternalTargetPlatform.g:656:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
             {
-            // InternalTargetPlatform.g:649:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
-            // InternalTargetPlatform.g:650:3: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
+            // InternalTargetPlatform.g:656:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )? )
+            // InternalTargetPlatform.g:657:3: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
             {
             this_INT_0=(Token)match(input,RULE_INT,FOLLOW_18); 
 
@@ -1716,7 +1726,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_INT_0, grammarAccess.getVersionAccess().getINTTerminalRuleCall_0());
             		
-            // InternalTargetPlatform.g:657:3: (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
+            // InternalTargetPlatform.g:664:3: (kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )? )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1725,7 +1735,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalTargetPlatform.g:658:4: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
+                    // InternalTargetPlatform.g:665:4: kw= '.' this_INT_2= RULE_INT (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
                     {
                     kw=(Token)match(input,23,FOLLOW_19); 
 
@@ -1739,7 +1749,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(this_INT_2, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_1());
                     			
-                    // InternalTargetPlatform.g:670:4: (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
+                    // InternalTargetPlatform.g:677:4: (kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )? )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -1748,7 +1758,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt19) {
                         case 1 :
-                            // InternalTargetPlatform.g:671:5: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
+                            // InternalTargetPlatform.g:678:5: kw= '.' this_INT_4= RULE_INT (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
                             {
                             kw=(Token)match(input,23,FOLLOW_19); 
 
@@ -1762,7 +1772,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                             					newLeafNode(this_INT_4, grammarAccess.getVersionAccess().getINTTerminalRuleCall_1_2_1());
                             				
-                            // InternalTargetPlatform.g:683:5: (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
+                            // InternalTargetPlatform.g:690:5: (kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER ) )?
                             int alt18=2;
                             int LA18_0 = input.LA(1);
 
@@ -1771,14 +1781,14 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             switch (alt18) {
                                 case 1 :
-                                    // InternalTargetPlatform.g:684:6: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
+                                    // InternalTargetPlatform.g:691:6: kw= '.' (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
                                     {
                                     kw=(Token)match(input,23,FOLLOW_20); 
 
                                     						current.merge(kw);
                                     						newLeafNode(kw, grammarAccess.getVersionAccess().getFullStopKeyword_1_2_2_0());
                                     					
-                                    // InternalTargetPlatform.g:689:6: (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
+                                    // InternalTargetPlatform.g:696:6: (this_ID_6= RULE_ID | this_INT_7= RULE_INT | this_QUALIFIER_8= RULE_QUALIFIER )
                                     int alt17=3;
                                     switch ( input.LA(1) ) {
                                     case RULE_ID:
@@ -1805,7 +1815,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                                     switch (alt17) {
                                         case 1 :
-                                            // InternalTargetPlatform.g:690:7: this_ID_6= RULE_ID
+                                            // InternalTargetPlatform.g:697:7: this_ID_6= RULE_ID
                                             {
                                             this_ID_6=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -1818,7 +1828,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 2 :
-                                            // InternalTargetPlatform.g:698:7: this_INT_7= RULE_INT
+                                            // InternalTargetPlatform.g:705:7: this_INT_7= RULE_INT
                                             {
                                             this_INT_7=(Token)match(input,RULE_INT,FOLLOW_2); 
 
@@ -1831,7 +1841,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 3 :
-                                            // InternalTargetPlatform.g:706:7: this_QUALIFIER_8= RULE_QUALIFIER
+                                            // InternalTargetPlatform.g:713:7: this_QUALIFIER_8= RULE_QUALIFIER
                                             {
                                             this_QUALIFIER_8=(Token)match(input,RULE_QUALIFIER,FOLLOW_2); 
 
@@ -1890,7 +1900,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersionRange"
-    // InternalTargetPlatform.g:724:1: entryRuleVersionRange returns [String current=null] : iv_ruleVersionRange= ruleVersionRange EOF ;
+    // InternalTargetPlatform.g:731:1: entryRuleVersionRange returns [String current=null] : iv_ruleVersionRange= ruleVersionRange EOF ;
     public final String entryRuleVersionRange() throws RecognitionException {
         String current = null;
 
@@ -1901,8 +1911,8 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 
         try {
-            // InternalTargetPlatform.g:726:2: (iv_ruleVersionRange= ruleVersionRange EOF )
-            // InternalTargetPlatform.g:727:2: iv_ruleVersionRange= ruleVersionRange EOF
+            // InternalTargetPlatform.g:733:2: (iv_ruleVersionRange= ruleVersionRange EOF )
+            // InternalTargetPlatform.g:734:2: iv_ruleVersionRange= ruleVersionRange EOF
             {
              newCompositeNode(grammarAccess.getVersionRangeRule()); 
             pushFollow(FOLLOW_1);
@@ -1932,7 +1942,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersionRange"
-    // InternalTargetPlatform.g:736:1: ruleVersionRange returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) ;
+    // InternalTargetPlatform.g:743:1: ruleVersionRange returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) ;
     public final AntlrDatatypeRuleToken ruleVersionRange() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1949,10 +1959,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 
         try {
-            // InternalTargetPlatform.g:743:2: ( ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) )
-            // InternalTargetPlatform.g:744:2: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
+            // InternalTargetPlatform.g:750:2: ( ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' ) )
+            // InternalTargetPlatform.g:751:2: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
             {
-            // InternalTargetPlatform.g:744:2: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
+            // InternalTargetPlatform.g:751:2: ( ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) ) | this_Version_7= ruleVersion | kw= 'lazy' )
             int alt23=3;
             switch ( input.LA(1) ) {
             case 24:
@@ -1980,12 +1990,12 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt23) {
                 case 1 :
-                    // InternalTargetPlatform.g:745:3: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
+                    // InternalTargetPlatform.g:752:3: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
                     {
-                    // InternalTargetPlatform.g:745:3: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
-                    // InternalTargetPlatform.g:746:4: (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' )
+                    // InternalTargetPlatform.g:752:3: ( (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' ) )
+                    // InternalTargetPlatform.g:753:4: (kw= '(' | kw= '[' ) this_Version_2= ruleVersion kw= ',' this_Version_4= ruleVersion (kw= ')' | kw= ']' )
                     {
-                    // InternalTargetPlatform.g:746:4: (kw= '(' | kw= '[' )
+                    // InternalTargetPlatform.g:753:4: (kw= '(' | kw= '[' )
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
@@ -2003,7 +2013,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt21) {
                         case 1 :
-                            // InternalTargetPlatform.g:747:5: kw= '('
+                            // InternalTargetPlatform.g:754:5: kw= '('
                             {
                             kw=(Token)match(input,24,FOLLOW_19); 
 
@@ -2014,7 +2024,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTargetPlatform.g:753:5: kw= '['
+                            // InternalTargetPlatform.g:760:5: kw= '['
                             {
                             kw=(Token)match(input,25,FOLLOW_19); 
 
@@ -2060,7 +2070,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
                     				afterParserOrEnumRuleCall();
                     			
-                    // InternalTargetPlatform.g:784:4: (kw= ')' | kw= ']' )
+                    // InternalTargetPlatform.g:791:4: (kw= ')' | kw= ']' )
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -2078,7 +2088,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt22) {
                         case 1 :
-                            // InternalTargetPlatform.g:785:5: kw= ')'
+                            // InternalTargetPlatform.g:792:5: kw= ')'
                             {
                             kw=(Token)match(input,26,FOLLOW_2); 
 
@@ -2089,7 +2099,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTargetPlatform.g:791:5: kw= ']'
+                            // InternalTargetPlatform.g:798:5: kw= ']'
                             {
                             kw=(Token)match(input,27,FOLLOW_2); 
 
@@ -2109,7 +2119,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTargetPlatform.g:799:3: this_Version_7= ruleVersion
+                    // InternalTargetPlatform.g:806:3: this_Version_7= ruleVersion
                     {
 
                     			newCompositeNode(grammarAccess.getVersionRangeAccess().getVersionParserRuleCall_1());
@@ -2129,7 +2139,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTargetPlatform.g:810:3: kw= 'lazy'
+                    // InternalTargetPlatform.g:817:3: kw= 'lazy'
                     {
                     kw=(Token)match(input,28,FOLLOW_2); 
 
@@ -2165,7 +2175,7 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOption"
-    // InternalTargetPlatform.g:822:1: ruleOption returns [Enumerator current=null] : ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) ;
+    // InternalTargetPlatform.g:829:1: ruleOption returns [Enumerator current=null] : ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) ;
     public final Enumerator ruleOption() throws RecognitionException {
         Enumerator current = null;
 
@@ -2178,10 +2188,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTargetPlatform.g:828:2: ( ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) )
-            // InternalTargetPlatform.g:829:2: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
+            // InternalTargetPlatform.g:835:2: ( ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) ) )
+            // InternalTargetPlatform.g:836:2: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
             {
-            // InternalTargetPlatform.g:829:2: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
+            // InternalTargetPlatform.g:836:2: ( (enumLiteral_0= 'requirements' ) | (enumLiteral_1= 'allEnvironments' ) | (enumLiteral_2= 'source' ) | (enumLiteral_3= 'configurePhase' ) )
             int alt24=4;
             switch ( input.LA(1) ) {
             case 29:
@@ -2213,10 +2223,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
 
             switch (alt24) {
                 case 1 :
-                    // InternalTargetPlatform.g:830:3: (enumLiteral_0= 'requirements' )
+                    // InternalTargetPlatform.g:837:3: (enumLiteral_0= 'requirements' )
                     {
-                    // InternalTargetPlatform.g:830:3: (enumLiteral_0= 'requirements' )
-                    // InternalTargetPlatform.g:831:4: enumLiteral_0= 'requirements'
+                    // InternalTargetPlatform.g:837:3: (enumLiteral_0= 'requirements' )
+                    // InternalTargetPlatform.g:838:4: enumLiteral_0= 'requirements'
                     {
                     enumLiteral_0=(Token)match(input,29,FOLLOW_2); 
 
@@ -2230,10 +2240,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTargetPlatform.g:838:3: (enumLiteral_1= 'allEnvironments' )
+                    // InternalTargetPlatform.g:845:3: (enumLiteral_1= 'allEnvironments' )
                     {
-                    // InternalTargetPlatform.g:838:3: (enumLiteral_1= 'allEnvironments' )
-                    // InternalTargetPlatform.g:839:4: enumLiteral_1= 'allEnvironments'
+                    // InternalTargetPlatform.g:845:3: (enumLiteral_1= 'allEnvironments' )
+                    // InternalTargetPlatform.g:846:4: enumLiteral_1= 'allEnvironments'
                     {
                     enumLiteral_1=(Token)match(input,30,FOLLOW_2); 
 
@@ -2247,10 +2257,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTargetPlatform.g:846:3: (enumLiteral_2= 'source' )
+                    // InternalTargetPlatform.g:853:3: (enumLiteral_2= 'source' )
                     {
-                    // InternalTargetPlatform.g:846:3: (enumLiteral_2= 'source' )
-                    // InternalTargetPlatform.g:847:4: enumLiteral_2= 'source'
+                    // InternalTargetPlatform.g:853:3: (enumLiteral_2= 'source' )
+                    // InternalTargetPlatform.g:854:4: enumLiteral_2= 'source'
                     {
                     enumLiteral_2=(Token)match(input,31,FOLLOW_2); 
 
@@ -2264,10 +2274,10 @@ public class InternalTargetPlatformParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTargetPlatform.g:854:3: (enumLiteral_3= 'configurePhase' )
+                    // InternalTargetPlatform.g:861:3: (enumLiteral_3= 'configurePhase' )
                     {
-                    // InternalTargetPlatform.g:854:3: (enumLiteral_3= 'configurePhase' )
-                    // InternalTargetPlatform.g:855:4: enumLiteral_3= 'configurePhase'
+                    // InternalTargetPlatform.g:861:3: (enumLiteral_3= 'configurePhase' )
+                    // InternalTargetPlatform.g:862:4: enumLiteral_3= 'configurePhase'
                     {
                     enumLiteral_3=(Token)match(input,32,FOLLOW_2); 
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012-2014 Obeo.
+ * Copyright (c) 2012-2014 Obeo and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,7 +25,7 @@ class TargetDefinitionGenerator {
 		'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com/mbarbero/org.eclipse.cbi.targetplatform -->
+		<!-- generated with https://www.github.com.org/eclipse/cbi.targetplatformdsl -->
 		<target name="«targetPlatform.name»" sequenceNumber="«sequenceNumber»">
 		  «IF targetPlatform.locations !== null && !targetPlatform.locations.empty»
 		  <locations>

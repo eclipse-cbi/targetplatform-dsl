@@ -492,10 +492,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:864:10: ( ( '0' .. '9' )+ )
-            // InternalTargetPlatform.g:864:12: ( '0' .. '9' )+
+            // InternalTargetPlatform.g:871:10: ( ( '0' .. '9' )+ )
+            // InternalTargetPlatform.g:871:12: ( '0' .. '9' )+
             {
-            // InternalTargetPlatform.g:864:12: ( '0' .. '9' )+
+            // InternalTargetPlatform.g:871:12: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -509,7 +509,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalTargetPlatform.g:864:13: '0' .. '9'
+            	    // InternalTargetPlatform.g:871:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -541,10 +541,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:866:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )* )
-            // InternalTargetPlatform.g:866:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
+            // InternalTargetPlatform.g:873:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )* )
+            // InternalTargetPlatform.g:873:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
             {
-            // InternalTargetPlatform.g:866:11: ( '^' )?
+            // InternalTargetPlatform.g:873:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -553,7 +553,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalTargetPlatform.g:866:11: '^'
+                    // InternalTargetPlatform.g:873:11: '^'
                     {
                     match('^'); 
 
@@ -571,7 +571,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalTargetPlatform.g:866:40: ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
+            // InternalTargetPlatform.g:873:40: ( ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -584,9 +584,9 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalTargetPlatform.g:866:41: ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' )
+            	    // InternalTargetPlatform.g:873:41: ( '.' )? ( 'a' .. 'z' | 'A' .. 'Z' | '^' | '_' | '-' | '0' .. '9' )
             	    {
-            	    // InternalTargetPlatform.g:866:41: ( '.' )?
+            	    // InternalTargetPlatform.g:873:41: ( '.' )?
             	    int alt3=2;
             	    int LA3_0 = input.LA(1);
 
@@ -595,7 +595,7 @@ public class InternalTargetPlatformLexer extends Lexer {
             	    }
             	    switch (alt3) {
             	        case 1 :
-            	            // InternalTargetPlatform.g:866:41: '.'
+            	            // InternalTargetPlatform.g:873:41: '.'
             	            {
             	            match('.'); 
 
@@ -638,10 +638,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_QUALIFIER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:868:16: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
-            // InternalTargetPlatform.g:868:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalTargetPlatform.g:875:16: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
+            // InternalTargetPlatform.g:875:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             {
-            // InternalTargetPlatform.g:868:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalTargetPlatform.g:875:18: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -690,10 +690,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:870:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalTargetPlatform.g:870:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTargetPlatform.g:877:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalTargetPlatform.g:877:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalTargetPlatform.g:870:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTargetPlatform.g:877:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -711,10 +711,10 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalTargetPlatform.g:870:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalTargetPlatform.g:877:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalTargetPlatform.g:870:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalTargetPlatform.g:877:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -730,7 +730,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalTargetPlatform.g:870:21: '\\\\' .
+                    	    // InternalTargetPlatform.g:877:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -738,7 +738,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTargetPlatform.g:870:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalTargetPlatform.g:877:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -763,10 +763,10 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTargetPlatform.g:870:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalTargetPlatform.g:877:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalTargetPlatform.g:870:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalTargetPlatform.g:877:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -782,7 +782,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalTargetPlatform.g:870:54: '\\\\' .
+                    	    // InternalTargetPlatform.g:877:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -790,7 +790,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTargetPlatform.g:870:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalTargetPlatform.g:877:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -833,12 +833,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:872:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalTargetPlatform.g:872:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalTargetPlatform.g:879:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalTargetPlatform.g:879:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalTargetPlatform.g:872:24: ( options {greedy=false; } : . )*
+            // InternalTargetPlatform.g:879:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -863,7 +863,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalTargetPlatform.g:872:52: .
+            	    // InternalTargetPlatform.g:879:52: .
             	    {
             	    matchAny(); 
 
@@ -893,12 +893,12 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:874:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalTargetPlatform.g:874:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalTargetPlatform.g:881:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalTargetPlatform.g:881:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalTargetPlatform.g:874:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalTargetPlatform.g:881:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -911,7 +911,7 @@ public class InternalTargetPlatformLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalTargetPlatform.g:874:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalTargetPlatform.g:881:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -931,7 +931,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalTargetPlatform.g:874:40: ( ( '\\r' )? '\\n' )?
+            // InternalTargetPlatform.g:881:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -940,9 +940,9 @@ public class InternalTargetPlatformLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalTargetPlatform.g:874:41: ( '\\r' )? '\\n'
+                    // InternalTargetPlatform.g:881:41: ( '\\r' )? '\\n'
                     {
-                    // InternalTargetPlatform.g:874:41: ( '\\r' )?
+                    // InternalTargetPlatform.g:881:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -951,7 +951,7 @@ public class InternalTargetPlatformLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalTargetPlatform.g:874:41: '\\r'
+                            // InternalTargetPlatform.g:881:41: '\\r'
                             {
                             match('\r'); 
 
@@ -983,10 +983,10 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:876:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalTargetPlatform.g:876:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTargetPlatform.g:883:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalTargetPlatform.g:883:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalTargetPlatform.g:876:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTargetPlatform.g:883:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1040,8 +1040,8 @@ public class InternalTargetPlatformLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTargetPlatform.g:878:16: ( . )
-            // InternalTargetPlatform.g:878:18: .
+            // InternalTargetPlatform.g:885:16: ( . )
+            // InternalTargetPlatform.g:885:18: .
             {
             matchAny(); 
 
