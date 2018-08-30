@@ -21,30 +21,45 @@
               <includes>
                 <include>**/*</include>
               </includes>
+              <excludes>
+                <exclude>.gitignore</exclude>
+              </excludes>
             </fileset>
             <fileset>
               <directory>${project.basedir}/../${project.artifactId}.tests/src/gen/xtext/</directory>
               <includes>
                 <include>**/*</include>
               </includes>
+              <excludes>
+                <exclude>.gitignore</exclude>
+              </excludes>
             </fileset>
             <fileset>
               <directory>${project.basedir}/../${project.artifactId}.ide/src/gen/xtext/</directory>
               <includes>
                 <include>**/*</include>
               </includes>
+              <excludes>
+                <exclude>.gitignore</exclude>
+              </excludes>
             </fileset>
             <fileset>
               <directory>${project.basedir}/../${project.artifactId}.ui/src/gen/xtext/</directory>
               <includes>
                 <include>**/*</include>
               </includes>
+              <excludes>
+                <exclude>.gitignore</exclude>
+              </excludes>
             </fileset>
             <fileset>
               <directory>${project.basedir}/../${project.artifactId}.ui.tests/src/gen/xtext/</directory>
               <includes>
                 <include>**/*</include>
               </includes>
+              <excludes>
+                <exclude>.gitignore</exclude>
+              </excludes>
             </fileset>
           </filesets>
         </configuration>
