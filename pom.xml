@@ -69,6 +69,11 @@
           <version>3.6</version>
         </plugin>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.4.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-compiler-plugin</artifactId>
           <version>${tycho-version}</version>
@@ -112,6 +117,19 @@
           <groupId>org.eclipse.xtext</groupId>
           <artifactId>xtext-maven-plugin</artifactId>
           <version>${xtext-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.xtend</groupId>
+          <artifactId>xtend-maven-plugin</artifactId>
+          <version>${xtext-version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>xtend-install-debug-info</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

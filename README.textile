@@ -133,6 +133,8 @@ h2. Build
 
 Do a @mvn clean package@ or @mvn clean verify@.
 
+On macOS, you need to add @-Ptarget-default@ to the command line due to the silly Maven profile activation policy.
+
 h2. Contribute
 
 Clone this repository, import all projects in your Eclipse and set your target platform to the one in @org.eclipse.cbi.targetplatform-parent/default.target@.
