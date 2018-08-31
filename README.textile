@@ -4,7 +4,7 @@ h1. Target Platform Definition DSL and Generator
 
 h2. IMPORTANT
 
-This project has been "transfered to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy version of this project, please use one of the following two URL:
+This project has been "transfered to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy versions of this project, please use one of the following two URLs:
 
 *https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/* or
 *https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/latest*
