@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.cbi.targetplatform-feature"
+      label="%featureName"
+      version="2.1.1.qualifier"
+      provider-name="%providerName"
+      plugin="org.eclipse.cbi.targetplatform">
+
+   <description>
+      %description
+   </description>
+
+   <copyright url="%copyrightURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="Target Platform Definition DSL and Generator update site" url="http://mbarbero.github.com/org.eclipse.cbi.targetplatform/p2/"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.xtext.runtime" version="2.7.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.ui" version="2.7.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.cbi.targetplatform"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.cbi.targetplatform.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
