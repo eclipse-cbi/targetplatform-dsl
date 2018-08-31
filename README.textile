@@ -23,16 +23,6 @@ h2. Installation
 
 Since the transfer to the Eclipse CBI project (see the "IMPORTANT" note above), no new release has been done. As such, there is no update site available yet.
 
-<!-- 
-Add the following p2 repository (update-site) in your update manager (in Eclipse, @Help Menu > Install New Software...@, @Add...@ button on the top right corner)
-
-*http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/* or *http://mbarbero.github.io/fr.obeo.releng.targetplatform/p2/latest/* for the latest version only.
-
-Then, select the _Target Platform Definition DSL and Generator_ feature and click on @Finish@.
-
-bq. This tool requires Xtext 2.7.0 or later. You may need to add the Xtext update site to the list of the available update sites to be able install and/or update Xtext: *http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/*
--->
-
 h3. Requirements
 
 * Java SE 8
