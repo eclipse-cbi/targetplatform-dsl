@@ -59,7 +59,7 @@ public class TargetPlatformBundleActivator extends Plugin {
 		}
 		agentProviderRef = null;
 		
-		context = null;
+		this.context = null;
 		INSTANCE = null;
 		
 		super.stop(context);
