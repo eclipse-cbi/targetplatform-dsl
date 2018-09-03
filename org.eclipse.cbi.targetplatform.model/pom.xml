@@ -52,12 +52,12 @@
           <dependency>
             <groupId>org.eclipse.platform</groupId>
             <artifactId>org.eclipse.text</artifactId>
-            <version>3.6.0</version>
+            <version>3.6.300</version>
           </dependency>
           <dependency>
             <groupId>org.eclipse.platform</groupId>
             <artifactId>org.eclipse.core.resources</artifactId>
-            <version>3.11.1</version>
+            <version>3.13.0</version>
           </dependency>
           <dependency>
             <groupId>org.eclipse.emf</groupId>

@@ -129,6 +129,11 @@ public class ConfigurationElementStub implements IConfigurationElement {
 		return valid;
 	}
 
+	//@Override (since 4.8) 
+	public int getHandleId() {
+		return 0;
+	}
+	
 	public static Builder builder() {
 		return new Builder().valid(true);
 	}
