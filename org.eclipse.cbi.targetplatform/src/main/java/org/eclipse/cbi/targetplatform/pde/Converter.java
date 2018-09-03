@@ -179,18 +179,10 @@ public class Converter {
 		URI targetDefinitionLocation = targetPlatformLocation.trimFileExtension().appendFileExtension("target");
 		
 		if (hasContentDifferencesOtherThanSequenceNumber(targetDefinitionLocation, xml)) {
-			OutputStream outputStream = null;
-			try {
-				outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())));
+			try(OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(targetDefinitionLocation.toFileString())))) {
 				outputStream.write(xml.getBytes());
 			} catch (Exception e) {
 				ret.merge(BasicDiagnostic.toDiagnostic(e));
-			} finally {
-				try {
-					Closeables.close(outputStream, true);
-				} catch (IOException e) {
-					// swallowed
-				}
 			}
 		} else {
 			ret.merge(new BasicDiagnostic(Diagnostic.INFO, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target definition '"+targetDefinitionLocation+"' did not changed since previous generation, we did not overwrote it.", null));
