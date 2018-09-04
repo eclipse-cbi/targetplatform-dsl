@@ -1,6 +1,7 @@
 h1. Target Platform Definition DSL and Generator
 
-!https://travis-ci.org/mbarbero/fr.obeo.releng.targetplatform.png?branch=master!:https://travis-ci.org/mbarbero/fr.obeo.releng.targetplatform
+
+!https://ci.eclipse.org/cbi/buildStatus/icon?job=targetplatform-dsl/master!:https://ci.eclipse.org/cbi/job/targetplatform-dsl/
 
 h2. IMPORTANT
 
