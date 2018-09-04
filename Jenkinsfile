@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     options {
-        buildDiscarder(logRotator(numToKeepStr: '1'))
+        buildDiscarder(logRotator(numToKeepStr: '5'))
         checkoutToSubdirectory('scm')
         timestamps()
     }
