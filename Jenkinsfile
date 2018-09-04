@@ -7,6 +7,8 @@ pipeline {
         timestamps()
     }
 
+    triggers { pollSCM('H * * * *') }
+
     tools {
         maven 'apache-maven-latest' 
     }
