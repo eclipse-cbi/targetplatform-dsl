@@ -11,6 +11,10 @@
 package org.eclipse.cbi.targetplatform.ui.handler;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -35,12 +39,30 @@ import com.google.common.base.Optional;
 @SuppressWarnings("restriction")
 public class PDEIntegration {
 
+	private static final String ACQUIRE_SERVICE = "acquireService";
+	
 	private Optional<ITargetPlatformService> service;
-
+	
 	public PDEIntegration() {
-		service = Optional.fromNullable(
-			(ITargetPlatformService) PDECore.getDefault().acquireService(ITargetPlatformService.class.getName())
-		);
+		this.service = Optional.fromNullable(acquireTargetPlatformService());
+	}
+
+	private static ITargetPlatformService acquireTargetPlatformService() {
+		RuntimeException toBeThrown = new RuntimeException("Method " + PDECore.class.getName() + ".acquireService(String|Class) cannot be found");
+		try {
+			Method acquireService = PDECore.getDefault().getClass().getMethod(ACQUIRE_SERVICE, String.class);
+			return (ITargetPlatformService) acquireService.invoke(PDECore.getDefault(), ITargetPlatformService.class.getName());
+		} catch (ReflectiveOperationException e1) {
+			toBeThrown.addSuppressed(e1);
+			try {
+				Method acquireService = PDECore.getDefault().getClass().getMethod(ACQUIRE_SERVICE, Class.class);
+				return (ITargetPlatformService) acquireService.invoke(PDECore.getDefault(), ITargetPlatformService.class);
+			} catch (ReflectiveOperationException e2) {
+				toBeThrown.addSuppressed(e2);
+			}
+		}
+		
+		throw toBeThrown;
 	}
 
 	public void setTargetPlatform(URI targetFileURIToSet, IProgressMonitor monitor) throws CoreException {
