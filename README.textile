@@ -5,10 +5,12 @@ h1. Target Platform Definition DSL and Generator
 
 h2. IMPORTANT
 
+*New 3.0.0 SNAPSHOT build are available from "http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/*
+
 This project has been "transfered to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy versions of this project, please use one of the following two URLs:
 
-*https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/* or
-*https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/latest*
+https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/ or
+https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/latest
 
 h2. Introduction
 
@@ -16,9 +18,9 @@ Target Platform Definition DSL and Generator provides a DSL with an advanced edi
 
 The greatest thing about this tool is that it avoids you to manage the links to strict versions (e.g., @3.2.5.v20093493-sfoit-v-rrel@) in @.target@ files. It lets you define the bundles and features you want to use in your target platform and it handles the generation of the @.target@ file with the most recent available version. It is possible to restrict the lookup within a version range.
 
-!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/editor-outline.png(The targetplatform DSL editor)!
+!https://www.eclipse.org/cbi/images/tpd/editor-outline.png(The targetplatform DSL editor)!
 
-!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/completion.png(Content assist example)!
+!https://www.eclipse.org/cbi/images/tpd/completion.png(Content assist example)!
 
 h2. Installation
 
@@ -40,13 +42,13 @@ h2. Basic usage
 
 * To activate the target platform, you can either use the _Set as Target Platform_ action which is available on right-clicking on a @.tpd@ file, or use the @Ctrl + R@ (@⌘ Cmd + R@ on Mac) keybinding.
 
-!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/context-menu.png(The right-click command)!
+!https://www.eclipse.org/cbi/images/tpd/context-menu.png(The right-click command)!
 
 * You can also right-click on an opened file and choose @Validate@, it will look for any error and will also check if all repositories are available and if all specified installation unit are available within the repository (and respecting the version range if any).
 
-!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validate-action.png(The right-click validate command)!
+!https://www.eclipse.org/cbi/images/tpd/validate-action.png(The right-click validate command)!
 
-!http://mbarbero.github.io/fr.obeo.releng.targetplatform/screenshots/validation-error.png(The validation result)!
+!https://www.eclipse.org/cbi/images/tpd/validation-error.png(The validation result)!
 
 h3. Syntax
 
@@ -98,7 +100,7 @@ Then, you define the locations of your p2 repositories. You can add as many loca
 location "http://download.eclipse.org/releases/kepler/" 
 </pre>
 
-A location may have an ID that can be written before or after the URI. This is useful if you want to apply some maven stuff (providing a password, a mirror...) for this repository (see "#17":https://github.com/mbarbero/fr.obeo.releng.targetplatform/issues/17 for examples).
+A location may have an ID that can be written before or after the URI. This is useful if you want to apply some maven stuff (providing a password, a mirror...) for this repository (see "#17":https://github.com/eclipse-cbi/targetplatform-dsl/issues/17 for examples).
 
 <pre>
 location kepler "http://download.eclipse.org/releases/kepler/" 
