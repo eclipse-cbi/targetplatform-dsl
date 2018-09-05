@@ -69,7 +69,15 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                dir('scm') {
+                    sh '''
+                        POM_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.6.0:exec)
+                        rm -rf /home/data/httpd/download.eclipse.org/cbi/tdp/${POM_VERSION}
+                        mkdir -p /home/data/httpd/download.eclipse.org/cbi/tdp/${POM_VERSION}
+                        cp -rf org.eclipse.cbi.targetplatform-update/target/repository/* /home/data/httpd/download.eclipse.org/cbi/tdp/${POM_VERSION}
+                        cp org.eclipse.cbi.targetplatform-update/target/org.eclipse.cbi.targetplatform-*.zip /home/data/httpd/download.eclipse.org/cbi/tdp/${POM_VERSION}/
+                    '''
+                }
             }
         }
     }
