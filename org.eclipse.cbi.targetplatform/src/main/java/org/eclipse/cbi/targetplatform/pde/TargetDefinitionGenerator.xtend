@@ -25,7 +25,7 @@ class TargetDefinitionGenerator {
 		'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="«targetPlatform.name»" sequenceNumber="«sequenceNumber»">
 		  «IF targetPlatform.locations !== null && !targetPlatform.locations.empty»
 		  <locations>
