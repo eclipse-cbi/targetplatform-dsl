@@ -9,7 +9,7 @@
   
   <groupId>org.eclipse.cbi.targetplatform</groupId>
   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-  <version>2.1.1-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <licenses>
@@ -186,7 +186,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/default</classifier>              
                 </artifact>
               </target>
@@ -238,7 +238,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/testing/4.8-photon</classifier>              
                 </artifact>
               </target>
@@ -290,7 +290,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/testing/4.7-oxygen</classifier>              
                 </artifact>
               </target>
@@ -342,7 +342,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/testing/4.6-neon</classifier>              
                 </artifact>
               </target>
@@ -394,7 +394,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/testing/4.5-mars</classifier>              
                 </artifact>
               </target>
@@ -446,7 +446,7 @@
                 <artifact>
                   <groupId>org.eclipse.cbi.targetplatform</groupId>
                   <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>2.1.1-SNAPSHOT</version>
+                  <version>3.0.0-SNAPSHOT</version>
                   <classifier>target-platforms/testing/4.4-luna</classifier>              
                 </artifact>
               </target>
