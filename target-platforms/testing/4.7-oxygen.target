@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Oxygen (4.7) Testing Target Platform" sequenceNumber="1536158715">
+<target name="Oxygen (4.7) Testing Target Platform" sequenceNumber="1536160302">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.ui.feature.group" version="2.14.0.v20180523-0937"/>
@@ -29,12 +29,12 @@
       <repository location="http://download.eclipse.org/tools/orbit/R-builds/R20180606145124/repository"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.pde.core" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.core" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.repository" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.metadata" version="0.0.0"/>
-      <unit id="org.eclipse.jdt.launching" version="0.0.0"/>
+      <unit id="org.eclipse.platform.feature.group" version="4.7.3.v20180330-0640"/>
+      <unit id="org.eclipse.pde.core" version="3.11.101.v20171228-1230"/>
+      <unit id="org.eclipse.equinox.p2.core" version="2.4.101.v20170906-1259"/>
+      <unit id="org.eclipse.equinox.p2.repository" version="2.3.301.v20170906-1259"/>
+      <unit id="org.eclipse.equinox.p2.metadata" version="2.3.200.v20170511-1106"/>
+      <unit id="org.eclipse.jdt.launching" version="3.9.100.v20180323-1351"/>
       <repository location="http://download.eclipse.org/eclipse/updates/4.7/R-4.7.3a-201803300640"/>
     </location>
   </locations>

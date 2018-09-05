@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Photon (4.8) Testing Target Platform" sequenceNumber="1536159505">
+<target name="Photon (4.8) Testing Target Platform" sequenceNumber="1536160291">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.ui.feature.group" version="2.14.0.v20180523-0937"/>
@@ -29,12 +29,12 @@
       <repository location="http://download.eclipse.org/tools/orbit/R-builds/R20180606145124/repository"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.pde.core" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.core" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.repository" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.p2.metadata" version="0.0.0"/>
-      <unit id="org.eclipse.jdt.launching" version="0.0.0"/>
+      <unit id="org.eclipse.platform.feature.group" version="4.8.0.v20180611-0656"/>
+      <unit id="org.eclipse.pde.core" version="3.12.0.v20180516-1159"/>
+      <unit id="org.eclipse.equinox.p2.core" version="2.5.0.v20180512-1128"/>
+      <unit id="org.eclipse.equinox.p2.repository" version="2.4.0.v20180512-1128"/>
+      <unit id="org.eclipse.equinox.p2.metadata" version="2.4.0.v20180320-1220"/>
+      <unit id="org.eclipse.jdt.launching" version="3.10.0.v20180606-1318"/>
       <repository location="http://download.eclipse.org/eclipse/updates/4.8/R-4.8-201806110500"/>
     </location>
   </locations>
