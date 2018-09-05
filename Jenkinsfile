@@ -40,7 +40,7 @@ pipeline {
                         dir('4.6') {
                             sh 'cp -rf ../scm/* .'
                             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-                                sh 'mvn -B clean verify -Ptarget-4_6-Neon'
+                                sh 'mvn -B clean verify -Ptarget-4_6-neon'
                             }
                         }
                     }
