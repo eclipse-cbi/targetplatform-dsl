@@ -72,10 +72,14 @@ pipeline {
                 dir('scm') {
                     sh '''
                         POM_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.6.0:exec)
-                        rm -rf /home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}
-                        mkdir -p /home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}
-                        cp -rf org.eclipse.cbi.targetplatform-update/target/repository/* /home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}
-                        cp org.eclipse.cbi.targetplatform-update/target/org.eclipse.cbi.targetplatform-*.zip /home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}/
+                        DEPLOY_PATH="/home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}"
+                        mkdir -p "${DEPLOY_PATH}.new"
+                        cp -rf org.eclipse.cbi.targetplatform-update/target/repository/* "${DEPLOY_PATH}.new/"
+                        cp org.eclipse.cbi.targetplatform-update/target/org.eclipse.cbi.targetplatform-*.zip "${DEPLOY_PATH}.new/"
+                        
+                        mv "${DEPLOY_PATH}" "${DEPLOY_PATH}.old"
+                        mv "${DEPLOY_PATH}.new" "${DEPLOY_PATH}"
+                        rm -rf "${DEPLOY_PATH}.old"
                     '''
                 }
             }
