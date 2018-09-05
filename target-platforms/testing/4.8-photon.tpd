@@ -1,4 +1,4 @@
-target "Oxygen-Canary (4.7) Testing Target Platform"
+target "Photon (4.8) Testing Target Platform"
 
 include "../inc/xtext-target.tpd"
 
