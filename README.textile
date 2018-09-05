@@ -5,7 +5,7 @@ h1. Target Platform Definition DSL and Generator
 
 h2. IMPORTANT
 
-*New 3.0.0 SNAPSHOT build are available from "http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/*
+*New 3.0.0 SNAPSHOT builds are available from "http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/*
 
 This project has been "transfered to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy versions of this project, please use one of the following two URLs:
 
