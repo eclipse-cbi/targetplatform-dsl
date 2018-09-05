@@ -28,7 +28,7 @@ pipeline {
                 stage('Tests against 4.5 - Mars') {
                     steps {
                         dir('4.5') {
-                            sh 'cp -rf ../scm/* .'
+                            sh 'cp -rf ../scm/* . && cp -rf ../scm/.git .'
                             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
                                 sh 'mvn -B clean verify -Ptarget-4_5-mars'
                             }
@@ -38,7 +38,7 @@ pipeline {
                 stage('Tests against 4.6 - Neon') {
                     steps {
                         dir('4.6') {
-                            sh 'cp -rf ../scm/* .'
+                            sh 'cp -rf ../scm/* . && cp -rf ../scm/.git .'
                             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
                                 sh 'mvn -B clean verify -Ptarget-4_6-neon'
                             }
@@ -48,7 +48,7 @@ pipeline {
                 stage('Tests against 4.7 - Oxygen') {
                     steps {
                         dir('4.7') {
-                            sh 'cp -rf ../scm/* .'
+                            sh 'cp -rf ../scm/* . && cp -rf ../scm/.git .'
                             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
                                 sh 'mvn -B clean verify -Ptarget-4_7-oxygen'
                             }
@@ -58,7 +58,7 @@ pipeline {
                 stage('Tests against 4.8 - Photon') {
                     steps {
                         dir('4.8') {
-                            sh 'cp -rf ../scm/* .'
+                            sh 'cp -rf ../scm/* . && cp -rf ../scm/.git .'
                             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
                                 sh 'mvn -B clean verify -Ptarget-4_8-photon'
                             }
