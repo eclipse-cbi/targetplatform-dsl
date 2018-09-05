@@ -62,7 +62,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		</target>
 		'''.toString, content)
@@ -96,7 +96,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
@@ -141,7 +141,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
@@ -193,7 +193,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
@@ -239,7 +239,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
@@ -281,7 +281,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="planner" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
@@ -323,7 +323,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
@@ -365,7 +365,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <locations>
 		    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
@@ -391,7 +391,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <os>win32</os>
@@ -414,7 +414,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <os>win32</os>
@@ -438,7 +438,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <ws>cocoa</ws>
@@ -461,7 +461,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <arch>x86_64</arch>
@@ -484,7 +484,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <nl>fr_FR</nl>
@@ -507,7 +507,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 		</target>
@@ -528,7 +528,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <os>win32</os>
@@ -555,7 +555,7 @@ class TestTargetGeneration {
 		assertEquals('''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
-		<!-- generated with https://github.com.org/eclipse/cbi.targetplatformdsl -->
+		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="TP1" sequenceNumber="1">
 		  <environment>
 		    <os>linux</os>
