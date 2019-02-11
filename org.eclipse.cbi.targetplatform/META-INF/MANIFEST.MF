@@ -32,3 +32,4 @@ Export-Package: org.eclipse.cbi.targetplatform,
  org.eclipse.cbi.targetplatform.util,
  org.eclipse.cbi.targetplatform.validation
 Bundle-Activator: org.eclipse.cbi.targetplatform.TargetPlatformBundleActivator
+Automatic-Module-Name: org.eclipse.cbi.targetplatform

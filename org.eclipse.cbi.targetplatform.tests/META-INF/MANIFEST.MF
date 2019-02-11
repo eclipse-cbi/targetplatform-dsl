@@ -39,3 +39,4 @@ Export-Package: org.eclipse.cbi.targetplatform.tests;x-internal=true,
  org.eclipse.cbi.targetplatform.tests.stubs.p2,
  org.eclipse.cbi.targetplatform.tests.stubs.registry,
  org.eclipse.cbi.targetplatform.tests.util
+Automatic-Module-Name: org.eclipse.cbi.targetplatform.tests
