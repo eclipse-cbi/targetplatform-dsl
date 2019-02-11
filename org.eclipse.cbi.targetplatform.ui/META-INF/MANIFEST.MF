@@ -33,3 +33,4 @@ Export-Package: org.eclipse.cbi.targetplatform.ui,
  org.eclipse.cbi.targetplatform.ui.handler,
  org.eclipse.cbi.targetplatform.ui.internal,
  org.eclipse.cbi.targetplatform.ui.quickfix
+Automatic-Module-Name: org.eclipse.cbi.targetplatform.ui

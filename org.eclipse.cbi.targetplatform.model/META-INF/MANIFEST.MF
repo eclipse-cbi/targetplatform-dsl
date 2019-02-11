@@ -16,3 +16,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.cbi.targetplatform.model,
  org.eclipse.cbi.targetplatform.model.impl,
  org.eclipse.cbi.targetplatform.model.util
+Automatic-Module-Name: org.eclipse.cbi.targetplatform.model

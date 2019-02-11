@@ -13,4 +13,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.cbi.targetplatform.ide.contentassist.antlr,
  org.eclipse.cbi.targetplatform.ide.contentassist.antlr.internal
+Automatic-Module-Name: org.eclipse.cbi.targetplatform.ide
 
