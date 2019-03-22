@@ -72,7 +72,7 @@ public class ResolvedLocation {
 					}
 					resolvedIUs.add(unit);
 				} else {
-					String msg = "Error occured during resolution of '" + uri.toString() + "'. The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' can not be found.";
+					String msg = "Error occurred during resolution of '" + uri.toString() + "'. The IU '" + iu.getID() + "' with range constraint '" + iu.getVersionRange() + "' cannot be found.";
 					diag.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, msg, new Object[]{this, iu,}));
 				}
 			}

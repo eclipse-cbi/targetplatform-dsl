@@ -70,7 +70,7 @@ public class Converter {
 	public Diagnostic generateTargetDefinitionFile(URI uri, IProgressMonitor monitor) {
 		BasicDiagnostic ret = new BasicDiagnostic(TargetPlatformBundleActivator.PLUGIN_ID, 0, "Diagnostic of the generation of the target platform.", null);
 		if (!"targetplatform".equals(uri.fileExtension()) && !"tpd".equals(uri.fileExtension())) {
-			ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target platform file '" + uri + "' must ends with '.tpd' or '.targetplatform' extensions.", null));
+			ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target platform file '" + uri + "' must end with '.tpd' or '.targetplatform' extension.", null));
 		} else {
 			Diagnostic diagnostic = doGenerateTargetDefinitionFile(uri, monitor);
 			if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
@@ -99,7 +99,7 @@ public class Converter {
 					targetPlatform = (TargetPlatform) resource.getContents().get(0);
 				}
 				if (targetPlatform == null) {
-					ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occured while loading the file " + uri + ".", null));
+					ret.merge(new BasicDiagnostic(Diagnostic.ERROR, TargetPlatformBundleActivator.PLUGIN_ID, -1, "Error occurred while loading the file " + uri + ".", null));
 				} else if (subMonitor.isCanceled()) {
 					ret.merge(Diagnostic.CANCEL_INSTANCE);
 				} else {
@@ -185,7 +185,7 @@ public class Converter {
 				ret.merge(BasicDiagnostic.toDiagnostic(e));
 			}
 		} else {
-			ret.merge(new BasicDiagnostic(Diagnostic.INFO, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target definition '"+targetDefinitionLocation+"' did not changed since previous generation, we did not overwrote it.", null));
+			ret.merge(new BasicDiagnostic(Diagnostic.INFO, TargetPlatformBundleActivator.PLUGIN_ID, -1, "The target definition '"+targetDefinitionLocation+"' did not change since previous generation, we did not overwrite it.", null));
 		}
 		
 		return ret;
