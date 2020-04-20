@@ -1,13 +1,11 @@
 pipeline {
-    agent any
+    agent 'jipp-migration'
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         checkoutToSubdirectory('scm')
         timestamps()
     }
-
-    triggers { pollSCM('H * * * *') }
 
     tools {
         maven 'apache-maven-latest' 
