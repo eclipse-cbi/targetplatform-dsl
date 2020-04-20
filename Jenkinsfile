@@ -1,5 +1,7 @@
 pipeline {
-    agent 'jipp-migration'
+    agent {
+        label 'jipp-migration'
+    }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
