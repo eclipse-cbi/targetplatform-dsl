@@ -9,12 +9,12 @@
   </parent>
   <artifactId>org.eclipse.cbi.targetplatform.model</artifactId>
   <packaging>eclipse-plugin</packaging>
-  
+
   <properties>
     <emf-version>2.12.0</emf-version>
   </properties>
 
-  <build>  
+  <build>
     <plugins>
       <plugin>
         <groupId>org.eclipse.xtext</groupId>
