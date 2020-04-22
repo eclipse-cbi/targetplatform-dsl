@@ -21,7 +21,7 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.cbi.targetplatform,
  org.eclipse.cbi.targetplatform.conversion,
- org.eclipse.cbi.targetplatform.formatting,
+ org.eclipse.cbi.targetplatform.formatting2,
  org.eclipse.cbi.targetplatform.parser.antlr,
  org.eclipse.cbi.targetplatform.parser.antlr.internal,
  org.eclipse.cbi.targetplatform.pde,
