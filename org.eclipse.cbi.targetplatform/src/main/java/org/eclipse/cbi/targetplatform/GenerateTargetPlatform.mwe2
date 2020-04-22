@@ -57,7 +57,8 @@ Workflow {
 				generateStub = false
 			}
 			formatter = {
-				generateStub = false
+				generateStub = true
+				generateXtendStub = true
 			}
 			serializer = {
 				generateStub = false
