@@ -8,6 +8,7 @@ environment JavaSE-1.8
 location "http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700" {
 	// required to start UI tests in workbench - not a dependency per se
 	org.eclipse.pde.junit.runtime
+	org.eclipse.jdt.junit4.runtime
 }
 
 // Required for xcore source generation
