@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012-2014 Obeo.
+ * Copyright (c) 2012-2020 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -270,24 +270,24 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUContentAssist1() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location1" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu1'
 		)
 	}
 	
 	@Test 
 	def void testIUContentAssist2() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location2" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu1',
 			'org.iu2'
 		)
@@ -295,24 +295,24 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUContentAssist3() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location3" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu1'
 		)
 	}
 	
 	@Test 
 	def void testIUContentAssist4() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location4" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu1',
 			'org.iu2',
 			'com.iu1',
@@ -323,12 +323,12 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUContentAssist5() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location4" {
-				o
+				o«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu1',
 			'org.iu2'
 		)
@@ -336,12 +336,12 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUContentAssist6() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location4" {
-				c
+				c«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'com.iu1',
 			'com.iu2',
 			'com.iu3'
@@ -350,32 +350,32 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUContentAssist7() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "emptyLocation" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText('')
+		'''.assertProposals
 	}
 	
 	@Test 
 	def void testIUContentAssist8() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "badLocation" {
-				
+				«c»
 			}
-		''').cursorBack(3).assertText('')
+		'''.assertProposals
 	}
 	
 	@Test 
 	def void testIUVersionContentAssist1() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location1" {
-				org.iu1 
+				org.iu1 «c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'[1.2.0,1.2.1)',
 			'[1.2.0,1.3.0)',
 			'[1.2.0,2.0.0)',
@@ -387,12 +387,12 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUVersionContentAssist2() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location3" {
-				org.iu1 
+				org.iu1 «c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'[1.2.0,1.2.1)',
 			'[1.2.0,1.3.0)',
 			'[1.2.0,2.0.0)',
@@ -430,37 +430,37 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test 
 	def void testIUVersionContentAssist3() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location2" {
 				org.iu1
-				
+				«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			'org.iu2'
 		)
 	}
 	
 	@Test 
 	def void testIUVersionContentAssist4() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location2" {
 				org.iu1
 				org.iu2
-				
+				«c»
 			}
-		''').cursorBack(3).assertText('')
+		'''.assertProposals
 	}
 	
 	@Test 
 	def void testIUVersionContentAssist5() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location "location1" {
-				org.iu1
+				org.iu1«c»
 			}
-		''').cursorBack(3).assertText(
+		'''.assertProposals(
 			' [1.2.0,1.2.1)',
 			' [1.2.0,1.3.0)',
 			' [1.2.0,2.0.0)',
@@ -518,14 +518,14 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test
 	def void testLocationURIAndID5ContentAssist() {
-		newBuilder.append('''
+		'''
 			target "TPName"
 			location
-			
+			«c»
 			location "uri" {
 				
 			}
-		''').cursorBack(22).assertText( // cursor location\n|\n
+		'''.assertProposals(
 			'"http://p2.repository.url/" ',
 			'locationID '
 		)
@@ -533,14 +533,14 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test
 	def void testLocationURIAndID6ContentAssist() {
-		newBuilder.append('''
+		'''
 			target "TPName"
-			location
+			location«c»
 			
 			location "uri" {
 				
 			}
-		''').cursorBack(23).assertText(
+		'''.assertProposals(
 			' "http://p2.repository.url/" ',
 			' locationID ',
 			'''
@@ -552,14 +552,14 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test
 	def void testLocationURIAndID7ContentAssist() {
-		newBuilder.append('''
+		'''
 			target "TPName"
-			location 
+			location «c»
 			
 			location "uri" {
 				
 			}
-		''').cursorBack(22).assertText(
+		'''.assertProposals(
 			'"http://p2.repository.url/" ',
 			'locationID '
 		)
@@ -567,37 +567,48 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	
 	@Test
 	def void testLocationID1() {
-		newBuilder.append('''
+		'''
 			target "TPName"
-			location "locationURI" {
+			location "locationURI" «c»{
 				
 			}
-		''').cursorBack(6).assertText( // cursor: " |{
+		'''.assertProposals(
 			'locationID '
 		)
 	}
 	
 	@Test
 	def void testLocationID2() {
-		newBuilder.append('''
+		'''
 			target "TPName"
-			location "locationURI" {
+			location "locationURI"«c» {
 				
 			}
-		''').cursorBack(7).assertText( // cursor: "| {
+		'''.assertProposals(
 			' locationID'
 		)
 	}
 	
 	@Test
 	def void testLocationID3() {
-		newBuilder.append('''
+		'''
 			target "TPName"
-			location "locationURI"{
+			location "locationURI"«c»{
 				
 			}
-		''').cursorBack(6).assertText( // cursor: "|{
+		'''.assertProposals(
 			' locationID '
 		)
+	}
+
+	// cursor position marker
+	val c = '''<|>'''
+
+	private def void assertProposals(CharSequence text, String... expectedProposals) {
+		val cursorPosition = text.toString.indexOf(c)
+		val content = text.toString.replace(c, "")
+
+		newBuilder.append(content).
+		assertTextAtCursorPosition(cursorPosition, expectedProposals)
 	}
 }
