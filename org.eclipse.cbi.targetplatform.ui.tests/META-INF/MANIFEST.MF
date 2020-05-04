@@ -21,7 +21,11 @@ Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.ui.workbench;resolution:=optional,
  org.eclipse.xtext.ui.shared,
  org.eclipse.equinox.p2.metadata;bundle-version="2.2.0",
- org.eclipse.equinox.p2.core;bundle-version="2.3.0"
+ org.eclipse.equinox.p2.core;bundle-version="2.3.0",
+ org.eclipse.jdt.core,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.equinox.event
 Import-Package: org.hamcrest.core,
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
