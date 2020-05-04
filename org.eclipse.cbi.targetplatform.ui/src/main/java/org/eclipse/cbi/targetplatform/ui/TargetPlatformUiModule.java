@@ -10,16 +10,17 @@
  *******************************************************************************/
 package org.eclipse.cbi.targetplatform.ui;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-
 import org.eclipse.cbi.targetplatform.ui.editor.autoedit.TargetPlatformAutoEditStrategyProvider;
 import org.eclipse.cbi.targetplatform.ui.editor.syntaxcoloring.TargetPlatformHighlightingConfiguration;
 import org.eclipse.cbi.targetplatform.ui.editor.syntaxcoloring.TargetPlatformSemanticHighlightingCalculator;
 import org.eclipse.cbi.targetplatform.ui.editor.syntaxcoloring.TargetPlatformTokenToAttributeIdMapper;
+import org.eclipse.cbi.targetplatform.ui.hyperlinking.TargetPlatformHyperlinkHelper;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -45,5 +46,9 @@ public class TargetPlatformUiModule extends org.eclipse.cbi.targetplatform.ui.Ab
 	
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return TargetPlatformTokenToAttributeIdMapper.class;
+	}
+
+	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		return TargetPlatformHyperlinkHelper.class;
 	}
 }
