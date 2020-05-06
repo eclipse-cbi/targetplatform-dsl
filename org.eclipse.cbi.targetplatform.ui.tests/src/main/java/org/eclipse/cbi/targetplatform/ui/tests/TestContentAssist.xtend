@@ -99,7 +99,7 @@ class TestContentAssist extends AbstractContentAssistProcessorTest {
 	}
 	
 	@Inject
-	private IExecutionEnvironmentsManager eeManager;
+	IExecutionEnvironmentsManager eeManager;
 	
 	@Test
 	def void testTargetPlatform1() {
