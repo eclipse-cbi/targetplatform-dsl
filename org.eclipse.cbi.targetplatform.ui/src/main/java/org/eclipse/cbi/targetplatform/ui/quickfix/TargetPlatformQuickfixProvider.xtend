@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012-2014 Obeo and others.
+ * Copyright (c) 2012-2020 Obeo and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -60,9 +60,9 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    "Remove 'with requirements' option.", "Remove 'with requirements' option.", null) [
 	    	element, context |
 	    	if (element instanceof TargetPlatform) {
-	    		(element as TargetPlatform).options.remove(Option.INCLUDE_REQUIRED)
+	    		element.options.remove(Option.INCLUDE_REQUIRED)
 	    	} else if (element instanceof Location) {
-	    		(element as Location).options.remove(Option.INCLUDE_REQUIRED)
+	    		element.options.remove(Option.INCLUDE_REQUIRED)
 	    	}
 	    ]
 	}
@@ -73,9 +73,9 @@ class TargetPlatformQuickfixProvider extends DefaultQuickfixProvider {
 	    "Remove 'with allEnvironments' option.", "Remove 'with allEnvironments' option.", null) [
 	    	element, context |
 	    	if (element instanceof TargetPlatform) {
-	    		(element as TargetPlatform).options.remove(Option.INCLUDE_ALL_ENVIRONMENTS)
+	    		element.options.remove(Option.INCLUDE_ALL_ENVIRONMENTS)
 	    	} else if (element instanceof Location) {
-	    		(element as Location).options.remove(Option.INCLUDE_ALL_ENVIRONMENTS)
+	    		element.options.remove(Option.INCLUDE_ALL_ENVIRONMENTS)
 	    	}
 	    ]
 	}

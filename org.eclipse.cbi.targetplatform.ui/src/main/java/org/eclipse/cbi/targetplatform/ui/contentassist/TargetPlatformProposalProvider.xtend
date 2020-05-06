@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012-2014 Obeo and others.
+ * Copyright (c) 2012-2020 Obeo and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -66,13 +66,13 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	static val IU = TargetPlatformFactory.eINSTANCE.createIU
 	
 	@Inject
-	private TargetPlatformGrammarAccess grammarAccess;
+	TargetPlatformGrammarAccess grammarAccess;
 	
 	@Inject
-	private IExecutionEnvironmentsManager eeManager;
+	IExecutionEnvironmentsManager eeManager;
 	
 	@Inject
-	private IProvisioningAgent provisioningAgent
+	IProvisioningAgent provisioningAgent
 	
 	var IQuery<IInstallableUnit> iuAssistQuery
 	
