@@ -3,15 +3,6 @@ h1. Target Platform Definition DSL and Generator
 
 !https://ci.eclipse.org/cbi/buildStatus/icon?job=targetplatform-dsl/master!:https://ci.eclipse.org/cbi/job/targetplatform-dsl/
 
-h2. IMPORTANT
-
-*New 3.0.0 SNAPSHOT builds are available from "http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/*
-
-This project has been "transferred to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy versions of this project, please use one of the following two URLs:
-
-https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/ or
-https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/latest
-
 h2. Introduction
 
 Target Platform Definition DSL and Generator provides a DSL with an advanced editor and a generator taking this DSL as input and generating a @.target@ file that PDE is able to read to provision a Target Platform.
@@ -24,7 +15,7 @@ The greatest thing about this tool is that it avoids you to manage the links to 
 
 h2. Installation
 
-Since the transfer to the Eclipse CBI project (see the "IMPORTANT" note above), no new release has been done. As such, there is no update site available yet.
+Update site for the current version (3.0.0-SNAPSHOT) can be downloaded from "https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/
 
 h3. Requirements
 
