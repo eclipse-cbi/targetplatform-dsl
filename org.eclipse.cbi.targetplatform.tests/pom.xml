@@ -26,10 +26,6 @@
               <type>p2-installable-unit</type>
               <artifactId>org.eclipse.equinox.p2.transport.ecf</artifactId>
             </dependency>
-            <dependency>
-	          <type>p2-installable-unit</type>
-	          <artifactId>org.eclipse.equinox.ds</artifactId>
-	        </dependency>
           </dependencies>
         </configuration>
       </plugin>

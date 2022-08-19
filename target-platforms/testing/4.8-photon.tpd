@@ -5,7 +5,7 @@ include "../inc/xtext-target.tpd"
 with source requirements
 environment JavaSE-1.8
 
-location "http://download.eclipse.org/eclipse/updates/4.8/R-4.8-201806110500" {
+location "https://download.eclipse.org/eclipse/updates/4.8/R-4.8-201806110500" {
 	org.eclipse.platform.feature.group
 
 	org.eclipse.pde.core

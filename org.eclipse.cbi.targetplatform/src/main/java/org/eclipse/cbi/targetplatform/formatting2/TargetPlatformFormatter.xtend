@@ -101,11 +101,14 @@ class TargetPlatformFormatter extends AbstractFormatter2 {
 
 	private def formatOptions(Options it, extension IFormattableDocument document) {
 		allSemanticRegions.forEach[
-			prepend[oneSpace priority = HIGH_PRIORITY]
-			append[noSpace priority = LOW_PRIORITY]
+			if (text == ",") {
+				prepend[noSpace].append[oneSpace]
+			} else {
+				
+				prepend[oneSpace priority = HIGH_PRIORITY]
+				append[noSpace priority = LOW_PRIORITY]
+			}
 		]
-
-		allRegionsFor.keywords(",").forEach[prepend[noSpace].append[oneSpace]]
 	}
 
 	private def formatEnvironmentKeyword(Environment it, extension IFormattableDocument document) {
@@ -114,11 +117,13 @@ class TargetPlatformFormatter extends AbstractFormatter2 {
 
 	private def formatEnvironments(Environment it, extension IFormattableDocument document) {
 		allSemanticRegions.forEach[
-			prepend[oneSpace priority = HIGH_PRIORITY]
-			append[noSpace priority = LOW_PRIORITY]
+			if (text == ",") {
+				prepend[noSpace].append[oneSpace]
+			} else {
+				prepend[oneSpace priority = HIGH_PRIORITY]
+				append[noSpace priority = LOW_PRIORITY]
+			}
 		]
-
-		allRegionsFor.keywords(",").forEach[prepend[noSpace].append[oneSpace]]
 	}
 
 	/*

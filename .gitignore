@@ -1,6 +1,13 @@
 **/src/gen
-target
+**/target/*
+!**/target/generated-sources
+**/target/generated-sources/*
+!**/target/generated-sources/xtend
+**/target/generated-sources/xtend/*
+!**/target/generated-sources/xtend/.gitignore
 *~
 *.rej
 *.bak
 *.xtendbin
+/build.log
+/repository

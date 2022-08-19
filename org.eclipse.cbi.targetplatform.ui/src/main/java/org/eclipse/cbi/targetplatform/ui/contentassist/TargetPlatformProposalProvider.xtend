@@ -11,6 +11,8 @@
 package org.eclipse.cbi.targetplatform.ui.contentassist
 
 import com.google.inject.Inject
+import java.net.URI
+import java.util.Locale
 import org.eclipse.cbi.targetplatform.model.Environment
 import org.eclipse.cbi.targetplatform.model.IU
 import org.eclipse.cbi.targetplatform.model.Location
@@ -19,9 +21,6 @@ import org.eclipse.cbi.targetplatform.model.Options
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.model.TargetPlatformFactory
 import org.eclipse.cbi.targetplatform.services.TargetPlatformGrammarAccess
-import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator
-import java.net.URI
-import java.util.Locale
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.core.runtime.Platform
@@ -34,16 +33,17 @@ import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.query.IQuery
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
 import org.eclipse.jface.operation.IRunnableWithProgress
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.widgets.Display
+import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
-import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
 
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
@@ -286,7 +286,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
 			val uri = location.uri 
-			val window = TargetplatformActivator.getInstance.workbench.activeWorkbenchWindow
+			val window = PlatformUI.getWorkbench().activeWorkbenchWindow
 			val IRunnableWithProgress op = [monitor|
 				val wpm = SubMonitor.convert(new ReadAndDispatchProgressMonitorWrapper(monitor, window.shell.display), "Creating content assist for " + uri, 100)
 				try {
@@ -333,7 +333,7 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 		if (!text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val iu = model as IU
 			val uri = iu.location.uri 
-			val window = TargetplatformActivator.getInstance.workbench.activeWorkbenchWindow
+			val window = PlatformUI.getWorkbench().activeWorkbenchWindow
 			val op = versionProposalRunnable(uri, iu, prefix, window.shell.display, context, acceptor)
 			window.run(false, true, op)
 		}

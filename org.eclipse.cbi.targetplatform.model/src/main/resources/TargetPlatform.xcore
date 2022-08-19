@@ -2,11 +2,12 @@
 package org.eclipse.cbi.targetplatform.model
 
 import com.google.common.base.Splitter
+import java.util.Arrays
 import java.util.Locale
 import org.eclipse.core.runtime.Platform
+import org.eclipse.core.runtime.RegistryFactory
 import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
 import org.eclipse.jdt.launching.JavaRuntime
-import org.eclipse.core.runtime.RegistryFactory
 
 class TargetPlatform {
 	String name
@@ -39,14 +40,14 @@ class Environment extends TargetContent {
 	derived String operatingSystem get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		return 
-			Platform.knownOSValues.findFirst[
+			Arrays.asList(Platform.knownOSValues).findFirst[
 				envToUpper.contains(it.toUpperCase)
 			]
 	}
 	
 	derived String windowingSystem get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
+		val knownWSUpperValues = Arrays.asList(Platform.knownWSValues).map[toUpperCase]
 		
 		val allWS = envToUpper.filter[
 			knownWSUpperValues.contains(it)
@@ -58,7 +59,7 @@ class Environment extends TargetContent {
 			return null
 		} else {
 			return 
-				Platform.knownWSValues.findFirst[
+				Arrays.asList(Platform.knownWSValues).findFirst[
 					envToUpper.contains(it.toUpperCase)
 				]
 		}
@@ -66,14 +67,14 @@ class Environment extends TargetContent {
 	
 	derived String architecture get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-		return Platform.knownOSArchValues.findFirst[
+		return Arrays.asList(Platform.knownOSArchValues).findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
 	}
 	
 	derived Locale localization get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-		val locale = Locale.availableLocales.map[toString].findFirst[
+		val locale = Arrays.asList(Locale.availableLocales).map[toString].findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
 		
@@ -109,7 +110,7 @@ class Environment extends TargetContent {
 			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 			
 			for (env : envToUpper) {
-				val ee = eeManager.executionEnvironments.findFirst[it.id.toUpperCase.equals(env)]
+				val ee = Arrays.asList(eeManager.executionEnvironments).findFirst[it.id.toUpperCase.equals(env)]
 				if (ee !== null) {
 					return ee
 				}

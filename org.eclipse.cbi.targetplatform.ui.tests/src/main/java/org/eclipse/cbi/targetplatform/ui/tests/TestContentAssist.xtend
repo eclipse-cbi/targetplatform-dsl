@@ -11,93 +11,90 @@
 package org.eclipse.cbi.targetplatform.ui.tests
 
 import com.google.common.collect.ImmutableList
-import com.google.inject.Guice
-import com.google.inject.Module
-import com.google.inject.Provider
 import java.net.URI
 import java.util.Locale
 import javax.inject.Inject
-import org.eclipse.cbi.targetplatform.TargetPlatformRuntimeModule
-import org.eclipse.cbi.targetplatform.TargetPlatformStandaloneSetup
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub
-import org.eclipse.cbi.targetplatform.tests.stubs.p2.ProvisioningAgentStub
-import org.eclipse.cbi.targetplatform.ui.TargetPlatformUiModule
-import org.eclipse.cbi.targetplatform.ui.internal.TargetplatformActivator
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub
 import org.eclipse.core.runtime.Platform
 import org.eclipse.equinox.p2.core.IProvisioningAgent
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
 import org.eclipse.equinox.p2.metadata.Version
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
-import org.eclipse.xtext.ui.shared.SharedStateModule
-import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(XtextRunner)
 @InjectWith(TargetPlatformUiInjectorProvider)
-class TestContentAssist extends AbstractContentAssistProcessorTest {
+class TestContentAssist extends AbstractContentAssistTest {
 	
-	static val MOCK_RUNTIME_MODULE = new TargetPlatformRuntimeModule() {
-		override provideIProvisioningAgent() {
-			return new Provider<IProvisioningAgent>() {
-				override IProvisioningAgent get() {
-					return new ProvisioningAgentStub(new IQueryResultProvider<IInstallableUnit>() {
-						override listIUs(URI location) {
-							if ("location1".equals(location.toString)) {
-								newImmutableList(
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,2,0))
-								)
-							} else if ("location2".equals(location.toString)) {
-								newImmutableList(
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,2,0)),
-									IUStub::createFeature("org.iu2", Version.createOSGi(3,7,72))
-								)
-							} else if ("location3".equals(location.toString)) {
-								newImmutableList(
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,2,0)),
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,2,5)),
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,3,2)),
-									IUStub::createFeature("org.iu1", Version.createOSGi(2,0,0)),
-									IUStub::createFeature("org.iu1", Version.createOSGi(2,3,0)),
-									IUStub::createFeature("org.iu1", Version.createOSGi(3,9,0))
-								)
-							} else if ("location4".equals(location.toString)) {
-								newImmutableList(
-									IUStub::createFeature("org.iu1", Version.createOSGi(1,2,0)),
-									IUStub::createFeature("org.iu2", Version.createOSGi(3,7,72)),
-									IUStub::createFeature("com.iu1", Version.createOSGi(1,2,0)),
-									IUStub::createFeature("com.iu2", Version.createOSGi(3,7,72)),
-									IUStub::createFeature("com.iu3", Version.createOSGi(3,7,72))
-								)
-							} else if ("badLocation".equals(location.toString)) {
-								throw new RuntimeException("bad location")
-							} else if ("emptyRepository".equals(location.toString)) {
-								return emptyList
-							} else {
-								return emptyList
-							}
-						}
-					});
+	@Inject
+	IProvisioningAgent agent
+
+	Object repositoryManager;
+
+	@Before
+	def void init() {
+		repositoryManager = getRepositoryManager
+		setRepositoryManager(
+			new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
+				override listIUs(URI location) {
+					if ("location1".equals(location.toString)) {
+						newImmutableList(
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 2, 0))
+						)
+					} else if ("location2".equals(location.toString)) {
+						newImmutableList(
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 2, 0)),
+							IUStub::createFeature("org.iu2", Version.createOSGi(3, 7, 72))
+						)
+					} else if ("location3".equals(location.toString)) {
+						newImmutableList(
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 2, 0)),
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 2, 5)),
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 3, 2)),
+							IUStub::createFeature("org.iu1", Version.createOSGi(2, 0, 0)),
+							IUStub::createFeature("org.iu1", Version.createOSGi(2, 3, 0)),
+							IUStub::createFeature("org.iu1", Version.createOSGi(3, 9, 0))
+						)
+					} else if ("location4".equals(location.toString)) {
+						newImmutableList(
+							IUStub::createFeature("org.iu1", Version.createOSGi(1, 2, 0)),
+							IUStub::createFeature("org.iu2", Version.createOSGi(3, 7, 72)),
+							IUStub::createFeature("com.iu1", Version.createOSGi(1, 2, 0)),
+							IUStub::createFeature("com.iu2", Version.createOSGi(3, 7, 72)),
+							IUStub::createFeature("com.iu3", Version.createOSGi(3, 7, 72))
+						)
+					} else if ("badLocation".equals(location.toString)) {
+						throw new RuntimeException("bad location")
+					} else if ("emptyRepository".equals(location.toString)) {
+						return emptyList
+					} else {
+						return emptyList
+					}
 				}
-			};
-		}
+			}))
 	}
 	
-	override protected doGetSetup() {
-		return new TargetPlatformStandaloneSetup() {
-			override createInjector() {
-				return Guice.createInjector(Modules2.mixin(
-						MOCK_RUNTIME_MODULE,
-						new SharedStateModule(),
-						new TargetPlatformUiModule(TargetplatformActivator.getInstance) as Module));
-			}
-		};
+	@After
+	def void restore() {
+		setRepositoryManager(repositoryManager)
 	}
 	
+	private def getRepositoryManager() {
+		return agent.getService("org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager")
+	}
+	
+	private def void setRepositoryManager(Object repositroyManager) {
+		agent.registerService("org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager", repositroyManager)
+	}
+
 	@Inject
 	IExecutionEnvironmentsManager eeManager;
 	
