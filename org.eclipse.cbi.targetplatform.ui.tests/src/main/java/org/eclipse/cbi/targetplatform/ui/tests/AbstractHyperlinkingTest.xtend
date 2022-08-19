@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
@@ -104,7 +103,7 @@ abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
 
 	protected def IHyperlink[] hyperlinkingOn(IFile dslFile, int offset) {
 		val editor = dslFile.openInEditor
-		val document = XtextDocumentUtil.get(editor.internalSourceViewer)
+		val document = editor.document
 		val resource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
 
 			override exec(XtextResource state) {

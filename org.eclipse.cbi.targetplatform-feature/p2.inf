@@ -1,2 +1,7 @@
-update.id=fr.obeo.releng.targetplatform-feature.feature.group
-update.range=[2,3)
+update.id=org.eclipse.cbi.targetplatform.feature.feature.group
+update.range=[2,4)
+update.matchExp = providedCapabilities.exists(pc | \
+   pc.namespace == 'org.eclipse.equinox.p2.iu' && \
+     (pc.name == 'fr.obeo.releng.targetplatform-feature.feature.group' || \
+       pc.name == 'org.eclipse.cbi.targetplatform-feature.feature.group' || \
+       (pc.name == 'org.eclipse.cbi.targetplatform.feature.feature.group' && pc.version ~= range('[0.0.0,$version$)'))))

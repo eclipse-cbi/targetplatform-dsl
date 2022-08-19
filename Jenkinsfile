@@ -10,20 +10,82 @@ pipeline {
     }
 
     tools {
-        maven 'apache-maven-latest' 
+        maven 'apache-maven-latest'
+        jdk 'openjdk-jdk11-latest'
+    }
+
+    environment {
+        PUBLISH_LOCATION = 'cbi/updates'
+    }
+
+    parameters {
+        choice(
+            name: 'BUILD_TYPE',
+            choices: ['nightly', 'milestone', 'release'],
+            description: '''
+                Choose the type of build.
+                Note that a release build will not promote the build, but rather will promote the most recent milestone build.
+            '''
+        )
+
+        booleanParam(
+           name: 'PROMOTE',
+            defaultValue: false,
+            description: 'Whether to promote the build to the download server.'
+        )
+
+        booleanParam(
+            name: 'ARCHIVE',
+            defaultValue: false,
+            description: 'Whether to archive the workspace.'
+        )
     }
 
     stages {
+        stage('Display Parameters') {
+            steps {
+                echo "BUILD_TYPE=${params.BUILD_TYPE}"
+                echo "PROMOTE=${params.PROMOTE}"
+                echo "ARCHIVE=${params.ARCHIVE}"
+                echo "GIT_COMMIT=${env.GIT_COMMIT}"
+                script {
+                    env.PROMOTE = params.PROMOTE
+                    env.BUILD_TYPE = params.BUILD_TYPE
+                }
+             }
+        }
+    
         stage('Build') {
             steps {
                 dir('scm') {
-                    wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-                        sh 'mvn -B clean install -Ptarget-default'
+                    sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+                        wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+                            sh '''
+                                if [[ $PROMOTE == false ]]; then
+                                    promotion_argument='-Dorg.eclipse.justj.p2.manager.args='
+                                fi
+                                mvn \
+                                  -B \
+                                  -Ptarget-default \
+                                  -Peclipse-sign \
+                                   $promotion_argument \
+                                  -Dorg.eclipse.storage.user=genie.cbi \
+                                  -Dorg.eclipse.justj.p2.manager.build.url=$JOB_URL \
+                                  -Dorg.eclipse.download.location.relative=$PUBLISH_LOCATION \
+                                  -Dorg.eclipse.justj.p2.manager.relative= \
+                                  -Dbuild.type=$BUILD_TYPE \
+                                  -Dgit.commit=$GIT_COMMIT \
+                                  -Dbuild.id=$BUILD_NUMBER \
+                                  clean \
+                                  install \
+                            '''
+                        }
                     }
                 }
             }
         }
 
+/*
         stage('Tests against 4.5 - Mars') {
             steps {
                 dir('4.5') {
@@ -64,7 +126,9 @@ pipeline {
                 }
             }
         }
+*/
 
+/*
         stage('Deploy') {
             steps {
                 dir('scm') {
@@ -86,6 +150,17 @@ ENDSSH
                       '''
                     }
                 }
+            }
+        }
+*/
+        stage('Archive Results') {
+            when {
+                expression {
+                    params.ARCHIVE
+                }
+            }
+            steps {
+                archiveArtifacts 'scm/**'
             }
         }
     }

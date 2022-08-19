@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IContributor;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IPluginDescriptor;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 
 import com.google.common.collect.ImmutableList;
@@ -171,10 +170,6 @@ public final class ExtensionStub implements IExtension {
 			stub.configurationElements = ImmutableList.copyOf(configurationElements.stream().map(e -> e.declaringExtension(stub).build()).iterator());
 			return stub;
 		}
-	}
-
-	public IPluginDescriptor getDeclaringPluginDescriptor() throws InvalidRegistryObjectException {
-		return null;
 	}
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.cbi.targetplatform-feature"
+      id="org.eclipse.cbi.targetplatform.feature"
       label="%featureName"
       version="3.0.0.qualifier"
       provider-name="%providerName"
@@ -23,8 +23,16 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.14.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.xtext.ui" version="2.14.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.18.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.ui" version="2.18.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.eclipse.emf.ecore.xcore.lib"/>
+      <import plugin="org.eclipse.xtend.lib"/>
+      <import plugin="org.eclipse.xtend.lib.macro"/>
+      <import plugin="org.aopalliance"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
+      <import plugin="org.eclipse.xtext.xbase.ide"/>
+      <import plugin="org.eclipse.xtext.xbase.ui"/>
    </requires>
 
    <plugin

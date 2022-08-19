@@ -20,7 +20,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.eclipse.cbi.targetplatform.TargetPlatformBundleActivator;
+import org.eclipse.cbi.targetplatform.model.TargetPlatform;
+import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
+import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -40,15 +43,9 @@ import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
-import org.eclipse.cbi.targetplatform.model.TargetPlatform;
-import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
-import org.eclipse.cbi.targetplatform.pde.TargetDefinitionGenerator;
-import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
 
 /**
  * @author <a href="mailto:mikael.barbero@gmail.com">Mikael Barbero</a>
@@ -195,7 +192,7 @@ public class Converter {
 		try {
 			File targetDefinition = new File(targetDefinitionLocation.toFileString());
 			if (targetDefinition.exists()) {
-				String oldXml = Files.toString(targetDefinition, Charsets.UTF_8);
+				String oldXml = Files.asCharSource(targetDefinition, Charsets.UTF_8).read();
 				oldXml = SEQUENCE_NUMBER__PATTERN.matcher(oldXml).replaceFirst("");
 				String newXml = SEQUENCE_NUMBER__PATTERN.matcher(xml).replaceFirst("");
 				return !oldXml.equals(newXml);

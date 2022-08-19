@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
-<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Mars (4.5) Testing Target Platform" sequenceNumber="1536003964">
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="Mars (4.5) Testing Target Platform" sequenceNumber="1660906681">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.xtext.ui.feature.group" version="2.14.0.v20180523-0937"/>
-      <unit id="org.eclipse.xtext.runtime.feature.group" version="2.14.0.v20180523-0937"/>
-      <unit id="org.eclipse.xtext.testing" version="2.14.0.v20180522-1821"/>
-      <unit id="org.eclipse.xtext.junit4" version="2.14.0.v20180523-0437"/>
-      <unit id="org.eclipse.xtext.xbase.testing" version="2.14.0.v20180522-1833"/>
-      <unit id="org.eclipse.xtext.xbase.junit" version="2.14.0.v20180523-0437"/>
-      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0"/>
+      <unit id="org.eclipse.xtext.ui.feature.group" version="2.27.0.v20220530-0508"/>
+      <unit id="org.eclipse.xtext.xtext.ui.feature.group" version="2.27.0.v20220530-0508"/>
+      <unit id="org.eclipse.xtext.runtime.feature.group" version="2.27.0.v20220530-0508"/>
+      <unit id="org.eclipse.xtext.testing" version="2.27.0.v20220530-0355"/>
+      <unit id="org.eclipse.xtext.junit4" version="2.27.0.v20220530-0416"/>
+      <unit id="org.eclipse.xtext.xbase.testing" version="2.27.0.v20220530-0402"/>
+      <unit id="org.eclipse.xtext.xbase.junit" version="2.27.0.v20220530-0416"/>
+      <unit id="org.eclipse.xtext.generator" version="2.27.0.v20220530-0402"/>
+      <unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
+      <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.ecore" version="2.12.0.v20160420-0247"/>
-      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.1.100.v20160526-0606"/>
-      <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.12"/>
+      <unit id="org.eclipse.emf.ecore" version="2.27.0.v20220426-0617"/>
+      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.6.0.v20210405-0628"/>
+      <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.30"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <repository location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.mwe.core" version="1.3.21.201705291011"/>
-      <repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.objectweb.asm" version="5.0.1.v201404251740"/>
-      <repository location="http://download.eclipse.org/tools/orbit/R-builds/R20180606145124/repository"/>
+      <unit id="org.eclipse.emf.mwe.core" version="1.7.0.v20220519-1115"/>
+      <unit id="org.eclipse.emf.mwe2.lib" version="2.13.0.v20220519-1115"/>
+      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.5.2.v20160212-1500"/>
@@ -35,7 +32,7 @@
       <unit id="org.eclipse.equinox.p2.repository" version="2.3.100.v20150428-1613"/>
       <unit id="org.eclipse.equinox.p2.metadata" version="2.3.0.v20150511-1532"/>
       <unit id="org.eclipse.jdt.launching" version="3.8.0.v20150527-0946"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500"/>
+      <repository location="https://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500"/>
     </location>
   </locations>
   <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>

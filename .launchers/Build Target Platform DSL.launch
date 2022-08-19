@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+    <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+        <mapEntry key="JAVA_HOME" value="${maven.build.java.home}"/>
+    </mapAttribute>
+    <stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${project_loc:/org.eclipse.cbi.targetplatform-parent}/build.log"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.ui.externaltools.launchGroup"/>
+    </listAttribute>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${maven.build.command}"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="clean&#13;&#10;verify&#13;&#10;--no-transfer-progress&#13;&#10;-Ptarget-default&#13;&#10;-Duser.home=${system_property:user.home}&#13;&#10;-Dpromote=true&#13;&#10;-Dorg.eclipse.justj.p2.manager.args=&quot;-remote localhost:${project_loc:/org.eclipse.cbi.targetplatform-parent}/repository&quot;&#13;&#10;-Dorg.eclipse.justj.p2.manager.relative=&quot;&quot;&#13;&#10;-Dbuild.type=nightly"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${project_loc:/org.eclipse.cbi.targetplatform-parent}"/>
+</launchConfiguration>

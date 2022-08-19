@@ -1,8 +1,9 @@
 target "Xtext base target"
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0" {
+location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0" {
 	// do not depend on org.eclipse.xtext.sdk.feature.group to avoid dependency to draw2d  
 	org.eclipse.xtext.ui.feature.group
+	org.eclipse.xtext.xtext.ui.feature.group
 	org.eclipse.xtext.runtime.feature.group
 	
 	org.eclipse.xtext.testing
@@ -10,19 +11,19 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0
 	
 	org.eclipse.xtext.xbase.testing
 	org.eclipse.xtext.xbase.junit
+	
+	org.eclipse.xtext.generator
+	
+	org.objectweb.asm
 }
 
-location "http://download.eclipse.org/modeling/emf/emf/builds/release/2.12" {
+location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.30" {
 	org.eclipse.emf.ecore
 	org.eclipse.emf.ecore.xcore.lib
 }
 
 // required for resolving dependencies of Xtext
-location "http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315"
-location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0" {
 	org.eclipse.emf.mwe.core
-}
-
-location "http://download.eclipse.org/tools/orbit/R-builds/R20180606145124/repository" {
-	org.objectweb.asm [5.0.1,6.0.0)
+	org.eclipse.emf.mwe2.lib
 }

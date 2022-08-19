@@ -11,6 +11,7 @@
 package org.eclipse.cbi.targetplatform.ui.hyperlinking
 
 import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
+import org.eclipse.jface.text.IRegion
 import org.eclipse.jface.text.Region
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper
@@ -33,7 +34,7 @@ class TargetPlatformHyperlinkHelper extends HyperlinkHelper {
 		if (it instanceof IncludeDeclaration) {
 			val hyperlink = hyperlinkProvider.get
 
-			hyperlink.hyperlinkRegion = hyperlinkRegion
+			hyperlink.hyperlinkRegion = hyperlinkRegion as IRegion
 			hyperlink.URI = importURI.createURI.resolve(resource.URI)
 
 			acceptor.accept(hyperlink)
