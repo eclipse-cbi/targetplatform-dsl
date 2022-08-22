@@ -42,6 +42,12 @@ Contributor Agreement (ECA) on file.
 For more information, please see the Eclipse Committer Handbook:
 https://www.eclipse.org/projects/handbook/#resources-commit
 
+## Setting Up a Development Environment
+
+You can set up a pre-configured IDE for the development of the Target Platform Definition DSL projects using the following link.
+
+[![Create Eclipse Development Environment for the Target Platform Definition DSL](https://download.eclipse.org/oomph/www/setups/svg/Target_Platform_Definition_DSL.svg)](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/eclipse-cbi/targetplatform-dsl/master/TPDConfiguration.setup&show=true "Click to open Eclipse-Installer Auto Launch or drag onto your running installer's title area")
+
 ## Contact
 
 Contact the project developers via the project's *dev* list.
