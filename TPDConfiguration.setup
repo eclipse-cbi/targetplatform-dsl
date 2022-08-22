@@ -17,7 +17,7 @@
     </detail>
     <detail
         key="badgeLabel">
-      <value>Target Platform Definition SDL</value>
+      <value>Target Platform Definition DSL</value>
     </detail>
   </annotation>
   <installation
@@ -47,7 +47,7 @@
       </setupTask>
     </setupTask>
     <stream
-        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']/@projects[name='cbi']/@projects[name='tpd']/@streams[name='master']"/>
+        href="https://raw.githubusercontent.com/eclipse-cbi/targetplatform-dsl/master/TPD.setup#//@streams[name='master']"/>
     <description>The Target Platform Definition DSL workspace provides access to the &lt;a href=&quot;https://github.com/eclipse-cbi/targetplatform-dsl&quot;>eclipse-cbi/targetplatform-dsl&lt;/a>'s projects. </description>
   </workspace>
   <description>
