@@ -15,7 +15,7 @@ The greatest thing about this tool is that it avoids you to manage the links to 
 
 h2. Installation
 
-Update site for the current version (3.0.0-SNAPSHOT) can be downloaded from "https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/
+The update site "https://download.eclipse.org/cbi/updates/tpd/":https://download.eclipse.org/cbi/updates/tpd/ provides access to all versions going forward. The old update site for the 3.0.0-SNAPSHOT version at "https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/ is obselete.
 
 h3. Requirements
 
