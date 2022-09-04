@@ -17,12 +17,13 @@ import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.ListMultimap
 import com.google.common.collect.Multimaps
 import com.google.inject.Inject
-import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
-import org.eclipse.cbi.targetplatform.model.Location
-import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import java.util.LinkedList
 import java.util.List
 import java.util.Set
+import org.eclipse.cbi.targetplatform.model.IncludeDeclaration
+import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.TargetPlatform
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
@@ -37,9 +38,20 @@ class LocationIndexBuilder {
 			newLinkedHashSet(targetPlatform), 
 			newLinkedList(targetPlatform)
 		)
-		return LinkedListMultimap.create(Multimaps.index(locationList, [uri]))
+		return LinkedListMultimap.create(Multimaps.index(locationList, [uri.normalizeURI]))
 	}
-	
+
+	private static def String normalizeURI(String uri) {
+		if (uri === null) {
+			return null
+		}
+		val uriValue = URI.createURI(uri)
+		if (uriValue.hasTrailingPathSeparator) {
+			return uriValue.trimSegments(1).toString
+		}
+		return uri
+	}
+
 	private def List<Location> getLocations(Set<TargetPlatform> visited, List<TargetPlatform> toBeVisited) {
 		val locations = newArrayList()
 		
