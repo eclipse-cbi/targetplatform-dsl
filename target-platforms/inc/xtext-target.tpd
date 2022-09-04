@@ -1,5 +1,9 @@
 target "Xtext base target"
 
+location "https://download.eclipse.org/cbi/updates/license/2.0.2.v20181016-2210" {
+	org.eclipse.license.feature.group
+}
+
 location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0" {
 	// do not depend on org.eclipse.xtext.sdk.feature.group to avoid dependency to draw2d  
 	org.eclipse.xtext.ui.feature.group
@@ -17,7 +21,7 @@ location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.
 	org.objectweb.asm
 }
 
-location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.30" {
+location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.31" {
 	org.eclipse.emf.ecore
 	org.eclipse.emf.ecore.xcore.lib
 }

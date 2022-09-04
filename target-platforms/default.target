@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Default (clean build) Target Platform" sequenceNumber="1660899612">
+<target name="Default (clean build) Target Platform" sequenceNumber="1662208210">
   <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
+      <repository location="https://download.eclipse.org/cbi/updates/license/2.0.2.v20181016-2210"/>
+    </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.ui.feature.group" version="2.27.0.v20220530-0508"/>
       <unit id="org.eclipse.xtext.xtext.ui.feature.group" version="2.27.0.v20220530-0508"/>
@@ -14,6 +18,11 @@
       <unit id="org.eclipse.xtext.generator" version="2.27.0.v20220530-0402"/>
       <unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
       <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.ecore" version="2.28.0.v20220817-1401"/>
+      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.6.0.v20210405-0628"/>
+      <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.31"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.pde.junit.runtime" version="3.6.200.v20220523-1051"/>
@@ -28,8 +37,6 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.ecore.xcore" version="1.21.0.v20220426-0617"/>
-      <unit id="org.eclipse.emf.ecore" version="2.27.0.v20220426-0617"/>
-      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.6.0.v20210405-0628"/>
       <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.30"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
