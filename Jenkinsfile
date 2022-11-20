@@ -134,7 +134,7 @@ pipeline {
                 dir('scm') {
                     sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
                       sh '''
-                        POM_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.6.0:exec)
+                        POM_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:3.1.0:exec)
                         DEPLOY_PATH="/home/data/httpd/download.eclipse.org/cbi/tpd/${POM_VERSION}"
                         ssh genie.cbi@projects-storage.eclipse.org<<ENDSSH 
                             mkdir -p "${DEPLOY_PATH}.new"

@@ -11,3 +11,5 @@
 *.xtendbin
 /build.log
 /repository
+# tycho creates temporary files outside the maven target directory
+.tycho*
