@@ -100,6 +100,7 @@ SPDX-License-Identifier: EPL-2.0
                 -commit https://github.com/eclipse-cbi/targetplatform-dsl/commit/${git.commit}
                 -breadcrumb "CBI Target Platform Definition DSL https://projects.eclipse.org/projects/technology.cbi"
                 -favicon https://raw.githubusercontent.com/eclipse-cbi/p2repo-aggregator/main/favicon.ico
+                -mapping tdp->TDP
                 -title-image https://www.eclipse.org/org/workinggroups/assets/images/wg_eclipse_ide.svg
                 -body-image https://raw.githubusercontent.com/eclipse-cbi/p2repo-aggregator/main/cbi.svg
               </appArgLine>
