@@ -35,7 +35,7 @@
     <!-- comment out snapshots repo, when not intending to use snapshots. releases come from "eclipse-repo.url"
       <cbi-snapshots-repo.url>https://repo.eclipse.org/content/repositories/cbi-snapshots/</cbi-snapshots-repo.url>
     -->
-    <!-- 
+    <!--
     <tycho-snapshots>https://repo.eclipse.org/content/repositories/tycho-snapshots/</tycho-snapshots>
      -->
   </properties>
@@ -56,7 +56,7 @@
         <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
-    <!-- 
+    <!--
     <pluginRepository>
       <id>tycho-snapshots</id>
       <url>${tycho-snapshots}</url>
@@ -77,6 +77,20 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
+          <configuration>
+            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+            <filesets>
+              <fileset>
+                <directory>target</directory>
+                <includes>
+                  <include>**</include>
+                </includes>
+                <excludes>
+                  <exclude>generated-sources/xtend/.gitignore</exclude>
+                </excludes>
+              </fileset>
+            </filesets>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
