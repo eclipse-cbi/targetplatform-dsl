@@ -10,6 +10,7 @@
  *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Hannes Niederhausen (itemis AG) - removed version range check if container is a maven related rule
  */
 package org.eclipse.cbi.targetplatform.conversion
 
@@ -29,6 +30,8 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.ParserRule
 
 @Singleton
 class TargetPlatformConverter extends DefaultTerminalConverters {
@@ -92,8 +95,11 @@ class TargetPlatformSTRINGValueConverter extends STRINGValueConverter {
 		}
 		val ge = node.grammarElement as RuleCall
 		val container = ge.eContainer as Assignment
+		// we don't want to check the versions of maven rules, they have a diofferent pattern
+		val containerParserRule = EcoreUtil2.getContainerOfType(ge, ParserRule)
+		val isMavenRule = containerParserRule?.name.startsWith("Maven")
 		val value = Strings.convertFromJavaString(string.substring(1, string.length() - 1), true)
-		if (value !== null && container !== null && "version".equals(container.feature)) {
+		if (!isMavenRule && value !== null && container !== null && "version".equals(container.feature)) {
 			return TargetPlatformConverter::parseVersionRange(value, node)
 		} else {
 			return value

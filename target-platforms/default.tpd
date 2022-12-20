@@ -1,8 +1,8 @@
 target "Default (clean build) Target Platform"
 
-include "testing/4.24-2022-06.tpd" with source requirements environment JavaSE-11
+include "testing/4.26-2022-12.tpd" with source requirements environment JavaSE-11
 
-location "https://download.eclipse.org/eclipse/updates/4.24/R-4.24-202206070700" {
+location "https://download.eclipse.org/eclipse/updates/4.26" {
 	// required to start UI tests in workbench - not a dependency per se
 	org.eclipse.pde.junit.runtime
 	org.eclipse.jdt.junit4.runtime
@@ -21,4 +21,14 @@ location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0
 // Required for grammar generation (during mwe2 run)
 location "https://download.itemis.de/updates/releases/2.1.1" {
 	de.itemis.xtext.antlr.sdk.feature.group
+}
+
+// for grammar debugging purposes, very helpful views
+location "https://xtexttools.libutzki.de/" {
+	de.libutzki.xtext.nodemodeloutline.feature.feature.group
+	de.libutzki.xtext.semanticmodeloutline.feature.feature.group
+}
+
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
+	com.google.gson
 }

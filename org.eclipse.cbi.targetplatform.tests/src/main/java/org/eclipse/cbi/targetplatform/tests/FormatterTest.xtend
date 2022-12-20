@@ -792,6 +792,62 @@ class FormatterTest {
 			}
 		''')
 	}
+	
+	@Test def testMavenDependencies() {
+		'''
+		target "Test"  maven Test    scope   =compile ,   test  ,runtime 
+			dependencyDepth    =    none    missingManifest  =    generate     includeSources{
+			feature {
+			id="my.feature.com" 	name="My little feature"
+					version="1.0.0.qualifier" additionalBundles { org.eclipse.rcp }
+			}
+			
+			dependency {   		groupId="org.jetbrains.kotlin" artifactId="kotlin-runtime"
+		  		version="1.2.71"
+		  		
+		  		
+		  		 type="jar"  } 
+
+
+		dependency {   		groupId="org.jetbrains.kotlin" artifactId="kotlin-runtime"
+		  		version="1.2.71"
+		  		
+		  		
+		  		classifier="jdk8" type="jar"  } 
+			
+			repository  id  =       "localRepo" 
+			
+			
+						url  =     "http://my.local.artifactory.de"
+		}'''.isFormattedTo('''
+		target "Test"
+		
+		maven Test scope=compile,test,runtime dependencyDepth=none missingManifest=generate includeSources {
+			feature {
+				id="my.feature.com"
+				name="My little feature"
+				version="1.0.0.qualifier"
+				additionalBundles {
+					org.eclipse.rcp
+				}
+			}
+			dependency {
+				groupId="org.jetbrains.kotlin"
+				artifactId="kotlin-runtime"
+				version="1.2.71"
+				type="jar"
+			}
+			dependency {
+				groupId="org.jetbrains.kotlin"
+				artifactId="kotlin-runtime"
+				version="1.2.71"
+				classifier="jdk8"
+				type="jar"
+			}
+			repository id="localRepo" url="http://my.local.artifactory.de"
+		}
+		''')
+	}
 
 	private def isFormattedTo(CharSequence actual, CharSequence expected) {
 		assertFormatted[

@@ -10,11 +10,13 @@
  *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Hannes Niederhausen (itemis AG) - added generation of maven locations
  */
 package org.eclipse.cbi.targetplatform.pde
 
 import org.eclipse.cbi.targetplatform.model.Option
 import org.eclipse.cbi.targetplatform.resolved.ResolvedLocation
+import org.eclipse.cbi.targetplatform.resolved.ResolvedMavenLocation
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
 
 import static com.google.common.base.Preconditions.*
@@ -24,16 +26,19 @@ class TargetDefinitionGenerator {
 	
 	def String generate(ResolvedTargetPlatform targetPlatform, int sequenceNumber) {
 		checkNotNull(targetPlatform)
-		
+		val numLocations = targetPlatform.locations.size+targetPlatform.mavenLocations.size
 		'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde?>
 		<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 		<target name="«targetPlatform.name»" sequenceNumber="«sequenceNumber»">
-		  «IF targetPlatform.locations !== null && !targetPlatform.locations.empty»
+		  «IF numLocations>0»
 		  <locations>
 		    «FOR location : targetPlatform.locations»
 		    «generateLocation(targetPlatform, location)»
+		    «ENDFOR»
+		    «FOR mvnLocation : targetPlatform.mavenLocations»
+		    «generateMavenLocation(targetPlatform, mvnLocation)»
 		    «ENDFOR»
 		  </locations>
 		  «ENDIF»
@@ -62,6 +67,60 @@ class TargetDefinitionGenerator {
 		  <targetJRE path="«targetPlatform.environment.targetJRE»"/>
 		  «ENDIF»
 		</target>
+		'''
+	}
+	
+	def generateMavenLocation(ResolvedTargetPlatform platform, ResolvedMavenLocation mavenLocation) {
+		
+		val scopeValue = mavenLocation.scope
+		val inclSource = mavenLocation.includeSources
+		val missingManifest = mavenLocation.missingManifest
+		val depDepth = mavenLocation.dependencyDepth
+		val label = mavenLocation.label
+		val genFeature = mavenLocation.generatedFeature
+		
+		'''
+		<location includeDependencyDepth="«depDepth»" includeDependencyScopes="«scopeValue»" includeSource="«inclSource»" missingManifest="«missingManifest»" type="Maven" label="«label»">
+		«IF genFeature!==null»
+		<feature id="«genFeature.id»" label="«genFeature.name»" provider-name="«genFeature.vendor»" version="«genFeature.version»">
+			<description url="http://www.example.com/description">
+				[Enter Feature Description here.]
+			</description>
+			<copyright url="http://www.example.com/copyright">
+				[Enter Copyright Description here.]
+			</copyright>
+			<license url="http://www.example.com/license">
+				[Enter License Description here.]
+			</license>
+			«FOR iu:genFeature.additionalBundles»
+			<plugin download-size="0" id="«iu.ID»" install-size="0" unpack="false" version="0.0.0"/>
+			«ENDFOR»
+		</feature>
+		«ENDIF»
+		<dependencies>
+			«FOR dep:mavenLocation.mavenDependencies»
+			<dependency>
+				<groupId>«dep.groupId»</groupId>
+				<artifactId>«dep.artifactId»</artifactId>
+				<version>«dep.version»</version>
+				«IF dep.hasClassifier»
+				<classifier>«dep.classifier»</classifier>
+				«ENDIF»
+				<type>«dep.type»</type>
+			</dependency>
+			«ENDFOR»
+		</dependencies>
+		«IF mavenLocation.hasAdditionalRepositories»
+		<repositories>
+			«FOR repEntry : mavenLocation.repositoryMap.entrySet»
+			<repository>
+				<id>«repEntry.key»</id>
+				<url>«repEntry.value»</url>
+			</repository>
+			«ENDFOR»
+		</repositories>
+		«ENDIF»
+		</location>
 		'''
 	}
 	
