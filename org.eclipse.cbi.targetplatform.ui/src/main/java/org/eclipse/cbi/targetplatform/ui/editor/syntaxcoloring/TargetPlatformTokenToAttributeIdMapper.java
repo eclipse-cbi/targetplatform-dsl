@@ -10,6 +10,7 @@
  *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Hannes Niederhausen (itemis AG) - removed default highlighting for maven keyword; it's used in the maven elements as well
  */
 package org.eclipse.cbi.targetplatform.ui.editor.syntaxcoloring;
 
@@ -40,8 +41,7 @@ public class TargetPlatformTokenToAttributeIdMapper extends AbstractAntlrTokenTo
 			return TargetPlatformHighlightingConfiguration.OPTION_ID;
 		}
 		
-		if ("'version'".equals(tokenName) ||
-			"'='".equals(tokenName) ||
+		if ("'='".equals(tokenName) ||
 			"';'".equals(tokenName)) {
 			return DefaultHighlightingConfiguration.DEFAULT_ID;
 		}

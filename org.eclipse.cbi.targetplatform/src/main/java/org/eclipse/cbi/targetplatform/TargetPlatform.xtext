@@ -11,6 +11,7 @@
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
  *     Denis Golovin - Fix version qualifier parsing problems
+ *     Hannes Niederhausen (itemis AG) - added maven related rules
  *******************************************************************************/
 grammar org.eclipse.cbi.targetplatform.TargetPlatform with org.eclipse.xtext.common.Terminals
 
@@ -25,7 +26,7 @@ TargetPlatform:
 ;
 
 TargetContent: 
-	Options | Environment | IncludeDeclaration | Location
+	Options | Environment | IncludeDeclaration | Location | MavenLocation
 ;
 
 Options: 
@@ -48,12 +49,76 @@ Location:
 	'}')?
 ;
 
+MavenLocation:
+	'maven' label=ID 
+	'scope' '=' scopes+=MavenScope (',' scopes+=MavenScope)* 'dependencyDepth' '=' dependencyDepth=MavenDependencyDepth
+	'missingManifest' '=' missingManifest=MavenMissingManifest
+	(includeSources?='includeSources')?
+	'{'
+		(generatedFeature=GeneratedFeature)?
+		(dependencies+=MavenDependency)+
+		(repositories+=MavenRepository)*
+	'}'
+;
+
+GeneratedFeature:
+	'feature' '{'
+		'id' '=' id=STRING
+		'name' '=' name=STRING
+		'version' '=' version=STRING
+		('vendor' '=' vendor=STRING)?
+		('installLibrary' '=' instalLibrary=STRING)?
+		
+		('additionalBundles' '{'
+		(additionalBundles+=IU)+
+		'}')?
+	'}'
+;
+
+MavenDependency:
+	'dependency' '{'
+		'groupId' '=' groupId=STRING
+		'artifactId' '=' artifactId=STRING
+		'version' '=' version=STRING
+		('classifier' '=' classifier=STRING)?
+		('type' '=' type=STRING)?
+	'}'
+;
+
+MavenRepository:
+	'repository' 'id' '=' id=STRING 'url' '=' url=STRING
+;
+
+
+
 enum Option:
 	INCLUDE_REQUIRED |
 	INCLUDE_ALL_ENVIRONMENTS |
 	INCLUDE_SOURCE |
 	INCLUDE_CONFIGURE_PHASE
 ;
+
+enum MavenScope:
+	COMPILE |
+	PROVIDED |
+	RUNTIME |
+	TEST |
+	SYSTEM |
+	IMPORT
+;
+
+enum MavenMissingManifest:
+	GENERATE |
+	ERROR |
+	IGNORE
+;
+
+enum MavenDependencyDepth:
+	NONE |
+	DIRECT |
+	INFINITE
+;
+
 
 IU:
 	ID=ID ( (';' 'version' '=')? (version=VersionRange|version=STRING) )? 

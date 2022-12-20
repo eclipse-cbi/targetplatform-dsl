@@ -1,11 +1,11 @@
-target "Photon (4.8) Testing Target Platform"
+target "Photon (4.26) Testing Target Platform"
 
 include "../inc/xtext-target.tpd"
 
 with source requirements
 environment JavaSE-1.8
 
-location "https://download.eclipse.org/eclipse/updates/4.24/R-4.24-202206070700" {
+location "https://download.eclipse.org/eclipse/updates/4.26" {
 	org.eclipse.platform.feature.group
 
 	org.eclipse.pde.core

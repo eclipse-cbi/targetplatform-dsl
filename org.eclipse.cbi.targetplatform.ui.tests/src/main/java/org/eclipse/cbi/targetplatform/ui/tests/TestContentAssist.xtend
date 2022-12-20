@@ -10,6 +10,7 @@
  *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Hannes Niederhausen (itemis AG) - adopted to new maven location templates
  */
 package org.eclipse.cbi.targetplatform.ui.tests
 
@@ -157,7 +158,31 @@ class TestContentAssist extends AbstractContentAssistTest {
 			'''
 			location "http://p2.repository.url/" {
 				
-			}''')
+			}''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				feature {
+					id="my.feature.com"
+					name="My little feature"
+					version="1.0.0.qualifier"
+				}
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			'''
+			)
 	}
 	
 	@Test
@@ -187,7 +212,30 @@ class TestContentAssist extends AbstractContentAssistTest {
 			'''
 			location "http://p2.repository.url/" {
 				
-			}''')
+			}''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				feature {
+					id="my.feature.com"
+					name="My little feature"
+					version="1.0.0.qualifier"
+				}
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			''')
 	}
 	
 	@Test
@@ -218,7 +266,30 @@ class TestContentAssist extends AbstractContentAssistTest {
 			'''
 			location "http://p2.repository.url/" {
 				
-			}'''
+			}''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				feature {
+					id="my.feature.com"
+					name="My little feature"
+					version="1.0.0.qualifier"
+				}
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			'''
 		)
 	}
 	
@@ -264,7 +335,30 @@ class TestContentAssist extends AbstractContentAssistTest {
 			'''
 			location "http://p2.repository.url/" {
 				
-			}'''
+			}''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			''',
+			'''
+			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+				feature {
+					id="my.feature.com"
+					name="My little feature"
+					version="1.0.0.qualifier"
+				}
+				dependency {
+					groupId=""
+					artifactId=""
+					version=""
+				}
+			}
+			'''
 		)
 	}
 	
@@ -598,6 +692,7 @@ class TestContentAssist extends AbstractContentAssistTest {
 			}
 		'''.assertProposals(
 			' locationID '
+			
 		)
 	}
 

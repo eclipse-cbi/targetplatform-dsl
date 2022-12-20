@@ -10,6 +10,7 @@
  *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
+ *     Hannes Niederhausen (itemis AG) - modifications for maven related elements
  */
 package org.eclipse.cbi.targetplatform.ui.contentassist
 
@@ -17,8 +18,11 @@ import com.google.inject.Inject
 import java.net.URI
 import java.util.Locale
 import org.eclipse.cbi.targetplatform.model.Environment
+import org.eclipse.cbi.targetplatform.model.GeneratedFeature
 import org.eclipse.cbi.targetplatform.model.IU
 import org.eclipse.cbi.targetplatform.model.Location
+import org.eclipse.cbi.targetplatform.model.MavenDependency
+import org.eclipse.cbi.targetplatform.model.MavenLocation
 import org.eclipse.cbi.targetplatform.model.Option
 import org.eclipse.cbi.targetplatform.model.Options
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
@@ -154,6 +158,8 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			}
 			
 			templateLocation(context, acceptor)
+			templateMavenLocation(context, acceptor)
+			templateMavenLocationWithFeature(context, acceptor)
 			templateIncludeDeclaration(context, acceptor)
 		}
 	}
@@ -174,6 +180,64 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			p.cursorPosition = proposalText.length + middleText.length
 			p.setSelectionStart(p.getReplacementOffset() + proposalPrefix.length);
 			p.setSelectionLength(TargetPlatformProposalProvider.LOCATION__URI_PLACEHOLDER.length);
+			p.setSimpleLinkedMode(context.getViewer(), '\t');
+		}
+		acceptor.accept(p);
+	}
+	
+	private def templateMavenLocationWithFeature(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val proposalText = '''
+		maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+			feature {
+				id="my.feature.com"
+				name="My little feature"
+				version="1.0.0.qualifier"
+			}
+			dependency {
+				groupId=""
+				artifactId=""
+				version=""
+			}
+		}
+		'''
+		val p = createCompletionProposal(
+			proposalText, 
+			new StyledString("Maven Location with Feature - add a new maven location with feature to this target platform", StyledString.QUALIFIER_STYLER), 
+			getImage(LOCATION), 
+			context
+		)
+		
+		if (p instanceof ConfigurableCompletionProposal) {
+			p.priority = priorityHelper.defaultPriority + 540
+			p.cursorPosition = 6
+			p.setSelectionStart(p.getReplacementOffset()+6);
+			p.setSelectionLength("MavenDependencies".length);
+			p.setSimpleLinkedMode(context.getViewer(), '\t');
+		}
+		acceptor.accept(p);
+	}
+	private def templateMavenLocation(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val proposalText = '''
+		maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
+			dependency {
+				groupId=""
+				artifactId=""
+				version=""
+			}
+		}
+		'''
+		val p = createCompletionProposal(
+			proposalText, 
+			new StyledString("Maven location - add a new maven location to this target platform", StyledString.QUALIFIER_STYLER), 
+			getImage(LOCATION), 
+			context
+		)
+		
+		if (p instanceof ConfigurableCompletionProposal) {
+			p.priority = priorityHelper.defaultPriority + 540
+			p.cursorPosition = 6
+			p.setSelectionStart(p.getReplacementOffset()+6);
+			p.setSelectionLength("MavenDependencies".length);
 			p.setSimpleLinkedMode(context.getViewer(), '\t');
 		}
 		acceptor.accept(p);
@@ -286,7 +350,8 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 				context.currentNode.text.substring(0, currentNodeSizeToCursor)
 			else
 				''
-		if (text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
+		// need to check, the model could be a GeneratedFeature, which for now is not supported
+		if (model instanceof Location && text.contains("\n") || context.currentNode.text.length < currentNodeSizeToCursor) {
 			val location = model as Location
 			val uri = location.uri 
 			val window = PlatformUI.getWorkbench().activeWorkbenchWindow
@@ -439,6 +504,10 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 	}
 	
 	override completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// reactivating the keyword completion for the maven classes
+		switch(context.currentModel) {
+			MavenLocation, MavenDependency, GeneratedFeature: super.completeKeyword(keyword, context, acceptor)
+		}
 	}
 	
 	override complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

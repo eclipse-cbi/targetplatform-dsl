@@ -25,6 +25,9 @@ class TargetPlatform {
 	refers derived Location[] locations get {
 		new UnmodifiableEList(contents.filter(typeof(Location)).toList)
 	}
+	refers derived MavenLocation[] mavenLocations get {
+		new UnmodifiableEList(contents.filter(typeof(MavenLocation)).toList)
+	}
 	refers derived Environment environment get {
 		contents.filter(typeof(Environment)).head
 	}
@@ -137,6 +140,41 @@ class Location extends TargetContent {
 	contains IU[] ius opposite location
 }
 
+class MavenLocation extends TargetContent {
+	String label
+	MavenScope[] scopes
+	MavenDependencyDepth dependencyDepth
+	MavenMissingManifest missingManifest
+	boolean includeSources
+	
+	contains GeneratedFeature generatedFeature
+	contains MavenDependency[] dependencies 
+	
+	contains MavenRepository[] repositories
+}
+
+class GeneratedFeature {
+	String ^id
+	String name
+	String vendor
+	String version
+	String instalLibrary
+	contains IU[] additionalBundles 
+}
+
+class MavenRepository {
+	String ^id
+	String url
+}
+
+class MavenDependency {
+	String groupId
+	String artifactId
+	String version
+	String classifier
+	String ^type = "jar"
+}
+
 class IncludeDeclaration extends TargetContent {
 	String importURI
 }
@@ -145,6 +183,28 @@ class IU {
 	String ID
 	String version
 	container Location location opposite ius
+}
+
+
+enum MavenScope {
+	COMPILE as 'compile' = 0
+	PROVIDED as 'provided' = 1
+	RUNTIME as 'runtime' = 2
+	TEST as 'test' = 3
+	SYSTEM as 'system' = 4
+	IMPORT as 'import' = 5
+}
+
+enum MavenMissingManifest {
+	GENERATE as 'generate' = 0,
+	ERROR as 'error' = 1,
+	IGNORE as 'ignore' = 2
+}
+
+enum MavenDependencyDepth {
+	NONE as 'none' = 0,
+	DIRECT as 'direct' = 1,
+	INFINITE as 'infinite' = 2
 }
 
 enum Option {
