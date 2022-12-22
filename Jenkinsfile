@@ -6,6 +6,7 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         checkoutToSubdirectory('scm')
+        disableConcurrentBuilds()
         timestamps()
     }
 
