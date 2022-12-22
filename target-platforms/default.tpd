@@ -9,12 +9,12 @@ location "https://download.eclipse.org/eclipse/updates/4.26" {
 }
 
 // Required for xcore source generation
-location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.30" {
+location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.32" {
 	org.eclipse.emf.ecore.xcore
 }
 
 // Required for launching mwe2 workflow (main class org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher)
-location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0" {
 	org.eclipse.emf.mwe2.launch
 }
 

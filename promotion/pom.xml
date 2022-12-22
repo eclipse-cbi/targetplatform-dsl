@@ -28,7 +28,7 @@ SPDX-License-Identifier: EPL-2.0
   <packaging>pom</packaging>
 
   <properties>
-    <eclipse.repo>https://download.eclipse.org/releases/2022-06</eclipse.repo>
+    <eclipse.repo>https://download.eclipse.org/releases/2022-12</eclipse.repo>
     <justj.tools.repo>https://download.eclipse.org/justj/tools/updates/nightly/latest</justj.tools.repo>
     <org.eclipse.download.location.relative>cbi/updates</org.eclipse.download.location.relative>
     <org.eclipse.storage.user>genie.cbi</org.eclipse.storage.user>
