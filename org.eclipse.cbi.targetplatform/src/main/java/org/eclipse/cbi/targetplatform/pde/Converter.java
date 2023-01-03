@@ -27,6 +27,7 @@ import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.cbi.targetplatform.model.TargetPlatformPackage;
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
+import org.eclipse.cbi.targetplatform.util.MavenLocationIndexBuilder;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -63,6 +64,9 @@ public class Converter {
 	
 	@Inject
 	private LocationIndexBuilder indexBuilder;
+	
+	@Inject
+	private MavenLocationIndexBuilder mavenIndexBuilder;
 	
 	@Inject
 	private IProvisioningAgent agent;
@@ -132,7 +136,7 @@ public class Converter {
 		
 		try {
 			IMetadataRepositoryManager repositoryManager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-			ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+			ResolvedTargetPlatform resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder, mavenIndexBuilder);
 			subMonitor.worked(5);
 			
 			if (subMonitor.isCanceled()) {

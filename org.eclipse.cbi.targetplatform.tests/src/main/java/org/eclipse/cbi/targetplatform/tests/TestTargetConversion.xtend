@@ -18,10 +18,11 @@ import com.google.inject.Provider
 import org.eclipse.cbi.targetplatform.model.TargetPlatform
 import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider
-import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub
+import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub
 import org.eclipse.cbi.targetplatform.tests.util.CustomTargetPlatformInjectorProvider
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder
+import org.eclipse.cbi.targetplatform.util.MavenLocationIndexBuilder
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
@@ -52,6 +53,9 @@ class TestTargetConversion {
 	@Inject
 	LocationIndexBuilder indexBuilder;
 	
+	@Inject
+	MavenLocationIndexBuilder mavenIndexBuilder;
+	
 	@Test
 	def testBasicBundle() {
 		val targetPlatform = parser.parse('''
@@ -63,7 +67,7 @@ class TestTargetConversion {
 			}
 			''')
 		
-		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -102,7 +106,7 @@ class TestTargetConversion {
 			}
 			''')
 		
-		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(targetPlatform, indexBuilder, mavenIndexBuilder);
 		val d = resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(null) {
 			override loadRepository(java.net.URI location, IProgressMonitor monitor) throws ProvisionException, OperationCanceledException {
 				if ("unknownHost".equals(location.toString)) {
@@ -130,7 +134,7 @@ class TestTargetConversion {
 			}
 		''')
 
-		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(targetPlatform, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -170,7 +174,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -217,7 +221,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -259,7 +263,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -297,7 +301,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -338,7 +342,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -384,7 +388,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -430,7 +434,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -476,7 +480,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -522,7 +526,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -561,7 +565,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -600,7 +604,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -637,7 +641,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -674,7 +678,7 @@ class TestTargetConversion {
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -709,7 +713,7 @@ class TestTargetConversion {
 			}
 		''')
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -742,7 +746,7 @@ class TestTargetConversion {
 			}
 		''')
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/".equals(location.toString)) {
@@ -775,7 +779,7 @@ class TestTargetConversion {
 			}
 		''')
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -808,7 +812,7 @@ class TestTargetConversion {
 			}
 		''')
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/modeling/emf/compare/updates/releases/2.1/R201310031412/".equals(location.toString)) {
@@ -841,7 +845,7 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"
 		''')
 		
-		val targetDef = ResolvedTargetPlatform.create(o, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(o, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
@@ -871,7 +875,7 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler"
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
@@ -907,7 +911,7 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler"
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
@@ -943,7 +947,7 @@ class TestTargetConversion {
 			location "http://download.eclipse.org/sirius/updates/releases/0.9.0/kepler"
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
-		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder);
+		val targetDef = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 		targetDef.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				return emptyList
@@ -977,7 +981,7 @@ class TestTargetConversion {
 			}
 		''')
 		
-		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, indexBuilder);
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp, indexBuilder, mavenIndexBuilder);
 		val d = resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
 			override listIUs(java.net.URI location) {
 				if ("http://download.eclipse.org/egit/updates-3.3".equals(location.toString)) {
