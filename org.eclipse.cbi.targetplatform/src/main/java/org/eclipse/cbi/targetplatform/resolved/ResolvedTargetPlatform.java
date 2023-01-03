@@ -26,6 +26,7 @@ import org.eclipse.cbi.targetplatform.model.Location;
 import org.eclipse.cbi.targetplatform.model.Option;
 import org.eclipse.cbi.targetplatform.model.TargetPlatform;
 import org.eclipse.cbi.targetplatform.util.LocationIndexBuilder;
+import org.eclipse.cbi.targetplatform.util.MavenLocationIndexBuilder;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -114,7 +115,7 @@ public class ResolvedTargetPlatform {
 		return ret;
 	}
 	
-	public static ResolvedTargetPlatform create(TargetPlatform targetPlatform, LocationIndexBuilder indexBuilder) throws URISyntaxException {
+	public static ResolvedTargetPlatform create(TargetPlatform targetPlatform, LocationIndexBuilder indexBuilder, MavenLocationIndexBuilder mavenIndexBuilder) throws URISyntaxException {
 		Preconditions.checkArgument(targetPlatform != null);
 		LinkedList<ResolvedLocation> locations = Lists.newLinkedList();
 		
@@ -125,11 +126,10 @@ public class ResolvedTargetPlatform {
 			locations.addFirst(resolvedLocation);
 		}
 		
-		List<ResolvedMavenLocation> mavenLocations = targetPlatform.getMavenLocations().stream() //
+		List<ResolvedMavenLocation> mavenLocations = mavenIndexBuilder.getLocationIndex(targetPlatform).values().stream() // 
 				.map(ResolvedMavenLocation::new)
 				.collect(Collectors.toList());
-		
-		
+				
 		final EnumSet<Option> options = getOptionSet(targetPlatform.getOptions());
 		return new ResolvedTargetPlatform(targetPlatform.getName(), locations, mavenLocations, options, Environment.create(targetPlatform));
 	}
