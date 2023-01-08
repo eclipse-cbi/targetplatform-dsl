@@ -27,20 +27,20 @@ import org.eclipse.equinox.app.IApplicationContext;
 
 import com.google.inject.Injector;
 
-
 /**
  * @author <a href="mailto:mikael.barbero@gmail.com">Mikael Barbero</a>
  *
  */
 public class ConverterApplication implements IApplication {
 
-	/** 
+	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
-		Map<?,?> arguments = context.getArguments();
+		Map<?, ?> arguments = context.getArguments();
 		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
 		String path;
 		if (args.length <= 0) {
@@ -49,21 +49,30 @@ public class ConverterApplication implements IApplication {
 		} else {
 			path = args[0];
 		}
-		
+
+		try {
+			File pathAsFile = new File(path);
+			if (pathAsFile.isFile()) {
+				path = pathAsFile.getAbsoluteFile().toURI().toString();
+			}
+		} catch (RuntimeException e) {
+		}
+
 		Injector injector = new TargetPlatformStandaloneSetup().createInjector();
+		TargetPlatformStandaloneSetup.doSetup();
 		Converter converter = new Converter();
 		injector.injectMembers(converter);
 
 		URI uri = normalize(org.eclipse.emf.common.util.URI.createURI(path));
-		
+
 		Diagnostic diagnostic = converter.generateTargetDefinitionFile(uri, createPrintingMonitor());
-		
+
 		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
 			for (Diagnostic child : diagnostic.getChildren()) {
 				printDiagnostic(child, "");
 			}
 		}
-		
+
 		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
 			System.out.println("Problems occurred during generation of target platform definition file.");
 			return -1;
@@ -79,7 +88,7 @@ public class ConverterApplication implements IApplication {
 	private static IProgressMonitor createPrintingMonitor() {
 		return BasicMonitor.toIProgressMonitor(new BasicMonitor.Printing(System.out));
 	}
-	
+
 	private static void printDiagnostic(Diagnostic diagnostic, String indent) {
 		if (diagnostic.getSeverity() > Diagnostic.OK) {
 			System.out.print(indent);
@@ -94,28 +103,28 @@ public class ConverterApplication implements IApplication {
 	private static String getSeverityString(Diagnostic diagnostic) {
 		final String severity;
 		switch (diagnostic.getSeverity()) {
-			case Diagnostic.OK:
-				severity = "[OK]     ";
-				break;
-			case Diagnostic.INFO:
-				severity = "[INFO]   ";
-				break;
-			case Diagnostic.WARNING:
-				severity = "[WARNING]";
-				break;
-			case Diagnostic.ERROR:
-				severity = "[ERROR]  ";
-				break;
-			case Diagnostic.CANCEL:
-				severity = "[CANCEL] ";
-				break;
-			default:
-				severity = Integer.toHexString(diagnostic.getSeverity());
-				break;
+		case Diagnostic.OK:
+			severity = "[OK]     ";
+			break;
+		case Diagnostic.INFO:
+			severity = "[INFO]   ";
+			break;
+		case Diagnostic.WARNING:
+			severity = "[WARNING]";
+			break;
+		case Diagnostic.ERROR:
+			severity = "[ERROR]  ";
+			break;
+		case Diagnostic.CANCEL:
+			severity = "[CANCEL] ";
+			break;
+		default:
+			severity = Integer.toHexString(diagnostic.getSeverity());
+			break;
 		}
 		return severity;
 	}
-	
+
 	private static URI normalize(URI uri) {
 		String fragment = uri.fragment();
 		String query = uri.query();
@@ -126,8 +135,7 @@ public class ConverterApplication implements IApplication {
 			if (result.hasAbsolutePath()) {
 				result = URI.createURI("file:" + result);
 			} else {
-				result = URI.createFileURI(new File(result.toString())
-						.getAbsolutePath());
+				result = URI.createFileURI(new File(result.toString()).getAbsolutePath());
 			}
 		}
 
@@ -144,7 +152,7 @@ public class ConverterApplication implements IApplication {
 
 		return result;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * 
