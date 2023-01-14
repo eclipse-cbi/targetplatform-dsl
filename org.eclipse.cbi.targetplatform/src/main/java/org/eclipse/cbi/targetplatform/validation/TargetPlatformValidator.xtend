@@ -1,13 +1,13 @@
 /**
  * Copyright (c) 2012-2014 Obeo and others.
- * 
+ *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
  */
@@ -52,8 +52,8 @@ import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
 
 /**
- * Custom validation rules. 
- * 
+ * Custom validation rules.
+ *
  * see http://www.eclipse.org/Xtext/documentation.html#validation
  */
 class TargetPlatformValidator extends AbstractTargetPlatformValidator {
@@ -290,7 +290,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 
 			if (externalIDs.size > 1) {
 				val externalLocationsWithConflictualID = externalLocations.filter[externalIDs.contains(ID)]
-				val String msg = '''The ID for location '«locationURI»' must be unique. Found '«externalIDs.join("', '")»'  in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.''';
+				val String msg = '''The ID for location '«locationURI»' must be unique. Found '«externalIDs.join("', '")»' in '«externalLocationsWithConflictualID.map[eResource.URI.toString].toSet.join("', '")»'.''';
 				val conflictualInclude = externalLocationsWithConflictualID.map [ location |
 					targetPlatform.includes.filter [
 						val direct = indexBuilder.getImportedTargetPlatform(resource, it);
