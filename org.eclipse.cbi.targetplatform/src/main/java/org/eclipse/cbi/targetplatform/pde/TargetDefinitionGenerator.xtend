@@ -22,8 +22,8 @@ import org.eclipse.cbi.targetplatform.resolved.ResolvedTargetPlatform
 import static com.google.common.base.Preconditions.*
 
 class TargetDefinitionGenerator {
-	
-	
+
+
 	def String generate(ResolvedTargetPlatform targetPlatform, int sequenceNumber) {
 		checkNotNull(targetPlatform)
 		val numLocations = targetPlatform.locations.size+targetPlatform.mavenLocations.size
@@ -42,10 +42,10 @@ class TargetDefinitionGenerator {
 		    «ENDFOR»
 		  </locations>
 		  «ENDIF»
-		  «IF (targetPlatform.environment !== null && 
-			  	(!targetPlatform.environment.os.nullOrEmpty || 
-			  	 !targetPlatform.environment.ws.nullOrEmpty || 
-			  	 !targetPlatform.environment.arch.nullOrEmpty || 
+		  «IF (targetPlatform.environment !== null &&
+			  	(!targetPlatform.environment.os.nullOrEmpty ||
+			  	 !targetPlatform.environment.ws.nullOrEmpty ||
+			  	 !targetPlatform.environment.arch.nullOrEmpty ||
 			  	 !targetPlatform.environment.nl.nullOrEmpty)
 		  )»
 		  <environment>
@@ -69,61 +69,52 @@ class TargetDefinitionGenerator {
 		</target>
 		'''
 	}
-	
+
 	def generateMavenLocation(ResolvedTargetPlatform platform, ResolvedMavenLocation mavenLocation) {
-		
+
 		val scopeValue = mavenLocation.scope
 		val inclSource = mavenLocation.includeSources
 		val missingManifest = mavenLocation.missingManifest
 		val depDepth = mavenLocation.dependencyDepth
 		val label = mavenLocation.label
 		val genFeature = mavenLocation.generatedFeature
-		
+
 		'''
 		<location includeDependencyDepth="«depDepth»" includeDependencyScopes="«scopeValue»" includeSource="«inclSource»" missingManifest="«missingManifest»" type="Maven" label="«label»">
-		«IF genFeature!==null»
-		<feature id="«genFeature.id»" label="«genFeature.name»" provider-name="«genFeature.vendor»" version="«genFeature.version»">
-			<description url="http://www.example.com/description">
-				[Enter Feature Description here.]
-			</description>
-			<copyright url="http://www.example.com/copyright">
-				[Enter Copyright Description here.]
-			</copyright>
-			<license url="http://www.example.com/license">
-				[Enter License Description here.]
-			</license>
-			«FOR iu:genFeature.additionalBundles»
-			<plugin download-size="0" id="«iu.ID»" install-size="0" unpack="false" version="0.0.0"/>
-			«ENDFOR»
-		</feature>
-		«ENDIF»
-		<dependencies>
-			«FOR dep:mavenLocation.mavenDependencies»
-			<dependency>
-				<groupId>«dep.groupId»</groupId>
-				<artifactId>«dep.artifactId»</artifactId>
-				<version>«dep.version»</version>
-				«IF dep.hasClassifier»
-				<classifier>«dep.classifier»</classifier>
-				«ENDIF»
-				<type>«dep.type»</type>
-			</dependency>
-			«ENDFOR»
-		</dependencies>
-		«IF mavenLocation.hasAdditionalRepositories»
-		<repositories>
-			«FOR repEntry : mavenLocation.repositoryMap.entrySet»
-			<repository>
-				<id>«repEntry.key»</id>
-				<url>«repEntry.value»</url>
-			</repository>
-			«ENDFOR»
-		</repositories>
-		«ENDIF»
+		  «IF genFeature!==null»
+		  <feature id="«genFeature.id»" label="«genFeature.name»" provider-name="«genFeature.vendor»" version="«genFeature.version»">
+		    «FOR iu:genFeature.additionalBundles»
+		    <plugin download-size="0" id="«iu.ID»" install-size="0" unpack="false" version="0.0.0"/>
+		    «ENDFOR»
+		  </feature>
+		  «ENDIF»
+		  <dependencies>
+		    «FOR dep:mavenLocation.mavenDependencies»
+		    <dependency>
+		      <groupId>«dep.groupId»</groupId>
+		      <artifactId>«dep.artifactId»</artifactId>
+		      <version>«dep.version»</version>
+		      «IF dep.hasClassifier»
+		      <classifier>«dep.classifier»</classifier>
+		      «ENDIF»
+		      <type>«dep.type»</type>
+		    </dependency>
+		    «ENDFOR»
+		  </dependencies>
+		  «IF mavenLocation.hasAdditionalRepositories»
+		  <repositories>
+		    «FOR repEntry : mavenLocation.repositoryMap.entrySet»
+		    <repository>
+		      <id>«repEntry.key»</id>
+		      <url>«repEntry.value»</url>
+		    </repository>
+		    «ENDFOR»
+		  </repositories>
+		  «ENDIF»
 		</location>
 		'''
 	}
-	
+
 	private def String generateLocation(ResolvedTargetPlatform targetPlatform, ResolvedLocation location) {
 		val options =
 			if (!targetPlatform.options.empty) {
@@ -131,18 +122,18 @@ class TargetDefinitionGenerator {
 			} else {
 				location.options
 			}
-		
+
 		val includeMode = 'includeMode="' + (if (options.contains(Option.INCLUDE_REQUIRED)) 'planner' else 'slicer') + '"'
 		val includeAllPlatforms = 'includeAllPlatforms="' + options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) + '"'
 		val includeSource = 'includeSource="' + options.contains(Option.INCLUDE_SOURCE) + '"'
 		val includeConfigurePhase = 'includeConfigurePhase="' + options.contains(Option.INCLUDE_CONFIGURE_PHASE) + '"'
-		val locationAttributes = 
-				includeMode + ' ' + includeAllPlatforms +  ' ' + 
-				includeSource + ' ' + includeConfigurePhase 
-		 
-		val repositoryAttributes = 
+		val locationAttributes =
+				includeMode + ' ' + includeAllPlatforms +  ' ' +
+				includeSource + ' ' + includeConfigurePhase
+
+		val repositoryAttributes =
 			'''«IF !location.ID.nullOrEmpty»id="«location.ID»" «ENDIF»location="«location.URI»"'''
-			
+
 		'''
 		<location «locationAttributes» type="InstallableUnit">
 		  «FOR iu : location.resolvedIUs»

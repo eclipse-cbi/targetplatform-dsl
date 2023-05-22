@@ -1,13 +1,13 @@
 /**
  * Copyright (c) 2012-2014 Obeo and others.
- * 
+ *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Mikael Barbero (Obeo) - initial API and implementation
  */
@@ -65,7 +65,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -74,11 +74,16 @@ class TestTargetGeneration {
 		'''.toString, content)
 	}
 
+	def static assertTarget(String expectedContent, String actualContent) {
+		assertEquals(expectedContent, actualContent)
+		assertFalse(actualContent.contains('\t'))
+	}
+
 	@Test
 	def void testSingleLocationSingleIU() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
@@ -99,7 +104,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -118,7 +123,7 @@ class TestTargetGeneration {
 	def void testSingleLocationManyIU() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			location "http://location.org/p2" {
 				an.iu
 				an.iu2;version=[1.2.0,2.0.0)
@@ -144,7 +149,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -164,11 +169,11 @@ class TestTargetGeneration {
 	def void testManyLocationManyIU() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
-			
+
 			location "http://location2.org/p2" {
 				an.iu2
 			}
@@ -196,7 +201,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -219,9 +224,9 @@ class TestTargetGeneration {
 	def void testOptionSource() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			with source
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
@@ -242,7 +247,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -261,9 +266,9 @@ class TestTargetGeneration {
 	def void testOptionRequirement() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			with requirements
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
@@ -284,7 +289,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -303,9 +308,9 @@ class TestTargetGeneration {
 	def void testOptionIncludeAllPlatforms() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			with allEnvironments
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
@@ -326,7 +331,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -345,9 +350,9 @@ class TestTargetGeneration {
 	def void testOptionConfigurePhase() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			with configurePhase
-			
+
 			location "http://location.org/p2" {
 				an.iu
 			}
@@ -368,7 +373,7 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -387,14 +392,14 @@ class TestTargetGeneration {
 	def void testEnvOS() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment Win32
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -410,14 +415,14 @@ class TestTargetGeneration {
 	def void testEnvOSWin32WSWin32() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment Win32 wiN32
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -434,14 +439,14 @@ class TestTargetGeneration {
 	def void testEnvWS() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment cocoa
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -457,14 +462,14 @@ class TestTargetGeneration {
 	def void testEnvArch() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment x86_64
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -480,14 +485,14 @@ class TestTargetGeneration {
 	def void testEnvLocale() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment fr_fr
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -503,14 +508,14 @@ class TestTargetGeneration {
 	def void testEnvEE() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment JavaSE-1.7
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -524,14 +529,14 @@ class TestTargetGeneration {
 	def void testEnv1() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment JavaSE-1.7 win32 cocoa x86 en_us
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -551,14 +556,14 @@ class TestTargetGeneration {
 	def void testEnv2() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			environment win32 linux
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
@@ -575,7 +580,7 @@ class TestTargetGeneration {
 	def void testMavenLocationWithoutFeature() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=generate includeSources {
 				dependency {
 					groupId="org.mockito"
@@ -593,21 +598,21 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 			<target name="TP1" sequenceNumber="1">
 			  <locations>
 			    <location includeDependencyDepth="infinite" includeDependencyScopes="compile" includeSource="true" missingManifest="generate" type="Maven" label="MavenDependencies">
-			    <dependencies>
-			    	<dependency>
-			    		<groupId>org.mockito</groupId>
-			    		<artifactId>mockito-core</artifactId>
-			    		<version>3.12.4</version>
-			    		<type>jar</type>
-			    	</dependency>
-			    </dependencies>
+			      <dependencies>
+			        <dependency>
+			          <groupId>org.mockito</groupId>
+			          <artifactId>mockito-core</artifactId>
+			          <version>3.12.4</version>
+			          <type>jar</type>
+			        </dependency>
+			      </dependencies>
 			    </location>
 			  </locations>
 			</target>
@@ -618,7 +623,7 @@ class TestTargetGeneration {
 	def void testMavenLocationWithFeature() {
 		val tp1 = parser.parse('''
 			target "TP1"
-			
+
 			maven MavenDependencies scope=compile,test dependencyDepth=infinite missingManifest=generate includeSources {
 				feature {
 					id="my.feature.com"
@@ -641,32 +646,23 @@ class TestTargetGeneration {
 
 		val gen = new TargetDefinitionGenerator();
 		val content = gen.generate(resolvedTargetPlatform, 1);
-		assertEquals('''
+		assertTarget('''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<?pde?>
 			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
 			<target name="TP1" sequenceNumber="1">
 			  <locations>
 			    <location includeDependencyDepth="infinite" includeDependencyScopes="compile,test" includeSource="true" missingManifest="generate" type="Maven" label="MavenDependencies">
-			    <feature id="my.feature.com" label="My little feature" provider-name="" version="1.0.0.qualifier">
-			    	<description url="http://www.example.com/description">
-			    		[Enter Feature Description here.]
-			    	</description>
-			    	<copyright url="http://www.example.com/copyright">
-			    		[Enter Copyright Description here.]
-			    	</copyright>
-			    	<license url="http://www.example.com/license">
-			    		[Enter License Description here.]
-			    	</license>
-			    </feature>
-			    <dependencies>
-			    	<dependency>
-			    		<groupId>org.mockito</groupId>
-			    		<artifactId>mockito-core</artifactId>
-			    		<version>3.12.4</version>
-			    		<type>jar</type>
-			    	</dependency>
-			    </dependencies>
+			      <feature id="my.feature.com" label="My little feature" provider-name="" version="1.0.0.qualifier">
+			      </feature>
+			      <dependencies>
+			        <dependency>
+			          <groupId>org.mockito</groupId>
+			          <artifactId>mockito-core</artifactId>
+			          <version>3.12.4</version>
+			          <type>jar</type>
+			        </dependency>
+			      </dependencies>
 			    </location>
 			  </locations>
 			</target>
