@@ -25,7 +25,8 @@ Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.jdt.core,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.testing,
- org.eclipse.equinox.event
+ org.eclipse.equinox.event,
+ org.eclipse.xtext.xbase.ui.testing
 Import-Package: org.hamcrest.core,
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",

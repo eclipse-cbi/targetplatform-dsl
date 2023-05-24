@@ -24,6 +24,13 @@
   <setupTask
       xsi:type="setup:CompoundTask"
       name="User Preferences">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/UserPreferences">
+      <detail
+          key="/instance/org.eclipse.oomph.setup.ui/showToolBarContributions">
+        <value>record</value>
+      </detail>
+    </annotation>
     <setupTask
         xsi:type="setup:CompoundTask"
         name="org.eclipse.core.resources">
@@ -40,6 +47,24 @@
           key="/instance/org.eclipse.m2e.core/eclipse.m2.problem.notCoveredMojoExecution"
           value="ignore"/>
     </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.oomph.setup.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.oomph.setup.ui/showToolBarContributions"
+          value="true"/>
+    </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="User Preferences">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.core.resources"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.m2e.core"/>
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
