@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Default (clean build) Target Platform" sequenceNumber="1671695641">
+<target name="Default (clean build) Target Platform" sequenceNumber="1684912042">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
@@ -15,6 +15,7 @@
       <unit id="org.eclipse.xtext.junit4" version="2.29.0.v20221121-0943"/>
       <unit id="org.eclipse.xtext.xbase.testing" version="2.29.0.v20221121-0924"/>
       <unit id="org.eclipse.xtext.xbase.junit" version="2.29.0.v20221121-0943"/>
+      <unit id="org.eclipse.xtext.xbase.ui.testing" version="2.29.0.v20221121-0943"/>
       <unit id="org.eclipse.xtext.generator" version="2.29.0.v20221121-0924"/>
       <unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
       <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0"/>

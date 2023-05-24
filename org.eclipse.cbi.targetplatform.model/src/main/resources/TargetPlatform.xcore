@@ -1,6 +1,7 @@
 @GenModel
   (prefix="TargetPlatform", 
    modelName="TargetPlatform", 
+   complianceLevel="8.0",
    modelDirectory="/org.eclipse.cbi.targetplatform.model/target/generated-sources/emf", 
    copyrightText="Copyright (c) 2017-2022 Eclipse Foundation and others\n\nThis program and the accompanying materials\nare made available under the terms of the Eclipse Public License 2.0\nwhich accompanies this distribution, and is available at\nhttps://www.eclipse.org/legal/epl-2.0/\n\nSPDX-License-Identifier: EPL-2.0\n\nContributors:\n\tMikael Barbero - initial implementation")
 package org.eclipse.cbi.targetplatform.model
