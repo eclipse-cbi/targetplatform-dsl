@@ -458,7 +458,7 @@
       <activation>
         <property>
           <name>promote</name>
-          <value>!false</value>
+          <value>true</value>
         </property>
       </activation>
       <modules>
