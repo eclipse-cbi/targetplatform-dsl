@@ -7,10 +7,7 @@ h2. IMPORTANT
 
 *New 3.0.0 SNAPSHOT builds are available from "http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/":http://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/*
 
-This project has been "transfered to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. As such, the previous repositories are not working anymore. If you still want legacy versions of this project, please use one of the following two URLs:
-
-https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/ or
-https://dl.bintray.com/mbarbero/fr.obeo.releng.targetplatform/latest
+This project has been "transferred to the Eclipse CBI project":https://bugs.eclipse.org/bugs/show_bug.cgi?id=538414 on August 31, 2018. If you are using an old version of this project (named @fr.obeo.releng.targetplatform@), then you need to uninstall that old version before you can use this one.
 
 h2. Introduction
 
@@ -76,7 +73,7 @@ include "http://git.some.server.org/tree/tp/all.tpd"
 You can define some options about what should be retrieved from the p2 repository. You can do that with the @with@ keyword.
 
 <pre>
-with source allEnvironments	
+with source allEnvironments
 </pre>
 
 Available options are:
@@ -97,19 +94,19 @@ environment linux gtk x86_64
 Then, you define the locations of your p2 repositories. You can add as many locations as your want to your target. Location string must be URL, if your p2 repository is local, don't forget to put a @file:/@ URL.
 
 <pre>
-location "http://download.eclipse.org/releases/kepler/" 
+location "http://download.eclipse.org/releases/kepler/"
 </pre>
 
 A location may have an ID that can be written before or after the URI. This is useful if you want to apply some maven stuff (providing a password, a mirror...) for this repository (see "#17":https://github.com/eclipse-cbi/targetplatform-dsl/issues/17 for examples).
 
 <pre>
-location kepler "http://download.eclipse.org/releases/kepler/" 
+location kepler "http://download.eclipse.org/releases/kepler/"
 </pre>
 
 Then, you may list the Installable Units (IUs) your want to include in your target. This can be _bundles_ or Eclipse _features_ (it may end with @feature.group@).
 
 <pre>
-location "http://download.eclipse.org/releases/kepler/" {	
+location "http://download.eclipse.org/releases/kepler/" {
     org.eclipse.emf.sdk.feature.group
 }
 </pre>
@@ -122,7 +119,7 @@ If no version is specified, the most recent IUs will be selected in the reposito
 location "http://download.eclipse.org/releases/juno/" {
     // select the most recent version of EMF after 2.7.0
     org.eclipse.emf.sdk.feature.group 2.7.0
-    // select the most recent eclipse.rcp feature within the given range 
+    // select the most recent eclipse.rcp feature within the given range
     org.eclipse.rcp.feature.group [4.0.0,4.3.0)
 }
 </pre>
@@ -133,7 +130,7 @@ bq. You can use the special keyword @lazy@ as version to state that you don't wa
 
 h3. Call the generator from the command line
 
-This project provide an Eclipse application that you can launch from the command line. The ID of the application is @org.eclipse.cbi.targetplatform.tpd.converter@ and is provided by the plugin @org.eclipse.cbi.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
+This project provides an Eclipse application that you can launch from the command line. The ID of the application is @org.eclipse.cbi.targetplatform.tpd.converter@ and is provided by the plugin @org.eclipse.cbi.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
 
 h2. Build
 
@@ -147,4 +144,4 @@ Clone this repository, import all projects in your Eclipse and set your target p
 
 h2. License
 
-This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
