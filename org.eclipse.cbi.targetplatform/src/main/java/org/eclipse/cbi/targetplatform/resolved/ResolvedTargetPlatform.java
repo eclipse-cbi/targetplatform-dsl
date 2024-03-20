@@ -139,12 +139,16 @@ public class ResolvedTargetPlatform {
 		List<UnresolvedIU> ius = Lists.newArrayList();
 		Set<String> ids = Sets.newHashSet();
 		List<Location> list = locationIndex.get(locationUri);
-		for (Location location : list) {
+		for (Location location : list) { // in reverse order of declaration: overrides seen first
 			EList<IU> iuList = location.getIus();
-			for (IU iu : iuList) {
-				if (!ids.contains(iu.getID())) {
-					ids.add(iu.getID());
-					ius.add(new UnresolvedIU(iu.getID(), Strings.emptyToNull(iu.getVersion())));
+			for (IU iu : iuList) { // in order of declaration
+				String idv = iu.getID() + ":" + Strings.nullToEmpty(iu.getVersion());
+				if (!ids.contains(idv)) { // neither duplicates (same location), nor redundant overrides (across locations)
+					if (iu.getVersion() != null || !ids.contains(iu.getID())) { // can override the unversioned only
+						ids.add(idv);
+						ids.add(iu.getID());
+						ius.add(new UnresolvedIU(iu.getID(), Strings.emptyToNull(iu.getVersion())));
+					}
 				}
 			}
 		}
