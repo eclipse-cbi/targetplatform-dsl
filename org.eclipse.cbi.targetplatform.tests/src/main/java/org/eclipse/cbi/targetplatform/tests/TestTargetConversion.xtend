@@ -332,13 +332,16 @@ class TestTargetConversion {
 			target "TP1"
 			include "tp2.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" { 
-				com.google.guava
+				com.google.guava // no version, last location (top level): resolve newest version
+				com.google.guava // ignore duplicate
+				com.google.guava;version="[11.0.0,12.0.0)" // redundant override
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version="[11.0.0,12.0.0)"
+				com.google.guava;version="[11.0.0,12.0.0)" // resolve specified version
+				com.google.guava;version="[11.0.0,12.0.0)" // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 
@@ -362,9 +365,12 @@ class TestTargetConversion {
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
-		assertEquals(1, ids.size)
-		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0", versions.head.toString)
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.get(0))
+		assertEquals("com.google.guava", ids.get(1))
+		assertEquals(2, versions.size)
+		assertTrue(versions.findFirst[it.toString == "11.0.2"] !== null)
+		assertTrue(versions.findFirst[it.toString == "12.0.0"] !== null)
 	}
 	
 	@Test
@@ -378,13 +384,16 @@ class TestTargetConversion {
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version=[11.0.0,12.0.0)
+				com.google.guava;version=[11.0.0,12.0.0) // resolve specified version
+				com.google.guava;version=[11.0.0,12.0.0) // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
+				com.google.guava // no version, last location (via includes): resolve newest version
+				com.google.guava // ignore duplicate
+				com.google.guava;version=[11.0.0,12.0.0) // redundant override
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
@@ -408,9 +417,12 @@ class TestTargetConversion {
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
-		assertEquals(1, ids.size)
-		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0", versions.head.toString)
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.get(0))
+		assertEquals("com.google.guava", ids.get(1))
+		assertEquals(2, versions.size)
+		assertTrue(versions.findFirst[it.toString == "11.0.2"] !== null)
+		assertTrue(versions.findFirst[it.toString == "12.0.0"] !== null)
 	}
 	
 	@Test
@@ -424,13 +436,15 @@ class TestTargetConversion {
 		parser.parse('''
 			target "TP2"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version=[11.0.0,12.0.0)
+				com.google.guava;version=[11.0.0,12.0.0) // resolve specified version
+				com.google.guava;version=[11.0.0,12.0.0) // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
+				com.google.guava // no version: is overridden by subsequent location (via includes)
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
@@ -470,13 +484,15 @@ class TestTargetConversion {
 			target "TP2"
 			include "tp3.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version=[11.0.0,12.0.0)
+				com.google.guava;version=[11.0.0,12.0.0) // resolve specified version
+				com.google.guava;version=[11.0.0,12.0.0) // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
+				com.google.guava // no version: is overridden by subsequent location (via includes)
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
@@ -516,13 +532,15 @@ class TestTargetConversion {
 			target "TP2"
 			include "tp3.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
+				com.google.guava // no version, last location (via includes): resolve newest version
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp2.tpd"), resourceSet)
 		parser.parse('''
 			target "TP3"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version=[11.0.0,12.0.0)
+				com.google.guava;version=[11.0.0,12.0.0) // resolve specified version
+				com.google.guava;version=[11.0.0,12.0.0) // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp3.tpd"), resourceSet)
 		
@@ -546,9 +564,12 @@ class TestTargetConversion {
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
-		assertEquals(1, ids.size)
-		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0", versions.head.toString)
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.get(0))
+		assertEquals("com.google.guava", ids.get(1))
+		assertEquals(2, versions.size)
+		assertTrue(versions.findFirst[it.toString == "11.0.2"] !== null)
+		assertTrue(versions.findFirst[it.toString == "12.0.0"] !== null)
 	}
 	
 	@Test
@@ -558,10 +579,12 @@ class TestTargetConversion {
 			target "TP1"
 			include "tp2.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" { 
-				com.google.guava
+				com.google.guava // no version: is overridden by subsequent location
+				com.google.guava // ignore duplicate
 			}
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version="[11.0.0,12.0.0)"
+				com.google.guava;version="[11.0.0,12.0.0)" // resolve specified version
+				com.google.guava;version="[11.0.0,12.0.0)" // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
@@ -597,10 +620,12 @@ class TestTargetConversion {
 			target "TP1"
 			include "tp2.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version="[11.0.0,12.0.0)"
+				com.google.guava;version="[11.0.0,12.0.0)" // resolve specified version
+				com.google.guava;version="[11.0.0,12.0.0)" // ignore duplicate
 			}
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" { 
-				com.google.guava
+				com.google.guava // no version, last location: resolve newest version
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
@@ -624,9 +649,12 @@ class TestTargetConversion {
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
-		assertEquals(1, ids.size)
-		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0", versions.head.toString)
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.get(0))
+		assertEquals("com.google.guava", ids.get(1))
+		assertEquals(2, versions.size)
+		assertTrue(versions.findFirst[it.toString == "11.0.2"] !== null)
+		assertTrue(versions.findFirst[it.toString == "12.0.0"] !== null)
 	}
 	
 	@Test
@@ -636,8 +664,10 @@ class TestTargetConversion {
 			target "TP1"
 			include "tp2.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava;version="[11.0.0,12.0.0)"
-				com.google.guava
+				com.google.guava;version="[11.0.0,12.0.0)" // resolve specified version
+				com.google.guava;version="[11.0.0,12.0.0)" // ignore duplicate
+				com.google.guava // no version, not first declaration in location: ignored
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
@@ -673,8 +703,10 @@ class TestTargetConversion {
 			target "TP1"
 			include "tp2.tpd"
 			location "http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/" {
-				com.google.guava
-				com.google.guava;version="[11.0.0,12.0.0)"
+				com.google.guava // no version, first declaration in location: resolve newest version
+				com.google.guava;version="[11.0.0,12.0.0)" // resolve specified version
+				com.google.guava;version="[11.0.0,12.0.0)" // ignore duplicate
+				com.google.guava // ignore duplicate
 			}
 		''', URI.createURI("tmp:/tp1.tpd"), resourceSet)
 		
@@ -698,9 +730,12 @@ class TestTargetConversion {
 		
 		val String[] ids = targetDef.locations.map[resolvedIUs.map[id]].flatten
 		val Version[] versions = targetDef.locations.map[resolvedIUs.map[version]].flatten
-		assertEquals(1, ids.size)
-		assertEquals("com.google.guava", ids.head)
-		assertEquals("12.0.0", versions.head.toString)
+		assertEquals(2, ids.size)
+		assertEquals("com.google.guava", ids.get(0))
+		assertEquals("com.google.guava", ids.get(1))
+		assertEquals(2, versions.size)
+		assertTrue(versions.findFirst[it.toString == "11.0.2"] !== null)
+		assertTrue(versions.findFirst[it.toString == "12.0.0"] !== null)
 	}
 	
 	@Test
