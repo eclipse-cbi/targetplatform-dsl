@@ -140,4 +140,9 @@ public class MetadataRepositoryStub implements IMetadataRepository {
 	public void compress(IPool<IInstallableUnit> iuPool) {
 	}
 
+	@Override
+	public boolean removeReferences(Collection<? extends IRepositoryReference> references) {
+		return false;
+	}
+
 }
