@@ -15,9 +15,9 @@
 package org.eclipse.cbi.targetplatform.ui.tests
 
 import com.google.common.collect.ImmutableList
+import com.google.inject.Inject
 import java.net.URI
 import java.util.Locale
-import javax.inject.Inject
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IQueryResultProvider
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.IUStub
 import org.eclipse.cbi.targetplatform.tests.stubs.p2.MetadataRepositoryManagerStub

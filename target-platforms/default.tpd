@@ -1,20 +1,20 @@
 target "Default (clean build) Target Platform"
 
-include "testing/4.26-2022-12.tpd" with source requirements environment JavaSE-11
+include "testing/4.31-2024-03.tpd" with source requirements environment JavaSE-17
 
-location "https://download.eclipse.org/eclipse/updates/4.26" {
+location "https://download.eclipse.org/eclipse/updates/4.31" {
 	// required to start UI tests in workbench - not a dependency per se
 	org.eclipse.pde.junit.runtime
 	org.eclipse.jdt.junit4.runtime
 }
 
 // Required for xcore source generation
-location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.32" {
+location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.37.0" {
 	org.eclipse.emf.ecore.xcore
 }
 
 // Required for launching mwe2 workflow (main class org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher)
-location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.17.0" {
 	org.eclipse.emf.mwe2.launch
 }
 
@@ -29,6 +29,6 @@ location "https://xtexttools.libutzki.de/" {
 	de.libutzki.xtext.semanticmodeloutline.feature.feature.group
 }
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
+location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.31.0" {
 	com.google.gson
 }

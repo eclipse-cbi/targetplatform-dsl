@@ -28,7 +28,7 @@ SPDX-License-Identifier: EPL-2.0
   <packaging>pom</packaging>
 
   <properties>
-    <eclipse.repo>https://download.eclipse.org/releases/2022-12</eclipse.repo>
+    <eclipse.repo>https://download.eclipse.org/releases/latest</eclipse.repo>
     <justj.tools.repo>https://download.eclipse.org/justj/tools/updates/nightly/latest</justj.tools.repo>
     <org.eclipse.download.location.relative>cbi/updates</org.eclipse.download.location.relative>
     <org.eclipse.storage.user>genie.cbi</org.eclipse.storage.user>
@@ -43,11 +43,11 @@ SPDX-License-Identifier: EPL-2.0
   <build>
     <plugins>
       <plugin>
-        <groupId>org.eclipse.tycho.extras</groupId>
-        <artifactId>tycho-eclipserun-plugin</artifactId>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-eclipse-plugin</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <executionEnvironment>JavaSE-11</executionEnvironment>
+          <executionEnvironment>JavaSE-17</executionEnvironment>
           <dependencies>
             <dependency>
               <artifactId>org.eclipse.justj.p2</artifactId>
