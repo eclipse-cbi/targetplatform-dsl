@@ -221,6 +221,119 @@ class TestTargetGeneration {
 	}
 
 	@Test
+	def void testSingleLocationManyIUVersions() {
+		val tp1 = parser.parse('''
+			target "TP1"
+
+			location "http://location.org/p2" {
+				an.iu;version=[1.2.0,2.0.0)
+				an.iu [2,3)
+				an.iu 3
+			}		''')
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
+			override listIUs(URI location) {
+				var List<IInstallableUnit> ret
+				if ("http://location.org/p2".equals(location.toString)) {
+					ret = newImmutableList(
+						IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(1, 2, 0, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(2, 0, 0, null)),
+						IUStub.createBundle("an.iu", Version.createOSGi(2, 0, 1, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(3, 0, 0, null)),
+						IUStub.createBundle("an.iu", Version.createOSGi(3, 1, 0, null)),
+						IUStub.createBundle("an.iu2", Version.createOSGi(1, 3, 74, null))
+					)
+				} else {
+					ret = emptyList
+				}
+				return ret;
+			}
+
+		}), new NullProgressMonitor());
+
+		val gen = new TargetDefinitionGenerator();
+		val content = gen.generate(resolvedTargetPlatform, 1);
+		assertTarget('''
+			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			<?pde?>
+			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+			<target name="TP1" sequenceNumber="1">
+			  <locations>
+			    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
+			      <unit id="an.iu" version="1.2.0.thequalifier"/>
+			      <unit id="an.iu" version="2.0.1.thequalifier"/>
+			      <unit id="an.iu" version="3.1.0"/>
+			      <repository location="http://location.org/p2"/>
+			    </location>
+			  </locations>
+			</target>
+		'''.toString, content)
+	}
+
+	@Test
+	def void testManyLocationManyIUVersions() {
+		val tp1 = parser.parse('''
+			target "TP1"
+
+			location "http://location.org/p1" {
+				an.iu 3
+			}
+
+			location "http://location.org/p2" {
+				an.iu;version=[1.2.0,2.0.0)
+				an.iu [2,3)
+			}
+		''')
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
+			override listIUs(URI location) {
+				var List<IInstallableUnit> ret
+				if ("http://location.org/p1".equals(location.toString) ||
+					"http://location.org/p2".equals(location.toString)
+				) {
+					ret = newImmutableList(
+						IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(1, 2, 0, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(2, 0, 0, null)),
+						IUStub.createBundle("an.iu", Version.createOSGi(2, 0, 1, "thequalifier")),
+						IUStub.createBundle("an.iu", Version.createOSGi(3, 0, 0, null)),
+						IUStub.createBundle("an.iu", Version.createOSGi(3, 1, 0, null)),
+						IUStub.createBundle("an.iu2", Version.createOSGi(1, 3, 74, null))
+					)
+				} else {
+					ret = emptyList
+				}
+				return ret;
+			}
+
+		}), new NullProgressMonitor());
+
+		val gen = new TargetDefinitionGenerator();
+		val content = gen.generate(resolvedTargetPlatform, 1);
+		assertTarget('''
+			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			<?pde?>
+			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+			<target name="TP1" sequenceNumber="1">
+			  <locations>
+			    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
+			      <unit id="an.iu" version="3.1.0"/>
+			      <repository location="http://location.org/p1"/>
+			    </location>
+			    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
+			      <unit id="an.iu" version="1.2.0.thequalifier"/>
+			      <unit id="an.iu" version="2.0.1.thequalifier"/>
+			      <repository location="http://location.org/p2"/>
+			    </location>
+			  </locations>
+			</target>
+		'''.toString, content)
+	}
+
+	@Test
 	def void testOptionSource() {
 		val tp1 = parser.parse('''
 			target "TP1"
