@@ -1,0 +1,19 @@
+target "4.31 Testing Target Platform"
+
+include "../inc/xtext-target.tpd"
+
+with source requirements
+environment JavaSE-17
+
+location "https://download.eclipse.org/eclipse/updates/4.31" {
+	org.eclipse.platform.feature.group
+
+	org.eclipse.pde.core
+
+	org.eclipse.equinox.p2.core
+	org.eclipse.equinox.p2.repository
+	org.eclipse.equinox.p2.metadata
+
+	org.eclipse.jdt.launching
+
+}
