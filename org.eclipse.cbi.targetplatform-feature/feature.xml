@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.cbi.targetplatform.feature"
       label="%featureName"
-      version="3.0.0.qualifier"
+      version="3.1.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.cbi.targetplatform"
       license-feature="org.eclipse.license"
