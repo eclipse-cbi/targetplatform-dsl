@@ -296,12 +296,7 @@
             <artifactId>target-platform-configuration</artifactId>
             <configuration>
               <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/default</classifier>
-                </artifact>
+                <file>${basedir}/../target-platforms/default.target</file>
               </target>
             </configuration>
           </plugin>
@@ -319,126 +314,6 @@
               <timestampProvider>jgit</timestampProvider>
               <jgit.ignore>pom.xml .gitignore .launchers/**</jgit.ignore>
               <jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_8-photon</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/testing/4.8-photon</classifier>
-                </artifact>
-              </target>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_7-oxygen</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/testing/4.7-oxygen</classifier>
-                </artifact>
-              </target>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_6-neon</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/testing/4.6-neon</classifier>
-                </artifact>
-              </target>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_5-mars</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/testing/4.5-mars</classifier>
-                </artifact>
-              </target>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>target-4_4-luna</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>target-platform-configuration</artifactId>
-            <configuration>
-              <target>
-                <artifact>
-                  <groupId>org.eclipse.cbi.targetplatform</groupId>
-                  <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>target-platforms/testing/4.4-luna</classifier>
-                </artifact>
-              </target>
             </configuration>
           </plugin>
         </plugins>
