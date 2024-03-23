@@ -45,11 +45,15 @@ pipeline {
     stages {
         stage('Display Parameters') {
             steps {
-                echo "BUILD_TYPE=${params.BUILD_TYPE}"
-                echo "PROMOTE=${params.PROMOTE}"
-                echo "ARCHIVE=${params.ARCHIVE}"
-                echo "GIT_COMMIT=${env.GIT_COMMIT}"
                 script {
+                    def description = """
+BUILD_TYPE=${params.BUILD_TYPE}
+PROMOTE=${params.PROMOTE}
+ARCHIVE=${params.ARCHIVE}
+GIT_COMMIT=${env.GIT_COMMIT}
+""".trim()
+                    echo description
+                    currentBuild.description = description.replace("\n", "<br/>")
                     env.PROMOTE = params.PROMOTE
                     env.BUILD_TYPE = params.BUILD_TYPE
                 }
@@ -64,11 +68,12 @@ pipeline {
                             sh '''
                                 if [[ $PROMOTE == false ]]; then
                                     promotion_argument='-Dorg.eclipse.justj.p2.manager.args='
+                                else
+                                    promotion_argument='-Peclipse-sign -Dpromote=true'
                                 fi
                                 mvn \
                                   -B \
                                   -Ptarget-default \
-                                  -Peclipse-sign \
                                    $promotion_argument \
                                   -Dorg.eclipse.storage.user=genie.cbi \
                                   -Dorg.eclipse.justj.p2.manager.build.url=$JOB_URL \
