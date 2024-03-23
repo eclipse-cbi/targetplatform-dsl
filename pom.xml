@@ -280,7 +280,6 @@
                   <classifier>target-platforms/default</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
           <plugin>
@@ -321,7 +320,6 @@
                   <classifier>target-platforms/testing/4.8-photon</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
         </plugins>
@@ -346,7 +344,6 @@
                   <classifier>target-platforms/testing/4.7-oxygen</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
         </plugins>
@@ -371,7 +368,6 @@
                   <classifier>target-platforms/testing/4.6-neon</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
         </plugins>
@@ -396,7 +392,6 @@
                   <classifier>target-platforms/testing/4.5-mars</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
         </plugins>
@@ -421,7 +416,6 @@
                   <classifier>target-platforms/testing/4.4-luna</classifier>
                 </artifact>
               </target>
-              <resolver>p2</resolver>
             </configuration>
           </plugin>
         </plugins>
