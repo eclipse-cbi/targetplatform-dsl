@@ -26,10 +26,11 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.version.ignore>.*[a-zA-Z]+.*</maven.version.ignore>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tycho-version>4.0.6</tycho-version>
     <xtext-version>2.34.0</xtext-version>
-    <cbi-plugins.version>1.3.4</cbi-plugins.version>
+    <cbi-plugins.version>1.4.3</cbi-plugins.version>
     <os-jvm-flags/>
     <eclipse-repo.url>https://repo.eclipse.org/content/repositories/cbi/</eclipse-repo.url>
     <!-- comment out snapshots repo, when not intending to use snapshots. releases come from "eclipse-repo.url"
@@ -71,12 +72,13 @@
   </pluginRepositories>
 
   <build>
+	<defaultGoal>verify</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.2</version>
           <configuration>
             <excludeDefaultDirectories>true</excludeDefaultDirectories>
             <filesets>
@@ -95,27 +97,27 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.1.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.3.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
+          <version>3.12.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.4.1</version>
           <executions>
             <execution>
               <id>enforce-maven</id>
@@ -124,9 +126,20 @@
               </goals>
               <configuration>
                 <rules>
+                  <banDuplicatePomDependencyVersions/>
+                  <requireJavaVersion>
+                    <version>[8,21)</version>
+                    <message>Cannot compile with Java 21 because of ambiguous method calls in Xtend code.</message>
+                  </requireJavaVersion>
                   <requireMavenVersion>
-                    <version>3.8.1</version>
+                    <version>3.9.0</version>
                   </requireMavenVersion>
+                  <requirePluginVersions/>
+                  <requireSameVersions>
+                    <plugins>
+                      <plugin>org.eclipse.tycho:*</plugin>
+                    </plugins>
+                  </requireSameVersions>
                 </rules>
               </configuration>
             </execution>
@@ -135,11 +148,21 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-bnd-plugin</artifactId>
+          <version>${tycho-version}</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-ds-plugin</artifactId>
           <version>${tycho-version}</version>
         </plugin>
         <plugin>
