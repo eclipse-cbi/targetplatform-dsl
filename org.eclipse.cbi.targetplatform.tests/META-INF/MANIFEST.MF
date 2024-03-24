@@ -23,7 +23,6 @@ Require-Bundle: org.eclipse.cbi.targetplatform,
  org.eclipse.xtext.ui,
  org.eclipse.cbi.targetplatform.model,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.xbase.junit
 Import-Package: org.apache.log4j,
