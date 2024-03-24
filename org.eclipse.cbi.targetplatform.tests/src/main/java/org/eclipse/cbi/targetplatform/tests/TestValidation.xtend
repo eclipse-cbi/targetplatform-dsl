@@ -29,11 +29,11 @@ import org.eclipse.cbi.targetplatform.validation.TargetPlatformValidator
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Constants
-import org.eclipse.xtext.junit4.validation.ValidatorTester
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidatorTester
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic
 import org.eclipse.xtext.validation.EValidatorRegistrar
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic
