@@ -47,7 +47,7 @@ pipeline {
       steps {
         script {
           env.BUILD_TYPE = params.BUILD_TYPE
-          if (env.BRANCH_NAME == env.MAIN_BRANCH) {
+          if (env.BRANCH_NAME == "master") {
            // Only promote and sign the master branch.
            //
            env.PROMOTE = params.PROMOTE
