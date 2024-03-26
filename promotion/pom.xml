@@ -18,13 +18,13 @@ SPDX-License-Identifier: EPL-2.0
   <parent>
     <groupId>org.eclipse.cbi.targetplatform</groupId>
     <artifactId>org.eclipse.cbi.targetplatform-parent</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
 
   <groupId>org.eclipse.cbi</groupId>
   <artifactId>org.eclipse.cbi.targetplatform.promote</artifactId>
-  <version>3.0.0-SNAPSHOTT</version>
+  <version>3.1.0-SNAPSHOTT</version>
   <packaging>pom</packaging>
 
   <properties>
