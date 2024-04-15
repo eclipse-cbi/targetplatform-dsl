@@ -124,7 +124,68 @@ bq. You can use the special keyword @lazy@ as version to state that you don't wa
 
 h3. Call the generator from the command line
 
-This project provide an Eclipse application that you can launch from the command line. The ID of the application is @org.eclipse.cbi.targetplatform.tpd.converter@ and is provided by the plugin @org.eclipse.cbi.targetplatform@. You can use this app in shell scripts, ant or maven build. If you use Tycho, you may have a look at "this example pom.xml file":https://github.com/hmarchadour/fr.obeo.releng.targetplatform/blob/78e0d470f57bfd82ba6fe7e1c09bfeb2fdfb0180/fr.obeo.releng.targetplatform-parent/targetdefinitions/pom.xml
+This project provide an Eclipse application that you can launch from the command line. The ID of the application is @org.eclipse.cbi.targetplatform.tpd.converter@ and is provided by the plugin @org.eclipse.cbi.targetplatform@. You can use this app in shell scripts, ant or Maven build. If you prefer Maven, the following pom.xml snippet may help you to get started. It configures the @tycho-eclipse-plugin@ to execute the mentioned application passing its application ID and the .tpd file (named like the containing maven artifact/project) :
+
+<pre>
+[...]
+  <artifactId>[artifact.id.of.the.target.definition.project]</artifactId>
+  <packaging>eclipse-target-definition</packaging>
+[...]
+  <properties>
+     <tycho.version>4.0.6</tycho.version>
+   </properties>
+[...]
+  <build>
+    <plugins>
+[...]
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-eclipse-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>eclipse-run</goal>
+            </goals>
+            <phase>generate-resources</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <addDefaultDependencies>true</addDefaultDependencies>
+          <repositories>
+            <repository>
+              <id>e2024-03-mirror</id>
+              <layout>p2</layout>
+              <url>https://[url.to.eclipse.release.p2.repository.mirror]/</url>
+            </repository>
+            <repository>
+              <id>cbi-targetplatform-dsl-mirror</id>
+              <layout>p2</layout>
+              <url>https://[url.to.cbi-targetplatform-dsl-3.0.0-release.p2.repository.mirror]</url>
+            </repository>
+          </repositories>
+          <dependencies>
+            <dependency>
+              <artifactId>org.eclipse.cbi.targetplatform.feature</artifactId>
+              <type>eclipse-feature</type>
+            </dependency>
+            <dependency>
+              <artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+              <type>eclipse-feature</type>
+            </dependency>
+          </dependencies>
+          <applicationArgs>
+            <applicationArg>-application</applicationArg>
+            <applicationArg>org.eclipse.cbi.targetplatform.tpd.converter</applicationArg>
+            <applicationArg>${project.artifactId}.tpd</applicationArg>
+          </applicationArgs>
+        </configuration>
+      </plugin>
+[...]
+    </plugins>
+  </build>
+</project>
+</pre>
 
 h2. Build
 
