@@ -2,19 +2,19 @@ target "Default (clean build) Target Platform"
 
 include "testing/4.31-2024-03.tpd" with source requirements environment JavaSE-17
 
-location "https://download.eclipse.org/eclipse/updates/4.31" {
+location "https://download.eclipse.org/eclipse/updates/4.32" {
 	// required to start UI tests in workbench - not a dependency per se
 	org.eclipse.pde.junit.runtime
 	org.eclipse.jdt.junit4.runtime
 }
 
 // Required for xcore source generation
-location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.37.0" {
+location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.38.0" {
 	org.eclipse.emf.ecore.xcore
 }
 
 // Required for launching mwe2 workflow (main class org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher)
-location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.17.0" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.18.0" {
 	org.eclipse.emf.mwe2.launch
 }
 
@@ -24,11 +24,11 @@ location "https://download.itemis.de/updates/releases/2.1.1" {
 }
 
 // for grammar debugging purposes, very helpful views
-location "https://xtexttools.libutzki.de/" {
-	de.libutzki.xtext.nodemodeloutline.feature.feature.group
-	de.libutzki.xtext.semanticmodeloutline.feature.feature.group
-}
+//location "https://xtexttools.libutzki.de/" {
+//	de.libutzki.xtext.nodemodeloutline.feature.feature.group
+//	de.libutzki.xtext.semanticmodeloutline.feature.feature.group
+//}
 
-location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.31.0" {
+location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.32.0" {
 	com.google.gson
 }
