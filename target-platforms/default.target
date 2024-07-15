@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Default (clean build) Target Platform" sequenceNumber="1710945266">
+<target name="Default (clean build) Target Platform" sequenceNumber="1721032258">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
       <repository location="https://download.eclipse.org/cbi/updates/license/2.0.2.v20181016-2210"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.xtext.ui.feature.group" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.xtext.ui.feature.group" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.runtime.feature.group" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.testing" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.junit4" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.xbase.testing" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.xbase.junit" version="2.34.0.v20240227-0940"/>
-      <unit id="org.eclipse.xtext.xbase.ui.testing" version="2.34.0.v20240227-0940"/>
-      <unit id="org.objectweb.asm" version="9.6.0"/>
-      <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.34.0"/>
+      <unit id="org.eclipse.xtext.ui.feature.group" version="2.35.0.v20240528-1523"/>
+      <unit id="org.eclipse.xtext.xtext.ui.feature.group" version="2.35.0.v20240528-1523"/>
+      <unit id="org.eclipse.xtext.runtime.feature.group" version="2.35.0.v20240528-1523"/>
+      <unit id="org.eclipse.xtext.testing" version="2.35.0.v20240528-1523"/>
+      <unit id="org.eclipse.xtext.xbase.testing" version="2.35.0.v20240528-1523"/>
+      <unit id="org.eclipse.xtext.xbase.ui.testing" version="2.35.0.v20240528-1523"/>
+      <unit id="org.objectweb.asm" version="9.7.0"/>
+      <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.35.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.pde.junit.runtime" version="3.8.100.v20240130-1723"/>
-      <unit id="org.eclipse.jdt.junit4.runtime" version="1.3.100.v20231214-1952"/>
       <unit id="org.eclipse.platform.feature.group" version="4.31.0.v20240229-1022"/>
       <unit id="org.eclipse.pde.core" version="3.18.0.v20240215-1456"/>
       <unit id="org.eclipse.equinox.p2.core" version="2.11.0.v20240210-1628"/>
@@ -31,29 +27,29 @@
       <repository location="https://download.eclipse.org/eclipse/updates/4.31"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.ecore.xcore" version="1.28.0.v20231208-1446"/>
-      <unit id="org.eclipse.emf.ecore" version="2.36.0.v20240203-0859"/>
-      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.7.0.v20230204-1018"/>
-      <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.37.0"/>
+      <unit id="org.eclipse.pde.junit.runtime" version="3.8.100.v20240130-1723"/>
+      <unit id="org.eclipse.jdt.junit4.runtime" version="1.3.100.v20231214-1952"/>
+      <repository location="https://download.eclipse.org/eclipse/updates/4.32"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.mwe2.launch" version="2.17.0.v20240224-1400"/>
-      <unit id="org.eclipse.emf.mwe.core" version="1.11.0.v20240224-1400"/>
-      <unit id="org.eclipse.emf.mwe2.lib" version="2.17.0.v20240224-1400"/>
-      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.17.0"/>
+      <unit id="org.eclipse.emf.ecore.xcore" version="1.29.0.v20240314-1003"/>
+      <unit id="org.eclipse.emf.ecore" version="2.36.0.v20240203-0859"/>
+      <unit id="org.eclipse.emf.ecore.xcore.lib" version="1.7.0.v20230204-1018"/>
+      <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.38.0"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.mwe2.launch" version="2.18.0.v20240525-1058"/>
+      <unit id="org.eclipse.emf.mwe.core" version="1.12.0.v20240525-1058"/>
+      <unit id="org.eclipse.emf.mwe2.lib" version="2.18.0.v20240525-1058"/>
+      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.18.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
       <repository location="https://download.itemis.de/updates/releases/2.1.1"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="de.libutzki.xtext.nodemodeloutline.feature.feature.group" version="0.0.1.202110271659"/>
-      <unit id="de.libutzki.xtext.semanticmodeloutline.feature.feature.group" version="0.0.1.202110271659"/>
-      <repository location="https://xtexttools.libutzki.de/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.google.gson" version="2.10.1"/>
-      <repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.31.0"/>
+      <unit id="com.google.gson" version="2.11.0"/>
+      <repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.32.0"/>
     </location>
   </locations>
   <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
