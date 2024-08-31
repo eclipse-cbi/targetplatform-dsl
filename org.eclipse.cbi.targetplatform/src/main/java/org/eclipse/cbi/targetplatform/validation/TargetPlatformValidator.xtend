@@ -50,6 +50,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
+import com.google.common.collect.Iterables
 
 /**
  * Custom validation rules.
@@ -157,7 +158,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		if (!location.options.empty && !location.targetPlatform.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
-			val lastOption = (nodes.last as CompositeNode);
+			val lastOption = (Iterables.getLast(nodes, null) as CompositeNode);
 			acceptError("You cannot define options on location and on target platform.", location, withKeyword.offset,
 				lastOption.endOffset - withKeyword.offset, CHECK__NO_OPTIONS_ON_LOCATIONS_IF_GLOBAL_OPTIONS)
 		}
@@ -176,7 +177,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 					val nodes = NodeModelUtils::findNodesForFeature(l, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 					if (!nodes.empty) {
 						val withKeyword = (nodes.head as CompositeNode).previousSibling
-						val lastOption = (nodes.last as CompositeNode)
+						val lastOption = (Iterables.getLast(nodes, null) as CompositeNode)
 						acceptError("Options of every location must be the same", l, withKeyword.offset,
 							lastOption.endOffset - withKeyword.offset, CHECK__OPTIONS_EQUALS_ALL_LOCATIONS)
 					} else {
@@ -196,7 +197,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		if (targetPlatform.options.empty && !location.options.empty) {
 			val nodes = NodeModelUtils::findNodesForFeature(location, TargetPlatformPackage.Literals.LOCATION__OPTIONS)
 			val withKeyword = (nodes.head as CompositeNode).previousSibling
-			val lastOption = (nodes.last as CompositeNode);
+			val lastOption = (Iterables.getLast(nodes, null) as CompositeNode);
 			acceptWarning("Options on location are deprecated. Define the option at the target level.", location,
 				withKeyword.offset, lastOption.endOffset - withKeyword.offset, DEPRECATE__OPTIONS_ON_LOCATIONS)
 		}
