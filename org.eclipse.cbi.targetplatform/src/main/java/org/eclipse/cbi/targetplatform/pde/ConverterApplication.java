@@ -35,7 +35,7 @@ public class ConverterApplication implements IApplication {
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
 	@Override
@@ -44,7 +44,7 @@ public class ConverterApplication implements IApplication {
 		String[] args = (String[]) arguments.get(IApplicationContext.APPLICATION_ARGS);
 		String path;
 		if (args.length <= 0) {
-			System.out.println("Must provide path to a target form file");
+			System.out.println("Must provide path to a *.tpd file.");
 			return -256;
 		} else {
 			path = args[0];
@@ -74,13 +74,13 @@ public class ConverterApplication implements IApplication {
 		}
 
 		if (diagnostic.getSeverity() == Diagnostic.ERROR) {
-			System.out.println("Problems occurred during generation of target platform definition file.");
+			System.out.println("Problems occurred during generation of target file.");
 			return -1;
 		} else if (diagnostic.getSeverity() == Diagnostic.CANCEL) {
 			System.out.println("Operation cancelled.");
 			return -2;
 		} else {
-			System.out.println("The target platform definition file has been successfully generated.");
+			System.out.println("The target file has been successfully generated.");
 			return 0;
 		}
 	}
@@ -155,7 +155,7 @@ public class ConverterApplication implements IApplication {
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * @see org.eclipse.equinox.app.IApplication#stop()
 	 */
 	@Override
