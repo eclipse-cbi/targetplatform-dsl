@@ -391,7 +391,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val knownOSUpperValues = Platform.knownOSValues.map[toUpperCase]
 		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
 		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
-		val knownLocale = Locale.availableLocales.map[toString].map[toUpperCase]
+		val knownLocale = Locale.getAvailableLocales.map[toString].map[toUpperCase]
 		val knownEE = eeManager.executionEnvironments.map[id.toUpperCase]
 
 		while (dupEnvIt.hasNext) {
@@ -440,7 +440,7 @@ class TargetPlatformValidator extends AbstractTargetPlatformValidator {
 		val knownOSUpperValues = Platform.knownOSValues.map[toUpperCase]
 		val knownWSUpperValues = Platform.knownWSValues.map[toUpperCase]
 		val knownArchUpperValues = Platform.knownOSArchValues.map[toUpperCase]
-		val knownLocale = Locale.availableLocales.map[toString.toUpperCase]
+		val knownLocale = Locale.getAvailableLocales.map[toString.toUpperCase]
 		val knownEE = eeManager.executionEnvironments.map[id.toUpperCase]
 
 		val envList = tp.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].toList
