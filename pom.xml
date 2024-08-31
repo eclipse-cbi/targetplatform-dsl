@@ -129,8 +129,7 @@
                 <rules>
                   <banDuplicatePomDependencyVersions/>
                   <requireJavaVersion>
-                    <version>[8,21)</version>
-                    <message>Cannot compile with Java 21 because of ambiguous method calls in Xtend code.</message>
+                    <version>[8,)</version>
                   </requireJavaVersion>
                   <requireMavenVersion>
                     <version>3.9.0</version>

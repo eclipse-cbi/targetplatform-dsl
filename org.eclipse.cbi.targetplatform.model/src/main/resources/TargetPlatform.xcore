@@ -1,8 +1,8 @@
 @GenModel
-  (prefix="TargetPlatform", 
-   modelName="TargetPlatform", 
+  (prefix="TargetPlatform",
+   modelName="TargetPlatform",
    complianceLevel="8.0",
-   modelDirectory="/org.eclipse.cbi.targetplatform.model/target/generated-sources/emf", 
+   modelDirectory="/org.eclipse.cbi.targetplatform.model/target/generated-sources/emf",
    copyrightText="Copyright (c) 2017-2022 Eclipse Foundation and others\n\nThis program and the accompanying materials\nare made available under the terms of the Eclipse Public License 2.0\nwhich accompanies this distribution, and is available at\nhttps://www.eclipse.org/legal/epl-2.0/\n\nSPDX-License-Identifier: EPL-2.0\n\nContributors:\n\tMikael Barbero - initial implementation")
 package org.eclipse.cbi.targetplatform.model
 
@@ -16,7 +16,7 @@ import org.eclipse.jdt.launching.JavaRuntime
 
 class TargetPlatform {
 	String name
-	contains TargetContent[] contents opposite targetPlatform  
+	contains TargetContent[] contents opposite targetPlatform
 	refers derived IncludeDeclaration[] includes get {
 		new UnmodifiableEList(contents.filter(typeof(IncludeDeclaration)).toList)
 	}
@@ -44,53 +44,53 @@ class Options extends TargetContent {
 
 class Environment extends TargetContent {
 	String[] env
-	
+
 	derived String operatingSystem get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-		return 
+		return
 			Arrays.asList(Platform.knownOSValues).findFirst[
 				envToUpper.contains(it.toUpperCase)
 			]
 	}
-	
+
 	derived String windowingSystem get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		val knownWSUpperValues = Arrays.asList(Platform.knownWSValues).map[toUpperCase]
-		
+
 		val allWS = envToUpper.filter[
 			knownWSUpperValues.contains(it)
 		].toList
-		
+
 		if (allWS.size <= 1 && allWS.contains(operatingSystem?.toUpperCase)) {
-			// case for win32 which is an os and an ws. Let's consider the first one 
+			// case for win32 which is an os and an ws. Let's consider the first one
 			// as the os and the second as ws
 			return null
 		} else {
-			return 
+			return
 				Arrays.asList(Platform.knownWSValues).findFirst[
 					envToUpper.contains(it.toUpperCase)
 				]
 		}
 	}
-	
+
 	derived String architecture get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
 		return Arrays.asList(Platform.knownOSArchValues).findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
 	}
-	
+
 	derived Locale localization get {
 		val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-		val locale = Arrays.asList(Locale.availableLocales).map[toString].findFirst[
+		val locale = Arrays.asList(Locale.getAvailableLocales).map[toString].findFirst[
 			envToUpper.contains(it.toUpperCase)
 		]
-		
+
 		if (locale !== null) {
 			var String language = "";
 			var String country = "";
 			var String variant = "";
-	
+
 			val tokens = Splitter.on('_').trimResults.split(locale).iterator;
 			if (tokens.hasNext) {
 				language = tokens.next
@@ -101,13 +101,13 @@ class Environment extends TargetContent {
 			if (tokens.hasNext) {
 				variant = tokens.next
 			}
-	
+
 			return new Locale(language, country, variant);
 		} else {
 			return null;
 		}
 	}
-	
+
 	derived ExecutionEnvironment executionEnvironment get {
 		if (RegistryFactory.registry === null) {
 			// we won't be able to find EE list without the extensions registry
@@ -116,14 +116,14 @@ class Environment extends TargetContent {
 		val eeManager = JavaRuntime.executionEnvironmentsManager
 		if (eeManager !== null) {
 			val envToUpper = targetPlatform.contents.filter(typeof(Environment)).map[env].flatten.filter[!nullOrEmpty].map[toUpperCase].toList
-			
+
 			for (env : envToUpper) {
 				val ee = Arrays.asList(eeManager.executionEnvironments).findFirst[it.id.toUpperCase.equals(env)]
 				if (ee !== null) {
 					return ee
 				}
 			}
-			
+
 			return null
 		} else {
 			return null
@@ -147,10 +147,10 @@ class MavenLocation extends TargetContent {
 	MavenDependencyDepth dependencyDepth
 	MavenMissingManifest missingManifest
 	boolean includeSources
-	
+
 	contains GeneratedFeature generatedFeature
-	contains MavenDependency[] dependencies 
-	
+	contains MavenDependency[] dependencies
+
 	contains MavenRepository[] repositories
 }
 
@@ -160,7 +160,7 @@ class GeneratedFeature {
 	String vendor
 	String version
 	String instalLibrary
-	contains IU[] additionalBundles 
+	contains IU[] additionalBundles
 }
 
 class MavenRepository {
@@ -209,8 +209,8 @@ enum MavenDependencyDepth {
 }
 
 enum Option {
-	INCLUDE_REQUIRED as 'requirements' = 0 
-	INCLUDE_ALL_ENVIRONMENTS as 'allEnvironments' = 1 
+	INCLUDE_REQUIRED as 'requirements' = 0
+	INCLUDE_ALL_ENVIRONMENTS as 'allEnvironments' = 1
 	INCLUDE_SOURCE as 'source' = 2
 	INCLUDE_CONFIGURE_PHASE as 'configurePhase' = 3
 }
