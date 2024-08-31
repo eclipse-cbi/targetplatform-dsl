@@ -28,9 +28,9 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.version.ignore>.*[a-zA-Z]+.*</maven.version.ignore>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>4.0.6</tycho-version>
+    <tycho-version>4.0.8</tycho-version>
     <xtext-version>2.36.0</xtext-version>
-    <cbi-plugins.version>1.4.3</cbi-plugins.version>
+    <cbi-plugins.version>1.5.0</cbi-plugins.version>
     <os-jvm-flags/>
     <eclipse-repo.url>https://repo.eclipse.org/content/repositories/cbi/</eclipse-repo.url>
     <!-- comment out snapshots repo, when not intending to use snapshots. releases come from "eclipse-repo.url"
@@ -78,7 +78,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.3.2</version>
+          <version>3.4.0</version>
           <configuration>
             <excludeDefaultDirectories>true</excludeDefaultDirectories>
             <filesets>
@@ -97,12 +97,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -112,12 +112,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
+          <version>3.20.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>3.5.0</version>
           <executions>
             <execution>
               <id>enforce-maven</id>
@@ -148,7 +148,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.4.1</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
