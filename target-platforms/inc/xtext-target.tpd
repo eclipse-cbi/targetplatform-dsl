@@ -4,8 +4,8 @@ location "https://download.eclipse.org/cbi/updates/license/2.0.2.v20181016-2210"
 	org.eclipse.license.feature.group
 }
 
-location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.35.0" {
-	// do not depend on org.eclipse.xtext.sdk.feature.group to avoid dependency to draw2d  
+location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.36.0" {
+	// do not depend on org.eclipse.xtext.sdk.feature.group to avoid dependency to draw2d
 	org.eclipse.xtext.ui.feature.group
 	org.eclipse.xtext.xtext.ui.feature.group
 	org.eclipse.xtext.runtime.feature.group
@@ -24,7 +24,7 @@ location "https://download.eclipse.org/modeling/emf/emf/builds/release/2.38.0" {
 }
 
 // required for resolving dependencies of Xtext
-location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.18.0" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.19.0" {
 	org.eclipse.emf.mwe.core
 	org.eclipse.emf.mwe2.lib
 }

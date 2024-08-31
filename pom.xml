@@ -29,7 +29,7 @@
     <maven.version.ignore>.*[a-zA-Z]+.*</maven.version.ignore>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tycho-version>4.0.6</tycho-version>
-    <xtext-version>2.34.0</xtext-version>
+    <xtext-version>2.36.0</xtext-version>
     <cbi-plugins.version>1.4.3</cbi-plugins.version>
     <os-jvm-flags/>
     <eclipse-repo.url>https://repo.eclipse.org/content/repositories/cbi/</eclipse-repo.url>
