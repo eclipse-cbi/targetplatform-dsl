@@ -12,7 +12,7 @@ pipeline {
 
   tools {
     maven 'apache-maven-latest'
-    jdk 'temurin-jdk17-latest'
+    jdk 'temurin-jdk21-latest'
   }
 
   environment {
@@ -62,8 +62,6 @@ ARCHIVE=${params.ARCHIVE}
 """.trim()
           echo description
           currentBuild.description = description.replace("\n", "<br/>")
-          env.PROMOTE = params.PROMOTE
-          env.BUILD_TYPE = params.BUILD_TYPE
         }
        }
     }
