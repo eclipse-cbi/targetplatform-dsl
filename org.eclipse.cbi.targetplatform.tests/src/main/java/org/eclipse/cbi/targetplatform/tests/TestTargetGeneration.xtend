@@ -643,7 +643,7 @@ class TestTargetGeneration {
 		val tp1 = parser.parse('''
 			target "TP1"
 
-			environment JavaSE-1.7 win32 cocoa x86 en_us
+			environment JavaSE-1.7 win32 cocoa x86_64 en_us
 		''')
 		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
 
@@ -657,7 +657,7 @@ class TestTargetGeneration {
 			  <environment>
 			    <os>win32</os>
 			    <ws>cocoa</ws>
-			    <arch>x86</arch>
+			    <arch>x86_64</arch>
 			    <nl>en_US</nl>
 			  </environment>
 			  <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>

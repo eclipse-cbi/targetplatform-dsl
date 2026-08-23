@@ -29,9 +29,9 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.version.ignore>.*[a-zA-Z]+.*</maven.version.ignore>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>4.0.10</tycho-version>
-    <xtext-version>2.37.0</xtext-version>
-    <cbi-plugins.version>1.5.0</cbi-plugins.version>
+    <tycho-version>5.0.4</tycho-version>
+    <xtext-version>2.42.0</xtext-version>
+    <cbi-plugins.version>1.5.4</cbi-plugins.version>
     <os-jvm-flags/>
     <eclipse-repo.url>https://repo.eclipse.org/content/repositories/cbi/</eclipse-repo.url>
     <!-- comment out snapshots repo, when not intending to use snapshots. releases come from "eclipse-repo.url"
@@ -235,7 +235,7 @@
           <version>${xtext-version}</version>
         </plugin>
         <plugin>
-          <groupId>org.eclipse.xtend</groupId>
+          <groupId>org.eclipse.xtext</groupId>
           <artifactId>xtend-maven-plugin</artifactId>
           <version>${xtext-version}</version>
           <executions>

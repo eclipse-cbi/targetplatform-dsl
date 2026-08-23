@@ -19,7 +19,7 @@ location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.19.0
 }
 
 // Required for grammar generation (during mwe2 run)
-location "https://download.itemis.de/updates/releases/2.1.1" {
+location "https://xtext.github.io/download/updates/releases/2.1.1" {
 	de.itemis.xtext.antlr.sdk.feature.group
 }
 

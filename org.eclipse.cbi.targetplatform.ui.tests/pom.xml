@@ -11,7 +11,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.eclipse.xtend</groupId>
+        <groupId>org.eclipse.xtext</groupId>
         <artifactId>xtend-maven-plugin</artifactId>
       </plugin>
       <plugin>
@@ -21,6 +21,7 @@
           <argLine>-Xmx1024m ${os-jvm-flags}</argLine>
           <useUIHarness>true</useUIHarness>
           <useUIThread>true</useUIThread>
+          <providerHint>junit4</providerHint>
         </configuration>
       </plugin>
     </plugins>
