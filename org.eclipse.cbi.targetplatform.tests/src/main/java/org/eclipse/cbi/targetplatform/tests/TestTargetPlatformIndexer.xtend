@@ -149,7 +149,7 @@ class TestTargetPlatformIndexer {
 		val resourceSet = resourceSetProvider.get
 		val o = parser.parse('''
 			target "o" 
-			include "https://git.eclipse.org/c/emfcompare/org.eclipse.emf.compare.git/plain/org.eclipse.emf.compare-parent/targetPlatforms/kepler-sdk.targetplatform?id=e9fbfd866f648083df83174d566ee1b9d61daeca" 
+			include "https://raw.githubusercontent.com/eclipse-emf-compare/emf-compare/b53194aa331597b2c46f39d632080eed05c976dd/org.eclipse.emf.compare-parent/targetPlatforms/2026-03-sdk.tpd" 
 			''', 
 			URI.createURI("tmp:/o.tpd"), resourceSet
 		)

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -46,7 +47,6 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -199,7 +199,7 @@ public class Converter {
 		try {
 			File targetDefinition = new File(targetDefinitionLocation.toFileString());
 			if (targetDefinition.exists()) {
-				String oldXml = Files.asCharSource(targetDefinition, Charsets.UTF_8).read();
+				String oldXml = Files.asCharSource(targetDefinition, StandardCharsets.UTF_8).read();
 				oldXml = SEQUENCE_NUMBER__PATTERN.matcher(oldXml).replaceFirst("");
 				String newXml = SEQUENCE_NUMBER__PATTERN.matcher(xml).replaceFirst("");
 				return !oldXml.equals(newXml);
