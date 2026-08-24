@@ -91,7 +91,7 @@ class TestGrammar {
 			target "a target platform"
 
 			location "my location URL" {
-				with source, allEnvironments, requirements, configurePhase
+				with source, allEnvironments, requirements, configurePhase, ignoreRepositoryReferences
 				org.eclipse.emf.sdk.feature.group;version="[2.9.0,3.0.0)"
 			}
 		''')
@@ -101,6 +101,7 @@ class TestGrammar {
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_ALL_ENVIRONMENTS))
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_REQUIRED))
 		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_CONFIGURE_PHASE))
+		assertTrue(fisrtLocation.options.contains(Option::INCLUDE_IGNORE_REPOSITORY_REFERENCES))
 	}
 
 	@Test

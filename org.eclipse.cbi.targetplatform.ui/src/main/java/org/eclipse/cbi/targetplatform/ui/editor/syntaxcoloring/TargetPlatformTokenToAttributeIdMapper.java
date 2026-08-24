@@ -37,7 +37,8 @@ public class TargetPlatformTokenToAttributeIdMapper extends AbstractAntlrTokenTo
 		if ("'requirements'".equals(tokenName) ||
 			"'allEnvironments'".equals(tokenName) ||
 			"'source'".equals(tokenName) ||
-			"'configurePhase'".equals(tokenName)) {
+			"'configurePhase'".equals(tokenName) ||
+			"'ignoreRepositoryReferences'".equals(tokenName)) {
 			return TargetPlatformHighlightingConfiguration.OPTION_ID;
 		}
 		
