@@ -502,6 +502,48 @@ class TestTargetGeneration {
 	}
 
 	@Test
+	def void testOptionIgnoreRepositoryReferences() {
+		val tp1 = parser.parse('''
+			target "TP1"
+
+			with ignoreRepositoryReferences
+
+			location "http://location.org/p2" {
+				an.iu
+			}
+		''')
+
+		val resolvedTargetPlatform = ResolvedTargetPlatform.create(tp1, indexBuilder, mavenIndexBuilder);
+		resolvedTargetPlatform.resolve(new MetadataRepositoryManagerStub(new IQueryResultProvider<IInstallableUnit>() {
+			override listIUs(URI location) {
+				if ("http://location.org/p2".equals(location.toString)) {
+					newImmutableList(
+						IUStub.createBundle("an.iu", Version.createOSGi(1, 0, 0, "thequalifier"))
+					)
+				} else {
+					return emptyList
+				}
+			}
+		}), new NullProgressMonitor());
+
+		val gen = new TargetDefinitionGenerator();
+		val content = gen.generate(resolvedTargetPlatform, 1);
+		assertTarget('''
+			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			<?pde?>
+			<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+			<target name="TP1" sequenceNumber="1">
+			  <locations>
+			    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" followRepositoryReferences="false" type="InstallableUnit">
+			      <unit id="an.iu" version="1.0.0.thequalifier"/>
+			      <repository location="http://location.org/p2"/>
+			    </location>
+			  </locations>
+			</target>
+		'''.toString, content)
+	}
+
+	@Test
 	def void testEnvOS() {
 		val tp1 = parser.parse('''
 			target "TP1"
