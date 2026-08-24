@@ -213,4 +213,5 @@ enum Option {
 	INCLUDE_ALL_ENVIRONMENTS as 'allEnvironments' = 1
 	INCLUDE_SOURCE as 'source' = 2
 	INCLUDE_CONFIGURE_PHASE as 'configurePhase' = 3
+	INCLUDE_IGNORE_REPOSITORY_REFERENCES as 'ignoreRepositoryReferences' = 4
 }

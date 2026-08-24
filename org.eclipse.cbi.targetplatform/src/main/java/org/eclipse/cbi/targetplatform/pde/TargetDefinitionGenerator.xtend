@@ -127,9 +127,11 @@ class TargetDefinitionGenerator {
 		val includeAllPlatforms = 'includeAllPlatforms="' + options.contains(Option.INCLUDE_ALL_ENVIRONMENTS) + '"'
 		val includeSource = 'includeSource="' + options.contains(Option.INCLUDE_SOURCE) + '"'
 		val includeConfigurePhase = 'includeConfigurePhase="' + options.contains(Option.INCLUDE_CONFIGURE_PHASE) + '"'
+		val appendFollowRepositoryReferences = options.contains(Option.INCLUDE_IGNORE_REPOSITORY_REFERENCES) ? ' followRepositoryReferences="false"' : ''
 		val locationAttributes =
 				includeMode + ' ' + includeAllPlatforms +  ' ' +
-				includeSource + ' ' + includeConfigurePhase
+				includeSource + ' ' + includeConfigurePhase +
+				appendFollowRepositoryReferences
 
 		val repositoryAttributes =
 			'''«IF !location.ID.nullOrEmpty»id="«location.ID»" «ENDIF»location="«location.URI»"'''
