@@ -286,6 +286,10 @@ class TargetPlatformProposalProvider extends AbstractTargetPlatformProposalProvi
 			if (!options.options.contains(Option.INCLUDE_CONFIGURE_PHASE)) {
 				acceptor.accept(createCompletionProposal(Option.INCLUDE_CONFIGURE_PHASE.literal, 'the configure phase will be run during the download operation of the target platform', options, 410, context))
 			}
+			
+			if (!options.options.contains(Option.INCLUDE_IGNORE_REPOSITORY_REFERENCES)) {
+				acceptor.accept(createCompletionProposal(Option.INCLUDE_IGNORE_REPOSITORY_REFERENCES.literal, 'declares that your software repositories are self-contained', options, 400, context))
+			}
 		}
 	}
 	

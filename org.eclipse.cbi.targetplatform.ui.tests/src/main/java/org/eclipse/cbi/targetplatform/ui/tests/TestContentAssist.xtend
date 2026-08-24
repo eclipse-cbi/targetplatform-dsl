@@ -189,15 +189,15 @@ class TestContentAssist extends AbstractContentAssistTest {
 	def void testTargetContentOptions1() {
 		newBuilder.append('''
 			target "TPName"
-			with ''').assertText("requirements", "allEnvironments", "source", "configurePhase")
+			with ''').assertText("requirements", "allEnvironments", "source", "configurePhase", "ignoreRepositoryReferences")
 	}
 	
 	@Test
 	def void testTargetContentOptions2() {
 		newBuilder.append('''
 			target "TPName"
-			with source ''').assertText("requirements", "allEnvironments", "configurePhase")
-			.append("requirements ").assertText("allEnvironments", "configurePhase")
+			with source ''').assertText("requirements", "allEnvironments", "configurePhase", "ignoreRepositoryReferences")
+			.append("requirements ").assertText("allEnvironments", "configurePhase", "ignoreRepositoryReferences")
 	}
 	
 	@Test
