@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+    <booleanAttribute key="add_console" value="false"/>
     <setAttribute key="additional_plugins"/>
     <booleanAttribute key="append.args" value="true"/>
     <booleanAttribute key="askclear" value="true"/>
@@ -24,7 +25,7 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true"/>
@@ -32,46 +33,16 @@
     <stringAttribute key="product" value="org.eclipse.platform.ide"/>
     <setAttribute key="selected_features">
         <setEntry value="org.eclipse.cbi.targetplatform.feature:default"/>
-        <setEntry value="org.eclipse.e4.rcp.source:default"/>
         <setEntry value="org.eclipse.e4.rcp:default"/>
-        <setEntry value="org.eclipse.ecf.core.feature.source:default"/>
-        <setEntry value="org.eclipse.ecf.core.feature:default"/>
-        <setEntry value="org.eclipse.ecf.core.ssl.feature.source:default"/>
-        <setEntry value="org.eclipse.ecf.core.ssl.feature:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.feature.source:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.feature:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.httpclient5.feature.source:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.httpclient5.feature:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.ssl.feature.source:default"/>
-        <setEntry value="org.eclipse.ecf.filetransfer.ssl.feature:default"/>
-        <setEntry value="org.eclipse.emf.common.source:default"/>
-        <setEntry value="org.eclipse.emf.common:default"/>
-        <setEntry value="org.eclipse.emf.databinding.edit.source:default"/>
-        <setEntry value="org.eclipse.emf.databinding.edit:default"/>
-        <setEntry value="org.eclipse.emf.databinding.source:default"/>
-        <setEntry value="org.eclipse.emf.databinding:default"/>
-        <setEntry value="org.eclipse.emf.ecore.source:default"/>
-        <setEntry value="org.eclipse.emf.ecore:default"/>
-        <setEntry value="org.eclipse.emf.edit.source:default"/>
-        <setEntry value="org.eclipse.emf.edit:default"/>
-        <setEntry value="org.eclipse.equinox.p2.core.feature.source:default"/>
         <setEntry value="org.eclipse.equinox.p2.core.feature:default"/>
-        <setEntry value="org.eclipse.equinox.p2.extras.feature.source:default"/>
         <setEntry value="org.eclipse.equinox.p2.extras.feature:default"/>
-        <setEntry value="org.eclipse.equinox.p2.rcp.feature.source:default"/>
         <setEntry value="org.eclipse.equinox.p2.rcp.feature:default"/>
-        <setEntry value="org.eclipse.equinox.p2.user.ui.source:default"/>
         <setEntry value="org.eclipse.equinox.p2.user.ui:default"/>
-        <setEntry value="org.eclipse.help.source:default"/>
         <setEntry value="org.eclipse.help:default"/>
-        <setEntry value="org.eclipse.jdt.source:default"/>
         <setEntry value="org.eclipse.jdt:default"/>
         <setEntry value="org.eclipse.license:default"/>
-        <setEntry value="org.eclipse.pde.source:default"/>
         <setEntry value="org.eclipse.pde:default"/>
-        <setEntry value="org.eclipse.platform.source:default"/>
         <setEntry value="org.eclipse.platform:default"/>
-        <setEntry value="org.eclipse.rcp.source:default"/>
         <setEntry value="org.eclipse.rcp:default"/>
         <setEntry value="org.eclipse.sdk:default"/>
         <setEntry value="org.eclipse.xtext.runtime:default"/>
