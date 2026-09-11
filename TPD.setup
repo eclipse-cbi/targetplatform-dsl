@@ -68,8 +68,8 @@
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-21"
-      location="${jre.location-21}">
+      version="JavaSE-25"
+      location="${jre.location-25}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -187,8 +187,6 @@
     <repository
         url="${setup.pde.p2}"/>
     <repository
-        url="${setup.pde.p2}"/>
-    <repository
         url="${setup.jdt.p2}"/>
     <repository
         url="${setup.git.p2}"/>
@@ -205,46 +203,6 @@
         url="${setup.launching.p2}"/>
     <repository
         url="${setup.targlets.p2}"/>
-    <repository
-        url="${setup.pde.p2}"/>
-    <repository
-        url="${setup.pde.p2}"/>
-    <repository
-        url="${setup.jdt.p2}"/>
-    <repository
-        url="${setup.git.p2}"/>
-    <repository
-        url="${setup.egit.p2}">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/ReleaseTrainAlternate"/>
-    </repository>
-    <repository
-        url="${setup.workingsets.p2}"/>
-    <repository
-        url="${setup.projects.p2}"/>
-    <repository
-        url="${setup.launching.p2}"/>
-    <repository
-        url="${setup.targlets.p2}"/>
-    <repository
-        url="${setup.pde.p2}"/>
-    <repository
-        url="${setup.pde.p2}"/>
-    <repository
-        url="${setup.jdt.p2}"/>
-    <repository
-        url="${setup.git.p2}"/>
-    <repository
-        url="${setup.egit.p2}">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/ReleaseTrainAlternate"/>
-    </repository>
-    <repository
-        url="${setup.workingsets.p2}"/>
-    <repository
-        url="${setup.projects.p2}"/>
-    <repository
-        url="${setup.launching.p2}"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -285,6 +243,12 @@
         <value>remoteURI</value>
       </detail>
     </annotation>
+    <configSections
+        name="branch">
+      <properties
+          key="autoSetupRebase"
+          value="always"/>
+    </configSections>
     <description>${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -304,7 +268,7 @@
         <repository
             url="https://download.eclipse.org/cbi/updates/license"/>
         <repository
-            url="https://download.eclipse.org/tools/orbit/downloads/latest-R/"/>
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/milestone/latest"/>
       </repositoryList>
     </targlet>
   </setupTask>
@@ -377,7 +341,7 @@
   <setupTask
       xsi:type="setup:StringSubstitutionTask"
       name="maven.build.java.home"
-      value="${jre.location-21}">
+      value="${jre.location-25}">
     <description>The location used to specify JAVA_HOME in the External Tools Configurations.</description>
   </setupTask>
   <setupTask
